@@ -1,0 +1,14 @@
+#include <MMJ_SW_053_CIGS_PIC_BBM.h>
+#use spi (MASTER, SPI1, MODE=0, BITS=8, STREAM=SMF)
+
+void main()
+{
+   //delay_ms(100);
+   while(TRUE)
+   {
+   
+      //
+      //TODO: User Code
+   }
+
+}
