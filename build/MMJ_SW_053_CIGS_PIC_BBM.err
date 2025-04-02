@@ -1,0 +1,2 @@
+Compiling C:\Users\shoin\Chiba Institute of Technology\3号機 - ドキュメント\井上\CIGS\02_Software\MMJ_SW_053_CIGS_PIC_BBM\MMJ_SW_053_CIGS_PIC_BBM on 25-3-25 at 18:54
+*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\3号機 - ドキュメント\井上\CIGS\02_Software\MMJ_SW_053_CIGS_PIC_BBM\MMJ_SW_053_CIGS_PIC_BBM.c" Line 6(11,12): Undefined identifier  -- delayms

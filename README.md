@@ -1,1 +1,0 @@
-# MMJ_SW_053_CIGS_PIC
