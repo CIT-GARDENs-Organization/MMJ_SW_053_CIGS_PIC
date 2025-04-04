@@ -1,5 +1,11 @@
 #include "communication.h"
 
+
+/**
+ * @brief make_receive_command
+ * @param receive_signal: received signal
+ * @param receive_signal_size: size of received signal   
+ */
 Command make_receive_command(unsigned int8 receive_signal[], int8 receive_signal_size)
 {
    Command command = {0, {0x00}, 0, FALSE};
@@ -35,6 +41,11 @@ Command make_receive_command(unsigned int8 receive_signal[], int8 receive_signal
    return command;
 }
 
+/**
+ * @brief make_frame
+ * @param receive_signal: received signal
+ * @param receive_signal_size: size of received signal   
+ */
 int8 make_frame(unsigned int8 receive_signal[], int8 receive_signal_size)
 {
    int8 i = 0;
@@ -54,6 +65,10 @@ int8 make_frame(unsigned int8 receive_signal[], int8 receive_signal_size)
    
 }
 
+/**
+ * @brief get_content_size
+ * @param frame_id: frame ID
+ */
 int8 get_content_size(unsigned int8 frame_id)
 {
    for (int i = 0; i < RECEIVE_FRAME_KINDS; i++)
@@ -64,6 +79,11 @@ int8 get_content_size(unsigned int8 frame_id)
    return -1;
 }
 
+/**
+ * @brief check_crc
+ * @param frame: received signal
+ * @param receive_frame_size: size of received signal   
+ */
 int1 check_crc(unsigned int8 frame[], int8 receive_frame_size)
 {
    unsigned int8 received_crc = frame[receive_frame_size-1]; // '1' is for crc
@@ -79,6 +99,11 @@ int1 check_crc(unsigned int8 frame[], int8 receive_frame_size)
    }
 }
 
+/**
+ * @brief calc_crc
+ * @param frame: received signal
+ * @param payload_size: size of received signal   
+ */
 unsigned int8 calc_crc(unsigned int8 frame[], int8 payload_size)
 {
    unsigned int8 crc = frame[0], i = 1;
@@ -87,6 +112,10 @@ unsigned int8 calc_crc(unsigned int8 frame[], int8 payload_size)
    return crc;
 }
 
+/**
+ * @brief check_device_id
+ * @param device_id: device ID
+ */
 int1 check_device_id(unsigned int8 device_id)
 {
    if (SELF_DEVICE_ID == device_id)
@@ -101,7 +130,11 @@ int1 check_device_id(unsigned int8 device_id)
 }
 
 
-
+/**
+ * @brief clear_receive_signal
+ * @param receive_signal: received signal
+ * @param receive_signal_size: size of received signal   
+ */
 void clear_receive_signal(unsigned int8 receive_signal[], int8 *receive_signal_size)
 {
    memset(receive_signal, 0x00, *receive_signal_size);
@@ -109,7 +142,12 @@ void clear_receive_signal(unsigned int8 receive_signal[], int8 *receive_signal_s
 }
 
 
-
+/**
+ * @brief transmit_command
+ * @param frame_id: frame ID
+ * @param content: content of command
+ * @param size: size of content
+ */
 void transmit_command(int8 frame_id, unsigned int8 content[], int8 size)
 {
    unsigned int8 data[16];
@@ -123,6 +161,11 @@ void transmit_command(int8 frame_id, unsigned int8 content[], int8 size)
    transmit(data, data_size);
 }
 
+/**
+ * @brief transmit
+ * @param data: data to transmit
+ * @param data_size: size of data
+ */
 void transmit(unsigned int8 data[], int8 data_size)
 {
    for(int i = 0; i < data_size; i++)

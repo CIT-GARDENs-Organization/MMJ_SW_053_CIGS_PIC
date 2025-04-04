@@ -1,5 +1,6 @@
 #include "DataCopy.h"
 
+//********* SMF data queue *********/
 void copy_data(void)
 {
    fprintf(PC, "\r\n______________________________\r\n________Start copy_data________\r\n\r\n");
@@ -23,6 +24,12 @@ void copy_data(void)
    fprintf(PC, "_________End copy_data_________\r\n______________________________\r\n\r\n");
 }
 
+/**
+ * @brief enqueue_smf_data
+ * @param src: source address
+ * @param dest: destination address
+ * @param size: data size
+ */
 SmfDataStruct *dequeue_smf_data(void)
 {
    if (smf_data_head == smf_data_tail)
@@ -38,6 +45,10 @@ SmfDataStruct *dequeue_smf_data(void)
    }
 }
 
+/**
+ * @brief is_empty_smf_data
+ * @return 1: empty, 0: not empty
+ */
 int1 is_empty_smf_data(void)
 {
    return smf_data_head == smf_data_tail;

@@ -1,1 +1,0 @@
-# define MODE_UPDATETIME 0x00

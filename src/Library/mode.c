@@ -1,3 +1,6 @@
+#include "mode.h"
+
+//********* global variables *********/
 void update_time(unsigned int8 raw_time[])
 {  
    unsigned int32 time;

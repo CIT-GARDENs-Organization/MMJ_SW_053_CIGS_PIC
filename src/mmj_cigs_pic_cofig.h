@@ -1,6 +1,11 @@
-#include <16LF1789.h>
+#ifndef MMJ_CIGS_PIC_CONFIG_H
+#define MMJ_CIGS_PIC_CONFIG_H
+
+#include <16F1789.h>
+
+
 #device ADC=12
-#use delay(crystal=16MHz)
+#use delay(crystal=16MHz, clock=16MHz)
 #fuses NOMCLR
 
 //
@@ -29,6 +34,6 @@
 
 
 
-
+#endif
 
 
