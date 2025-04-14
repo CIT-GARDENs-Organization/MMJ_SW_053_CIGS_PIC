@@ -9,7 +9,7 @@ volatile int8 executed_mission_count = 0;
 // Packet format
 #define PACKET_SIZE 64
 #define CHECKSUM
-//volatile unsigned int8 PACKET_DATA[MISSION_DATA_SIZE] = {0x00};
+volatile unsigned int8 PACKET_DATA[MISSION_DATA_SIZE] = {0x00};
 
 
 

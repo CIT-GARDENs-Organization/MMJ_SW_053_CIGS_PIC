@@ -1,4 +1,31 @@
-#include "DataCopy.h"
+#include "mis_muc_flash.h"
+#include "GDNS_tbd_FlashOperation.h"
+
+//********PICF FUCNTION ***************/
+void write_data_picf(PICF_START_ADDR, PICF_END_ADDR, (int8 *)mission_datas)
+{
+   write_data_bytes_flash128m(PICF_START_ADDR, PICF_END_ADDR, (int8 *)mission_datas); 
+}
+
+void read_data_picf()
+{
+   read_data_bytes_flash128m(PICF_START_ADDR, PICF_END_ADDR, (int8 *)mission_datas); 
+   for (int i = 0; i < PICF_END_ADDR; i++)
+   {
+      fprintf(PC, "mission_datas[%d]: %X\r\n", i, mission_datas[i]);
+   }
+}
+
+void erase_picf()
+{
+   sector_erase_flash128m(PICF_START_ADDR); // erase 64kByte
+   delay_ms(1000);
+   fprintf(PC, "Erase PICF\r\n");
+}
+
+
+
+
 
 //********* SMF data queue *********/
 void copy_data(void)

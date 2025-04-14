@@ -1,6 +1,12 @@
 {
     "files.associations": {
         "mmj_cigs_pic_mode.h": "c",
-        "mmj_cigs_pic_main.h": "c"
+        "mmj_cigs_pic_main.h": "c",
+        "common.h": "c",
+        "communication.h": "c",
+        "mmj_cigs_pic_cofig.h": "c",
+        "mmj_cigs_pic_config.h": "c",
+        "gdns_tbd_flashoperation.h": "c",
+        "mmj_cigs_pic_func.h": "c"
     }
 }

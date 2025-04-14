@@ -12,13 +12,13 @@ void TIMER0_isr(void)
       dsec = 0;
       sec++;
       
-      
+      /*
       if (sec >= 86400)
       {
          sec -= 86400;
          day++;
       }
-      
+      */
    }
 }
 

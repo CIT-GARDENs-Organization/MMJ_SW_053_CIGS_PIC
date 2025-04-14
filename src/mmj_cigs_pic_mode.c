@@ -53,7 +53,7 @@ void setup()
 	setup_adc_ports(sAN0 | sAN1 | sAN2 | sAN3 | sAN4 | sAN5, VSS_VDD);
 	setup_adc(ADC_CLOCK_DIV_64);
 
-/********setup DAC*****************/
+   /********setup DAC*****************/
    setup_dac(DAC_VSS_VDD|DAC_OUTPUT1);                                        //DAC output at pin DAC output1 from 0-VDD volts 
 //   setup_vref(VREF_ON|VREF_COMP_DAC_2v048); 
    setup_dac3(DAC_VSS_VDD|DAC_OUTPUT1);                                          //DAC output at pin DAC output1 from 0-VDD volts 
@@ -61,55 +61,75 @@ void setup()
    
 }
 
-void measure(unsigned int8 parameter[])
+void mode_measure(unsigned int8 parameter[])
 {
-   fprintf(PC, "Start example_01\r\n");
-   fprintf(PC, "executing");
-   delay_ms(1000);
-   fprintf(PC, ".");
-   delay_ms(1000);
-   fprintf(PC, ".");
-   delay_ms(1000);
-   fprintf(PC, ".");
-   delay_ms(1000);
-   fprintf(PC, ".");
-   delay_ms(1000);
-   fprintf(PC, ".\r\n");
-   fprintf(PC, "End example_01\r\n");
+   unsined in sweep_step = parameter[0]; // Get the measurement step from the parameter array
+   setup();
+   sweep(sweep_step);
+   copy_data();
 }
 
-
-//___________ others ________________
-
-void executed_mission_pop(void)
+void mode_copy_SMF()
 {
-   executed_mission[executed_mission_count--] = 0x00;
-}
-
-void enqueue_smf_data(unsigned int32 src, unsigned int32 dest, unsigned int32 size)
-{
-   int8 next_tail = (smf_data_tail + 1) % SMF_DATA_SIZE;
-
-   if(next_tail == smf_data_head)
-      fprintf(PC, "SMF data list is full!!!\r\n");
-      
-   else
+   unsigned int8 smf_data[SMF_DATA_SIZE] = {0x00};
+   unsigned int32 src = 0x00000000;
+   unsigned int32 dest = 0x00000000;
+   unsigned int32 size = 0x00000000;
+   for (int i = 0; i < SMF_DATA_SIZE; i++)
    {
-      smf_data[smf_data_tail].src = src;
-      smf_data[smf_data_tail].dest = dest;
-      smf_data[smf_data_tail].size = size;
-
-      smf_data_tail = next_tail;
+      smf_data[i] = read_data_byte_flash128m(src + i);
+      fprintf(PC, "smf_data[%d]: %X\r\n", i, smf_data[i]);
    }
+   enqueue_smf_data(src, dest, size);
+   fprintf(PC, "enqueue_smf_data\r\n");
 }
 
-void update_time(unsigned int8 raw_time[])
-{  
-   unsigned int32 time;
-   memcpy(&time, raw_time, 4);
-   
-   day = (time >> 22) & 0x000003FF;
-   sec = time & 0x0001FFFF;
-   //unsigned int8  subsec = (time >> 18) & 0x0000000F;
-   // int1 absolute_flag = time >> 17 & 0x00000001
+
+//___________________ test functions _______________
+void mode_test_temp()
+{
+   unsigned int16 temp_top = 0;
+   unsigned int16 temp_bot = 0;
+   set_adc_channel(3);
+   temp_top = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+   set_adc_channel(3);
+   temp_bot = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+   fprintf(PC, "temp_top: %X\r\n", temp_top);
+   fprintf(PC, "temp_bot: %X\r\n", temp_bot);
+}
+
+void mode_test_PD()
+{
+   unsigned int16 pd_start = 0;
+   unsigned int16 pd_end = 0;
+   set_adc_channel(3);
+   pd_start = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+   set_adc_channel(3);
+   pd_end = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+   fprintf(PC, "pd_start: %X\r\n", pd_start);
+   fprintf(PC, "pd_end: %X\r\n", pd_end);
+}
+
+void mode_test_CIGS()
+{
+   unsigned int16 cigs_value = 0;
+   set_adc_channel(3);
+   cigs_value = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+   fprintf(PC, "cigs_value: %X\r\n", cigs_value);
+}
+
+void mode_test_current()
+{
+   unsigned int16 current_value = 0;
+   set_adc_channel(3);
+   current_value = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+   fprintf(PC, "current_value: %X\r\n", current_value);
+}
+
+void mode_test_voltage()
+{
+   unsigned int16 voltage_value = 0;
+   set_adc_channel(3);
+   voltage_value = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+   fprintf(PC, "voltage_value: %X\r\n", voltage_value);
 }

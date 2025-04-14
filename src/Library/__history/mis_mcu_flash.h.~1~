@@ -1,10 +1,16 @@
-#ifndef DATA_COPY_H
-#define DATA_COPY_H
+#ifndef MIS_MCU_FLASH_H
+#define MIS_MCU_FLASH_H
 
-#define EXAMPLE_APRS_HEADER   0x00000000
-#define EXAMPLE_APRS          0x00001000
-#define EXAMPLE_SENSOR_HEADR  0x0000A000
-#define EXAMPLE_SENSOR        0x00010000
+// Define the Flash Memory types
+#define PICF FLASH128M
+#define PICF_CS FLASH128M_CS
+#define SMF_CS FLASH1G_CS
+#define SMF FLASH1G
+
+// Define SMF Address range
+
+
+
 
 void copy_data(void);
 
