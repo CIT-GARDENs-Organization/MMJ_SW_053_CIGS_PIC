@@ -1,0 +1,90 @@
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main on 15-4-25 at 01:06
+>>> Warning 225 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_config.h" Line 52(13,20): Duplicate #define
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\Library\mis_mcu_flash.h" Line 18(1,14): Expecting a (
+*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 19(10,13): Undefined identifier   day
+*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 28(8,14): Undefined identifier   status
+*** Error 51 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 33(4,8): A numeric expression must appear here
+*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 35(11,30): Undefined identifier   receive_signal_size
+*** Error 51 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 37(7,11): A numeric expression must appear here
+*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 50(13,14): Undefined identifier  -- setup_lcd
+*** Error 32 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 61(22,29): Expecting a , or )
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 61(31,38): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 62(1,2): Expecting a declaration
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 63(47,48): Expecting an identifier
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 65(4,10): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 65(10,11): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 65(11,18): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 65(20,28): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 66(4,5): Expecting a declaration
+*** Error 22 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 66(4,5): Bad expression syntax
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 67(12,26): Expecting a (
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 68(47,48): Expecting an identifier
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 69(52,53): Expecting an identifier
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 70(32,33): Expecting an identifier
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 70(35,36): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 70(36,37): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 72(10,16): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 72(19,23): Expecting a (
+*** Error 32 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 73(26,33): Expecting a , or )
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 73(35,42): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 74(10,12): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 74(13,14): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 74(14,15): Expecting a declaration
+*** Error 29 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 74(34,35): Function definition different from previous definition
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 75(20,21): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 75(22,34): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 76(10,14): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 77(13,19): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 77(22,30): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 78(10,15): Expecting a declaration
+*** Error 22 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 78(15,16): Bad expression syntax
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 80(12,24): Expecting a (
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 81(45,46): Expecting an identifier
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 82(50,51): Expecting an identifier
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 82(52,58): Expecting a (
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 83(56,57): Expecting an identifier
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 84(52,53): Expecting an identifier
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 85(10,12): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 85(13,14): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 85(14,20): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 85(24,32): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 86(10,11): Expecting a declaration
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 87(55,56): Expecting an identifier
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 88(13,19): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 88(20,25): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 89(10,11): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 90(10,15): Expecting a declaration
+*** Error 22 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 90(15,16): Bad expression syntax
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 92(12,28): Expecting a (
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 93(49,50): Expecting an identifier
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 94(52,53): Expecting an identifier
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 95(32,33): Expecting an identifier
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 95(35,36): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 95(36,37): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 96(10,12): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 96(13,14): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 96(14,21): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 96(23,30): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 96(31,32): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 96(32,33): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 96(34,36): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 96(37,42): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 97(10,11): Expecting a declaration
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 98(44,45): Expecting an identifier
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 99(13,19): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 99(22,29): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 101(13,19): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 101(22,30): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 102(10,11): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 103(10,14): Expecting a declaration
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 104(44,45): Expecting an identifier
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 105(4,5): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 106(4,10): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 106(11,17): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 107(1,2): Expecting a declaration
+*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 122(10,29): Undefined identifier   receive_signal_size
+*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 124(10,17): Undefined identifier   command
+*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 125(30,31): Undefined identifier  -- clear_receive_signal
+*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 127(13,20): Undefined identifier   command
+      86 Errors,  1 Warnings.
+Build Failed.

@@ -1,0 +1,36 @@
+#ifndef MIS_MCU_FLASH_H
+#define MIS_MCU_FLASH_H
+
+/*
+// Define the Flash Memory types
+#define PICF FLASH128M
+#define PICF_CS FLASH128M_CS
+#define SMF_CS FLASH1G_CS
+#define SMF FLASH1G
+*/
+// Define SMF Address range
+
+
+
+
+void copy_data(void);
+
+SmfDataStruct *dequeue_smf_data(void);
+
+int1 is_empty_smf_data(void);
+
+// SMF data queue
+typedef struct{
+    unsigned int32 src;
+    unsigned int32 dest;
+    unsigned int32 size;
+ }SmfDataStruct;
+ 
+#define SMF_DATA_SIZE 16
+ 
+volatile int8 smf_data_head = 0;
+volatile int8 smf_data_tail = 0;
+ 
+SmfDataStruct smf_data[SMF_DATA_SIZE] = { {0x00} };
+
+#endif
