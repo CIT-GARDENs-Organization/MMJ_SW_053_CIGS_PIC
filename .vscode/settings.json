@@ -7,6 +7,9 @@
         "mmj_cigs_pic_cofig.h": "c",
         "mmj_cigs_pic_config.h": "c",
         "gdns_tbd_flashoperation.h": "c",
-        "mmj_cigs_pic_func.h": "c"
+        "mmj_cigs_pic_func.h": "c",
+        "mis_mcu_flash.h": "c",
+        "mmj_define.h": "c",
+        "value.h": "c"
     }
 }

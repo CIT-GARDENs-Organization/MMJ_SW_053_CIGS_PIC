@@ -1,0 +1,5000 @@
+CCS PCM C Compiler, Version 5.104, 57077               15-4-25 23:42
+
+               Filename:   build\mmj_cigs_pic_main.lst
+
+               ROM used:   3717 words (23%)
+                           Largest free fragment is 2048
+               RAM used:   1578 (77%) at main() level
+                           1654 (81%) worst case
+               Stack used: 5 locations (3 in main + 2 for interrupts)
+               Stack size: 16
+
+*
+0000:  MOVLP  08
+0001:  GOTO   55B
+0002:  NOP
+*
+0004:  CLRF   03
+0005:  MOVLP  00
+0006:  MOVLB  00
+0007:  MOVF   77,W
+0008:  MOVWF  20
+0009:  MOVF   78,W
+000A:  MOVWF  21
+000B:  MOVF   79,W
+000C:  MOVWF  22
+000D:  MOVF   7A,W
+000E:  MOVWF  23
+000F:  MOVLB  03
+0010:  MOVF   11,W
+0011:  MOVLB  00
+0012:  MOVWF  24
+0013:  MOVLB  03
+0014:  MOVF   12,W
+0015:  MOVLB  00
+0016:  MOVWF  25
+0017:  MOVLB  03
+0018:  MOVF   13,W
+0019:  MOVLB  00
+001A:  MOVWF  26
+001B:  MOVLB  03
+001C:  MOVF   14,W
+001D:  MOVLB  00
+001E:  MOVWF  27
+001F:  BTFSS  0B.5
+0020:  GOTO   023
+0021:  BTFSC  0B.2
+0022:  GOTO   043
+0023:  CLRF   05
+0024:  MOVLW  91
+0025:  MOVWF  04
+0026:  BTFSS  00.5
+0027:  GOTO   02A
+0028:  BTFSC  11.5
+0029:  GOTO   045
+002A:  MOVF   20,W
+002B:  MOVWF  77
+002C:  MOVF   21,W
+002D:  MOVWF  78
+002E:  MOVF   22,W
+002F:  MOVWF  79
+0030:  MOVF   23,W
+0031:  MOVWF  7A
+0032:  MOVF   24,W
+0033:  MOVLB  03
+0034:  MOVWF  11
+0035:  MOVLB  00
+0036:  MOVF   25,W
+0037:  MOVLB  03
+0038:  MOVWF  12
+0039:  MOVLB  00
+003A:  MOVF   26,W
+003B:  MOVLB  03
+003C:  MOVWF  13
+003D:  MOVLB  00
+003E:  MOVF   27,W
+003F:  MOVLB  03
+0040:  MOVWF  14
+0041:  RETFIE
+0042:  MOVLB  00
+0043:  MOVLP  00
+0044:  GOTO   2A0
+0045:  MOVLP  00
+0046:  GOTO   2EC
+.................... //#include <mmj_cigs_pic_main.h>
+.................... 
+.................... 
+.................... 
+.................... #include "mmj_cigs_pic_config.h"
+.................... #ifndef MMJ_CIGS_PIC_CONFIG_H
+.................... #define MMJ_CIGS_PIC_CONFIG_H
+.................... 
+.................... #include <16F1789.h>
+.................... //////////// Standard Header file for the PIC16F1789 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC16F1789
+0047:  BRW
+0048:  RETLW  00
+0049:  RETLW  09
+004A:  RETLW  55
+004B:  RETLW  70
+004C:  RETLW  6C
+004D:  RETLW  69
+004E:  RETLW  6E
+004F:  RETLW  6B
+0050:  RETLW  20
+0051:  RETLW  63
+0052:  RETLW  6F
+0053:  RETLW  6D
+0054:  RETLW  6D
+0055:  RETLW  6E
+0056:  RETLW  64
+0057:  RETLW  00
+0058:  RETLW  00
+0059:  RETLW  00
+005A:  RETLW  00
+005B:  RETLW  00
+005C:  RETLW  00
+005D:  RETLW  00
+005E:  RETLW  00
+005F:  RETLW  00
+0060:  RETLW  00
+0061:  RETLW  00
+0062:  RETLW  00
+0063:  RETLW  00
+0064:  RETLW  00
+0065:  RETLW  00
+0066:  RETLW  00
+0067:  RETLW  00
+0068:  RETLW  00
+0069:  RETLW  00
+006A:  RETLW  01
+006B:  RETLW  00
+006C:  RETLW  53
+006D:  RETLW  74
+006E:  RETLW  61
+006F:  RETLW  74
+0070:  RETLW  75
+0071:  RETLW  73
+0072:  RETLW  20
+0073:  RETLW  63
+0074:  RETLW  68
+0075:  RETLW  65
+0076:  RETLW  63
+0077:  RETLW  6B
+0078:  RETLW  00
+0079:  RETLW  00
+007A:  RETLW  00
+007B:  RETLW  00
+007C:  RETLW  00
+007D:  RETLW  00
+007E:  RETLW  00
+007F:  RETLW  00
+0080:  RETLW  00
+0081:  RETLW  00
+0082:  RETLW  00
+0083:  RETLW  00
+0084:  RETLW  00
+0085:  RETLW  00
+0086:  RETLW  00
+0087:  RETLW  00
+0088:  RETLW  00
+0089:  RETLW  00
+008A:  RETLW  00
+008B:  RETLW  00
+008C:  RETLW  02
+008D:  RETLW  01
+008E:  RETLW  49
+008F:  RETLW  73
+0090:  RETLW  20
+0091:  RETLW  53
+0092:  RETLW  4D
+0093:  RETLW  46
+0094:  RETLW  20
+0095:  RETLW  61
+0096:  RETLW  76
+0097:  RETLW  61
+0098:  RETLW  69
+0099:  RETLW  6C
+009A:  RETLW  61
+009B:  RETLW  62
+009C:  RETLW  6C
+009D:  RETLW  65
+009E:  RETLW  00
+009F:  DATA 53,3A
+00A0:  DATA 61,39
+00A1:  DATA 74,10
+00A2:  DATA ED,30
+00A3:  DATA EB,32
+00A4:  DATA 5F,39
+00A5:  DATA E5,31
+00A6:  DATA E5,34
+00A7:  DATA F6,32
+00A8:  DATA DF,31
+00A9:  DATA EF,36
+00AA:  DATA ED,30
+00AB:  DATA 6E,32
+00AC:  DATA 0D,05
+00AD:  DATA 89,16
+00AE:  DATA 3E,10
+00AF:  DATA 00,00
+00B0:  DATA 45,37
+00B1:  DATA 64,10
+00B2:  DATA ED,30
+00B3:  DATA EB,32
+00B4:  DATA 5F,39
+00B5:  DATA E5,31
+00B6:  DATA 69,3B
+00B7:  DATA E5,2F
+00B8:  DATA E3,37
+00B9:  DATA ED,36
+00BA:  DATA 61,37
+00BB:  DATA E4,06
+00BC:  DATA 0A,00
+00BD:  DATA F3,34
+00BE:  DATA 67,37
+00BF:  DATA 61,36
+00C0:  DATA A0,32
+00C1:  DATA 6E,32
+00C2:  DATA A0,3B
+00C3:  DATA 69,3A
+00C4:  DATA 68,10
+00C5:  DATA 53,23
+00C6:  DATA C4,06
+00C7:  DATA 0A,00
+00C8:  DATA E4,37
+00C9:  DATA EE,13
+00CA:  DATA 74,10
+00CB:  DATA E6,34
+00CC:  DATA 6E,32
+00CD:  DATA A0,29
+00CE:  DATA 46,22
+00CF:  DATA 0D,05
+00D0:  DATA 00,00
+00D1:  DATA 89,16
+00D2:  DATA 3E,10
+00D3:  DATA 49,37
+00D4:  DATA F6,30
+00D5:  DATA EC,34
+00D6:  DATA 64,10
+00D7:  DATA 46,39
+00D8:  DATA E1,36
+00D9:  DATA 65,10
+00DA:  DATA 49,22
+00DB:  DATA 20,39
+00DC:  DATA E5,31
+00DD:  DATA E5,34
+00DE:  DATA F6,32
+00DF:  DATA 64,1D
+00E0:  DATA A0,12
+00E1:  DATA D8,06
+00E2:  DATA 0A,00
+00E3:  DATA 89,16
+00E4:  DATA 3E,10
+00E5:  DATA 43,29
+00E6:  DATA 43,10
+00E7:  DATA 65,39
+00E8:  DATA F2,37
+00E9:  DATA F2,10
+00EA:  DATA 0D,05
+00EB:  DATA 00,01
+00EC:  DATA 89,04
+00ED:  DATA 2D,1F
+00EE:  DATA 20,39
+00EF:  DATA E5,31
+00F0:  DATA E5,34
+00F1:  DATA F6,32
+00F2:  DATA 64,10
+00F3:  DATA 43,29
+00F4:  DATA 43,1D
+00F5:  DATA A0,12
+00F6:  DATA D8,06
+00F7:  DATA 0A,00
+00F8:  DATA 89,04
+00F9:  DATA 20,10
+00FA:  DATA A0,31
+00FB:  DATA 6F,36
+00FC:  DATA EC,32
+00FD:  DATA 63,3A
+00FE:  DATA A0,21
+00FF:  DATA D2,21
+0100:  DATA 20,1D
+0101:  DATA A0,12
+0102:  DATA D8,06
+0103:  DATA 0A,00
+0104:  DATA 89,16
+0105:  DATA 3E,10
+0106:  DATA 49,37
+0107:  DATA F6,30
+0108:  DATA EC,34
+0109:  DATA 64,10
+010A:  DATA E4,32
+010B:  DATA F6,34
+010C:  DATA E3,32
+010D:  DATA A0,24
+010E:  DATA 44,10
+010F:  DATA F2,32
+0110:  DATA E3,32
+0111:  DATA 69,3B
+0112:  DATA 65,32
+0113:  DATA 0D,05
+0114:  DATA 00,01
+0115:  DATA 89,04
+0116:  DATA 2D,1F
+0117:  DATA 20,39
+0118:  DATA E5,31
+0119:  DATA E5,34
+011A:  DATA F6,32
+011B:  DATA 64,1D
+011C:  DATA 20,10
+011D:  DATA 20,10
+011E:  DATA A0,12
+011F:  DATA D8,06
+0120:  DATA 0A,00
+0121:  DATA 89,04
+0122:  DATA 20,10
+0123:  DATA A0,26
+0124:  DATA 79,10
+0125:  DATA E4,32
+0126:  DATA F6,34
+0127:  DATA E3,32
+0128:  DATA A0,24
+0129:  DATA 44,1D
+012A:  DATA A0,12
+012B:  DATA D8,06
+012C:  DATA 0A,00
+012D:  DATA 54,39
+012E:  DATA 61,37
+012F:  DATA F3,34
+0130:  DATA 74,10
+0131:  DATA E3,37
+0132:  DATA ED,36
+0133:  DATA 61,37
+0134:  DATA E4,06
+0135:  DATA 8A,04
+0136:  DATA 2D,1F
+0137:  DATA 20,00
+0138:  DATA 0D,05
+0139:  DATA DF,2F
+013A:  DATA DF,2F
+013B:  DATA DF,2F
+013C:  DATA DF,2F
+013D:  DATA DF,2F
+013E:  DATA DF,2F
+013F:  DATA DF,2F
+0140:  DATA DF,2F
+0141:  DATA DF,2F
+0142:  DATA DF,2F
+0143:  DATA DF,2F
+0144:  DATA DF,2F
+0145:  DATA DF,2F
+0146:  DATA DF,2F
+0147:  DATA DF,2F
+0148:  DATA 0D,05
+0149:  DATA DF,2F
+014A:  DATA DF,2F
+014B:  DATA DF,2F
+014C:  DATA DF,2F
+014D:  DATA 53,3A
+014E:  DATA 61,39
+014F:  DATA 74,10
+0150:  DATA E3,37
+0151:  DATA F0,3C
+0152:  DATA 5F,32
+0153:  DATA 61,3A
+0154:  DATA E1,2F
+0155:  DATA DF,2F
+0156:  DATA DF,2F
+0157:  DATA DF,2F
+0158:  DATA DF,06
+0159:  DATA 8A,06
+015A:  DATA 0A,00
+015B:  DATA D3,37
+015C:  DATA 75,39
+015D:  DATA E3,32
+015E:  DATA A0,30
+015F:  DATA 64,32
+0160:  DATA F2,32
+0161:  DATA F3,39
+0162:  DATA 3A,10
+0163:  DATA 09,18
+0164:  DATA F8,12
+0165:  DATA 30,1C
+0166:  DATA 4C,2C
+0167:  DATA 0D,05
+0168:  DATA 00,01
+0169:  DATA C4,32
+016A:  DATA 73,3A
+016B:  DATA 69,37
+016C:  DATA 61,3A
+016D:  DATA E9,37
+016E:  DATA 6E,10
+016F:  DATA 61,32
+0170:  DATA 64,39
+0171:  DATA E5,39
+0172:  DATA 73,1D
+0173:  DATA A0,04
+0174:  DATA 30,3C
+0175:  DATA 25,18
+0176:  DATA 38,26
+0177:  DATA D8,06
+0178:  DATA 0A,00
+0179:  DATA C4,30
+017A:  DATA F4,30
+017B:  DATA A0,39
+017C:  DATA 69,3D
+017D:  DATA 65,1D
+017E:  DATA A0,04
+017F:  DATA 09,10
+0180:  DATA A0,12
+0181:  DATA 30,1C
+0182:  DATA 4C,2C
+0183:  DATA 0D,05
+0184:  DATA 00,01
+0185:  DATA C3,37
+0186:  DATA F0,3C
+0187:  DATA 69,37
+0188:  DATA 67,17
+0189:  DATA 00,01
+018A:  DATA DF,2F
+018B:  DATA DF,2F
+018C:  DATA DF,2F
+018D:  DATA DF,2F
+018E:  DATA DF,22
+018F:  DATA 6E,32
+0190:  DATA A0,31
+0191:  DATA 6F,38
+0192:  DATA F9,2F
+0193:  DATA E4,30
+0194:  DATA F4,30
+0195:  DATA DF,2F
+0196:  DATA DF,2F
+0197:  DATA DF,2F
+0198:  DATA DF,2F
+0199:  DATA DF,06
+019A:  DATA 8A,2F
+019B:  DATA DF,2F
+019C:  DATA DF,2F
+019D:  DATA DF,2F
+019E:  DATA DF,2F
+019F:  DATA DF,2F
+01A0:  DATA DF,2F
+01A1:  DATA DF,2F
+01A2:  DATA DF,2F
+01A3:  DATA DF,2F
+01A4:  DATA DF,2F
+01A5:  DATA DF,2F
+01A6:  DATA DF,2F
+01A7:  DATA DF,2F
+01A8:  DATA DF,2F
+01A9:  DATA DF,06
+01AA:  DATA 8A,06
+01AB:  DATA 0A,00
+01AC:  DATA D3,26
+01AD:  DATA 46,10
+01AE:  DATA E4,30
+01AF:  DATA F4,30
+01B0:  DATA 20,36
+01B1:  DATA E9,39
+01B2:  DATA 74,10
+01B3:  DATA E9,39
+01B4:  DATA A0,32
+01B5:  DATA 6D,38
+01B6:  DATA F4,3C
+01B7:  DATA 0D,05
+01B8:  DATA 00,00
+01B9:  DATA 0D,05
+01BA:  DATA 54,34
+01BB:  DATA E9,39
+01BC:  DATA 20,10
+01BD:  DATA ED,34
+01BE:  DATA F3,39
+01BF:  DATA E9,37
+01C0:  DATA 6E,10
+01C1:  DATA E9,39
+01C2:  DATA A0,32
+01C3:  DATA F8,32
+01C4:  DATA E3,3A
+01C5:  DATA F4,32
+01C6:  DATA E4,06
+01C7:  DATA 8A,04
+01C8:  DATA 2D,1F
+01C9:  DATA 20,18
+01CA:  DATA F8,12
+01CB:  DATA E4,06
+01CC:  DATA 0A,00
+01CD:  DATA DB,2B
+01CE:  DATA 41,29
+01CF:  DATA CE,2E
+01D0:  DATA 20,10
+01D1:  DATA 6F,3B
+01D2:  DATA 65,39
+01D3:  DATA 66,36
+01D4:  DATA EF,3B
+01D5:  DATA A0,32
+01D6:  DATA F8,32
+01D7:  DATA E3,3A
+01D8:  DATA F4,32
+01D9:  DATA E4,2F
+01DA:  DATA ED,34
+01DB:  DATA F3,39
+01DC:  DATA E9,37
+01DD:  DATA 6E,10
+01DE:  DATA EC,34
+01DF:  DATA 73,3A
+01E0:  DATA 00,01
+01E1:  DATA 0D,05
+01E2:  DATA DF,2F
+01E3:  DATA DF,2F
+01E4:  DATA DF,2F
+01E5:  DATA DF,2F
+01E6:  DATA DF,2F
+01E7:  DATA DF,2F
+01E8:  DATA DF,2F
+01E9:  DATA DF,2F
+01EA:  DATA DF,2F
+01EB:  DATA DF,2F
+01EC:  DATA DF,2F
+01ED:  DATA DF,2F
+01EE:  DATA DF,2F
+01EF:  DATA DF,2F
+01F0:  DATA DF,2F
+01F1:  DATA 0D,05
+01F2:  DATA DF,2F
+01F3:  DATA DF,2F
+01F4:  DATA DF,29
+01F5:  DATA F4,30
+01F6:  DATA 72,3A
+01F7:  DATA A0,32
+01F8:  DATA F8,32
+01F9:  DATA E3,3A
+01FA:  DATA F4,32
+01FB:  DATA DF,36
+01FC:  DATA E9,39
+01FD:  DATA F3,34
+01FE:  DATA 6F,37
+01FF:  DATA DF,2F
+0200:  DATA DF,2F
+0201:  DATA DF,06
+0202:  DATA 8A,06
+0203:  DATA 0A,00
+0204:  DATA C3,37
+0205:  DATA ED,36
+0206:  DATA 61,37
+0207:  DATA 64,10
+0208:  DATA 49,22
+0209:  DATA 3A,10
+020A:  DATA 25,2C
+020B:  DATA 0D,05
+020C:  DATA 0D,05
+020D:  DATA 00,01
+020E:  DATA 89,04
+020F:  DATA 2D,1F
+0210:  DATA A0,24
+0211:  DATA 6E,3B
+0212:  DATA 61,36
+0213:  DATA 69,32
+0214:  DATA A0,21
+0215:  DATA 4D,22
+0216:  DATA A0,24
+0217:  DATA C4,10
+0218:  DATA 0D,05
+0219:  DATA 00,01
+021A:  DATA 0D,05
+021B:  DATA DF,2F
+021C:  DATA DF,2F
+021D:  DATA DF,2F
+021E:  DATA 45,37
+021F:  DATA 64,10
+0220:  DATA 65,3C
+0221:  DATA E5,31
+0222:  DATA 75,3A
+0223:  DATA E5,2F
+0224:  DATA ED,34
+0225:  DATA F3,39
+0226:  DATA E9,37
+0227:  DATA EE,2F
+0228:  DATA DF,2F
+0229:  DATA DF,2F
+022A:  DATA DF,06
+022B:  DATA 8A,2F
+022C:  DATA DF,2F
+022D:  DATA DF,2F
+022E:  DATA DF,2F
+022F:  DATA DF,2F
+0230:  DATA DF,2F
+0231:  DATA DF,2F
+0232:  DATA DF,2F
+0233:  DATA DF,2F
+0234:  DATA DF,2F
+0235:  DATA DF,2F
+0236:  DATA DF,2F
+0237:  DATA DF,2F
+0238:  DATA DF,2F
+0239:  DATA DF,2F
+023A:  DATA DF,2F
+023B:  DATA 0D,05
+023C:  DATA 00,00
+023D:  DATA 53,3A
+023E:  DATA 61,39
+023F:  DATA 74,10
+0240:  DATA 65,3C
+0241:  DATA E1,36
+0242:  DATA 70,36
+0243:  DATA E5,2F
+0244:  DATA 30,18
+0245:  DATA 0D,05
+0246:  DATA 00,01
+0247:  DATA 28,2A
+0248:  DATA E8,34
+0249:  DATA 73,10
+024A:  DATA ED,34
+024B:  DATA F3,39
+024C:  DATA E9,37
+024D:  DATA 6E,10
+024E:  DATA E3,30
+024F:  DATA 6E,10
+0250:  DATA 65,3C
+0251:  DATA E5,31
+0252:  DATA 75,3A
+0253:  DATA 65,10
+0254:  DATA ED,30
+0255:  DATA EE,3C
+0256:  DATA 20,3A
+0257:  DATA E9,36
+0258:  DATA 65,10
+0259:  DATA E1,39
+025A:  DATA A0,3C
+025B:  DATA EF,3A
+025C:  DATA A0,3B
+025D:  DATA 61,37
+025E:  DATA F4,14
+025F:  DATA 0D,05
+0260:  DATA 00,01
+0261:  DATA 65,3C
+0262:  DATA E5,31
+0263:  DATA 75,3A
+0264:  DATA 69,37
+0265:  DATA 67,00
+0266:  DATA 6F,39
+0267:  DATA E4,32
+0268:  DATA 72,10
+0269:  DATA C3,37
+026A:  DATA F0,3C
+026B:  DATA A0,39
+026C:  DATA 6D,33
+026D:  DATA 5F,32
+026E:  DATA 61,3A
+026F:  DATA E1,06
+0270:  DATA 0A,00
+0271:  DATA 45,37
+0272:  DATA 64,10
+0273:  DATA 65,3C
+0274:  DATA E1,36
+0275:  DATA 70,36
+0276:  DATA E5,2F
+0277:  DATA 30,18
+0278:  DATA 0D,05
+0279:  DATA 00,00
+027A:  DATA 53,3A
+027B:  DATA 61,39
+027C:  DATA 74,10
+027D:  DATA 65,3C
+027E:  DATA E1,36
+027F:  DATA 70,36
+0280:  DATA E5,2F
+0281:  DATA B0,18
+0282:  DATA 0D,05
+0283:  DATA 00,01
+0284:  DATA 65,3C
+0285:  DATA E5,31
+0286:  DATA 75,3A
+0287:  DATA 69,37
+0288:  DATA 67,00
+0289:  DATA 45,37
+028A:  DATA 64,10
+028B:  DATA 65,3C
+028C:  DATA E1,36
+028D:  DATA 70,36
+028E:  DATA E5,2F
+028F:  DATA B0,18
+0290:  DATA 0D,05
+0291:  DATA 00,00
+0292:  DATA D3,26
+0293:  DATA 46,10
+0294:  DATA E4,30
+0295:  DATA F4,30
+0296:  DATA 20,36
+0297:  DATA E9,39
+0298:  DATA 74,10
+0299:  DATA E9,39
+029A:  DATA 20,33
+029B:  DATA 75,36
+029C:  DATA EC,10
+029D:  DATA A1,10
+029E:  DATA 0D,05
+029F:  DATA 00,00
+*
+0317:  DATA 53,3A
+0318:  DATA 61,39
+0319:  DATA 74,10
+031A:  DATA F3,32
+031B:  DATA 74,3A
+031C:  DATA 69,37
+031D:  DATA E7,06
+031E:  DATA 0A,00
+031F:  DATA 45,37
+0320:  DATA 64,10
+0321:  DATA F3,32
+0322:  DATA 74,3A
+0323:  DATA 69,37
+0324:  DATA E7,06
+0325:  DATA 0A,00
+0326:  DATA 0D,05
+0327:  DATA 53,3A
+0328:  DATA 61,39
+0329:  DATA 74,10
+032A:  DATA 65,3C
+032B:  DATA E5,31
+032C:  DATA 75,3A
+032D:  DATA E5,2F
+032E:  DATA E3,37
+032F:  DATA ED,36
+0330:  DATA 61,37
+0331:  DATA E4,06
+0332:  DATA 0A,00
+0333:  DATA 89,16
+0334:  DATA 3E,10
+0335:  DATA 55,38
+0336:  DATA EC,34
+0337:  DATA EE,35
+0338:  DATA A0,31
+0339:  DATA EF,36
+033A:  DATA ED,30
+033B:  DATA 6E,32
+033C:  DATA 0D,05
+033D:  DATA 00,01
+033E:  DATA 09,10
+033F:  DATA 20,10
+0340:  DATA 54,39
+0341:  DATA 61,37
+0342:  DATA F3,36
+0343:  DATA 69,3A
+0344:  DATA A0,20
+0345:  DATA E3,35
+0346:  DATA EE,37
+0347:  DATA EC,32
+0348:  DATA 67,32
+0349:  DATA E5,06
+034A:  DATA 0A,00
+034B:  DATA 89,16
+034C:  DATA 3E,10
+034D:  DATA 53,3A
+034E:  DATA 61,3A
+034F:  DATA F5,39
+0350:  DATA A0,31
+0351:  DATA E8,32
+0352:  DATA E3,35
+0353:  DATA 0D,05
+0354:  DATA 00,01
+0355:  DATA 89,04
+0356:  DATA 2D,1F
+0357:  DATA A0,26
+0358:  DATA 79,10
+0359:  DATA 73,3A
+035A:  DATA 61,3A
+035B:  DATA F5,39
+035C:  DATA A0,34
+035D:  DATA 73,10
+035E:  DATA 25,32
+035F:  DATA 0D,05
+0360:  DATA 00,01
+0361:  DATA 09,10
+0362:  DATA 20,10
+0363:  DATA 54,39
+0364:  DATA 61,37
+0365:  DATA F3,36
+0366:  DATA 69,3A
+0367:  DATA A0,26
+0368:  DATA C9,29
+0369:  DATA A0,26
+036A:  DATA C3,2A
+036B:  DATA A0,29
+036C:  DATA F4,30
+036D:  DATA F4,3A
+036E:  DATA F3,06
+036F:  DATA 0A,00
+0370:  DATA E6,34
+0371:  DATA EE,34
+0372:  DATA 73,34
+0373:  DATA 65,32
+0374:  DATA A0,34
+0375:  DATA 6E,10
+0376:  DATA 73,3A
+0377:  DATA 61,3A
+0378:  DATA F5,39
+0379:  DATA DF,31
+037A:  DATA E8,32
+037B:  DATA E3,35
+037C:  DATA 0D,05
+037D:  DATA 00,01
+037E:  DATA 89,16
+037F:  DATA 3E,10
+0380:  DATA E9,39
+0381:  DATA A0,29
+0382:  DATA 4D,23
+0383:  DATA A0,30
+0384:  DATA F6,30
+0385:  DATA 69,36
+0386:  DATA 61,31
+0387:  DATA EC,32
+0388:  DATA 0D,05
+0389:  DATA 00,01
+038A:  DATA 09,10
+038B:  DATA 20,10
+038C:  DATA 54,39
+038D:  DATA 61,37
+038E:  DATA F3,36
+038F:  DATA 69,3A
+0390:  DATA A0,20
+0391:  DATA E3,35
+0392:  DATA EE,37
+0393:  DATA EC,32
+0394:  DATA 67,32
+0395:  DATA E5,06
+0396:  DATA 0A,00
+0397:  DATA 89,04
+0398:  DATA 2D,1F
+0399:  DATA A0,30
+039A:  DATA 6C,36
+039B:  DATA EF,3B
+039C:  DATA E4,06
+039D:  DATA 0A,00
+039E:  DATA 89,04
+039F:  DATA 2D,1F
+03A0:  DATA 20,32
+03A1:  DATA 65,37
+03A2:  DATA F9,32
+03A3:  DATA E4,06
+03A4:  DATA 0A,00
+03A5:  DATA 0D,05
+03A6:  DATA 0D,05
+03A7:  DATA 00,01
+03A8:  DATA DF,2F
+03A9:  DATA DF,2F
+03AA:  DATA DF,2F
+03AB:  DATA DF,2F
+03AC:  DATA DF,2F
+03AD:  DATA DF,29
+03AE:  DATA F4,30
+03AF:  DATA 72,3A
+03B0:  DATA A0,36
+03B1:  DATA E1,34
+03B2:  DATA EE,2F
+03B3:  DATA DF,2F
+03B4:  DATA DF,2F
+03B5:  DATA DF,2F
+03B6:  DATA DF,2F
+03B7:  DATA DF,06
+03B8:  DATA 8A,06
+03B9:  DATA 0A,00
+03BA:  DATA 0D,05
+03BB:  DATA 0D,05
+03BC:  DATA BD,1E
+03BD:  DATA BD,1E
+03BE:  DATA BD,1E
+03BF:  DATA 0D,05
+03C0:  DATA 0D,05
+03C1:  DATA C6,34
+03C2:  DATA EE,34
+03C3:  DATA 73,34
+03C4:  DATA 65,32
+03C5:  DATA 20,38
+03C6:  DATA F2,37
+03C7:  DATA E3,32
+03C8:  DATA F3,39
+03C9:  DATA AE,06
+03CA:  DATA 8A,2B
+03CB:  DATA E1,34
+03CC:  DATA 74,10
+03CD:  DATA E6,37
+03CE:  DATA 72,10
+03CF:  DATA C2,27
+03D0:  DATA D3,29
+03D1:  DATA 20,28
+03D2:  DATA C9,21
+03D3:  DATA 20,3A
+03D4:  DATA 75,39
+03D5:  DATA 6E,10
+03D6:  DATA 6F,33
+03D7:  DATA 66,10
+03D8:  DATA ED,32
+03D9:  DATA 00,01
+03DA:  DATA 45,37
+03DB:  DATA 64,10
+03DC:  DATA ED,30
+03DD:  DATA 69,37
+03DE:  DATA 0D,05
+03DF:  DATA 00,00
+*
+0405:  MOVF   0B,W
+0406:  BCF    0B.7
+0407:  MOVLB  03
+0408:  BSF    15.7
+0409:  BSF    15.0
+040A:  NOP
+040B:  NOP
+040C:  BTFSC  09.7
+040D:  BSF    0B.7
+040E:  MOVF   13,W
+040F:  ANDLW  7F
+0410:  BTFSC  03.2
+0411:  GOTO   451
+0412:  MOVLB  14
+0413:  MOVWF  3D
+0414:  MOVLB  03
+0415:  MOVF   11,W
+0416:  MOVLB  14
+0417:  MOVWF  3E
+0418:  MOVLB  03
+0419:  MOVF   12,W
+041A:  MOVLB  14
+041B:  MOVWF  3F
+041C:  MOVF   3D,W
+041D:  MOVWF  40
+041E:  MOVLB  00
+041F:  CALL   3E0
+0420:  MOVLB  14
+0421:  MOVF   3E,W
+0422:  MOVLB  03
+0423:  MOVWF  11
+0424:  MOVLB  14
+0425:  MOVF   3F,W
+0426:  MOVLB  03
+0427:  MOVWF  12
+0428:  MOVF   0B,W
+0429:  BCF    0B.7
+042A:  BSF    15.7
+042B:  BSF    15.0
+042C:  NOP
+042D:  NOP
+042E:  BTFSC  09.7
+042F:  BSF    0B.7
+0430:  RLF    13,W
+0431:  RLF    14,W
+0432:  ANDLW  7F
+0433:  BTFSC  03.2
+0434:  GOTO   451
+0435:  MOVLB  14
+0436:  MOVWF  3D
+0437:  MOVLB  03
+0438:  MOVF   11,W
+0439:  MOVLB  14
+043A:  MOVWF  3E
+043B:  MOVLB  03
+043C:  MOVF   12,W
+043D:  MOVLB  14
+043E:  MOVWF  3F
+043F:  MOVF   3D,W
+0440:  MOVWF  40
+0441:  MOVLB  00
+0442:  CALL   3E0
+0443:  MOVLB  14
+0444:  MOVF   3E,W
+0445:  MOVLB  03
+0446:  MOVWF  11
+0447:  MOVLB  14
+0448:  MOVF   3F,W
+0449:  MOVLB  03
+044A:  MOVWF  12
+044B:  INCF   11,F
+044C:  BTFSC  03.2
+044D:  INCF   12,F
+044E:  MOVLB  00
+044F:  GOTO   405
+0450:  MOVLB  03
+0451:  MOVLB  00
+0452:  RETURN
+*
+046C:  MOVLB  14
+046D:  BTFSC  3D.7
+046E:  GOTO   481
+046F:  MOVLW  0F
+0470:  MOVWF  77
+0471:  SWAPF  3C,W
+0472:  ANDWF  77,F
+0473:  MOVLW  0A
+0474:  SUBWF  77,W
+0475:  BTFSC  03.0
+0476:  GOTO   47A
+0477:  MOVLW  30
+0478:  ADDWF  77,F
+0479:  GOTO   47C
+047A:  MOVF   3D,W
+047B:  ADDWF  77,F
+047C:  MOVF   77,W
+047D:  MOVWF  40
+047E:  MOVLB  00
+047F:  CALL   3E0
+0480:  MOVLB  14
+0481:  MOVLW  0F
+0482:  ANDWF  3C,F
+0483:  MOVLW  0A
+0484:  SUBWF  3C,W
+0485:  BTFSC  03.0
+0486:  GOTO   489
+0487:  MOVLW  30
+0488:  GOTO   48B
+0489:  BCF    3D.7
+048A:  MOVF   3D,W
+048B:  ADDWF  3C,F
+048C:  MOVF   3C,W
+048D:  MOVWF  40
+048E:  MOVLB  00
+048F:  CALL   3E0
+0490:  RETURN
+0491:  CLRF   77
+0492:  CLRF   78
+0493:  MOVLB  14
+0494:  MOVF   39,W
+0495:  BCF    03.0
+0496:  BTFSC  3A.0
+0497:  ADDWF  77,F
+0498:  RRF    77,F
+0499:  RRF    78,F
+049A:  BTFSC  3A.1
+049B:  ADDWF  77,F
+049C:  RRF    77,F
+049D:  RRF    78,F
+049E:  BTFSC  3A.2
+049F:  ADDWF  77,F
+04A0:  RRF    77,F
+04A1:  RRF    78,F
+04A2:  BTFSC  3A.3
+04A3:  ADDWF  77,F
+04A4:  RRF    77,F
+04A5:  RRF    78,F
+04A6:  BTFSC  3A.4
+04A7:  ADDWF  77,F
+04A8:  RRF    77,F
+04A9:  RRF    78,F
+04AA:  BTFSC  3A.5
+04AB:  ADDWF  77,F
+04AC:  RRF    77,F
+04AD:  RRF    78,F
+04AE:  BTFSC  3A.6
+04AF:  ADDWF  77,F
+04B0:  RRF    77,F
+04B1:  RRF    78,F
+04B2:  BTFSC  3A.7
+04B3:  ADDWF  77,F
+04B4:  RRF    77,F
+04B5:  RRF    78,F
+04B6:  MOVLB  00
+04B7:  RETURN
+04B8:  MOVF   0B,W
+04B9:  BCF    0B.7
+04BA:  MOVLB  03
+04BB:  BSF    15.7
+04BC:  BSF    15.0
+04BD:  NOP
+04BE:  NOP
+04BF:  BTFSC  09.7
+04C0:  BSF    0B.7
+04C1:  BTFSC  03.0
+04C2:  GOTO   4EB
+04C3:  MOVF   13,W
+04C4:  ANDLW  7F
+04C5:  MOVLB  14
+04C6:  MOVWF  3D
+04C7:  MOVLB  03
+04C8:  MOVF   11,W
+04C9:  MOVLB  14
+04CA:  MOVWF  3E
+04CB:  MOVLB  03
+04CC:  MOVF   12,W
+04CD:  MOVLB  14
+04CE:  MOVWF  3F
+04CF:  MOVF   3D,W
+04D0:  MOVWF  40
+04D1:  MOVLB  00
+04D2:  CALL   3E0
+04D3:  MOVLB  14
+04D4:  MOVF   3E,W
+04D5:  MOVLB  03
+04D6:  MOVWF  11
+04D7:  MOVLB  14
+04D8:  MOVF   3F,W
+04D9:  MOVLB  03
+04DA:  MOVWF  12
+04DB:  MOVF   0B,W
+04DC:  BCF    0B.7
+04DD:  BSF    15.7
+04DE:  BSF    15.0
+04DF:  NOP
+04E0:  NOP
+04E1:  BTFSC  09.7
+04E2:  BSF    0B.7
+04E3:  MOVLB  14
+04E4:  DECFSZ 3C,F
+04E5:  GOTO   4E7
+04E6:  GOTO   4E9
+04E7:  MOVLB  03
+04E8:  GOTO   4EB
+04E9:  GOTO   50E
+04EA:  MOVLB  03
+04EB:  RLF    13,W
+04EC:  RLF    14,W
+04ED:  ANDLW  7F
+04EE:  MOVLB  14
+04EF:  MOVWF  3D
+04F0:  MOVLB  03
+04F1:  MOVF   11,W
+04F2:  MOVLB  14
+04F3:  MOVWF  3E
+04F4:  MOVLB  03
+04F5:  MOVF   12,W
+04F6:  MOVLB  14
+04F7:  MOVWF  3F
+04F8:  MOVF   3D,W
+04F9:  MOVWF  40
+04FA:  MOVLB  00
+04FB:  CALL   3E0
+04FC:  MOVLB  14
+04FD:  MOVF   3E,W
+04FE:  MOVLB  03
+04FF:  MOVWF  11
+0500:  MOVLB  14
+0501:  MOVF   3F,W
+0502:  MOVLB  03
+0503:  MOVWF  12
+0504:  INCF   11,F
+0505:  BTFSC  03.2
+0506:  INCF   12,F
+0507:  BCF    03.0
+0508:  MOVLB  14
+0509:  DECFSZ 3C,F
+050A:  GOTO   50C
+050B:  GOTO   50E
+050C:  MOVLB  00
+050D:  GOTO   4B8
+050E:  MOVLB  00
+050F:  RETURN
+*
+0746:  MOVF   78,W
+0747:  BTFSC  03.2
+0748:  GOTO   74D
+0749:  MOVF   77,W
+074A:  MOVWI  W,[FSR0++]
+074B:  DECFSZ 78,F
+074C:  GOTO   749
+*
+07DF:  MOVLB  13
+07E0:  MOVF   65,W
+07E1:  CLRF   78
+07E2:  SUBWF  64,W
+07E3:  BTFSC  03.0
+07E4:  GOTO   7E8
+07E5:  MOVF   64,W
+07E6:  MOVWF  77
+07E7:  GOTO   7F4
+07E8:  CLRF   77
+07E9:  MOVLW  08
+07EA:  MOVWF  66
+07EB:  RLF    64,F
+07EC:  RLF    77,F
+07ED:  MOVF   65,W
+07EE:  SUBWF  77,W
+07EF:  BTFSC  03.0
+07F0:  MOVWF  77
+07F1:  RLF    78,F
+07F2:  DECFSZ 66,F
+07F3:  GOTO   7EB
+07F4:  MOVLB  00
+07F5:  RETURN
+*
+0800:  MOVLW  20
+0801:  MOVLB  13
+0802:  BTFSS  5F.4
+0803:  MOVLW  30
+0804:  MOVWF  60
+0805:  MOVF   5E,W
+0806:  MOVWF  77
+0807:  BTFSS  5E.7
+0808:  GOTO   011
+0809:  COMF   77,F
+080A:  INCF   77,F
+080B:  MOVF   77,W
+080C:  MOVWF  5E
+080D:  MOVLW  2D
+080E:  MOVWF  60
+080F:  BSF    5F.7
+0810:  BSF    5F.0
+0811:  MOVF   5E,W
+0812:  MOVWF  64
+0813:  MOVLW  64
+0814:  MOVWF  65
+0815:  MOVLP  00
+0816:  MOVLB  00
+0817:  CALL   7DF
+0818:  MOVLP  08
+0819:  MOVF   77,W
+081A:  MOVLB  13
+081B:  MOVWF  5E
+081C:  MOVLW  30
+081D:  ADDWF  78,W
+081E:  MOVWF  61
+081F:  MOVF   5E,W
+0820:  MOVWF  64
+0821:  MOVLW  0A
+0822:  MOVWF  65
+0823:  MOVLP  00
+0824:  MOVLB  00
+0825:  CALL   7DF
+0826:  MOVLP  08
+0827:  MOVLW  30
+0828:  ADDWF  77,W
+0829:  MOVLB  13
+082A:  MOVWF  63
+082B:  MOVLW  30
+082C:  ADDWF  78,W
+082D:  MOVWF  62
+082E:  MOVF   60,W
+082F:  MOVWF  77
+0830:  MOVLW  30
+0831:  SUBWF  61,W
+0832:  BTFSC  03.2
+0833:  GOTO   038
+0834:  BSF    5F.1
+0835:  BTFSC  5F.7
+0836:  BSF    5F.2
+0837:  GOTO   04C
+0838:  MOVF   60,W
+0839:  MOVWF  61
+083A:  MOVLW  20
+083B:  MOVWF  60
+083C:  MOVLW  30
+083D:  SUBWF  62,W
+083E:  BTFSC  03.2
+083F:  GOTO   044
+0840:  BSF    5F.0
+0841:  BTFSC  5F.7
+0842:  BSF    5F.1
+0843:  GOTO   04C
+0844:  BTFSS  03.2
+0845:  BSF    5F.0
+0846:  BTFSS  03.2
+0847:  GOTO   04C
+0848:  MOVF   61,W
+0849:  MOVWF  62
+084A:  MOVLW  20
+084B:  MOVWF  61
+084C:  BTFSC  5F.2
+084D:  GOTO   053
+084E:  BTFSC  5F.1
+084F:  GOTO   05B
+0850:  BTFSC  5F.0
+0851:  GOTO   063
+0852:  GOTO   06B
+0853:  MOVF   60,W
+0854:  MOVLB  14
+0855:  MOVWF  40
+0856:  MOVLP  00
+0857:  MOVLB  00
+0858:  CALL   3E0
+0859:  MOVLP  08
+085A:  MOVLB  13
+085B:  MOVF   61,W
+085C:  MOVLB  14
+085D:  MOVWF  40
+085E:  MOVLP  00
+085F:  MOVLB  00
+0860:  CALL   3E0
+0861:  MOVLP  08
+0862:  MOVLB  13
+0863:  MOVF   62,W
+0864:  MOVLB  14
+0865:  MOVWF  40
+0866:  MOVLP  00
+0867:  MOVLB  00
+0868:  CALL   3E0
+0869:  MOVLP  08
+086A:  MOVLB  13
+086B:  MOVF   63,W
+086C:  MOVLB  14
+086D:  MOVWF  40
+086E:  MOVLP  00
+086F:  MOVLB  00
+0870:  CALL   3E0
+0871:  MOVLP  08
+0872:  RETURN
+.................... 
+.................... #list
+.................... 
+.................... 
+.................... #device ADC=12
+.................... #use delay(crystal=16MHz, clock=16MHz)
+0873:  MOVLW  26
+0874:  MOVWF  05
+0875:  MOVLW  3D
+0876:  MOVWF  04
+0877:  MOVF   00,W
+0878:  BTFSC  03.2
+0879:  GOTO   088
+087A:  MOVLW  05
+087B:  MOVWF  78
+087C:  CLRF   77
+087D:  DECFSZ 77,F
+087E:  GOTO   07D
+087F:  DECFSZ 78,F
+0880:  GOTO   07C
+0881:  MOVLW  2E
+0882:  MOVWF  77
+0883:  DECFSZ 77,F
+0884:  GOTO   083
+0885:  GOTO   086
+0886:  DECFSZ 00,F
+0887:  GOTO   07A
+0888:  RETURN
+.................... #fuses NOMCLR
+.................... 
+.................... 
+.................... 
+.................... //#define SELF_DEVICE_ID CIGS_PIC
+.................... 
+.................... 
+.................... //-------------Serial--------------------
+.................... #use rs232(baud=9600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8,stream=BOSS)
+*
+02E6:  BTFSS  11.4
+02E7:  GOTO   2E6
+02E8:  MOVLB  03
+02E9:  MOVWF  1A
+02EA:  MOVLB  00
+02EB:  RETURN
+.................... #use rs232(baud=9600,parity=N,xmit=PIN_A3,bits=8,stream=PC,FORCE_SW)
+*
+03E0:  MOVLB  01
+03E1:  BCF    0C.3
+03E2:  MOVLB  02
+03E3:  BCF    0C.3
+03E4:  MOVLW  08
+03E5:  MOVWF  78
+03E6:  GOTO   3E7
+03E7:  NOP
+03E8:  BSF    78.7
+03E9:  GOTO   3FA
+03EA:  BCF    78.7
+03EB:  MOVLB  14
+03EC:  RRF    40,F
+03ED:  MOVLB  02
+03EE:  BTFSC  03.0
+03EF:  BSF    0C.3
+03F0:  BTFSS  03.0
+03F1:  BCF    0C.3
+03F2:  BSF    78.6
+03F3:  GOTO   3FA
+03F4:  BCF    78.6
+03F5:  DECFSZ 78,F
+03F6:  GOTO   3EB
+03F7:  GOTO   3F8
+03F8:  NOP
+03F9:  BSF    0C.3
+03FA:  MOVLW  84
+03FB:  MOVWF  04
+03FC:  DECFSZ 04,F
+03FD:  GOTO   3FC
+03FE:  NOP
+03FF:  BTFSC  78.7
+0400:  GOTO   3EA
+0401:  BTFSC  78.6
+0402:  GOTO   3F4
+0403:  MOVLB  00
+0404:  RETURN
+.................... 
+.................... 
+.................... // Flash Memory
+.................... #define DEBUG
+.................... #define USE_FLASH1G     //MT25QL01GBBB
+.................... #define USE_FLASH128M   //MT25QL128ABA
+.................... 
+.................... #define SMF_CS  PIN_C1
+.................... //#define SMF 
+.................... #use spi (MASTER, SPI1, BAUD=400000, MODE=0, BITS=8, STREAM=SMF)
+.................... 
+.................... 
+.................... #define PICF_CS PIN_C2
+.................... #use spi (MASTER, SPI1, BAUD=400000, MODE=0, BITS=8, STREAM=PICF)
+.................... 
+.................... // Flash Address
+.................... #define PICF_START_ADDR 0x00000000
+.................... #define PICF_END_ADDR   0x000FFFFF  
+.................... #define SMF_START_ADDR 0x00000000
+.................... #define SMF_END_ADDR   0x000FFFFF   
+.................... 
+.................... 
+.................... 
+.................... //-------------I/O port--------------------
+.................... // AI/O___ADC
+.................... #define TEMP_TOP PIN_A5
+.................... #define TEMP_BOT PIN_A3
+.................... #define CIGS_VOLT PIN_A0
+.................... #define CIGS_CURR PIN_A1
+.................... #define PD PIN_E0
+.................... 
+.................... // AI/O___DAC
+.................... #define Load PIN_A2
+.................... #define Load PIN_A6
+.................... 
+.................... // DI/O___
+.................... 
+.................... 
+.................... 
+.................... 
+.................... #endif // MMJ_CIGS_PIC_CONFIG_H
+.................... 
+.................... 
+.................... 
+.................... #include "common.h"
+.................... #ifndef COMMON_H
+.................... #define COMMON_H
+.................... 
+.................... 
+.................... 
+.................... #include "mmj_define.h"
+.................... #ifndef MMJ_DEFINE_H
+.................... #define MMJ_DEFINE_H
+.................... 
+.................... 
+.................... //__________ Receive signal max length _________
+.................... #define RECEIVE_SIGNAL_MAX 32
+.................... 
+.................... //__________ SFD (Start FrameDelimiter) _________
+.................... 
+.................... #define SFD 0xAA
+.................... 
+.................... //_____________ Device IDs ____________
+.................... 
+.................... #define MAIN_PIC  0x00
+.................... #define COM_PIC   0x01
+.................... #define RESET_PIC 0x02
+.................... #define FAB_PIC   0x03
+.................... #define BOSS_PIC  0x04
+.................... #define APRS_PIC  0x05
+.................... #define CAM_MCU   0x06
+.................... #define CHO_MCU   0x07
+.................... #define NAKA_PIC  0x08
+.................... #define SATO_PIC  0x09
+.................... #define BHU_MCU   0x0A
+.................... #define CIGS_PIC  0x0B
+.................... 
+.................... #define SELF_DEVICE_ID CIGS_PIC
+.................... 
+.................... 
+.................... //____________ Frame IDs ____________
+.................... /* 
+.................... !!!NOTE!!!
+....................  change write `value.h` line26
+.................... */
+.................... 
+.................... 
+.................... // receives
+.................... #define UPLINK_COMMAND 0x00
+.................... #define STATUS_CHECK   0x01
+.................... #define IS_SMF_AVAILABLE 0x02
+.................... 
+.................... #define UPLINK_COMMAND_LENGTH 9
+.................... #define STATUS_CHECK_LENGTH   0
+.................... #define IS_SMF_AVAILABLE_LENGTH 1
+.................... 
+.................... #define RECEIVE_FRAME_KINDS 3
+.................... 
+.................... 
+.................... // transmits
+.................... #define MIS_MCU_STATUS 0x01
+.................... #define ACK 0x0F
+.................... 
+.................... 
+.................... //______________ Status ______________
+.................... 
+.................... // #define OFF       0x00
+.................... // #define BOOTING   0x01 these values used in BOSS PIC only
+.................... #define IDLE      0x02
+.................... #define BUSY      0x03
+.................... #define SMF_COPY_REQ 0x04
+.................... #define COPYING   0x05
+.................... #define FINISHED  0x06
+.................... 
+.................... 
+.................... //____________ Is SMF availavle respond ____________
+.................... 
+.................... #define ALLOW 0x00
+.................... #define DENY  0x01
+.................... 
+.................... 
+.................... #endif  // MMJ_DEFINE_H
+.................... 
+.................... #include "value.h"
+.................... #ifndef VALUE_H
+.................... #define VALUE_H
+.................... 
+.................... 
+.................... // timer
+.................... volatile unsigned int32 dsec = 0, sec = 0; //dsec -> deci second (0.1 sec)
+.................... volatile unsigned int16 day = 0;
+.................... 
+.................... 
+.................... // receive buffer
+.................... volatile unsigned int8 receive_signal[RECEIVE_SIGNAL_MAX] = {0x00};
+.................... volatile int8 receive_signal_size = 0;
+.................... 
+.................... 
+.................... // MIS MCU statement
+.................... volatile int8 status = IDLE;
+.................... 
+.................... 
+.................... // for use ID and length data table
+.................... typedef struct{
+....................    int8 id;
+....................    int8 length;
+....................    unsigned int8 name[32];
+.................... }FrameID;
+.................... 
+.................... const FrameID frame_ids[RECEIVE_FRAME_KINDS] = {
+....................    {UPLINK_COMMAND, UPLINK_COMMAND_LENGTH, "Uplink commnd"}, 
+....................    {STATUS_CHECK, STATUS_CHECK_LENGTH, "Status check"}, 
+....................    {IS_SMF_AVAILABLE, IS_SMF_AVAILABLE_LENGTH, "Is SMF available"}
+.................... };
+.................... 
+.................... 
+.................... // Command struct
+.................... typedef struct{
+....................    int8 frame_id;
+....................    unsigned int8 content[RECEIVE_SIGNAL_MAX];
+....................    int8 size;
+....................    int1 is_exist;
+.................... } Command;
+.................... 
+.................... 
+.................... // SMF data queue
+.................... typedef struct{
+....................    unsigned int32 src;
+....................    unsigned int32 dest;
+....................    unsigned int32 size;
+.................... }SmfDataStruct;
+.................... 
+.................... #define SMF_DATA_SIZE 16
+.................... 
+.................... volatile int8 smf_data_head = 0;
+.................... volatile int8 smf_data_tail = 0;
+.................... 
+.................... SmfDataStruct smf_data[SMF_DATA_SIZE] = { {0x00} };
+.................... 
+.................... 
+.................... #endif  // VALUE_H
+.................... 
+.................... 
+.................... #include "communication.h"
+.................... #ifndef COMMUNICATION_H
+.................... #define COMMUNICATION_H
+.................... 
+.................... // fundamental function. It's format resieve signal to Command struct
+.................... Command make_receive_command(unsigned int8 receive_signal[], int8 receive_signal_size);
+.................... int8 make_frame(unsigned int8 receive_signal[], int8 receive_signal_size);
+.................... int8 get_content_size(unsigned int8 frame_id);
+.................... int1 check_crc(unsigned int8 frame[], int8 receive_frame_size);
+.................... unsigned int8 calc_crc(unsigned int8 frame[], int8 payload_size);
+.................... int1 check_device_id(unsigned int8 device_id);
+.................... 
+.................... // clear receive buffer
+.................... void clear_receive_signal(unsigned int8 receive_signal[], int8 *receive_signal_size);
+.................... 
+.................... // convet Command to byte and transmit this data
+.................... void transmit_command(int8 frame_id, unsigned int8 content[], int8 size);
+.................... void transmit(unsigned int8 data[], int8 data_size);
+.................... 
+.................... #endif // COMMUNICATION_H
+.................... 
+.................... #include "communication.c"
+.................... #include "communication.h"
+.................... #ifndef COMMUNICATION_H
+.................... #define COMMUNICATION_H
+.................... 
+.................... // fundamental function. It's format resieve signal to Command struct
+.................... Command make_receive_command(unsigned int8 receive_signal[], int8 receive_signal_size);
+.................... int8 make_frame(unsigned int8 receive_signal[], int8 receive_signal_size);
+.................... int8 get_content_size(unsigned int8 frame_id);
+.................... int1 check_crc(unsigned int8 frame[], int8 receive_frame_size);
+.................... unsigned int8 calc_crc(unsigned int8 frame[], int8 payload_size);
+.................... int1 check_device_id(unsigned int8 device_id);
+.................... 
+.................... // clear receive buffer
+.................... void clear_receive_signal(unsigned int8 receive_signal[], int8 *receive_signal_size);
+.................... 
+.................... // convet Command to byte and transmit this data
+.................... void transmit_command(int8 frame_id, unsigned int8 content[], int8 size);
+.................... void transmit(unsigned int8 data[], int8 data_size);
+.................... 
+.................... #endif // COMMUNICATION_H
+.................... 
+.................... 
+.................... 
+.................... #include "mmj_define.h"
+.................... #ifndef MMJ_DEFINE_H
+.................... #define MMJ_DEFINE_H
+.................... 
+.................... 
+.................... //__________ Receive signal max length _________
+.................... #define RECEIVE_SIGNAL_MAX 32
+.................... 
+.................... //__________ SFD (Start FrameDelimiter) _________
+.................... 
+.................... #define SFD 0xAA
+.................... 
+.................... //_____________ Device IDs ____________
+.................... 
+.................... #define MAIN_PIC  0x00
+.................... #define COM_PIC   0x01
+.................... #define RESET_PIC 0x02
+.................... #define FAB_PIC   0x03
+.................... #define BOSS_PIC  0x04
+.................... #define APRS_PIC  0x05
+.................... #define CAM_MCU   0x06
+.................... #define CHO_MCU   0x07
+.................... #define NAKA_PIC  0x08
+.................... #define SATO_PIC  0x09
+.................... #define BHU_MCU   0x0A
+.................... #define CIGS_PIC  0x0B
+.................... 
+.................... #define SELF_DEVICE_ID CIGS_PIC
+.................... 
+.................... 
+.................... //____________ Frame IDs ____________
+.................... /* 
+.................... !!!NOTE!!!
+....................  change write `value.h` line26
+.................... */
+.................... 
+.................... 
+.................... // receives
+.................... #define UPLINK_COMMAND 0x00
+.................... #define STATUS_CHECK   0x01
+.................... #define IS_SMF_AVAILABLE 0x02
+.................... 
+.................... #define UPLINK_COMMAND_LENGTH 9
+.................... #define STATUS_CHECK_LENGTH   0
+.................... #define IS_SMF_AVAILABLE_LENGTH 1
+.................... 
+.................... #define RECEIVE_FRAME_KINDS 3
+.................... 
+.................... 
+.................... // transmits
+.................... #define MIS_MCU_STATUS 0x01
+.................... #define ACK 0x0F
+.................... 
+.................... 
+.................... //______________ Status ______________
+.................... 
+.................... // #define OFF       0x00
+.................... // #define BOOTING   0x01 these values used in BOSS PIC only
+.................... #define IDLE      0x02
+.................... #define BUSY      0x03
+.................... #define SMF_COPY_REQ 0x04
+.................... #define COPYING   0x05
+.................... #define FINISHED  0x06
+.................... 
+.................... 
+.................... //____________ Is SMF availavle respond ____________
+.................... 
+.................... #define ALLOW 0x00
+.................... #define DENY  0x01
+.................... 
+.................... 
+.................... #endif  // MMJ_DEFINE_H
+.................... 
+.................... #include "value.h"
+.................... #ifndef VALUE_H
+.................... #define VALUE_H
+.................... 
+.................... 
+.................... // timer
+.................... volatile unsigned int32 dsec = 0, sec = 0; //dsec -> deci second (0.1 sec)
+.................... volatile unsigned int16 day = 0;
+.................... 
+.................... 
+.................... // receive buffer
+.................... volatile unsigned int8 receive_signal[RECEIVE_SIGNAL_MAX] = {0x00};
+.................... volatile int8 receive_signal_size = 0;
+.................... 
+.................... 
+.................... // MIS MCU statement
+.................... volatile int8 status = IDLE;
+.................... 
+.................... 
+.................... // for use ID and length data table
+.................... typedef struct{
+....................    int8 id;
+....................    int8 length;
+....................    unsigned int8 name[32];
+.................... }FrameID;
+.................... 
+.................... const FrameID frame_ids[RECEIVE_FRAME_KINDS] = {
+....................    {UPLINK_COMMAND, UPLINK_COMMAND_LENGTH, "Uplink commnd"}, 
+....................    {STATUS_CHECK, STATUS_CHECK_LENGTH, "Status check"}, 
+....................    {IS_SMF_AVAILABLE, IS_SMF_AVAILABLE_LENGTH, "Is SMF available"}
+.................... };
+.................... 
+.................... 
+.................... // Command struct
+.................... typedef struct{
+....................    int8 frame_id;
+....................    unsigned int8 content[RECEIVE_SIGNAL_MAX];
+....................    int8 size;
+....................    int1 is_exist;
+.................... } Command;
+.................... 
+.................... 
+.................... // SMF data queue
+.................... typedef struct{
+....................    unsigned int32 src;
+....................    unsigned int32 dest;
+....................    unsigned int32 size;
+.................... }SmfDataStruct;
+.................... 
+.................... #define SMF_DATA_SIZE 16
+.................... 
+.................... volatile int8 smf_data_head = 0;
+.................... volatile int8 smf_data_tail = 0;
+.................... 
+.................... SmfDataStruct smf_data[SMF_DATA_SIZE] = { {0x00} };
+.................... 
+.................... 
+.................... #endif  // VALUE_H
+.................... 
+.................... 
+.................... Command make_receive_command(unsigned int8 receive_signal[], int8 receive_signal_size)
+.................... {
+....................    Command command = {0, {0x00}, 0, FALSE};
+*
+052B:  MOVLB  13
+052C:  CLRF   5C
+052D:  CLRF   5D
+052E:  CLRF   5E
+052F:  CLRF   5F
+0530:  CLRF   60
+0531:  CLRF   61
+0532:  CLRF   62
+0533:  CLRF   63
+0534:  CLRF   64
+0535:  CLRF   65
+0536:  CLRF   66
+0537:  CLRF   67
+0538:  CLRF   68
+0539:  CLRF   69
+053A:  CLRF   6A
+053B:  CLRF   6B
+053C:  CLRF   6C
+053D:  CLRF   6D
+053E:  CLRF   6E
+053F:  CLRF   6F
+0540:  MOVLB  14
+0541:  CLRF   20
+0542:  CLRF   21
+0543:  CLRF   22
+0544:  CLRF   23
+0545:  CLRF   24
+0546:  CLRF   25
+0547:  CLRF   26
+0548:  CLRF   27
+0549:  CLRF   28
+054A:  CLRF   29
+054B:  CLRF   2A
+054C:  CLRF   2B
+054D:  CLRF   2C
+054E:  CLRF   2D
+054F:  CLRF   2E
+....................    fprintf(PC, "Start make_receive_command\r\n\t-> ");
+0550:  MOVLW  9F
+0551:  MOVLB  03
+0552:  MOVWF  11
+0553:  MOVLW  00
+0554:  MOVWF  12
+0555:  MOVLB  00
+0556:  CALL   405
+....................    for (int8 i = 0; i < receive_signal_size; i++)
+0557:  MOVLB  14
+0558:  CLRF   2F
+0559:  MOVLB  13
+055A:  MOVF   5B,W
+055B:  MOVLB  14
+055C:  SUBWF  2F,W
+055D:  BTFSC  03.0
+055E:  GOTO   576
+....................       fprintf(PC, "%X ", receive_signal[i]);
+055F:  MOVF   2F,W
+0560:  MOVLB  13
+0561:  ADDWF  59,W
+0562:  MOVWF  04
+0563:  MOVLW  00
+0564:  ADDWFC 5A,W
+0565:  MOVWF  05
+0566:  MOVF   00,W
+0567:  MOVLB  14
+0568:  MOVWF  37
+0569:  MOVWF  3C
+056A:  MOVLW  37
+056B:  MOVWF  3D
+056C:  MOVLB  00
+056D:  CALL   46C
+056E:  MOVLW  20
+056F:  MOVLB  14
+0570:  MOVWF  40
+0571:  MOVLB  00
+0572:  CALL   3E0
+0573:  MOVLB  14
+0574:  INCF   2F,F
+0575:  GOTO   559
+....................    fprintf(PC, "\r\n");
+0576:  MOVLW  0D
+0577:  MOVWF  40
+0578:  MOVLB  00
+0579:  CALL   3E0
+057A:  MOVLW  0A
+057B:  MOVLB  14
+057C:  MOVWF  40
+057D:  MOVLB  00
+057E:  CALL   3E0
+.................... 
+....................    int8 frame_start_position = make_frame(receive_signal, receive_signal_size);
+057F:  MOVLB  13
+0580:  MOVF   5A,W
+0581:  MOVLB  14
+0582:  MOVWF  38
+0583:  MOVLB  13
+0584:  MOVF   59,W
+0585:  MOVLB  14
+0586:  MOVWF  37
+0587:  MOVLB  13
+0588:  MOVF   5B,W
+0589:  MOVLB  14
+058A:  MOVWF  39
+*
+05C2:  MOVF   78,W
+05C3:  MOVWF  30
+....................    if (frame_start_position == -1)
+05C4:  MOVF   30,W
+05C5:  SUBLW  FF
+05C6:  BTFSS  03.2
+05C7:  GOTO   5CD
+....................       return command;
+05C8:  MOVLW  DC
+05C9:  MOVWF  78
+05CA:  MOVLW  09
+05CB:  MOVWF  79
+05CC:  GOTO   733
+....................       
+....................    unsigned int8 *frame = &receive_signal[frame_start_position];
+....................    
+....................    int8 frame_id = frame[0] & 0x0F;
+....................    int8 content_size = get_content_size(frame_id);
+05CD:  MOVF   30,W
+05CE:  MOVLB  13
+05CF:  ADDWF  59,W
+05D0:  MOVWF  78
+05D1:  MOVLW  00
+05D2:  ADDWFC 5A,W
+05D3:  MOVWF  7A
+05D4:  MOVF   78,W
+05D5:  MOVLB  14
+05D6:  MOVWF  31
+05D7:  MOVF   7A,W
+05D8:  MOVWF  32
+05D9:  MOVF   31,W
+05DA:  MOVWF  04
+05DB:  MOVF   32,W
+05DC:  MOVWF  05
+05DD:  ADDFSR 00,FSR0
+05DE:  MOVF   00,W
+05DF:  ANDLW  0F
+05E0:  MOVWF  33
+05E1:  MOVF   33,W
+05E2:  MOVWF  37
+*
+0622:  MOVF   78,W
+0623:  MOVLB  14
+0624:  MOVWF  34
+....................    if (content_size == -1)
+0625:  MOVF   34,W
+0626:  SUBLW  FF
+0627:  BTFSS  03.2
+0628:  GOTO   62E
+....................       return command;
+0629:  MOVLW  DC
+062A:  MOVWF  78
+062B:  MOVLW  09
+062C:  MOVWF  79
+062D:  GOTO   733
+....................       
+....................    int8 receive_frame_size = receive_signal_size - frame_start_position;
+062E:  MOVF   30,W
+062F:  MOVLB  13
+0630:  SUBWF  5B,W
+0631:  MOVLB  14
+0632:  MOVWF  35
+....................    
+....................    if (!check_crc(frame, receive_frame_size))
+0633:  MOVF   32,W
+0634:  MOVWF  38
+0635:  MOVF   31,W
+0636:  MOVWF  37
+0637:  MOVF   35,W
+0638:  MOVWF  39
+*
+069A:  MOVF   78,F
+069B:  BTFSS  03.2
+069C:  GOTO   6A2
+....................       return command;
+069D:  MOVLW  DC
+069E:  MOVWF  78
+069F:  MOVLW  09
+06A0:  MOVWF  79
+06A1:  GOTO   733
+....................    
+....................    if(!check_device_id((frame[0] & 0xF0) >> 4))
+06A2:  MOVF   31,W
+06A3:  MOVWF  04
+06A4:  MOVF   32,W
+06A5:  MOVWF  05
+06A6:  ADDFSR 00,FSR0
+06A7:  MOVF   00,W
+06A8:  ANDLW  F0
+06A9:  MOVWF  77
+06AA:  SWAPF  77,W
+06AB:  MOVWF  37
+06AC:  MOVLW  0F
+06AD:  ANDWF  37,F
+06AE:  MOVF   37,W
+06AF:  MOVWF  38
+*
+06FA:  MOVF   78,F
+06FB:  BTFSS  03.2
+06FC:  GOTO   702
+....................       return command;
+06FD:  MOVLW  DC
+06FE:  MOVWF  78
+06FF:  MOVLW  09
+0700:  MOVWF  79
+0701:  GOTO   733
+.................... 
+....................    command.frame_id = frame_id;
+0702:  MOVF   33,W
+0703:  MOVLB  13
+0704:  MOVWF  5C
+....................    memcpy(command.content, &frame[1], receive_frame_size-2); // '2' is for Decive ID, Frame ID and CRC
+0705:  MOVLW  01
+0706:  MOVLB  14
+0707:  ADDWF  31,W
+0708:  MOVWF  78
+0709:  MOVLW  00
+070A:  ADDWFC 32,W
+070B:  MOVWF  7A
+070C:  MOVF   78,W
+070D:  MOVWF  37
+070E:  MOVF   7A,W
+070F:  MOVWF  38
+0710:  MOVLW  02
+0711:  SUBWF  35,W
+0712:  MOVWF  39
+0713:  MOVF   38,W
+0714:  MOVWF  05
+0715:  MOVF   37,W
+0716:  MOVWF  04
+0717:  MOVF   39,W
+0718:  MOVWF  78
+0719:  BTFSC  03.2
+071A:  GOTO   723
+071B:  MOVLW  26
+071C:  MOVWF  07
+071D:  MOVLW  2D
+071E:  MOVWF  06
+071F:  MOVIW  [FSR0++],W
+0720:  MOVWI  W,[FSR1++]
+0721:  DECFSZ 78,F
+0722:  GOTO   71F
+....................    command.size = receive_frame_size-2;
+0723:  MOVLW  02
+0724:  SUBWF  35,W
+0725:  MOVWF  2D
+....................    command.is_exist = TRUE;
+0726:  BSF    2E.0
+....................    fprintf(PC, "End make_recive_command\r\n");
+0727:  MOVLW  B0
+0728:  MOVLB  03
+0729:  MOVWF  11
+072A:  MOVLW  00
+072B:  MOVWF  12
+072C:  MOVLB  00
+072D:  CALL   405
+....................    return command;
+072E:  MOVLW  DC
+072F:  MOVWF  78
+0730:  MOVLW  09
+0731:  MOVWF  79
+0732:  MOVLB  14
+0733:  MOVLP  08
+0734:  MOVLB  00
+0735:  GOTO   62A (RETURN)
+.................... }
+.................... 
+.................... int8 make_frame(unsigned int8 receive_signal[], int8 receive_signal_size)
+*
+058B:  CLRF   3A
+.................... {
+....................    int8 i = 0;
+....................    for(i = 0; i < receive_signal_size-1; i++) // if SFD find 
+058C:  CLRF   3A
+058D:  MOVLW  01
+058E:  SUBWF  39,W
+058F:  SUBWF  3A,W
+0590:  BTFSC  03.0
+0591:  GOTO   5A2
+....................       if(receive_signal[i] == SFD)
+0592:  MOVF   3A,W
+0593:  ADDWF  37,W
+0594:  MOVWF  04
+0595:  MOVLW  00
+0596:  ADDWFC 38,W
+0597:  MOVWF  05
+0598:  MOVF   00,W
+0599:  SUBLW  AA
+059A:  BTFSS  03.2
+059B:  GOTO   5A0
+....................          return i+1;
+059C:  MOVLW  01
+059D:  ADDWF  3A,W
+059E:  MOVWF  78
+059F:  GOTO   5C2
+05A0:  INCF   3A,F
+05A1:  GOTO   58D
+....................    if (receive_signal[i] == SFD)
+05A2:  MOVF   3A,W
+05A3:  ADDWF  37,W
+05A4:  MOVWF  04
+05A5:  MOVLW  00
+05A6:  ADDWFC 38,W
+05A7:  MOVWF  05
+05A8:  MOVF   00,W
+05A9:  SUBLW  AA
+05AA:  BTFSS  03.2
+05AB:  GOTO   5B8
+....................    {
+....................       fprintf(PC, "signal end with SFD\r\n");
+05AC:  MOVLW  BD
+05AD:  MOVLB  03
+05AE:  MOVWF  11
+05AF:  MOVLW  00
+05B0:  MOVWF  12
+05B1:  MOVLB  00
+05B2:  CALL   405
+....................       return -1;
+05B3:  MOVLW  FF
+05B4:  MOVWF  78
+05B5:  MOVLB  14
+05B6:  GOTO   5C2
+....................    }
+05B7:  GOTO   5C2
+....................    else
+....................    {
+....................       fprintf(PC, "don't find SFD\r\n");
+05B8:  MOVLW  C8
+05B9:  MOVLB  03
+05BA:  MOVWF  11
+05BB:  MOVLW  00
+05BC:  MOVWF  12
+05BD:  MOVLB  00
+05BE:  CALL   405
+....................       return -1;
+05BF:  MOVLW  FF
+05C0:  MOVWF  78
+05C1:  MOVLB  14
+....................    }
+....................    
+.................... }
+.................... 
+.................... /**
+....................  * @brief get_content_size
+....................  * @param frame_id: frame ID
+....................  */
+.................... int8 get_content_size(unsigned int8 frame_id)
+.................... {
+....................    for (int i = 0; i < RECEIVE_FRAME_KINDS; i++)
+*
+05E3:  CLRF   38
+05E4:  MOVF   38,W
+05E5:  SUBLW  02
+05E6:  BTFSS  03.0
+05E7:  GOTO   604
+....................       if (frame_id == frame_ids[i].id)
+05E8:  MOVF   38,W
+05E9:  MOVWF  39
+05EA:  MOVLW  22
+05EB:  MOVWF  3A
+05EC:  MOVLB  00
+05ED:  CALL   491
+05EE:  MOVF   78,W
+05EF:  CALL   047
+05F0:  MOVWF  78
+05F1:  MOVLB  14
+05F2:  SUBWF  37,W
+05F3:  BTFSS  03.2
+05F4:  GOTO   602
+....................          return frame_ids[i].length;
+05F5:  MOVF   38,W
+05F6:  MOVWF  39
+05F7:  MOVLW  22
+05F8:  MOVWF  3A
+05F9:  MOVLB  00
+05FA:  CALL   491
+05FB:  MOVLW  01
+05FC:  ADDWF  78,W
+05FD:  CALL   047
+05FE:  MOVWF  78
+05FF:  MOVWF  78
+0600:  GOTO   622
+0601:  MOVLB  14
+0602:  INCF   38,F
+0603:  GOTO   5E4
+....................          
+....................    fprintf(PC, "\t-> Invalid Frame ID received: %X\r\n", frame_id);
+0604:  MOVLW  D1
+0605:  MOVLB  03
+0606:  MOVWF  11
+0607:  MOVLW  00
+0608:  MOVWF  12
+0609:  BCF    03.0
+060A:  MOVLW  1F
+060B:  MOVLB  14
+060C:  MOVWF  3C
+060D:  MOVLB  00
+060E:  CALL   4B8
+060F:  MOVLB  14
+0610:  MOVF   37,W
+0611:  MOVWF  3C
+0612:  MOVLW  37
+0613:  MOVWF  3D
+0614:  MOVLB  00
+0615:  CALL   46C
+0616:  MOVLW  0D
+0617:  MOVLB  14
+0618:  MOVWF  40
+0619:  MOVLB  00
+061A:  CALL   3E0
+061B:  MOVLW  0A
+061C:  MOVLB  14
+061D:  MOVWF  40
+061E:  MOVLB  00
+061F:  CALL   3E0
+....................    return -1;
+0620:  MOVLW  FF
+0621:  MOVWF  78
+.................... }
+.................... 
+.................... /**
+....................  * @brief check_crc
+....................  * @param frame: received signal
+....................  * @param receive_frame_size: size of received signal   
+....................  */
+.................... int1 check_crc(unsigned int8 frame[], int8 receive_frame_size)
+*
+0639:  MOVLW  01
+063A:  SUBWF  39,W
+063B:  ADDWF  37,W
+063C:  MOVWF  04
+063D:  MOVLW  00
+063E:  ADDWFC 38,W
+063F:  MOVWF  05
+0640:  MOVF   00,W
+0641:  MOVWF  3A
+0642:  MOVLW  01
+0643:  SUBWF  39,W
+0644:  MOVWF  3C
+0645:  MOVF   38,W
+0646:  MOVWF  3E
+0647:  MOVF   37,W
+0648:  MOVWF  3D
+0649:  MOVF   3C,W
+064A:  MOVWF  3F
+064B:  MOVLB  00
+064C:  CALL   510
+064D:  MOVF   78,W
+064E:  MOVLB  14
+064F:  MOVWF  3B
+.................... {
+....................    unsigned int8 received_crc = frame[receive_frame_size-1]; // '1' is for crc
+....................    unsigned int8 collect_crc = calc_crc(frame, receive_frame_size-1);
+....................    if (received_crc == collect_crc)
+0650:  MOVF   3B,W
+0651:  SUBWF  3A,W
+0652:  BTFSS  03.2
+0653:  GOTO   658
+....................       return TRUE;
+0654:  MOVLW  01
+0655:  MOVWF  78
+0656:  GOTO   69A
+0657:  GOTO   69A
+....................    else
+....................    {
+....................       fprintf(PC, "\t-> CRC error!\r\n");
+0658:  MOVLW  E3
+0659:  MOVLB  03
+065A:  MOVWF  11
+065B:  MOVLW  00
+065C:  MOVWF  12
+065D:  MOVLB  00
+065E:  CALL   405
+....................       fprintf(PC, "\t\t-> received CRC: %X\r\n", received_crc);
+065F:  MOVLW  EC
+0660:  MOVLB  03
+0661:  MOVWF  11
+0662:  MOVLW  00
+0663:  MOVWF  12
+0664:  BCF    03.0
+0665:  MOVLW  13
+0666:  MOVLB  14
+0667:  MOVWF  3C
+0668:  MOVLB  00
+0669:  CALL   4B8
+066A:  MOVLB  14
+066B:  MOVF   3A,W
+066C:  MOVWF  3C
+066D:  MOVLW  37
+066E:  MOVWF  3D
+066F:  MOVLB  00
+0670:  CALL   46C
+0671:  MOVLW  0D
+0672:  MOVLB  14
+0673:  MOVWF  40
+0674:  MOVLB  00
+0675:  CALL   3E0
+0676:  MOVLW  0A
+0677:  MOVLB  14
+0678:  MOVWF  40
+0679:  MOVLB  00
+067A:  CALL   3E0
+....................       fprintf(PC, "\t\t   collect CRC : %X\r\n", collect_crc);
+067B:  MOVLW  F8
+067C:  MOVLB  03
+067D:  MOVWF  11
+067E:  MOVLW  00
+067F:  MOVWF  12
+0680:  BCF    03.0
+0681:  MOVLW  13
+0682:  MOVLB  14
+0683:  MOVWF  3C
+0684:  MOVLB  00
+0685:  CALL   4B8
+0686:  MOVLB  14
+0687:  MOVF   3B,W
+0688:  MOVWF  3C
+0689:  MOVLW  37
+068A:  MOVWF  3D
+068B:  MOVLB  00
+068C:  CALL   46C
+068D:  MOVLW  0D
+068E:  MOVLB  14
+068F:  MOVWF  40
+0690:  MOVLB  00
+0691:  CALL   3E0
+0692:  MOVLW  0A
+0693:  MOVLB  14
+0694:  MOVWF  40
+0695:  MOVLB  00
+0696:  CALL   3E0
+....................       return FALSE;
+0697:  MOVLW  00
+0698:  MOVWF  78
+0699:  MOVLB  14
+....................    }
+.................... }
+.................... 
+.................... /**
+....................  * @brief calc_crc
+....................  * @param frame: received signal
+....................  * @param payload_size: size of received signal   
+....................  */
+.................... unsigned int8 calc_crc(unsigned int8 frame[], int8 payload_size)
+*
+0510:  MOVLB  14
+0511:  MOVF   3D,W
+0512:  MOVWF  04
+0513:  MOVF   3E,W
+0514:  MOVWF  05
+0515:  MOVIW  [FSR0+00],W
+0516:  MOVWF  40
+0517:  MOVLW  01
+0518:  MOVWF  41
+.................... {
+....................    unsigned int8 crc = frame[0], i = 1;
+....................    while(i < payload_size)
+0519:  MOVF   3F,W
+051A:  SUBWF  41,W
+051B:  BTFSC  03.0
+051C:  GOTO   527
+....................       crc ^= frame[i++];
+051D:  MOVF   41,W
+051E:  INCF   41,F
+051F:  ADDWF  3D,W
+0520:  MOVWF  04
+0521:  MOVLW  00
+0522:  ADDWFC 3E,W
+0523:  MOVWF  05
+0524:  MOVF   00,W
+0525:  XORWF  40,F
+0526:  GOTO   519
+....................    return crc;
+0527:  MOVF   40,W
+0528:  MOVWF  78
+0529:  MOVLB  00
+052A:  RETURN
+.................... }
+.................... 
+.................... /**
+....................  * @brief check_device_id
+....................  * @param device_id: device ID
+....................  */
+.................... int1 check_device_id(unsigned int8 device_id)
+.................... {
+....................    if (SELF_DEVICE_ID == device_id)
+*
+06B0:  MOVF   38,W
+06B1:  SUBLW  0B
+06B2:  BTFSS  03.2
+06B3:  GOTO   6B8
+....................       return TRUE;
+06B4:  MOVLW  01
+06B5:  MOVWF  78
+06B6:  GOTO   6FA
+06B7:  GOTO   6FA
+....................    else
+....................    {
+....................       fprintf(PC, "\t-> Invalid device ID received\r\n");
+06B8:  MOVLW  04
+06B9:  MOVLB  03
+06BA:  MOVWF  11
+06BB:  MOVLW  01
+06BC:  MOVWF  12
+06BD:  MOVLB  00
+06BE:  CALL   405
+....................       fprintf(PC, "\t\t-> received:     %X\r\n", device_id);
+06BF:  MOVLW  15
+06C0:  MOVLB  03
+06C1:  MOVWF  11
+06C2:  MOVLW  01
+06C3:  MOVWF  12
+06C4:  BCF    03.0
+06C5:  MOVLW  13
+06C6:  MOVLB  14
+06C7:  MOVWF  3C
+06C8:  MOVLB  00
+06C9:  CALL   4B8
+06CA:  MOVLB  14
+06CB:  MOVF   38,W
+06CC:  MOVWF  3C
+06CD:  MOVLW  37
+06CE:  MOVWF  3D
+06CF:  MOVLB  00
+06D0:  CALL   46C
+06D1:  MOVLW  0D
+06D2:  MOVLB  14
+06D3:  MOVWF  40
+06D4:  MOVLB  00
+06D5:  CALL   3E0
+06D6:  MOVLW  0A
+06D7:  MOVLB  14
+06D8:  MOVWF  40
+06D9:  MOVLB  00
+06DA:  CALL   3E0
+....................       fprintf(PC, "\t\t   My device ID: %X\r\n", SELF_DEVICE_ID);
+06DB:  MOVLW  21
+06DC:  MOVLB  03
+06DD:  MOVWF  11
+06DE:  MOVLW  01
+06DF:  MOVWF  12
+06E0:  BCF    03.0
+06E1:  MOVLW  13
+06E2:  MOVLB  14
+06E3:  MOVWF  3C
+06E4:  MOVLB  00
+06E5:  CALL   4B8
+06E6:  MOVLW  0B
+06E7:  MOVLB  14
+06E8:  MOVWF  3C
+06E9:  MOVLW  37
+06EA:  MOVWF  3D
+06EB:  MOVLB  00
+06EC:  CALL   46C
+06ED:  MOVLW  0D
+06EE:  MOVLB  14
+06EF:  MOVWF  40
+06F0:  MOVLB  00
+06F1:  CALL   3E0
+06F2:  MOVLW  0A
+06F3:  MOVLB  14
+06F4:  MOVWF  40
+06F5:  MOVLB  00
+06F6:  CALL   3E0
+....................       return FALSE;  
+06F7:  MOVLW  00
+06F8:  MOVWF  78
+06F9:  MOVLB  14
+....................    }
+.................... }
+.................... 
+.................... 
+.................... /**
+....................  * @brief clear_receive_signal
+....................  * @param receive_signal: received signal
+....................  * @param receive_signal_size: size of received signal   
+....................  */
+.................... void clear_receive_signal(unsigned int8 receive_signal[], int8 *receive_signal_size)
+.................... {
+....................    memset(receive_signal, 0x00, *receive_signal_size);
+*
+0736:  MOVLB  13
+0737:  MOVF   56,W
+0738:  MOVWF  7A
+0739:  MOVF   55,W
+073A:  MOVWF  04
+073B:  MOVF   7A,W
+073C:  MOVWF  05
+073D:  MOVF   00,W
+073E:  MOVWF  58
+073F:  MOVF   54,W
+0740:  MOVWF  05
+0741:  MOVF   53,W
+0742:  MOVWF  04
+0743:  CLRF   77
+0744:  MOVF   58,W
+0745:  MOVWF  78
+....................    *receive_signal_size = 0;
+*
+074D:  MOVF   55,W
+074E:  MOVWF  04
+074F:  MOVF   56,W
+0750:  MOVWF  05
+0751:  CLRF   00
+0752:  MOVLP  08
+0753:  MOVLB  00
+0754:  GOTO   646 (RETURN)
+.................... }
+.................... 
+.................... 
+.................... /**
+....................  * @brief transmit_command
+....................  * @param frame_id: frame ID
+....................  * @param content: content of command
+....................  * @param size: size of content
+....................  */
+.................... void transmit_command(int8 frame_id, unsigned int8 content[], int8 size)
+.................... {
+....................    unsigned int8 data[16];
+....................    data[0] = SFD;
+0755:  MOVLW  AA
+0756:  MOVLB  13
+0757:  MOVWF  5A
+....................    data[1] = (BOSS_PIC << 4) | frame_id;
+0758:  MOVF   56,W
+0759:  IORLW  40
+075A:  MOVWF  5B
+....................    memcpy(&data[2], content, size);
+075B:  MOVF   58,W
+075C:  MOVWF  05
+075D:  MOVF   57,W
+075E:  MOVWF  04
+075F:  MOVF   59,W
+0760:  MOVWF  78
+0761:  BTFSC  03.2
+0762:  GOTO   76B
+0763:  MOVLW  26
+0764:  MOVWF  07
+0765:  MOVLW  2C
+0766:  MOVWF  06
+0767:  MOVIW  [FSR0++],W
+0768:  MOVWI  W,[FSR1++]
+0769:  DECFSZ 78,F
+076A:  GOTO   767
+....................    int8 payload_size = 2 + size; // '2' is for Device ID and Frame ID plus CRC
+076B:  MOVLW  02
+076C:  ADDWF  59,W
+076D:  MOVWF  6A
+....................    data[payload_size] = calc_crc(&data[1], payload_size-1); // '1' is for CRC
+076E:  MOVLW  2A
+076F:  ADDWF  6A,W
+0770:  MOVWF  78
+0771:  MOVLW  26
+0772:  MOVWF  7A
+0773:  BTFSC  03.0
+0774:  INCF   7A,F
+0775:  MOVF   78,W
+0776:  MOVWF  6D
+0777:  MOVF   7A,W
+0778:  MOVWF  6E
+0779:  MOVLW  01
+077A:  SUBWF  6A,W
+077B:  MOVWF  6F
+077C:  MOVLW  26
+077D:  MOVLB  14
+077E:  MOVWF  3E
+077F:  MOVLW  2B
+0780:  MOVWF  3D
+0781:  MOVLB  13
+0782:  MOVF   6F,W
+0783:  MOVLB  14
+0784:  MOVWF  3F
+0785:  MOVLB  00
+0786:  CALL   510
+0787:  MOVLB  13
+0788:  MOVF   6E,W
+0789:  MOVWF  05
+078A:  MOVF   6D,W
+078B:  MOVWF  04
+078C:  MOVF   78,W
+078D:  MOVWF  00
+....................    int8 data_size = payload_size + 1; // '1' is for CRC
+078E:  MOVLW  01
+078F:  ADDWF  6A,W
+0790:  MOVWF  6B
+....................    
+....................    transmit(data, data_size);
+0791:  MOVLW  26
+0792:  MOVWF  6E
+0793:  MOVLW  2A
+0794:  MOVWF  6D
+0795:  MOVF   6B,W
+0796:  MOVWF  6F
+*
+07DE:  RETURN
+.................... }
+.................... 
+.................... /**
+....................  * @brief transmit
+....................  * @param data: data to transmit
+....................  * @param data_size: size of data
+....................  */
+.................... void transmit(unsigned int8 data[], int8 data_size)
+.................... {
+....................    for(int i = 0; i < data_size; i++)
+*
+0797:  MOVLB  14
+0798:  CLRF   20
+0799:  MOVLB  13
+079A:  MOVF   6F,W
+079B:  MOVLB  14
+079C:  SUBWF  20,W
+079D:  BTFSC  03.0
+079E:  GOTO   7AF
+....................       fputc(data[i], BOSS);
+079F:  MOVF   20,W
+07A0:  MOVLB  13
+07A1:  ADDWF  6D,W
+07A2:  MOVWF  04
+07A3:  MOVLW  00
+07A4:  ADDWFC 6E,W
+07A5:  MOVWF  05
+07A6:  MOVF   00,W
+07A7:  MOVLB  14
+07A8:  MOVWF  22
+07A9:  MOVF   22,W
+07AA:  MOVLB  00
+07AB:  CALL   2E6
+07AC:  MOVLB  14
+07AD:  INCF   20,F
+07AE:  GOTO   799
+....................       
+....................    fprintf(PC, "Transit command\r\n\t-> ");
+07AF:  MOVLW  2D
+07B0:  MOVLB  03
+07B1:  MOVWF  11
+07B2:  MOVLW  01
+07B3:  MOVWF  12
+07B4:  MOVLB  00
+07B5:  CALL   405
+....................    for(int i = 0; i < data_size; i++)
+07B6:  MOVLB  14
+07B7:  CLRF   21
+07B8:  MOVLB  13
+07B9:  MOVF   6F,W
+07BA:  MOVLB  14
+07BB:  SUBWF  21,W
+07BC:  BTFSC  03.0
+07BD:  GOTO   7D5
+....................       fprintf(PC, "%X ", data[i]);
+07BE:  MOVF   21,W
+07BF:  MOVLB  13
+07C0:  ADDWF  6D,W
+07C1:  MOVWF  04
+07C2:  MOVLW  00
+07C3:  ADDWFC 6E,W
+07C4:  MOVWF  05
+07C5:  MOVF   00,W
+07C6:  MOVLB  14
+07C7:  MOVWF  22
+07C8:  MOVWF  3C
+07C9:  MOVLW  37
+07CA:  MOVWF  3D
+07CB:  MOVLB  00
+07CC:  CALL   46C
+07CD:  MOVLW  20
+07CE:  MOVLB  14
+07CF:  MOVWF  40
+07D0:  MOVLB  00
+07D1:  CALL   3E0
+07D2:  MOVLB  14
+07D3:  INCF   21,F
+07D4:  GOTO   7B8
+....................    fprintf(PC, "\r\n");
+07D5:  MOVLW  0D
+07D6:  MOVWF  40
+07D7:  MOVLB  00
+07D8:  CALL   3E0
+07D9:  MOVLW  0A
+07DA:  MOVLB  14
+07DB:  MOVWF  40
+07DC:  MOVLB  00
+07DD:  CALL   3E0
+.................... }
+.................... 
+.................... #include "GDNS_tbd_FlashOperation.h"
+.................... //#define USE_FLASH128M   //MT25QL128ABA:PICF,GF
+.................... 
+.................... //////////////////////////////port select//////////////////////////////////////
+.................... #ifdef DEBUG1
+....................    #define DEBUG_PORT pc
+.................... #endif
+.................... 
+.................... #ifdef USE_FLASH1G
+....................    #define FLASH1G //port for 1 Gbit Flash
+....................    #define FLASH1G_CS 
+.................... #endif
+.................... 
+.................... #ifdef USE_FLASH128M
+....................    #define FLASH128M //port for 128 Mbit Flash
+....................    #define FLASH128M_CS 
+.................... #endif
+.................... 
+.................... ////////////////////////////////CMD List///////////////////////////////////////
+.................... #define READ_ID                     0x9F
+.................... #define READ_STATUS_REGISTER        0x05
+.................... #define READ                        0x03
+.................... #define READ_4BYTE                  0x13
+.................... #define WRITE_ENABLE                0x06
+.................... #define PAGE_PROGRAM                0x02
+.................... #define PAGE_PROGRAM_4BYTE          0x12
+.................... #define SUBSECTOR_4KB_ERASE         0x20
+.................... #define SUBSECTOR_4KB_ERASE_4BYTE   0x21
+.................... #define SUBSECTOR_32KB_ERASE        0x52
+.................... #define SUBSECTOR_32KB_ERASE_4BYTE  0x5C
+.................... #define SECTOR_ERASE                0xD8
+.................... #define SECTOR_ERASE_4BYTE          0xDC
+.................... 
+.................... ///////////////////////////function List///////////////////////////////////////
+.................... #ifdef USE_FLASH1G
+....................    int8 status_register_flash1g();                                                                       //bit[7:2]status register control bit,bit[1]write enable bit T:ennable F:disable,bit[0]write in progress bit T:busy F:ready
+....................    int8 read_id_flash1g();                                                                               //T:Flash id read successfully(connect OK),F:Flash id read failed
+....................    void sector_erase_flash1g(unsigned int32 sector_address);                                             //64kByte erase
+....................    void subsector_32kByte_erase_flash1g(unsigned int32 subsector_address);                               //32kByte erase
+....................    void subsector_4kByte_erase_flash1g(unsigned int32 subsector_address);                                //4kByte erase
+....................    int8 read_data_byte_flash1g(unsigned int32 read_address);                                             //read 1 Byte data
+....................    void read_data_bytes_flash1g(unsigned int32 read_address,unsigned int32 amount,int8 *read_data);      //read multi Bytes data(max 128 MByte) and store to "read data"
+....................    void write_data_byte_flash1g(unsigned int32 write_address,int8 write_data);                           //write 1 Byte data to flash
+....................    void write_data_bytes_flash1g(unsigned int32 write_address,int8 amount,int8 *write_data);             //write multi Bytes data(max128 Byte) to flash
+.................... #endif
+....................    
+.................... #ifdef USE_FLASH128M
+....................    int8 status_register_flash128m();                                                                     //bit[7:2]status register control bit,bit[1]write enable bit T:ennable F:disable,bit[0]write in progress bit T:busy F:ready
+....................    int8 read_id_flash128m();                                                                             //T:Flash id read successfully(connect OK),F:Flash id read failed
+....................    void sector_erase_flash128m(unsigned int32 sector_address);                                           //64kByte erase
+....................    void subsector_32kByte_erase_flash128m(unsigned int32 subsector_address);                             //32kByte erase
+....................    void subsector_4kByte_erase_flash128m(unsigned int32 subsector_address);                              //4kByte erase
+....................    int8 read_data_byte_flash128m(unsigned int32 read_address);                                           //read 1 Byte data
+....................    void read_data_bytes_flash128m(unsigned int32 read_address,unsigned int32 amount,int8 *read_data);    //read multi Bytes data(max 128 MByte) and store to "read data"
+....................    void write_data_byte_flash128m(unsigned int32 write_address,int8 write_data);                         //write 1 Byte data to flash
+....................    void write_data_bytes_flash128m(unsigned int32 write_address,int8 amount,int8 *write_data);           //write multi Bytes data(max128 Byte) to flash
+.................... #endif
+....................    
+.................... 
+.................... 
+.................... 
+.................... #include "mis_mcu_flash.h"
+.................... #ifndef MIS_MCU_FLASH_H
+.................... #define MIS_MCU_FLASH_H
+.................... 
+.................... 
+.................... #define EXAMPLE_APRS_HEADER   0x00000000
+.................... #define EXAMPLE_APRS          0x00001000
+.................... #define EXAMPLE_SENSOR_HEADR  0x0000A000
+.................... #define EXAMPLE_SENSOR        0x00010000
+.................... 
+.................... 
+.................... 
+.................... 
+.................... void copy_data(void);
+.................... 
+.................... SmfDataStruct *dequeue_smf_data(void);
+.................... 
+.................... int1 is_empty_smf_data(void);
+.................... 
+.................... #endif  // MIS_MCU_FLASH_H
+.................... 
+.................... #include "mis_mcu_flash.c"
+.................... #include "mis_mcu_flash.h"
+.................... #ifndef MIS_MCU_FLASH_H
+.................... #define MIS_MCU_FLASH_H
+.................... 
+.................... 
+.................... #define EXAMPLE_APRS_HEADER   0x00000000
+.................... #define EXAMPLE_APRS          0x00001000
+.................... #define EXAMPLE_SENSOR_HEADR  0x0000A000
+.................... #define EXAMPLE_SENSOR        0x00010000
+.................... 
+.................... 
+.................... 
+.................... 
+.................... void copy_data(void);
+.................... 
+.................... SmfDataStruct *dequeue_smf_data(void);
+.................... 
+.................... int1 is_empty_smf_data(void);
+.................... 
+.................... #endif  // MIS_MCU_FLASH_H
+.................... 
+.................... 
+.................... /*
+.................... //PICF FUCNTION
+.................... void write_data_picf(PICF_START_ADDR, PICF_END_ADDR, (int8 *)mission_datas)
+.................... {
+....................    write_data_bytes_flash128m(PICF_START_ADDR, PICF_END_ADDR, (int8 *)mission_datas); 
+.................... }
+.................... 
+.................... void read_data_picf()
+.................... {
+....................    read_data_bytes_flash128m(PICF_START_ADDR, PICF_END_ADDR, (int8 *)mission_datas); 
+....................    for (int i = 0; i < PICF_END_ADDR; i++)
+....................    {
+....................       fprintf(PC, "mission_datas[%d]: %X\r\n", i, mission_datas[i]);
+....................    }
+.................... }
+.................... 
+.................... void erase_picf()
+.................... {
+....................    sector_erase_flash128m(PICF_START_ADDR); // erase 64kByte
+....................    delay_ms(1000);
+....................    fprintf(PC, "Erase PICF\r\n");
+.................... }
+.................... 
+.................... 
+.................... */
+.................... 
+.................... 
+.................... //SMF data queue 
+.................... void copy_data(void)
+.................... {
+....................    fprintf(PC, "\r\n______________________________\r\n________Start copy_data________\r\n\r\n");
+*
+0BC8:  MOVLW  38
+0BC9:  MOVLB  03
+0BCA:  MOVWF  11
+0BCB:  MOVLW  01
+0BCC:  MOVWF  12
+0BCD:  MOVLP  00
+0BCE:  MOVLB  00
+0BCF:  CALL   405
+0BD0:  MOVLP  08
+....................    while (!is_empty_smf_data())
+0BD1:  MOVLP  00
+0BD2:  CALL   7F6
+0BD3:  MOVLP  08
+0BD4:  MOVF   78,F
+0BD5:  BTFSS  03.2
+0BD6:  GOTO   541
+....................    {
+....................       SmfDataStruct smf_data = dequeue_smf_data();
+*
+0C04:  MOVF   79,W
+0C05:  MOVWF  05
+0C06:  MOVF   78,W
+0C07:  MOVWF  04
+0C08:  MOVLW  0C
+0C09:  MOVWF  78
+0C0A:  MOVLW  26
+0C0B:  MOVWF  07
+0C0C:  MOVWF  06
+0C0D:  MOVIW  [FSR0++],W
+0C0E:  MOVWI  W,[FSR1++]
+0C0F:  DECFSZ 78,F
+0C10:  GOTO   40D
+....................       fprintf(PC, "Source address: \t0x%08LX\r\n", smf_data.src);
+0C11:  MOVLW  5B
+0C12:  MOVLB  03
+0C13:  MOVWF  11
+0C14:  MOVLW  01
+0C15:  MOVWF  12
+0C16:  BCF    03.0
+0C17:  MOVLW  13
+0C18:  MOVLB  14
+0C19:  MOVWF  3C
+0C1A:  MOVLP  00
+0C1B:  MOVLB  00
+0C1C:  CALL   4B8
+0C1D:  MOVLP  08
+0C1E:  MOVLB  13
+0C1F:  MOVF   59,W
+0C20:  MOVLB  14
+0C21:  MOVWF  3C
+0C22:  MOVLW  37
+0C23:  MOVWF  3D
+0C24:  MOVLP  00
+0C25:  MOVLB  00
+0C26:  CALL   46C
+0C27:  MOVLP  08
+0C28:  MOVLB  13
+0C29:  MOVF   58,W
+0C2A:  MOVLB  14
+0C2B:  MOVWF  3C
+0C2C:  MOVLW  37
+0C2D:  MOVWF  3D
+0C2E:  MOVLP  00
+0C2F:  MOVLB  00
+0C30:  CALL   46C
+0C31:  MOVLP  08
+0C32:  MOVLB  13
+0C33:  MOVF   57,W
+0C34:  MOVLB  14
+0C35:  MOVWF  3C
+0C36:  MOVLW  37
+0C37:  MOVWF  3D
+0C38:  MOVLP  00
+0C39:  MOVLB  00
+0C3A:  CALL   46C
+0C3B:  MOVLP  08
+0C3C:  MOVLB  13
+0C3D:  MOVF   56,W
+0C3E:  MOVLB  14
+0C3F:  MOVWF  3C
+0C40:  MOVLW  37
+0C41:  MOVWF  3D
+0C42:  MOVLP  00
+0C43:  MOVLB  00
+0C44:  CALL   46C
+0C45:  MOVLP  08
+0C46:  MOVLW  0D
+0C47:  MOVLB  14
+0C48:  MOVWF  40
+0C49:  MOVLP  00
+0C4A:  MOVLB  00
+0C4B:  CALL   3E0
+0C4C:  MOVLP  08
+0C4D:  MOVLW  0A
+0C4E:  MOVLB  14
+0C4F:  MOVWF  40
+0C50:  MOVLP  00
+0C51:  MOVLB  00
+0C52:  CALL   3E0
+0C53:  MOVLP  08
+....................       fprintf(PC, "Destination address: \t0x%08LX\r\n", smf_data.dest);
+0C54:  MOVLW  69
+0C55:  MOVLB  03
+0C56:  MOVWF  11
+0C57:  MOVLW  01
+0C58:  MOVWF  12
+0C59:  BCF    03.0
+0C5A:  MOVLW  18
+0C5B:  MOVLB  14
+0C5C:  MOVWF  3C
+0C5D:  MOVLP  00
+0C5E:  MOVLB  00
+0C5F:  CALL   4B8
+0C60:  MOVLP  08
+0C61:  MOVLB  13
+0C62:  MOVF   5D,W
+0C63:  MOVLB  14
+0C64:  MOVWF  3C
+0C65:  MOVLW  37
+0C66:  MOVWF  3D
+0C67:  MOVLP  00
+0C68:  MOVLB  00
+0C69:  CALL   46C
+0C6A:  MOVLP  08
+0C6B:  MOVLB  13
+0C6C:  MOVF   5C,W
+0C6D:  MOVLB  14
+0C6E:  MOVWF  3C
+0C6F:  MOVLW  37
+0C70:  MOVWF  3D
+0C71:  MOVLP  00
+0C72:  MOVLB  00
+0C73:  CALL   46C
+0C74:  MOVLP  08
+0C75:  MOVLB  13
+0C76:  MOVF   5B,W
+0C77:  MOVLB  14
+0C78:  MOVWF  3C
+0C79:  MOVLW  37
+0C7A:  MOVWF  3D
+0C7B:  MOVLP  00
+0C7C:  MOVLB  00
+0C7D:  CALL   46C
+0C7E:  MOVLP  08
+0C7F:  MOVLB  13
+0C80:  MOVF   5A,W
+0C81:  MOVLB  14
+0C82:  MOVWF  3C
+0C83:  MOVLW  37
+0C84:  MOVWF  3D
+0C85:  MOVLP  00
+0C86:  MOVLB  00
+0C87:  CALL   46C
+0C88:  MOVLP  08
+0C89:  MOVLW  0D
+0C8A:  MOVLB  14
+0C8B:  MOVWF  40
+0C8C:  MOVLP  00
+0C8D:  MOVLB  00
+0C8E:  CALL   3E0
+0C8F:  MOVLP  08
+0C90:  MOVLW  0A
+0C91:  MOVLB  14
+0C92:  MOVWF  40
+0C93:  MOVLP  00
+0C94:  MOVLB  00
+0C95:  CALL   3E0
+0C96:  MOVLP  08
+....................       fprintf(PC, "Data size: \t\t  %08LX\r\n", smf_data.size);
+0C97:  MOVLW  79
+0C98:  MOVLB  03
+0C99:  MOVWF  11
+0C9A:  MOVLW  01
+0C9B:  MOVWF  12
+0C9C:  BCF    03.0
+0C9D:  MOVLW  0F
+0C9E:  MOVLB  14
+0C9F:  MOVWF  3C
+0CA0:  MOVLP  00
+0CA1:  MOVLB  00
+0CA2:  CALL   4B8
+0CA3:  MOVLP  08
+0CA4:  MOVLB  13
+0CA5:  MOVF   61,W
+0CA6:  MOVLB  14
+0CA7:  MOVWF  3C
+0CA8:  MOVLW  37
+0CA9:  MOVWF  3D
+0CAA:  MOVLP  00
+0CAB:  MOVLB  00
+0CAC:  CALL   46C
+0CAD:  MOVLP  08
+0CAE:  MOVLB  13
+0CAF:  MOVF   60,W
+0CB0:  MOVLB  14
+0CB1:  MOVWF  3C
+0CB2:  MOVLW  37
+0CB3:  MOVWF  3D
+0CB4:  MOVLP  00
+0CB5:  MOVLB  00
+0CB6:  CALL   46C
+0CB7:  MOVLP  08
+0CB8:  MOVLB  13
+0CB9:  MOVF   5F,W
+0CBA:  MOVLB  14
+0CBB:  MOVWF  3C
+0CBC:  MOVLW  37
+0CBD:  MOVWF  3D
+0CBE:  MOVLP  00
+0CBF:  MOVLB  00
+0CC0:  CALL   46C
+0CC1:  MOVLP  08
+0CC2:  MOVLB  13
+0CC3:  MOVF   5E,W
+0CC4:  MOVLB  14
+0CC5:  MOVWF  3C
+0CC6:  MOVLW  37
+0CC7:  MOVWF  3D
+0CC8:  MOVLP  00
+0CC9:  MOVLB  00
+0CCA:  CALL   46C
+0CCB:  MOVLP  08
+0CCC:  MOVLW  0D
+0CCD:  MOVLB  14
+0CCE:  MOVWF  40
+0CCF:  MOVLP  00
+0CD0:  MOVLB  00
+0CD1:  CALL   3E0
+0CD2:  MOVLP  08
+0CD3:  MOVLW  0A
+0CD4:  MOVLB  14
+0CD5:  MOVWF  40
+0CD6:  MOVLP  00
+0CD7:  MOVLB  00
+0CD8:  CALL   3E0
+0CD9:  MOVLP  08
+....................       fprintf(PC, "Copying.");
+0CDA:  MOVLW  85
+0CDB:  MOVLB  03
+0CDC:  MOVWF  11
+0CDD:  MOVLW  01
+0CDE:  MOVWF  12
+0CDF:  MOVLP  00
+0CE0:  MOVLB  00
+0CE1:  CALL   405
+0CE2:  MOVLP  08
+....................       delay_ms(1000);
+0CE3:  MOVLW  04
+0CE4:  MOVLB  13
+0CE5:  MOVWF  62
+0CE6:  MOVLW  FA
+0CE7:  MOVWF  6D
+0CE8:  MOVLB  00
+0CE9:  CALL   073
+0CEA:  MOVLB  13
+0CEB:  DECFSZ 62,F
+0CEC:  GOTO   4E6
+....................       fprintf(PC, ".");
+0CED:  MOVLW  2E
+0CEE:  MOVLB  14
+0CEF:  MOVWF  40
+0CF0:  MOVLP  00
+0CF1:  MOVLB  00
+0CF2:  CALL   3E0
+0CF3:  MOVLP  08
+....................       delay_ms(1000);
+0CF4:  MOVLW  04
+0CF5:  MOVLB  13
+0CF6:  MOVWF  62
+0CF7:  MOVLW  FA
+0CF8:  MOVWF  6D
+0CF9:  MOVLB  00
+0CFA:  CALL   073
+0CFB:  MOVLB  13
+0CFC:  DECFSZ 62,F
+0CFD:  GOTO   4F7
+....................       fprintf(PC, ".");
+0CFE:  MOVLW  2E
+0CFF:  MOVLB  14
+0D00:  MOVWF  40
+0D01:  MOVLP  00
+0D02:  MOVLB  00
+0D03:  CALL   3E0
+0D04:  MOVLP  08
+....................       delay_ms(1000);
+0D05:  MOVLW  04
+0D06:  MOVLB  13
+0D07:  MOVWF  62
+0D08:  MOVLW  FA
+0D09:  MOVWF  6D
+0D0A:  MOVLB  00
+0D0B:  CALL   073
+0D0C:  MOVLB  13
+0D0D:  DECFSZ 62,F
+0D0E:  GOTO   508
+....................       fprintf(PC, ".");   
+0D0F:  MOVLW  2E
+0D10:  MOVLB  14
+0D11:  MOVWF  40
+0D12:  MOVLP  00
+0D13:  MOVLB  00
+0D14:  CALL   3E0
+0D15:  MOVLP  08
+....................       delay_ms(1000);
+0D16:  MOVLW  04
+0D17:  MOVLB  13
+0D18:  MOVWF  62
+0D19:  MOVLW  FA
+0D1A:  MOVWF  6D
+0D1B:  MOVLB  00
+0D1C:  CALL   073
+0D1D:  MOVLB  13
+0D1E:  DECFSZ 62,F
+0D1F:  GOTO   519
+....................       fprintf(PC, ".\r\n");   
+0D20:  MOVLW  2E
+0D21:  MOVLB  14
+0D22:  MOVWF  40
+0D23:  MOVLP  00
+0D24:  MOVLB  00
+0D25:  CALL   3E0
+0D26:  MOVLP  08
+0D27:  MOVLW  0D
+0D28:  MOVLB  14
+0D29:  MOVWF  40
+0D2A:  MOVLP  00
+0D2B:  MOVLB  00
+0D2C:  CALL   3E0
+0D2D:  MOVLP  08
+0D2E:  MOVLW  0A
+0D2F:  MOVLB  14
+0D30:  MOVWF  40
+0D31:  MOVLP  00
+0D32:  MOVLB  00
+0D33:  CALL   3E0
+0D34:  MOVLP  08
+....................       delay_ms(1000);
+0D35:  MOVLW  04
+0D36:  MOVLB  13
+0D37:  MOVWF  62
+0D38:  MOVLW  FA
+0D39:  MOVWF  6D
+0D3A:  MOVLB  00
+0D3B:  CALL   073
+0D3C:  MOVLB  13
+0D3D:  DECFSZ 62,F
+0D3E:  GOTO   538
+0D3F:  MOVLB  00
+0D40:  GOTO   3D1
+....................    }
+....................    fprintf(PC, "_________End copy_data_________\r\n______________________________\r\n\r\n");
+0D41:  MOVLW  8A
+0D42:  MOVLB  03
+0D43:  MOVWF  11
+0D44:  MOVLW  01
+0D45:  MOVWF  12
+0D46:  MOVLP  00
+0D47:  MOVLB  00
+0D48:  CALL   405
+0D49:  MOVLP  08
+.................... }
+.................... 
+.................... SmfDataStruct *dequeue_smf_data(void)
+.................... {
+....................    if (smf_data_head == smf_data_tail)
+*
+0BD7:  MOVF   56,W
+0BD8:  SUBWF  55,W
+0BD9:  BTFSS  03.2
+0BDA:  GOTO   3E9
+....................    {
+....................       fprintf(PC, "SMF data list is empty\r\n");
+0BDB:  MOVLW  AC
+0BDC:  MOVLB  03
+0BDD:  MOVWF  11
+0BDE:  MOVLW  01
+0BDF:  MOVWF  12
+0BE0:  MOVLP  00
+0BE1:  MOVLB  00
+0BE2:  CALL   405
+0BE3:  MOVLP  08
+....................       return 0x00;
+0BE4:  MOVLW  00
+0BE5:  MOVWF  78
+0BE6:  MOVWF  79
+0BE7:  GOTO   404
+....................    }
+0BE8:  GOTO   404
+....................    else
+....................    {
+....................       int8 current_head = smf_data_head;
+0BE9:  MOVF   55,W
+0BEA:  MOVLB  13
+0BEB:  MOVWF  62
+....................       smf_data_head = (smf_data_head + 1) % SMF_DATA_SIZE;
+0BEC:  MOVLW  01
+0BED:  MOVLB  00
+0BEE:  ADDWF  55,W
+0BEF:  ANDLW  0F
+0BF0:  MOVWF  55
+....................       return &smf_data[current_head];
+0BF1:  MOVLB  13
+0BF2:  MOVF   62,W
+0BF3:  MOVLB  14
+0BF4:  MOVWF  39
+0BF5:  MOVLW  0C
+0BF6:  MOVWF  3A
+0BF7:  MOVLP  00
+0BF8:  MOVLB  00
+0BF9:  CALL   491
+0BFA:  MOVLP  08
+0BFB:  MOVF   78,W
+0BFC:  ADDLW  37
+0BFD:  MOVWF  78
+0BFE:  MOVLW  20
+0BFF:  MOVWF  7A
+0C00:  BTFSC  03.0
+0C01:  INCF   7A,F
+0C02:  MOVF   7A,W
+0C03:  MOVWF  79
+....................    }
+.................... }
+.................... 
+.................... 
+.................... int1 is_empty_smf_data(void)
+.................... {
+....................    return smf_data_head == smf_data_tail;
+*
+07F6:  MOVF   56,W
+07F7:  SUBWF  55,W
+07F8:  BTFSC  03.2
+07F9:  GOTO   7FC
+07FA:  MOVLW  00
+07FB:  GOTO   7FD
+07FC:  MOVLW  01
+07FD:  MOVWF  78
+07FE:  RETURN
+.................... }
+.................... 
+.................... 
+.................... //#include "function.h"
+.................... //#include "function.c"
+.................... 
+.................... 
+.................... #endif          // COMMON_H
+.................... 
+.................... #include "mmj_cigs_pic_func.h"
+.................... #ifndef MMJ_CIGS_PIC_FUNC_H
+.................... #define MMJ_CIGS_PIC_FUNC_H
+.................... 
+.................... /*
+.................... // _________ values _________
+.................... #define MISSION_DATA_SIZE 64
+.................... volatile unsigned int8 mission_datas[MISSION_DATA_SIZE] = {0x00};
+.................... volatile int8 executed_mission_count = 0;
+.................... */
+.................... 
+.................... /*
+.................... 
+.................... // Packet format
+.................... #define PACKET_SIZE 64
+.................... #define CHECKSUM
+.................... //volatile unsigned int8 PACKET_DATA[MISSION_DATA_SIZE] = {0x00};
+.................... */
+.................... 
+.................... 
+.................... 
+.................... // _________ functions ____________
+.................... #define DATA_BUFFER_SIZE 143
+.................... volatile unsigned int16 data_buffer[DATA_BUFFER_SIZE*4] = {0x00};
+.................... 
+.................... volatile unsigned int32 measured_time = 0;
+.................... volatile unsigned int16 measured_pd_start = 0;
+.................... volatile unsigned int16 measured_pd_end = 0;
+.................... volatile unsigned int16 measured_temp_top = 0;
+.................... volatile unsigned int16 measured_temp_bot = 0;
+.................... 
+.................... volatile unsigned int8 packet_data[64] = {0x00};
+.................... 
+.................... 
+.................... void convert_cigs_data(unsigned int8);
+.................... void convert_header_data(void); 
+.................... void sweep(unsigned int8 parameter[]);
+.................... 
+.................... 
+.................... 
+.................... #endif
+.................... 
+.................... #include "mmj_cigs_pic_mode.h"
+.................... #ifndef MMJ_CIGS_PIC_MODE_H
+.................... #define MMJ_CIGS_PIC_MODE_H
+.................... 
+.................... // _________ values _________
+.................... #define EXECUTED_MISSION_SIZE 64
+.................... volatile unsigned int8 executed_mission[EXECUTED_MISSION_SIZE] = {0x00};
+.................... volatile int8 executed_mission_count = 0;
+.................... 
+.................... #define PARAMETER_LENGTH 8
+.................... 
+.................... 
+.................... // __________ functions ____________
+.................... 
+.................... // fundamental fnction
+.................... void execute_mission(unsigned int8 *content);
+.................... 
+.................... // missions
+.................... void example_00(unsigned int8 parameter[]);
+.................... void example_01(unsigned int8 parameter[]);
+.................... 
+.................... // other tools
+.................... void executed_mission_pop(void);
+.................... void enqueue_smf_data(unsigned int32 src, unsigned int32 dest, unsigned int32 size);
+.................... void update_time(unsigned int8 raw_time[]);
+.................... 
+.................... #endif  
+.................... 
+.................... #include "mmj_cigs_pic_mode.c"
+.................... #include "mmj_cigs_pic_mode.h"
+.................... #ifndef MMJ_CIGS_PIC_MODE_H
+.................... #define MMJ_CIGS_PIC_MODE_H
+.................... 
+.................... // _________ values _________
+.................... #define EXECUTED_MISSION_SIZE 64
+.................... volatile unsigned int8 executed_mission[EXECUTED_MISSION_SIZE] = {0x00};
+.................... volatile int8 executed_mission_count = 0;
+.................... 
+.................... #define PARAMETER_LENGTH 8
+.................... 
+.................... 
+.................... // __________ functions ____________
+.................... 
+.................... // fundamental fnction
+.................... void execute_mission(unsigned int8 *content);
+.................... 
+.................... // missions
+.................... void example_00(unsigned int8 parameter[]);
+.................... void example_01(unsigned int8 parameter[]);
+.................... 
+.................... // other tools
+.................... void executed_mission_pop(void);
+.................... void enqueue_smf_data(unsigned int32 src, unsigned int32 dest, unsigned int32 size);
+.................... void update_time(unsigned int8 raw_time[]);
+.................... 
+.................... #endif  
+.................... 
+.................... 
+.................... //____________ main mission function _______________
+.................... 
+.................... 
+.................... void execute_mission(unsigned int8 *content)
+*
+08CD:  MOVF   58,W
+08CE:  MOVWF  04
+08CF:  MOVF   59,W
+08D0:  MOVWF  05
+08D1:  MOVIW  [FSR0+00],W
+08D2:  MOVWF  5A
+08D3:  MOVLW  01
+08D4:  ADDWF  58,W
+08D5:  MOVWF  78
+08D6:  MOVLW  00
+08D7:  ADDWFC 59,W
+08D8:  MOVWF  7A
+08D9:  MOVF   78,W
+08DA:  MOVWF  5B
+08DB:  MOVF   7A,W
+08DC:  MOVWF  5C
+.................... {
+.................... //!   // timer update
+.................... //!   update_time(content);
+.................... //!   fprintf(PC, "\r\nUpdate the time setting\r\n");
+.................... //!   fprintf(PC, "\t-> Day: \t%lu\r\n", day);
+.................... //!   fprintf(PC, "\t-> Hour: \t%lu\r\n", sec / 3600);
+.................... //!   fprintf(PC, "\t-> Minute: \t%lu\r\n", (sec / 60) % 60);
+.................... //!   fprintf(PC, "\t-> Second: \t%lu\r\n", sec % 60);
+.................... //!   
+....................    // record to executed mission list
+....................    unsigned int8 command_id = content[0];
+....................    unsigned int8 *parameter = &content[1];
+....................    for (int i = 0; i < executed_mission_count; i++)
+08DD:  CLRF   5D
+08DE:  MOVF   70,W
+08DF:  SUBWF  5D,W
+08E0:  BTFSC  03.0
+08E1:  GOTO   113
+....................       if (command_id == executed_mission[i])
+08E2:  MOVLW  BD
+08E3:  ADDWF  5D,W
+08E4:  MOVWF  04
+08E5:  MOVLW  25
+08E6:  MOVWF  05
+08E7:  BTFSC  03.0
+08E8:  INCF   05,F
+08E9:  MOVF   00,W
+08EA:  SUBWF  5A,W
+08EB:  BTFSS  03.2
+08EC:  GOTO   111
+....................       {
+....................          fprintf(PC, "\r\nThis  mission is executed\r\n\t-> 0x%d\r\n", command_id);
+08ED:  MOVLW  B9
+08EE:  MOVLB  03
+08EF:  MOVWF  11
+08F0:  MOVLW  01
+08F1:  MOVWF  12
+08F2:  BCF    03.0
+08F3:  MOVLW  23
+08F4:  MOVLB  14
+08F5:  MOVWF  3C
+08F6:  MOVLP  00
+08F7:  MOVLB  00
+08F8:  CALL   4B8
+08F9:  MOVLP  08
+08FA:  MOVLB  13
+08FB:  MOVF   5A,W
+08FC:  MOVWF  5E
+08FD:  MOVLW  18
+08FE:  MOVWF  5F
+08FF:  MOVLB  00
+0900:  CALL   000
+0901:  MOVLW  0D
+0902:  MOVLB  14
+0903:  MOVWF  40
+0904:  MOVLP  00
+0905:  MOVLB  00
+0906:  CALL   3E0
+0907:  MOVLP  08
+0908:  MOVLW  0A
+0909:  MOVLB  14
+090A:  MOVWF  40
+090B:  MOVLP  00
+090C:  MOVLB  00
+090D:  CALL   3E0
+090E:  MOVLP  08
+....................          return;
+090F:  GOTO   33A
+0910:  MOVLB  13
+0911:  INCF   5D,F
+0912:  GOTO   0DE
+....................       }
+....................    if (executed_mission_count != EXECUTED_MISSION_SIZE)
+0913:  MOVF   70,W
+0914:  SUBLW  40
+0915:  BTFSC  03.2
+0916:  GOTO   122
+....................       executed_mission[executed_mission_count++] = command_id;
+0917:  MOVF   70,W
+0918:  INCF   70,F
+0919:  ADDLW  BD
+091A:  MOVWF  04
+091B:  MOVLW  25
+091C:  MOVWF  05
+091D:  BTFSC  03.0
+091E:  INCF   05,F
+091F:  MOVF   5A,W
+0920:  MOVWF  00
+0921:  GOTO   12C
+....................    else
+....................       fprintf(PC, "[WARN]  overflow executed_mission list");
+0922:  MOVLW  CD
+0923:  MOVLB  03
+0924:  MOVWF  11
+0925:  MOVLW  01
+0926:  MOVWF  12
+0927:  MOVLP  00
+0928:  MOVLB  00
+0929:  CALL   405
+092A:  MOVLP  08
+092B:  MOVLB  13
+....................    
+....................    
+....................    // execution mission
+....................    fprintf(PC, "\r\n______________________________\r\n_____Start execute_mission_____\r\n\r\n");
+092C:  MOVLW  E1
+092D:  MOVLB  03
+092E:  MOVWF  11
+092F:  MOVLW  01
+0930:  MOVWF  12
+0931:  MOVLP  00
+0932:  MOVLB  00
+0933:  CALL   405
+0934:  MOVLP  08
+....................    fprintf(PC, "Command ID: %X\r\n\r\n", command_id);
+0935:  MOVLW  04
+0936:  MOVLB  03
+0937:  MOVWF  11
+0938:  MOVLW  02
+0939:  MOVWF  12
+093A:  BCF    03.0
+093B:  MOVLW  0C
+093C:  MOVLB  14
+093D:  MOVWF  3C
+093E:  MOVLP  00
+093F:  MOVLB  00
+0940:  CALL   4B8
+0941:  MOVLP  08
+0942:  MOVLB  13
+0943:  MOVF   5A,W
+0944:  MOVLB  14
+0945:  MOVWF  3C
+0946:  MOVLW  37
+0947:  MOVWF  3D
+0948:  MOVLP  00
+0949:  MOVLB  00
+094A:  CALL   46C
+094B:  MOVLP  08
+094C:  MOVLW  0B
+094D:  MOVLB  03
+094E:  MOVWF  11
+094F:  MOVLW  02
+0950:  MOVWF  12
+0951:  BCF    03.0
+0952:  MOVLW  04
+0953:  MOVLB  14
+0954:  MOVWF  3C
+0955:  MOVLP  00
+0956:  MOVLB  00
+0957:  CALL   4B8
+0958:  MOVLP  08
+....................    switch(command_id)
+0959:  MOVLB  13
+095A:  MOVF   5A,W
+095B:  XORLW  00
+095C:  MOVLB  00
+095D:  BTFSC  03.2
+095E:  GOTO   163
+095F:  XORLW  01
+0960:  BTFSC  03.2
+0961:  GOTO   2A4
+0962:  GOTO   328
+....................    {
+....................       case 0x00:
+....................          example_00(parameter);
+0963:  MOVLB  13
+0964:  MOVF   5C,W
+0965:  MOVWF  5F
+0966:  MOVF   5B,W
+0967:  MOVWF  5E
+....................          break;
+*
+0AA3:  GOTO   331
+....................       case 0x01:
+....................          example_01(parameter);
+0AA4:  MOVLB  13
+0AA5:  MOVF   5C,W
+0AA6:  MOVWF  5F
+0AA7:  MOVF   5B,W
+0AA8:  MOVWF  5E
+....................          break;
+*
+0B27:  GOTO   331
+....................       default:
+....................          fprintf(PC, "\t\t-> Invalid CMD ID!\r\n");
+0B28:  MOVLW  0E
+0B29:  MOVLB  03
+0B2A:  MOVWF  11
+0B2B:  MOVLW  02
+0B2C:  MOVWF  12
+0B2D:  MOVLP  00
+0B2E:  MOVLB  00
+0B2F:  CALL   405
+0B30:  MOVLP  08
+....................    }
+....................    fprintf(PC, "\r\n______End execute_mission______\r\n_______________________________\r\n");
+0B31:  MOVLW  1A
+0B32:  MOVLB  03
+0B33:  MOVWF  11
+0B34:  MOVLW  02
+0B35:  MOVWF  12
+0B36:  MOVLP  00
+0B37:  MOVLB  00
+0B38:  CALL   405
+0B39:  MOVLP  08
+.................... }
+.................... 
+.................... 
+.................... void example_00(unsigned int8 parameter[])
+.................... {
+....................    fprintf(PC, "Start example_00\r\n");
+*
+0968:  MOVLW  3D
+0969:  MOVLB  03
+096A:  MOVWF  11
+096B:  MOVLW  02
+096C:  MOVWF  12
+096D:  MOVLP  00
+096E:  MOVLB  00
+096F:  CALL   405
+0970:  MOVLP  08
+....................    
+....................    // accept continuous execute
+....................    executed_mission_pop();
+....................    fprintf(PC, "(This mission can execute many time as you want)\r\n");
+*
+097A:  MOVLW  47
+097B:  MOVLB  03
+097C:  MOVWF  11
+097D:  MOVLW  02
+097E:  MOVWF  12
+097F:  MOVLP  00
+0980:  MOVLB  00
+0981:  CALL   405
+0982:  MOVLP  08
+....................     
+....................    // anything do
+....................    fprintf(PC, "executing");
+0983:  MOVLW  61
+0984:  MOVLB  03
+0985:  MOVWF  11
+0986:  MOVLW  02
+0987:  MOVWF  12
+0988:  MOVLP  00
+0989:  MOVLB  00
+098A:  CALL   405
+098B:  MOVLP  08
+....................    delay_ms(1000);
+098C:  MOVLW  04
+098D:  MOVLB  13
+098E:  MOVWF  6C
+098F:  MOVLW  FA
+0990:  MOVWF  6D
+0991:  MOVLB  00
+0992:  CALL   073
+0993:  MOVLB  13
+0994:  DECFSZ 6C,F
+0995:  GOTO   18F
+....................    fprintf(PC, ".");
+0996:  MOVLW  2E
+0997:  MOVLB  14
+0998:  MOVWF  40
+0999:  MOVLP  00
+099A:  MOVLB  00
+099B:  CALL   3E0
+099C:  MOVLP  08
+....................    delay_ms(1000);
+099D:  MOVLW  04
+099E:  MOVLB  13
+099F:  MOVWF  6C
+09A0:  MOVLW  FA
+09A1:  MOVWF  6D
+09A2:  MOVLB  00
+09A3:  CALL   073
+09A4:  MOVLB  13
+09A5:  DECFSZ 6C,F
+09A6:  GOTO   1A0
+....................    fprintf(PC, ".");
+09A7:  MOVLW  2E
+09A8:  MOVLB  14
+09A9:  MOVWF  40
+09AA:  MOVLP  00
+09AB:  MOVLB  00
+09AC:  CALL   3E0
+09AD:  MOVLP  08
+....................    delay_ms(1000);
+09AE:  MOVLW  04
+09AF:  MOVLB  13
+09B0:  MOVWF  6C
+09B1:  MOVLW  FA
+09B2:  MOVWF  6D
+09B3:  MOVLB  00
+09B4:  CALL   073
+09B5:  MOVLB  13
+09B6:  DECFSZ 6C,F
+09B7:  GOTO   1B1
+....................    fprintf(PC, ".");
+09B8:  MOVLW  2E
+09B9:  MOVLB  14
+09BA:  MOVWF  40
+09BB:  MOVLP  00
+09BC:  MOVLB  00
+09BD:  CALL   3E0
+09BE:  MOVLP  08
+....................    delay_ms(1000);
+09BF:  MOVLW  04
+09C0:  MOVLB  13
+09C1:  MOVWF  6C
+09C2:  MOVLW  FA
+09C3:  MOVWF  6D
+09C4:  MOVLB  00
+09C5:  CALL   073
+09C6:  MOVLB  13
+09C7:  DECFSZ 6C,F
+09C8:  GOTO   1C2
+....................    fprintf(PC, ".");
+09C9:  MOVLW  2E
+09CA:  MOVLB  14
+09CB:  MOVWF  40
+09CC:  MOVLP  00
+09CD:  MOVLB  00
+09CE:  CALL   3E0
+09CF:  MOVLP  08
+....................    delay_ms(1000);
+09D0:  MOVLW  04
+09D1:  MOVLB  13
+09D2:  MOVWF  6C
+09D3:  MOVLW  FA
+09D4:  MOVWF  6D
+09D5:  MOVLB  00
+09D6:  CALL   073
+09D7:  MOVLB  13
+09D8:  DECFSZ 6C,F
+09D9:  GOTO   1D3
+....................    fprintf(PC, ".\r\n");
+09DA:  MOVLW  2E
+09DB:  MOVLB  14
+09DC:  MOVWF  40
+09DD:  MOVLP  00
+09DE:  MOVLB  00
+09DF:  CALL   3E0
+09E0:  MOVLP  08
+09E1:  MOVLW  0D
+09E2:  MOVLB  14
+09E3:  MOVWF  40
+09E4:  MOVLP  00
+09E5:  MOVLB  00
+09E6:  CALL   3E0
+09E7:  MOVLP  08
+09E8:  MOVLW  0A
+09E9:  MOVLB  14
+09EA:  MOVWF  40
+09EB:  MOVLP  00
+09EC:  MOVLB  00
+09ED:  CALL   3E0
+09EE:  MOVLP  08
+....................    
+....................    // order Copy to SMF data
+....................    fprintf(PC, "order Copy smf_data\r\n");
+09EF:  MOVLW  66
+09F0:  MOVLB  03
+09F1:  MOVWF  11
+09F2:  MOVLW  02
+09F3:  MOVWF  12
+09F4:  MOVLP  00
+09F5:  MOVLB  00
+09F6:  CALL   405
+09F7:  MOVLP  08
+....................    unsigned int32 smf_data_source_address = 0x00005000; // (in self Flash memory)
+....................    unsigned int32 smf_data_destination_address = 0x00103D00; // (in SMF)
+....................    unsigned int32 data_size = 0x00000080;
+09F8:  MOVLB  13
+09F9:  CLRF   63
+09FA:  CLRF   62
+09FB:  MOVLW  50
+09FC:  MOVWF  61
+09FD:  CLRF   60
+09FE:  CLRF   67
+09FF:  MOVLW  10
+0A00:  MOVWF  66
+0A01:  MOVLW  3D
+0A02:  MOVWF  65
+0A03:  CLRF   64
+0A04:  CLRF   6B
+0A05:  CLRF   6A
+0A06:  CLRF   69
+0A07:  MOVLW  80
+0A08:  MOVWF  68
+....................    enqueue_smf_data(smf_data_source_address, smf_data_destination_address, data_size);
+0A09:  MOVF   63,W
+0A0A:  MOVWF  6F
+0A0B:  MOVF   62,W
+0A0C:  MOVWF  6E
+0A0D:  MOVF   61,W
+0A0E:  MOVWF  6D
+0A0F:  MOVF   60,W
+0A10:  MOVWF  6C
+0A11:  MOVF   67,W
+0A12:  MOVLB  14
+0A13:  MOVWF  23
+0A14:  MOVLB  13
+0A15:  MOVF   66,W
+0A16:  MOVLB  14
+0A17:  MOVWF  22
+0A18:  MOVLB  13
+0A19:  MOVF   65,W
+0A1A:  MOVLB  14
+0A1B:  MOVWF  21
+0A1C:  MOVLB  13
+0A1D:  MOVF   64,W
+0A1E:  MOVLB  14
+0A1F:  MOVWF  20
+0A20:  MOVLB  13
+0A21:  MOVF   6B,W
+0A22:  MOVLB  14
+0A23:  MOVWF  27
+0A24:  MOVLB  13
+0A25:  MOVF   6A,W
+0A26:  MOVLB  14
+0A27:  MOVWF  26
+0A28:  MOVLB  13
+0A29:  MOVF   69,W
+0A2A:  MOVLB  14
+0A2B:  MOVWF  25
+0A2C:  MOVLB  13
+0A2D:  MOVF   68,W
+0A2E:  MOVLB  14
+0A2F:  MOVWF  24
+....................    
+....................    fprintf(PC, "End example_00\r\n");
+*
+0A9A:  MOVLW  71
+0A9B:  MOVLB  03
+0A9C:  MOVWF  11
+0A9D:  MOVLW  02
+0A9E:  MOVWF  12
+0A9F:  MOVLP  00
+0AA0:  MOVLB  00
+0AA1:  CALL   405
+0AA2:  MOVLP  08
+....................    
+.................... }
+.................... 
+.................... void example_01(unsigned int8 parameter[])
+.................... {
+....................    fprintf(PC, "Start example_01\r\n");
+*
+0AA9:  MOVLW  7A
+0AAA:  MOVLB  03
+0AAB:  MOVWF  11
+0AAC:  MOVLW  02
+0AAD:  MOVWF  12
+0AAE:  MOVLP  00
+0AAF:  MOVLB  00
+0AB0:  CALL   405
+0AB1:  MOVLP  08
+....................    fprintf(PC, "executing");
+0AB2:  MOVLW  84
+0AB3:  MOVLB  03
+0AB4:  MOVWF  11
+0AB5:  MOVLW  02
+0AB6:  MOVWF  12
+0AB7:  MOVLP  00
+0AB8:  MOVLB  00
+0AB9:  CALL   405
+0ABA:  MOVLP  08
+....................    delay_ms(1000);
+0ABB:  MOVLW  04
+0ABC:  MOVLB  13
+0ABD:  MOVWF  60
+0ABE:  MOVLW  FA
+0ABF:  MOVWF  6D
+0AC0:  MOVLB  00
+0AC1:  CALL   073
+0AC2:  MOVLB  13
+0AC3:  DECFSZ 60,F
+0AC4:  GOTO   2BE
+....................    fprintf(PC, ".");
+0AC5:  MOVLW  2E
+0AC6:  MOVLB  14
+0AC7:  MOVWF  40
+0AC8:  MOVLP  00
+0AC9:  MOVLB  00
+0ACA:  CALL   3E0
+0ACB:  MOVLP  08
+....................    delay_ms(1000);
+0ACC:  MOVLW  04
+0ACD:  MOVLB  13
+0ACE:  MOVWF  60
+0ACF:  MOVLW  FA
+0AD0:  MOVWF  6D
+0AD1:  MOVLB  00
+0AD2:  CALL   073
+0AD3:  MOVLB  13
+0AD4:  DECFSZ 60,F
+0AD5:  GOTO   2CF
+....................    fprintf(PC, ".");
+0AD6:  MOVLW  2E
+0AD7:  MOVLB  14
+0AD8:  MOVWF  40
+0AD9:  MOVLP  00
+0ADA:  MOVLB  00
+0ADB:  CALL   3E0
+0ADC:  MOVLP  08
+....................    delay_ms(1000);
+0ADD:  MOVLW  04
+0ADE:  MOVLB  13
+0ADF:  MOVWF  60
+0AE0:  MOVLW  FA
+0AE1:  MOVWF  6D
+0AE2:  MOVLB  00
+0AE3:  CALL   073
+0AE4:  MOVLB  13
+0AE5:  DECFSZ 60,F
+0AE6:  GOTO   2E0
+....................    fprintf(PC, ".");
+0AE7:  MOVLW  2E
+0AE8:  MOVLB  14
+0AE9:  MOVWF  40
+0AEA:  MOVLP  00
+0AEB:  MOVLB  00
+0AEC:  CALL   3E0
+0AED:  MOVLP  08
+....................    delay_ms(1000);
+0AEE:  MOVLW  04
+0AEF:  MOVLB  13
+0AF0:  MOVWF  60
+0AF1:  MOVLW  FA
+0AF2:  MOVWF  6D
+0AF3:  MOVLB  00
+0AF4:  CALL   073
+0AF5:  MOVLB  13
+0AF6:  DECFSZ 60,F
+0AF7:  GOTO   2F1
+....................    fprintf(PC, ".");
+0AF8:  MOVLW  2E
+0AF9:  MOVLB  14
+0AFA:  MOVWF  40
+0AFB:  MOVLP  00
+0AFC:  MOVLB  00
+0AFD:  CALL   3E0
+0AFE:  MOVLP  08
+....................    delay_ms(1000);
+0AFF:  MOVLW  04
+0B00:  MOVLB  13
+0B01:  MOVWF  60
+0B02:  MOVLW  FA
+0B03:  MOVWF  6D
+0B04:  MOVLB  00
+0B05:  CALL   073
+0B06:  MOVLB  13
+0B07:  DECFSZ 60,F
+0B08:  GOTO   302
+....................    fprintf(PC, ".\r\n");
+0B09:  MOVLW  2E
+0B0A:  MOVLB  14
+0B0B:  MOVWF  40
+0B0C:  MOVLP  00
+0B0D:  MOVLB  00
+0B0E:  CALL   3E0
+0B0F:  MOVLP  08
+0B10:  MOVLW  0D
+0B11:  MOVLB  14
+0B12:  MOVWF  40
+0B13:  MOVLP  00
+0B14:  MOVLB  00
+0B15:  CALL   3E0
+0B16:  MOVLP  08
+0B17:  MOVLW  0A
+0B18:  MOVLB  14
+0B19:  MOVWF  40
+0B1A:  MOVLP  00
+0B1B:  MOVLB  00
+0B1C:  CALL   3E0
+0B1D:  MOVLP  08
+....................    fprintf(PC, "End example_01\r\n");
+0B1E:  MOVLW  89
+0B1F:  MOVLB  03
+0B20:  MOVWF  11
+0B21:  MOVLW  02
+0B22:  MOVWF  12
+0B23:  MOVLP  00
+0B24:  MOVLB  00
+0B25:  CALL   405
+0B26:  MOVLP  08
+.................... }
+.................... 
+.................... 
+.................... //___________ others ________________
+.................... 
+.................... void executed_mission_pop(void)
+.................... {
+....................    executed_mission[executed_mission_count--] = 0x00;
+*
+0971:  MOVF   70,W
+0972:  DECF   70,F
+0973:  ADDLW  BD
+0974:  MOVWF  04
+0975:  MOVLW  25
+0976:  MOVWF  05
+0977:  BTFSC  03.0
+0978:  INCF   05,F
+0979:  CLRF   00
+.................... }
+.................... 
+.................... void enqueue_smf_data(unsigned int32 src, unsigned int32 dest, unsigned int32 size)
+*
+0A30:  MOVLW  01
+0A31:  MOVLB  00
+0A32:  ADDWF  56,W
+0A33:  ANDLW  0F
+0A34:  MOVLB  14
+0A35:  MOVWF  28
+.................... {
+....................    int8 next_tail = (smf_data_tail + 1) % SMF_DATA_SIZE;
+.................... 
+....................    if(next_tail == smf_data_head)
+0A36:  MOVLB  00
+0A37:  MOVF   55,W
+0A38:  MOVLB  14
+0A39:  SUBWF  28,W
+0A3A:  BTFSS  03.2
+0A3B:  GOTO   247
+....................       fprintf(PC, "SMF data list is full!!!\r\n");
+0A3C:  MOVLW  92
+0A3D:  MOVLB  03
+0A3E:  MOVWF  11
+0A3F:  MOVLW  02
+0A40:  MOVWF  12
+0A41:  MOVLP  00
+0A42:  MOVLB  00
+0A43:  CALL   405
+0A44:  MOVLP  08
+0A45:  GOTO   29A
+0A46:  MOVLB  14
+....................       
+....................    else
+....................    {
+....................       smf_data[smf_data_tail].src = src;
+0A47:  MOVLB  00
+0A48:  MOVF   56,W
+0A49:  MOVLB  14
+0A4A:  MOVWF  39
+0A4B:  MOVLW  0C
+0A4C:  MOVWF  3A
+0A4D:  MOVLP  00
+0A4E:  MOVLB  00
+0A4F:  CALL   491
+0A50:  MOVLP  08
+0A51:  MOVLW  37
+0A52:  ADDWF  78,W
+0A53:  MOVWF  04
+0A54:  MOVLW  20
+0A55:  MOVWF  05
+0A56:  BTFSC  03.0
+0A57:  INCF   05,F
+0A58:  MOVLB  13
+0A59:  MOVF   6C,W
+0A5A:  MOVWF  00
+0A5B:  MOVF   6D,W
+0A5C:  MOVWI  W,[FSR0+01]
+0A5D:  MOVF   6E,W
+0A5E:  MOVWI  W,[FSR0+02]
+0A5F:  MOVF   6F,W
+0A60:  MOVWI  W,[FSR0+03]
+....................       smf_data[smf_data_tail].dest = dest;
+0A61:  MOVLB  00
+0A62:  MOVF   56,W
+0A63:  MOVLB  14
+0A64:  MOVWF  39
+0A65:  MOVLW  0C
+0A66:  MOVWF  3A
+0A67:  MOVLP  00
+0A68:  MOVLB  00
+0A69:  CALL   491
+0A6A:  MOVLP  08
+0A6B:  MOVLW  04
+0A6C:  ADDWF  78,W
+0A6D:  ADDLW  37
+0A6E:  MOVWF  04
+0A6F:  MOVLW  20
+0A70:  MOVWF  05
+0A71:  BTFSC  03.0
+0A72:  INCF   05,F
+0A73:  MOVLB  14
+0A74:  MOVF   20,W
+0A75:  MOVWF  00
+0A76:  MOVF   21,W
+0A77:  MOVWI  W,[FSR0+01]
+0A78:  MOVF   22,W
+0A79:  MOVWI  W,[FSR0+02]
+0A7A:  MOVF   23,W
+0A7B:  MOVWI  W,[FSR0+03]
+....................       smf_data[smf_data_tail].size = size;
+0A7C:  MOVLB  00
+0A7D:  MOVF   56,W
+0A7E:  MOVLB  14
+0A7F:  MOVWF  39
+0A80:  MOVLW  0C
+0A81:  MOVWF  3A
+0A82:  MOVLP  00
+0A83:  MOVLB  00
+0A84:  CALL   491
+0A85:  MOVLP  08
+0A86:  MOVLW  08
+0A87:  ADDWF  78,W
+0A88:  ADDLW  37
+0A89:  MOVWF  04
+0A8A:  MOVLW  20
+0A8B:  MOVWF  05
+0A8C:  BTFSC  03.0
+0A8D:  INCF   05,F
+0A8E:  MOVLB  14
+0A8F:  MOVF   24,W
+0A90:  MOVWF  00
+0A91:  MOVF   25,W
+0A92:  MOVWI  W,[FSR0+01]
+0A93:  MOVF   26,W
+0A94:  MOVWI  W,[FSR0+02]
+0A95:  MOVF   27,W
+0A96:  MOVWI  W,[FSR0+03]
+.................... 
+....................       smf_data_tail = next_tail;
+0A97:  MOVF   28,W
+0A98:  MOVLB  00
+0A99:  MOVWF  56
+....................    }
+.................... }
+.................... 
+.................... void update_time(unsigned int8 raw_time[])
+.................... {  
+....................    unsigned int32 time;
+....................    memcpy(&time, raw_time, 4);
+....................    
+....................    day = (time >> 22) & 0x000003FF;
+....................    sec = time & 0x0001FFFF;
+....................    //unsigned int8  subsec = (time >> 18) & 0x0000000F;
+....................    // int1 absolute_flag = time >> 17 & 0x00000001
+.................... }
+.................... 
+.................... // _________________ missions ______________________
+.................... 
+.................... /*
+.................... void setup()
+.................... {
+....................    //setup ADC
+....................    setup_oscillator(OSC_16MHZ);   //oscillator speed (crystal)
+.................... 	setup_adc_ports(sAN0 | sAN1 | sAN2 | sAN3 | sAN4 | sAN5, VSS_VDD);
+.................... 	setup_adc(ADC_CLOCK_DIV_64);
+.................... 
+....................    //setup DAC
+....................    setup_dac(DAC_VSS_VDD|DAC_OUTPUT1);                                        //DAC output at pin DAC output1 from 0-VDD volts 
+....................    //   setup_vref(VREF_ON|VREF_COMP_DAC_2v048); 
+....................    setup_dac3(DAC_VSS_VDD|DAC_OUTPUT1);                                          //DAC output at pin DAC output1 from 0-VDD volts 
+....................    dac_write3(20);                                                               //output analog voltage for biasing of current sensor
+....................    
+.................... }
+.................... 
+.................... void mode_measure(unsigned int8 parameter[])
+.................... {
+....................    unsined in sweep_step = parameter[0]; // Get the measurement step from the parameter array
+....................    setup();
+....................    sweep(sweep_step);
+....................    copy_data();
+.................... }
+.................... 
+.................... void mode_copy_SMF()
+.................... {
+....................    unsigned int8 smf_data[SMF_DATA_SIZE] = {0x00};
+....................    unsigned int32 src = 0x00000000;
+....................    unsigned int32 dest = 0x00000000;
+....................    unsigned int32 size = 0x00000000;
+....................    for (int i = 0; i < SMF_DATA_SIZE; i++)
+....................    {
+....................       smf_data[i] = read_data_byte_flash128m(src + i);
+....................       fprintf(PC, "smf_data[%d]: %X\r\n", i, smf_data[i]);
+....................    }
+....................    enqueue_smf_data(src, dest, size);
+....................    fprintf(PC, "enqueue_smf_data\r\n");
+.................... }
+.................... 
+.................... 
+.................... //___________________ test functions _______________
+.................... void mode_test_temp()
+.................... {
+....................    unsigned int16 temp_top = 0;
+....................    unsigned int16 temp_bot = 0;
+....................    set_adc_channel(3);
+....................    temp_top = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+....................    set_adc_channel(3);
+....................    temp_bot = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+....................    fprintf(PC, "temp_top: %X\r\n", temp_top);
+....................    fprintf(PC, "temp_bot: %X\r\n", temp_bot);
+.................... }
+.................... 
+.................... void mode_test_PD()
+.................... {
+....................    unsigned int16 pd_start = 0;
+....................    unsigned int16 pd_end = 0;
+....................    set_adc_channel(3);
+....................    pd_start = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+....................    set_adc_channel(3);
+....................    pd_end = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+....................    fprintf(PC, "pd_start: %X\r\n", pd_start);
+....................    fprintf(PC, "pd_end: %X\r\n", pd_end);
+.................... }
+.................... 
+.................... void mode_test_CIGS()
+.................... {
+....................    unsigned int16 cigs_value = 0;
+....................    set_adc_channel(3);
+....................    cigs_value = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+....................    fprintf(PC, "cigs_value: %X\r\n", cigs_value);
+.................... }
+.................... 
+.................... void mode_test_current()
+.................... {
+....................    unsigned int16 current_value = 0;
+....................    set_adc_channel(3);
+....................    current_value = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+....................    fprintf(PC, "current_value: %X\r\n", current_value);
+.................... }
+.................... 
+.................... void mode_test_voltage()
+.................... {
+....................    unsigned int16 voltage_value = 0;
+....................    set_adc_channel(3);
+....................    voltage_value = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+....................    fprintf(PC, "voltage_value: %X\r\n", voltage_value);
+.................... }
+.................... */
+.................... 
+.................... 
+.................... 
+.................... //____________ intrrupts ____________
+.................... #INT_TIMER0
+.................... void TIMER0_isr(void) 
+.................... {
+....................    // every 0.1 sec interrupts
+....................    set_timer0(100);
+*
+02A0:  MOVLW  64
+02A1:  MOVWF  15
+.................... 
+....................    if (++dsec >= 100)
+02A2:  MOVLW  01
+02A3:  ADDWF  29,F
+02A4:  BTFSC  03.0
+02A5:  INCF   2A,F
+02A6:  BTFSC  03.2
+02A7:  INCF   2B,F
+02A8:  BTFSC  03.2
+02A9:  INCF   2C,F
+02AA:  MOVF   2C,F
+02AB:  BTFSS  03.2
+02AC:  GOTO   2B7
+02AD:  MOVF   2B,F
+02AE:  BTFSS  03.2
+02AF:  GOTO   2B7
+02B0:  MOVF   2A,F
+02B1:  BTFSS  03.2
+02B2:  GOTO   2B7
+02B3:  MOVF   29,W
+02B4:  SUBLW  63
+02B5:  BTFSC  03.0
+02B6:  GOTO   2E3
+....................    {
+....................       dsec = 0;
+02B7:  CLRF   2C
+02B8:  CLRF   2B
+02B9:  CLRF   2A
+02BA:  CLRF   29
+....................       sec++;
+02BB:  MOVLW  01
+02BC:  ADDWF  2D,F
+02BD:  BTFSC  03.0
+02BE:  INCF   2E,F
+02BF:  BTFSC  03.2
+02C0:  INCF   2F,F
+02C1:  BTFSC  03.2
+02C2:  INCF   30,F
+.................... 
+....................       if (sec >= 86400)
+02C3:  MOVF   30,F
+02C4:  BTFSS  03.2
+02C5:  GOTO   2D8
+02C6:  MOVF   2F,W
+02C7:  SUBLW  00
+02C8:  BTFSC  03.0
+02C9:  GOTO   2E3
+02CA:  XORLW  FF
+02CB:  BTFSS  03.2
+02CC:  GOTO   2D8
+02CD:  MOVF   2E,W
+02CE:  SUBLW  50
+02CF:  BTFSC  03.0
+02D0:  GOTO   2E3
+02D1:  XORLW  FF
+02D2:  BTFSS  03.2
+02D3:  GOTO   2D8
+02D4:  MOVF   2D,W
+02D5:  SUBLW  7F
+02D6:  BTFSC  03.0
+02D7:  GOTO   2E3
+....................       {
+....................          sec -= 86400;
+02D8:  MOVLW  80
+02D9:  SUBWF  2D,F
+02DA:  MOVLW  51
+02DB:  SUBWFC 2E,F
+02DC:  MOVLW  01
+02DD:  SUBWFC 2F,F
+02DE:  MOVLW  00
+02DF:  SUBWFC 30,F
+....................          day++;
+02E0:  INCF   31,F
+02E1:  BTFSC  03.2
+02E2:  INCF   32,F
+....................       }
+....................    }
+.................... }
+.................... 
+02E3:  BCF    0B.2
+02E4:  MOVLP  00
+02E5:  GOTO   02A
+.................... #INT_RDA
+.................... void RDA_isr(void)
+.................... {
+....................    if (status == BUSY || status == COPYING)
+*
+02EC:  MOVF   54,W
+02ED:  SUBLW  03
+02EE:  BTFSC  03.2
+02EF:  GOTO   2F4
+02F0:  MOVF   54,W
+02F1:  SUBLW  05
+02F2:  BTFSS  03.2
+02F3:  GOTO   2FC
+....................    {
+....................       fgetc(BOSS);
+02F4:  BTFSS  11.5
+02F5:  GOTO   2F4
+02F6:  MOVLB  03
+02F7:  MOVF   19,W
+....................       fputc(0xAA, BOSS);
+02F8:  MOVLW  AA
+02F9:  MOVLB  00
+02FA:  CALL   2E6
+....................    }
+02FB:  GOTO   314
+....................    else
+....................    {
+....................       if (receive_signal_size < 16)
+02FC:  MOVF   53,W
+02FD:  SUBLW  0F
+02FE:  BTFSS  03.0
+02FF:  GOTO   30F
+....................          receive_signal[receive_signal_size++] = fgetc(BOSS);
+0300:  MOVF   53,W
+0301:  INCF   53,F
+0302:  ADDLW  13
+0303:  MOVWF  04
+0304:  MOVLW  20
+0305:  MOVWF  05
+0306:  BTFSC  03.0
+0307:  INCF   05,F
+0308:  BTFSS  11.5
+0309:  GOTO   308
+030A:  MOVLB  03
+030B:  MOVF   19,W
+030C:  MOVWF  00
+030D:  GOTO   313
+030E:  MOVLB  00
+....................       else
+....................          fgetc(BOSS);
+030F:  BTFSS  11.5
+0310:  GOTO   30F
+0311:  MOVLB  03
+0312:  MOVF   19,W
+0313:  MOVLB  00
+....................    }
+0314:  BCF    11.5
+0315:  MOVLP  00
+0316:  GOTO   02A
+.................... }
+.................... 
+.................... 
+.................... 
+.................... //____________ initialize ____________
+.................... 
+.................... void initialize(void)
+.................... {
+....................    fprintf(PC, "Start setting\r\n");
+*
+0453:  MOVLW  17
+0454:  MOVLB  03
+0455:  MOVWF  11
+0456:  MOVLW  03
+0457:  MOVWF  12
+0458:  MOVLB  00
+0459:  CALL   405
+....................    //setup_lcd(LCD_DISABLED);
+....................    setup_timer_0(T0_INTERNAL | T0_DIV_256 | RTCC_8_BIT);
+045A:  MOVLB  01
+045B:  MOVF   15,W
+045C:  ANDLW  C0
+045D:  IORLW  07
+045E:  MOVWF  15
+....................    enable_interrupts(INT_RDA);
+045F:  BSF    11.5
+....................    enable_interrupts(INT_TIMER0);
+0460:  BSF    0B.5
+....................    enable_interrupts(GLOBAL);
+0461:  MOVLW  C0
+0462:  IORWF  0B,F
+....................    fprintf(PC, "End setting\r\n");
+0463:  MOVLW  1F
+0464:  MOVLB  03
+0465:  MOVWF  11
+0466:  MOVLW  03
+0467:  MOVWF  12
+0468:  MOVLB  00
+0469:  CALL   405
+046A:  MOVLP  08
+046B:  GOTO   615 (RETURN)
+.................... }
+.................... 
+.................... 
+.................... // ___________ command execution ___________
+.................... 
+.................... int1 execute_command(Command *command)
+.................... {
+....................    fprintf(PC, "\r\nStart execute_command\r\n");
+*
+0889:  MOVLW  26
+088A:  MOVLB  03
+088B:  MOVWF  11
+088C:  MOVLW  03
+088D:  MOVWF  12
+088E:  MOVLP  00
+088F:  MOVLB  00
+0890:  CALL   405
+0891:  MOVLP  08
+....................    
+....................    switch(command->frame_id)
+0892:  MOVLB  13
+0893:  MOVF   53,W
+0894:  MOVWF  04
+0895:  MOVF   54,W
+0896:  MOVWF  05
+0897:  ADDFSR 00,FSR0
+0898:  MOVF   00,W
+0899:  XORLW  00
+089A:  MOVLB  00
+089B:  BTFSC  03.2
+089C:  GOTO   0A4
+089D:  XORLW  01
+089E:  BTFSC  03.2
+089F:  GOTO   346
+08A0:  XORLW  03
+08A1:  BTFSC  03.2
+08A2:  GOTO   398
+08A3:  GOTO   557
+....................    {
+....................       case UPLINK_COMMAND:
+....................          fprintf(PC, "\t-> Uplink command\r\n");
+08A4:  MOVLW  33
+08A5:  MOVLB  03
+08A6:  MOVWF  11
+08A7:  MOVLW  03
+08A8:  MOVWF  12
+08A9:  MOVLP  00
+08AA:  MOVLB  00
+08AB:  CALL   405
+08AC:  MOVLP  08
+....................          fprintf(PC, "\t   Transmit Acknolegde\r\n");
+08AD:  MOVLW  3E
+08AE:  MOVLB  03
+08AF:  MOVWF  11
+08B0:  MOVLW  03
+08B1:  MOVWF  12
+08B2:  MOVLP  00
+08B3:  MOVLB  00
+08B4:  CALL   405
+08B5:  MOVLP  08
+....................          transmit_command(ACK, 0, 0);
+08B6:  MOVLW  0F
+08B7:  MOVLB  13
+08B8:  MOVWF  56
+08B9:  CLRF   58
+08BA:  CLRF   57
+08BB:  CLRF   59
+08BC:  MOVLP  00
+08BD:  MOVLB  00
+08BE:  CALL   755
+08BF:  MOVLP  08
+.................... 
+....................          status = BUSY;
+08C0:  MOVLW  03
+08C1:  MOVWF  54
+....................          execute_mission(command->content);
+08C2:  MOVLW  01
+08C3:  MOVLB  13
+08C4:  ADDWF  53,W
+08C5:  MOVWF  56
+08C6:  MOVLW  00
+08C7:  ADDWFC 54,W
+08C8:  MOVWF  57
+08C9:  MOVF   57,W
+08CA:  MOVWF  59
+08CB:  MOVF   56,W
+08CC:  MOVWF  58
+....................          if (!is_empty_smf_data())
+*
+0B3A:  MOVLP  00
+0B3B:  CALL   7F6
+0B3C:  MOVLP  08
+0B3D:  MOVF   78,F
+0B3E:  BTFSS  03.2
+0B3F:  GOTO   343
+....................             status = SMF_COPY_REQ;
+0B40:  MOVLW  04
+0B41:  MOVWF  54
+0B42:  GOTO   345
+....................          else
+....................             status = FINISHED;
+0B43:  MOVLW  06
+0B44:  MOVWF  54
+....................          break;
+0B45:  GOTO   557
+....................       
+....................       case STATUS_CHECK:
+....................          fprintf(PC, "\t-> Status check\r\n");
+0B46:  MOVLW  4B
+0B47:  MOVLB  03
+0B48:  MOVWF  11
+0B49:  MOVLW  03
+0B4A:  MOVWF  12
+0B4B:  MOVLP  00
+0B4C:  MOVLB  00
+0B4D:  CALL   405
+0B4E:  MOVLP  08
+....................          fprintf(PC, "\t\t-> My status is %d\r\n", status);
+0B4F:  MOVLW  55
+0B50:  MOVLB  03
+0B51:  MOVWF  11
+0B52:  MOVLW  03
+0B53:  MOVWF  12
+0B54:  BCF    03.0
+0B55:  MOVLW  12
+0B56:  MOVLB  14
+0B57:  MOVWF  3C
+0B58:  MOVLP  00
+0B59:  MOVLB  00
+0B5A:  CALL   4B8
+0B5B:  MOVLP  08
+0B5C:  MOVF   54,W
+0B5D:  MOVLB  13
+0B5E:  MOVWF  5E
+0B5F:  MOVLW  18
+0B60:  MOVWF  5F
+0B61:  MOVLB  00
+0B62:  CALL   000
+0B63:  MOVLW  0D
+0B64:  MOVLB  14
+0B65:  MOVWF  40
+0B66:  MOVLP  00
+0B67:  MOVLB  00
+0B68:  CALL   3E0
+0B69:  MOVLP  08
+0B6A:  MOVLW  0A
+0B6B:  MOVLB  14
+0B6C:  MOVWF  40
+0B6D:  MOVLP  00
+0B6E:  MOVLB  00
+0B6F:  CALL   3E0
+0B70:  MOVLP  08
+....................          fprintf(PC, "\t   Transmit MIS MCU Status\r\n");
+0B71:  MOVLW  61
+0B72:  MOVLB  03
+0B73:  MOVWF  11
+0B74:  MOVLW  03
+0B75:  MOVWF  12
+0B76:  MOVLP  00
+0B77:  MOVLB  00
+0B78:  CALL   405
+0B79:  MOVLP  08
+....................          transmit_command(MIS_MCU_STATUS, &status, 1);
+0B7A:  MOVLW  01
+0B7B:  MOVLB  13
+0B7C:  MOVWF  56
+0B7D:  MOVLW  20
+0B7E:  MOVWF  58
+0B7F:  MOVLW  34
+0B80:  MOVWF  57
+0B81:  MOVLW  01
+0B82:  MOVWF  59
+0B83:  MOVLP  00
+0B84:  MOVLB  00
+0B85:  CALL   755
+0B86:  MOVLP  08
+....................          if (status == FINISHED)
+0B87:  MOVF   54,W
+0B88:  SUBLW  06
+0B89:  BTFSS  03.2
+0B8A:  GOTO   397
+....................          {
+....................             fprintf(PC, "finished in status_check\r\n");
+0B8B:  MOVLW  70
+0B8C:  MOVLB  03
+0B8D:  MOVWF  11
+0B8E:  MOVLW  03
+0B8F:  MOVWF  12
+0B90:  MOVLP  00
+0B91:  MOVLB  00
+0B92:  CALL   405
+0B93:  MOVLP  08
+....................             return TRUE;
+0B94:  MOVLW  01
+0B95:  MOVWF  78
+0B96:  GOTO   559
+....................          }
+....................          break;
+0B97:  GOTO   557
+....................       
+....................       case IS_SMF_AVAILABLE:
+....................          fprintf(PC, "\t-> is SMF available\r\n");
+0B98:  MOVLW  7E
+0B99:  MOVLB  03
+0B9A:  MOVWF  11
+0B9B:  MOVLW  03
+0B9C:  MOVWF  12
+0B9D:  MOVLP  00
+0B9E:  MOVLB  00
+0B9F:  CALL   405
+0BA0:  MOVLP  08
+....................          fprintf(PC, "\t   Transmit Acknolegde\r\n");
+0BA1:  MOVLW  8A
+0BA2:  MOVLB  03
+0BA3:  MOVWF  11
+0BA4:  MOVLW  03
+0BA5:  MOVWF  12
+0BA6:  MOVLP  00
+0BA7:  MOVLB  00
+0BA8:  CALL   405
+0BA9:  MOVLP  08
+....................          transmit_command(ACK, 0, 0);
+0BAA:  MOVLW  0F
+0BAB:  MOVLB  13
+0BAC:  MOVWF  56
+0BAD:  CLRF   58
+0BAE:  CLRF   57
+0BAF:  CLRF   59
+0BB0:  MOVLP  00
+0BB1:  MOVLB  00
+0BB2:  CALL   755
+0BB3:  MOVLP  08
+....................          if (command->content[0] == ALLOW)
+0BB4:  MOVLB  13
+0BB5:  MOVF   53,W
+0BB6:  MOVWF  04
+0BB7:  MOVF   54,W
+0BB8:  MOVWF  05
+0BB9:  ADDFSR 01,FSR0
+0BBA:  MOVF   00,F
+0BBB:  BTFSS  03.2
+0BBC:  GOTO   54E
+....................          {
+....................             fprintf(PC, "\t\t-> allowd\r\n");
+0BBD:  MOVLW  97
+0BBE:  MOVLB  03
+0BBF:  MOVWF  11
+0BC0:  MOVLW  03
+0BC1:  MOVWF  12
+0BC2:  MOVLP  00
+0BC3:  MOVLB  00
+0BC4:  CALL   405
+0BC5:  MOVLP  08
+....................             status = COPYING;
+0BC6:  MOVLW  05
+0BC7:  MOVWF  54
+....................             copy_data();
+....................             status = FINISHED;
+*
+0D4A:  MOVLW  06
+0D4B:  MOVWF  54
+....................          }
+0D4C:  GOTO   557
+0D4D:  MOVLB  13
+....................          else
+....................             fprintf(PC, "\t\t-> denyed\r\n");
+0D4E:  MOVLW  9E
+0D4F:  MOVLB  03
+0D50:  MOVWF  11
+0D51:  MOVLW  03
+0D52:  MOVWF  12
+0D53:  MOVLP  00
+0D54:  MOVLB  00
+0D55:  CALL   405
+0D56:  MOVLP  08
+....................    }
+....................    return FALSE;
+0D57:  MOVLW  00
+0D58:  MOVWF  78
+0D59:  MOVLP  08
+0D5A:  GOTO   64F (RETURN)
+.................... }
+.................... 
+.................... 
+.................... // ___________ main functoin _______________
+.................... 
+.................... void main()
+0D5B:  MOVLB  03
+0D5C:  BSF    1F.3
+0D5D:  MOVLW  A0
+0D5E:  MOVWF  1B
+0D5F:  MOVLW  01
+0D60:  MOVWF  1C
+0D61:  MOVLW  A6
+0D62:  MOVWF  1E
+0D63:  MOVLW  90
+0D64:  MOVWF  1D
+0D65:  MOVLB  01
+0D66:  BCF    0C.3
+0D67:  MOVLB  02
+0D68:  BSF    0C.3
+0D69:  MOVLB  04
+0D6A:  BCF    15.5
+0D6B:  MOVLW  40
+0D6C:  MOVWF  14
+0D6D:  MOVLW  09
+0D6E:  MOVWF  12
+0D6F:  MOVLW  2A
+0D70:  MOVWF  15
+0D71:  MOVLB  02
+0D72:  BCF    1D.5
+0D73:  BCF    1D.3
+0D74:  BCF    1D.4
+0D75:  MOVLB  01
+0D76:  BCF    0E.5
+0D77:  BSF    0E.4
+0D78:  BCF    0E.3
+0D79:  MOVLB  00
+0D7A:  CLRF   2C
+0D7B:  CLRF   2B
+0D7C:  CLRF   2A
+0D7D:  CLRF   29
+0D7E:  CLRF   30
+0D7F:  CLRF   2F
+0D80:  CLRF   2E
+0D81:  CLRF   2D
+0D82:  CLRF   32
+0D83:  CLRF   31
+0D84:  CLRF   53
+0D85:  MOVLW  02
+0D86:  MOVWF  54
+0D87:  CLRF   55
+0D88:  CLRF   56
+0D89:  MOVLB  03
+0D8A:  CLRF   28
+0D8B:  CLRF   27
+0D8C:  MOVLB  11
+0D8D:  CLRF   44
+0D8E:  CLRF   43
+0D8F:  CLRF   42
+0D90:  CLRF   41
+0D91:  CLRF   46
+0D92:  CLRF   45
+0D93:  CLRF   48
+0D94:  CLRF   47
+0D95:  CLRF   4A
+0D96:  CLRF   49
+0D97:  CLRF   4C
+0D98:  CLRF   4B
+0D99:  CLRF   70
+0D9A:  MOVLB  03
+0D9B:  CLRF   0C
+0D9C:  CLRF   0D
+0D9D:  CLRF   0E
+0D9E:  CLRF   0F
+0D9F:  CLRF   10
+0DA0:  MOVLB  02
+0DA1:  CLRF   12
+0DA2:  CLRF   11
+0DA3:  GOTO   5C1
+0DA4:  DATA 20,34
+0DA5:  DATA 60,34
+0DA6:  DATA 13,34
+0DA7:  DATA 00,34
+0DA8:  DATA C0,34
+0DA9:  DATA 60,34
+0DAA:  DATA 37,34
+0DAB:  DATA 00,34
+0DAC:  DATA FF,34
+0DAD:  DATA 60,34
+0DAE:  DATA F9,34
+0DAF:  DATA 00,34
+0DB0:  DATA FF,34
+0DB1:  DATA C0,34
+0DB2:  DATA 00,34
+0DB3:  DATA FF,34
+0DB4:  DATA C0,34
+0DB5:  DATA 00,34
+0DB6:  DATA FF,34
+0DB7:  DATA C0,34
+0DB8:  DATA 00,34
+0DB9:  DATA 7C,34
+0DBA:  DATA C0,34
+0DBB:  DATA 00,34
+0DBC:  DATA 80,34
+0DBD:  DATA 65,34
+0DBE:  DATA 7D,34
+0DBF:  DATA 00,34
+0DC0:  DATA 00,34
+0DC1:  MOVLW  0D
+0DC2:  MOVWF  05
+0DC3:  MOVLW  A4
+0DC4:  MOVWF  04
+0DC5:  BSF    05.7
+0DC6:  MOVIW  [FSR0++],W
+0DC7:  MOVWF  77
+0DC8:  XORLW  00
+0DC9:  BTFSC  03.2
+0DCA:  GOTO   5DB
+0DCB:  MOVIW  [FSR0++],W
+0DCC:  MOVWF  78
+0DCD:  BTFSC  78.7
+0DCE:  GOTO   5D3
+0DCF:  ANDLW  3F
+0DD0:  MOVWF  07
+0DD1:  MOVIW  [FSR0++],W
+0DD2:  MOVWF  06
+0DD3:  BTFSC  78.6
+0DD4:  MOVIW  [FSR0++],W
+0DD5:  BTFSS  78.6
+0DD6:  MOVIW  [FSR0++],W
+0DD7:  MOVWI  W,[FSR1++]
+0DD8:  DECFSZ 77,F
+0DD9:  GOTO   5D5
+0DDA:  GOTO   5C6
+.................... {
+....................    fprintf(PC, "\r\n\r\n");
+0DDB:  MOVLW  A5
+0DDC:  MOVLB  03
+0DDD:  MOVWF  11
+0DDE:  MOVLW  03
+0DDF:  MOVWF  12
+0DE0:  MOVLP  00
+0DE1:  MOVLB  00
+0DE2:  CALL   405
+0DE3:  MOVLP  08
+....................    for (int8 i = 0; i < 3; i++)
+0DE4:  MOVLB  13
+0DE5:  CLRF   2D
+0DE6:  MOVF   2D,W
+0DE7:  SUBLW  02
+0DE8:  BTFSS  03.0
+0DE9:  GOTO   60A
+....................    {
+....................       for (int8 j = 0; j < 31; j++)
+0DEA:  CLRF   2E
+0DEB:  MOVF   2E,W
+0DEC:  SUBLW  1E
+0DED:  BTFSS  03.0
+0DEE:  GOTO   5F9
+....................          fprintf(PC, "_");
+0DEF:  MOVLW  5F
+0DF0:  MOVLB  14
+0DF1:  MOVWF  40
+0DF2:  MOVLP  00
+0DF3:  MOVLB  00
+0DF4:  CALL   3E0
+0DF5:  MOVLP  08
+0DF6:  MOVLB  13
+0DF7:  INCF   2E,F
+0DF8:  GOTO   5EB
+....................       fprintf(PC, "\r\n");
+0DF9:  MOVLW  0D
+0DFA:  MOVLB  14
+0DFB:  MOVWF  40
+0DFC:  MOVLP  00
+0DFD:  MOVLB  00
+0DFE:  CALL   3E0
+0DFF:  MOVLP  08
+0E00:  MOVLW  0A
+0E01:  MOVLB  14
+0E02:  MOVWF  40
+0E03:  MOVLP  00
+0E04:  MOVLB  00
+0E05:  CALL   3E0
+0E06:  MOVLP  08
+0E07:  MOVLB  13
+0E08:  INCF   2D,F
+0E09:  GOTO   5E6
+....................    }
+....................          
+....................    fprintf(PC, "___________Start main__________\r\n\r\n");
+0E0A:  MOVLW  A8
+0E0B:  MOVLB  03
+0E0C:  MOVWF  11
+0E0D:  MOVLW  03
+0E0E:  MOVWF  12
+0E0F:  MOVLP  00
+0E10:  MOVLB  00
+0E11:  CALL   405
+0E12:  MOVLP  08
+....................    
+....................    initialize();
+0E13:  MOVLP  00
+0E14:  GOTO   453
+0E15:  MOVLP  08
+....................    
+....................    int1 is_finished = FALSE;
+0E16:  MOVLB  13
+0E17:  BCF    2F.0
+.................... 
+....................    //Start loop
+....................    while(!is_finished)
+0E18:  BTFSC  2F.0
+0E19:  GOTO   661
+....................    {
+....................       
+....................       //receive anything signal
+....................       if(receive_signal_size > 0)
+0E1A:  MOVLB  00
+0E1B:  MOVF   53,F
+0E1C:  BTFSC  03.2
+0E1D:  GOTO   654
+....................       {
+....................          Command command = make_receive_command(receive_signal, receive_signal_size);
+0E1E:  MOVLW  20
+0E1F:  MOVLB  13
+0E20:  MOVWF  5A
+0E21:  MOVLW  13
+0E22:  MOVWF  59
+0E23:  MOVLB  00
+0E24:  MOVF   53,W
+0E25:  MOVLB  13
+0E26:  MOVWF  5B
+0E27:  MOVLP  00
+0E28:  MOVLB  00
+0E29:  GOTO   52B
+0E2A:  MOVLP  08
+0E2B:  MOVF   79,W
+0E2C:  MOVWF  7A
+0E2D:  MOVF   78,W
+0E2E:  MOVWF  04
+0E2F:  MOVF   7A,W
+0E30:  MOVWF  05
+0E31:  MOVLW  23
+0E32:  MOVWF  78
+0E33:  MOVLW  26
+0E34:  MOVWF  07
+0E35:  CLRF   06
+0E36:  MOVIW  [FSR0++],W
+0E37:  MOVWI  W,[FSR1++]
+0E38:  DECFSZ 78,F
+0E39:  GOTO   636
+....................          clear_receive_signal(receive_signal, &receive_signal_size);
+0E3A:  MOVLW  20
+0E3B:  MOVLB  13
+0E3C:  MOVWF  54
+0E3D:  MOVLW  13
+0E3E:  MOVWF  53
+0E3F:  MOVLW  20
+0E40:  MOVWF  56
+0E41:  MOVLW  33
+0E42:  MOVWF  55
+0E43:  MOVLP  00
+0E44:  MOVLB  00
+0E45:  GOTO   736
+0E46:  MOVLP  08
+....................             
+....................          if(command.is_exist)
+0E47:  MOVLB  13
+0E48:  BTFSS  52.0
+0E49:  GOTO   653
+....................             is_finished = execute_command(&command); 
+0E4A:  MOVLW  26
+0E4B:  MOVWF  54
+0E4C:  CLRF   53
+0E4D:  MOVLB  00
+0E4E:  GOTO   089
+0E4F:  MOVLB  13
+0E50:  BCF    2F.0
+0E51:  BTFSC  78.0
+0E52:  BSF    2F.0
+0E53:  MOVLB  00
+....................       }
+....................       
+....................       if(is_finished == TRUE)
+0E54:  MOVLB  13
+0E55:  BTFSC  2F.0
+....................          break;
+0E56:  GOTO   661
+....................          
+....................       delay_ms(400);
+0E57:  MOVLW  02
+0E58:  MOVWF  53
+0E59:  MOVLW  C8
+0E5A:  MOVWF  6D
+0E5B:  MOVLB  00
+0E5C:  CALL   073
+0E5D:  MOVLB  13
+0E5E:  DECFSZ 53,F
+0E5F:  GOTO   659
+0E60:  GOTO   618
+....................    
+....................    }
+....................    
+....................    fprintf(PC, "\r\n\r\n======\r\n\r\nFinished process.\r\nWait for BOSS PIC turn off me");
+0E61:  MOVLW  BA
+0E62:  MOVLB  03
+0E63:  MOVWF  11
+0E64:  MOVLW  03
+0E65:  MOVWF  12
+0E66:  MOVLP  00
+0E67:  MOVLB  00
+0E68:  CALL   405
+0E69:  MOVLP  08
+....................    
+....................    while (TRUE)
+....................    {
+....................       fprintf(PC, ".");
+0E6A:  MOVLW  2E
+0E6B:  MOVLB  14
+0E6C:  MOVWF  40
+0E6D:  MOVLP  00
+0E6E:  MOVLB  00
+0E6F:  CALL   3E0
+0E70:  MOVLP  08
+....................       delay_ms(1000);
+0E71:  MOVLW  04
+0E72:  MOVLB  13
+0E73:  MOVWF  53
+0E74:  MOVLW  FA
+0E75:  MOVWF  6D
+0E76:  MOVLB  00
+0E77:  CALL   073
+0E78:  MOVLB  13
+0E79:  DECFSZ 53,F
+0E7A:  GOTO   674
+0E7B:  MOVLB  00
+0E7C:  GOTO   66A
+....................    }
+....................    
+....................    fprintf(PC, "End main\r\n");
+0E7D:  MOVLW  DA
+0E7E:  MOVLB  03
+0E7F:  MOVWF  11
+0E80:  MOVLW  03
+0E81:  MOVWF  12
+0E82:  MOVLP  00
+0E83:  MOVLB  00
+0E84:  CALL   405
+0E85:  MOVLP  08
+.................... }
+0E86:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F82   HS NOWDT PUT NOMCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN
+   Word  2: 1EFF   NOWRT NOVCAP PLL_SW STVREN BORV19 NOLPBOR NODEBUG NOLVP
