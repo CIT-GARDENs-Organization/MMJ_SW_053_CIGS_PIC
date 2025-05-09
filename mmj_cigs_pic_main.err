@@ -1,0 +1,8 @@
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_pic_main on 09-5-25 at 19:55
+*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_mode.c" Line 56(10,11): Undefined identifier  -- whlie
+*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_mode.c" Line 75(7,15): Undefined identifier   pd_start
+*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_excute_mission.c" Line 106(12,24): Undefined identifier   CMD_ID_SWEEP
+*** Error 22 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_excute_mission.c" Line 108(15,16): Bad expression syntax
+*** Error 51 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_excute_mission.c" Line 111(7,14): A numeric expression must appear here
+*** Error 28 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_excute_mission.c" Line 114(103,104): Expecting an identifier
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_excute_mission.c" Line 115(1,2): Expecting a declaration

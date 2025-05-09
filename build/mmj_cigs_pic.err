@@ -1,12 +1,6 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\main\mmj_cigs_pic_main on 15-4-25 at 23:42
->>> Warning 225 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\include\mmj_cigs_pic_config.h" Line 51(13,20): Duplicate #define
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\include\mmj_cigs_pic_func.h" Line 23(25,36): Variable never used:   data_buffer
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\include\mmj_cigs_pic_func.h" Line 25(25,38): Variable never used:   measured_time
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\include\mmj_cigs_pic_func.h" Line 26(25,42): Variable never used:   measured_pd_start
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\include\mmj_cigs_pic_func.h" Line 27(25,40): Variable never used:   measured_pd_end
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\include\mmj_cigs_pic_func.h" Line 28(25,42): Variable never used:   measured_temp_top
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\include\mmj_cigs_pic_func.h" Line 29(25,42): Variable never used:   measured_temp_bot
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\MMJ_SW_053_CIGS_PIC\src\include\mmj_cigs_pic_func.h" Line 31(24,35): Variable never used:   packet_data
-      Memory usage:   ROM=23%      RAM=77% - 81%
-      0 Errors,  8 Warnings.
-Build Successful.
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main on 23-4-25 at 23:33
+>>> Warning 245 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication_driver.h" Line 4(61,104): File may have mis-matched #if/#endif
+>>> Warning 245 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\include\.\mmj_cigs_pic_main.h" Line 4(61,104): File may have mis-matched #if/#endif
+*** Error 14 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_main.c" Line 136(61,62): Missing #ENDIF
+      1 Errors,  2 Warnings.
+Build Failed.

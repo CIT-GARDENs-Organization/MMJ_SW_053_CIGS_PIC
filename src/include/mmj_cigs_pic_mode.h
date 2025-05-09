@@ -1,26 +1,79 @@
 #ifndef MMJ_CIGS_PIC_MODE_H
 #define MMJ_CIGS_PIC_MODE_H
 
-// _________ values _________
-#define EXECUTED_MISSION_SIZE 64
-volatile unsigned int8 executed_mission[EXECUTED_MISSION_SIZE] = {0x00};
-volatile int8 executed_mission_count = 0;
 
-#define PARAMETER_LENGTH 8
+// ___________MODE FUNCTIONS____________
+
+#Separate
+void mode_measure(unsigned int8 parameter[]);
+
+// Flash command 
+#Separate
+void mode_flash_erase_all();
+#Separate
+void mode_flash_erase_1sector();
+#Separate
+void mode_flash_copy_1sector();
+#Separate
+void mode_flash_write_1sector();
+#Separate
+void mode_flash_func2();
+#Separate
+void mode_flash_read();
+#Separate
+void mode_flash_read_address();
+
+// IV command
+#Separate
+void mode_iv_measure();
+#Separate
+void mode_iv_measure_voltage();
 
 
-// __________ functions ____________
 
-// fundamental fnction
-void execute_mission(unsigned int8 *content);
+// Development command
+#Separate
+void mode_dev_vol();
+#Separate
+void mode_dev_cur();
+#Separate
+void mode_dev_temp();   
+#Separate
+void mode_dev_pd();
+#Separate
+void mode_dev_cigs();
+#Separate
+void mode_dev_time();
+#Separate
+void mode_dev_sweep();
 
-// missions
-void example_00(unsigned int8 parameter[]);
-void example_01(unsigned int8 parameter[]);
+// ______________CMD ID________________
+#define ID_SWEEP 0x01
 
-// other tools
-void executed_mission_pop(void);
-void enqueue_smf_data(unsigned int32 src, unsigned int32 dest, unsigned int32 size);
-void update_time(unsigned int8 raw_time[]);
+// Flash command 
+#define ID_FLASH_ERASE_ALL 0xA0
+#define ID_FLASH_ERASE_1SECTOR 0xA1
+#define ID_FLASH_COPY_1SECTOR 0xA2
+#define ID_FLASH_WRITE_1SECTOR 0xA3
+#define ID_FLASH_FUNC2 0xA4
+#define ID_FLASH_READ 0xA5
+#define ID_FLASH_READ_ADDRESS 0xA6
 
-#endif  
+// IV command
+#define ID_IV_MEASURE 0xB0
+#define ID_IV_MEASURE_VOLTAGE 0xB1
+
+// Development command
+#define ID_DEV_VOL 0xC0
+#define ID_DEV_CUR 0xC1
+#define ID_DEV_TEMP 0xC1
+#define ID_DEV_PD 0xC2
+#define ID_DEV_CIGS 0xC3
+#define ID_DEV_TIME 0xC4
+#define ID_DEV_SWEEP 0xC5
+
+#include "../mmj_cigs_pic_mode.c"
+
+#endif // MMJ_CIGS_PIC_MODE_H
+
+//------------------End of File------------------

@@ -10,6 +10,8 @@
         "mmj_cigs_pic_func.h": "c",
         "mis_mcu_flash.h": "c",
         "mmj_define.h": "c",
-        "value.h": "c"
+        "value.h": "c",
+        "communication_driver.h": "c",
+        "mmj_cigs_pic_excute_mission.h": "c"
     }
 }

@@ -169,17 +169,17 @@ _bif void sleep(void);
 #define STACK_UNDERFLOW      0x7F        
 
 ////////////////////////////////////////////////////////////////// Timer 0
-// Timer 0 (AKA RTCC)Functions: SETUP_COUNTERS() or SETUP_TIMER_0(),
+// Timer 0 (AKA RTCC)Functions: SETUP_COUNTERS() or initialize_timer_0(),
 //                              SET_TIMER0() or SET_RTCC(),
 //                              GET_TIMER0() or GET_RTCC()
 // Timer 0 Prototypes:
-_bif void setup_timer_0(int8 mode);
+_bif void initialize_timer_0(int8 mode);
 _bif void set_timer0(int8 value);      
 _bif int8 get_timer0(void);            
 _bif void setup_counters(int8 mode, int8 prescaler);
 _bif void set_rtcc(int8 value);        
 _bif int8 get_rtcc(void);              
-// Constants used for SETUP_TIMER_0() are:
+// Constants used for initialize_timer_0() are:
 #define T0_INTERNAL   0   
 #define T0_EXT_L_TO_H 32
 #define T0_EXT_H_TO_L 48
@@ -248,12 +248,12 @@ _bif void restart_wdt(void);
 #define WDT_256S    0x112
 
 ////////////////////////////////////////////////////////////////// Timer 1
-// Timer 1 Functions: SETUP_TIMER_1, GET_TIMER1, SET_TIMER1
+// Timer 1 Functions: initialize_timer_1, GET_TIMER1, SET_TIMER1
 // Timer 1 Prototypes:
-_bif void setup_timer_1(int16 mode); 
+_bif void initialize_timer_1(int16 mode); 
 _bif int16 get_timer1(void);
 _bif void set_timer1(int16 value);
-// Constants used for SETUP_TIMER_1() are:
+// Constants used for initialize_timer_1() are:
 //      (or (via |) together constants from each group)
 #define T1_DISABLED         0
 #define T1_INTERNAL         0x07      
@@ -277,12 +277,12 @@ _bif void set_timer1(int16 value);
 #define T1_GATE_COMP2       0x8300       
 
 ////////////////////////////////////////////////////////////////// Timer 2
-// Timer 2 Functions: SETUP_TIMER_2, GET_TIMER2, SET_TIMER2
+// Timer 2 Functions: initialize_timer_2, GET_TIMER2, SET_TIMER2
 // Timer 2 Prototypes:
-_bif void setup_timer_2(int8 mode, int8 period, int8 postscale); 
+_bif void initialize_timer_2(int8 mode, int8 period, int8 postscale); 
 _bif int8 get_timer2(void);
 _bif void set_timer2(int8 value);
-// Constants used for SETUP_TIMER_2() are:
+// Constants used for initialize_timer_2() are:
 #define T2_DISABLED         0
 #define T2_DIV_BY_1         4
 #define T2_DIV_BY_4         5

@@ -19,9 +19,11 @@ volatile int8 executed_mission_count = 0;
 
 
 // _________ functions ____________
-#define DATA_BUFFER_SIZE 143
-volatile unsigned int16 data_buffer[DATA_BUFFER_SIZE*4] = {0x00};
-
+#define DATA_BUFFER_SIZE 150
+#define HEADER_SIZE 12
+volatile unsigned int16 data_buffer[DATA_BUFFER_SIZE*2] = {0x00};
+volatile unsigned int8 cigs_data[DATA_BUFFER_SIZE*2] = {0x00};
+volatile unsigned int8 cigs_data_header[HEADER_SIZE] = {0x00};
 volatile unsigned int32 measured_time = 0;
 volatile unsigned int16 measured_pd_start = 0;
 volatile unsigned int16 measured_pd_end = 0;
@@ -30,11 +32,14 @@ volatile unsigned int16 measured_temp_bot = 0;
 
 volatile unsigned int8 packet_data[64] = {0x00};
 
-
-void convert_cigs_data(unsigned int8);
-void convert_header_data(void); 
+#separate
 void sweep(unsigned int8 parameter[]);
 
+void convert_cigs_data(unsigned int8 measurement_step);
+void convert_header_data(void); 
 
+
+#include "../mmj_cigs_pic_func.c"
 
 #endif
+//------------------End of File------------------
