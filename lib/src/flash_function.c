@@ -20,7 +20,7 @@ void flash_init()
     for (unsigned int8 i = 0; i < 20; i++) {
         fprintf(PC, "%X ", chip_id[i]);                                         //print chip ID
     }
-
+    //    fprintf(PC, "\r\n");
     output_high(SPI0_CS);                                                 //take CS PIN higher back       
 
     fprintf(PC, "\tComplete\r\n");
