@@ -1,10 +1,10 @@
-004-005 @WRITE_PACKED_MEMORY.P1
+004-005 @READ_PROGRAM_MEMORY8.P1
 004-005 @WRITE_PROGRAM_MEMORY8.P2
-004-005 @READ_PACKED_MEMORY.P3
-004-005 @READ_PROGRAM_MEMORY8.P4
-004-005 @MEMSET.P5
-006-007 @READ_PACKED_MEMORY.P1
-006-007 @WRITE_PACKED_MEMORY.P2
+004-005 @MEMSET.P3
+004-005 @READ_PACKED_MEMORY.P4
+004-005 @WRITE_PACKED_MEMORY.P5
+006-007 @WRITE_PACKED_MEMORY.P1
+006-007 @READ_PACKED_MEMORY.P2
 020     @INTERRUPT_AREA
 021     @INTERRUPT_AREA
 022     @INTERRUPT_AREA
@@ -26,8 +26,8 @@
 077     @SCRATCH
 077     @MEMSET.P1
 078     @SCRATCH
-078     @MEMSET.P1
 078     _RETURN_
+078     @MEMSET.P1
 079     @SCRATCH
 07A     @SCRATCH
 07F     @INTERRUPT_AREA
@@ -41,15 +41,15 @@
 191-192 @READ_PROGRAM_MEMORY8.P2
 1FF     @INTERRUPT_AREA
 27F     @INTERRUPT_AREA
-291     CCP_1_LOW
 291     CCP_1
+291     CCP_1_LOW
 292     CCP_1_HIGH
-298     CCP_2_LOW
 298     CCP_2
+298     CCP_2_LOW
 299     CCP_2_HIGH
 2FF     @INTERRUPT_AREA
-311     CCP_3
 311     CCP_3_LOW
+311     CCP_3
 312     CCP_3_HIGH
 37F     @INTERRUPT_AREA
 3FF     @INTERRUPT_AREA
@@ -73,64 +73,58 @@
 7CB-7CE smf
 7CF-7D4 frame_ids
 7D5-7DD get_executed_mission.executed_mission
-7DE-7DF mode_test_current.current_value
 7DE     @SPI_XFER_2_8.P1
+7DE     @WRITEBITA.P2
 7DE-7DF mode_test_CIGS.cigs_value
-7DE-7DF mode_test_voltage.voltage_value
-7DE     @WRITEBITA.P1
-7DE-7DF mode_test_temp.temp_top_value
-7DE-7DF mode_measure_voltage.cigs_value
 7DE-7DF mode_test_PD.pd_value
+7DE-7DF mode_test_voltage.voltage_value
 7DE.0   MAIN.is_finished
-7DF-7EF,820-831 MAIN.command
+7DE-7DF mode_test_current.current_value
+7DE-7DF mode_measure_voltage.cigs_value
+7DE-7DF mode_test_temp.temp_top_value
 7DF     @WRITEBITA.P1
-7E0-7E1 mode_test_temp.temp_bot_value
+7DF-7EF,820-831 MAIN.command
 7E0-7E1 @WRITEBITA.P1
+7E0-7E1 mode_test_temp.temp_bot_value
 7FF     @INTERRUPT_AREA
 832     MAIN.i
 833-834 clear_receive_signal.receive_signal
 833-834 execute_command.command
-833-835 flash_init.chip_id
+833-846 flash_init.chip_id
 833     MAIN.@SCRATCH1
 835-836 handle_uplink_command.command
 835-836 handle_smf_available.command
 835-836 handle_status_check.command
 835-836 clear_receive_signal.receive_signal_size
-836     flash_init.i
 837-838 copy_data.smf_data
-837     flash_init.i
 837     handle_smf_available.@SCRATCH1
 838     transmit_command.frame_id
 838     clear_receive_signal.@SCRATCH1
 838     handle_uplink_command.@SCRATCH1
-838     flash_init.@SCRATCH1
-839-83A make_receive_command.receive_signal
 839-83A transmit_command.content
+839-83A make_receive_command.receive_signal
 839     clear_receive_signal.@SCRATCH2
 839     handle_uplink_command.@SCRATCH2
-839     flash_init.@SCRATCH2
 83A-83B execute_mission.content
-83A     @SPI_XFER_1_8.P1
 83B     transmit_command.size
 83B     make_receive_command.receive_signal_size
-83C-85E make_receive_command.command
-83C-84B transmit_command.data
 83C     execute_mission.command_id
 83C     dequeue_smf_data.current_head
+83C-84B transmit_command.data
+83C-85E make_receive_command.command
 83C     copy_data.@SCRATCH1
 83D-83E execute_mission.parameter
-83D     @delay_ms1.P1
 83D     dequeue_smf_data.@SCRATCH1
 83D     copy_data.@SCRATCH2
 83E     copy_data.@SCRATCH3
-83F-840 mode_measure.parameter
-83F     @PRINTF_D_839.P1
 83F     add_executed_mission.command_id
+83F     @PRINTF_D_839.P1
+83F-840 mode_measure.parameter
 83F     is_executed_mission.command_id
 83F     copy_data.@SCRATCH4
-840     @PRINTF_D_839.P1
 840-848 is_executed_mission.executed_mission
 840-848 add_executed_mission.executed_mission
+840     @PRINTF_D_839.P1
 841     mode_measure.sweep_step
 842     sweep.parameter
 843     sweep.measurement_step
@@ -141,18 +135,24 @@
 846     @PRINTF_U_839.P1
 846     sweep.@SCRATCH1
 846     @PRINTF_D_839.@SCRATCH3
+847     flash_init.i
 847     @PRINTF_U_839.P1
 847     convert_cigs_data.i
 847     sweep.@SCRATCH2
 847     @PRINTF_D_839.@SCRATCH4
+848     flash_init.i
 848     @DIV88.P1
 849     @DIV88.P1
 849     is_executed_mission.i
+84A     @delay_ms1.P1
 84A     @DIV88.@SCRATCH1
 84A     add_executed_mission.@SCRATCH1
+84A     flash_init.@SCRATCH1
 84B     add_executed_mission.@SCRATCH2
-84C     @MUL88.P1
+84B     flash_init.@SCRATCH2
 84C     transmit_command.payload_size
+84C     @SPI_XFER_1_8.P1
+84C     @MUL88.P2
 84C     convert_cigs_data.@SCRATCH1
 84D     transmit_command.data_size
 84D     @MUL88.P1
@@ -175,19 +175,19 @@
 863     make_receive_command.frame_id
 864     make_receive_command.content_size
 865     make_receive_command.receive_frame_size
-867-868 trim_receive_signal_header.receive_signal
-867     get_content_size.frame_id
 867-868 check_crc.frame
+867     get_content_size.frame_id
+867-868 trim_receive_signal_header.receive_signal
 867     make_receive_command.@SCRATCH1
-868     get_content_size.i
 868     check_device_id.device_id
+868     get_content_size.i
 868     make_receive_command.@SCRATCH2
-869     check_crc.receive_frame_size
 869     trim_receive_signal_header.receive_signal_size
+869     check_crc.receive_frame_size
 869     make_receive_command.@SCRATCH3
 869     get_content_size.@SCRATCH1
-86A     trim_receive_signal_header.i
 86A     check_crc.received_crc
+86A     trim_receive_signal_header.i
 86B     check_crc.collect_crc
 86B     trim_receive_signal_header.@SCRATCH1
 86C     @PRINTF_X_839.P1
@@ -203,8 +203,8 @@
 86F     @PSTRINGC7_839.@SCRATCH3
 86F     @PSTRINGCN7_839.@SCRATCH3
 87F     @INTERRUPT_AREA
-8A0     @PUTCHAR_2_.P1
 8A0     calc_crc8.crc
+8A0     @PUTCHAR_2_.P1
 8A1     calc_crc8.i
 8A2     calc_crc8.@SCRATCH1
 8A4     RDA_isr.@SCRATCH1
@@ -347,55 +347,53 @@ ROM Allocation:
 0004CD  @const1305.call
 0004D7  @const1306.call
 0004E3  @const1307.call
-00050B  @const1311.call
-000515  @const1313.call
-000519  @const1314.call
-00051C  @const1316.call
-000521  @const1319.call
-000528  @const1323.call
-000549  @const1324.call
-000560  @const1325.call
-000575  @const1327.call
-000584  @const1328.call
-000594  @const1330.call
-00059C  @const1331.call
-0005A6  @const1332.call
-0005AB  @const1335.call
-0005AE  @const1336.call
-0005B9  @const1338.call
-0005D9  @const1340.call
-0005DF  @PUTCHAR_2_
-000604  @PSTRINGC7_839
-000654  io_init
-00066C  adc_init
-000694  uart_init
-0006A8  timer_init
-0006C5  @SPI_XFER_1_8
-0006D2  @PRINTF_X_839
-0006F9  flash_init
-000775  @PSTRINGCN7_839
-0007CF  calc_crc8
-0007EF  transmit_ack
-0007FA  get_executed_mission
-000800  make_receive_command
-000861  trim_receive_signal_header
-0008B8  get_content_size
-000912  check_crc
-00099E  check_device_id
-000A33  @DIV88
-000A4A  @PRINTF_D_839
-000AB9  clear_receive_signal
-000AC9  @MEMSET
-000AD8  transmit_command
-000B19  transmit
-000B27  @PUTCHARI_BIU_1
-000B66  @MUL88
-000B8D  sweep
-000BAB  @PRINTF_U_839
-000CE3  convert_cigs_data
-000E32  mode_measure
-000E48  is_empty_smf_data
-000E53  @delay_ms1
+00050B  @const1309.call
+000515  @const1311.call
+00051E  @const1315.call
+000524  @const1319.call
+000545  @const1320.call
+00055C  @const1321.call
+000571  @const1323.call
+000584  @const1324.call
+000593  @const1326.call
+00059B  @const1327.call
+0005A5  @const1328.call
+0005AA  @const1331.call
+0005AD  @const1332.call
+0005B8  @const1334.call
+0005D8  @const1336.call
+0005DE  @PUTCHAR_2_
+000603  @PSTRINGC7_839
+000653  io_init
+00066B  adc_init
+000693  uart_init
+0006A7  timer_init
+0006C4  @delay_ms1
+0006DA  @SPI_XFER_1_8
+0006E7  @PRINTF_X_839
+00070E  flash_init
+00078D  @PSTRINGCN7_839
+0007E7  @DIV88
+0007F4  transmit_ack
+000800  calc_crc8
+000820  make_receive_command
+000881  trim_receive_signal_header
+0008DB  get_content_size
+000935  check_crc
+0009BE  check_device_id
+000A56  @PRINTF_D_839
+000AC9  clear_receive_signal
+000AD9  @MEMSET
+000AE8  transmit_command
+000B27  transmit
+000B35  @PUTCHARI_BIU_1
+000B7D  get_executed_mission
+000B82  @MUL88
+000BA9  sweep
+000BC7  @PRINTF_U_839
+000D03  convert_cigs_data
+000E52  mode_measure
+000E68  is_empty_smf_data
 001000  execute_command
 001020  handle_uplink_command
 001046  execute_mission
@@ -406,18 +404,18 @@ ROM Allocation:
 0011B3  handle_smf_available
 0011DC  copy_data
 0011E2  dequeue_smf_data
-001397  @cinit1
 001397  MAIN
+001397  @cinit1
 0013DE  @cinit2
 0135  NEXT
 
 Project Directory:
-    C:\Users\shoin\Chiba Institute of Technology\5ÔøΩÔøΩÔøΩ@ - ÔøΩhÔøΩLÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩg\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\
+    C:\Users\shoin\Chiba Institute of Technology\5çÜã@ - ÉhÉLÉÖÉÅÉìÉg\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\
 
 Project Files:
-    mmj_cigs_main.c                                     [01-6-25 16:53  CRC=5538E719]
-    src\include\mmj_cigs_main.h                         [31-5-25 18:47  CRC=C7BBE446]
-    src\include\mmj_cigs_config.h                       [01-6-25 15:46  CRC=BF7099B6]
+    mmj_cigs_main.c                                         [01-6-25 17:40  CRC=EA6C323A]
+    src\include\mmj_cigs_main.h                             [01-6-25 17:19  CRC=5F2F4DE8]
+    src\include\mmj_cigs_config.h                           [01-6-25 17:19  CRC=050B6569]
     lib\16F1789.h                                           [31-5-25 18:14  CRC=7EB717D9]
     lib\typedef_content.h                                   [31-5-25 18:14  CRC=7A1DD3DD]
     lib\value_status.h                                      [31-5-25 18:14  CRC=D872A938]
@@ -425,10 +423,10 @@ Project Files:
     lib\src\timer.c                                         [01-6-25 14:37  CRC=314FA792]
     lib\uart.h                                              [31-5-25 18:14  CRC=6B29CE19]
     lib\src\uart.c                                          [01-6-25 14:37  CRC=D4D9228C]
-    src\include\mmj_cigs_mode.h                         [31-5-25 18:14  CRC=3180C589]
-    src\mmj_cigs_mode.c                                 [01-6-25 14:36  CRC=B6921DFF]
-    src\include\mmj_cigs_func.h                         [31-5-25 18:14  CRC=66B89F7A]
-    src\mmj_cigs_func.c                                 [01-6-25 14:36  CRC=CDE6C746]
+    src\include\mmj_cigs_mode.h                             [01-6-25 17:19  CRC=02E0AF78]
+    src\mmj_cigs_mode.c                                     [01-6-25 17:19  CRC=1A452110]
+    src\include\mmj_cigs_func.h                             [01-6-25 17:19  CRC=6DA5B65E]
+    src\mmj_cigs_func.c                                     [01-6-25 17:19  CRC=676F85DE]
     lib\smf_queue.h                                         [31-5-25 18:14  CRC=C9E8B394]
     lib\src\smf_queue.c                                     [31-5-25 18:14  CRC=8D824372]
     lib\flash.h                                             [31-5-25 19:26  CRC=D7AF6975]
@@ -442,20 +440,17 @@ Project Files:
     lib\src\mission_tools.c                                 [31-5-25 18:14  CRC=70766A14]
     lib\data_copy.h                                         [31-5-25 18:14  CRC=D872A938]
     lib\src\data_copy.c                                     [31-5-25 18:14  CRC=C350962C]
-    lib\smf_queue.h                                         [31-5-25 18:14  CRC=C9E8B394]
-    lib\flash.h                                             [31-5-25 19:26  CRC=D7AF6975]
-    src\include\mmj_cigs_excute_mission.h               [31-5-25 18:14  CRC=40CB9E63]
-    src\mmj_cigs_excute_mission.c                       [31-5-25 18:14  CRC=2DFB26B2]
-    src\include\mmj_cigs_mode.h                         [31-5-25 18:14  CRC=3180C589]
-    lib\flash_function.h                                    [01-6-25 16:48  CRC=6F516549]
-    lib\src\flash_function.c                                [01-6-25 16:58  CRC=89FC6169]
+    src\include\mmj_cigs_excute_mission.h                   [01-6-25 17:19  CRC=817D4F65]
+    src\mmj_cigs_excute_mission.c                           [01-6-25 17:19  CRC=068384A9]
+    lib\flash_function.h                                    [01-6-25 17:36  CRC=D872A938]
+    lib\src\flash_function.c                                [01-6-25 17:42  CRC=4832510C]
 
-Source signature=7FF8C265
+Source signature=F37154F3
 Program memory checksum=0000
-Hex file CRC=5540
+Hex file CRC=7983
 
 Units:
-    C:\Users\shoin\Chiba Institute of Technology\5ÔøΩÔøΩÔøΩ@ - ÔøΩhÔøΩLÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩg\CIGS\02_Software\mmj_cigs53_CIGS_PIC\mmj_cigs_pic_main (main)
+    C:\Users\shoin\Chiba Institute of Technology\5çÜã@ - ÉhÉLÉÖÉÅÉìÉg\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main (main)
 
 Compiler Settings:
     Processor:      PIC16F1789
@@ -469,7 +464,7 @@ Compiler Settings:
 
 Output Files:
     XREF file:   build\mmj_cigs_main.xsym
-    Errors:      build\mmj_cigs_main.err
+    Errors:      build\mmj_cigs_pic_main.err
     Ext Symbols: build\mmj_cigs_main.esym
     INHX8:       build\mmj_cigs_main.hex
     Symbols:     build\mmj_cigs_main.sym

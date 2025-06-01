@@ -1,4 +1,4 @@
-#include "include/mmj_cigs_pic_func.h"
+#include "include/mmj_cigs_func.h"
 #include "./lib/smf_queue.h"
 #include "./lib/flash.h"
 #include "./lib/mission_tools.h"
@@ -10,7 +10,7 @@ void mode_measure(unsigned int8 parameter[])
    fprintf(PC, "Start MODE MEASURE\r\n");
    unsigned int8 sweep_step = parameter[0]; // Get the measurement step from the parameter array
    
-   initialize_sweep();
+   //adc_init();
    sweep(sweep_step);
    //copy_data();
 

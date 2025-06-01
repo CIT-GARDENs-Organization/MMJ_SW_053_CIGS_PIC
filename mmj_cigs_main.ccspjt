@@ -1,0 +1,14 @@
+[PROJECT]
+Target=build\mmj_cigs_main.hex
+Processor_Text=PIC16F1789
+CCSVersion=5.104
+Compiler=PCM
+[Target Data]
+FileList=mmj_cigs_main.c
+[build\mmj_cigs_main.c]
+Type=4
+[mru-list]
+1=build\mmj_cigs_main.c
+[Units]
+Count=1
+1=mmj_cigs_main (main)

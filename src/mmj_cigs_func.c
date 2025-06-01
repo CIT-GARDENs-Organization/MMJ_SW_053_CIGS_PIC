@@ -1,15 +1,18 @@
-#include "include/mmj_cigs_pic_config.h"
-//#include "include/mmj_cigs_pic_func.h"
+#include "include/mmj_cigs_config.h"
+//#include "include/mmj_cigs_func.h"
 
-void initialize_pic()
+void io_init()
 {
+    fprintf(PC, "IO Initialize\r\n");
     output_low(CIGS_CONNECT);
     output_low(EN_NPWR);
+    fprintf(PC, "\tComplete\r\n");
 }
 
-void initialize_sweep()
+void adc_init()
 {
-   //setup ADC
+   fprintf(PC, "ADC Initialize\r\n");
+    //setup ADC
    setup_oscillator(OSC_16MHZ);   //oscillator speed (crystal)
    setup_adc_ports(CIGS_VOLT | CIGS_CURR | TEMP_BOT | TEMP_TOP | PD , VSS_VDD);
    setup_adc(ADC_CLOCK_DIV_64);
@@ -17,7 +20,7 @@ void initialize_sweep()
    //setup DAC
    setup_dac(DAC_OUTPUT1 | DAC_VSS_VDD);                                        //DAC output at pin DAC output1 from 0-VDD volts  
    dac_write(50);                                                               
-   fprintf(PC, "\Sweep initialize complete\r\n");
+   fprintf(PC, "\tComplete\r\n");
 }
 
 #Separate

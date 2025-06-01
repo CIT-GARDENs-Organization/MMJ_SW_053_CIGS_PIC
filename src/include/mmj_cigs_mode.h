@@ -1,5 +1,5 @@
-#ifndef MMJ_CIGS_PIC_MODE_H
-#define MMJ_CIGS_PIC_MODE_H
+#ifndef MMJ_CIGS_MODE_H
+#define MMJ_CIGS_MODE_H
 
 
 // ___________MODE FUNCTIONS____________
@@ -72,8 +72,8 @@ void mode_dev_sweep();
 #define ID_DEV_TIME 0xC4
 #define ID_DEV_SWEEP 0xC5
 
-#include "../mmj_cigs_pic_mode.c"
+#include "../mmj_cigs_mode.c"
 
-#endif // MMJ_CIGS_PIC_MODE_H
+#endif // MMJ_CIGS_MODE_H
 
 //------------------End of File------------------

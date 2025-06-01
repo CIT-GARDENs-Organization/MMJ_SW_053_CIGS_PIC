@@ -1,19 +1,23 @@
-#include "include/mmj_cigs_pic_main.h"
+#include "include/mmj_cigs_main.h"
 
 void main()
 { 
    fprintf(PC,"\r\n============================================================\r\n");
-   fprintf(PC,"This is MOMIJI CIGS PIC BBM for MIS7_BBM1. Last updated on 2025/04/25, by Inoue.\r\n");  
-   fprintf(PC,"See the changelog for the changes in this release\n\r");
+   fprintf(PC,"This is MOMIJI CIGS PIC BBM for MIS7_BBM1.\r\n");
+   fprintf(PC,"Last updated on 2025/04/25, by Inoue.\r\n\r\n");  
 
-   initialize_pic();
-   initialize_uart();
-   initialize_timer();
-   //initialize_flash();
+   
+   io_init();
+   adc_init();
+   uart_init();
+   timer_init();
+   flash_init();
 
 
    int1 is_finished = FALSE;
-   fprintf(PC,"CIGS PIC Start Operation\r\n\r\n");
+   fprintf(PC,"____CIGS PIC Start Operation_____\r\n\r\n");
+   fprintf(PC,"waiting for BOSS PIC command");
+   
    //Start loop
    while(!is_finished)
    {
@@ -50,6 +54,7 @@ void main()
          break;
          
       delay_ms(400);
+      fprintf(PC,".");
    }
    
    

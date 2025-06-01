@@ -1,4 +1,6 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_pic_main on 09-5-25 at 20:00
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\mmj_cigs_pic_func.c" Line 46(36,37): Undefined identifier  -- timer0_get_time
-      1 Errors,  0 Warnings.
-Build Failed.
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 01-6-25 at 17:42
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\include\mmj_cigs_func.h" Line 33(24,35): Variable never used:   packet_data
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\flash.h" Line 47(7,10): Variable never used:   smf
+      Memory usage:   ROM=31%      RAM=64% - 67%
+      0 Errors,  2 Warnings.
+Build Successful.

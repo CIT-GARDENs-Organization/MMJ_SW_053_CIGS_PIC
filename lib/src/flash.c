@@ -1,3 +1,5 @@
+#include "../flash.h"
+
 ///////////////////////////////////////////////////////////////////////////////
 //////////////////////////GDNS_226_FlashOperation.c////////////////////////////
 //////////////////////////////////ver 2.2//////////////////////////////////////
@@ -37,12 +39,21 @@ void spi_xfer_select_stream(Flash flash_stream, int8 *write_data, unsigned int16
 void spi_xfer_and_read_select_stream(Flash flash_stream, int8 *write_data, unsigned int16 write_amount, int8 *read_data, unsigned int32 read_amount){
    switch(flash_stream.spi_stream_id){
       case SPI_0:
-      for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
-         spi_xfer(FLASH_STREAM0, write_data[spi_xfer_num]);
-      for(unsigned int32 spi_rcv_num = 0;spi_rcv_num < read_amount;spi_rcv_num++)
-         read_data[spi_rcv_num] = spi_xfer(FLASH_STREAM0);
+         fprintf(PC, "\t->");
+         for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
+         {
+            spi_xfer(FLASH_STREAM0, write_data[spi_xfer_num]);
+            fprintf(PC, "%X ", write_data[spi_xfer_num]);
+         }   
+         fprintf(PC, "\r\n\t<-");
+         for(unsigned int32 spi_rcv_num = 0;spi_rcv_num < read_amount;spi_rcv_num++)
+         {
+            read_data[spi_rcv_num] = spi_xfer(FLASH_STREAM0);
+            fprintf(PC, "%X ", read_data[spi_rcv_num]);
+         }
+         fprintf(PC, "\r\n");
          break;
-         
+            
       case SPI_1:
          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
             spi_xfer(FLASH_STREAM1, write_data[spi_xfer_num]);
@@ -123,7 +134,7 @@ int8 status_register(Flash flash_stream){
    output_high(flash_stream.cs_pin);                                             //take CS PIN higher back
    #ifdef DEBUG
       if((status_reg & 0x01) == true)                                          //masking status bit   
-         fprintf(DEBUG_PORT,"flash busy\n\r");
+         fprintf(DEBUG_PORT,"flash busy\r\n");
    #endif
    return status_reg;  
 }
@@ -137,7 +148,7 @@ int8 read_id(Flash flash_stream){
    spi_xfer_and_read_select_stream(flash_stream, &flash_cmd, 1, chip_id, 20);
    output_high(flash_stream.cs_pin);
    #ifdef DEBUG
-      fprintf(DEBUG_PORT,"Read ID:");
+      fprintf(DEBUG_PORT,"\tRead ID:");
       for(int8 print_counter = 0;print_counter < 20;print_counter++)
          fprintf(DEBUG_PORT,"%x ",chip_id[print_counter]);
       fprintf(DEBUG_PORT,"\r\n");
@@ -145,13 +156,13 @@ int8 read_id(Flash flash_stream){
    //chip id check
    if(chip_id[0] == 0x20){  
       #ifdef DEBUG
-         fprintf(DEBUG_PORT,"flash connect OK\r\n");
+         fprintf(DEBUG_PORT,"\tflash connect OK\r\n");
       #endif
       return true;
    }
    else{
       #ifdef DEBUG
-         fprintf(DEBUG_PORT,"flash not connect\r\n");
+         fprintf(DEBUG_PORT,"\tflash not connect\r\n");
       #endif
       return false;
    }

@@ -1,5 +1,5 @@
-#ifndef MMJ_CIGS_PIC_FUNC_H
-#define MMJ_CIGS_PIC_FUNC_H
+#ifndef MMJ_CIGS_FUNC_H
+#define MMJ_CIGS_FUNC_H
 
 /*
 // _________ values _________
@@ -39,7 +39,7 @@ void convert_cigs_data(unsigned int8 measurement_step);
 void convert_header_data(void); 
 
 
-#include "../mmj_cigs_pic_func.c"
+#include "../mmj_cigs_func.c"
 
 #endif
 //------------------End of File------------------

@@ -17,13 +17,14 @@ static void TIMER0_isr(void)
    }
 }
 
-void initialize_timer()
+void timer_init()
 {
+   fprintf(PC, "Timer Initialize\r\n");
    clear_interrupt(INT_TIMER1);
    setup_timer_1(T1_EXTERNAL | T1_DIV_BY_1); //Config TMR1, external clock, prescaler=1
    set_timer1(0x8000); //timer1 for 1 second interruption
    //T1OSCEN = 1; //Enable TMR1 Oscillator
    enable_interrupts(INT_TIMER1);
    enable_interrupts(GLOBAL);
-   fprintf(PC, "\tTimer initialize complete\r\n");
+   fprintf(PC, "\tComplete\r\n");
 }

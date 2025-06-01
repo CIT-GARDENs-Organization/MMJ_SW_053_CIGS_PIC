@@ -1,5 +1,5 @@
-#ifndef MMJ_CIGS_PIC_CONFIG_H
-#define MMJ_CIGS_PIC_CONFIG_H
+#ifndef MMJ_CIGS_CONFIG_H
+#define MMJ_CIGS_CONFIG_H
 
 #include <16F1789.h>
 
@@ -17,8 +17,10 @@
 #use rs232(baud=9600,parity=N,xmit=PIN_B4,bits=8,stream=PC,FORCE_SW)
 
 
-#define SPI0_CS  PIN_C1
-#use spi(MASTER, SPI1, BAUD=400000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
+#define SPI0_CS  PIN_D1
+#use spi(MASTER, CLK=PIN_C3, DI=PIN_C4, DO=PIN_C5, BAUD=400000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
+// MISO PIN_C5, MOSI PIN_C4, SCK PIN_C3
+
 
 #define SPI1_CS PIN_C2
 #use spi(MASTER, SPI1, BAUD=400000, MODE=0, BITS=8, STREAM=SMF_STREAM)
@@ -41,6 +43,6 @@
 #define EN_NPWR PIN_C3  //Negative Power
 
 
-#endif // MMJ_CIGS_PIC_CONFIG_H
+#endif // MMJ_CIGS_CONFIG_H
 
 //------------------End of File------------------

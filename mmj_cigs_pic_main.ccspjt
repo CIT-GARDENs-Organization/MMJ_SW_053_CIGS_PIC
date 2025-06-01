@@ -1,20 +1,20 @@
 [PROJECT]
-Target=build\mmj_cigs_pic_main.hex
+Target=mmj_cigs_pic_main.hex
 Processor_Text=PIC16F1789
 CCSVersion=5.104
 Compiler=PCM
 Development_Mode=
 ToolSuite=CCS
 [Target Data]
-FileList=mmj_cigs_pic_main.c
+FileList=mmj_cigs_main.c
 BuildTool=C-COMPILER
 OptionString=+FM
 AdditionalOptionString=
 BuildRequired=1
-[..\..\..\..\..\..\Downloads\MIS_MCU_CCSC-issue-1 (2)\MIS_MCU_CCSC-issue-1\build\mmj_cigs_pic_main.c]
+[..\..\..\..\..\..\Downloads\MIS_MCU_CCSC-issue-1 (2)\MIS_MCU_CCSC-issue-1\build\mmj_cigs_main.c]
 Type=4
 [mru-list]
-1=build\mmj_cigs_pic_main.c
+1=mmj_cigs_main.c
 
 [fileformats]
 forcecoff=0
@@ -32,37 +32,41 @@ stayupne=3
 stayupoe=0
 
 [Opened Files]
-1=mmj_cigs_pic_main.c
-t1=30
-Count=15
-2=src\mmj_cigs_pic_mode.c
-t2=65
-3=src\include\mmj_cigs_pic_mode.h
+1=mmj_cigs_main.c
+t1=4
+Count=4
+2=lib\src\flash_function.c
+t2=4
+3=mmj_cigs_pic_main.c
 t3=1
-4=src\include\mmj_cigs_pic_func.h
-t4=30
+4=src\include\mmj_cigs_pic_main.h
+t4=1
 5=src\mmj_cigs_pic_func.c
-t5=16
+t5=2
 6=lib\communication_driver.h
 t6=1
 7=lib\src\data_copy.c
 t7=1
 8=lib\src\communication_driver.c
-t8=12
+t8=1
 9=lib\src\communication.c
 t9=1
 10=src\include\mmj_cigs_pic_config.h
-t10=1
+t10=3
 11=lib\data_copy.h
 t11=1
 12=src\include\mmj_cigs_pic_main.h
-t12=19
+t12=1
 13=lib\src\timer.c
 t13=1
 14=src\mmj_cigs_pic_excute_mission.c
 t14=1
-15=build\mmj_cigs_pic_main.tre
-t15=-1
+15=lib\src\flash_function.c
+t15=1
+16=build\mmj_cigs_pic_main.tre
+t16=-1
+17=build\mmj_cigs_main.tre
+t17=-1
 
 [Directories]
 Include=src\;lib\;lib\src\;src\include\
@@ -75,9 +79,9 @@ enabled=0
 chip=1
 D1=
 V1=
-buildcount=156
+buildcount=218
 
-[src\mmj_cigs_pic_main.c]
+[src\mmj_cigs_main.c]
 Type=4
 Path=
 FileList=
@@ -90,16 +94,16 @@ AdditionalOptionString=
 
 [CompilerVersion]
 Fixed=
-[src\build\mmj_cigs_pic_main.c]
+[src\build\mmj_cigs_main.c]
 Type=4
-[build\mmj_cigs_pic_main.c]
+[build\mmj_cigs_main.c]
 Type=4
 
 [ExtraIncludes]
-Count=1
-1=mmj_cigs_pic_main=c:\users\shoin\chiba institute of technology\5çÜã@ - ÉhÉlÉÖÉÅÉìÉg\cigs\02_software\pic\mmj_sw_053_cigs_pic\src\mmj_cigs_pic_main.c
+Count=0
+1=mmj_cigs_main=c:\users\shoin\chiba institute of technology\5ÔøΩÔøΩÔøΩ@ - ÔøΩhÔøΩlÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩg\cigs\02_software\pic\mmj_cigsigs_pic\src\mmj_cigs_pic_main.c
 
-[mmj_cigs_pic_main.c]
+[mmj_cigs_main.c]
 Type=4
 Path=
 FileList=
@@ -108,4 +112,13 @@ OptionString=
 AdditionalOptionString=
 [Units]
 Count=1
-1=mmj_cigs_pic_main (main)
+1=mmj_cigs_main
+Link=0
+
+[mmj_cigs_pic_main.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=

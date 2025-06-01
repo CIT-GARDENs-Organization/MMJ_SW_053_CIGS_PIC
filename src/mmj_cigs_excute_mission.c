@@ -1,4 +1,4 @@
-#include "mmj_cigs_pic_mode.h"
+#include "mmj_cigs_mode.h"
 
 #separate
 int1 execute_command(Command *command)

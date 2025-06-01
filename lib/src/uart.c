@@ -6,11 +6,12 @@ static void RDA_isr(void)
          boss_receive_buffer[boss_receive_buffer_size++ % RECEIVE_BUFFER_MAX] = fgetc(BOSS);
 }
 
-void initialize_uart()
+void uart_init()
 {
+   fprintf(PC, "UART Initialize\r\n");
    enable_interrupts(INT_RDA);
    enable_interrupts(global);
-   fprintf(PC, "\tUART initialize complete\r\n");
+   fprintf(PC, "\tComplete\r\n");
 }
 
 void clear_receive_signal(unsigned int8 receive_signal[], int8 *receive_signal_size)
