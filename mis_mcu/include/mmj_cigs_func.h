@@ -30,6 +30,9 @@ volatile unsigned int16 measured_pd_end = 0;
 volatile unsigned int16 measured_temp_top = 0;
 volatile unsigned int16 measured_temp_bot = 0;
 
+unsigned int32 current;
+
+
 volatile unsigned int8 packet_data[64] = {0x00};
 
 #separate

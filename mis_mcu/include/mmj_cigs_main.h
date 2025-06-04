@@ -26,7 +26,7 @@
 
 #include "mmj_cigs_excute_mission.h"
 
-#include "./lib/flash_function.h"
+#include "mmj_cigs_flash.h"
 
 #endif // MMJ_CIGS_MAIN_H
 //------------------End of File------------------

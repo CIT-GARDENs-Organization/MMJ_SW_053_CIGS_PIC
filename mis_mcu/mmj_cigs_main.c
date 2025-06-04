@@ -2,7 +2,7 @@
 
 void main()
 { 
-   fprintf(PC,"\r\n============================================================\r\n");
+   fprintf(PC,"\r\n\r\n============================================================\r\n");
    fprintf(PC,"This is MOMIJI CIGS PIC BBM for MIS7_BBM1.\r\n");
    fprintf(PC,"Last updated on 2025/04/25, by Inoue.\r\n\r\n");  
 
@@ -11,7 +11,7 @@ void main()
    adc_init();
    uart_init();
    timer_init();
-   flash_init();
+   misf_init();
 
 
    int1 is_finished = FALSE;

@@ -1,5 +1,6 @@
 #include "include/mmj_cigs_config.h"
 //#include "include/mmj_cigs_func.h"
+#include "include/mmj_cigs_piclog.h"
 
 void io_init()
 {
@@ -59,9 +60,21 @@ void sweep(unsigned int8 parameter)
         set_adc_channel(CIGS_VOLT);       
         delay_us(10); // wait for the ADC to stabilize
         data_buffer[count*2] = read_adc(ADC_START_AND_READ);  // read voltage at adc pin
+        
         set_adc_channel(CIGS_CURR);
+        current = 0; // reset current value
+        for(int k=0; k<10; k++)
+        {
+                                            //  routing nth channel to adc//verYOMOGI 20220214update,byUCHIDA
+            delay_us(10);
+            current = current + read_adc(ADC_START_AND_READ);
+        }    
+        
+        current = current / 10; // average the current value
+
         delay_us(10); // wait for the ADC to stabilize
-        data_buffer[count*2+1] = read_adc(ADC_START_AND_READ); // read voltage at adc pin
+        data_buffer[count*2+1] = current; // store the current value in the buffer
+        //data_buffer[count*2+1] = read_adc(ADC_START_AND_READ); // read voltage at adc pin
     }
 
     fprintf(PC, "END SWEEP\r\n");

@@ -13,6 +13,7 @@
         "value.h": "c",
         "communication_driver.h": "c",
         "mmj_cigs_excute_mission.h": "c",
-        "flash_function.c": "cpp"
+        "flash_function.c": "cpp",
+        "mmj_cigs_flash.h": "c"
     }
 }
