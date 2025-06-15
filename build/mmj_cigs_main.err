@@ -1,6 +1,11 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 04-6-25 at 17:34
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\include\mmj_cigs_func.h" Line 36(24,35): Variable never used:   packet_data
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\flash.h" Line 47(7,10): Variable never used:   smf
-      Memory usage:   ROM=34%      RAM=64% - 68%
-      0 Errors,  2 Warnings.
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 15-6-25 at 18:32
+>>> Warning 245 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main.c" Line 65(1,2): File may have mis-matched #if/#endif
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_func.h" Line 36(24,35): Variable never used:   packet_data
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\src\ad7490.c" Line 5(22,36): Variable never used:   adf7490_stream
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_excute_mission.h" Line 20(15,27): Variable never used:   duration_sec
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\src\mmj_cigs_excute_mission.c" Line 14(19,28): Variable never used:   parameter
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_flash.h" Line 22(15,37): Variable never used:   data_size_loop_counter
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_flash.h" Line 23(16,33): Variable never used:   data_size_counter
+      Memory usage:   ROM=77%      RAM=62% - 73%
+      0 Errors,  7 Warnings.
 Build Successful.

@@ -1,4 +1,24 @@
-#include "../mt25q.h"
+///////////////////////////////////////////////////////////////////////////////
+//////////////////////////GDNS_226_FlashOperation.c////////////////////////////
+//////////////////////////////////ver 2.2//////////////////////////////////////
+/////////////////////////////last editor:T Kawai///////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////redefinition of spi communication///////////////////////
+#include "../flash.h"
+
+#define CMD_READ_ID                     0x9F
+#define CMD_READ_STATUS_REGISTER        0x05
+#define CMD_READ                        0x03//for MT25QL128ABA
+#define CMD_4BYTE_READ                  0x13//for MT25QL01GBBB
+#define CMD_WRITE_ENABLE                0x06
+#define CMD_PAGE_PROGRAM                0x02//for MT25QL128ABA
+#define CMD_4BYTE_PAGE_PROGRAM          0x12//for MT25QL01GBBB
+#define CMD_SUBSECTOR_4KB_ERASE         0x20//for MT25QL128ABA
+#define CMD_4BYTE_SUBSECTOR_4KB_ERASE   0x21//for MT25QL01GBBB
+#define CMD_SUBSECTOR_32KB_ERASE        0x52//for MT25QL128ABA
+#define CMD_4BYTE_SUBSECTOR_32KB_ERASE  0x5C//for MT25QL01GBBB
+#define CMD_SECTOR_ERASE                0xD8//for MT25QL128ABA
+#define CMD_4BYTE_SECTOR_ERASE          0xDC//for MT25QL01GBBB
 
 //send multi bytes
 void spi_xfer_select_stream(Flash flash_stream, int8 *write_data, unsigned int16 write_amount){
@@ -11,6 +31,16 @@ void spi_xfer_select_stream(Flash flash_stream, int8 *write_data, unsigned int16
       case SPI_1:
          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
             spi_xfer(FLASH_STREAM1,write_data[spi_xfer_num]);
+         break;
+   
+      case SPI_2:
+         for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
+            spi_xfer(FLASH_STREAM2,write_data[spi_xfer_num]);
+         break;
+   
+      case SPI_3:
+         for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
+            spi_xfer(FLASH_STREAM3,write_data[spi_xfer_num]);
          break;
          
       default:
@@ -36,6 +66,19 @@ void spi_xfer_and_read_select_stream(Flash flash_stream, int8 *write_data, unsig
             read_data[spi_rcv_num] = spi_xfer(FLASH_STREAM1);
          break;
    
+      case SPI_2:
+         for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
+            spi_xfer(FLASH_STREAM2, write_data[spi_xfer_num]);
+         for(unsigned int32 spi_rcv_num = 0;spi_rcv_num < read_amount;spi_rcv_num++)
+            read_data[spi_rcv_num] = spi_xfer(FLASH_STREAM2);
+         break;
+   
+      case SPI_3:
+         for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
+            spi_xfer(FLASH_STREAM3, write_data[spi_xfer_num]);
+         for(unsigned int32 spi_rcv_num = 0;spi_rcv_num < read_amount;spi_rcv_num++)
+            read_data[spi_rcv_num] = spi_xfer(FLASH_STREAM3);
+         break;
          
       default:
          break;
@@ -59,6 +102,20 @@ void spi_xfer_two_datas_select_stream(Flash flash_stream, int8 *cmd_data, unsign
          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
             spi_xfer(FLASH_STREAM1, write_data[spi_xfer_num]);
          break;
+   
+      case SPI_2:
+         for(unsigned int8 spi_xfer_num = 0;spi_xfer_num < cmd_amount;spi_xfer_num++)
+            spi_xfer(FLASH_STREAM2, cmd_data[spi_xfer_num]);
+         for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
+            spi_xfer(FLASH_STREAM2, write_data[spi_xfer_num]);
+         break;
+   
+      case SPI_3:
+         for(unsigned int8 spi_xfer_num = 0;spi_xfer_num < cmd_amount;spi_xfer_num++)
+            spi_xfer(FLASH_STREAM3, cmd_data[spi_xfer_num]);
+         for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
+            spi_xfer(FLASH_STREAM3, write_data[spi_xfer_num]);
+         break;
          
       default:
          break;
@@ -73,59 +130,58 @@ void spi_xfer_two_datas_select_stream(Flash flash_stream, int8 *cmd_data, unsign
 void flash_setting(Flash flash_stream){
    output_high(flash_stream.cs_pin);
 }
-#Separate 
+
 int8 status_register(Flash flash_stream){
    int8 flash_cmd = CMD_READ_STATUS_REGISTER;
    int8 status_reg;
    output_low(flash_stream.cs_pin);                                              //lower the CS PIN
    spi_xfer_and_read_select_stream(flash_stream, &flash_cmd, 1, &status_reg, 1);
    output_high(flash_stream.cs_pin);                                             //take CS PIN higher back
-   #ifdef MT25Q_DEBUG
+   #ifdef DEBUG
       if((status_reg & 0x01) == true)                                          //masking status bit   
-         fprintf(PC,"flash busy\n\r");
+         fprintf(DEBUG_PORT,"flash busy\n\r");
    #endif
    return status_reg;  
 }
 
 //
 //->success:True,fail:false
-#Separate 
 int8 read_id(Flash flash_stream){
    int8 flash_cmd = CMD_READ_ID;
    int8 chip_id[20];
    output_low(flash_stream.cs_pin);
    spi_xfer_and_read_select_stream(flash_stream, &flash_cmd, 1, chip_id, 20);
    output_high(flash_stream.cs_pin);
-   #ifdef MT25Q_DEBUG
-      fprintf(PC,"Read ID:");
+   #ifdef DEBUG
+      fprintf(DEBUG_PORT,"Read ID:");
       for(int8 print_counter = 0;print_counter < 20;print_counter++)
-         fprintf(PC,"%x ",chip_id[print_counter]);
-      fprintf(PC,"\r\n");
+         fprintf(DEBUG_PORT,"%x ",chip_id[print_counter]);
+      fprintf(DEBUG_PORT,"\r\n");
    #endif
    //chip id check
    if(chip_id[0] == 0x20){  
-      #ifdef MT25Q_DEBUG
-         fprintf(PC,"flash connect OK\r\n");
+      #ifdef DEBUG
+         fprintf(DEBUG_PORT,"flash connect OK\r\n");
       #endif
       return true;
    }
    else{
-      #ifdef MT25Q_DEBUG
-         fprintf(PC,"flash not connect\r\n");
+      #ifdef DEBUG
+         fprintf(DEBUG_PORT,"flash not connect\r\n");
       #endif
       return false;
    }
 }
-#Separate 
+
 void sector_erase(Flash flash_stream, unsigned int32 sector_address){
-//!   #ifdef MT25Q_DEBUG
-//!      fprintf(PC,"Sector Erase\r\n");
+//!   #ifdef DEBUG
+//!      fprintf(DEBUG_PORT,"Sector Erase\r\n");
 //!   #endif
    if(flash_stream.flash_model == MT25QL128ABA){
       int8 write_enable_cmd = CMD_WRITE_ENABLE;
       unsigned int8 flash_cmd[4];
-//!      #ifdef MT25Q_DEBUG
-//!         fprintf(PC,"FLASH MODEL:MT25QL128ABA\r\n");
+//!      #ifdef DEBUG
+//!         fprintf(DEBUG_PORT,"FLASH MODEL:MT25QL128ABA\r\n");
 //!      #endif
       flash_cmd[0] = CMD_SECTOR_ERASE;
       flash_cmd[1] = (unsigned int8)((sector_address>>16) & 0xff);   // 0x 00 _ _ 00 00
@@ -147,8 +203,8 @@ void sector_erase(Flash flash_stream, unsigned int32 sector_address){
    else if(flash_stream.flash_model == MT25QL01GBBB){
       int8 write_enable_cmd = CMD_WRITE_ENABLE;
       unsigned int8 flash_cmd[5];
-//!      #ifdef MT25Q_DEBUG
-//!         fprintf(PC,"FLASH MODEL:MT25QL01GBBB\r\n");
+//!      #ifdef DEBUG
+//!         fprintf(DEBUG_PORT,"FLASH MODEL:MT25QL01GBBB\r\n");
 //!      #endif
       flash_cmd[0] = CMD_4BYTE_SECTOR_ERASE;
       flash_cmd[1] = (unsigned int8)((sector_address>>24) & 0xff);   // 0x _ _ 00 00 00
@@ -170,8 +226,8 @@ void sector_erase(Flash flash_stream, unsigned int32 sector_address){
    }
    
    else{
-      #ifdef MT25Q_DEBUG
-         fprintf(PC,"error:flash model is invalid\r\n");
+      #ifdef DEBUG
+         fprintf(DEBUG_PORT,"error:flash model is invalid\r\n");
       #endif
    }
    
@@ -184,19 +240,19 @@ void sector_erase(Flash flash_stream, unsigned int32 sector_address){
          delay_ms(10);   
       
       if(timeout_counter > 100){
-         #ifdef MT25Q_DEBUG
-            fprintf(PC,"flash timeout\r\n");
+         #ifdef DEBUG
+            fprintf(DEBUG_PORT,"flash timeout\r\n");
          #endif
          break;
       }  
       timeout_counter++;
    }
-   #ifdef MT25Q_DEBUG
-      fprintf(PC,"flash sector erase complete\r\n");
+   #ifdef DEBUG
+      fprintf(DEBUG_PORT,"flash sector erase complete\r\n");
    #endif
    return;
 }
-#Separate 
+
 void subsector_32kByte_erase(Flash flash_stream, unsigned int32 subsector_address){
    if(flash_stream.flash_model == MT25QL128ABA){
       int8 write_enable_cmd = CMD_WRITE_ENABLE;
@@ -243,8 +299,8 @@ void subsector_32kByte_erase(Flash flash_stream, unsigned int32 subsector_addres
    }
    
    else{
-      #ifdef MT25Q_DEBUG
-         fprintf(PC,"error:flash model is invalid\r\n");
+      #ifdef DEBUG
+         fprintf(DEBUG_PORT,"error:flash model is invalid\r\n");
       #endif
    }
    
@@ -257,19 +313,19 @@ void subsector_32kByte_erase(Flash flash_stream, unsigned int32 subsector_addres
          delay_ms(10);   
       
       if(timeout_counter > 100){
-         #ifdef MT25Q_DEBUG
-            fprintf(PC,"flash timeout\r\n");
+         #ifdef DEBUG
+            fprintf(DEBUG_PORT,"flash timeout\r\n");
          #endif
          break;
       }  
       timeout_counter++;
    }
-   #ifdef MT25Q_DEBUG
-      fprintf(PC,"flash 32kByte subsector erase complete\r\n");
+   #ifdef DEBUG
+      fprintf(DEBUG_PORT,"flash 32kByte subsector erase complete\r\n");
    #endif
    return;
 }
-#Separate 
+
 void subsector_4kByte_erase(Flash flash_stream, unsigned int32 subsector_address){
    if(flash_stream.flash_model == MT25QL128ABA){
       int8 write_enable_cmd = CMD_WRITE_ENABLE;
@@ -316,8 +372,8 @@ void subsector_4kByte_erase(Flash flash_stream, unsigned int32 subsector_address
    }
    
    else{
-      #ifdef MT25Q_DEBUG
-         fprintf(PC,"error:flash model is invalid\r\n");
+      #ifdef DEBUG
+         fprintf(DEBUG_PORT,"error:flash model is invalid\r\n");
       #endif
    }
    
@@ -330,19 +386,19 @@ void subsector_4kByte_erase(Flash flash_stream, unsigned int32 subsector_address
          delay_ms(10);   
       
       if(timeout_counter > 100){
-         #ifdef MT25Q_DEBUG
-            fprintf(PC,"flash timeout\r\n");
+         #ifdef DEBUG
+            fprintf(DEBUG_PORT,"flash timeout\r\n");
          #endif
          break;
       }  
       timeout_counter++;
    }
-   #ifdef MT25Q_DEBUG
-      fprintf(PC,"flash 4kByte subsector erase complete\r\n");
+   #ifdef DEBUG
+      fprintf(DEBUG_PORT,"flash 4kByte subsector erase complete\r\n");
    #endif
    return;
 }
-#Separate 
+   
 int8 read_data_byte(Flash flash_stream, unsigned int32 read_address){
    int8 read_data;
    if(flash_stream.flash_model == MT25QL128ABA){
@@ -378,7 +434,7 @@ int8 read_data_byte(Flash flash_stream, unsigned int32 read_address){
    }
    return read_data;
 }
-#Separate 
+   
 void read_data_bytes(Flash flash_stream, unsigned int32 read_start_address, int8 *read_data, unsigned int32 read_amount)
 {
    if(flash_stream.flash_model == MT25QL128ABA){
@@ -414,7 +470,7 @@ void read_data_bytes(Flash flash_stream, unsigned int32 read_start_address, int8
    }
    return;
 }
-#Separate 
+   
 void write_data_byte(Flash flash_stream, unsigned int32 write_address,int8 write_data)
 {
    if(flash_stream.flash_model == MT25QL128ABA){
@@ -473,19 +529,19 @@ void write_data_byte(Flash flash_stream, unsigned int32 write_address,int8 write
          delay_ms(10);   
       
       if(timeout_counter > 100){
-         #ifdef MT25Q_DEBUG
-            fprintf(PC,"flash timeout\r\n");
+         #ifdef DEBUG
+            fprintf(DEBUG_PORT,"flash timeout\r\n");
          #endif
          break;
       }  
       timeout_counter++;
    }
-   #ifdef MT25Q_DEBUG
-      fprintf(PC,"flash write complete\r\n");
+   #ifdef DEBUG
+      fprintf(DEBUG_PORT,"flash write complete\r\n");
    #endif
    return;
 }
-#Separate 
+
 void write_data_bytes(Flash flash_stream, unsigned int32 write_start_address, int8 *write_data, unsigned int16 write_amount){
    if(flash_stream.flash_model == MT25QL128ABA){
       int8 write_enable_cmd = CMD_WRITE_ENABLE;
@@ -541,41 +597,16 @@ void write_data_bytes(Flash flash_stream, unsigned int32 write_start_address, in
          delay_ms(10);   
       
       if(timeout_counter > 100){
-         #ifdef MT25Q_DEBUG
-            fprintf(PC,"flash timeout\r\n");
+         #ifdef DEBUG
+            fprintf(DEBUG_PORT,"flash timeout\r\n");
          #endif
          break;
       }  
       timeout_counter++;
    }
-   #ifdef MT25Q_DEBUG
-      fprintf(PC,"flash write complete\r\n");
+   #ifdef DEBUG
+      fprintf(DEBUG_PORT,"flash write complete\r\n");
    #endif
    return;
 }
 
-#Separate 
-int1 is_connect(Flash flash_stream){
-   READ_ID_DATA read_id_data;
-   int8 flash_cmd = CMD_READ_ID;
-   output_low(flash_stream.cs_pin);
-   spi_xfer_and_read_select_stream(flash_stream, &flash_cmd, 1, read_id_data.bytes, sizeof(read_id_data.bytes));
-   output_high(flash_stream.cs_pin);
-   #ifdef MT25Q_DEBUG
-      fprintf(PC,"Read ID:");
-
-   #endif
-   //chip id check
-   if(read_id_data.fields.manufacturer_id == MANUFACTURER_ID_MICRON){  
-      #ifdef MT25Q_DEBUG
-         fprintf(PC,"flash connect OK\r\n");
-      #endif
-      return true;
-   }
-   else{
-      #ifdef MT25Q_DEBUG
-         fprintf(PC,"flash not connect\r\n");
-      #endif
-      return false;
-   }
-}
