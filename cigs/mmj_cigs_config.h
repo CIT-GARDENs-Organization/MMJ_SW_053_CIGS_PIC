@@ -3,7 +3,7 @@
 
 #include <16F1789.h>
 
-#opt 0 // 0 = no optimization, 1 = optimize for speed, 2 = optimize for size
+//#opt 0 // 0 = no optimization, 1 = optimize for speed, 2 = optimize for size
 
 //#device ADC=12
 #use delay(crystal=16MHz)
@@ -20,6 +20,7 @@
 
 
 // -------------SPI--------------------
+// MOSI:PIN_C5, MISO:PIN_C4, SCK:PIN_C3
 // Shared Mission Flash
 #define MIS_FM_CS  PIN_D1
 #use spi(MASTER, SPI1, BAUD = 400000, MODE = 0, BITS= 8, STREAM = MIS_FM_STREAM)
@@ -60,8 +61,6 @@
 #define CONNECT_CIGS PIN_C0
 #define EN_NPWR PIN_C3  
 
-// DI/O RTC
-#define RTC_PIN PIN_C1
 
 // ADC Settings
 #define TEMP_TOP_ADC AD7490_VIN0

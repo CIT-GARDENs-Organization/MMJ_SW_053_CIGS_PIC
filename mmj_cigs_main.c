@@ -54,8 +54,8 @@ void main()
          break;
          
       delay_ms(400);
-      fprintf(PC,"0x%08LX\r\n", get_current_sec());
-      //fprintf(PC, ".");
+      //fprintf(PC,"0x%08LX\r\n", get_current_sec());
+      fprintf(PC, ".");
    }
    
    

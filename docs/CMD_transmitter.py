@@ -95,7 +95,7 @@ class Command:
                 return
 
     def input_payload(self, com: serial.Serial) -> bytes:
-        print('  __ __ __ __ __ __ __ __ __')
+        print('  __ __ __ __ __ __ __ __ __ __')
         while True:
             input_str = input('> ').replace(' ', '').upper()
             if re.fullmatch("^[0-9A-F]+$", input_str):

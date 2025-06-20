@@ -6,7 +6,12 @@
 // ___________MODE FUNCTIONS____________
 
 #Separate
-void mode_measure(unsigned int8 parameter[]);
+void mode_dummy(unsigned int8 uplinkcmd[]);
+typedef struct {
+    unsigned int8 id;
+    unsigned int32 param1;
+    unsigned int16 param2;
+} DUMMY_CMD;
 
 // Flash command 
 #Separate
@@ -15,12 +20,26 @@ void mode_flash_erase_all(unsigned int8 parameter[]);
 void mode_flash_erase_1sector(unsigned int8 parameter[]);
 #Separate
 void mode_flash_erase_4kbyte_subsector(unsigned int8 parameter[]);
-#Separate
+
+#separate
 void mode_flash_write_demo(unsigned int8 parameter[]);
+typedef struct {
+    unsigned int8 id;
+    unsigned int32 writeaddress;
+    unsigned int16 packetnum;
+} FLASH_WRITE_PARAM;
+
 #Separate
 void mode_flash_write_4kbyte_subsecotr(unsigned int8 parameter[]);
 #Separate
 void mode_flash_read(unsigned int8 parameter[]);
+
+typedef struct{
+    unsigned int8 id;
+    unsigned int16 readpacketnum;
+    unsigned int32 readaddress;
+}FLASH_PARAM;
+
 #Separate
 void mode_flash_read_address(unsigned int8 parameter[]);
 #Separate
@@ -56,6 +75,7 @@ void mode_dev_time();
 void mode_dev_sweep();
 
 // ______________CMD ID________________
+#define ID_DUMMY 0x00
 #define ID_SWEEP 0x01
 
 // Flash command 
@@ -82,11 +102,8 @@ void mode_dev_sweep();
 #define ID_DEV_SWEEP 0xC5
 
 
-typedef struct{
-    unsigned int8 id;
-    unsigned int16 readpacketnum;
-    unsigned int32 readaddress;
-}FLASH_PARAM;
+
+
 
 
 

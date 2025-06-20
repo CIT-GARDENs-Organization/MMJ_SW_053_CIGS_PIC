@@ -12,15 +12,15 @@ void execute_mission(unsigned int8 *content)
 {
    // record to executed mission list
    unsigned int8 command_id = content[0];
-   unsigned int8 *parameter = &content[1];
+   //unsigned int8 *parameter = &content[1];
       
    // execution mission
    fprintf(PC, "\r\n______________________________\r\n_____Start execute_mission_____\r\n\r\n");
    fprintf(PC, "Command ID: %X\r\n\r\n", command_id);
    switch(command_id)
    {
-      case 0x00: // example command
-         fprintf(PC, "\t-> Example command 0x00\r\n");
+      case ID_DUMMY: // example command
+         mode_dummy(content);
          //mode_iv_meas_adc();
          break;
       case 0x10:

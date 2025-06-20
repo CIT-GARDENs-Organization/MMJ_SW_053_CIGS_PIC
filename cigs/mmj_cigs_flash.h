@@ -19,6 +19,8 @@ void update_address_area(void);
 
 
 // __________MISF-ADDRESS__________
+#define ADDRESS_SMF_START 0x000000
+#define ADDRESS_SMF_END   0xF42400
 #define ADDRESS_MANEGE_START 0x000000
 #define ADDRESS_MANEGE_END   0x000FFF
 #define ADDRESS_MISF_PICLOG_INDEX_START 0x000100
@@ -28,6 +30,10 @@ void update_address_area(void);
 #define ADDRESS_MISF_MEASUREMENT_START 0x142000
 #define ADDRESS_MISF_MEASUREMENT_END   0x941FFF
 
+//
+#define SECTOR_64K_BYTE 0x10000 // 64KByte
+#define SECTOR_32K_BYTE 0x8000  // 32KByte
+#define SECTOR_4K_BYTE  0x1000  // 4KByte
 
 // Counter
 unsigned int32  smf_piclog_use_counter;
@@ -47,27 +53,23 @@ unsigned int32  misf_meas_uncopyed_counter;
 #define DATA_HEADER_SIZE 64 
 
 
+typedef struct FLASH_DATA_HEADER {
+    unsigned int32  smf_piclog_use_counter;
+    unsigned int8   smf_piclog_loop_counter;
+    unsigned int32  smf_meas_use_counter;
+    unsigned int8   smf_meas_loop_counter;
 
-typedef union {
-    struct {
-        unsigned int32  smf_piclog_use_counter;
-        unsigned int8   smf_piclog_loop_counter;
-        unsigned int32  smf_meas_use_counter;
-        unsigned int8   smf_meas_loop_counter;
+    unsigned int32  misf_piclog_use_counter;
+    unsigned int8   misf_piclog_loop_counter;
+    unsigned int32  misf_piclog_uncopyed_counter;
+    unsigned int8   misf_piclog_write_counter;
+    unsigned int32  misf_meas_use_counter;
+    unsigned int8   misf_meas_loop_counter;
+    unsigned int32  misf_meas_uncopyed_counter;
 
-        unsigned int32  misf_piclog_use_counter;
-        unsigned int8   misf_piclog_loop_counter;
-        unsigned int32  misf_piclog_uncopyed_counter;
-        unsigned int8   misf_piclog_write_counter;
-        unsigned int32  misf_meas_use_counter;
-        unsigned int8   misf_meas_loop_counter;
-        unsigned int32  misf_meas_uncopyed_counter;
-
-        unsigned int8   reserve[34];
-        unsigned int8   crc;
-    }   fields; // フィールド
-    unsigned int8 bytes[PACKET_SIZE]; 
-} FLASH_DATA_HEADER; // PICLOGデータ
+    unsigned int8   reserve[34];
+    unsigned int8   crc;
+}   FLASH_DATA_HEADER; // フィールド
 
 
 
