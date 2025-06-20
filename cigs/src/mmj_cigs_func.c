@@ -39,18 +39,18 @@ void adc_init()
 #Separate
 void sweep(unsigned int8 parameter)
 {
-
+    // 
     fprintf(PC, "Start SWEEP\r\n");
     unsigned int8 measurement_step = parameter; // Get the measurement step from the parameter array
     fprintf(PC, "\tSweep step : %u\r\n", measurement_step);
     output_high(CONNECT_CIGS);
 
-    // read temperature
+
     set_adc_channel(TEMP_TOP);
-    delay_us(10); // wait for the ADC to stabilize
+    delay_us(10); 
     measured_temp_top = read_adc(ADC_START_AND_READ); // read voltage at adc pin
     set_adc_channel(TEMP_BOT);
-    delay_us(10); // wait for the ADC to stabilize
+    delay_us(10); 
     measured_temp_bot = read_adc(ADC_START_AND_READ); // read voltage at adc pin
 
     // read PD value
@@ -60,7 +60,7 @@ void sweep(unsigned int8 parameter)
     
     // read timestamp
     //measured_time = timer0_get_time(); // read time from timer0
-
+   unsigned int32 current;
     // CIGS value
     for (unsigned int16 count = 0; count < measurement_step; count++)
     {    
@@ -135,7 +135,6 @@ void convert_header_data()
     cigs_data_header[2] = measured_time & 0xFF;         // Extract the lower 8 bits
     cigs_data_header[3] = (measured_time >> 8) & 0xFF;  //
     cigs_data_header[4] = (measured_time >> 16) & 0xFF;
-
 
     // Save measurement PD value & Mode Data 
     cigs_data_header[5] = measured_pd_start & 0xFF;

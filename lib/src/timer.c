@@ -1,9 +1,9 @@
-#INT_TIMER0
-static void TIMER0_isr(void)
+#INT_TIMER1
+void TIMER1_isr()
 {
-   // every 0.01 sec interrupts
-   set_timer0(100);
-
+   set_timer1(CLOCK_FREQUENCY); //3.2767秒後に割り込みを発生させる
+   sec++;
+   /*
    if (++subsec >= 100)
    {
       subsec = 0;
@@ -13,13 +13,22 @@ static void TIMER0_isr(void)
       {
          day++;
       }
-   }
+   }*/
 }
 
 void setup_timer()
 {
-   setup_timer_0(T0_INTERNAL | T0_DIV_256 | RTCC_8_BIT);
-   enable_interrupts(INT_TIMER1);
+   fprintf(PC, "Timer Initialize\r\n");
+   clear_interrupt(INT_TIMER1);
+   //sec = 0;
+   // 外部クロックをT1CKIピンから入力、プリスケーラなし
+   setup_timer_1(T1_EXTERNAL | T1_DIV_BY_1 | T1_ENABLE_SOSC);
+   set_timer1(CLOCK_FREQUENCY); 
+   //set_timer1(0);  // タイマーカウント初期値設定
+   //T1OSCEN = 1; //Enable TMR1 Oscillator
+   enable_interrupts(INT_TIMER1);   
+   enable_interrupts(GLOBAL);
+   fprintf(PC, "\tComplete\r\n");
 }
 
 void set_current_sec(unsigned int32 new_sec)

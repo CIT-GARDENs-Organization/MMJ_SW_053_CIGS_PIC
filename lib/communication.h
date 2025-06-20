@@ -42,7 +42,7 @@ typedef struct {
     int8 length;
 } FrameID;
 
-#define CONTENT_MAX 32
+#define CONTENT_MAX 9
 typedef struct {
     int8 frame_id;
     unsigned int8 size;

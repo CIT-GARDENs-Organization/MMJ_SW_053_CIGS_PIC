@@ -1,43 +1,52 @@
 #include "../mmj_cigs_piclog.h"
 #include "../../lib/timer.h"
+#include "../mmj_cigs_flash.h"
 
-
-
+#define PICLOG_DEBUG
 
 void piclog_make(unsigned int8 function, unsigned int8 parameter)
 {
-    PICLOG piclog_data;
-    piclog_data.time = get_current_sec();
-    piclog_data.function = function;
-    piclog_data.parameter = parameter;
-    /*
-    // フラッシュ書き込み
-    piclog_write(piclog_data.bytes);
-    fprintf(PC, "PICLOG data written: Function %d, Parameter %d\r\n", function, parameter);
-    piclog_data_counter += sizeof(PICLOG);
-    if (piclog_data_counter >= PICLOG_PACKET_SIZE)
-    {
-        spi_xfer_write(SMF_CS, piclog_data.bytes, sizeof(PICLOG)); // SPIでフラッシュに書き込み
-        //unsigned int8 crc = calc_crc8(piclog_data.bytes, sizeof(PICLOG) - 1); // CRC計算
-        piclog_data_counter = 0; // リセット
-    }
-    */
-}
+    int8 piclog[PICLOG_PACKET_SIZE];
+    int32 time = get_current_sec();
+    piclog[0] = (time >> 24) & 0xFF; // Time high byte
+    piclog[1] = (time >> 16) & 0xFF;
+    piclog[2] = (time >> 8) & 0xFF;  // Time middle byte
+    piclog[3] = time & 0xFF;         // Time low byte
+    piclog[4] = function;            // Function code
+    piclog[5] = parameter;           // Parameter code
 
-void piclog_write(unsigned int8 *data)
-{
-    /*
-    if (flash_isconnect(SMF_STREM))
-    {
-        fprintf(PC, "PICLOG data write\r\n");
-        unsigned int8 data[sizeof(PICLOG)];
-        //flash_write(ADDRESS_PICLOG_START, *piclog_data[bytes],8); // フラッシュに書き込み
-    }
-    else
-    {
-        fprintf(PC, "Flash is not connected\r\n");
+    #ifdef PICLOG_DEBUG
+        fprintf(PC, "[PICLOG] : ");
+        for (unsigned int8 i = 0; i < PICLOG_PACKET_SIZE; i++) {
+            fprintf(PC, "%02X ", piclog[i]);
+        }
+        fprintf(PC, "\r\n");
+    #endif
+
+    unsigned int32 write_address = ADDRESS_MISF_PICLOG_DATA_START + misf_piclog_use_counter;
+    if(is_connect(mis_fm) == FALSE) {
+        fprintf(PC, "Mission Flash is not connected\r\n");
         return;
     }
-    */
-}
+    write_data_bytes(mis_fm, write_address, piclog, PICLOG_PACKET_SIZE);
+    misf_piclog_use_counter += PICLOG_PACKET_SIZE;
+
+    // Next Packet
+    if (misf_piclog_use_counter + PICLOG_PACKET_SIZE >= MISF_PICLOG_MAX_COUNT) {
+        write_data_bytes(mis_fm, write_address, *PICLOG_BLANK_DATA, PICLOG_PACKET_SIZE);
+        misf_piclog_use_counter = 0; // Reset if max count reached
+    }
     
+    /*
+    // Add CRC Check
+    if (misf_piclog_write_counter >= MISF_PICLOG_MAX_COUNT) {
+        write_address = ADDRESS_MISF_PICLOG_DATA_START + misf_piclog_use_counter;
+        write_data_bytes(mis_fm, write_address, *PICLOG_BLANK_DATA, PICLOG_BLANK_SIZE);
+        unsigned int8 piclog_data_header[PICLOG_BLANK_SIZE] = {0x00, 0x00, 0x00}; // Initialize blank data
+        misf_piclog_write_counter = 0; // Reset if max count reached
+    }
+    */
+    #ifdef PICLOG_DEBUG
+        //fprintf(PC, "PICLOG written: %02X %02X %02X %02X %02X %02X\r\n", piclog_data.bytes[0], data[1], data[2], data[3], data[4], data[5]);
+    #endif
+}

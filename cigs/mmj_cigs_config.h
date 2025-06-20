@@ -6,7 +6,7 @@
 #opt 0 // 0 = no optimization, 1 = optimize for speed, 2 = optimize for size
 
 //#device ADC=12
-#use delay(crystal=16MHz, clock=16MHz)
+#use delay(crystal=16MHz)
 #fuses NOMCLR
 
 
@@ -25,12 +25,15 @@
 #use spi(MASTER, SPI1, BAUD = 400000, MODE = 0, BITS= 8, STREAM = MIS_FM_STREAM)
 
 // Mission Flash
-#define SMF_CS PIN_C2
+#define SMF_CS PIN_D2
 #use spi(MASTER, SPI1, BAUD = 400000, MODE = 0, BITS = 8, STREAM = SMF_STREAM)
 
 // Analog to Digital Converter 
-#define ADC_CS PIN_C2
-#use spi(MASTER, SPI1, BAUD = 9600, MODE=2, BITS = 8, STREAM = ADC_STREAM)
+#define ADC_CS PIN_D3
+#use spi(MASTER, SPI1, BAUD = 100000, MODE=2, BITS = 8, STREAM = ADC_STREAM)
+
+
+
 
 /* DEMO
 #use spi (MASTER, SPI1, ENABLE=PIN_A0, MODE=0, BITS=8, STREAM=MISF)
@@ -56,6 +59,9 @@
 // DI/O___
 #define CONNECT_CIGS PIN_C0
 #define EN_NPWR PIN_C3  
+
+// DI/O RTC
+#define RTC_PIN PIN_C1
 
 // ADC Settings
 #define TEMP_TOP_ADC AD7490_VIN0

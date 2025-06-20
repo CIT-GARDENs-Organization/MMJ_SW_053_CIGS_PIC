@@ -6,54 +6,92 @@
 
 // MIS_FM Function
 void misf_init(void);
-
-
+void update_misf_data_header(void);
+void update_address_area(void);
 
 
 
 #define PACKET_SIZE 64
 #define MISF_DATA_HEADER_SIZE 64 // MISFデータヘッダーのサイズ
+#define MISF_PICLOG_MAX_COUNT 60
+
+
+
 
 // __________MISF-ADDRESS__________
-// DATA SIZE AREA
-#define ADDRESS_DATA_SIZE_START 0x000000
-#define ADDRESS_DATA_SIZE_END   0x000003
-#define DATA_SIZE 4 // データサイズのサイズ
-unsigned int8 data_size_loop_counter; // データサイズループカウンター
-unsigned int32 data_size_counter; // データサイズカウンター
+#define ADDRESS_MANEGE_START 0x000000
+#define ADDRESS_MANEGE_END   0x000FFF
+#define ADDRESS_MISF_PICLOG_INDEX_START 0x000100
+#define ADDRESS_MISF_PICLOG_INDEX_END 0x0001FF
+#define ADDRESS_MISF_PICLOG_DATA_START 0x000200
+#define ADDRESS_MISF_PICLOG_DATA_END   0x141FFF
+#define ADDRESS_MISF_MEASUREMENT_START 0x142000
+#define ADDRESS_MISF_MEASUREMENT_END   0x941FFF
 
 
-// PICLOG AREA
-#define ADDRESS_PICLOG_START 0x000000
-#define ADDRESS_PICLOG_END   0x000007
-#define PICLOG_SIZE 6 // PICLOGのサイズ
+// Counter
+unsigned int32  smf_piclog_use_counter;
+unsigned int8   smf_piclog_loop_counter;
+unsigned int32  smf_meas_use_counter;
+unsigned int8   smf_meas_loop_counter;
+
+unsigned int32  misf_piclog_use_counter;
+unsigned int8   misf_piclog_loop_counter;
+unsigned int32  misf_piclog_uncopyed_counter;
+unsigned int8   misf_piclog_write_counter;
+unsigned int32  misf_meas_use_counter;
+unsigned int8   misf_meas_loop_counter;
+unsigned int32  misf_meas_uncopyed_counter;
+
+
+#define DATA_HEADER_SIZE 64 
+
+
 
 typedef union {
     struct {
-        unsigned int32 piclog_write_counter; // 時間
-        unsigned int8 piclog_loop_counter; // 関数
-        unsigned int32 piclog_smfwrite_counter; // パラメータ
-        unsigned int8 piclog_smf_loop_counter; // SMF書き込みループカウンター
+        unsigned int32  smf_piclog_use_counter;
+        unsigned int8   smf_piclog_loop_counter;
+        unsigned int32  smf_meas_use_counter;
+        unsigned int8   smf_meas_loop_counter;
+
+        unsigned int32  misf_piclog_use_counter;
+        unsigned int8   misf_piclog_loop_counter;
+        unsigned int32  misf_piclog_uncopyed_counter;
+        unsigned int8   misf_piclog_write_counter;
+        unsigned int32  misf_meas_use_counter;
+        unsigned int8   misf_meas_loop_counter;
+        unsigned int32  misf_meas_uncopyed_counter;
+
+        unsigned int8   reserve[34];
+        unsigned int8   crc;
     }   fields; // フィールド
-    unsigned int8 bytes[MISF_DATA_HEADER_SIZE]; // バイト配列
-} PICLOG_DATA_HEADER; // PICLOGデータ
+    unsigned int8 bytes[PACKET_SIZE]; 
+} FLASH_DATA_HEADER; // PICLOGデータ
 
 
 
 
-// MEASUREMENT DATA AREA
-#define ADDRESS_MEASUREMENT_START ｓ
-#define ADDRESS_MEASUREMENT_END   0x001FFF
-#define MEASUREMENT_SIZE 16 // 測定データのサイズ
-typedef union {
+// Packet format
+//unsigned int8 HEADER_SIZE 0x12
+
+typedef union{
     struct {
-        unsigned int32 measurement_data_counter;
-        unsigned int8 meas_loop_counter;
-        unsigned int32 measurement_data_smf_counter;
-        unsigned int8 meas_smf_loop_counter;
-    }   fields; // フィールド
-    unsigned int8 bytes[MISF_DATA_HEADER_SIZE]; // バイト配列
-} MEAS_DATA_HEADER; // PICLOGデータ
+        unsigned int8  header_start; // Header start byte
+        unsigned int8  header_end;   // Header end byte
+        unsigned int32 measurement_time; // Measurement time in milliseconds
+        unsigned int16 measured_pd_start; // Start PD value
+        unsigned int16 measured_pd_end;   // End PD value
+        unsigned int16 measured_temp_top;  // Top temperature value
+        unsigned int16 measured_temp_bot;  // Bottom temperature value
+        unsigned int8  mode_data;          // Mode data
+        unsigned int8  crc;                // CRC for error checking
+    } fields;
+    unsigned int8 bytes[PACKET_SIZE];
+}MEAS_PACKET;
+
+
+
 
 
 

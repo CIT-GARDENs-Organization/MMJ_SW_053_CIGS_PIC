@@ -2,7 +2,7 @@
 #define MT25Q_H
 
 // =========
-#define MT25Q_DEBUG
+//#define MT25Q_DEBUG
 // =====-====
 
 

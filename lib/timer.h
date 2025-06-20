@@ -4,11 +4,14 @@
 // __________ define _________
 
 #define SEC_IN_A_DAY 86400
+#define CLOCK_FREQUENCY 32768 // 32.768 kHz
+// External clock source for Timer1
+// Must Add a 32.768 kHz crystal to the T1CKI pin (pin 6 of PIC16F1789)
 
 
 // __________ values _________
 
-volatile unsigned int32 subsec = 0, sec = 0; //dsec -> deci second (0.01 sec)
+unsigned int32 subsec = 0, sec = 0; //dsec -> deci second (0.01 sec)
 volatile unsigned int16 day = 0;
 
 

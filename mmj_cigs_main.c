@@ -13,10 +13,16 @@ void main()
    setup_timer();
    ad7490_init();
    misf_init();
-
+   piclog_make(PICLOG_STARTUP,0x00);
 
    int1 is_finished = FALSE;
    fprintf(PC,"____CIGS PIC Start Operation_____\r\n\r\n");
+   
+   
+   
+   
+   
+   
    fprintf(PC,"waiting for BOSS PIC command");
    
    //Start loop
@@ -27,6 +33,7 @@ void main()
       {
          //Command command = make_command(boss_receive_buffer, boss_receive_buffer_size);
          volatile Command recieve_cmd = make_receive_command(boss_receive_buffer, boss_receive_buffer_size);
+         /*
          fprintf(PC, "Frame ID: %X\r\n", recieve_cmd.frame_id);
          fprintf(PC, "Content size: %u\r\n", recieve_cmd.size);
          fprintf(PC, "payload: ");
@@ -34,11 +41,12 @@ void main()
             fprintf(PC, "%X ", recieve_cmd.content[i]);
          fprintf(PC, "\r\n\r\n");
          fprintf(PC, "is_exist: %d\r\n", recieve_cmd.is_exist);
-         
+         */
          clear_receive_signal(boss_receive_buffer, &boss_receive_buffer_size);
          
          if(recieve_cmd.is_exist)
             is_finished = execute_command(&recieve_cmd); 
+            fprintf(PC,"\r\nwaiting for BOSS PIC command");
       }
       
       // check `is break while loop`
@@ -46,7 +54,8 @@ void main()
          break;
          
       delay_ms(400);
-      fprintf(PC,".");
+      fprintf(PC,"0x%08LX\r\n", get_current_sec());
+      //fprintf(PC, ".");
    }
    
    

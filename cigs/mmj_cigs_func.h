@@ -8,29 +8,26 @@ volatile unsigned int8 mission_datas[MISSION_DATA_SIZE] = {0x00};
 volatile int8 executed_mission_count = 0;
 */
 
-/*
 
-// Packet format
-#define PACKET_SIZE 64
-#define CHECKSUM
-//volatile unsigned int8 PACKET_DATA[MISSION_DATA_SIZE] = {0x00};
-*/
 
+
+
+
+// _________ values ____________
 
 
 // _________ functions ____________
 #define DATA_BUFFER_SIZE 150
 #define HEADER_SIZE 12
-volatile unsigned int16 data_buffer[DATA_BUFFER_SIZE*2] = {0x00} ;
-volatile unsigned int8 cigs_data[DATA_BUFFER_SIZE*2] = {0x00} ;
-volatile unsigned int8 cigs_data_header[HEADER_SIZE] = {0x00} ;
+volatile unsigned int16 data_buffer [DATA_BUFFER_SIZE*2] = {0x00} ;
+volatile unsigned int8  cigs_data [DATA_BUFFER_SIZE*2] = {0x00} ;
+volatile unsigned int8  cigs_data_header [HEADER_SIZE] = {0x00} ;
 volatile unsigned int32 measured_time = 0 ;
 volatile unsigned int16 measured_pd_start = 0 ;
 volatile unsigned int16 measured_pd_end = 0 ;
 volatile unsigned int16 measured_temp_top = 0 ;
 volatile unsigned int16 measured_temp_bot = 0 ;     
 
-unsigned int32 current;
 
 
 volatile unsigned int8 packet_data[64] = {0x00};

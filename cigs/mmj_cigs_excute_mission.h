@@ -2,7 +2,7 @@
 #define MMJ_CIGS_EXCUTE_MISSION_H
 
 // _________ values _________
-#define PARAMETER_LENGTH 8
+//#define PARAMETER_LENGTH 8
 
 #Separate
 int1 execute_command(Command *command);
