@@ -119,7 +119,6 @@ void write_misf_address_area()
     write_data_bytes(mis_fm, ADDRESS_MANEGE_START, writedata, PACKET_SIZE);
 }
 
-}
 
 
 

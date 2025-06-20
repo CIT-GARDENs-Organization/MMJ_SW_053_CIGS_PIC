@@ -54,29 +54,6 @@ unsigned int32  misf_meas_uncopyed_counter;
 
 
 
-// Packet format
-//unsigned int8 HEADER_SIZE 0x12
-
-typedef union{
-    struct {
-        unsigned int8  header_start; // Header start byte
-        unsigned int8  header_end;   // Header end byte
-        unsigned int32 measurement_time; // Measurement time in milliseconds
-        unsigned int16 measured_pd_start; // Start PD value
-        unsigned int16 measured_pd_end;   // End PD value
-        unsigned int16 measured_temp_top;  // Top temperature value
-        unsigned int16 measured_temp_bot;  // Bottom temperature value
-        unsigned int8  mode_data;          // Mode data
-        unsigned int8  crc;                // CRC for error checking
-    } fields;
-    unsigned int8 bytes[PACKET_SIZE];
-}MEAS_PACKET;
-
-
-
-
-
-
 
 // ___________SMF-ADDRESS___________
 

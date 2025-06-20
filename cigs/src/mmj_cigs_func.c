@@ -1,6 +1,9 @@
+#include "../mmj_cigs_func.h"
 #include "../mmj_cigs_config.h"
 #include "../mmj_cigs_piclog.h"
-
+#include "../../lib/ad7490.h"
+#include "../mmj_cigs_flash.h"
+#include "../../lib/mission_tools.h"
 
 /*
 struct AD7490_STREAM ad7490_stream = {
@@ -37,115 +40,114 @@ void adc_init()
 }
 
 #Separate
-void sweep(unsigned int8 parameter)
+void sweep(unsigned int8 parameter[])
 {
     // 
     fprintf(PC, "Start SWEEP\r\n");
-    unsigned int8 measurement_step = parameter; // Get the measurement step from the parameter array
+    unsigned int8 measurement_step = parameter[1]; // Get the measurement step from the parameter array
     fprintf(PC, "\tSweep step : %u\r\n", measurement_step);
     output_high(CONNECT_CIGS);
 
+    // read header data
+    measured_time = get_current_sec(); // read time from timer0
+    measured_pd = ad7490_read(ADC_PD); // read PD value
+    measured_temp_top = ad7490_read(ADC_TEMP_TOP); // read temperature at top
+    measured_temp_bot = ad7490_read(ADC_TEMP_BOT); // read temperature at bottom
+    measured_open_voltage = ad7490_read(ADC_CIGS_VOLT); // read open voltage at CIGS
 
-    set_adc_channel(TEMP_TOP);
-    delay_us(10); 
-    measured_temp_top = read_adc(ADC_START_AND_READ); // read voltage at adc pin
-    set_adc_channel(TEMP_BOT);
-    delay_us(10); 
-    measured_temp_bot = read_adc(ADC_START_AND_READ); // read voltage at adc pin
-
-    // read PD value
-    set_adc_channel(PD);
-    delay_us(10); // wait for the ADC to stabilize
-    measured_pd_start = read_adc(ADC_START_AND_READ); // read voltage at adc pin
-    
-    // read timestamp
-    //measured_time = timer0_get_time(); // read time from timer0
-   unsigned int32 current;
-    // CIGS value
     for (unsigned int16 count = 0; count < measurement_step; count++)
     {    
         // set DAC value
         dac_write(count);
         delay_us(100); // wait for the DAC to stabilize
 
-        // read CIGS voltage and current
-        set_adc_channel(CIGS_VOLT);       
+        // read CIGS voltage and current      
         delay_us(10); // wait for the ADC to stabilize
-        data_buffer[count*2] = read_adc(ADC_START_AND_READ);  // read voltage at adc pin
-        
-        set_adc_channel(CIGS_CURR);
-        current = 0; // reset current value
-        for(int k=0; k<10; k++)
-        {
-                                            //  routing nth channel to adc//verYOMOGI 20220214update,byUCHIDA
-            delay_us(10);
-            current = current + read_adc(ADC_START_AND_READ);
-        }    
-        
-        current = current / 10; // average the current value
+        data_buffer[count*2] = ad7490_read(ADC_CIGS_VOLT);
+        data_buffer[count*2+1] = ad7490_read(ADC_CIGS_CURR); // read voltage at adc pin
 
-        delay_us(10); // wait for the ADC to stabilize
-        data_buffer[count*2+1] = current; // store the current value in the buffer
-        //data_buffer[count*2+1] = read_adc(ADC_START_AND_READ); // read voltage at adc pin
     }
 
-    fprintf(PC, "END SWEEP\r\n");
-    // read PD value
-    set_adc_channel(PD);
-    measured_pd_end = read_adc(ADC_START_AND_READ); // read voltage at adc pin
-
-    convert_cigs_data(measurement_step);
-    //convert_header_data();    
     output_low(CONNECT_CIGS);
-}
+    fprintf(PC, "END SWEEP\r\n");
 
-
-void convert_cigs_data(unsigned int8 measurement_step)
-{
-    fprintf(PC, "Logged CIGS data\r\n");
-    // unsigned int8 measurement_step = 100;
-    // Save CIGS data to memory
-    for (unsigned int8 i = 0; i < measurement_step; i++)
-    {
-        cigs_data[i*3]      = (data_buffer[i*2] >> 4) & 0xFF;
-        fprintf(PC, "%X ", cigs_data[i*3]);
-        cigs_data[i*3+1]    = (data_buffer[i*2] & 0x0F) << 4 | (data_buffer[i*2+1] >>8 )& 0x0F;
-        fprintf(PC, "%X ", cigs_data[i*3+1]);
-        cigs_data[i*3+2]    = data_buffer[i*2+1] & 0xFF;
-        fprintf(PC, "%X ", cigs_data[i*3+2]);
-    }
-    /*
-    fprintf(PC, "Logging CIGS data\r\n");
-    for (unsigned int16 j = 0; j < measurement_step*3; j++)
-    {
-        fprintf(PC, "%X ", cigs_data[j]);
-    }
-    */
-   fprintf(PC, "\r\n");
-}
-
-
-void convert_header_data()
-{    
-    // Save CIGS data header
-    cigs_data_header[0] = 0xFF; // Header start
-    cigs_data_header[1] = 0x0F; // Header start
-
-    // Save measurement start time
-    cigs_data_header[2] = measured_time & 0xFF;         // Extract the lower 8 bits
-    cigs_data_header[3] = (measured_time >> 8) & 0xFF;  //
-    cigs_data_header[4] = (measured_time >> 16) & 0xFF;
-
-    // Save measurement PD value & Mode Data 
-    cigs_data_header[5] = measured_pd_start & 0xFF;
-    cigs_data_header[6] = ((measured_pd_start & 0x0F) << 4) | ((measured_pd_end >> 8) & 0x0F);
-    cigs_data_header[7] = measured_pd_end >> 4 & 0xFF;
+    fprintf(PC, "Start CIGS data conversion\r\n");
+    unsigned int8 packetdata[PACKET_SIZE] = {0x00};
     
-    // Save measurement Temp value
-    cigs_data_header[8] = measured_pd_start & 0xFF;
-    cigs_data_header[9] = ((measured_pd_start & 0x0F) << 4) | ((measured_pd_end >> 8) & 0x0F);
-    cigs_data_header[10] = measured_pd_end >> 4 & 0xFF;
+    make_meas_header(packetdata, parameter); // Create measurement header
+    unsigned int8 packetbytecounter = HEADER_SIZE; // Start after header size
+    
+    for (unsigned int8 i = 0; i < measurement_step; i++)
+    {        
+        packetdata[i*3]      = (data_buffer[i*2] >> 4) & 0xFF;
+        packetdata[i*3+1]    = (data_buffer[i*2] & 0x0F) << 4 | (data_buffer[i*2+1] >>8 )& 0x0F;
+        packetdata[i*3+2]    = data_buffer[i*2+1] & 0xFF;
+        packetbytecounter += 3; // Each CIGS data takes 3 bytes
 
-    cigs_data_header[11] = 0x00; // Header end
+        if (packetbytecounter == PACKET_SIZE-1) {
+            // Add CRC
+            packetdata[PACKET_SIZE-2] = calc_crc8(packetdata, PACKET_SIZE-1);            
+            
+            // Flash 書き込み処理
+            unsigned int32 write_address = ADDRESS_MISF_MEASUREMENT_START + misf_meas_use_counter;
+            write_data_bytes(mis_fm, write_address, packetdata, PACKET_SIZE);
+
+            // カウンタ更新
+            misf_meas_use_counter += PACKET_SIZE;
+            misf_meas_uncopyed_counter += PACKET_SIZE;
+            write_misf_address_area();
+        }
+    }
+
+    if (packetbytecounter < PACKET_SIZE) {
+        // Fill the remaining bytes with 0x00
+        for (unsigned int8 j = packetbytecounter; j < PACKET_SIZE; j++) {
+            packetdata[j] = 0x00;
+        }
+        // Flash 書き込み処理
+        unsigned int32 write_address = ADDRESS_MISF_MEASUREMENT_START + misf_meas_use_counter;
+        write_data_bytes(mis_fm, write_address, packetdata, PACKET_SIZE);
+        
+        // カウンタ更新
+        misf_meas_use_counter += PACKET_SIZE;
+        misf_meas_uncopyed_counter += PACKET_SIZE;
+        write_misf_address_area();
+    }
+
+}
+
+void make_meas_header(unsigned int8 *packetdata, unsigned int8 *cmd)
+{
+    packetdata[0] = START_MAKER; // Header start
+    packetdata[1] = START_MAKER; // Header start
+    
+    // Add uplink cmd
+    packetdata[2]  = cmd[0]; // Command ID
+    packetdata[3]  = cmd[1]; // Param1
+    packetdata[4]  = cmd[2]; // Param2
+    packetdata[5]  = cmd[3]; // Param3 
+    packetdata[6]  = cmd[4]; // Param4
+    packetdata[7]  = cmd[5]; // Param5
+    packetdata[8]  = cmd[6]; // Param6
+    packetdata[9]  = cmd[7]; // Param7
+    packetdata[10] = cmd[8]; // Reserved byte
+
+    // Add timestamp
+    packetdata[11] = measured_time >> 24 & 0xFF; // Time high byte
+    packetdata[12] = measured_time >> 16 & 0xFF; //
+    packetdata[13] = measured_time >> 8 & 0xFF;  // Time middle byte
+    packetdata[14] = measured_time & 0xFF;         // Time low
+    
+    
+    //cigs_data[i*3+1]    = (data_buffer[i*2] & 0x0F) << 4 | (data_buffer[i*2+1] >>8 )& 0x0F;
+
+    // Add PD value
+    packetdata[15] = ( measured_pd >> 4 ) &  0xFF; // PD start low byte
+    packetdata[16] = ( measured_pd & 0x0F ) << 4 | ( measured_open_voltage >>8 )& 0x0F;
+    packetdata[17] = measured_open_voltage & 0xFF; // PD end
+    packetdata[18] = ( measured_temp_top >> 4 ) &  0xFF; // PD start low byte
+    packetdata[19] = ( measured_temp_top & 0x0F ) << 4 | ( measured_temp_bot >>8 )& 0x0F;
+    packetdata[20] = measured_temp_bot & 0xFF; // PD end
+    packetdata[21] = RESERVED_VALUE;
 }
 
