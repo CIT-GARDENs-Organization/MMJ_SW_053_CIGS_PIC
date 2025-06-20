@@ -219,7 +219,7 @@ void mode_flash_erase_all(unsigned int8 parameter[])
    fprintf(PC, "Start Flash Erase All\r\n");
    unsigned int8 cmd = parameter[0]; // Get the command ID from the parameter array
    piclog_make(cmd, 0x00); // Log the command execution
-   for (unsigned int32 address = ADDRESS_SMF_START; address < ADDRESS_SMF_END; address += SECTOR_64K_BYTE) {
+   for (unsigned int32 address = ADDRESS_MISF_START; address < ADDRESS_MISF_END; address += SECTOR_64K_BYTE) {
       sector_erase(mis_fm, address); // Erase each sector
    }
    fprintf(PC, "End Flash Erase All\r\n");
@@ -346,17 +346,23 @@ void mode_flash_read(unsigned int8 uplinkcmd[])
    piclog_make(flash_param.id, 0x00);
    
 
-   unsigned int8 readdata[PACKET_SIZE];
+   unsigned int8 readdata[PACKET_SIZE] = {0x00}; // Initialize read data buffer
+   unsigned int32 read_address;
    fprintf(PC, "READ DATA\r\n");
 
    if(is_connect(mis_fm) == FALSE) {
       fprintf(PC, "Mission Flash is not connected\r\n");
       return;
    }
-   for (unsigned int8 packetcount = 0; packetcount < flash_param.readpacketnum; packetcount++){
-      read_data_bytes(mis_fm,flash_param.readaddress + packetcount * PACKET_SIZE, readdata, PACKET_SIZE);
-      for (unsigned int8 bitcount = 0; bitcount < PACKET_SIZE; bitcount++){
-         fprintf(PC,"%02X ",readdata[bitcount]);
+
+   for (unsigned int32 packetcount = 0; packetcount < flash_param.readpacketnum; packetcount++){
+      read_address = flash_param.readaddress + packetcount * PACKET_SIZE;
+
+      //fprintf(PC, "Packet %lu: Address 0x%08LX\r\n", packetcount, read_address);
+      
+      read_data_bytes(mis_fm, read_address, readdata, PACKET_SIZE);
+      for (unsigned int8 bytecount = 0; bytecount < PACKET_SIZE; bytecount++){
+         fprintf(PC,"%02X ",readdata[bytecount]);
       }
       fprintf(PC,"\r\n");
    }
@@ -424,6 +430,9 @@ void mode_flash_address_reset(unsigned int8 parameter[])
    unsigned int8 writedata[PACKET_SIZE] = {0x00}; // Initialize write data to zero
    
    write_data_bytes(mis_fm, ADDRESS_MANEGE_START, writedata, PACKET_SIZE);
+   misf_init(); // Update the address area after writing
+
+   piclog_make(parameter[0], 0x00); // Log the command execution
 
    fprintf(PC, "End Flash Address Reset\r\n");
 }

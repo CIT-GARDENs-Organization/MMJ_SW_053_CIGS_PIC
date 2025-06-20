@@ -496,6 +496,8 @@ void write_data_bytes(Flash flash_stream, unsigned int32 write_start_address, in
       flash_cmd[2] = (unsigned int8)((write_start_address>>8) & 0xff);    // 0x 00 00 _ _ 00
       flash_cmd[3] = (unsigned int8)((write_start_address) & 0xff);       // 0x 00 00 00 _ _
 
+      //fprintf(PC, "address:0x%08LX\r\n", write_start_address);
+
       //Write enable sequence
       output_low(flash_stream.cs_pin);
       spi_xfer_select_stream(flash_stream, &write_enable_cmd, 1);

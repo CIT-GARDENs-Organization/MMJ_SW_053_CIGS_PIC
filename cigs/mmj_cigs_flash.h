@@ -7,7 +7,7 @@
 // MIS_FM Function
 void misf_init(void);
 void update_misf_data_header(void);
-void update_address_area(void);
+void write_misf_address_area(void);
 
 
 
@@ -19,16 +19,16 @@ void update_address_area(void);
 
 
 // __________MISF-ADDRESS__________
-#define ADDRESS_SMF_START 0x000000
-#define ADDRESS_SMF_END   0xF42400
-#define ADDRESS_MANEGE_START 0x000000
-#define ADDRESS_MANEGE_END   0x000FFF
-#define ADDRESS_MISF_PICLOG_INDEX_START 0x000100
-#define ADDRESS_MISF_PICLOG_INDEX_END 0x0001FF
-#define ADDRESS_MISF_PICLOG_DATA_START 0x000200
-#define ADDRESS_MISF_PICLOG_DATA_END   0x141FFF
-#define ADDRESS_MISF_MEASUREMENT_START 0x142000
-#define ADDRESS_MISF_MEASUREMENT_END   0x941FFF
+#define ADDRESS_MISF_START              0x000000
+#define ADDRESS_MISF_END                0xF42400
+#define ADDRESS_MANEGE_START            0x000000
+#define ADDRESS_MANEGE_END              0x00FFFF
+#define ADDRESS_MISF_PICLOG_INDEX_START 0x010000
+#define ADDRESS_MISF_PICLOG_INDEX_END   0x01FFFF
+#define ADDRESS_MISF_PICLOG_DATA_START  0x020000
+#define ADDRESS_MISF_PICLOG_DATA_END    0x15FFFF
+#define ADDRESS_MISF_MEASUREMENT_START  0x160000
+#define ADDRESS_MISF_MEASUREMENT_END    0x95FFFF
 
 //
 #define SECTOR_64K_BYTE 0x10000 // 64KByte
@@ -51,26 +51,6 @@ unsigned int32  misf_meas_uncopyed_counter;
 
 
 #define DATA_HEADER_SIZE 64 
-
-
-typedef struct FLASH_DATA_HEADER {
-    unsigned int32  smf_piclog_use_counter;
-    unsigned int8   smf_piclog_loop_counter;
-    unsigned int32  smf_meas_use_counter;
-    unsigned int8   smf_meas_loop_counter;
-
-    unsigned int32  misf_piclog_use_counter;
-    unsigned int8   misf_piclog_loop_counter;
-    unsigned int32  misf_piclog_uncopyed_counter;
-    unsigned int8   misf_piclog_write_counter;
-    unsigned int32  misf_meas_use_counter;
-    unsigned int8   misf_meas_loop_counter;
-    unsigned int32  misf_meas_uncopyed_counter;
-
-    unsigned int8   reserve[34];
-    unsigned int8   crc;
-}   FLASH_DATA_HEADER; // フィールド
-
 
 
 

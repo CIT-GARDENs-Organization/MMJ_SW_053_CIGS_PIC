@@ -1,9 +1,9 @@
 
-ROM used:   14079/16384 (86%)
-            14148/16384 (86%) including unused fragments
+ROM used:   14755/16384 (90%)
+            15130/16384 (92%) including unused fragments
 
-            3.1 Average locations per line
-            14.7 Average locations per statement
+            3.2 Average locations per line
+            14.8 Average locations per statement
 
 RAM used:   1265/2048 (62%) at main() level
             1611/2048 (79%) worst case
@@ -24,15 +24,15 @@ Lines Stmts  %   Files
    29     0   0  lib\uart.h
    23     9   1  lib\src\uart.c
   115     0   0  cigs\mmj_cigs_mode.h
-  430   176  18  cigs\src\mmj_cigs_mode.c
+  439   179  18  cigs\src\mmj_cigs_mode.c
    46     0   0  cigs\mmj_cigs_func.h
   152    68   7  cigs\src\mmj_cigs_func.c
    29     0   0  cigs\mmj_cigs_piclog.h
-   53    22   2  cigs\src\mmj_cigs_piclog.c
-  113     0   0  cigs\mmj_cigs_flash.h
-   86    45   5  cigs\src\mmj_cigs_flash.c
+   64    26   3  cigs\src\mmj_cigs_piclog.c
+   93     0   0  cigs\mmj_cigs_flash.h
+  138    72   7  cigs\src\mmj_cigs_flash.c
   100     0   0  lib\mt25q.h
-  582   289  30  lib\src\mt25q.c
+  584   289  29  lib\src\mt25q.c
    52     0   0  lib\smf_queue.h
    80    40   4  lib\src\smf_queue.c
    25     0   0  lib\mission_tools.h
@@ -50,259 +50,260 @@ Lines Stmts  %   Files
    26     0   0  cigs\mmj_cigs_excute_mission.h
   155    75   8  cigs\src\mmj_cigs_excute_mission.c
 ----- -----
- 4608   961 Total
+ 4662   995 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
 1     22   0    1             @delay_ms1
  Inline         0             @PUTCHARI_BIU_1
-0     37   0    1             @PUTCHAR_2_
-1     13   0    3             @SPI_XFER_1_8
+1     37   0    1             @PUTCHAR_2_
+0     13   0    3             @SPI_XFER_1_8
 1     13   0    3             @SPI_XFER_2_8
 0     16   0    0     29  1.2  TIMER1_isr
 1     29   0    0    179  2.1  setup_timer
 0     10   0    0             @const874
-1     82   1    4             @PSTRINGC7_839
+1     78   1    4             @PSTRINGC7_839
 0      6   0    0             @const879
  Inline         0     13  1.0  get_current_sec
 0     25   0    3    152  5.2  RDA_isr
 1     20   0    0     90  1.5  setup_uart_to_boss
 0      9   0    0             @const888
 0      6   0    0             @const889
-2     31   0    6    105  2.8  clear_receive_signal
+1     31   0    6    105  2.8  clear_receive_signal
  Inline         0             @MEMSET
-1     94   1   13    436  9.0  spi_xfer_select_stream
-1    208   1   29    794  9.8  spi_xfer_and_read_select_stream
-1    152   1   18    791 10.0  spi_xfer_two_datas_select_stream
-2     23   0    4     33  1.7  flash_setting
-1     34   0    6             @WRITEBITA
-2     80   1    6    199  3.8  status_register
-3    470   3   26   2032  9.9  sector_erase
-3    417   3   29   2032  9.9  subsector_4kByte_erase
+1     96   1   13    436  9.0  spi_xfer_select_stream
+1    212   1   29    794  9.8  spi_xfer_and_read_select_stream
+1    156   1   18    791 10.0  spi_xfer_two_datas_select_stream
+1     19   0    4     33  1.7  flash_setting
+1     34   0    6     33  1.7  @WRITEBITA
+1     70   0    6    199  3.8  status_register
+3    469   3   26   2032  9.9  sector_erase
+2    423   3   26   2032  9.9  subsector_4kByte_erase
 5    238   2   23   1422  7.7  read_data_byte
 1    199   1   28   1438  8.4  read_data_bytes
 6    453   3   30   2216  9.8  write_data_byte
-2    407   3   33   2226 10.5  write_data_bytes
-1     89   1    9    327  5.6  is_connect
-1    576   4  132   2439  5.9  misf_init
-0     14   0    0             @const1143
-0     13   0    0             @const1146
-0     11   0    0             @const1147
-0     16   0    0             @const1148
-1     94   1    4             @PSTRINGCN7_839
-1     79   1   16             @DIV3232
-1    103   1   15             @PRINTF_L32U_839
-0     16   0    0      3  0.0  @const1156
-1     23   0    3   1612  4.3  @DIV88
-1     72   1    2             @PRINTF_U_839
-0     15   0    0   1134  9.2  @const1163
-0     15   0    0             @const1164
-0     16   0    0      3  0.0  @const1165
-0     16   0    0    244  3.0  @const1166
-0     19   0    0             @const1167
-0     15   0    0   1134  9.2  @const1168
-0     15   0    0     90  1.5  @const1169
-0     18   0    0             @const1170
-0      6   0    0             @const1171
-0     14   0    0     90  1.5  @const1174
-2    288   2   27   1134  9.2  piclog_make
-0      6   0    0             @const1179
-1     43   0    2             @PRINTF_X_839
-0     17   0    0   1310  6.1  @const1187
+2    409   3   33   2226 10.5  write_data_bytes
+1     89   1   10    327  5.6  is_connect
+1    633   4   69   2664  5.9  misf_init
+0     14   0    0   2664  5.9  @const1128
+0     13   0    0    327  5.6  @const1130
+0     21   0    0   2664  5.9  @const1131
+1     90   1    4             @PSTRINGCN7_839
+1     39   0    2             @PRINTF_X_839
+0     21   0    0             @const1137
+0     21   0    0             @const1138
+0     21   0    0      3  0.0  @const1139
+0     21   0    0   1612  4.3  @const1140
+0     21   0    0             @const1141
+0     21   0    0   1134  9.2  @const1142
+0     21   0    0             @const1143
+0     21   0    0      3  0.0  @const1144
+0     21   0    0    244  3.0  @const1145
+0     21   0    0             @const1146
+0      6   0    0   1134  9.2  @const1147
+ Inline        69   2646  5.4  write_misf_address_area
+0     17   0    0   2621  5.4  @const1150
+2    674   5   27   1265  8.8  piclog_make
+0      6   0    0   1329  8.8  @const1153
+0     17   0    0   1226  8.7  @const1158
 1     24   0    0     90  1.5  io_init
-0      8   0    0             @const1189
-0      6   0    0    889  7.4  @const1190
+0      8   0    0     90  1.5  @const1160
+0      6   0    0     90  1.5  @const1161
 1     40   0    0    245  2.7  adc_init
-0      9   0    0             @const1192
-0      6   0    0             @const1193
-0      7   0    0             @const1196
-0     10   0    0             @const1198
-0      6   0    0    770  4.3  @const1202
+0      9   0    0    245  2.7  @const1163
+0      6   0    0    245  2.7  @const1164
+0      7   0    0   1310  6.1  @const1167
+0     10   0    0   1310  6.1  @const1169
+1     23   0    3             @DIV88
+4     76   1    2   1310  6.1  @PRINTF_U_839
+4     79   1   16   1310  6.1  @DIV3232
+0      6   0    0             @const1182
  Inline        10    889  7.4  convert_cigs_data
-0     10   0    0    463  6.5  @const1203
-3     39   0    2    268  6.1  @MUL88
-0     14   0    0             @const1241
-5     48   0    2    268  6.1  dequeue_smf_data
-0     13   0    0             @const1242
-2     11   0    0     43  2.5  is_empty_smf_data
+0     10   0    0    889  7.4  @const1183
+3     39   0    2    889  7.4  @MUL88
+0     14   0    0    463  6.5  @const1221
+4     48   0    2    268  6.1  dequeue_smf_data
+0     13   0    0    268  6.1  @const1222
+1     11   0    0     43  2.5  is_empty_smf_data
 5    111   1   10    855  3.3  getMissionTypeStruct
-2    578   4   27   1307  9.6  make_receive_command
-0     16   0    0    295  7.4  @const1290
-0      7   0    0    295  7.4  @const1291
-0     14   0    0             @const1300
+3    581   4   27   1307  9.6  make_receive_command
+0     16   0    0   1307  9.6  @const1270
+0      7   0    0   1307  9.6  @const1271
+0     14   0    0    356  5.9  @const1280
  Inline         5    387  7.3  trim_receive_signal_header
-0     11   0    0    194  3.4  @const1302
-0      9   0    0    194  3.4  @const1303
+0     11   0    0    387  7.3  @const1282
+0      9   0    0    387  7.3  @const1283
  Inline         3    295  7.4  get_content_size
-0     18   0    0             @const1305
+0     18   0    0    295  7.4  @const1285
  Inline         6    356  5.9  check_crc
-0      9   0    0    348  4.5  @const1308
-0     12   0    0    348  4.5  @const1309
-0     12   0    0             @const1310
+0      9   0    0    356  5.9  @const1288
+0     12   0    0    356  5.9  @const1289
+0     12   0    0    348  4.5  @const1290
  Inline         1    194  3.4  check_device_id
-0     17   0    0    175  5.5  @const1311
-0     12   0    0    201  3.8  @const1312
-0     12   0    0    201  3.8  @const1313
-2    150   1   29    457  5.9  transmit_command
+0     17   0    0    194  3.4  @const1291
+0     12   0    0    194  3.4  @const1292
+0     12   0    0    201  3.8  @const1293
+2    146   1   29    457  5.9  transmit_command
  Inline         6    348  4.5  transmit
-0      7   0    0     33  1.3  @const1318
+0      7   0    0    348  4.5  @const1298
 1     27   0    6    175  5.5  calc_crc8
-0     10   0    0             @const1332
-0     12   0    0             @const1333
-4    115   1    6             @PRINTF_D_839
+0     10   0    0    201  3.8  @const1312
+0     12   0    0    201  3.8  @const1313
+5    115   1    6             @PRINTF_D_839
 1     11   0    0     33  1.3  transmit_ack
-4     15   0    0     38  1.7  transmit_status
-0     18   0    0     47  1.3  @const1339
-0     28   0    0    176  2.3  @const1342
-0     13   0    0     86  2.3  @const1345
-0     13   0    0    238  3.2  @const1347
-0     14   0    0    118  2.6  @const1348
-0     28   0    0    797  5.0  @const1349
-0     17   0    0    797  5.0  @const1350
+3     15   0    0     38  1.7  transmit_status
+0     18   0    0   1352  9.8  @const1319
+0     28   0    0   1352  9.8  @const1322
+0     13   0    0    176  2.3  @const1325
+0     13   0    0     86  2.3  @const1327
+0     14   0    0    238  3.2  @const1328
+0     28   0    0    118  2.6  @const1329
+0     17   0    0    797  5.0  @const1330
 0     10   0    0    176  2.3  ad7490_init
-2     77   1    4     86  2.3  ad7490_read
+4     77   1    4     86  2.3  ad7490_read
  Inline         4    238  3.2  set_add
  Inline         2    118  2.6  set_pm
 2    310   2   33    797  5.0  mode_dummy
-0     10   0    0    136  2.5  @const1383
-0     10   0    0      3  0.0  @const1385
-0     11   0    0   1288  6.0  @const1386
-0     11   0    0   1288  6.0  @const1387
-0      9   0    0    147  2.5  @const1388
-0     11   0    0    250  2.9  @const1392
-0     15   0    0    114  2.0  @const1395
-4    704   5   11   1288  6.0  mode_iv_meas_adc
-0      7   0    0    114  2.0  @const1398
-0     10   0    0    114  2.0  @const1400
-0      6   0    0    114  2.0  @const1404
-0      8   0    0    114  2.0  @const1408
-0      8   0    0    114  2.0  @const1409
-0      8   0    0    281  4.5  @const1412
-0      9   0    0    486  4.8  @const1415
-0     10   0    0             @const1418
-0     10   0    0    486  4.8  @const1421
+0     10   0    0    797  5.0  @const1363
+0     10   0    0    797  5.0  @const1365
+0     11   0    0      3  0.0  @const1366
+0     11   0    0   1288  6.0  @const1367
+0      9   0    0   1288  6.0  @const1368
+0     11   0    0    104  2.8  @const1372
+0     15   0    0    136  2.5  @const1375
+5    704   5   11   1288  6.0  mode_iv_meas_adc
+0      7   0    0   1288  6.0  @const1378
+0     10   0    0   1288  6.0  @const1380
+0      6   0    0    114  2.0  @const1384
+0      8   0    0    250  2.9  @const1388
+0      8   0    0    250  2.9  @const1389
+0      8   0    0    147  2.5  @const1392
+0      9   0    0    114  2.0  @const1395
+0     10   0    0    114  2.0  @const1398
+0     10   0    0    114  2.0  @const1401
 2     85   1    7    281  4.5  mode_flash_erase_all
-0     12   0    0             @const1422
-0     11   0    0   1121  3.5  @const1425
-3    214   2   19    486  4.8  mode_flash_erase_1sector
-0     15   0    0   1655  8.7  @const1426
-0     14   0    0   1547  9.6  @const1429
-0     14   0    0             @const1430
-3    210   1   19    486  4.8  mode_flash_erase_4kbyte_subsector
-0     14   0    0    265  2.9  @const1431
-0     15   0    0             @const1434
-0     13   0    0    265  2.9  @const1435
-3    510   4   99   1655  8.7  mode_flash_write_demo
-0     13   0    0    265  2.9  @const1436
-0     10   0    0    265  2.9  @const1438
-0     11   0    0   1547  9.6  @const1439
-0     11   0    0   1547  9.6  @const1440
-0      7   0    0   1547  9.6  @const1444
-0     12   0    0    333  3.1  @const1449
-4    352   3  262    265  2.9  mode_flash_write_4kbyte_subsecotr
-0     19   0    0    348  2.9  @const1450
-0     18   0    0    274  4.3  @const1453
-4    495   4   88   1547  9.6  mode_flash_read
-0     10   0    0    348  2.9  @const1454
-0     10   0    0    348  2.9  @const1456
-0     11   0    0    348  2.9  @const1457
-0     11   0    0    333  3.1  @const1458
-0      6   0    0    333  3.1  @const1460
-0     17   0    0    333  3.1  @const1461
-0      9   0    0    274  4.3  @const1466
-3    178   1   10    348  2.9  mode_flash_read_address
-0     14   0    0             @const1467
-0     17   0    0    265  2.9  @const1470
-0     13   0    0    265  2.9  @const1471
+0     12   0    0    281  4.5  @const1402
+0     11   0    0    281  4.5  @const1405
+3    214   1   19    486  4.8  mode_flash_erase_1sector
+0     15   0    0    486  4.8  @const1406
+0     14   0    0    486  4.8  @const1409
+0     14   0    0   1547  9.6  @const1410
+3    213   1   19    486  4.8  mode_flash_erase_4kbyte_subsector
+0     14   0    0    486  4.8  @const1411
+0     15   0    0    486  4.8  @const1414
+0     13   0    0             @const1415
+3    510   3   99   1655  8.7  mode_flash_write_demo
+0     13   0    0   1655  8.7  @const1416
+0     10   0    0   1655  8.7  @const1418
+0     11   0    0    265  2.9  @const1419
+0     11   0    0   1547  9.6  @const1420
+0      7   0    0   1547  9.6  @const1424
+0     12   0    0    333  3.1  @const1429
+4    352   2  262    265  2.9  mode_flash_write_4kbyte_subsecotr
+0     19   0    0    265  2.9  @const1430
+0     18   0    0    265  2.9  @const1433
+4    606   4   99   1634  9.8  mode_flash_read
+0     10   0    0   1634  9.8  @const1434
+0     10   0    0   1718  9.7  @const1436
+0     11   0    0    348  2.9  @const1437
+0     11   0    0    348  2.9  @const1438
+0      6   0    0    333  3.1  @const1441
+0     17   0    0    333  3.1  @const1442
+0      9   0    0    274  4.3  @const1447
+4    178   1   10    348  2.9  mode_flash_read_address
+0     14   0    0    348  2.9  @const1448
+0     17   0    0    348  2.9  @const1451
+0     13   0    0    348  2.9  @const1452
 4    158   1  266    333  3.1  mode_flash_smf_copy
-0     12   0    0    265  2.9  @const1472
-0     11   0    0    359  3.0  @const1476
-0     12   0    0    359  3.0  @const1480
-0      6   0    0   1346  8.7  @const1482
-0     12   0    0   1346  8.7  @const1485
-0     12   0    0    171  4.2  @const1489
-0     11   0    0   1412  6.5  @const1492
-4    117   1   66    180  2.5  mode_flash_address_reset
-0     14   0    0   1412  6.5  @const1493
-0     13   0    0   1412  6.5  @const1495
-6    436   3  120   1346  8.7  copy_data
-0     13   0    0             @const1545
-0     12   0    0    171  4.2  @const1546
-0     14   0    0             @const1549
-0     13   0    0    171  4.2  @const1562
-0     13   0    0    171  4.2  @const1563
-5    945   7   42   1412  6.5  initialize_mission
-0     22   0    0    171  4.2  @const1564
-0     22   0    0    666  3.4  @const1565
-0     22   0    0    320  7.8  @const1566
-0     23   0    0    552  7.6  @const1567
-0      9   0    0    666  3.4  @const1569
-0     16   0    0    251  4.4  @const1570
-0     17   0    0   1143  5.9  @const1571
-5     78   1   12    171  4.2  check_and_erase_if_wrap
-0     27   0    0    206  4.3  @const1572
-5    122   1   28    320  7.8  erase_write_area
-5    218   2   38    552  7.6  write_mission_data
-6    496   4   23    666  3.4  update_size_area
-0     10   0    0    262  5.1  @const1581
-0      9   0    0    251  4.4  @const1582
- Inline        14    262  5.1  @PRINTF_L32D_839
-0     10   0    0             @const1585
-5    246   2    3   1143  5.9  execute_mission
-0     35   0    0    206  4.3  @const1598
-0     10   0    0    322  4.3  @const1599
-0     12   0    0    206  4.3  @const1600
-0     35   0    0    322  4.3  @const1601
-6     64   0    2    262  5.1  execute_command
-0     12   0    0             @const1602
-4     50   0    4    251  4.4  handle_uplink_command
-0     11   0    0             @const1603
-0     13   0    0    954  6.2  @const1604
-4     40   0    2    206  4.3  handle_status_check
-0     10   0    0             @const1605
-0     15   0    0    954  6.2  @const1606
-0     14   0    0             @const1607
-6     57   0    3    322  4.3  handle_smf_available
-0     13   0    0             @const1608
-0     13   0    0             @const1609
-0      7   0    0             @const1610
-0      7   0    0             @const1611
-6    355   3   14    954  6.2  MAIN
-0     35   0    0             @const1615
-0     23   0    0             @const1616
-0     21   0    0             @const1617
-0     19   0    0             @const1619
-0     15   0    0             @const1620
-0     16   0    0             @const1622
-0     32   0    0             @const1624
-0      6   0    0             @const1626
+0     12   0    0    333  3.1  @const1453
+0     11   0    0    333  3.1  @const1457
+0     12   0    0    274  4.3  @const1461
+0      6   0    0    274  4.3  @const1463
+0     12   0    0    274  4.3  @const1466
+0     12   0    0    265  2.9  @const1470
+0     11   0    0    265  2.9  @const1473
+4    135   1   67    244  2.6  mode_flash_address_reset
+0     14   0    0    244  2.6  @const1474
+0     13   0    0    180  2.5  @const1476
+7    438   3  120   1346  8.7  copy_data
+0     13   0    0   1346  8.7  @const1526
+0     12   0    0   1346  8.7  @const1527
+0     14   0    0   1346  8.7  @const1530
+0     13   0    0   1346  8.7  @const1543
+0     13   0    0    171  4.2  @const1544
+6    969   7   42   1412  6.5  initialize_mission
+0     22   0    0   1412  6.5  @const1545
+0     22   0    0   1412  6.5  @const1546
+0     22   0    0   1412  6.5  @const1547
+0     23   0    0   1412  6.5  @const1548
+5    107   1   15    552  7.6  @PRINTF_L32U_839
+0      9   0    0    666  3.4  @const1552
+0     16   0    0    251  4.4  @const1553
+0     17   0    0   1143  5.9  @const1554
+5     85   1   12    171  4.2  check_and_erase_if_wrap
+0     27   0    0    171  4.2  @const1555
+5    129   1   28    320  7.8  erase_write_area
+5    218   1   38    552  7.6  write_mission_data
+6    503   3   23    666  3.4  update_size_area
+0     10   0    0    666  3.4  @const1564
+0      9   0    0    666  3.4  @const1565
+ Inline        14    666  3.4  @PRINTF_L32D_839
+0     10   0    0             @const1568
+4    236   2    3   1143  5.9  execute_mission
+0     35   0    0   1143  5.9  @const1581
+0     10   0    0   1143  5.9  @const1582
+0     12   0    0   1143  5.9  @const1583
+0     35   0    0    322  4.3  @const1584
+5     64   0    2    262  5.1  execute_command
+0     12   0    0    262  5.1  @const1585
+4     48   0    4    251  4.4  handle_uplink_command
+0     11   0    0    251  4.4  @const1586
+0     13   0    0    251  4.4  @const1587
+4     42   0    2    206  4.3  handle_status_check
+0     10   0    0    206  4.3  @const1588
+0     15   0    0    206  4.3  @const1589
+0     14   0    0    206  4.3  @const1590
+5     59   0    3    322  4.3  handle_smf_available
+0     13   0    0    322  4.3  @const1591
+0     13   0    0    322  4.3  @const1592
+0      7   0    0    322  4.3  @const1593
+0      7   0    0             @const1594
+7    357   2   14    954  6.2  MAIN
+0     35   0    0    954  6.2  @const1598
+0     23   0    0    954  6.2  @const1599
+0     21   0    0    954  6.2  @const1600
+0     19   0    0             @const1602
+0     15   0    0             @const1603
+0     16   0    0             @const1605
+1     32   0    0             @const1607
+0      6   0    0             @const1609
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               159
-    Statements              961
-    Comments                1123
-    Volume (V)              186315
-    Difficulty (D)          773.7
-    Effort to implement (E) 144158987
-    Time to implement (T)   2224 hours, 41 minutes
-    Est Delivered Bugs (B)  92
-    Cyclomatic Complexity   198
-    Maintainability (MI)    63
+    Functions               194
+    Statements              995
+    Comments                1141
+    Volume (V)              278812
+    Difficulty (D)          1009.5
+    Effort to implement (E) 281472191
+    Time to implement (T)   4343 hours, 42 minutes
+    Est Delivered Bugs (B)  143
+    Cyclomatic Complexity   314
+    Maintainability (MI)    77
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     3  0  
 00003-00003     0  1  
 00004-00049    70  0  
-0004A-007FF  1968  6  
-00800-00FFF  2047  1  
-01000-017FF  2040  8  
-01800-01FFF  2038  10  
-02000-027FF  2046  2  
-02800-02FFF  2006  42  
-03000-037FF  1861  187  
-03800-03FFF     0  2048  
+0004A-007FF  1974  0  
+00800-00FFF  2035  13  
+01000-017FF  2047  1  
+01800-01FFF  2041  7  
+02000-027FF  2035  13  
+02800-02FFF  1830  218  
+03000-037FF  1925  123  
+03800-03FFF   795  1253  
 
 
 

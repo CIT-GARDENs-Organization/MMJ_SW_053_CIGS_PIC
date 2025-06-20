@@ -6,7 +6,7 @@
 
 void piclog_make(unsigned int8 function, unsigned int8 parameter)
 {
-    int8 piclog[PICLOG_PACKET_SIZE];
+    unsigned int8 piclog[PICLOG_PACKET_SIZE];
     int32 time = get_current_sec();
     piclog[0] = (time >> 24) & 0xFF; // Time high byte
     piclog[1] = (time >> 16) & 0xFF;
@@ -24,18 +24,29 @@ void piclog_make(unsigned int8 function, unsigned int8 parameter)
     #endif
 
     unsigned int32 write_address = ADDRESS_MISF_PICLOG_DATA_START + misf_piclog_use_counter;
+    //fprintf(PC, "Write PICLOG to address: 0x%08LX\r\n", write_address);
+    
     if(is_connect(mis_fm) == FALSE) {
         fprintf(PC, "Mission Flash is not connected\r\n");
         return;
     }
+    
     write_data_bytes(mis_fm, write_address, piclog, PICLOG_PACKET_SIZE);
+    
+    // Update the counters
     misf_piclog_use_counter += PICLOG_PACKET_SIZE;
+    misf_piclog_uncopyed_counter += PICLOG_PACKET_SIZE;
+    misf_piclog_write_counter += PICLOG_PACKET_SIZE;
 
     // Next Packet
-    if (misf_piclog_use_counter + PICLOG_PACKET_SIZE >= MISF_PICLOG_MAX_COUNT) {
-        write_data_bytes(mis_fm, write_address, *PICLOG_BLANK_DATA, PICLOG_PACKET_SIZE);
-        misf_piclog_use_counter = 0; // Reset if max count reached
+    if (misf_piclog_write_counter + PICLOG_PACKET_SIZE >=  PACKET_SIZE) {
+        write_address = ADDRESS_MISF_PICLOG_DATA_START + misf_piclog_use_counter;
+        write_data_bytes(mis_fm, write_address, PICLOG_BLANK_DATA, PICLOG_PACKET_SIZE);
+        misf_piclog_write_counter = 0;
     }
+
+
+    write_misf_address_area(); // Update the address area after writing
     
     /*
     // Add CRC Check
