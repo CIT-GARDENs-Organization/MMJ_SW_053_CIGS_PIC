@@ -4,6 +4,11 @@
 #define PICLOG_PACKET_SIZE 6
 unsigned int8 PICLOG_STARTUP = 0x00;
 
+// PICLOG Parameter
+#define PICLOG_PARAM_START 0x01
+#define PICLOG_PARAM_END 0x02
+
+
 // PICLOG
 typedef union {
     struct {

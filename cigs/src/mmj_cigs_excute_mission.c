@@ -24,7 +24,7 @@ void execute_mission(unsigned int8 *content)
          //mode_iv_meas_adc();
          break;
       case 0x10:
-         //mode_measure(parameter);
+         mode_test_iv();
          break;
       case 0x01:
          //example_01(parameter);

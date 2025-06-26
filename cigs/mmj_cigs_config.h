@@ -22,17 +22,17 @@
 // -------------SPI--------------------
 // MOSI:PIN_C5, MISO:PIN_C4, SCK:PIN_C3
 // Shared Mission Flash
-#define MIS_FM_CS  PIN_D1
+#define MIS_FM_CS  PIN_D3
 #use spi(MASTER, SPI1, BAUD = 400000, MODE = 0, BITS= 8, STREAM = MIS_FM_STREAM)
 
 // Mission Flash
-#define SMF_CS PIN_D2
+#define SMF_CS PIN_D1
 #use spi(MASTER, SPI1, BAUD = 400000, MODE = 0, BITS = 8, STREAM = SMF_STREAM)
 
 // Analog to Digital Converter 
-#define ADC_CS PIN_D3
-#use spi(MASTER, SPI1, BAUD = 100000, MODE=2, BITS = 8, STREAM = ADC_STREAM)
-
+#define ADC_CS PIN_D2
+//#use spi(MASTER, SPI1, BAUD = 9600, MODE=2, BITS = 16, STREAM = ADC_STREAM)
+#use spi(MASTER, CLK = PIN_C3, DI = PIN_C4, DO = PIN_C5,ENABLE = PIN_D2, BAUD = 9600, BITS = 16, STREAM = ADC_STREAM, MODE = 2 )
 
 
 
@@ -58,16 +58,17 @@
 #define LOAD PIN_A5
 
 // DI/O___
-#define CONNECT_CIGS PIN_C0
-#define EN_NPWR PIN_C3  
+#define CONNECT_CIGS PIN_E0
+#define EN_NPWR PIN_A4
+#define EN_MEAS_VOL PIN_A5
 
 
 // ADC Settings
-#define ADC_TEMP_TOP    AD7490_VIN0
-#define ADC_TEMP_BOT    AD7490_VIN1
-#define ADC_CIGS_VOLT   AD7490_VIN2
-#define ADC_CIGS_CURR   AD7490_VIN3
-#define ADC_PD          AD7490_VIN4
+#define ADC_CIGS_VOLT   AD7490_VIN0
+#define ADC_CIGS_CURR   AD7490_VIN1
+#define ADC_PD          AD7490_VIN2
+#define ADC_TEMP_TOP    AD7490_VIN3
+#define ADC_TEMP_BOT    AD7490_VIN4
 
 // Flasj Settings
 

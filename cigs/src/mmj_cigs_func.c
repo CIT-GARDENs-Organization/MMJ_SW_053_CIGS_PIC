@@ -13,10 +13,6 @@ struct AD7490_STREAM ad7490_stream = {
 */
 
 
-
-
-
-
 void io_init()
 {
     fprintf(PC, "IO Initialize\r\n");
@@ -34,7 +30,7 @@ void adc_init()
    setup_adc(ADC_CLOCK_DIV_64);
 
    //setup DAC
-   setup_dac(DAC_OUTPUT2 | DAC_VSS_FVR);                                        //DAC output at pin DAC output1 from 0-VDD volts  
+   setup_dac(DAC_OUTPUT2 | DAC_VSS_VDD);                                        //DAC output at pin DAC output1 from 0-VDD volts  
    dac_write(50);                                                               
    fprintf(PC, "\tComplete\r\n");
 }
@@ -59,13 +55,12 @@ void sweep(unsigned int8 parameter[])
     {    
         // set DAC value
         dac_write(count);
-        delay_us(100); // wait for the DAC to stabilize
+        delay_ms(100); // wait for the DAC to stabilize
 
         // read CIGS voltage and current      
         delay_us(10); // wait for the ADC to stabilize
         data_buffer[count*2] = ad7490_read(ADC_CIGS_VOLT);
         data_buffer[count*2+1] = ad7490_read(ADC_CIGS_CURR); // read voltage at adc pin
-
     }
 
     output_low(CONNECT_CIGS);
@@ -75,7 +70,7 @@ void sweep(unsigned int8 parameter[])
     unsigned int8 packetdata[PACKET_SIZE] = {0x00};
     
     make_meas_header(packetdata, parameter); // Create measurement header
-    unsigned int8 packetbytecounter = HEADER_SIZE; // Start after header size
+    unsigned int8 packetbytecounter = 21; // Start after header size
     
     for (unsigned int8 i = 0; i < measurement_step; i++)
     {        
@@ -148,6 +143,5 @@ void make_meas_header(unsigned int8 *packetdata, unsigned int8 *cmd)
     packetdata[18] = ( measured_temp_top >> 4 ) &  0xFF; // PD start low byte
     packetdata[19] = ( measured_temp_top & 0x0F ) << 4 | ( measured_temp_bot >>8 )& 0x0F;
     packetdata[20] = measured_temp_bot & 0xFF; // PD end
-    packetdata[21] = RESERVED_VALUE;
 }
 

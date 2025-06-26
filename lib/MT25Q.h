@@ -3,7 +3,7 @@
 
 // =========
 //#define MT25Q_DEBUG
-// =====-====
+// =========
 
 
 #define FLASH_STREAM0 MIS_FM_STREAM     // <- Align the names to `config.h` Stream name

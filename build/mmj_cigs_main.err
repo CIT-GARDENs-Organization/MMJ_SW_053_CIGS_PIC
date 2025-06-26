@@ -1,8 +1,8 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 20-6-25 at 18:44
->>> Warning 203 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\src\mmj_cigs_mode.c" Line 410(1,1): Condition always TRUE
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 26-6-25 at 19:19
+>>> Warning 203 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\src\mmj_cigs_mode.c" Line 443(1,1): Condition always TRUE
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\timer.h" Line 14(16,22): Variable never used:   subsec
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\src\ad7490.c" Line 5(22,36): Variable never used:   adf7490_stream
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\src\mmj_cigs_mode.c" Line 46(18,28): Variable never used:   sweep_step
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_excute_mission.h" Line 20(15,27): Variable never used:   duration_sec
-      Memory usage:   ROM=87%      RAM=43% - 60%
+      Memory usage:   ROM=96%      RAM=44% - 64%
       0 Errors,  4 Warnings.
 Build Successful.

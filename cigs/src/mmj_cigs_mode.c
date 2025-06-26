@@ -26,10 +26,11 @@ void mode_dummy(unsigned int8 uplinkcmd[])
    fprintf(PC, "\tParam1   : 0x%08LX\r\n", dummy_cmd.param1);
    fprintf(PC, "\tParam2   : 0x%04LX\r\n", dummy_cmd.param2);
 
-   piclog_make(dummy_cmd.id, 0x00); // Log the command execution
+   piclog_make(dummy_cmd.id, PICLOG_PARAM_START); // Log the command execution
 
    // This is a dummy function for testing purposes
    // You can add your own code here
+   piclog_make(dummy_cmd.id, PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End MODE DUMMY\r\n");
 }
 
@@ -43,7 +44,7 @@ void mode_measure(unsigned int8 parameter[])
 
 
    unsigned int8 sweep_step = parameter[0]; // Get the measurement step from the parameter array
-   piclog_make(parameter[0], sweep_step); // Log the command execution
+   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
    //adc_init();
    sweep(parameter);
    
@@ -209,7 +210,30 @@ void mode_test_voltage()
    fprintf(PC, "voltage_value: %X\r\n", voltage_value);
 }
 
-
+#separate
+void mode_test_iv()
+{
+   unsigned int8 measurement_step = 100; // Get the measurement step from the parameter array
+   fprintf(PC, "Start MODE TEST IV\r\n");
+   fprintf(PC, "\tSweep step : %u\r\n", measurement_step);
+   //unsigned int16 test = 0x9330;
+   //fprintf (PC, "Test value: %04LX\r\n", test);
+   output_high(EN_MEAS_VOL);
+   output_high(CONNECT_CIGS);
+   output_low(EN_NPWR); // Enable NPWR
+   unsigned int16 readdata;
+   setup_dac(DAC_OUTPUT2 | DAC_VSS_VDD);   
+   for (unsigned int16 count = 0; count < measurement_step; count++)
+   {    
+      // set DAC value
+      dac_write(count);
+      delay_ms(100); // wait for the DAC to stabilize
+      readdata = ad7490_readdata(0x8330);  // read voltage at adc pin
+      fprintf(PC, "%04LX, ", readdata);
+      readdata = ad7490_readdata(0xAF30);  // read voltage at adc pin
+      fprintf(PC, "%04LX\r\n", readdata);
+   }
+}
 
 
 
@@ -224,6 +248,7 @@ void mode_flash_erase_all(unsigned int8 parameter[])
    for (unsigned int32 address = ADDRESS_MISF_START; address < ADDRESS_MISF_END; address += SECTOR_64K_BYTE) {
       sector_erase(mis_fm, address); // Erase each sector
    }
+   piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Erase All\r\n");
 }
 
@@ -239,10 +264,10 @@ void mode_flash_erase_1sector(unsigned int8 parameter[])
       ((unsigned int32)parameter[4]);
 
    fprintf(PC, "\tSector Address: 0x%08LX\r\n", sector_address);
-   piclog_make(cmd, 0x00); // Log the command execution
+   piclog_make(cmd, PICLOG_PARAM_START); // Log the command execution
    
    sector_erase(mis_fm, sector_address);
-   
+   piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Erase 1 Sector\r\n");
 }
 
@@ -258,10 +283,10 @@ void mode_flash_erase_4kbyte_subsector(unsigned int8 parameter[])
       ((unsigned int32)parameter[4]);
    
    fprintf(PC, "\tSubsector Address: 0x%08LX\r\n", subsector_address);
-   piclog_make(cmd, 0x00); // Log the command execution
+   piclog_make(cmd, PICLOG_PARAM_START); // Log the command execution
    
    subsector_4kByte_erase(mis_fm, 0x00000000);
-   
+   piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Copy 1 Sector\r\n");
 }
 
@@ -269,6 +294,8 @@ void mode_flash_erase_4kbyte_subsector(unsigned int8 parameter[])
 void mode_flash_write_demo(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Write Demo\r\n");
+   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
+
    FLASH_WRITE_PARAM flash_write_param = {0};
    
    flash_write_param.id = parameter[0];
@@ -306,6 +333,8 @@ void mode_flash_write_demo(unsigned int8 parameter[])
 
       write_data_bytes(mis_fm, current_address, writedata, PACKET_SIZE);
    }
+
+   piclog_make(flash_write_param.id, PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "\r\n");
    fprintf(PC, "End Flash Write Demo\r\n");
 }
@@ -314,10 +343,12 @@ void mode_flash_write_demo(unsigned int8 parameter[])
 void mode_flash_write_4kbyte_subsecotr(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Write 4kByte Subsector\r\n");
+   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
    flash_setting(mis_fm);
    unsigned int32 write_address = 0x00000000;
    int8 write_data[256] = {0x01, 0x02, 0x03, 0x04}; // Example data
    write_data_bytes(mis_fm, write_address, write_data, 256);
+   piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Write 4kByte Subsector\r\n");
 }
 
@@ -325,6 +356,7 @@ void mode_flash_write_4kbyte_subsecotr(unsigned int8 parameter[])
 void mode_flash_read(unsigned int8 uplinkcmd[])
 {
    fprintf(PC, "Start Flash Read\r\n");
+   piclog_make(uplinkcmd[0], PICLOG_PARAM_START); // Log the command execution
    FLASH_PARAM flash_param = {0};
    // for(unsigned int8 i = 0; i < PARAMETER_LENGTH; i++)
    // {
@@ -368,6 +400,7 @@ void mode_flash_read(unsigned int8 uplinkcmd[])
       }
       fprintf(PC,"\r\n");
    }
+   piclog_make(flash_param.id, PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Read\r\n");
 }
 
@@ -429,12 +462,13 @@ void mode_flash_smf_write(unsigned int8 parameter[])
 void mode_flash_address_reset(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Address Reset\r\n");
+   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
    unsigned int8 writedata[PACKET_SIZE] = {0x00}; // Initialize write data to zero
    
    write_data_bytes(mis_fm, ADDRESS_MANEGE_START, writedata, PACKET_SIZE);
    misf_init(); // Update the address area after writing
 
-   piclog_make(parameter[0], 0x00); // Log the command execution
 
+   piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Address Reset\r\n");
 }
