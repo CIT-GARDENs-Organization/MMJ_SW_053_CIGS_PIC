@@ -3,9 +3,8 @@
 void main()
 { 
    fprintf(PC,"\r\n\r\n\r\n============================================================\r\n");
-   fprintf(PC,"This is MOMIJI CIGS PIC BBM for MIS7_BBM1.\r\n");
-   fprintf(PC,"Last updated on 2025/06/15, by Inoue.\r\n\r\n");  
-
+   fprintf(PC,"This is MOMIJI CIGS PIC BBM for MIS7_BBM3.\r\n");
+   fprintf(PC,"Last updated on %s %s, by Inoue.\r\n\r\n", __DATE__, __TIME__);
    
    io_init();
    adc_init();

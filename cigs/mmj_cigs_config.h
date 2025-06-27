@@ -32,7 +32,7 @@
 // Analog to Digital Converter 
 #define ADC_CS PIN_D2
 //#use spi(MASTER, SPI1, BAUD = 9600, MODE=2, BITS = 16, STREAM = ADC_STREAM)
-#use spi(MASTER, CLK = PIN_C3, DI = PIN_C4, DO = PIN_C5,ENABLE = PIN_D2, BAUD = 9600, BITS = 16, STREAM = ADC_STREAM, MODE = 2 )
+#use spi(MASTER, CLK = PIN_C3, DI = PIN_C4, DO = PIN_C5, ENABLE = PIN_D2, BAUD = 9600, BITS = 16, STREAM = ADC_STREAM, MODE = 2 )
 
 
 

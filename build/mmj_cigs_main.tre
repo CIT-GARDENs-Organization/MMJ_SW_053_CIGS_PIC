@@ -1,5 +1,5 @@
 ÀÄmmj_cigs_main
-   ÃÄMAIN  7/361  Ram=14
+   ÃÄMAIN  7/403  Ram=14
    ³  ÃÄ@cinit1  (Inline)  Ram=0
    ³  ÃÄ@cinit2  (Inline)  Ram=0
    ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
@@ -7,7 +7,15 @@
    ³  ³  ÀÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³  ÀÄ*
+   ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
+   ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
+   ³  ³  ÀÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
+   ³  ³  ÀÄ*
+   ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
+   ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
+   ³  ³  ÀÄ*
+   ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³  ÀÄ*
    ³  ÃÄio_init  1/24  Ram=0
    ³  ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
@@ -24,7 +32,7 @@
    ³  ³  ³  ÀÄ*
    ³  ³  ÀÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³     ÀÄ*
-   ³  ÃÄsetup_timer  1/29  Ram=0
+   ³  ÃÄsetup_timer  1/30  Ram=0
    ³  ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³  ³  ÀÄ*
    ³  ³  ÀÄ@PSTRINGC7_839  1/78  Ram=5
@@ -63,8 +71,7 @@
    ³  ³  ³  ÃÄ@WRITEBITA  1/34  Ram=6
    ³  ³  ³  ÀÄ@WRITEBITA  1/34  Ram=6
    ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
-   ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
-   ³  ³  ³  ÀÄ@PUTCHAR_2_  1/37  Ram=1
+   ³  ³  ³  ÀÄ*
    ³  ³  ÃÄ@PRINTF_X_839  1/39  Ram=2
    ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ÀÄ@PUTCHAR_2_  1/37  Ram=1
@@ -321,7 +328,7 @@
    ³  ÃÄexecute_command  7/66  Ram=2
    ³  ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³  ³  ÀÄ*
-   ³  ³  ÃÄhandle_uplink_command  5/51  Ram=5
+   ³  ³  ÃÄhandle_uplink_command  2/53  Ram=5
    ³  ³  ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
@@ -387,10 +394,10 @@
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_U_839  2/76  Ram=2
-   ³  ³  ³  ³  ³  ³  ÃÄ@DIV88  1/23  Ram=3
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_U_839  2/72  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@DIV88  2/23  Ram=3
    ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
-   ³  ³  ³  ³  ³  ³  ÃÄ@DIV88  1/23  Ram=3
+   ³  ³  ³  ³  ³  ³  ÃÄ@DIV88  2/23  Ram=3
    ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ÀÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
@@ -413,7 +420,7 @@
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ÀÄ@PUTCHAR_2_  1/37  Ram=1
-   ³  ³  ³  ³  ÃÄmode_flash_erase_all  2/92  Ram=7
+   ³  ³  ³  ³  ÃÄmode_flash_erase_all  3/94  Ram=7
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄpiclog_make  2/684  Ram=22
@@ -548,7 +555,7 @@
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄpiclog_make  2/684  Ram=22
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄflash_setting  3/25  Ram=4
+   ³  ³  ³  ³  ³  ÃÄflash_setting  2/25  Ram=4
    ³  ³  ³  ³  ³  ³  ÃÄ@WRITEBITA  1/34  Ram=6
    ³  ³  ³  ³  ³  ³  ÀÄ@WRITEBITA  1/34  Ram=6
    ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  2/406  Ram=30
@@ -610,7 +617,7 @@
    ³  ³  ³  ³  ÃÄmode_flash_read_address  4/178  Ram=10
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄflash_setting  3/25  Ram=4
+   ³  ³  ³  ³  ³  ÃÄflash_setting  2/25  Ram=4
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄread_data_bytes  1/245  Ram=29
    ³  ³  ³  ³  ³  ³  ÀÄ*
@@ -634,9 +641,9 @@
    ³  ³  ³  ³  ÃÄmode_flash_smf_copy  4/158  Ram=266
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄflash_setting  3/25  Ram=4
+   ³  ³  ³  ³  ³  ÃÄflash_setting  2/25  Ram=4
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄflash_setting  3/25  Ram=4
+   ³  ³  ³  ³  ³  ÃÄflash_setting  2/25  Ram=4
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄread_data_bytes  1/245  Ram=29
    ³  ³  ³  ³  ³  ³  ÀÄ*
@@ -662,19 +669,19 @@
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_U_839  2/76  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_U_839  2/72  Ram=2
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
-   ³  ³  ³  ³  ³  ÃÄad7490_read  5/889  Ram=7
+   ³  ³  ³  ³  ³  ÃÄad7490_read  5/873  Ram=7
    ³  ³  ³  ³  ³  ³  ÃÄset_add  (Inline)  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄset_pm  (Inline)  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄad7490_make_cmd  (Inline)  Ram=4
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  3/115  Ram=9
-   ³  ³  ³  ³  ³  ³  ³  ³  ÃÄ@DIV88  1/23  Ram=3
-   ³  ³  ³  ³  ³  ³  ³  ³  ÃÄ@DIV88  1/23  Ram=3
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  5/115  Ram=9
+   ³  ³  ³  ³  ³  ³  ³  ³  ÃÄ@DIV88  2/23  Ram=3
+   ³  ³  ³  ³  ³  ³  ³  ³  ÃÄ@DIV88  2/23  Ram=3
    ³  ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
@@ -690,7 +697,7 @@
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  3/115  Ram=9
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  5/115  Ram=9
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
@@ -703,7 +710,7 @@
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  3/115  Ram=9
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  5/115  Ram=9
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
@@ -716,7 +723,7 @@
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  3/115  Ram=9
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  5/115  Ram=9
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
@@ -729,7 +736,7 @@
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  3/115  Ram=9
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  5/115  Ram=9
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
@@ -742,7 +749,7 @@
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  3/115  Ram=9
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  5/115  Ram=9
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
@@ -755,7 +762,7 @@
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  3/115  Ram=9
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  5/115  Ram=9
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
@@ -768,7 +775,7 @@
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  3/115  Ram=9
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_839  5/115  Ram=9
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
@@ -789,11 +796,11 @@
    ³  ³  ³  ³  ³  ³  ³  ÀÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³  ³  ³  ³  ³  ÃÄ@SPI_XFER_3_16  2/31  Ram=4
    ³  ³  ³  ³  ³  ³  ÀÄ@SPI_XFER_3_16  2/31  Ram=4
-   ³  ³  ³  ³  ³  ÃÄad7490_read  5/889  Ram=7
+   ³  ³  ³  ³  ³  ÃÄad7490_read  5/873  Ram=7
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄad7490_read  5/889  Ram=7
+   ³  ³  ³  ³  ³  ÃÄad7490_read  5/873  Ram=7
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄad7490_read  5/889  Ram=7
+   ³  ³  ³  ³  ³  ÃÄad7490_read  5/873  Ram=7
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@DIV3232  5/79  Ram=15
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC7_839  1/78  Ram=5
@@ -808,18 +815,18 @@
    ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ÀÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³  ³  ³     ÀÄ*
-   ³  ³  ³  ÀÄis_empty_smf_data  4/11  Ram=0
-   ³  ³  ÃÄhandle_status_check  5/40  Ram=2
+   ³  ³  ³  ÀÄis_empty_smf_data  1/11  Ram=0
+   ³  ³  ÃÄhandle_status_check  5/42  Ram=2
    ³  ³  ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ÃÄtransmit_status  5/15  Ram=0
+   ³  ³  ³  ÃÄtransmit_status  3/15  Ram=0
    ³  ³  ³  ³  ÀÄtransmit_command  2/143  Ram=26
    ³  ³  ³  ³     ÀÄ*
    ³  ³  ³  ÀÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³  ³     ÀÄ*
-   ³  ³  ÀÄhandle_smf_available  6/57  Ram=3
+   ³  ³  ÀÄhandle_smf_available  5/59  Ram=3
    ³  ³     ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³     ³  ÀÄ*
    ³  ³     ÃÄ@PSTRINGC7_839  1/78  Ram=5
@@ -828,15 +835,15 @@
    ³  ³     ³  ÀÄ*
    ³  ³     ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³     ³  ÀÄ*
-   ³  ³     ÃÄcopy_data  6/355  Ram=118
+   ³  ³     ÃÄcopy_data  6/353  Ram=118
    ³  ³     ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³     ³  ³  ÀÄ*
    ³  ³     ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³     ³  ³  ÀÄ*
-   ³  ³     ³  ÃÄis_empty_smf_data  4/11  Ram=0
+   ³  ³     ³  ÃÄis_empty_smf_data  1/11  Ram=0
    ³  ³     ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³     ³  ³  ÀÄ*
-   ³  ³     ³  ÃÄ@PRINTF_D_839  3/115  Ram=9
+   ³  ³     ³  ÃÄ@PRINTF_D_839  5/115  Ram=9
    ³  ³     ³  ³  ÀÄ*
    ³  ³     ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³     ³  ³  ÀÄ*
@@ -926,7 +933,7 @@
    ³  ³     ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³     ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³     ³  ³  ³  ÀÄ*
-   ³  ³     ³  ³  ÃÄ@PRINTF_D_839  3/115  Ram=9
+   ³  ³     ³  ³  ÃÄ@PRINTF_D_839  5/115  Ram=9
    ³  ³     ³  ³  ³  ÀÄ*
    ³  ³     ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³     ³  ³  ³  ÀÄ*
@@ -940,7 +947,7 @@
    ³  ³     ³  ³  ³  ÀÄ*
    ³  ³     ³  ³  ÀÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³     ³  ³     ÀÄ*
-   ³  ³     ³  ÃÄcheck_and_erase_if_wrap  5/86  Ram=12
+   ³  ³     ³  ÃÄcheck_and_erase_if_wrap  6/86  Ram=12
    ³  ³     ³  ³  ÃÄ@PSTRINGC7_839  1/78  Ram=5
    ³  ³     ³  ³  ³  ÀÄ*
    ³  ³     ³  ³  ÀÄsubsector_4kByte_erase  2/364  Ram=25
@@ -1007,7 +1014,7 @@
    ³  ³     ³  ³  ÃÄ@PUTCHAR_2_  1/37  Ram=1
    ³  ³     ³  ³  ÃÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³     ³  ³  ³  ÀÄ*
-   ³  ³     ³  ³  ÃÄ@PRINTF_U_839  2/76  Ram=2
+   ³  ³     ³  ³  ÃÄ@PRINTF_U_839  2/72  Ram=2
    ³  ³     ³  ³  ³  ÀÄ*
    ³  ³     ³  ³  ÀÄ@PSTRINGCN7_839  1/90  Ram=6
    ³  ³     ³  ³     ÀÄ*
@@ -1027,5 +1034,5 @@
    ³  ÃÄ@delay_ms1  1/22  Ram=1
    ³  ÀÄ@PSTRINGC7_839  1/78  Ram=5
    ³     ÀÄ*
-   ÃÄTIMER1_isr  0/16  Ram=0
+   ÃÄTIMER1_isr  0/17  Ram=0
    ÀÄRDA_isr  0/25  Ram=3

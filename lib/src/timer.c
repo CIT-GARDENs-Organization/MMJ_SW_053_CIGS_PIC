@@ -1,7 +1,7 @@
 #INT_TIMER1
 void TIMER1_isr()
 {
-   set_timer1(CLOCK_FREQUENCY); //3.2767秒後に割り込みを発生させる
+   set_timer1(2^16-CLOCK_FREQUENCY); 
    sec++;
    /*
    if (++subsec >= 100)
@@ -23,7 +23,7 @@ void setup_timer()
    //sec = 0;
    // 外部クロックをT1CKIピンから入力、プリスケーラなし
    setup_timer_1(T1_EXTERNAL | T1_DIV_BY_1 | T1_ENABLE_SOSC);
-   set_timer1(CLOCK_FREQUENCY); 
+   set_timer1(2^16-CLOCK_FREQUENCY); 
    //set_timer1(0);  // タイマーカウント初期値設定
    //T1OSCEN = 1; //Enable TMR1 Oscillator
    enable_interrupts(INT_TIMER1);   
@@ -34,7 +34,6 @@ void setup_timer()
 void set_current_sec(unsigned int32 new_sec)
 {
    sec = new_sec;
-
 }
 
 
