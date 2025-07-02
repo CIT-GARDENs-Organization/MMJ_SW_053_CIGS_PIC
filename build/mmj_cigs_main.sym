@@ -773,10 +773,10 @@ ROM Allocation:
 0007E1  @const1609.call
 0007EE  @const1610.call
 0007F5  @const1611.call
-0007FB  @const1618.call
 000800  @const1615.call
 000823  @const1616.call
 00083A  @const1617.call
+00084D  @const1618.call
 000852  @const1619.call
 000857  @const1621.call
 00086A  @const1622.call
@@ -829,11 +829,11 @@ ROM Allocation:
 001994  check_device_id
 001A2A  mode_dummy
 001B59  mode_test_iv
-001C12  sector_erase
-001DB3  mode_flash_erase_all
-001E11  mode_flash_erase_1sector
-001EF2  mode_flash_erase_4kbyte_subsector
-001FD1  transmit_status
+001C0B  sector_erase
+001DAC  mode_flash_erase_all
+001E0A  mode_flash_erase_1sector
+001EEB  mode_flash_erase_4kbyte_subsector
+001FCA  transmit_status
 002000  mode_flash_write_demo
 002214  mode_flash_write_4kbyte_subsecotr
 002393  mode_flash_read
@@ -873,46 +873,46 @@ Project Directory:
     C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\
 
 Project Files:
-    mmj_cigs_main.c                                         [27-6-25 12:55  CRC=8E2645DF]
-    cigs\mmj_cigs_main.h                                    [21-6-25 17:55  CRC=AE56AA49]
-    cigs\mmj_cigs_config.h                                  [27-6-25 13:03  CRC=2234D2E6]
+    mmj_cigs_main.c                                         [27-6-25 13:26  CRC=8E2645DF]
+    cigs\mmj_cigs_main.h                                    [27-6-25 13:26  CRC=AE56AA49]
+    cigs\mmj_cigs_config.h                                  [27-6-25 13:26  CRC=2234D2E6]
     ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F1789.h [13-5-21 13:48  CRC=CCE282A9]
-    lib\typedef_content.h                                   [21-6-25 17:55  CRC=5BC2252D]
-    lib\value_status.h                                      [21-6-25 17:55  CRC=D872A938]
-    lib\timer.h                                             [21-6-25 17:55  CRC=F926EB79]
-    lib\src\timer.c                                         [27-6-25 13:03  CRC=D31530C4]
-    lib\uart.h                                              [21-6-25 17:55  CRC=B35B6721]
-    lib\src\uart.c                                          [21-6-25 17:55  CRC=F3CCF952]
-    cigs\mmj_cigs_mode.h                                    [21-6-25 17:55  CRC=1E0095D7]
-    cigs\src\mmj_cigs_mode.c                                [26-6-25 19:19  CRC=0529C90D]
-    cigs\mmj_cigs_func.h                                    [21-6-25 17:55  CRC=3886B065]
-    cigs\src\mmj_cigs_func.c                                [26-6-25 20:38  CRC=6024F0D2]
-    cigs\mmj_cigs_piclog.h                                  [21-6-25 19:05  CRC=F82852C6]
-    cigs\src\mmj_cigs_piclog.c                              [21-6-25 17:55  CRC=C3A877C0]
-    cigs\mmj_cigs_flash.h                                   [21-6-25 17:55  CRC=9FBBE9BB]
-    cigs\src\mmj_cigs_flash.c                               [21-6-25 17:55  CRC=E5808947]
-    lib\mt25q.h                                             [25-6-25 19:57  CRC=726402A8]
-    lib\src\mt25q.c                                         [21-6-25 17:55  CRC=6F00399F]
-    lib\ad7490.h                                            [26-6-25 18:33  CRC=6A4E05FB]
-    lib\src\ad7490.c                                        [26-6-25 18:47  CRC=25AE1A5F]
-    lib\mission_tools.h                                     [21-6-25 17:55  CRC=74693D93]
-    lib\communication_driver.h                              [21-6-25 17:55  CRC=134747F3]
-    lib\communication.h                                     [21-6-25 17:55  CRC=6C774022]
-    lib\frame.h                                             [21-6-25 17:55  CRC=F6BF5534]
-    lib\src\communication.c                                 [21-6-25 17:55  CRC=1737AD71]
-    lib\src\communication_driver.c                          [21-6-25 17:55  CRC=EF54DBEE]
-    lib\src\mission_tools.c                                 [21-6-25 17:55  CRC=343AB288]
-    lib\smf_queue.h                                         [21-6-25 17:55  CRC=208BB36F]
-    lib\src\smf_queue.c                                     [21-6-25 17:55  CRC=2E627FDB]
-    lib\data_copy.h                                         [21-6-25 17:55  CRC=BECC9544]
-    lib\src\data_copy.c                                     [21-6-25 17:55  CRC=318C045C]
+    lib\typedef_content.h                                   [27-6-25 13:26  CRC=5BC2252D]
+    lib\value_status.h                                      [27-6-25 13:26  CRC=D872A938]
+    lib\timer.h                                             [27-6-25 13:26  CRC=F926EB79]
+    lib\src\timer.c                                         [27-6-25 13:26  CRC=D31530C4]
+    lib\uart.h                                              [27-6-25 13:26  CRC=B35B6721]
+    lib\src\uart.c                                          [27-6-25 13:26  CRC=F3CCF952]
+    cigs\mmj_cigs_mode.h                                    [27-6-25 13:26  CRC=1E0095D7]
+    cigs\src\mmj_cigs_mode.c                                [28-6-25 20:07  CRC=43C1614E]
+    cigs\mmj_cigs_func.h                                    [27-6-25 13:26  CRC=3886B065]
+    cigs\src\mmj_cigs_func.c                                [27-6-25 13:26  CRC=6024F0D2]
+    cigs\mmj_cigs_piclog.h                                  [27-6-25 13:26  CRC=F82852C6]
+    cigs\src\mmj_cigs_piclog.c                              [27-6-25 13:26  CRC=C3A877C0]
+    cigs\mmj_cigs_flash.h                                   [27-6-25 13:26  CRC=9FBBE9BB]
+    cigs\src\mmj_cigs_flash.c                               [27-6-25 13:26  CRC=E5808947]
+    lib\mt25q.h                                             [27-6-25 13:26  CRC=726402A8]
+    lib\src\mt25q.c                                         [27-6-25 13:26  CRC=6F00399F]
+    lib\ad7490.h                                            [27-6-25 13:26  CRC=6A4E05FB]
+    lib\src\ad7490.c                                        [27-6-25 13:26  CRC=25AE1A5F]
+    lib\mission_tools.h                                     [27-6-25 13:26  CRC=74693D93]
+    lib\communication_driver.h                              [27-6-25 13:26  CRC=134747F3]
+    lib\communication.h                                     [27-6-25 13:26  CRC=6C774022]
+    lib\frame.h                                             [27-6-25 13:26  CRC=F6BF5534]
+    lib\src\communication.c                                 [27-6-25 13:26  CRC=1737AD71]
+    lib\src\communication_driver.c                          [27-6-25 13:26  CRC=EF54DBEE]
+    lib\src\mission_tools.c                                 [27-6-25 13:26  CRC=343AB288]
+    lib\smf_queue.h                                         [27-6-25 13:26  CRC=208BB36F]
+    lib\src\smf_queue.c                                     [27-6-25 13:26  CRC=2E627FDB]
+    lib\data_copy.h                                         [27-6-25 13:26  CRC=BECC9544]
+    lib\src\data_copy.c                                     [27-6-25 13:26  CRC=318C045C]
     ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdint.h [13-5-20 09:33  CRC=4FD89CC0]
-    cigs\mmj_cigs_excute_mission.h                          [21-6-25 17:55  CRC=A4ED4BF3]
-    cigs\src\mmj_cigs_excute_mission.c                      [26-6-25 15:21  CRC=8413AAF7]
+    cigs\mmj_cigs_excute_mission.h                          [27-6-25 13:26  CRC=A4ED4BF3]
+    cigs\src\mmj_cigs_excute_mission.c                      [27-6-25 13:26  CRC=8413AAF7]
 
-Source signature=A3538D5E
+Source signature=E1EB259F
 Program memory checksum=0000
-Hex file CRC=7A6F
+Hex file CRC=AEAC
 
 Units:
     C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main (main)

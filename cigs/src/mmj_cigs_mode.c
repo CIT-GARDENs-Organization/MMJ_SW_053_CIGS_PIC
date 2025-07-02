@@ -222,16 +222,18 @@ void mode_test_iv()
    output_high(CONNECT_CIGS);
    output_low(EN_NPWR); // Enable NPWR
    unsigned int16 readdata;
-   setup_dac(DAC_OUTPUT2 | DAC_VSS_VDD);   
+   setup_dac(DAC_OUTPUT1 | DAC_VSS_VDD);   
    for (unsigned int16 count = 0; count < measurement_step; count++)
    {    
       // set DAC value
       dac_write(count);
       delay_ms(100); // wait for the DAC to stabilize
       readdata = ad7490_readdata(0x8330);  // read voltage at adc pin
-      fprintf(PC, "%04LX, ", readdata);
-      readdata = ad7490_readdata(0xAF30);  // read voltage at adc pin
+      fprintf(PC, "%04LX,", readdata);
+      //delay_ms(100); // wait for the ADC to stabilize
+      readdata = ad7490_readdata(0x8730);  // read voltage at adc pin
       fprintf(PC, "%04LX\r\n", readdata);
+      //delay_ms(100); // wait for the ADC to stabilize
    }
 }
 
