@@ -67,6 +67,8 @@ void sweep(unsigned int8 parameter[])
         data_buffer[count*2] = ad7490_readdata(0x8330);//0xAF30 Jumper 
         data_buffer[count*2+1] = ad7490_readdata(0x8730); // read voltage at adc pin
         
+        // monitoring
+        fprintf(PC, "%04LX,%04LX\r\n", data_buffer[count*2], data_buffer[count*2+1]);
     }
 
     output_low(CONNECT_CIGS);

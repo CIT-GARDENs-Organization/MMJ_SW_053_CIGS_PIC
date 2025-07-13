@@ -17,7 +17,10 @@ void main()
    int1 is_finished = FALSE;
    fprintf(PC,"____CIGS PIC Start Operation_____\r\n\r\n");
    
-   
+   mcp4911_device_t dac1 = {
+      .cs_pin = DAC_CS,
+      .spi_stream = DAC_STREAM
+   };
    
    
    
