@@ -8,7 +8,7 @@ void misf_init()
     output_high(MIS_FM_CS); // Set CS pin high to deselect the flash
     output_high(SMF_CS); // Set CS pin high to deselect the SMF
     
-    unsigned int8 readdata[PACKET_SIZE];
+
 
     if (!is_connect(mis_fm)) {
         fprintf(PC, "\tFlash is not connected\r\n");
@@ -16,21 +16,22 @@ void misf_init()
     }else {
         //fprintf(PC, "\tFlash is connected\r\n");
     }
+    unsigned int8 readdata[PACKET_SIZE];
     read_data_bytes(mis_fm, ADDRESS_MANEGE_START, readdata, PACKET_SIZE); // Read the PICLOG data header
     
     // Update the flash data header with the read data
-    smf_piclog_use_counter = (readdata[0] << 24) | (readdata[1] << 16) | (readdata[2] << 8) | readdata[3];
+    smf_piclog_use_counter = ((unsigned int32)readdata[0] << 24) | ((unsigned int32)readdata[1] << 16) | ((unsigned int32)readdata[2] << 8) | ((unsigned int32)readdata[3]);
     smf_piclog_loop_counter = readdata[4];
-    smf_meas_use_counter = (readdata[5] << 24) | (readdata[6] << 16) | (readdata[7] << 8) | readdata[8];
+    smf_meas_use_counter = ((unsigned int32)readdata[5] << 24) |((unsigned int32)readdata[6] << 16) |((unsigned int32)readdata[7] << 8) | ((unsigned int32)readdata[8]);
     smf_meas_loop_counter = readdata[9];
 
-    misf_piclog_use_counter = (readdata[10] << 24) | (readdata[11] << 16) | (readdata[12] << 8) | readdata[13];
+    misf_piclog_use_counter = ((unsigned int32)readdata[10] << 24) |((unsigned int32)readdata[11] << 16) |((unsigned int32)readdata[12] << 8) | ((unsigned int32)readdata[13]);
     misf_piclog_loop_counter = readdata[14];
-    misf_piclog_uncopyed_counter = (readdata[15] << 24) | (readdata[16] << 16) | (readdata[17] << 8) | readdata[18];
-    misf_piclog_write_counter = (readdata[19] << 24) | (readdata[20] << 16) | (readdata[21] << 8) | readdata[22];
-    misf_meas_use_counter = (readdata[23] << 24) | (readdata[24] << 16) | (readdata[25] << 8) | readdata[26];
+    misf_piclog_uncopyed_counter = ((unsigned int32)readdata[15] << 24) |((unsigned int32)readdata[16] << 16) |((unsigned int32)readdata[17] << 8) | ((unsigned int32)readdata[18]);
+    misf_piclog_write_counter = ((unsigned int32)readdata[19] << 24) |((unsigned int32)readdata[20] << 16) |((unsigned int32)readdata[21] << 8) | ((unsigned int32)readdata[22]);
+    misf_meas_use_counter = ((unsigned int32)readdata[23] << 24) |((unsigned int32)readdata[24] << 16) |((unsigned int32)readdata[25] << 8) | ((unsigned int32)readdata[26]);
     misf_meas_loop_counter = readdata[27];
-    misf_meas_uncopyed_counter = (readdata[28] << 24) | (readdata[29] << 16) | (readdata[30] << 8) | readdata[31];
+    misf_meas_uncopyed_counter = ((unsigned int32)readdata[28] << 24) |((unsigned int32)readdata[29] << 16) |((unsigned int32)readdata[30] << 8) | ((unsigned int32)readdata[31]);
 
     fprintf(PC, "\tSMF  PICLOG Use Counter      : 0x%08LX\r\n", smf_piclog_use_counter);
     fprintf(PC, "\tSMF  PICLOG Loop Counter     : 0x%02X\r\n", smf_piclog_loop_counter);
@@ -41,7 +42,7 @@ void misf_init()
     fprintf(PC, "\tMISF PICLOG Loop Counter     : 0x%02X\r\n", misf_piclog_loop_counter);
     fprintf(PC, "\tMISF PICLOG Write Counter    : 0x%02X\r\n", misf_piclog_write_counter);
     fprintf(PC, "\tMISF MEAS   Use Counter      : 0x%08LX\r\n", misf_meas_use_counter);
-    fprintf(PC, "\tMISF MEAS   Uncopyed Counter : 0x%08LX\r\n", misf_meas_uncopyed_counter);  
+    fprintf(PC, "\tMISF MEAS   Uncopyed Counter : 0x%08LX\r\n", misf_meas_uncopyed_counter);
     fprintf(PC, "\tMISF MEAS   Loop Counter     : 0x%02X\r\n", misf_meas_loop_counter);    
     fprintf(PC, "\tComplete\r\n");
 }
@@ -100,7 +101,7 @@ void write_misf_address_area()
     writedata[24] = (misf_meas_use_counter >> 16) & 0xFF;
     writedata[25] = (misf_meas_use_counter >> 8) & 0xFF;
     writedata[26] = misf_meas_use_counter & 0xFF;
-
+    
     // 27: misf_meas_loop_counter
     writedata[27] = misf_meas_loop_counter;
 
@@ -117,6 +118,9 @@ void write_misf_address_area()
     subsector_4kByte_erase(mis_fm, ADDRESS_MANEGE_START); // 4KBサブセクタを消去
     // Flash に書き込む
     write_data_bytes(mis_fm, ADDRESS_MANEGE_START, writedata, PACKET_SIZE);
+    fprintf(PC, "Write MISF Address Area Complete\r\n");
+
+    
 }
 
 

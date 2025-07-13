@@ -4,10 +4,8 @@
 
 
 typedef enum {
-   APRS_DATA,  // <- assign your missoins
-   IN_VEHICLE, 
-   ECOSYSTEM_DATA, 
-   APRS_PIC_LOG
+   MEAURE_DATA,  // <- assign your missoins
+   PICLOG_DATA
 } MissionType;
 
 typedef struct {

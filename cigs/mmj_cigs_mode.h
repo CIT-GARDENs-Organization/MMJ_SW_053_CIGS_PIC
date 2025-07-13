@@ -31,9 +31,9 @@ typedef struct {
 
 #Separate
 void mode_flash_write_4kbyte_subsecotr(unsigned int8 parameter[]);
+
 #Separate
 void mode_flash_read(unsigned int8 parameter[]);
-
 typedef struct{
     unsigned int8 id;
     unsigned int16 readpacketnum;
@@ -42,11 +42,15 @@ typedef struct{
 
 #Separate
 void mode_flash_read_address(unsigned int8 parameter[]);
+
 #Separate
 void mode_flash_smf_copy(unsigned int8 parameter[]);
+
 #Separate
 void mode_flash_address_reset(unsigned int8 parameter[]);
 
+#separate
+void mode_flash_smf_read(unsigned int8 parameter[]);
 
 // IV command
 #Separate

@@ -3,9 +3,9 @@
 
 #include <16F1789.h>
 
-//#opt 0 // 0 = no optimization, 1 = optimize for speed, 2 = optimize for size
+//#opt 8 // 0 = no optimization, 1 = optimize for speed, 2 = optimize for size
 
-//#device ADC=12
+#device ADC=12
 #use delay(crystal=16MHz)
 #fuses NOMCLR
 
@@ -23,16 +23,16 @@
 // MOSI:PIN_C5, MISO:PIN_C4, SCK:PIN_C3
 // Shared Mission Flash
 #define MIS_FM_CS  PIN_D3
-#use spi(MASTER, SPI1, BAUD = 400000, MODE = 0, BITS= 8, STREAM = MIS_FM_STREAM)
+#use spi(MASTER, SPI1, BAUD = 200000, MODE = 0, BITS= 8, STREAM = MIS_FM_STREAM)
 
 // Mission Flash
 #define SMF_CS PIN_D1
-#use spi(MASTER, SPI1, BAUD = 400000, MODE = 0, BITS = 8, STREAM = SMF_STREAM)
+#use spi(MASTER, SPI1, BAUD = 200000, MODE = 0, BITS = 8, STREAM = SMF_STREAM)
 
 // Analog to Digital Converter 
 #define ADC_CS PIN_D2
 //#use spi(MASTER, SPI1, BAUD = 9600, MODE=2, BITS = 16, STREAM = ADC_STREAM)
-#use spi(MASTER, CLK = PIN_C3, DI = PIN_C4, DO = PIN_C5, ENABLE = PIN_D2, BAUD = 9600, BITS = 16, STREAM = ADC_STREAM, MODE = 2 )
+#use spi(MASTER, CLK = PIN_C3, DI = PIN_C4, DO = PIN_C5, ENABLE = PIN_D2, BAUD = 57600, BITS = 16, STREAM = ADC_STREAM, MODE = 2 )
 
 
 

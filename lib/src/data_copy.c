@@ -7,7 +7,7 @@
 #define SIZE_AREA_SIZE 0x1000
 #define SUBSECTOR_SIZE 0x1000 // (4096bytes)
 
-#Separate
+/*
 #separate
 void copy_data()
 {
@@ -144,6 +144,7 @@ void update_size_area(unsigned int32 base_addr, unsigned int32 used_size, unsign
 
 
 
+*/
 
 
 
@@ -151,7 +152,6 @@ void update_size_area(unsigned int32 base_addr, unsigned int32 used_size, unsign
 
 
 
-/*
 void copy_data()
 {
     fprintf(PC, "\r\n____________________\r\n");
@@ -171,15 +171,20 @@ void copy_data()
         unsigned int32 mis_end_address = mission_type.end_address;
         unsigned int32 write_src = smf_data->src;
         unsigned int32 write_size = smf_data->size;
-        fprintf(PC, "In smf mission data start   address: %LX\r\n", mis_start_address);
-        fprintf(PC, "In smf mission data end     address: %LX\r\n", mis_end_address);
-        fprintf(PC, "In MIS FM Write source data address: %LX\r\n", write_src);
+        fprintf(PC, "In smf mission data start   address: %08LX\r\n", mis_start_address);
+        fprintf(PC, "In smf mission data end     address: %08LX\r\n", mis_end_address);
+        fprintf(PC, "In MIS FM Write source data address: %08LX\r\n", write_src);
         fprintf(PC, "In MIS FM Write data size          : %lu (0x%lx)\r\n\r\n", write_size, write_size);
       
       
         // flash setting
         //flash_setting(mis_fm);
         //flash_setting(smf);
+        if (is_connect(smf) == FALSE)
+        {
+            fprintf(PC, "Error: SMF is not connected\r\n");
+            return;
+        }
 
 
         // read size area
@@ -241,7 +246,7 @@ void copy_data()
         }
 
 
-       // write size area
+        // write size area
         fprintf(PC, "Update size area\r\n");
         subsector_4kByte_erase(smf, mis_start_address);
         write_data_byte(smf, mis_start_address + 0, (used_size >> 0)  & 0xFF);
@@ -256,6 +261,6 @@ void copy_data()
     fprintf(PC, "\r\n___End copy_data____\r\n");
     fprintf(PC, "____________________\r\n\r\n");
 }
-*/
+
 
 

@@ -24,7 +24,7 @@ void execute_mission(unsigned int8 *content)
          //mode_iv_meas_adc();
          break;
       case 0x10:
-         mode_test_iv();
+         mode_test_iv(content);
          break;
       case 0x01:
          //example_01(parameter);
@@ -35,6 +35,7 @@ void execute_mission(unsigned int8 *content)
       case ID_FLASH_ERASE_ALL:
          mode_flash_erase_all(content);
          break;
+      /*
       case ID_FLASH_ERASE_1SECTOR:
          mode_flash_erase_1sector(content);
          break;
@@ -47,15 +48,18 @@ void execute_mission(unsigned int8 *content)
       case ID_FLASH_4kByte_SUBSECTOR:
          mode_flash_write_4kbyte_subsecotr(content);
          break;
+      */
       case ID_FLASH_READ:
          mode_flash_read(content);
          break;
+      /*
       case ID_FLASH_READ_ADDRESS:
          mode_flash_read_address(content);
          break;
       case ID_FLASH_SMF_COPY:
          mode_flash_smf_copy(content);
          break;
+      */
       case ID_FLASH_ADDRESS_RESET:
          mode_flash_address_reset(content);
          break;

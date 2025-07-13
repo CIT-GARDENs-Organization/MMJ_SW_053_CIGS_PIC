@@ -211,9 +211,10 @@ void mode_test_voltage()
 }
 
 #separate
-void mode_test_iv()
+void mode_test_iv(unsigned int8 *uplinkcmd[])
 {
-   unsigned int8 measurement_step = 100; // Get the measurement step from the parameter array
+   
+   unsigned int8 measurement_step = uplinkcmd[1]; // Get the measurement step from the parameter array
    fprintf(PC, "Start MODE TEST IV\r\n");
    fprintf(PC, "\tSweep step : %u\r\n", measurement_step);
    //unsigned int16 test = 0x9330;
@@ -222,19 +223,22 @@ void mode_test_iv()
    output_high(CONNECT_CIGS);
    output_low(EN_NPWR); // Enable NPWR
    unsigned int16 readdata;
-   setup_dac(DAC_OUTPUT1 | DAC_VSS_VDD);   
-   for (unsigned int16 count = 0; count < measurement_step; count++)
-   {    
-      // set DAC value
-      dac_write(count);
-      delay_ms(100); // wait for the DAC to stabilize
-      readdata = ad7490_readdata(0x8330);  // read voltage at adc pin
-      fprintf(PC, "%04LX,", readdata);
-      //delay_ms(100); // wait for the ADC to stabilize
-      readdata = ad7490_readdata(0x8730);  // read voltage at adc pin
-      fprintf(PC, "%04LX\r\n", readdata);
-      //delay_ms(100); // wait for the ADC to stabilize
-   }
+   //setup_dac(DAC_OUTPUT1 | DAC_VSS_VDD); 
+   //delay_ms(1); // wait for the DAC to stabilize  
+
+   sweep(uplinkcmd); // Call the sweep function with the measurement step
+
+   fprintf(PC, "End MODE TEST IV\r\n");
+   output_low(EN_MEAS_VOL);
+   output_low(CONNECT_CIGS);
+   output_high(EN_NPWR); // Disable NPWR
+
+   fprintf(PC, "Add SMF que\r\n");
+   SmfDataStruct data;
+   data.mission_type = MEAURE_DATA; // コピーする目的のデータ種別
+   data.src = ADDRESS_MISF_MEASUREMENT_START + misf_meas_use_counter - misf_meas_uncopyed_counter; // コピー元のMIS_FMのアドレス
+   data.size = misf_meas_uncopyed_counter; // コピーするデータのサイズ
+   enqueue_smf_data(&data); // SMFへのデータコピーを実行する
 }
 
 

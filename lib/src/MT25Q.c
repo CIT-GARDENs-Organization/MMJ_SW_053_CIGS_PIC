@@ -94,7 +94,7 @@ int8 read_id(Flash flash_stream){
    int8 flash_cmd = CMD_READ_ID;
    int8 chip_id[20];
    output_low(flash_stream.cs_pin);
-   spi_xfer_and_read_select_stream(flash_stream, &flash_cmd, 1, chip_id, 20);
+   spi_xfer_and_read_select_stream(flash_stream, &flash_cmd, 1, chip_id, 16);
    output_high(flash_stream.cs_pin);
    #ifdef MT25Q_DEBUG
       fprintf(PC,"Read ID:");
@@ -103,7 +103,7 @@ int8 read_id(Flash flash_stream){
       fprintf(PC,"\r\n");
    #endif
    //chip id check
-   if(chip_id[0] == 0x20){  
+   if(chip_id[0] == MANUFACTURER_ID_MICRON){  
       #ifdef MT25Q_DEBUG
          fprintf(PC,"flash connect OK\r\n");
       #endif
@@ -563,6 +563,7 @@ int1 is_connect(Flash flash_stream){
    output_low(flash_stream.cs_pin);
    spi_xfer_and_read_select_stream(flash_stream, &flash_cmd, 1, read_id_data.bytes, sizeof(read_id_data.bytes));
    output_high(flash_stream.cs_pin);
+   //fprintf(PC,"Read ID:%02X", read_id_data.fields.manufacturer_id);
    #ifdef MT25Q_DEBUG
       fprintf(PC,"Read ID:");
 

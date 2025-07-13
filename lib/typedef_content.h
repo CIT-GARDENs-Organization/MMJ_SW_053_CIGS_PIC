@@ -13,8 +13,8 @@ typedef enum {
 
 
 typedef enum {
-    ALLOW = 0x00,
-    DENY  = 0x01
+    ALLOW = 0x01,
+    DENY  = 0x00
 } IsSmfAvailableContent;
 
 

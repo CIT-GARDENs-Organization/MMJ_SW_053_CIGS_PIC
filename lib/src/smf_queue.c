@@ -42,29 +42,17 @@ MissionTypeStruct getMissionTypeStruct(MissionType mis_type)
 {
    MissionTypeStruct mis_struct = {0};
    
-   if (mis_type == APRS_DATA)
+   if (mis_type == MEAURE_DATA)
    {
-      mis_struct.start_address   = 0x02400000;
-      mis_struct.end_address     = 0x02500FFF;
+      mis_struct.start_address   = 0x04EC0000;
+      mis_struct.end_address     = 0x056BFFFF;
       mis_struct.mission_flag    = 0b10000000;
    }
-   else if (mis_type == IN_VEHICLE)
+   else if (mis_type == PICLOG_DATA)
    {
-      mis_struct.start_address   = 0x02501000;
-      mis_struct.end_address     = 0x02501FFF;
+      mis_struct.start_address   = 0x04DC0000;
+      mis_struct.end_address     = 0x04EBFFFF;
       mis_struct.mission_flag    = 0b10000001;  
-   }
-   else if (mis_type == ECOSYSTEM_DATA)
-   {
-      mis_struct.start_address   = 0x02506000;
-      mis_struct.end_address     = 0x02516FFF;
-      mis_struct.mission_flag    = 0b10000011;  
-   }
-   else if (mis_type == APRS_PIC_LOG)
-   {
-      mis_struct.start_address   = 0x02517000;
-      mis_struct.end_address     = 0x02517FFF;
-      mis_struct.mission_flag    = 0b10000100;  
    }
    else
    {

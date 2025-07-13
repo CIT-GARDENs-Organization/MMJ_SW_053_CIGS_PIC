@@ -44,7 +44,8 @@ void main()
          clear_receive_signal(boss_receive_buffer, &boss_receive_buffer_size);
          
          if(recieve_cmd.is_exist)
-            is_finished = execute_command(&recieve_cmd); 
+            //is_finished = execute_command(&recieve_cmd); 
+            int1 flag = execute_command(&recieve_cmd);
             fprintf(PC,"\r\nwaiting for BOSS PIC command");
       }
       

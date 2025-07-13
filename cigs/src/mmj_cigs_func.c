@@ -19,7 +19,7 @@ void io_init()
 {
     fprintf(PC, "IO Initialize\r\n");
     output_low(CONNECT_CIGS);
-    output_low(EN_NPWR);
+    output_high(EN_NPWR);
     fprintf(PC, "\tComplete\r\n");
 }
 
@@ -28,12 +28,12 @@ void adc_init()
    fprintf(PC, "ADC Initialize\r\n");
     //setup ADC
    setup_oscillator(OSC_16MHZ);   //oscillator speed (crystal)
-   setup_adc_ports(CIGS_VOLT | CIGS_CURR | TEMP_BOT | TEMP_TOP | PD , DAC_VSS_FVR);
+   //setup_adc_ports(CIGS_VOLT | CIGS_CURR | TEMP_BOT | TEMP_TOP | PD , DAC_VSS_FVR);
    setup_adc(ADC_CLOCK_DIV_64);
 
    //setup DAC
-   setup_dac(DAC_OUTPUT2 | DAC_VSS_VDD);                                        //DAC output at pin DAC output1 from 0-VDD volts  
-   dac_write(50);                                                               
+   setup_dac(DAC_OUTPUT1 | DAC_VSS_VDD);                                        //DAC output at pin DAC output1 from 0-VDD volts  
+   dac_write(0);                                                               
    fprintf(PC, "\tComplete\r\n");
 }
 
@@ -45,72 +45,94 @@ void sweep(unsigned int8 parameter[])
     unsigned int8 measurement_step = parameter[1]; // Get the measurement step from the parameter array
     fprintf(PC, "\tSweep step : %u\r\n", measurement_step);
     output_high(CONNECT_CIGS);
+    delay_us(100); // wait for the CIGS to stabilize
 
     // read header data
+    /*
     measured_time = get_current_sec(); // read time from timer0
     measured_pd = ad7490_read(ADC_PD); // read PD value
     measured_temp_top = ad7490_read(ADC_TEMP_TOP); // read temperature at top
     measured_temp_bot = ad7490_read(ADC_TEMP_BOT); // read temperature at bottom
     measured_open_voltage = ad7490_read(ADC_CIGS_VOLT); // read open voltage at CIGS
-
-    for (unsigned int16 count = 0; count < measurement_step; count++)
+    */
+   
+    for (unsigned int8 count = 0; count < measurement_step; count++)
     {    
         // set DAC value
         dac_write(count);
-        delay_ms(100); // wait for the DAC to stabilize
+        //delay_ms(100); // wait for the DAC to stabilize
 
         // read CIGS voltage and current      
-        delay_us(10); // wait for the ADC to stabilize
-        data_buffer[count*2] = ad7490_read(ADC_CIGS_VOLT);
-        data_buffer[count*2+1] = ad7490_read(ADC_CIGS_CURR); // read voltage at adc pin
+        delay_ms(1); // wait for the ADC to stabilize
+        data_buffer[count*2] = ad7490_readdata(0x8330);//0xAF30 Jumper 
+        data_buffer[count*2+1] = ad7490_readdata(0x8730); // read voltage at adc pin
+        
     }
 
     output_low(CONNECT_CIGS);
     fprintf(PC, "END SWEEP\r\n");
 
     fprintf(PC, "Start CIGS data conversion\r\n");
-    unsigned int8 packetdata[PACKET_SIZE] = {0x00};
+    unsigned int8 packetdata[PACKET_SIZE] = {0x00}; // Initialize packet data with 0x00
     
-    make_meas_header(packetdata, parameter); // Create measurement header
-    unsigned int8 packetbytecounter = 21; // Start after header size
-    
-    for (unsigned int8 i = 0; i < measurement_step; i++)
-    {        
-        packetdata[i*3]      = (data_buffer[i*2] >> 4) & 0xFF;
-        packetdata[i*3+1]    = (data_buffer[i*2] & 0x0F) << 4 | (data_buffer[i*2+1] >>8 )& 0x0F;
-        packetdata[i*3+2]    = data_buffer[i*2+1] & 0xFF;
-        packetbytecounter += 3; // Each CIGS data takes 3 bytes
 
-        if (packetbytecounter == PACKET_SIZE-1) {
+    
+    //make_meas_header(packetdata, parameter); // Create measurement header
+    unsigned int8 packetdata_index = 0; // Index for packet data
+   
+    for (unsigned int16 i = 0; i < measurement_step; i++)
+    {        
+        packetdata[packetdata_index]      = (data_buffer[i*2] >> 4) & 0xFF;
+        packetdata_index++; 
+        packetdata[packetdata_index]    = (data_buffer[i*2] & 0x0F) << 4 | (data_buffer[i*2+1] >>8 )& 0x0F;
+        packetdata_index++; 
+        packetdata[packetdata_index]    = data_buffer[i*2+1] & 0xFF;
+        packetdata_index++; 
+
+        if (packetdata_index == PACKET_SIZE-1) {
             // Add CRC
-            packetdata[PACKET_SIZE-2] = calc_crc8(packetdata, PACKET_SIZE-1);            
+            //fprintf(PC, "Adding CRC to packetdata\r\n");
+            packetdata[PACKET_SIZE-1] = calc_crc8(packetdata, PACKET_SIZE-1);            
+            
             
             // Flash 書き込み処理
             unsigned int32 write_address = ADDRESS_MISF_MEASUREMENT_START + misf_meas_use_counter;
+            //fprintf(PC, "write data\r\n");
             write_data_bytes(mis_fm, write_address, packetdata, PACKET_SIZE);
-
+            //fprintf(PC, "Add Counter\r\n");
             // カウンタ更新
+            //fprintf(PC, "before misf_meas_use_counter: %08LX\r\n", misf_meas_use_counter);
             misf_meas_use_counter += PACKET_SIZE;
+            //fprintf(PC, "after misf_meas_use_counter: %08LX\r\n", misf_meas_use_counter);
             misf_meas_uncopyed_counter += PACKET_SIZE;
-            write_misf_address_area();
+            packetdata_index = 0; // Reset packet byte counter
+            memset(packetdata, 0x00, PACKET_SIZE); // これ重要
+            //fprintf(PC, "Added Counter\r\n");
         }
     }
 
-    if (packetbytecounter < PACKET_SIZE) {
+    //fprintf(PC, "End CIGS data conversion\r\n");
+    //fprintf(PC, "Start CIGS data conversion\r\n");
+    
+    if (packetdata_index < PACKET_SIZE-1) {
         // Fill the remaining bytes with 0x00
-        for (unsigned int8 j = packetbytecounter; j < PACKET_SIZE; j++) {
+        for (unsigned int8 j = packetdata_index; j < PACKET_SIZE-1; j++ ) {
             packetdata[j] = 0x00;
         }
         // Flash 書き込み処理
         unsigned int32 write_address = ADDRESS_MISF_MEASUREMENT_START + misf_meas_use_counter;
         write_data_bytes(mis_fm, write_address, packetdata, PACKET_SIZE);
-        
+        //fprintf(PC, "before misf_meas_use_counter: %08LX\r\n", misf_meas_use_counter);
         // カウンタ更新
         misf_meas_use_counter += PACKET_SIZE;
+        //fprintf(PC, "after misf_meas_use_counter: %08LX\r\n", misf_meas_use_counter);
         misf_meas_uncopyed_counter += PACKET_SIZE;
-        write_misf_address_area();
     }
-
+        
+    write_misf_address_area();
+    //misf_init(); // Initialize the mission flash
+    fprintf(PC, "End CIGS data conversion\r\n");
+    
 }
 
 void make_meas_header(unsigned int8 *packetdata, unsigned int8 *cmd)

@@ -1,10 +1,12 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 28-6-25 at 20:07
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 13-7-25 at 14:47
 >>> Warning 214 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\src\timer.c" Line 4(1,1): Operator precedance rules may not be as intended, use () to clarify
 >>> Warning 214 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\src\timer.c" Line 26(1,1): Operator precedance rules may not be as intended, use () to clarify
->>> Warning 203 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\src\mmj_cigs_mode.c" Line 445(1,1): Condition always TRUE
+>>> Warning 203 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\src\mmj_cigs_mode.c" Line 449(1,1): Condition always TRUE
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\timer.h" Line 14(16,22): Variable never used:   subsec
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\src\mmj_cigs_mode.c" Line 46(18,28): Variable never used:   sweep_step
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\src\mmj_cigs_mode.c" Line 225(19,27): Variable never used:   readdata
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_excute_mission.h" Line 20(15,27): Variable never used:   duration_sec
-      Memory usage:   ROM=96%      RAM=44% - 64%
-      0 Errors,  6 Warnings.
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main.c" Line 48(18,22): Variable never used:   flag
+      Memory usage:   ROM=91%      RAM=44% - 56%
+      0 Errors,  8 Warnings.
 Build Successful.
