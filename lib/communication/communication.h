@@ -50,7 +50,7 @@ typedef struct {
     unsigned int8 content[CONTENT_MAX];
 } Command;
 
-#include "./frame.h"
+#include "frame.h"
 
 // ______ Receive _______
 
@@ -75,7 +75,7 @@ static void transmit(unsigned int8 data[], int8 data_size);
 
 static unsigned int8 calc_crc8(unsigned int8 frame[], int8 payload_size);
 
-#include "./src/communication.c"
+#include "communication.c"
 
 #endif
 

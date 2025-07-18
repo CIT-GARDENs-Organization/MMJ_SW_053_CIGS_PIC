@@ -1,9 +1,8 @@
 #include "../mmj_cigs_func.h"
 #include "../mmj_cigs_config.h"
-#include "../mmj_cigs_piclog.h"
-#include "../../lib/ad7490.h"
+#include "../../lib/device/ad7490.h"
 #include "../mmj_cigs_flash.h"
-#include "../../lib/mission_tools.h"
+#include "../../lib/communication/mission_tools.h"
 
 /*
 struct AD7490_STREAM ad7490_stream = {
@@ -18,7 +17,7 @@ struct AD7490_STREAM ad7490_stream = {
 void io_init()
 {
     fprintf(PC, "IO Initialize\r\n");
-    output_low(CONNECT_CIGS);
+    output_low(CONNECT_CIGS1);
     output_high(EN_NPWR);
     fprintf(PC, "\tComplete\r\n");
 }
@@ -27,6 +26,7 @@ void adc_init()
 {
    fprintf(PC, "ADC Initialize\r\n");
     //setup ADC
+   /*
    setup_oscillator(OSC_16MHZ);   //oscillator speed (crystal)
    //setup_adc_ports(CIGS_VOLT | CIGS_CURR | TEMP_BOT | TEMP_TOP | PD , DAC_VSS_FVR);
    setup_adc(ADC_CLOCK_DIV_64);
@@ -34,8 +34,10 @@ void adc_init()
    //setup DAC
    setup_dac(DAC_OUTPUT1 | DAC_VSS_VDD);                                        //DAC output at pin DAC output1 from 0-VDD volts  
    dac_write(0);                                                               
+   */
    fprintf(PC, "\tComplete\r\n");
 }
+
 
 #Separate
 void sweep(unsigned int8 parameter[])
@@ -44,7 +46,7 @@ void sweep(unsigned int8 parameter[])
     fprintf(PC, "Start SWEEP\r\n");
     unsigned int8 measurement_step = parameter[1]; // Get the measurement step from the parameter array
     fprintf(PC, "\tSweep step : %u\r\n", measurement_step);
-    output_high(CONNECT_CIGS);
+    output_high(CONNECT_CIGS1);
     delay_us(100); // wait for the CIGS to stabilize
 
     // read header data
@@ -55,7 +57,7 @@ void sweep(unsigned int8 parameter[])
     measured_temp_bot = ad7490_read(ADC_TEMP_BOT); // read temperature at bottom
     measured_open_voltage = ad7490_read(ADC_CIGS_VOLT); // read open voltage at CIGS
     */
-   
+      /*
     for (unsigned int8 count = 0; count < measurement_step; count++)
     {    
         // set DAC value
@@ -71,7 +73,7 @@ void sweep(unsigned int8 parameter[])
         fprintf(PC, "%04LX,%04LX\r\n", data_buffer[count*2], data_buffer[count*2+1]);
     }
 
-    output_low(CONNECT_CIGS);
+    output_low(CONNECT_CIGS1);
     fprintf(PC, "END SWEEP\r\n");
 
     fprintf(PC, "Start CIGS data conversion\r\n");
@@ -134,7 +136,7 @@ void sweep(unsigned int8 parameter[])
     write_misf_address_area();
     //misf_init(); // Initialize the mission flash
     fprintf(PC, "End CIGS data conversion\r\n");
-    
+    */
 }
 
 void make_meas_header(unsigned int8 *packetdata, unsigned int8 *cmd)

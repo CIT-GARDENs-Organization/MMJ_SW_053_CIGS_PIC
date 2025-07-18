@@ -7,15 +7,12 @@
 // This is redundant, but it is a process to hide the Communication library as a driver.
 Command make_command(unsigned int8 receive_signal[], int8 receive_signal_size);
 
-#Separate
 void transmit_ack();
-#Separate
 void transmit_status();
-#Separate
 int1 req_use_smf();
 
 
-#include "./src/communication_driver.c"
+#include "communication_driver.c"
 
 #endif
 

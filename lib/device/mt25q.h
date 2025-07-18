@@ -92,7 +92,7 @@ struct {
 } fields;
 }READ_ID_DATA;
 
-#include "./src/mt25q.c"
+#include "mt25q.c"
 
 #endif
 

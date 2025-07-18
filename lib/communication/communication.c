@@ -1,4 +1,6 @@
-#include "../mission_tools.h"
+#include "mission_tools.h"
+#include "../tool/calc_tools.h"
+
 Command make_receive_command(unsigned int8 receive_signal[], int8 receive_signal_size)
 {
    Command command = {0, 0, FALSE,{0x00}};
@@ -121,15 +123,3 @@ static void transmit(unsigned int8 data[], int8 data_size)
       fprintf(PC, "%X ", data[i]);
    fprintf(PC, "\r\n");
 }
-
-
-// ______ Common _______
-
-static unsigned int8 calc_crc8(unsigned int8 frame[], int8 payload_size)
-{
-   unsigned int8 crc = frame[0], i = 1;
-   while(i < payload_size)
-      crc ^= frame[i++];
-   return crc;
-}
-

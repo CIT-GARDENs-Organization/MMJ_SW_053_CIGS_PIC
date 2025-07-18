@@ -161,7 +161,7 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     14   0    0    107  1.2  @const1272
 0     14   0    0   4170 14.0  @const1273
 0     13   0    0   4170 14.0  @const1274
-4   1834  19  337   4170 14.0  copy_data
+4   1834  19  337   4170 14.0  smf_write
 0     13   0    0             @const1298
 0     12   0    0             @const1299
 0     14   0    0             @const1302

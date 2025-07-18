@@ -1,4 +1,4 @@
-#include "../ad7490.h"
+#include "ad7490.h"
 
 
 
@@ -44,7 +44,7 @@ void ad7490_init()
 unsigned int16 ad7490_read(int8 channel)
 {   
     //AD7490_RESISTOR reg;
-        reg.fields.coding = 1; // 1: Two's complement, 0: Binary
+    reg.fields.coding = 1; // 1: Two's complement, 0: Binary
     reg.fields.write = 1;
     reg.fields.seq = 0; 
     reg.fields.range = 1;
@@ -59,7 +59,7 @@ unsigned int16 ad7490_read(int8 channel)
     spi_xfer(ADC_STREAM, cmd); // Dummy transfer to start communication
     #ifdef AD7490_DEBUG
         //fprintf(PC, "AD7490 Read Channel: %d\r\n", channel);
-        fprintf(PC,"\t[ADC] << %04LX\r\n", reg.value);
+        fprintf(PC,"\t[ADC] << %04LX\r\n", reADC DAC‚Ü‚Æ‚ß‚È‚ñ‚Æ‚¢‚¤Hg.value);
     #endif
     output_high(ADC_CS); // Set CS pin high to end communication
     delay_us(10); // Wait for the ADC to process the command

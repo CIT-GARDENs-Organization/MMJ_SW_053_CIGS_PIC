@@ -7,7 +7,7 @@ void main()
    fprintf(PC,"Last updated on %s %s, by Inoue.\r\n\r\n", __DATE__, __TIME__);
    
    io_init();
-   adc_init();
+   //adc_init();
    setup_uart_to_boss();
    setup_timer();
    ad7490_init();
@@ -17,12 +17,11 @@ void main()
    int1 is_finished = FALSE;
    fprintf(PC,"____CIGS PIC Start Operation_____\r\n\r\n");
    
-   mcp4911_device_t dac1 = {
-      .cs_pin = DAC_CS,
-      .spi_stream = DAC_STREAM
-   };
-   
-   
+   dac_cell.write_spi = spi_cell_write;
+   dac_cell.cs_pin = PIN_C0;
+
+   mcp4911_init(&dac_cell);
+
    
    
    fprintf(PC,"waiting for BOSS PIC command");

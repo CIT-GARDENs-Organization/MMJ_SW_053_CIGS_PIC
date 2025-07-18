@@ -9,7 +9,7 @@ enabled=0
 chip=1
 D1=
 V1=
-buildcount=434
+buildcount=436
 
 [fileformats]
 forcecoff=0
@@ -61,44 +61,44 @@ Fixed=
 
 [Opened Files]
 1=mmj_cigs_main.c
-t1=40
+t1=10
 2=cigs\src\mmj_cigs_func.c
-t2=1
+t2=137
 3=cigs\src\mmj_cigs_flash.c
 t3=1
-4=lib\src\timer.c
-t4=1
-Count=6
-5=lib\timer.h
-t5=4
-6=cigs\src\mmj_cigs_mode.c
-t6=215
-7=cigs\mmj_cigs_config.h
-t7=9
-8=cigs\src\mmj_cigs_func.c
-t8=9
-9=lib\src\data_copy.c
-t9=19
-10=cigs\mmj_cigs_main.h
-t10=1
-11=lib\src\mission_tools.c
-t11=71
-12=lib\src\communication.c
+4=cigs\mmj_cigs_config.h
+t4=75
+Count=19
+5=cigs\mmj_cigs_main.h
+t5=1
+6=lib\communication\uart.h
+t6=5
+7=lib\communication\mission_tools.h
+t7=11
+8=lib\communication\mission_tools.c
+t8=11
+9=cigs\src\mmj_cigs_mode_mission.c
+t9=101
+10=lib\device\ad7490.c
+t10=8
+11=lib\device\mt25q.c
+t11=1
+12=cigs\src\mmj_cigs_piclog.c
 t12=1
-13=lib\mission_tools.h
+13=lib\device\mcp4901.c
 t13=1
-14=lib\data_copy.h
+14=cigs\mmj_cigs_mode_flash.h
 t14=1
-15=lib\src\timer.c
+15=cigs\src\mmj_cigs_mode_flash.c
 t15=1
-16=lib\communication_driver.h
-t16=1
-17=lib\communication.h
-t17=1
-18=build\mmj_cigs_main.STA
-t18=-1
-19=build\mmj_cigs_main.tre
-t19=-1
+16=cigs\src\mmj_cigs_excute_mission.c
+t16=15
+17=lib\communication\communication_driver.h
+t17=5
+18=lib\communication\communication_driver.c
+t18=1
+19=lib\tool\timer.c
+t19=1
 20=cigs\mmj_cigs_excute_mission.h
 t20=1
 21=cigs\src\mmj_cigs_mode.c
@@ -122,3 +122,11 @@ AdditionalOptionString=
 [Units]
 Count=1
 1=mmj_cigs_main (main)
+2=cigs\test.c
+Link=0
+
+[ExtraIncludes]
+Count=0
+1=mmj_cigs_main=c:\users\shoin\chiba institute of technology\5号機 - ドネュメント\cigs\02_software\pic\mmj_sw_053_cigs_pic\cigs\test.c
+2=mmj_cigs_main=c:\users\shoin\chiba institute of technology\5号機 - ドネュメント\cigs\02_software\pic\mmj_sw_053_cigs_pic\test.c
+3=mmj_cigs_main=c:\users\shoin\chiba institute of technology\5号機 - ドネュメント\cigs\02_software\pic\mmj_sw_053_cigs_pic\test.c

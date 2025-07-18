@@ -22,7 +22,7 @@ void setup_uart_to_boss();
 void clear_receive_signal(unsigned int8 receive_signal[], int8 *receive_signal_size);
 
 
-#include "./src/uart.c"
+#include "uart.c"
 
 #endif
 

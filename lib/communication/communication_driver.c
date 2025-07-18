@@ -5,12 +5,12 @@ Command make_command(unsigned int8 receive_signal[], int8 receive_signal_size)
    fprintf(PC, "\t-> Content size: %d\r\n", command.size);
    return command;
 }
-#Separate
+
 void transmit_ack()
 {
    transmit_command(ACK, 0, 0);
 }
-#Separate
+
 void transmit_status()
 {
    transmit_command(MIS_MCU_STATUS, &status, 4);

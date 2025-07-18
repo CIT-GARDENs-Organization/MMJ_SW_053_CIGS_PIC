@@ -53,12 +53,13 @@ AD7490_RESISTOR reg = {0}; // Initialize the AD7490_RESISTOR union
 void ad7490_init(void);
 unsigned int16 ad7490_read(int8 channel);
 
-unsigned int16 ad7490_make_cmd(int8 channel);
+
 
 // Private Functions
 void set_add(int8 channel);
 void set_pm(int8 powermode);
 void print_bits(unsigned int16 data);
+unsigned int16 ad7490_make_cmd(int8 channel);
 // Resistor Settings
 #define AD7490_EN_WRITE 0b1
 
@@ -88,7 +89,7 @@ void print_bits(unsigned int16 data);
 #define AD7490_VIN15 0b1111
 
 
-#include "src/ad7490.c"
+#include "ad7490.c"
 
 #endif // AD7490_H
 //------------------End of File------------------

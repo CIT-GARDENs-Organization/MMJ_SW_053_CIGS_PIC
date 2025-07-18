@@ -1,11 +1,9 @@
 #include "../mmj_cigs_excute_mission.h"
-#include "../mmj_cigs_mode.h"
-#include "../mmj_cigs_config.h"
-#include "../../lib/typedef_content.h"
-#include "../../lib/smf_queue.h"
-#include "../../lib/mt25q.h"
-#include "../../lib/mission_tools.h"
-#include "../mmj_cigs_piclog.h"
+#include "../mmj_cigs_mode_mission.h"
+#include "../mmj_cigs_mode_flash.h"
+#include "../../lib/communication/typedef_content.h"
+#include "../../lib/tool/smf_queue.h"
+#include "../../lib/communication/mission_tools.h"
 
 #separate
 void execute_mission(unsigned int8 *content)
@@ -19,7 +17,7 @@ void execute_mission(unsigned int8 *content)
    fprintf(PC, "Command ID: %X\r\n\r\n", command_id);
    switch(command_id)
    {
-      case ID_DUMMY: // example command
+      case 0x00: // example command
          mode_dummy(content);
          //mode_iv_meas_adc();
          break;
@@ -35,7 +33,6 @@ void execute_mission(unsigned int8 *content)
       case ID_FLASH_ERASE_ALL:
          mode_flash_erase_all(content);
          break;
-      /*
       case ID_FLASH_ERASE_1SECTOR:
          mode_flash_erase_1sector(content);
          break;
@@ -45,21 +42,18 @@ void execute_mission(unsigned int8 *content)
       case ID_FALSH_WRITE_DEMO:
          mode_flash_write_demo(content);
          break;
-      case ID_FLASH_4kByte_SUBSECTOR:
+      case ID_FLASH_WRITE_4kByte_SUBSECTOR:
          mode_flash_write_4kbyte_subsecotr(content);
          break;
-      */
       case ID_FLASH_READ:
          mode_flash_read(content);
          break;
-      /*
       case ID_FLASH_READ_ADDRESS:
          mode_flash_read_address(content);
          break;
       case ID_FLASH_SMF_COPY:
          mode_flash_smf_copy(content);
          break;
-      */
       case ID_FLASH_ADDRESS_RESET:
          mode_flash_address_reset(content);
          break;
@@ -150,7 +144,7 @@ void handle_smf_available(Command *command) {
     if (command->content[0] == ALLOW) {
         fprintf(PC, "\t\t-> allowd\r\n");
         status[0] = COPYING;
-        copy_data();
+        smf_write();
         status[0] = FINISHED;
     } else {
         fprintf(PC, "\t\t-> denyed\r\n");

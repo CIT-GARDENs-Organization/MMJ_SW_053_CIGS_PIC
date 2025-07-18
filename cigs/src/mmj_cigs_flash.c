@@ -1,6 +1,6 @@
 #include "../mmj_cigs_config.h"
 #include "../mmj_cigs_flash.h"
-#include "../../lib/mt25q.h"
+#include "../../lib/device/mt25q.h"
 
 void misf_init()
 {
@@ -8,8 +8,6 @@ void misf_init()
     output_high(MIS_FM_CS); // Set CS pin high to deselect the flash
     output_high(SMF_CS); // Set CS pin high to deselect the SMF
     
-
-
     if (!is_connect(mis_fm)) {
         fprintf(PC, "\tFlash is not connected\r\n");
         return;

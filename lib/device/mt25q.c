@@ -1,4 +1,4 @@
-#include "../mt25q.h"
+#include "mt25q.h"
 
 //send multi bytes
 void spi_xfer_select_stream(Flash flash_stream, int8 *write_data, unsigned int16 write_amount){

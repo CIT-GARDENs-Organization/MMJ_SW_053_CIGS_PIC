@@ -69,6 +69,7 @@ void finished_use_smf()
    status[0] = EXECUTING_MISSION;
 }
 
+
 void check_and_respond_to_boss()
 {
    if (kbhit())
@@ -77,6 +78,8 @@ void check_and_respond_to_boss()
       transmit_status();
    }
 }
+
+
 /*
 unsigned int8 calc_crc8(unsigned int8 frame[], int8 payload_size)
 {

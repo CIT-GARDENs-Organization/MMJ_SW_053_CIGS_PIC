@@ -21,7 +21,11 @@
         "ad7490.h": "c",
         "flash.h": "c",
         "mt25q.h": "c",
-        "uart.h": "c"
+        "uart.h": "c",
+        "16f1789.h": "c",
+        "value_status.h": "c",
+        "mission_tools.h": "c",
+        "mmj_cigs_mode_mission.h": "c"
     },
     "C_Cpp.default.configurationProvider": "user.vscode-extension-for-ccsc"
 }
