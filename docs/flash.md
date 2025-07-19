@@ -160,8 +160,8 @@ Write Enable Latch、Busy状態などの情報を確認可能。
   .hファイル16行目に記載された部分を変更する。
   1つのSPIストリーム当たり1つのSPIストリーム名を記入する。使わないポートでも仮で実際に定義するSPIポートを宣言しておくこと。
 ```cpp:GDNS_226_FlashOperation.h
-#define FLASH_STREAM0 spi1(ここを変更)
-#define FLASH_STREAM1 spi2(ここを変更)
+#define MIS_FM_STREAM spi1(ここを変更)
+#define MIS_FM_STREAM spi2(ここを変更)
 #define FLASH_STREAM2 spi3(ここを変更)
 #define FLASH_STREAM3 spi4(ここを変更)
 typedef enum spi_stream{

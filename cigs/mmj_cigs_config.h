@@ -64,30 +64,33 @@
     //-------------UART--------------------
     #pin_select TX3=PIN_E3                                                           //TX PIN EXT +/- 6v
     #pin_select RX3=PIN_F2                                                           //RX PIN EXT +/- 6V
-    #use rs232(baud=9600,parity=N,UART3,bits=8,stream=BOSS)                      
+    #use rs232(baud=9600, parity=N, UART3, bits=8, stream=BOSS, ERRORS)                      
     
-    #use rs232(baud=9600,parity=N,rcv=PIN_E4,bits=8,stream=PC)       //(new) UART MAIN to pc
+    //#use rs232(baud=9600,parity=N, xmit=PIN_E4,bits=8,stream=PC)
+    #use rs232(baud=9600,parity=N, xmit=PIN_B6, bits=8, stream=PC)
 
     // -------------SPI--------------------
     #define SMF_CS PIN_A2
-    #define MIS_FM_CS  PIN_D3
+    #define MIS_FM_CS  PIN_A5
     #pin_select SCK1=PIN_A3
     #pin_select SDI1=PIN_A0
     #pin_select SDO1=PIN_A1
-    #use spi (MASTER, SPI1, BAUD=10000, MODE=0, BITS=8, STREAM=SMF_STREAM)
-    #use spi (MASTER, SPI1, BAUD=10000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
+    #define SMF_STREAM MIS_FM_STREAM
+    //#define MIS_FM_STREAM FLASH_STREAM
+    #use spi (MASTER, SPI1, BAUD=1000000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
+
+    //#use spi (MASTER, SPI1, BAUD=200000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
 
 
     
-    #pin_select SCK2=PIN_B2
-    #pin_select SDI2=PIN_B5
-    #pin_select SDO2=PIN_B4
-    #use spi (MASTER, SPI2, BAUD=10000, MODE=2, BITS=16, STREAM=ADC_STREAM)
-    #use spi (MASTER, SPI2, BAUD=10000, MODE=0, BITS=16, STREAM=DAC1_STREAM)
-    #use spi (MASTER, SPI2, BAUD=10000, MODE=0, BITS=16, STREAM=DAC2_STREAM)
+
+    #use spi (MASTER, CLK=PIN_B2, DI=PIN_B4, DO=PIN_B5,  BAUD=1000000, MODE=0, BITS=16, STREAM=ADCDAC_STREAM)
     #define ADC_CS PIN_B1
+    #define ADC_STREAM ADCDAC_STREAM
     #define DAC1_CS PIN_B3
+    #define DAC1_STREAM ADCDAC_STREAM
     #define DAC2_CS PIN_B0
+    #define DAC2_STREAM ADCDAC_STREAM
 
     // DI/O___
     #define CONNECT_CIGS1 PIN_C0

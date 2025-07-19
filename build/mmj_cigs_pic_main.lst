@@ -3501,8 +3501,8 @@ CCS PCM C Compiler, Version 5.104, 57077               01-6-25 16:58
 .................... ///////////////////////////////////////////////////////////////////////////////
 .................... ///////////////////////////////////////////////////////////////////////////////
 .................... //////////////////////////////define SPI STREAM////////////////////////////////
-.................... #define FLASH_STREAM0 MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
-.................... #define FLASH_STREAM1 SMF_STREAM
+.................... #define MIS_FM_STREAM MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
+.................... #define MIS_FM_STREAM SMF_STREAM
 .................... #define FLASH_STREAM2 SMF_STREAM // dont use
 .................... #define FLASH_STREAM3 SMF_STREAM // dont use
 .................... typedef enum spi_stream{
@@ -3604,8 +3604,8 @@ CCS PCM C Compiler, Version 5.104, 57077               01-6-25 16:58
 .................... ///////////////////////////////////////////////////////////////////////////////
 .................... ///////////////////////////////////////////////////////////////////////////////
 .................... //////////////////////////////define SPI STREAM////////////////////////////////
-.................... #define FLASH_STREAM0 MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
-.................... #define FLASH_STREAM1 SMF_STREAM
+.................... #define MIS_FM_STREAM MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
+.................... #define MIS_FM_STREAM SMF_STREAM
 .................... #define FLASH_STREAM2 SMF_STREAM // dont use
 .................... #define FLASH_STREAM3 SMF_STREAM // dont use
 .................... typedef enum spi_stream{
@@ -3705,12 +3705,12 @@ CCS PCM C Compiler, Version 5.104, 57077               01-6-25 16:58
 ....................    switch(flash_stream.spi_stream_id){
 ....................       case SPI_0:
 ....................          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
-....................             spi_xfer(FLASH_STREAM0,write_data[spi_xfer_num]);
+....................             spi_xfer(MIS_FM_STREAM,write_data[spi_xfer_num]);
 ....................          break;
 ....................          
 ....................       case SPI_1:
 ....................          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
-....................             spi_xfer(FLASH_STREAM1,write_data[spi_xfer_num]);
+....................             spi_xfer(MIS_FM_STREAM,write_data[spi_xfer_num]);
 ....................          break;
 ....................    
 ....................       case SPI_2:
@@ -3736,13 +3736,13 @@ CCS PCM C Compiler, Version 5.104, 57077               01-6-25 16:58
 ....................          fprintf(PC, "\t->");
 ....................          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
 ....................          {
-....................             spi_xfer(FLASH_STREAM0, write_data[spi_xfer_num]);
+....................             spi_xfer(MIS_FM_STREAM, write_data[spi_xfer_num]);
 ....................             fprintf(PC, "%X ", write_data[spi_xfer_num]);
 ....................          }   
 ....................          fprintf(PC, "\r\n\t<-");
 ....................          for(unsigned int32 spi_rcv_num = 0;spi_rcv_num < read_amount;spi_rcv_num++)
 ....................          {
-....................             read_data[spi_rcv_num] = spi_xfer(FLASH_STREAM0);
+....................             read_data[spi_rcv_num] = spi_xfer(MIS_FM_STREAM);
 ....................             fprintf(PC, "%X ", read_data[spi_rcv_num]);
 ....................          }
 ....................          fprintf(PC, "\r\n");
@@ -3750,9 +3750,9 @@ CCS PCM C Compiler, Version 5.104, 57077               01-6-25 16:58
 ....................             
 ....................       case SPI_1:
 ....................          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
-....................             spi_xfer(FLASH_STREAM1, write_data[spi_xfer_num]);
+....................             spi_xfer(MIS_FM_STREAM, write_data[spi_xfer_num]);
 ....................          for(unsigned int32 spi_rcv_num = 0;spi_rcv_num < read_amount;spi_rcv_num++)
-....................             read_data[spi_rcv_num] = spi_xfer(FLASH_STREAM1);
+....................             read_data[spi_rcv_num] = spi_xfer(MIS_FM_STREAM);
 ....................          break;
 ....................    
 ....................       case SPI_2:
@@ -3780,16 +3780,16 @@ CCS PCM C Compiler, Version 5.104, 57077               01-6-25 16:58
 ....................    switch(flash_stream.spi_stream_id){
 ....................       case SPI_0:
 ....................       for(unsigned int8 spi_xfer_num = 0;spi_xfer_num < cmd_amount;spi_xfer_num++)
-....................          spi_xfer(FLASH_STREAM0, cmd_data[spi_xfer_num]);
+....................          spi_xfer(MIS_FM_STREAM, cmd_data[spi_xfer_num]);
 ....................       for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
-....................          spi_xfer(FLASH_STREAM0, write_data[spi_xfer_num]);
+....................          spi_xfer(MIS_FM_STREAM, write_data[spi_xfer_num]);
 ....................          break;
 ....................          
 ....................       case SPI_1:
 ....................          for(unsigned int8 spi_xfer_num = 0;spi_xfer_num < cmd_amount;spi_xfer_num++)
-....................             spi_xfer(FLASH_STREAM1, cmd_data[spi_xfer_num]);
+....................             spi_xfer(MIS_FM_STREAM, cmd_data[spi_xfer_num]);
 ....................          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
-....................             spi_xfer(FLASH_STREAM1, write_data[spi_xfer_num]);
+....................             spi_xfer(MIS_FM_STREAM, write_data[spi_xfer_num]);
 ....................          break;
 ....................    
 ....................       case SPI_2:
@@ -5875,8 +5875,8 @@ CCS PCM C Compiler, Version 5.104, 57077               01-6-25 16:58
 .................... ///////////////////////////////////////////////////////////////////////////////
 .................... ///////////////////////////////////////////////////////////////////////////////
 .................... //////////////////////////////define SPI STREAM////////////////////////////////
-.................... #define FLASH_STREAM0 MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
-.................... #define FLASH_STREAM1 SMF_STREAM
+.................... #define MIS_FM_STREAM MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
+.................... #define MIS_FM_STREAM SMF_STREAM
 .................... #define FLASH_STREAM2 SMF_STREAM // dont use
 .................... #define FLASH_STREAM3 SMF_STREAM // dont use
 .................... typedef enum spi_stream{
@@ -6026,8 +6026,8 @@ CCS PCM C Compiler, Version 5.104, 57077               01-6-25 16:58
 .................... ///////////////////////////////////////////////////////////////////////////////
 .................... ///////////////////////////////////////////////////////////////////////////////
 .................... //////////////////////////////define SPI STREAM////////////////////////////////
-.................... #define FLASH_STREAM0 MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
-.................... #define FLASH_STREAM1 SMF_STREAM
+.................... #define MIS_FM_STREAM MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
+.................... #define MIS_FM_STREAM SMF_STREAM
 .................... #define FLASH_STREAM2 SMF_STREAM // dont use
 .................... #define FLASH_STREAM3 SMF_STREAM // dont use
 .................... typedef enum spi_stream{
@@ -7166,8 +7166,8 @@ CCS PCM C Compiler, Version 5.104, 57077               01-6-25 16:58
 .................... ///////////////////////////////////////////////////////////////////////////////
 .................... ///////////////////////////////////////////////////////////////////////////////
 .................... //////////////////////////////define SPI STREAM////////////////////////////////
-.................... #define FLASH_STREAM0 MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
-.................... #define FLASH_STREAM1 SMF_STREAM
+.................... #define MIS_FM_STREAM MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
+.................... #define MIS_FM_STREAM SMF_STREAM
 .................... #define FLASH_STREAM2 SMF_STREAM // dont use
 .................... #define FLASH_STREAM3 SMF_STREAM // dont use
 .................... typedef enum spi_stream{
@@ -7281,8 +7281,8 @@ CCS PCM C Compiler, Version 5.104, 57077               01-6-25 16:58
 .................... ///////////////////////////////////////////////////////////////////////////////
 .................... ///////////////////////////////////////////////////////////////////////////////
 .................... //////////////////////////////define SPI STREAM////////////////////////////////
-.................... #define FLASH_STREAM0 MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
-.................... #define FLASH_STREAM1 SMF_STREAM
+.................... #define MIS_FM_STREAM MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
+.................... #define MIS_FM_STREAM SMF_STREAM
 .................... #define FLASH_STREAM2 SMF_STREAM // dont use
 .................... #define FLASH_STREAM3 SMF_STREAM // dont use
 .................... typedef enum spi_stream{

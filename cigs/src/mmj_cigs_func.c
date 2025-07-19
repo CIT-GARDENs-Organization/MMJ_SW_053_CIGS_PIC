@@ -3,16 +3,63 @@
 #include "../../lib/device/ad7490.h"
 #include "../mmj_cigs_flash.h"
 #include "../../lib/communication/mission_tools.h"
+#include "../../lib/device/mcp4901.h"
 
-/*
-struct AD7490_STREAM ad7490_stream = {
-    ADC_STREAM,    // spi_stream
-    ADC_CS  // cs_pin
-};
-*/
 
-////
+//////////// Function to execute a mission based on the command content
+void mcp4901_1_write(unsigned int16 value)
+{
+   unsigned int16 cmd = mcp4901_make_cmd(value);
+   #ifdef MCP4901_DEBUG
+      fprintf(PC, "\t[DAC] <<< %04LX\r\n", cmd);
+   #endif
+   output_low(DAC1_CS); // Select MCP4901
+   delay_us(100); // Ensure CS is stable before sending data
+   spi_xfer(ADCDAC_STREAM, cmd); // Send first byte
+   output_high(DAC1_CS); // Deselect MCP4901
+}
 
+void mcp4901_2_write(unsigned int16 value)
+{
+   unsigned int16 cmd = mcp4901_make_cmd(value);
+   #ifdef MCP4901_DEBUG
+      fprintf(PC, "\t[DAC] <<< %04LX\r\n", cmd);
+   #endif
+   output_low(DAC2_CS); // Select MCP4901
+   delay_us(100); // Ensure CS is stable before sending data
+   spi_xfer(ADCDAC_STREAM, cmd); // Send first byte
+   output_high(DAC2_CS); // Deselect MCP4901
+}
+
+unsigned int16 ad7490_read(int8 channel)
+{   
+
+    unsigned int16 cmd = ad7490_make_cmd(channel);
+    
+    // Send the command to the ADC
+    output_low(ADC_CS); // Set CS pin low to select the ADC
+    delay_us(10); // Wait for the ADC to stabilize
+    spi_xfer(ADC_STREAM, cmd); // Dummy transfer to start communication
+    #ifdef AD7490_DEBUG
+       fprintf(PC,"\t[ADC] <<< %04LX\r\n", cmd);
+    #endif
+    delay_us(10); // Wait for the ADC to process the command
+    output_high(ADC_CS); // Set CS pin high to end communication
+    delay_us(10); // Wait for the ADC to process the command
+
+    // Read the ADC data
+    output_low(ADC_CS); 
+    delay_us(10); // Wait for the ADC to stabilize
+    unsigned int16 ans = spi_xfer(ADC_STREAM, 0x0000); // Read data from ADC
+    output_high(ADC_CS); 
+    unsigned int16 readdata = ans & 0x0FFF; //Conver LSB <--> MSB
+    
+    
+    #ifdef AD7490_DEBUG
+        fprintf(PC,"\t[ADC] >>> %04LX\r\n", readdata);
+    #endif
+    return readdata;
+}
 
 void io_init()
 {
@@ -173,3 +220,43 @@ void make_meas_header(unsigned int8 *packetdata, unsigned int8 *cmd)
     packetdata[20] = measured_temp_bot & 0xFF; // PD end
 }
 
+void test_sweep(unsigned int8 sweep_step)
+{
+    fprintf(PC, "Start TEST SWEEP\r\n");
+    output_high(CONNECT_CIGS1);
+    output_low(EN_NPWR); // Enable power to CIGS
+    delay_us(100); // wait for the CIGS to stabilize
+    fprintf(PC, "step, voltage, current\r\n");
+    mcp4901_1_write(0); // Initialize DAC to 0
+    delay_ms(100); // wait for the DAC to stabilize
+
+
+    unsigned int16 volt;
+    unsigned int16 curr;
+    for (unsigned int8 count = 0; count < sweep_step; count++)
+    {    
+        // set DAC value
+        mcp4901_1_write(count);
+
+        volt = ad7490_read(ADC_CIGS1_AMP); // read CIGS voltage
+        curr = ad7490_read(ADC_CIGS1_CURR); // read CIGS current
+        
+        fprintf(PC, "%u, %lu, %lu\r\n", count, volt, curr);
+        delay_ms(1); // wait for the ADC to stabilize
+    }
+}
+
+void test_adc()
+{
+    unsigned int16 ans;
+    mcp4901_1_write(0); // Initialize DAC to 0
+    fprintf(PC, "Start ADC TEST\r\n");
+    ans = ad7490_read(ADC_CIGS1_VOLT);
+    fprintf(PC, "ADC Voltage: %04LX\r\n", ans);
+    ans = ad7490_read(ADC_CIGS1_CURR);
+    fprintf(PC, "ADC Current: %04LX\r\n", ans);
+    ans = ad7490_read(ADC_CIGS1_AMP);
+    fprintf(PC, "ADC CIGS1 Amp: %04LX\r\n", ans);
+    ans = ad7490_read(ADC_CIGS1_VREF);
+    fprintf(PC, "ADC CIGS1 VREF: %04LX\r\n", ans);
+}

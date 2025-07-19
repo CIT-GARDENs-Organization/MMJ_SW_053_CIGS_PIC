@@ -69,7 +69,6 @@ void finished_use_smf()
    status[0] = EXECUTING_MISSION;
 }
 
-
 void check_and_respond_to_boss()
 {
    if (kbhit())
@@ -79,13 +78,3 @@ void check_and_respond_to_boss()
    }
 }
 
-
-/*
-unsigned int8 calc_crc8(unsigned int8 frame[], int8 payload_size)
-{
-   unsigned int8 crc = frame[0], i = 1;
-   while(i < payload_size)
-      crc ^= frame[i++];
-   return crc;
-}
-*/

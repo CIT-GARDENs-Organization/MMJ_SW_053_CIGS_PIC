@@ -25,12 +25,12 @@ void spi_xfer_select_stream(Flash flash_stream, int8 *write_data, unsigned int16
    switch(flash_stream.spi_stream_id){
       case SPI_0:
          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
-            spi_xfer(FLASH_STREAM0,write_data[spi_xfer_num]);
+            spi_xfer(MIS_FM_STREAM,write_data[spi_xfer_num]);
          break;
          
       case SPI_1:
          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
-            spi_xfer(FLASH_STREAM1,write_data[spi_xfer_num]);
+            spi_xfer(MIS_FM_STREAM,write_data[spi_xfer_num]);
          break;
    
       case SPI_2:
@@ -54,16 +54,16 @@ void spi_xfer_and_read_select_stream(Flash flash_stream, int8 *write_data, unsig
    switch(flash_stream.spi_stream_id){
       case SPI_0:
       for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
-         spi_xfer(FLASH_STREAM0, write_data[spi_xfer_num]);
+         spi_xfer(MIS_FM_STREAM, write_data[spi_xfer_num]);
       for(unsigned int32 spi_rcv_num = 0;spi_rcv_num < read_amount;spi_rcv_num++)
-         read_data[spi_rcv_num] = spi_xfer(FLASH_STREAM0);
+         read_data[spi_rcv_num] = spi_xfer(MIS_FM_STREAM);
          break;
          
       case SPI_1:
          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
-            spi_xfer(FLASH_STREAM1, write_data[spi_xfer_num]);
+            spi_xfer(MIS_FM_STREAM, write_data[spi_xfer_num]);
          for(unsigned int32 spi_rcv_num = 0;spi_rcv_num < read_amount;spi_rcv_num++)
-            read_data[spi_rcv_num] = spi_xfer(FLASH_STREAM1);
+            read_data[spi_rcv_num] = spi_xfer(MIS_FM_STREAM);
          break;
    
       case SPI_2:
@@ -91,16 +91,16 @@ void spi_xfer_two_datas_select_stream(Flash flash_stream, int8 *cmd_data, unsign
    switch(flash_stream.spi_stream_id){
       case SPI_0:
       for(unsigned int8 spi_xfer_num = 0;spi_xfer_num < cmd_amount;spi_xfer_num++)
-         spi_xfer(FLASH_STREAM0, cmd_data[spi_xfer_num]);
+         spi_xfer(MIS_FM_STREAM, cmd_data[spi_xfer_num]);
       for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
-         spi_xfer(FLASH_STREAM0, write_data[spi_xfer_num]);
+         spi_xfer(MIS_FM_STREAM, write_data[spi_xfer_num]);
          break;
          
       case SPI_1:
          for(unsigned int8 spi_xfer_num = 0;spi_xfer_num < cmd_amount;spi_xfer_num++)
-            spi_xfer(FLASH_STREAM1, cmd_data[spi_xfer_num]);
+            spi_xfer(MIS_FM_STREAM, cmd_data[spi_xfer_num]);
          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
-            spi_xfer(FLASH_STREAM1, write_data[spi_xfer_num]);
+            spi_xfer(MIS_FM_STREAM, write_data[spi_xfer_num]);
          break;
    
       case SPI_2:

@@ -10,6 +10,7 @@
 #define FLASH_STREAM1 SMF_STREAM
 #define FLASH_STREAM2 SMF_STREAM // dont use
 #define FLASH_STREAM3 SMF_STREAM // dont use
+
 typedef enum spi_stream{
     SPI_0,
     SPI_1,
@@ -26,8 +27,7 @@ typedef struct select_stream_to_flash{
 }Flash;
 
 
-Flash mis_fm = {SPI_0, MT25QL128ABA, MIS_FM_CS};
-Flash smf = {SPI_1, MT25QL01GBBB, SMF_CS};
+
 
 
 

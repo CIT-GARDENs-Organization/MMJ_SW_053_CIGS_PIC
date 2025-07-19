@@ -39,8 +39,8 @@ This library provides comprehensive SPI flash memory operations supporting two M
 ### SPI Stream Configuration
 
 The library supports 4 independent SPI streams:
-- `SPI_0` → `FLASH_STREAM0`
-- `SPI_1` → `FLASH_STREAM1`
+- `SPI_0` → `MIS_FM_STREAM`
+- `SPI_1` → `MIS_FM_STREAM`
 - `SPI_2` → `FLASH_STREAM2`
 - `SPI_3` → `FLASH_STREAM3`
 

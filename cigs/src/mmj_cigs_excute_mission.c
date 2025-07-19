@@ -4,6 +4,7 @@
 #include "../../lib/communication/typedef_content.h"
 #include "../../lib/tool/smf_queue.h"
 #include "../../lib/communication/mission_tools.h"
+#include "../mmj_cigs_func.h"
 
 #separate
 void execute_mission(unsigned int8 *content)
@@ -17,15 +18,18 @@ void execute_mission(unsigned int8 *content)
    fprintf(PC, "Command ID: %X\r\n\r\n", command_id);
    switch(command_id)
    {
-      case 0x00: // example command
+      case 0x10: // example command
          mode_dummy(content);
          //mode_iv_meas_adc();
          break;
-      case 0x10:
+      case 0x11:
          mode_test_iv(content);
          break;
+      case 0x12:
+         test_adc();
+         break;
       case 0x01:
-         //example_01(parameter);
+         mode_measure(content); // check if the flash is connected
          break;
       case 0x02:
          //example_02(parameter);

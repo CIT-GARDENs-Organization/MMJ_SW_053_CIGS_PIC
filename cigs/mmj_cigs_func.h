@@ -14,6 +14,11 @@ volatile int8 executed_mission_count = 0;
 
 
 // _________ values ____________
+unsigned int16 ad7490_read(int8 channel);
+void mcp4901_1_write(unsigned int16 val);
+void mcp4901_2_write(unsigned int16 val);
+
+
 
 
 // _________ functions ____________

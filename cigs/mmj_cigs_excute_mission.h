@@ -3,6 +3,8 @@
 
 // _________ values _________
 //#define PARAMETER_LENGTH 8
+#include "../lib/communication/mission_tools.h"
+
 
 #Separate
 int1 execute_command(Command *command);

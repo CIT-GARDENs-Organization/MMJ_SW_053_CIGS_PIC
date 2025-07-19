@@ -6,6 +6,8 @@
 // pin assignment etc
 #include "mmj_cigs_config.h"
 
+//#include "../lib/device/mt25q.h"
+
 #include "../lib/communication/typedef_content.h"
 
 #include "../lib/communication/value_status.h"
@@ -15,7 +17,7 @@
 #include "../lib/communication/uart.h"
 
 // SerialCommunication
-#include "../lib/communication/communication_driver.h"
+//#include "../lib/communication/communication_driver.h"
 
 #include "../lib/tool/smf_function.h"
 

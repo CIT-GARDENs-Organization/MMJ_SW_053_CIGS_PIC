@@ -1,5 +1,8 @@
 #include "mt25q.h"
 
+Flash mis_fm = {SPI_0, MT25QL128ABA, MIS_FM_CS};
+Flash smf = {SPI_1, MT25QL01GBBB, SMF_CS};
+
 //send multi bytes
 void spi_xfer_select_stream(Flash flash_stream, int8 *write_data, unsigned int16 write_amount){
    switch(flash_stream.spi_stream_id){

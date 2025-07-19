@@ -1,64 +1,38 @@
 #ifndef     AD7490_H
 #define     AD7490_H
 
-#ifdef AD7490_DEBUG
-   #define DEBUG_PORT PC
-#endif
 
-typedef struct AD7490_STREAM
-{
-    int8 spi_stream; // SPI stream number
-    int16 cs_pin;    // Chip Select pin number
-};
-//0x8B30
-
-
-
-typedef union AD7490_RESISTOR
-{
+typedef union {
     unsigned int16 value; // 16-bit value for direct access
-    struct fields
-    {
-        unsigned int blank3 :1 ; // bit 0 (LSB)
-        unsigned int blank2 :1   ; // bit 1
-        unsigned int blank1 :1   ; // bit 2
-        unsigned int blank0 :1   ; // bit 3
-        unsigned int coding:1       ; // bit 12
-        unsigned int range   :1    ; // bit 5
-        unsigned int weak_tri:1     ; // bit 4
-        unsigned int shadow:1   ; // bit 13
-        unsigned int write:1    ; // bit 15 (MSB)
-        unsigned int seq :1     ; // bit 14
-        unsigned int add3 :1    ; // bit 11
-        unsigned int add2  :1   ; // bit 10
-        unsigned int add1   :1  ; // bit 9
-        unsigned int add0    :1 ; // bit 8
-        unsigned int pm1    :1  ; // bit 7
-        unsigned int pm0     :1 ; // bit 6
+    struct {
+        int1 reserved0; // Reserved bits
+        int1 reserved1; // Reserved bits
+        int1 reserved2; // Reserved bits
+        int1 reserved3; // Reserved bits   
+        int1 coding; // 1: Two's complement, 0: Binary
+        int1 range; // 1: Range mode, 0: Normal mode
+        int1 weak_tri; // 1: Weak trigger, 0: Strong trigger
+        int1 shadow; // 1: Shadow register, 0: Direct access
+        int1 pm0;
+        int1 pm1; // Power mode bits
+        int1 add0;
+        int1 add1; // Channel address bits
+        int1 add2;
+        int1 add3; // Channel address bits
+        int1 seq; // 1: Sequential mode, 0: Random mode
+        int1 write; // 1: Write operation, 0: Read operation
+
     } fields;
-} AD7490_RESISTOR;
-
-unsigned int8 coding; // 1: Two's complement, 0: Binary
-unsigned int8 write;  // 1: Write operation, 0: Read operation
-unsigned int8 seq;    // 1: Sequential mode, 0: Random mode
-unsigned int8 range; // 1: Range mode, 0: Normal mode
-unsigned int8 weak_tri; // 1: Weak trigger, 0: Strong trigger
-unsigned int8 shadow; // 1: Shadow register, 0: Direct access
-unsigned int16 ad7490_readdata(unsigned int16 channel);
-//AD7490_RESISTOR reg;
-
-AD7490_RESISTOR reg = {0}; // Initialize the AD7490_RESISTOR union
+} ad7490_cmd_t;
 
 // Public Function 
 void ad7490_init(void);
-unsigned int16 ad7490_read(int8 channel);
+
 
 
 
 // Private Functions
-void set_add(int8 channel);
-void set_pm(int8 powermode);
-void print_bits(unsigned int16 data);
+
 unsigned int16 ad7490_make_cmd(int8 channel);
 // Resistor Settings
 #define AD7490_EN_WRITE 0b1

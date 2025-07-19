@@ -14,6 +14,13 @@ void misf_init()
     }else {
         //fprintf(PC, "\tFlash is connected\r\n");
     }
+    if (!is_connect(smf)) {
+        fprintf(PC, "\tSMF is not connected\r\n");
+        return;
+    }else {
+        fprintf(PC, "\t SMF is connected\r\n");
+    }
+
     unsigned int8 readdata[PACKET_SIZE];
     read_data_bytes(mis_fm, ADDRESS_MANEGE_START, readdata, PACKET_SIZE); // Read the PICLOG data header
     

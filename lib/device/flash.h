@@ -15,8 +15,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 //////////////////////////////define SPI STREAM////////////////////////////////
-#define FLASH_STREAM0 MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
-#define FLASH_STREAM1 SMF_STREAM
+#define MIS_FM_STREAM MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
+#define MIS_FM_STREAM SMF_STREAM
 #define FLASH_STREAM2 SMF_STREAM // dont use
 #define FLASH_STREAM3 SMF_STREAM // dont use
 typedef enum spi_stream{

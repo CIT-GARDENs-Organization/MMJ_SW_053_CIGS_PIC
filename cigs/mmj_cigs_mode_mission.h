@@ -20,7 +20,8 @@ void mode_iv_measure();
 void mode_iv_measure_voltage();
 #Separate
 void mode_iv_meas_adc();
-
+#separate
+void mode_test_iv(unsigned int8 *uplinkcmd[]);
 
 // Development command
 #Separate
