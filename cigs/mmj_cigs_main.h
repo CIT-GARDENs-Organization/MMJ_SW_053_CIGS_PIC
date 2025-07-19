@@ -32,6 +32,17 @@
 
 #include "mmj_cigs_flash.h"
 
+// Include code files
+#include "src/mmj_cigs_flash.c"
+#include "src/mmj_cigs_func.c"
+#include "src/mmj_cigs_piclog.c"
+#include "src/mmj_cigs_mode_flash.c"
+#include "src/mmj_cigs_mode_mission.c"
+#include "src/mmj_cigs_excute_mission.c"
+
+
+
+
 
 #endif // MMJ_CIGS_MAIN_H
 //------------------End of File------------------

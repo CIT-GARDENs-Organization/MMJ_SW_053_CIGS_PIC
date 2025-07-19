@@ -5,7 +5,7 @@
 
 // ___________MODE FUNCTIONS____________
 
-#Separate
+
 void mode_dummy(unsigned int8 uplinkcmd[]);
 typedef struct {
     unsigned int8 id;
@@ -14,29 +14,29 @@ typedef struct {
 } DUMMY_CMD;
 
 // IV command
-#Separate
+
 void mode_iv_measure();
-#Separate
+
 void mode_iv_measure_voltage();
-#Separate
+
 void mode_iv_meas_adc();
-#separate
+
 void mode_test_iv(unsigned int8 *uplinkcmd[]);
 
 // Development command
-#Separate
+
 void mode_dev_vol();
-#Separate
+
 void mode_dev_cur();
-#Separate
+
 void mode_dev_temp();   
-#Separate
+
 void mode_dev_pd();
-#Separate
+
 void mode_dev_cigs();
-#Separate
+
 void mode_dev_time();
-#Separate
+
 void mode_dev_sweep();
 
 // ______________CMD ID________________
@@ -59,7 +59,7 @@ void mode_dev_sweep();
 
 
 
-#include "src/mmj_cigs_mode_mission.c"
+
 
 #endif // MMJ_CIGS_MODE_MISSION_H
 

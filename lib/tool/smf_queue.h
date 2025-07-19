@@ -34,13 +34,13 @@ volatile SmfQueueStruct smf_queue = {0};
 
 // ___________________ functions ________________
 
-#separate
+
 void enqueue_smf_data(SmfDataStruct *data);
-#separate
+
 SmfDataStruct *dequeue_smf_data();
-#separate
+
 int1 is_empty_smf_data(void);
-#separate
+
 MissionTypeStruct getMissionTypeStruct(MissionType mis_type);
 
 #include "smf_queue.c"

@@ -6,13 +6,13 @@
 
 
 
-#Separate
+
 void smf_write(void);
 
-#separate
+
 void smf_read(void);
 
-#separate
+
 void smf_erase(void);
 
 

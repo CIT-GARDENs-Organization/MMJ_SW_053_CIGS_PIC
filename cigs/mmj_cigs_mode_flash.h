@@ -6,14 +6,14 @@
 // ___________MODE FUNCTIONS____________
 
 // Flash command 
-#Separate
+
 void mode_flash_erase_all(unsigned int8 parameter[]);
-#Separate
+
 void mode_flash_erase_1sector(unsigned int8 parameter[]);
-#Separate
+
 void mode_flash_erase_4kbyte_subsector(unsigned int8 parameter[]);
 
-#separate
+
 void mode_flash_write_demo(unsigned int8 parameter[]);
 typedef struct {
     unsigned int8 id;
@@ -21,10 +21,10 @@ typedef struct {
     unsigned int16 packetnum;
 } FLASH_WRITE_PARAM;
 
-#Separate
+
 void mode_flash_write_4kbyte_subsecotr(unsigned int8 parameter[]);
 
-#Separate
+
 void mode_flash_read(unsigned int8 parameter[]);
 typedef struct{
     unsigned int8 id;
@@ -32,16 +32,16 @@ typedef struct{
     unsigned int32 readaddress;
 }FLASH_PARAM;
 
-#Separate
+
 void mode_flash_read_address(unsigned int8 parameter[]);
 
-#Separate
+
 void mode_flash_smf_copy(unsigned int8 parameter[]);
 
-#Separate
+
 void mode_flash_address_reset(unsigned int8 parameter[]);
 
-#separate
+
 void mode_flash_smf_read(unsigned int8 parameter[]);
 
 // ______________CMD ID________________
@@ -61,7 +61,6 @@ void mode_flash_smf_read(unsigned int8 parameter[]);
 #define ID_FLASH_ADDRESS_RESET 0x9F
 
 
-#include "src/mmj_cigs_mode_flash.c"
 
 #endif // MMJ_CIGS_MODE_FLASH_H
 

@@ -63,7 +63,7 @@ unsigned int32  misf_meas_uncopyed_counter;
 
 
 
-#include "src/mmj_cigs_flash.c"
+
 
 #endif // MMJ_CIGS_FLASH_H
 //------------------End of File------------------

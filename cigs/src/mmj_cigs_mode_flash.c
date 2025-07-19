@@ -1,3 +1,4 @@
+#include "../mmj_cigs_mode_flash.h"
 #include "../mmj_cigs_func.h"
 #include "../../lib/tool/smf_queue.h"
 #include "../../lib/device/mt25q.h"
@@ -6,7 +7,7 @@
 
 // ========================== Flash Command ============================
 
-#Separate
+
 void mode_flash_erase_all(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Erase All\r\n");
@@ -22,7 +23,7 @@ void mode_flash_erase_all(unsigned int8 parameter[])
 
 
 
-#Separate
+
 void mode_flash_erase_1sector(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Erase 1 Sector\r\n");
@@ -41,7 +42,7 @@ void mode_flash_erase_1sector(unsigned int8 parameter[])
    fprintf(PC, "End Flash Erase 1 Sector\r\n");
 }
 
-#Separate
+
 void mode_flash_erase_4kbyte_subsector(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Copy 1 Sector\r\n");
@@ -60,7 +61,7 @@ void mode_flash_erase_4kbyte_subsector(unsigned int8 parameter[])
    fprintf(PC, "End Flash Copy 1 Sector\r\n");
 }
 
-#Separate
+
 void mode_flash_write_demo(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Write Demo\r\n");
@@ -109,7 +110,7 @@ void mode_flash_write_demo(unsigned int8 parameter[])
    fprintf(PC, "End Flash Write Demo\r\n");
 }
 
-#Separate
+
 void mode_flash_write_4kbyte_subsecotr(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Write 4kByte Subsector\r\n");
@@ -122,7 +123,7 @@ void mode_flash_write_4kbyte_subsecotr(unsigned int8 parameter[])
    fprintf(PC, "End Flash Write 4kByte Subsector\r\n");
 }
 
-#Separate
+
 void mode_flash_read(unsigned int8 uplinkcmd[])
 {
    fprintf(PC, "Start Flash Read\r\n");
@@ -174,7 +175,7 @@ void mode_flash_read(unsigned int8 uplinkcmd[])
    fprintf(PC, "End Flash Read\r\n");
 }
 
-#Separate
+
 void mode_flash_read_address(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Read Address\r\n");
@@ -186,7 +187,7 @@ void mode_flash_read_address(unsigned int8 parameter[])
    fprintf(PC, "End Flash Read Address\r\n");
 }
 
-#Separate
+
 void mode_flash_smf_copy(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash SMF Copy\r\n");
@@ -203,7 +204,7 @@ void mode_flash_smf_copy(unsigned int8 parameter[])
    fprintf(PC, "End Flash SMF Copy\r\n");
 }
 
-#Separate
+
 void mode_flash_smf_read(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash SMF Read\r\n");
@@ -217,7 +218,7 @@ void mode_flash_smf_read(unsigned int8 parameter[])
    fprintf(PC, "\r\nEnd Flash SMF Read\r\n");
 }
 
-#Separate
+
 void mode_flash_smf_write(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash SMF Write\r\n");
@@ -228,7 +229,7 @@ void mode_flash_smf_write(unsigned int8 parameter[])
    fprintf(PC, "End Flash SMF Write\r\n");
 }
   
-#Separate
+
 void mode_flash_address_reset(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Address Reset\r\n");

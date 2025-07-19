@@ -27,7 +27,7 @@ void piclog_write(unsigned int8 *data);
 
 
 
-#include "src/mmj_cigs_piclog.c"
+
 
 #endif // MMJ_CIGS_PICLOG_H
 //------------------End of File------------------

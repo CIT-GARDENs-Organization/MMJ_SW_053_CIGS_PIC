@@ -1,9 +1,9 @@
-D G "__PCH__" 0 80 ""5.104""
-D G "__DEVICE__" 0 80 "6794"
-D G "__DATE__" 0 80 ""19-Jul-25""
-D G "__TIME__" 0 80 ""19:38:22""
-D G "_UNICODE" 0 80 ""?""
-D G "__EVAL" 0 80 ""?""
+D G "__PCH__" 32 42 ""5.104""
+D G "__DEVICE__" 32 42 "6794"
+D G "__DATE__" 32 42 ""20-Jul-25""
+D G "__TIME__" 32 42 ""01:54:54""
+D G "_UNICODE" 32 42 ""?""
+D G "__EVAL" 32 42 ""?""
 D G "MMJ_CIGS_MAIN_H" 1 2 ""
 D G "MMJ_CIGS_CONFIG_H" 2 2 ""
 c L "set_tris_a" 3 1 26 "FUNCTION"
@@ -2695,94 +2695,125 @@ F N "execute_mission" 17 20 ""
 V L "content" 17 20 "*int8" `1412 
 f G "execute_mission" 17 20 "void(*int8 content)" `1411 
 V G "duration_sec" 17 22 "int8" `1413 
-D G "MMJ_CIGS_MODE_MISSION_H" 28 2 ""
-D G "PARAMETER_LENGTH" 28 4 "9"
-C L "execute_mission" 28 6 1 "FUNCTION"
-F N "mode_dummy" 28 9 ""
-V L "uplinkcmd" 28 9 "*int8" `1415 
-f G "mode_dummy" 28 9 "void(*int8 uplinkcmd)" `1414 
-T G "DUMMY_CMD" 28 14 "{int8 id,int32 param1,int16 param2}" `1421  "IV command"
-F N "mode_iv_measure" 28 18 ""
-f G "mode_iv_measure" 28 18 "void()" `1422 
-F N "mode_iv_measure_voltage" 28 20 ""
-f G "mode_iv_measure_voltage" 28 20 "void()" `1423 
-F N "mode_iv_meas_adc" 28 22 ""
-f G "mode_iv_meas_adc" 28 22 "void()" `1424 
-F N "mode_test_iv" 28 24 ""
-V L "uplinkcmd" 28 24 "*int8" `1426 
-f G "mode_test_iv" 28 24 "void(*int8 uplinkcmd)" `1425  "Development command"
-F N "mode_dev_vol" 28 28 ""
-f G "mode_dev_vol" 28 28 "void()" `1428 
-F N "mode_dev_cur" 28 30 ""
-f G "mode_dev_cur" 28 30 "void()" `1429 
-F N "mode_dev_temp" 28 32 ""
-f G "mode_dev_temp" 28 32 "void()" `1430 
-F N "mode_dev_pd" 28 34 ""
-f G "mode_dev_pd" 28 34 "void()" `1431 
-F N "mode_dev_cigs" 28 36 ""
-f G "mode_dev_cigs" 28 36 "void()" `1432 
-F N "mode_dev_time" 28 38 ""
-f G "mode_dev_time" 28 38 "void()" `1433 
-F N "mode_dev_sweep" 28 40 ""
-f G "mode_dev_sweep" 28 40 "void()" `1434  "______________CMD ID________________"
-D G "ID_IV_MEASURE" 28 45 "0xB0"
-D G "ID_IV_MEASURE_VOLTAGE" 28 46 "0xB1"
-D G "ID_DEV_VOL" 28 49 "0xC0"
-D G "ID_DEV_CUR" 28 50 "0xC1"
-D G "ID_DEV_TEMP" 28 51 "0xC1"
-D G "ID_DEV_PD" 28 52 "0xC2"
-D G "ID_DEV_CIGS" 28 53 "0xC3"
-D G "ID_DEV_TIME" 28 54 "0xC4"
-D G "ID_DEV_SWEEP" 28 55 "0xC5"
-D G "MMJ_CIGS_FUNC_H" 30 2 ""
-D G "START_MAKER" 30 11 "0xFF"
-D G "RESERVED_VALUE" 30 12 "0x00"
-C L "mode_dev_sweep" 30 4 1 "FUNCTION"
-F N "ad7490_read" 30 17 ""
-V L "channel" 30 17 "int8" `1436 
-f G "ad7490_read" 30 17 "int16(int8 channel)" `1435 
-F N "mcp4901_1_write" 30 18 ""
-V L "val" 30 18 "int16" `1438 
-f G "mcp4901_1_write" 30 18 "void(int16 val)" `1437 
-F N "mcp4901_2_write" 30 19 ""
-V L "val" 30 19 "int16" `1440 
-f G "mcp4901_2_write" 30 19 "void(int16 val)" `1439  "_________ functions ____________"
-D G "DATA_BUFFER_SIZE" 30 25 "150"
-D G "HEADER_SIZE" 30 26 "12"
-V G "data_buffer" 30 27 "int16[300]" `1441 
-V G "measured_time" 30 28 "int32" `1442 
-V G "measured_open_voltage" 30 29 "int16" `1443 
-V G "measured_pd" 30 30 "int16" `1444 
-V G "measured_temp_top" 30 31 "int16" `1445 
-V G "measured_temp_bot" 30 32 "int16" `1446 
-F N "make_meas_header" 30 35 ""
-V L "packetdata" 30 35 "*int8" `1448 
-V L "cmd" 30 35 "*int8" `1449 
-f G "make_meas_header" 30 35 "void(*int8 packetdata,*int8 cmd)" `1447 
-F N "sweep" 30 38 ""
-V L "parameter" 30 38 "*int8" `1451 
-f G "sweep" 30 38 "void(*int8 parameter)" `1450  "------------------End of File------------------"
+D G "MMJ_CIGS_PICLOG_H" 27 2 ""
+D G "PICLOG_PACKET_SIZE" 27 4 "6"
+V G "PICLOG_STARTUP" 27 5 "int8" `1414 
+D G "PICLOG_PARAM_START" 27 8 "0x01"
+D G "PICLOG_PARAM_END" 27 9 "0x02"
+C L "execute_mission" 27 7 1 "FUNCTION"
+T G "PICLOG" 27 20 "{{int32 time,int8 function,int8 parameter} bytes}" `1421  "extern宣言を追�
+�（実体は.cファイルで定義）"
+D G "PICLOG_BLANK_SIZE" 27 23 "4" "PICLOGの空データサイズ"
+V G "PICLOG_BLANK_DATA" 27 24 "int8[4]" `1422 
+C L "execute_mission" 27 7 1 "FUNCTION"
+F N "piclog_make" 27 25 ""
+V L "function" 27 25 "int8" `1424 
+V L "parameter" 27 25 "int8" `1425 
+f G "piclog_make" 27 25 "void(int8 function,int8 parameter)" `1423 
+F N "piclog_write" 27 26 ""
+V L "data" 27 26 "*int8" `1427 
+f G "piclog_write" 27 26 "void(*int8 data)" `1426  "MMJ_CIGS_PICLOG_H"
+D G "MMJ_CIGS_FUNC_H" 28 2 ""
+D G "START_MAKER" 28 11 "0xFF"
+D G "RESERVED_VALUE" 28 12 "0x00"
+C L "piclog_write" 28 4 1 "FUNCTION"
+F N "ad7490_read" 28 17 ""
+V L "channel" 28 17 "int8" `1429 
+f G "ad7490_read" 28 17 "int16(int8 channel)" `1428 
+F N "mcp4901_1_write" 28 18 ""
+V L "val" 28 18 "int16" `1431 
+f G "mcp4901_1_write" 28 18 "void(int16 val)" `1430 
+F N "mcp4901_2_write" 28 19 ""
+V L "val" 28 19 "int16" `1433 
+f G "mcp4901_2_write" 28 19 "void(int16 val)" `1432  "_________ functions ____________"
+D G "DATA_BUFFER_SIZE" 28 25 "150"
+D G "HEADER_SIZE" 28 26 "12"
+V G "data_buffer" 28 27 "int16[300]" `1434 
+V G "measured_time" 28 28 "int32" `1435 
+V G "measured_open_voltage" 28 29 "int16" `1436 
+V G "measured_pd" 28 30 "int16" `1437 
+V G "measured_temp_top" 28 31 "int16" `1438 
+V G "measured_temp_bot" 28 32 "int16" `1439 
+F N "make_meas_header" 28 35 ""
+V L "packetdata" 28 35 "*int8" `1441 
+V L "cmd" 28 35 "*int8" `1442 
+f G "make_meas_header" 28 35 "void(*int8 packetdata,*int8 cmd)" `1440 
+F N "sweep" 28 38 ""
+V L "parameter" 28 38 "*int8" `1444 
+f G "sweep" 28 38 "void(*int8 parameter)" `1443 
+T G "MEASUREMENT_DATA" 28 48 "{int32 time,int16 temp_py_top,int16 temp_py_bot,int16 temp_mis7,int16 pd}" `1452  "------------------End of File------------------"
+D G "MMJ_CIGS_FLASH_H" 29 2 ""
+C L "sweep" 29 7 1 "FUNCTION"
+F N "misf_init" 29 8 ""
+f G "misf_init" 29 8 "void()" `1453 
+F N "update_misf_data_header" 29 9 ""
+f G "update_misf_data_header" 29 9 "void()" `1454 
+F N "write_misf_address_area" 29 10 ""
+f G "write_misf_address_area" 29 10 "void()" `1455 
+D G "PACKET_SIZE" 29 14 "64"
+D G "MISF_DATA_HEADER_SIZE" 29 15 "64" "MISFデータヘッダーのサイズ"
+D G "MISF_PICLOG_MAX_COUNT" 29 16 "60"
+D G "ADDRESS_MISF_START" 29 22 "0x00000000"
+D G "ADDRESS_MISF_END" 29 23 "0x00F42400"
+D G "ADDRESS_MANEGE_START" 29 24 "0x00000000"
+D G "ADDRESS_MANEGE_END" 29 25 "0x0000FFFF"
+D G "ADDRESS_MISF_PICLOG_INDEX_START" 29 26 "0x00010000"
+D G "ADDRESS_MISF_PICLOG_INDEX_END" 29 27 "0x0001FFFF"
+D G "ADDRESS_MISF_PICLOG_DATA_START" 29 28 "0x00020000"
+D G "ADDRESS_MISF_PICLOG_DATA_END" 29 29 "0x0015FFFF"
+D G "ADDRESS_MISF_MEASUREMENT_START" 29 30 "0x00160000"
+D G "ADDRESS_MISF_MEASUREMENT_END" 29 31 "0x0095FFFF"
+D G "SECTOR_64K_BYTE" 29 34 "0x10000" "64KByte"
+D G "SECTOR_32K_BYTE" 29 35 "0x8000" "32KByte"
+D G "SECTOR_4K_BYTE" 29 36 "0x1000" "4KByte"
+C L "write_misf_address_area" 29 7 1 "FUNCTION"
+V G "smf_piclog_use_counter" 29 39 "int32" `1456 
+V G "smf_piclog_loop_counter" 29 40 "int8" `1457 
+V G "smf_meas_use_counter" 29 41 "int32" `1458 
+V G "smf_meas_loop_counter" 29 42 "int8" `1459 
+V G "misf_piclog_use_counter" 29 44 "int32" `1460 
+V G "misf_piclog_loop_counter" 29 45 "int8" `1461 
+V G "misf_piclog_uncopyed_counter" 29 46 "int32" `1462 
+V G "misf_piclog_write_counter" 29 47 "int8" `1463 
+V G "misf_meas_use_counter" 29 48 "int32" `1464 
+V G "misf_meas_loop_counter" 29 49 "int8" `1465 
+V G "misf_meas_uncopyed_counter" 29 50 "int32" `1466 
+D G "DATA_HEADER_SIZE" 29 53 "64"
+C L "write_misf_address_area" 29 7 3 "FUNCTION"
+C L "write_misf_address_area" 1 35 1 "FUNCTION"
+C L "write_misf_address_area" 2 126 2 "FUNCTION"
+C L "write_misf_address_area" 29 68 2 "FUNCTION"
+F N "misf_init" 30 5 ""
+F G "misf_init" 30 6 "void()" `1453 
+C L "misf_init" 30 8 1 "FUNCTION"
+C L "misf_init" 30 8 1 "FUNCTION"
+C L "misf_init" 30 8 1 "FUNCTION"
+V L "readdata" 30 24 "int8[64]" `1471 
+C L "misf_init" 30 8 2 "FUNCTION"
+F N "smf_init" 30 55 ""
+F G "smf_init" 30 56 "void()" `1484  "Flash smf = {SPI_1, MT25QL01GBBB, SPI1_CS};"
+F N "write_misf_address_area" 30 60 ""
+F G "write_misf_address_area" 30 61 "void()" `1455  "fprintf(PC, "Write MISF Address Area (Big Endian)\r\n");"
+V L "writedata" 30 63 "int8[64]" `1485 
+C L "write_misf_address_area" 30 8 2 "FUNCTION"
+C L "write_misf_address_area" 30 8 1 "FUNCTION"
+C L "write_misf_address_area" 30 8 1 "FUNCTION"
+C L "write_misf_address_area" 30 8 1 "FUNCTION"
+C L "write_misf_address_area" 30 8 1 "FUNCTION"
+C L "write_misf_address_area" 30 8 1 "FUNCTION"
+C L "write_misf_address_area" 30 8 1 "FUNCTION"
+C L "write_misf_address_area" 30 8 1 "FUNCTION"
+C L "write_misf_address_area" 30 8 1 "FUNCTION"
+C L "write_misf_address_area" 30 8 1 "FUNCTION"
+C L "write_misf_address_area" 30 8 1 "FUNCTION"
+C L "write_misf_address_area" 30 8 2 "FUNCTION"
 D G "AD7490_H" 32 2 ""
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-C L "sweep" 32 6 1 "FUNCTION"
-T G "ad7490_cmd_t" 32 26 "{int16 value,{int1 reserved0,int1 reserved1,int1 reserved2,int1 reserved3,int1 coding,int1 range,int1 weak_tri,int1 shadow,int1 pm0,int1 pm1,int1 add0,int1 add1,int1 add2,int1 add3,int1 seq,int1 write} fields}" `1473  "Public Function"
+T G "ad7490_cmd_t" 32 26 "{int16 value,{int1 reserved0,int1 reserved1,int1 reserved2,int1 reserved3,int1 coding,int1 range,int1 weak_tri,int1 shadow,int1 pm0,int1 pm1,int1 add0,int1 add1,int1 add2,int1 add3,int1 seq,int1 write} fields}" `1508  "Public Function"
 F N "ad7490_init" 32 29 ""
-f G "ad7490_init" 32 29 "void()" `1474  "Private Functions"
+f G "ad7490_init" 32 29 "void()" `1509  "Private Functions"
 F N "ad7490_make_cmd" 32 36 ""
-V L "channel" 32 36 "int8" `1476 
-f G "ad7490_make_cmd" 32 36 "int16(int8 channel)" `1475  "Resistor Settings"
+V L "channel" 32 36 "int8" `1511 
+f G "ad7490_make_cmd" 32 36 "int16(int8 channel)" `1510  "Resistor Settings"
 D G "AD7490_EN_WRITE" 32 38 "0b1"
 D G "AD7490_PM_NORMAL" 32 41 "0b00000000"
 D G "AD7490_PM_SHUTDOWN" 32 42 "0b00000001"
@@ -2806,18 +2837,18 @@ D G "AD7490_VIN14" 32 62 "0b1110"
 D G "AD7490_VIN15" 32 63 "0b1111"
 C L "ad7490_make_cmd" 32 6 2 "FUNCTION"
 F N "ad7490_readdata" 33 3 ""
-V L "channel" 33 3 "int16" `1478 
-F G "ad7490_readdata" 33 4 "int16(int16 channel)" `1477 
+V L "channel" 33 3 "int16" `1513 
+F G "ad7490_readdata" 33 4 "int16(int16 channel)" `1512 
 C L "ad7490_readdata" 33 5 1 "FUNCTION"
-V L "ans" 33 9 "int16" `1479 
+V L "ans" 33 9 "int16" `1514 
 C L "ad7490_readdata" 33 5 1 "FUNCTION"
 F N "ad7490_init" 33 15 ""
-F G "ad7490_init" 33 16 "void()" `1474 
+F G "ad7490_init" 33 16 "void()" `1509 
 C L "ad7490_init" 33 5 1 "FUNCTION"
 F N "ad7490_make_cmd" 33 23 ""
-V L "channel" 33 23 "int8" `1483 
-F G "ad7490_make_cmd" 33 24 "int16(int8 channel)" `1475 
-V L "cmd" 33 25 "ad7490_cmd_t" `1482 
+V L "channel" 33 23 "int8" `1518 
+F G "ad7490_make_cmd" 33 24 "int16(int8 channel)" `1510 
+V L "cmd" 33 25 "ad7490_cmd_t" `1517 
 C L "ad7490_make_cmd" 33 5 1 "FUNCTION"
 C L "ad7490_make_cmd" 33 5 1 "FUNCTION"
 C L "ad7490_make_cmd" 33 5 1 "FUNCTION"
@@ -2833,96 +2864,32 @@ C L "ad7490_make_cmd" 33 5 1 "FUNCTION"
 C L "ad7490_make_cmd" 33 5 1 "FUNCTION"
 C L "ad7490_make_cmd" 33 5 1 "FUNCTION"
 C L "ad7490_make_cmd" 33 5 1 "FUNCTION"
-D G "MMJ_CIGS_FLASH_H" 34 2 ""
-C L "misf_init" 34 7 1 "FUNCTION"
-F N "misf_init" 34 8 ""
-f G "misf_init" 34 8 "void()" `1483 
-F N "update_misf_data_header" 34 9 ""
-f G "update_misf_data_header" 34 9 "void()" `1484 
-F N "write_misf_address_area" 34 10 ""
-f G "write_misf_address_area" 34 10 "void()" `1485 
-D G "PACKET_SIZE" 34 14 "64"
-D G "MISF_DATA_HEADER_SIZE" 34 15 "64" "MISFデータヘッダーのサイズ"
-D G "MISF_PICLOG_MAX_COUNT" 34 16 "60"
-D G "ADDRESS_MISF_START" 34 22 "0x00000000"
-D G "ADDRESS_MISF_END" 34 23 "0x00F42400"
-D G "ADDRESS_MANEGE_START" 34 24 "0x00000000"
-D G "ADDRESS_MANEGE_END" 34 25 "0x0000FFFF"
-D G "ADDRESS_MISF_PICLOG_INDEX_START" 34 26 "0x00010000"
-D G "ADDRESS_MISF_PICLOG_INDEX_END" 34 27 "0x0001FFFF"
-D G "ADDRESS_MISF_PICLOG_DATA_START" 34 28 "0x00020000"
-D G "ADDRESS_MISF_PICLOG_DATA_END" 34 29 "0x0015FFFF"
-D G "ADDRESS_MISF_MEASUREMENT_START" 34 30 "0x00160000"
-D G "ADDRESS_MISF_MEASUREMENT_END" 34 31 "0x0095FFFF"
-D G "SECTOR_64K_BYTE" 34 34 "0x10000" "64KByte"
-D G "SECTOR_32K_BYTE" 34 35 "0x8000" "32KByte"
-D G "SECTOR_4K_BYTE" 34 36 "0x1000" "4KByte"
-C L "write_misf_address_area" 34 7 1 "FUNCTION"
-V G "smf_piclog_use_counter" 34 39 "int32" `1486 
-V G "smf_piclog_loop_counter" 34 40 "int8" `1487 
-V G "smf_meas_use_counter" 34 41 "int32" `1488 
-V G "smf_meas_loop_counter" 34 42 "int8" `1489 
-V G "misf_piclog_use_counter" 34 44 "int32" `1490 
-V G "misf_piclog_loop_counter" 34 45 "int8" `1491 
-V G "misf_piclog_uncopyed_counter" 34 46 "int32" `1492 
-V G "misf_piclog_write_counter" 34 47 "int8" `1493 
-V G "misf_meas_use_counter" 34 48 "int32" `1494 
-V G "misf_meas_loop_counter" 34 49 "int8" `1495 
-V G "misf_meas_uncopyed_counter" 34 50 "int32" `1496 
-D G "DATA_HEADER_SIZE" 34 53 "64"
-C L "write_misf_address_area" 34 7 1 "FUNCTION"
-C L "write_misf_address_area" 2 126 2 "FUNCTION"
-C L "write_misf_address_area" 34 68 2 "FUNCTION"
-F N "misf_init" 35 5 ""
-F G "misf_init" 35 6 "void()" `1483 
-C L "misf_init" 35 8 1 "FUNCTION"
-C L "misf_init" 35 8 1 "FUNCTION"
-C L "misf_init" 35 8 1 "FUNCTION"
-V L "readdata" 35 24 "int8[64]" `1501 
-C L "misf_init" 35 8 2 "FUNCTION"
-F N "smf_init" 35 55 ""
-F G "smf_init" 35 56 "void()" `1514  "Flash smf = {SPI_1, MT25QL01GBBB, SPI1_CS};"
-F N "write_misf_address_area" 35 60 ""
-F G "write_misf_address_area" 35 61 "void()" `1485  "fprintf(PC, "Write MISF Address Area (Big Endian)\r\n");"
-V L "writedata" 35 63 "int8[64]" `1515 
-C L "write_misf_address_area" 35 8 2 "FUNCTION"
-C L "write_misf_address_area" 35 8 1 "FUNCTION"
-C L "write_misf_address_area" 35 8 1 "FUNCTION"
-C L "write_misf_address_area" 35 8 1 "FUNCTION"
-C L "write_misf_address_area" 35 8 1 "FUNCTION"
-C L "write_misf_address_area" 35 8 1 "FUNCTION"
-C L "write_misf_address_area" 35 8 1 "FUNCTION"
-C L "write_misf_address_area" 35 8 1 "FUNCTION"
-C L "write_misf_address_area" 35 8 1 "FUNCTION"
-C L "write_misf_address_area" 35 8 1 "FUNCTION"
-C L "write_misf_address_area" 35 8 1 "FUNCTION"
-C L "write_misf_address_area" 35 8 2 "FUNCTION"
-D G "_MCP4901_H_" 36 3 ""
-T G "mcp4901_cmd_t" 36 25 "{int16 value,{int1 reserved4,int1 reserved3,int1 reserved2,int1 reserved,int1 data0,int1 data1,int1 data2,int1 data3,int1 data4,int1 data5,int1 data6,int1 data7,int1 shutdown,int1 gain,int1 buffer,int1 startbit} fields}" `1538  "---------------------- Public API --------------------------"
-F N "mcp4911_init" 36 29 ""
-f G "mcp4911_init" 36 29 "void()" `1539 
-F N "mcp4901_make_cmd" 36 31 ""
-V L "value" 36 31 "int16" `1541 
-f G "mcp4901_make_cmd" 36 31 "int16(int16 value)" `1540  "===================== mcp4911.h ====================="
-C L "mcp4901_make_cmd" 36 1 2 "FUNCTION"
-F N "mcp4901_make_cmd" 37 3 ""
-V L "value" 37 3 "int16" `1543 
-F G "mcp4901_make_cmd" 37 4 "int16(int16 value)" `1540 
-V L "cmd" 37 5 "mcp4901_cmd_t" `1542 
-C L "mcp4901_make_cmd" 37 6 1 "FUNCTION"
-C L "mcp4901_make_cmd" 37 6 1 "FUNCTION"
-C L "mcp4901_make_cmd" 37 6 1 "FUNCTION"
-C L "mcp4901_make_cmd" 37 6 1 "FUNCTION"
-C L "mcp4901_make_cmd" 37 6 1 "FUNCTION"
-C L "mcp4901_make_cmd" 37 6 1 "FUNCTION"
-C L "mcp4901_make_cmd" 37 6 1 "FUNCTION"
-C L "mcp4901_make_cmd" 37 6 1 "FUNCTION"
-C L "mcp4901_make_cmd" 37 6 1 "FUNCTION"
-C L "mcp4901_1_write" 36 35 2 "FUNCTION"
+D G "_MCP4901_H_" 34 3 ""
+T G "mcp4901_cmd_t" 34 25 "{int16 value,{int1 reserved4,int1 reserved3,int1 reserved2,int1 reserved,int1 data0,int1 data1,int1 data2,int1 data3,int1 data4,int1 data5,int1 data6,int1 data7,int1 shutdown,int1 gain,int1 buffer,int1 startbit} fields}" `1538  "---------------------- Public API --------------------------"
+F N "mcp4911_init" 34 29 ""
+f G "mcp4911_init" 34 29 "void()" `1539 
+F N "mcp4901_make_cmd" 34 31 ""
+V L "value" 34 31 "int16" `1541 
+f G "mcp4901_make_cmd" 34 31 "int16(int16 value)" `1540  "===================== mcp4911.h ====================="
+C L "mcp4901_make_cmd" 34 1 2 "FUNCTION"
+F N "mcp4901_make_cmd" 35 3 ""
+V L "value" 35 3 "int16" `1543 
+F G "mcp4901_make_cmd" 35 4 "int16(int16 value)" `1540 
+V L "cmd" 35 5 "mcp4901_cmd_t" `1542 
+C L "mcp4901_make_cmd" 35 6 1 "FUNCTION"
+C L "mcp4901_make_cmd" 35 6 1 "FUNCTION"
+C L "mcp4901_make_cmd" 35 6 1 "FUNCTION"
+C L "mcp4901_make_cmd" 35 6 1 "FUNCTION"
+C L "mcp4901_make_cmd" 35 6 1 "FUNCTION"
+C L "mcp4901_make_cmd" 35 6 1 "FUNCTION"
+C L "mcp4901_make_cmd" 35 6 1 "FUNCTION"
+C L "mcp4901_make_cmd" 35 6 1 "FUNCTION"
+C L "mcp4901_make_cmd" 35 6 1 "FUNCTION"
+C L "mcp4901_1_write" 34 35 2 "FUNCTION"
 C L "mcp4901_1_write" 31 9 1 "FUNCTION"
 F N "mcp4901_1_write" 31 10 ""
 V L "value" 31 10 "int16" `1544 
-F G "mcp4901_1_write" 31 11 "void(int16 value)" `1437 
+F G "mcp4901_1_write" 31 11 "void(int16 value)" `1430 
 V L "cmd" 31 12 "int16" `1543 
 C L "mcp4901_1_write" 31 9 1 "FUNCTION"
 C L "mcp4901_1_write" 31 9 1 "FUNCTION"
@@ -2930,7 +2897,7 @@ C L "mcp4901_1_write" 31 9 1 "FUNCTION"
 C L "mcp4901_1_write" 31 9 1 "FUNCTION"
 F N "mcp4901_2_write" 31 22 ""
 V L "value" 31 22 "int16" `1545 
-F G "mcp4901_2_write" 31 23 "void(int16 value)" `1439 
+F G "mcp4901_2_write" 31 23 "void(int16 value)" `1432 
 V L "cmd" 31 24 "int16" `1544 
 C L "mcp4901_2_write" 31 9 1 "FUNCTION"
 C L "mcp4901_2_write" 31 9 1 "FUNCTION"
@@ -2938,7 +2905,7 @@ C L "mcp4901_2_write" 31 9 1 "FUNCTION"
 C L "mcp4901_2_write" 31 9 1 "FUNCTION"
 F N "ad7490_read" 31 34 ""
 V L "channel" 31 34 "int8" `1546 
-F G "ad7490_read" 31 35 "int16(int8 channel)" `1435 
+F G "ad7490_read" 31 35 "int16(int8 channel)" `1428 
 V L "cmd" 31 37 "int16" `1545 
 C L "ad7490_read" 31 9 1 "FUNCTION"
 C L "ad7490_read" 31 9 1 "FUNCTION"
@@ -2959,14 +2926,14 @@ F G "adc_init" 31 73 "void()" `1551
 C L "adc_init" 31 9 7 "FUNCTION"
 F N "sweep" 31 90 ""
 V L "parameter" 31 90 "*int8" `1555 
-F G "sweep" 31 91 "void(*int8 parameter)" `1450  ""
+F G "sweep" 31 91 "void(*int8 parameter)" `1443  ""
 V L "measurement_step" 31 94 "int8" `1555 
 C L "sweep" 31 9 1 "FUNCTION"
 C L "sweep" 31 9 64 "FUNCTION"
-F N "make_meas_header" 31 189 ""
-V L "packetdata" 31 189 "*int8" `1448 
-V L "cmd" 31 189 "*int8" `1559 
-F G "make_meas_header" 31 190 "void(*int8 packetdata,*int8 cmd)" `1447 
+F N "make_meas_header" 31 188 ""
+V L "packetdata" 31 188 "*int8" `1441 
+V L "cmd" 31 188 "*int8" `1559 
+F G "make_meas_header" 31 189 "void(*int8 packetdata,*int8 cmd)" `1440 
 C L "make_meas_header" 31 9 1 "FUNCTION"
 C L "make_meas_header" 31 9 2 "FUNCTION"
 C L "make_meas_header" 31 9 1 "FUNCTION"
@@ -2985,305 +2952,357 @@ C L "make_meas_header" 31 9 1 "FUNCTION"
 C L "make_meas_header" 31 9 1 "FUNCTION"
 C L "make_meas_header" 31 9 1 "FUNCTION"
 C L "make_meas_header" 31 9 1 "FUNCTION"
-F N "test_sweep" 31 223 ""
-V L "sweep_step" 31 223 "int8" `1558 
-F G "test_sweep" 31 224 "void(int8 sweep_step,*int8 cmd)" `1557 
+F N "test_sweep" 31 222 ""
+V L "sweep_step" 31 222 "int8" `1558 
+F G "test_sweep" 31 223 "void(int8 sweep_step,*int8 cmd)" `1557 
 C L "test_sweep" 31 9 1 "FUNCTION"
 C L "test_sweep" 31 9 1 "FUNCTION"
 C L "test_sweep" 31 9 1 "FUNCTION"
 C L "test_sweep" 31 9 1 "FUNCTION"
-V L "volt" 31 234 "int16" `1561 
-V L "curr" 31 235 "int16" `1562 
-V L "count" 31 236 "int8" `1563 
+V L "volt" 31 233 "int16" `1561 
+V L "curr" 31 234 "int16" `1562 
+V L "count" 31 235 "int8" `1563 
 C L "test_sweep" 31 9 1 "FUNCTION"
 C L "test_sweep" 31 9 1 "FUNCTION"
 C L "test_sweep" 31 9 1 "FUNCTION"
 C L "test_sweep" 31 9 1 "FUNCTION"
-F N "test_adc" 31 249 ""
-F G "test_adc" 31 250 "void()" `1567 
-V L "ans" 31 251 "int16" `1568 
+F N "test_adc" 31 248 ""
+F G "test_adc" 31 249 "void()" `1567 
+V L "ans" 31 250 "int16" `1568 
 C L "test_adc" 31 9 1 "FUNCTION"
-D G "MMJ_CIGS_PICLOG_H" 38 2 ""
-D G "PICLOG_PACKET_SIZE" 38 4 "6"
-V G "PICLOG_STARTUP" 38 5 "int8" `1574 
-D G "PICLOG_PARAM_START" 38 8 "0x01"
-D G "PICLOG_PARAM_END" 38 9 "0x02"
-T G "PICLOG" 38 20 "{{int32 time,int8 function,int8 parameter} bytes}" `1581  "extern宣言を追�
-�（実体は.cファイルで定義）"
-D G "PICLOG_BLANK_SIZE" 38 23 "4" "PICLOGの空データサイズ"
-V G "PICLOG_BLANK_DATA" 38 24 "int8[4]" `1582 
-C L "piclog_make" 38 7 1 "FUNCTION"
-F N "piclog_make" 38 25 ""
-V L "function" 38 25 "int8" `1584 
-V L "parameter" 38 25 "int8" `1585 
-f G "piclog_make" 38 25 "void(int8 function,int8 parameter)" `1583 
-F N "piclog_write" 38 26 ""
-V L "data" 38 26 "*int8" `1587 
-f G "piclog_write" 38 26 "void(*int8 data)" `1586  "MMJ_CIGS_PICLOG_H"
-C L "piclog_write" 38 7 1 "FUNCTION"
-D G "PICLOG_DEBUG" 39 5 ""
-F N "piclog_make" 39 7 ""
-V L "function" 39 7 "int8" `1584 
-V L "parameter" 39 7 "int8" `1590 
-F G "piclog_make" 39 8 "void(int8 function,int8 parameter)" `1583 
-V L "PICLOG" 39 9 "int8[6]" `1588 
-V L "time" 39 10 "int32" `1589 
-C L "piclog_make" 39 11 1 "FUNCTION"
-C L "piclog_make" 39 11 1 "FUNCTION"
-C L "piclog_make" 39 11 1 "FUNCTION"
-C L "piclog_make" 39 11 1 "FUNCTION"
-C L "piclog_make" 39 11 1 "FUNCTION"
-V L "i" 39 20 "int8" `1591 
-V L "write_address" 39 26 "int32" `1594 
-C L "piclog_make" 39 11 1 "FUNCTION"
-C L "piclog_make" 39 11 1 "FUNCTION"
-C L "piclog_make" 39 11 1 "FUNCTION"
-C L "piclog_make" 39 11 8 "FUNCTION"
-C L "mode_dummy" 38 32 2 "FUNCTION"
-C L "mode_dummy" 29 9 1 "FUNCTION"
-F N "mode_dummy" 29 10 ""
-V L "uplinkcmd" 29 10 "*int8" `1597 
-F G "mode_dummy" 29 11 "void(*int8 uplinkcmd)" `1414 
-V L "DUMMY_CMD" 29 14 "DUMMY_CMD" `1597 
-C L "mode_dummy" 29 9 1 "FUNCTION"
-C L "mode_dummy" 29 9 3 "FUNCTION"
-C L "mode_dummy" 29 9 1 "FUNCTION"
-F N "mode_test_iv" 29 37 ""
-V L "uplinkcmd" 29 37 "*int8" `1603 
-F G "mode_test_iv" 29 38 "void(*int8 uplinkcmd)" `1425 
-V L "measurement_step" 29 39 "int8" `1602 
-C L "mode_test_iv" 29 9 1 "FUNCTION"
-C L "mode_test_iv" 29 9 1 "FUNCTION"
-V L "readdata" 29 44 "int16" `1605 
-C L "mode_test_iv" 29 9 1 "FUNCTION"
-C L "mode_test_iv" 29 9 1 "FUNCTION"
-C L "mode_measure" 29 9 1 "FUNCTION"
-F N "mode_measure" 29 55 ""
-V L "parameter" 29 55 "*int8" `1608 
-F G "mode_measure" 29 56 "void(*int8 parameter)" `1607 
-V L "sweep_step" 29 60 "int8" `1611 
-C L "mode_measure" 29 9 1 "FUNCTION"
-C L "mode_measure" 29 9 2 "FUNCTION"
-V L "count" 29 63 "int8" `1612 
-C L "mode_measure" 29 9 2 "FUNCTION"
-C L "mode_measure" 29 9 2 "FUNCTION"
-C L "mode_measure" 29 9 1 "FUNCTION"
-C L "mode_measure" 29 9 2 "FUNCTION"
-F N "mode_iv_meas_adc" 29 82 ""
-F G "mode_iv_meas_adc" 29 83 "void()" `1424 
-V L "measurement_step" 29 86 "int8" `1615 
-C L "mode_iv_meas_adc" 29 9 1 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 1 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 1 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 1 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 1 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 1 "FUNCTION"
-V L "current" 29 95 "int32" `1617  "read PD value"
-C L "mode_iv_meas_adc" 29 9 5 "FUNCTION"
-V L "count" 29 105 "int16" `1618 
-C L "mode_iv_meas_adc" 29 9 2 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 2 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 1 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 1 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 1 "FUNCTION"
-V L "k" 29 116 "int8" `1619 
-C L "mode_iv_meas_adc" 29 9 1 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 1 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 1 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 2 "FUNCTION"
-C L "mode_iv_meas_adc" 29 9 4 "FUNCTION"
-D G "MMJ_CIGS_MODE_FLASH_H" 40 2 ""
+F N "sweep_2ports" 31 263 ""
+V L "measurement_step" 31 263 "int8" `1575 
+F G "sweep_2ports" 31 264 "void(int8 measurement_step)" `1574 
+C L "sweep_2ports" 31 9 1 "FUNCTION"
+V L "measured_data" 31 273 "MEASUREMENT_DATA" `1578 
+V L "cigs1_buffer" 31 282 "int16[2][255]" `1579  "Buffer for CIGS1 data"
+V L "cigs2_buffer" 31 283 "int16[2][255]" `1581 
+V L "count" 31 286 "int8" `1583 
+C L "sweep_2ports" 31 9 1 "FUNCTION"
+C L "sweep_2ports" 31 9 2 "FUNCTION"
+F N "sweep_port1" 31 310 ""
+V L "measurement_step" 31 310 "int8" `1587 
+F G "sweep_port1" 31 311 "void(int8 measurement_step,int8 PC)" `1586 
+C L "sweep_port1" 31 9 1 "FUNCTION"
+V L "measured_data" 31 320 "MEASUREMENT_DATA" `1590 
+V L "cigs1_buffer" 31 328 "int16[2][255]" `1591  "Buffer for CIGS1 data"
+V L "count" 31 330 "int8" `1593 
+C L "sweep_port1" 31 9 1 "FUNCTION"
+C L "sweep_port1" 31 9 2 "FUNCTION"
+F N "sweep_port2" 31 350 ""
+V L "measurement_step" 31 350 "int8" `1597 
+F G "sweep_port2" 31 351 "void(int8 measurement_step)" `1596 
+C L "sweep_port2" 31 9 1 "FUNCTION"
+V L "measured_data" 31 360 "MEASUREMENT_DATA" `1600 
+V L "cigs2_buffer" 31 368 "int16[2][255]" `1601  "Buffer for CIGS2 data"
+V L "count" 31 370 "int8" `1603 
+C L "sweep_port2" 31 9 1 "FUNCTION"
+C L "sweep_port2" 31 9 2 "FUNCTION"
+D G "PICLOG_DEBUG" 36 5 ""
+F N "piclog_make" 36 7 ""
+V L "function" 36 7 "int8" `1424 
+V L "parameter" 36 7 "int8" `1608 
+F G "piclog_make" 36 8 "void(int8 function,int8 parameter)" `1423 
+V L "PICLOG" 36 9 "int8[6]" `1606 
+V L "time" 36 10 "int32" `1607 
+C L "piclog_make" 36 11 1 "FUNCTION"
+C L "piclog_make" 36 11 1 "FUNCTION"
+C L "piclog_make" 36 11 1 "FUNCTION"
+C L "piclog_make" 36 11 1 "FUNCTION"
+C L "piclog_make" 36 11 1 "FUNCTION"
+V L "i" 36 20 "int8" `1609 
+V L "write_address" 36 26 "int32" `1612 
+C L "piclog_make" 36 11 1 "FUNCTION"
+C L "piclog_make" 36 11 1 "FUNCTION"
+C L "piclog_make" 36 11 1 "FUNCTION"
+C L "piclog_make" 36 11 8 "FUNCTION"
+D G "MMJ_CIGS_MODE_FLASH_H" 38 2 ""
+D G "PARAMETER_LENGTH" 38 4 "9"
+C L "mode_flash_erase_all" 38 6 2 "FUNCTION"
+F N "mode_flash_erase_all" 38 10 ""
+V L "parameter" 38 10 "*int8" `1615 
+f G "mode_flash_erase_all" 38 10 "void(*int8 parameter)" `1614 
+F N "mode_flash_erase_1sector" 38 12 ""
+V L "parameter" 38 12 "*int8" `1618 
+f G "mode_flash_erase_1sector" 38 12 "void(*int8 parameter)" `1617 
+F N "mode_flash_erase_4kbyte_subsector" 38 14 ""
+V L "parameter" 38 14 "*int8" `1621 
+f G "mode_flash_erase_4kbyte_subsector" 38 14 "void(*int8 parameter)" `1620 
+F N "mode_flash_write_demo" 38 17 ""
+V L "parameter" 38 17 "*int8" `1624 
+f G "mode_flash_write_demo" 38 17 "void(*int8 parameter)" `1623 
+T G "FLASH_WRITE_PARAM" 38 22 "{int8 id,int32 writeaddress,int16 packetnum}" `1630 
+F N "mode_flash_write_4kbyte_subsecotr" 38 25 ""
+V L "parameter" 38 25 "*int8" `1632 
+f G "mode_flash_write_4kbyte_subsecotr" 38 25 "void(*int8 parameter)" `1631 
+F N "mode_flash_read" 38 28 ""
+V L "parameter" 38 28 "*int8" `1635 
+f G "mode_flash_read" 38 28 "void(*int8 parameter)" `1634 
+T G "FLASH_PARAM" 38 33 "{int8 id,int16 readpacketnum,int32 readaddress}" `1641 
+F N "mode_flash_read_address" 38 36 ""
+V L "parameter" 38 36 "*int8" `1643 
+f G "mode_flash_read_address" 38 36 "void(*int8 parameter)" `1642 
+F N "mode_flash_smf_copy" 38 39 ""
+V L "parameter" 38 39 "*int8" `1646 
+f G "mode_flash_smf_copy" 38 39 "void(*int8 parameter)" `1645 
+F N "mode_flash_address_reset" 38 42 ""
+V L "parameter" 38 42 "*int8" `1649 
+f G "mode_flash_address_reset" 38 42 "void(*int8 parameter)" `1648 
+F N "mode_flash_smf_read" 38 45 ""
+V L "parameter" 38 45 "*int8" `1652 
+f G "mode_flash_smf_read" 38 45 "void(*int8 parameter)" `1651  "______________CMD ID________________"
+D G "ID_FLASH_ERASE_ALL" 38 50 "0x90"
+D G "ID_FLASH_ERASE_1SECTOR" 38 51 "0x91"
+D G "ID_FLASH_ERASE_4kByte_SUBSECTOR" 38 52 "0x92"
+D G "ID_FLASH_ERASE_64kByte_SUBSECTOR" 38 53 "0x93"
+D G "ID_FALSH_WRITE_DEMO" 38 54 "0x94"
+D G "ID_FLASH_WRITE_4kByte_SUBSECTOR" 38 55 "0x95"
+D G "ID_FLASH_READ" 38 56 "0x96"
+D G "ID_FLASH_READ_ADDRESS" 38 57 "0x97"
+D G "ID_FLASH_SMF_COPY" 38 58 "0x9A"
+D G "ID_FLASH_SMF_READ" 38 59 "0x9B"
+D G "ID_FLASH_SMF_ERASE" 38 60 "0x9C"
+D G "ID_FLASH_ADDRESS_RESET" 38 61 "0x9F"
+C L "mode_flash_smf_read" 38 6 2 "FUNCTION"
+C L "mode_flash_smf_read" 28 54 1 "FUNCTION"
+C L "mode_flash_smf_read" 29 68 2 "FUNCTION"
+C L "mode_flash_smf_read" 27 32 2 "FUNCTION"
+C L "mode_flash_smf_read" 37 8 1 "FUNCTION"
+F N "mode_flash_erase_all" 37 11 ""
+V L "parameter" 37 11 "*int8" `1655 
+F G "mode_flash_erase_all" 37 12 "void(*int8 parameter)" `1614 
+V L "cmd" 37 14 "int8" `1655 
+C L "mode_flash_erase_all" 37 8 1 "FUNCTION"
+C L "mode_flash_erase_all" 37 8 1 "FUNCTION"
+V L "address" 37 16 "int32" `1656 
+C L "mode_flash_erase_all" 37 8 1 "FUNCTION"
+C L "mode_flash_erase_all" 37 8 1 "FUNCTION"
+F N "mode_flash_erase_1sector" 37 27 ""
+V L "parameter" 37 27 "*int8" `1659 
+F G "mode_flash_erase_1sector" 37 28 "void(*int8 parameter)" `1617 
+V L "cmd" 37 30 "int8" `1659 
+C L "mode_flash_erase_1sector" 37 8 1 "FUNCTION"
+V L "sector_address" 37 31 "int32" `1660 
+C L "mode_flash_erase_1sector" 37 8 1 "FUNCTION"
+C L "mode_flash_erase_1sector" 37 8 1 "FUNCTION"
+F N "mode_flash_erase_4kbyte_subsector" 37 46 ""
+V L "parameter" 37 46 "*int8" `1664 
+F G "mode_flash_erase_4kbyte_subsector" 37 47 "void(*int8 parameter)" `1620 
+V L "cmd" 37 49 "int8" `1664 
+C L "mode_flash_erase_4kbyte_subsector" 37 8 1 "FUNCTION"
+V L "subsector_address" 37 50 "int32" `1665 
+C L "mode_flash_erase_4kbyte_subsector" 37 8 1 "FUNCTION"
+C L "mode_flash_erase_4kbyte_subsector" 37 8 1 "FUNCTION"
+F N "mode_flash_write_demo" 37 65 ""
+V L "parameter" 37 65 "*int8" `1669 
+F G "mode_flash_write_demo" 37 66 "void(*int8 parameter)" `1623 
+C L "mode_flash_write_demo" 37 8 1 "FUNCTION"
+V L "FLASH_WRITE_PARAM" 37 70 "FLASH_WRITE_PARAM" `1669 
+C L "mode_flash_write_demo" 37 8 1 "FUNCTION"
+V L "writedata" 37 88 "int8[64]" `1673 
+V L "p" 37 89 "int16" `1674  "packet index"
+V L "base_value" 37 90 "int16" `1675 
+C L "mode_flash_write_demo" 37 8 1 "FUNCTION"
+V L "i" 37 97 "int8" `1677 
+C L "mode_flash_write_demo" 37 8 1 "FUNCTION"
+C L "mode_flash_write_demo" 37 8 1 "FUNCTION"
+V L "current_address" 37 103 "int32" `1679 
+C L "mode_flash_write_demo" 37 8 1 "FUNCTION"
+F N "mode_flash_write_4kbyte_subsecotr" 37 114 ""
+V L "parameter" 37 114 "*int8" `1683 
+F G "mode_flash_write_4kbyte_subsecotr" 37 115 "void(*int8 parameter)" `1631 
+C L "mode_flash_write_4kbyte_subsecotr" 37 8 1 "FUNCTION"
+V L "write_address" 37 119 "int32" `1683 
+V L "write_data" 37 120 "int8[256]" `1684 
+C L "mode_flash_write_4kbyte_subsecotr" 37 8 1 "FUNCTION"
+C L "mode_flash_write_4kbyte_subsecotr" 37 8 1 "FUNCTION"
+F N "mode_flash_read" 37 127 ""
+V L "uplinkcmd" 37 127 "*int8" `1687 
+F G "mode_flash_read" 37 128 "void(*int8 uplinkcmd)" `1634 
+C L "mode_flash_read" 37 8 1 "FUNCTION"
+V L "FLASH_PARAM" 37 131 "FLASH_PARAM" `1687 
+C L "mode_flash_read" 37 8 2 "FUNCTION"
+V L "readdata" 37 154 "int8[64]" `1691 
+C L "mode_flash_read" 37 8 1 "FUNCTION"
+V L "read_address" 37 155 "int32" `1692 
+V L "packetcount" 37 163 "int32" `1695 
+C L "mode_flash_read" 37 8 1 "FUNCTION"
+V L "bytecount" 37 169 "int8" `1696 
+C L "mode_flash_read" 37 8 1 "FUNCTION"
+F N "mode_flash_read_address" 37 179 ""
+V L "parameter" 37 179 "*int8" `1701 
+F G "mode_flash_read_address" 37 180 "void(*int8 parameter)" `1642 
+V L "read_address" 37 183 "int32" `1701 
+V L "read_data" 37 184 "int8[4]" `1702 
+F N "mode_flash_smf_copy" 37 191 ""
+V L "parameter" 37 191 "*int8" `1706 
+F G "mode_flash_smf_copy" 37 192 "void(*int8 parameter)" `1645 
+C L "mode_flash_smf_copy" 37 8 1 "FUNCTION"
+V L "src_address" 37 198 "int32" `1706 
+V L "dest_address" 37 199 "int32" `1707 
+C L "mode_flash_smf_copy" 37 8 1 "FUNCTION"
+V L "read_data" 37 200 "int8[256]" `1708 
+F N "mode_flash_smf_read" 37 208 ""
+V L "parameter" 37 208 "*int8" `1711 
+F G "mode_flash_smf_read" 37 209 "void(*int8 parameter)" `1651 
+V L "read_data" 37 211 "int8[256]" `1711  "read_data_bytes(smf, read_address, read_data, 256);"
+V L "i" 37 214 "int8" `1713 
+F N "mode_flash_smf_write" 37 222 ""
+V L "parameter" 37 222 "*int8" `1717 
+F G "mode_flash_smf_write" 37 223 "void(*int8 parameter)" `1716 
+V L "write_address" 37 226 "int32" `1720 
+V L "write_data" 37 227 "int8[256]" `1721 
+C L "mode_flash_smf_write" 37 8 1 "FUNCTION"
+F N "mode_flash_address_reset" 37 233 ""
+V L "parameter" 37 233 "*int8" `1724 
+F G "mode_flash_address_reset" 37 234 "void(*int8 parameter)" `1648 
+C L "mode_flash_address_reset" 37 8 1 "FUNCTION"
+V L "writedata" 37 237 "int8[64]" `1724 
+C L "mode_flash_address_reset" 37 8 1 "FUNCTION"
+C L "mode_flash_address_reset" 37 8 1 "FUNCTION"
+C L "mode_flash_address_reset" 37 8 1 "FUNCTION"
+D G "MMJ_CIGS_MODE_MISSION_H" 40 2 ""
 D G "PARAMETER_LENGTH" 40 4 "9"
-C L "mode_flash_erase_all" 40 6 2 "FUNCTION"
-F N "mode_flash_erase_all" 40 10 ""
-V L "parameter" 40 10 "*int8" `1622 
-f G "mode_flash_erase_all" 40 10 "void(*int8 parameter)" `1621 
-F N "mode_flash_erase_1sector" 40 12 ""
-V L "parameter" 40 12 "*int8" `1625 
-f G "mode_flash_erase_1sector" 40 12 "void(*int8 parameter)" `1624 
-F N "mode_flash_erase_4kbyte_subsector" 40 14 ""
-V L "parameter" 40 14 "*int8" `1628 
-f G "mode_flash_erase_4kbyte_subsector" 40 14 "void(*int8 parameter)" `1627 
-F N "mode_flash_write_demo" 40 17 ""
-V L "parameter" 40 17 "*int8" `1631 
-f G "mode_flash_write_demo" 40 17 "void(*int8 parameter)" `1630 
-T G "FLASH_WRITE_PARAM" 40 22 "{int8 id,int32 writeaddress,int16 packetnum}" `1637 
-F N "mode_flash_write_4kbyte_subsecotr" 40 25 ""
-V L "parameter" 40 25 "*int8" `1639 
-f G "mode_flash_write_4kbyte_subsecotr" 40 25 "void(*int8 parameter)" `1638 
-F N "mode_flash_read" 40 28 ""
-V L "parameter" 40 28 "*int8" `1642 
-f G "mode_flash_read" 40 28 "void(*int8 parameter)" `1641 
-T G "FLASH_PARAM" 40 33 "{int8 id,int16 readpacketnum,int32 readaddress}" `1648 
-F N "mode_flash_read_address" 40 36 ""
-V L "parameter" 40 36 "*int8" `1650 
-f G "mode_flash_read_address" 40 36 "void(*int8 parameter)" `1649 
-F N "mode_flash_smf_copy" 40 39 ""
-V L "parameter" 40 39 "*int8" `1653 
-f G "mode_flash_smf_copy" 40 39 "void(*int8 parameter)" `1652 
-F N "mode_flash_address_reset" 40 42 ""
-V L "parameter" 40 42 "*int8" `1656 
-f G "mode_flash_address_reset" 40 42 "void(*int8 parameter)" `1655 
-F N "mode_flash_smf_read" 40 45 ""
-V L "parameter" 40 45 "*int8" `1659 
-f G "mode_flash_smf_read" 40 45 "void(*int8 parameter)" `1658  "______________CMD ID________________"
-D G "ID_FLASH_ERASE_ALL" 40 50 "0x90"
-D G "ID_FLASH_ERASE_1SECTOR" 40 51 "0x91"
-D G "ID_FLASH_ERASE_4kByte_SUBSECTOR" 40 52 "0x92"
-D G "ID_FLASH_ERASE_64kByte_SUBSECTOR" 40 53 "0x93"
-D G "ID_FALSH_WRITE_DEMO" 40 54 "0x94"
-D G "ID_FLASH_WRITE_4kByte_SUBSECTOR" 40 55 "0x95"
-D G "ID_FLASH_READ" 40 56 "0x96"
-D G "ID_FLASH_READ_ADDRESS" 40 57 "0x97"
-D G "ID_FLASH_SMF_COPY" 40 58 "0x9A"
-D G "ID_FLASH_SMF_READ" 40 59 "0x9B"
-D G "ID_FLASH_SMF_ERASE" 40 60 "0x9C"
-D G "ID_FLASH_ADDRESS_RESET" 40 61 "0x9F"
-C L "mode_flash_smf_read" 30 47 1 "FUNCTION"
-C L "mode_flash_smf_read" 34 68 2 "FUNCTION"
-C L "mode_flash_smf_read" 38 32 2 "FUNCTION"
-C L "mode_flash_smf_read" 41 7 1 "FUNCTION"
-F N "mode_flash_erase_all" 41 10 ""
-V L "parameter" 41 10 "*int8" `1662 
-F G "mode_flash_erase_all" 41 11 "void(*int8 parameter)" `1621 
-V L "cmd" 41 13 "int8" `1662 
-C L "mode_flash_erase_all" 41 7 1 "FUNCTION"
-C L "mode_flash_erase_all" 41 7 1 "FUNCTION"
-V L "address" 41 15 "int32" `1663 
-C L "mode_flash_erase_all" 41 7 1 "FUNCTION"
-C L "mode_flash_erase_all" 41 7 1 "FUNCTION"
-F N "mode_flash_erase_1sector" 41 26 ""
-V L "parameter" 41 26 "*int8" `1666 
-F G "mode_flash_erase_1sector" 41 27 "void(*int8 parameter)" `1624 
-V L "cmd" 41 29 "int8" `1666 
-C L "mode_flash_erase_1sector" 41 7 1 "FUNCTION"
-V L "sector_address" 41 30 "int32" `1667 
-C L "mode_flash_erase_1sector" 41 7 1 "FUNCTION"
-C L "mode_flash_erase_1sector" 41 7 1 "FUNCTION"
-F N "mode_flash_erase_4kbyte_subsector" 41 45 ""
-V L "parameter" 41 45 "*int8" `1671 
-F G "mode_flash_erase_4kbyte_subsector" 41 46 "void(*int8 parameter)" `1627 
-V L "cmd" 41 48 "int8" `1671 
-C L "mode_flash_erase_4kbyte_subsector" 41 7 1 "FUNCTION"
-V L "subsector_address" 41 49 "int32" `1672 
-C L "mode_flash_erase_4kbyte_subsector" 41 7 1 "FUNCTION"
-C L "mode_flash_erase_4kbyte_subsector" 41 7 1 "FUNCTION"
-F N "mode_flash_write_demo" 41 64 ""
-V L "parameter" 41 64 "*int8" `1676 
-F G "mode_flash_write_demo" 41 65 "void(*int8 parameter)" `1630 
-C L "mode_flash_write_demo" 41 7 1 "FUNCTION"
-V L "FLASH_WRITE_PARAM" 41 69 "FLASH_WRITE_PARAM" `1676 
-C L "mode_flash_write_demo" 41 7 1 "FUNCTION"
-V L "writedata" 41 87 "int8[64]" `1680 
-V L "p" 41 88 "int16" `1681  "packet index"
-V L "base_value" 41 89 "int16" `1682 
-C L "mode_flash_write_demo" 41 7 1 "FUNCTION"
-V L "i" 41 96 "int8" `1684 
-C L "mode_flash_write_demo" 41 7 1 "FUNCTION"
-C L "mode_flash_write_demo" 41 7 1 "FUNCTION"
-V L "current_address" 41 102 "int32" `1686 
-C L "mode_flash_write_demo" 41 7 1 "FUNCTION"
-F N "mode_flash_write_4kbyte_subsecotr" 41 113 ""
-V L "parameter" 41 113 "*int8" `1690 
-F G "mode_flash_write_4kbyte_subsecotr" 41 114 "void(*int8 parameter)" `1638 
-C L "mode_flash_write_4kbyte_subsecotr" 41 7 1 "FUNCTION"
-V L "write_address" 41 118 "int32" `1690 
-V L "write_data" 41 119 "int8[256]" `1691 
-C L "mode_flash_write_4kbyte_subsecotr" 41 7 1 "FUNCTION"
-C L "mode_flash_write_4kbyte_subsecotr" 41 7 1 "FUNCTION"
-F N "mode_flash_read" 41 126 ""
-V L "uplinkcmd" 41 126 "*int8" `1694 
-F G "mode_flash_read" 41 127 "void(*int8 uplinkcmd)" `1641 
-C L "mode_flash_read" 41 7 1 "FUNCTION"
-V L "FLASH_PARAM" 41 130 "FLASH_PARAM" `1694 
-C L "mode_flash_read" 41 7 2 "FUNCTION"
-V L "readdata" 41 153 "int8[64]" `1698 
-C L "mode_flash_read" 41 7 1 "FUNCTION"
-V L "read_address" 41 154 "int32" `1699 
-V L "packetcount" 41 162 "int32" `1702 
-C L "mode_flash_read" 41 7 1 "FUNCTION"
-V L "bytecount" 41 168 "int8" `1703 
-C L "mode_flash_read" 41 7 1 "FUNCTION"
-F N "mode_flash_read_address" 41 178 ""
-V L "parameter" 41 178 "*int8" `1708 
-F G "mode_flash_read_address" 41 179 "void(*int8 parameter)" `1649 
-V L "read_address" 41 182 "int32" `1708 
-V L "read_data" 41 183 "int8[4]" `1709 
-F N "mode_flash_smf_copy" 41 190 ""
-V L "parameter" 41 190 "*int8" `1713 
-F G "mode_flash_smf_copy" 41 191 "void(*int8 parameter)" `1652 
-C L "mode_flash_smf_copy" 41 7 1 "FUNCTION"
-V L "src_address" 41 197 "int32" `1713 
-V L "dest_address" 41 198 "int32" `1714 
-C L "mode_flash_smf_copy" 41 7 1 "FUNCTION"
-V L "read_data" 41 199 "int8[256]" `1715 
-F N "mode_flash_smf_read" 41 207 ""
-V L "parameter" 41 207 "*int8" `1718 
-F G "mode_flash_smf_read" 41 208 "void(*int8 parameter)" `1658 
-V L "read_data" 41 210 "int8[256]" `1718  "read_data_bytes(smf, read_address, read_data, 256);"
-V L "i" 41 213 "int8" `1720 
-F N "mode_flash_smf_write" 41 221 ""
-V L "parameter" 41 221 "*int8" `1724 
-F G "mode_flash_smf_write" 41 222 "void(*int8 parameter)" `1723 
-V L "write_address" 41 225 "int32" `1727 
-V L "write_data" 41 226 "int8[256]" `1728 
-C L "mode_flash_smf_write" 41 7 1 "FUNCTION"
-F N "mode_flash_address_reset" 41 232 ""
-V L "parameter" 41 232 "*int8" `1731 
-F G "mode_flash_address_reset" 41 233 "void(*int8 parameter)" `1655 
-C L "mode_flash_address_reset" 41 7 1 "FUNCTION"
-V L "writedata" 41 236 "int8[64]" `1731 
-C L "mode_flash_address_reset" 41 7 1 "FUNCTION"
-C L "mode_flash_address_reset" 41 7 1 "FUNCTION"
-C L "mode_flash_address_reset" 41 7 1 "FUNCTION"
-C L "execute_mission" 40 66 2 "FUNCTION"
-C L "execute_mission" 30 47 1 "FUNCTION"
-F N "execute_mission" 27 10 ""
-V L "content" 27 10 "*int8" `1734 
-F G "execute_mission" 27 11 "void(*int8 content)" `1411  "record to executed mission list"
-V L "command_id" 27 13 "int8" `1733 
-C L "execute_mission" 27 14 2 "FUNCTION"
-C L "execute_mission" 27 14 1 "FUNCTION"
-C L "execute_mission" 27 14 1 "FUNCTION"
-C L "execute_mission" 27 14 1 "FUNCTION"
-C L "execute_mission" 27 14 1 "FUNCTION"
-C L "execute_mission" 27 14 1 "FUNCTION"
-C L "execute_mission" 27 14 1 "FUNCTION"
-C L "execute_mission" 27 14 1 "FUNCTION"
-C L "execute_mission" 27 14 1 "FUNCTION"
-F N "execute_command" 27 85 ""
-V L "Command" 27 85 " *" `1739 
-F G "execute_command" 27 86 "int8( * Command)" `1403 
-C L "execute_command" 27 14 1 "FUNCTION"
-F N "handle_uplink_command" 27 110 ""
-V L "Command" 27 110 " *" `1740 
-F G "handle_uplink_command" 27 110 "void( * Command)" `1405 
-C L "handle_uplink_command" 27 14 1 "FUNCTION"
-F N "handle_status_check" 27 127 ""
-V L "Command" 27 127 " *" `1742 
-F G "handle_status_check" 27 127 "int8( * Command)" `1407 
-F N "handle_smf_available" 27 143 ""
-V L "Command" 27 143 " *" `1745 
-F G "handle_smf_available" 27 143 "void( * Command)" `1409 
-C L "MAIN" 17 27 1 "FUNCTION"
-C L "MAIN" 38 32 2 "FUNCTION"
-C L "MAIN" 30 47 1 "FUNCTION"
-C L "MAIN" 34 68 2 "FUNCTION"
-C L "MAIN" 1 36 2 "FUNCTION"
+C L "mode_dummy" 40 6 1 "FUNCTION"
+F N "mode_dummy" 40 9 ""
+V L "uplinkcmd" 40 9 "*int8" `1727 
+f G "mode_dummy" 40 9 "void(*int8 uplinkcmd)" `1726 
+T G "DUMMY_CMD" 40 14 "{int8 id,int32 param1,int16 param2}" `1733  "IV command"
+F N "mode_iv_measure" 40 18 ""
+f G "mode_iv_measure" 40 18 "void()" `1734 
+F N "mode_iv_measure_voltage" 40 20 ""
+f G "mode_iv_measure_voltage" 40 20 "void()" `1735 
+F N "mode_iv_meas_adc" 40 22 ""
+f G "mode_iv_meas_adc" 40 22 "void()" `1736 
+F N "mode_test_iv" 40 24 ""
+V L "uplinkcmd" 40 24 "*int8" `1738 
+f G "mode_test_iv" 40 24 "void(*int8 uplinkcmd)" `1737  "Development command"
+F N "mode_dev_vol" 40 28 ""
+f G "mode_dev_vol" 40 28 "void()" `1740 
+F N "mode_dev_cur" 40 30 ""
+f G "mode_dev_cur" 40 30 "void()" `1741 
+F N "mode_dev_temp" 40 32 ""
+f G "mode_dev_temp" 40 32 "void()" `1742 
+F N "mode_dev_pd" 40 34 ""
+f G "mode_dev_pd" 40 34 "void()" `1743 
+F N "mode_dev_cigs" 40 36 ""
+f G "mode_dev_cigs" 40 36 "void()" `1744 
+F N "mode_dev_time" 40 38 ""
+f G "mode_dev_time" 40 38 "void()" `1745 
+F N "mode_dev_sweep" 40 40 ""
+f G "mode_dev_sweep" 40 40 "void()" `1746  "______________CMD ID________________"
+D G "ID_IV_MEASURE" 40 45 "0xB0"
+D G "ID_IV_MEASURE_VOLTAGE" 40 46 "0xB1"
+D G "ID_DEV_VOL" 40 49 "0xC0"
+D G "ID_DEV_CUR" 40 50 "0xC1"
+D G "ID_DEV_TEMP" 40 51 "0xC1"
+D G "ID_DEV_PD" 40 52 "0xC2"
+D G "ID_DEV_CIGS" 40 53 "0xC3"
+D G "ID_DEV_TIME" 40 54 "0xC4"
+D G "ID_DEV_SWEEP" 40 55 "0xC5"
+C L "mode_dev_sweep" 40 6 2 "FUNCTION"
+C L "mode_dev_sweep" 28 54 1 "FUNCTION"
+C L "mode_dev_sweep" 32 68 2 "FUNCTION"
+C L "mode_dev_sweep" 29 68 2 "FUNCTION"
+C L "mode_dev_sweep" 27 32 2 "FUNCTION"
+C L "mode_dev_sweep" 39 9 1 "FUNCTION"
+F N "mode_dummy" 39 10 ""
+V L "uplinkcmd" 39 10 "*int8" `1748 
+F G "mode_dummy" 39 11 "void(*int8 uplinkcmd)" `1726 
+V L "DUMMY_CMD" 39 14 "DUMMY_CMD" `1748 
+C L "mode_dummy" 39 9 1 "FUNCTION"
+C L "mode_dummy" 39 9 3 "FUNCTION"
+C L "mode_dummy" 39 9 1 "FUNCTION"
+F N "mode_test_iv" 39 37 ""
+V L "uplinkcmd" 39 37 "*int8" `1754 
+F G "mode_test_iv" 39 38 "void(*int8 uplinkcmd)" `1737 
+V L "measurement_step" 39 39 "int8" `1753 
+C L "mode_test_iv" 39 9 1 "FUNCTION"
+C L "mode_test_iv" 39 9 1 "FUNCTION"
+V L "readdata" 39 44 "int16" `1756 
+C L "mode_test_iv" 39 9 1 "FUNCTION"
+C L "mode_test_iv" 39 9 1 "FUNCTION"
+C L "mode_measure" 39 9 1 "FUNCTION"
+F N "mode_measure" 39 55 ""
+V L "parameter" 39 55 "*int8" `1759 
+F G "mode_measure" 39 56 "void(*int8 parameter)" `1758 
+V L "sweep_step" 39 60 "int8" `1762 
+C L "mode_measure" 39 9 1 "FUNCTION"
+C L "mode_measure" 39 9 2 "FUNCTION"
+V L "count" 39 63 "int8" `1763 
+C L "mode_measure" 39 9 2 "FUNCTION"
+C L "mode_measure" 39 9 2 "FUNCTION"
+C L "mode_measure" 39 9 1 "FUNCTION"
+C L "mode_measure" 39 9 2 "FUNCTION"
+F N "mode_iv_meas_adc" 39 82 ""
+F G "mode_iv_meas_adc" 39 83 "void()" `1736 
+V L "measurement_step" 39 86 "int8" `1766 
+C L "mode_iv_meas_adc" 39 9 1 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 1 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 1 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 1 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 1 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 1 "FUNCTION"
+V L "current" 39 95 "int32" `1768  "read PD value"
+C L "mode_iv_meas_adc" 39 9 5 "FUNCTION"
+V L "count" 39 105 "int16" `1769 
+C L "mode_iv_meas_adc" 39 9 2 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 2 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 1 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 1 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 1 "FUNCTION"
+V L "k" 39 116 "int8" `1770 
+C L "mode_iv_meas_adc" 39 9 1 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 1 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 1 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 2 "FUNCTION"
+C L "mode_iv_meas_adc" 39 9 4 "FUNCTION"
+C L "execute_mission" 17 26 1 "FUNCTION"
+C L "execute_mission" 40 64 2 "FUNCTION"
+C L "execute_mission" 38 65 2 "FUNCTION"
+C L "execute_mission" 28 54 1 "FUNCTION"
+F N "execute_mission" 41 10 ""
+V L "content" 41 10 "*int8" `1773 
+F G "execute_mission" 41 11 "void(*int8 content)" `1411  "record to executed mission list"
+V L "command_id" 41 13 "int8" `1772 
+C L "execute_mission" 41 14 2 "FUNCTION"
+C L "execute_mission" 41 14 1 "FUNCTION"
+C L "execute_mission" 41 14 1 "FUNCTION"
+C L "execute_mission" 41 14 1 "FUNCTION"
+C L "execute_mission" 41 14 1 "FUNCTION"
+C L "execute_mission" 41 14 1 "FUNCTION"
+C L "execute_mission" 41 14 1 "FUNCTION"
+C L "execute_mission" 41 14 1 "FUNCTION"
+C L "execute_mission" 41 14 1 "FUNCTION"
+F N "execute_command" 41 85 ""
+V L "Command" 41 85 " *" `1778 
+F G "execute_command" 41 86 "int8( * Command)" `1403 
+C L "execute_command" 41 14 1 "FUNCTION"
+F N "handle_uplink_command" 41 110 ""
+V L "Command" 41 110 " *" `1779 
+F G "handle_uplink_command" 41 110 "void( * Command)" `1405 
+C L "handle_uplink_command" 41 14 1 "FUNCTION"
+F N "handle_status_check" 41 127 ""
+V L "Command" 41 127 " *" `1781 
+F G "handle_status_check" 41 127 "int8( * Command)" `1407 
+F N "handle_smf_available" 41 143 ""
+V L "Command" 41 143 " *" `1784 
+F G "handle_smf_available" 41 143 "void( * Command)" `1409 
+C L "MAIN" 1 47 2 "FUNCTION"
 F N "MAIN" 0 3 ""
-F G "MAIN" 0 4 "void()" `1748 
+F G "MAIN" 0 4 "void()" `1787 
 C L "MAIN" 0 5 1 "FUNCTION"
 C L "MAIN" 0 5 1 "FUNCTION"
 C L "MAIN" 0 5 1 "FUNCTION"
-V L "is_finished" 0 19 "int1" `1756 
+V L "is_finished" 0 19 "int1" `1795 
 C L "MAIN" 0 5 3 "FUNCTION"
 C L "MAIN" 0 5 1 "FUNCTION"
 C L "MAIN" 0 5 1 "FUNCTION"
 C L "MAIN" 0 5 1 "FUNCTION"
-V L "recieve_cmd" 0 38 "Command" `1759 
+V L "recieve_cmd" 0 38 "Command" `1798 
 C L "MAIN" 0 5 7 "FUNCTION"
 C L "MAIN" 0 5 1 "FUNCTION"
-V L "flag" 0 52 "int1" `1760 
+V L "flag" 0 52 "int1" `1799 
 C L "MAIN" 0 5 1 "FUNCTION"
 C L "MAIN" 0 5 1 "FUNCTION"
 F B "reset_cpu" 0 0

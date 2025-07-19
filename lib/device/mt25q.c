@@ -76,7 +76,7 @@ void spi_xfer_two_datas_select_stream(Flash flash_stream, int8 *cmd_data, unsign
 void flash_setting(Flash flash_stream){
    output_high(flash_stream.cs_pin);
 }
-#Separate 
+ 
 int8 status_register(Flash flash_stream){
    int8 flash_cmd = CMD_READ_STATUS_REGISTER;
    int8 status_reg;
@@ -92,7 +92,7 @@ int8 status_register(Flash flash_stream){
 
 //
 //->success:True,fail:false
-#Separate 
+ 
 int8 read_id(Flash flash_stream){
    int8 flash_cmd = CMD_READ_ID;
    int8 chip_id[20];
@@ -119,7 +119,7 @@ int8 read_id(Flash flash_stream){
       return false;
    }
 }
-#Separate 
+ 
 void sector_erase(Flash flash_stream, unsigned int32 sector_address){
 //!   #ifdef MT25Q_DEBUG
 //!      fprintf(PC,"Sector Erase\r\n");
@@ -199,7 +199,7 @@ void sector_erase(Flash flash_stream, unsigned int32 sector_address){
    #endif
    return;
 }
-#Separate 
+ 
 void subsector_32kByte_erase(Flash flash_stream, unsigned int32 subsector_address){
    if(flash_stream.flash_model == MT25QL128ABA){
       int8 write_enable_cmd = CMD_WRITE_ENABLE;
@@ -272,7 +272,7 @@ void subsector_32kByte_erase(Flash flash_stream, unsigned int32 subsector_addres
    #endif
    return;
 }
-#Separate 
+ 
 void subsector_4kByte_erase(Flash flash_stream, unsigned int32 subsector_address){
    if(flash_stream.flash_model == MT25QL128ABA){
       int8 write_enable_cmd = CMD_WRITE_ENABLE;
@@ -345,7 +345,7 @@ void subsector_4kByte_erase(Flash flash_stream, unsigned int32 subsector_address
    #endif
    return;
 }
-#Separate 
+ 
 int8 read_data_byte(Flash flash_stream, unsigned int32 read_address){
    int8 read_data;
    if(flash_stream.flash_model == MT25QL128ABA){
@@ -381,7 +381,7 @@ int8 read_data_byte(Flash flash_stream, unsigned int32 read_address){
    }
    return read_data;
 }
-#Separate 
+ 
 void read_data_bytes(Flash flash_stream, unsigned int32 read_start_address, int8 *read_data, unsigned int32 read_amount)
 {
    if(flash_stream.flash_model == MT25QL128ABA){
@@ -417,7 +417,7 @@ void read_data_bytes(Flash flash_stream, unsigned int32 read_start_address, int8
    }
    return;
 }
-#Separate 
+ 
 void write_data_byte(Flash flash_stream, unsigned int32 write_address,int8 write_data)
 {
    if(flash_stream.flash_model == MT25QL128ABA){
@@ -488,7 +488,7 @@ void write_data_byte(Flash flash_stream, unsigned int32 write_address,int8 write
    #endif
    return;
 }
-#Separate 
+ 
 void write_data_bytes(Flash flash_stream, unsigned int32 write_start_address, int8 *write_data, unsigned int16 write_amount){
    if(flash_stream.flash_model == MT25QL128ABA){
       int8 write_enable_cmd = CMD_WRITE_ENABLE;
@@ -559,7 +559,7 @@ void write_data_bytes(Flash flash_stream, unsigned int32 write_start_address, in
    return;
 }
 
-#Separate 
+ 
 int1 is_connect(Flash flash_stream){
    READ_ID_DATA read_id_data;
    int8 flash_cmd = CMD_READ_ID;

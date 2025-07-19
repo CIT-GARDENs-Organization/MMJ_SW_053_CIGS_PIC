@@ -34,14 +34,21 @@ volatile unsigned int16 measured_temp_bot = 0 ;
 
 void make_meas_header(unsigned int8 *packetdata, unsigned int8 *cmd);
 
-#separate
+
 void sweep(unsigned int8 parameter[]);
 
 
 
+typedef struct{
+    unsigned int32 time;
+    unsigned int16 temp_py_top;
+    unsigned int16 temp_py_bot;
+    unsigned int16 temp_mis7;
+    unsigned int16 pd;
+} MEASUREMENT_DATA;
 
 
-#include "src/mmj_cigs_func.c"
+
 
 #endif
 //------------------End of File------------------

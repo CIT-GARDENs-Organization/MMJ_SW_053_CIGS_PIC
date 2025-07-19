@@ -1,4 +1,4 @@
-#separate
+
 void enqueue_smf_data(SmfDataStruct *data)
 {   
    int8 next_tail = (smf_queue.smf_data_tail + 1) % SMF_DATA_SIZE;
@@ -16,7 +16,7 @@ void enqueue_smf_data(SmfDataStruct *data)
    }
 }
 
-#separate
+
 SmfDataStruct *dequeue_smf_data()
 {
    if (smf_queue.smf_data_head == smf_queue.smf_data_tail)
@@ -31,13 +31,13 @@ SmfDataStruct *dequeue_smf_data()
       return &smf_queue.smf_data[current_head];
    }
 }
-#separate
+
 int1 is_empty_smf_data(void)
 {
    return smf_queue.smf_data_head == smf_queue.smf_data_tail;
 }
 
-#separate
+
 MissionTypeStruct getMissionTypeStruct(MissionType mis_type)
 {
    MissionTypeStruct mis_struct = {0};

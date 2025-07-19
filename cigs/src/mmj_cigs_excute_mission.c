@@ -6,7 +6,7 @@
 #include "../../lib/communication/mission_tools.h"
 #include "../mmj_cigs_func.h"
 
-#separate
+
 void execute_mission(unsigned int8 *content)
 {
    // record to executed mission list
@@ -81,7 +81,7 @@ void execute_mission(unsigned int8 *content)
 }
 
 
-#separate
+
 int1 execute_command(Command *command)
 {
    fprintf(PC, "Start execute_command\r\n");
@@ -106,7 +106,7 @@ int1 execute_command(Command *command)
 }
 
 
-#Separate
+
 void handle_uplink_command(Command *command) {
    fprintf(PC, "\t-> Uplink command\r\n");
    fprintf(PC, "\t   Transmit Acknolegde\r\n");
@@ -123,7 +123,7 @@ void handle_uplink_command(Command *command) {
    
 }
 
-#Separate
+
 int1 handle_status_check(Command *command) {
    fprintf(PC, "\t-> Status check\r\n");
    fprintf(PC, "\t   Transmit MIS MCU Status\r\n");
@@ -139,7 +139,7 @@ int1 handle_status_check(Command *command) {
 
 }
 
-#Separate
+
 void handle_smf_available(Command *command) {
     fprintf(PC, "\t-> SMF available check\r\n");
     fprintf(PC, "\t   Transmit Acknolegde\r\n");

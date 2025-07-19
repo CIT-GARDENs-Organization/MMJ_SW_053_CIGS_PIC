@@ -86,7 +86,7 @@ void adc_init()
 }
 
 
-#Separate
+
 void sweep(unsigned int8 parameter[])
 {
     // 
@@ -95,16 +95,15 @@ void sweep(unsigned int8 parameter[])
     fprintf(PC, "\tSweep step : %u\r\n", measurement_step);
     output_high(CONNECT_CIGS1);
     delay_us(100); // wait for the CIGS to stabilize
-
-    // read header data
-    /*
-    measured_time = get_current_sec(); // read time from timer0
-    measured_pd = ad7490_read(ADC_PD); // read PD value
-    measured_temp_top = ad7490_read(ADC_TEMP_TOP); // read temperature at top
-    measured_temp_bot = ad7490_read(ADC_TEMP_BOT); // read temperature at bottom
-    measured_open_voltage = ad7490_read(ADC_CIGS_VOLT); // read open voltage at CIGS
-    */
       /*
+    MEASUREMENT_DATA measured_data;
+
+    measured_data.time = get_current_sec(); 
+    measured_data.temp_py_top = ad7490_read(ADC_TEMP_PY_TOP);
+    measured_data.temp_py_bot = ad7490_read(ADC_TEMP_PY_BOT);
+    measured_data.temp_mis7 = ad7490_read(ADC_TEMP_MIS7);
+    measured_data.pd = ad7490_read(ADC_PD); 
+
     for (unsigned int8 count = 0; count < measurement_step; count++)
     {    
         // set DAC value
@@ -259,4 +258,131 @@ void test_adc()
     fprintf(PC, "ADC CIGS1 Amp: %04LX\r\n", ans);
     ans = ad7490_read(ADC_CIGS1_VREF);
     fprintf(PC, "ADC CIGS1 VREF: %04LX\r\n", ans);
+}
+
+void sweep_2ports(unsigned int8 measurement_step)
+{ 
+    fprintf(PC, "Start SWEEP 2ports\r\n");
+    fprintf(PC, "\tSweep step : %u\r\n", measurement_step);
+    
+    // Set CIGS1 and CIGS2
+    output_high(CONNECT_CIGS1);
+    output_high(CONNECT_CIGS2);
+    output_low(EN_NPWR); 
+
+    MEASUREMENT_DATA measured_data;
+
+    measured_data.time = get_current_sec(); 
+    measured_data.temp_py_top = ad7490_read(ADC_TEMP_PY_TOP);
+    measured_data.temp_py_bot = ad7490_read(ADC_TEMP_PY_BOT);
+    measured_data.temp_mis7 = ad7490_read(ADC_TEMP_MIS7);
+    measured_data.pd = ad7490_read(ADC_PD); 
+
+
+    unsigned int16 cigs1_buffer[2][0xFF]; // Buffer for CIGS1 data
+    unsigned int16 cigs2_buffer[2][0xFF];
+
+
+    for (unsigned int8 count = 0; count < measurement_step; count++)
+    {    
+        // set DAC value
+        mcp4901_1_write(count);
+        mcp4901_2_write(count);
+        //delay_ms(100); // wait for the DAC to stabilize
+
+        // read CIGS voltage and current      
+        delay_ms(1);
+        cigs1_buffer[0][count] = ad7490_readdata(ADC_CIGS1_VOLT);
+        cigs1_buffer[1][count] = ad7490_readdata(ADC_CIGS1_CURR);
+        cigs2_buffer[0][count] = ad7490_readdata(ADC_CIGS2_VOLT);
+        cigs2_buffer[1][count] = ad7490_readdata(ADC_CIGS2_CURR);
+    }
+
+    output_low(CONNECT_CIGS1);
+    output_low(CONNECT_CIGS2);
+    output_high(EN_NPWR);
+
+    fprintf(PC, "END SWEEP 2port\r\n");
+
+    fprintf(PC, "Start CIGS data conversion\r\n");  
+}
+
+void sweep_port1(unsigned int8 measurement_step)
+{
+    fprintf(PC, "Start SWEEP PORT1\r\n");
+    fprintf(PC, "\tSweep step : %u\r\n", measurement_step);
+    
+    // Set CIGS1
+    output_high(CONNECT_CIGS1);
+    output_low(CONNECT_CIGS2);
+    output_low(EN_NPWR); 
+
+    MEASUREMENT_DATA measured_data;
+
+    measured_data.time = get_current_sec(); 
+    measured_data.temp_py_top = ad7490_read(ADC_TEMP_PY_TOP);
+    measured_data.temp_py_bot = ad7490_read(ADC_TEMP_PY_BOT);
+    measured_data.temp_mis7 = ad7490_read(ADC_TEMP_MIS7);
+    measured_data.pd = ad7490_read(ADC_PD); 
+
+    unsigned int16 cigs1_buffer[2][0xFF]; // Buffer for CIGS1 data
+
+    for (unsigned int8 count = 0; count < measurement_step; count++)
+    {    
+        // set DAC value
+        mcp4901_1_write(count);
+        //delay_ms(100); // wait for the DAC to stabilize
+
+        // read CIGS voltage and current      
+        delay_ms(1);
+        cigs1_buffer[0][count] = ad7490_readdata(ADC_CIGS1_VOLT);
+        cigs1_buffer[1][count] = ad7490_readdata(ADC_CIGS1_CURR);
+    }
+
+    output_low(CONNECT_CIGS1);
+    output_high(EN_NPWR);
+
+    fprintf(PC, "END SWEEP PORT1\r\n");
+
+    fprintf(PC, "Start CIGS data conversion\r\n");  
+}
+
+void sweep_port2(unsigned int8 measurement_step)
+{
+    fprintf(PC, "Start SWEEP PORT2\r\n");
+    fprintf(PC, "\tSweep step : %u\r\n", measurement_step);
+    
+    // Set CIGS2
+    output_low(CONNECT_CIGS1);
+    output_high(CONNECT_CIGS2);
+    output_low(EN_NPWR); 
+
+    MEASUREMENT_DATA measured_data;
+
+    measured_data.time = get_current_sec(); 
+    measured_data.temp_py_top = ad7490_read(ADC_TEMP_PY_TOP);
+    measured_data.temp_py_bot = ad7490_read(ADC_TEMP_PY_BOT);
+    measured_data.temp_mis7 = ad7490_read(ADC_TEMP_MIS7);
+    measured_data.pd = ad7490_read(ADC_PD); 
+
+    unsigned int16 cigs2_buffer[2][0xFF]; // Buffer for CIGS2 data
+
+    for (unsigned int8 count = 0; count < measurement_step; count++)
+    {    
+        // set DAC value
+        mcp4901_2_write(count);
+        //delay_ms(100); // wait for the DAC to stabilize
+
+        // read CIGS voltage and current      
+        delay_ms(1);
+        cigs2_buffer[0][count] = ad7490_readdata(ADC_CIGS2_VOLT);
+        cigs2_buffer[1][count] = ad7490_readdata(ADC_CIGS2_CURR);
+    }
+
+    output_low(CONNECT_CIGS2);
+    output_high(EN_NPWR);
+
+    fprintf(PC, "END SWEEP PORT2\r\n");
+
+    fprintf(PC, "Start CIGS data conversion\r\n");  
 }

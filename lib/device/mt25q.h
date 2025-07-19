@@ -33,29 +33,29 @@ typedef struct select_stream_to_flash{
 
 // ===================== Function List =====================
 // Public Functions
-#Separate
+
 int1 is_connect(Flash flash_stream);
-#Separate
+
 void write_data_bytes(Flash flash_stream, unsigned int32 write_start_address, int8 *write_data, unsigned int16 write_amount);      
-#Separate
+
 void read_data_bytes(Flash flash_stream, unsigned int32 read_start_address, int8 *read_data, unsigned int32 read_amount);  
-#Separate
+
 void sector_erase(Flash flash_stream, unsigned int32 sector_address);
-#Separate
+
 void subsector_32kByte_erase(Flash flash_stream, unsigned int32 subsector_address);  
-#Separate                               
+                               
 void subsector_4kByte_erase(Flash flash_stream, unsigned int32 subsector_address);      
 
 //Private Functions
-#Separate 
+ 
 void flash_setting(Flash flash_stream);
-#Separate 
+ 
 int8 status_register(Flash flash_stream);
-#Separate 
+ 
 int8 read_id(Flash flash_stream);
-#Separate 
+ 
 int8 read_data_byte(Flash flash_stream, unsigned int32 read_address);                                               
-#Separate 
+ 
 void write_data_byte(Flash flash_stream, unsigned int32 write_address,int8 write_data);                             
         //
 

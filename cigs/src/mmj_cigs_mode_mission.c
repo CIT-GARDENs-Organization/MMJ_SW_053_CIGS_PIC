@@ -33,7 +33,7 @@ void mode_dummy(unsigned int8 uplinkcmd[])
    fprintf(PC, "End MODE DUMMY\r\n");
 }
 
-#separate
+
 void mode_test_iv(unsigned int8 *uplinkcmd[])
 {
    unsigned int8 measurement_step = uplinkcmd[1]; // Get the measurement step from the parameter array
@@ -51,7 +51,7 @@ void mode_test_iv(unsigned int8 *uplinkcmd[])
 }
 
 // _________________ Oparation Mode ______________________
-#Separate
+
 void mode_measure(unsigned int8 parameter[])
 {
    fprintf(PC, "Start MODE MEASURE\r\n");
@@ -78,7 +78,7 @@ void mode_measure(unsigned int8 parameter[])
 }
 
 
-#Separate
+
 void mode_iv_meas_adc()
 {
 
