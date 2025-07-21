@@ -562,14 +562,19 @@ void write_data_bytes(Flash flash_stream, unsigned int32 write_start_address, in
 int1 is_connect(Flash flash_stream){
    READ_ID_DATA read_id_data;
    int8 flash_cmd = CMD_READ_ID;
-   output_low(flash_stream.cs_pin);
+   output_high(flash_stream.cs_pin);
+   //delay_us(10);
    spi_xfer_and_read_select_stream(flash_stream, &flash_cmd, 1, read_id_data.bytes, sizeof(read_id_data.bytes));
    output_high(flash_stream.cs_pin);
    //fprintf(PC,"Read ID:%02X", read_id_data.fields.manufacturer_id);
-   #ifdef MT25Q_DEBUG
-      fprintf(PC,"Read ID:");
-
-   #endif
+   
+   fprintf(PC,"Read ID:");
+   
+   for (unsigned int8 i = 0; i < sizeof(read_id_data.bytes); i++) {
+      fprintf(PC, "%02X ", read_id_data.bytes[i]);
+   }
+   
+   fprintf(PC,"\r\n");
    //chip id check
    if(read_id_data.fields.manufacturer_id == MANUFACTURER_ID_MICRON){  
       #ifdef MT25Q_DEBUG

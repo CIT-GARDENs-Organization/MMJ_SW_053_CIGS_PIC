@@ -5,12 +5,15 @@
 void misf_init()
 {
     fprintf(PC, "MISSION FLASH Initialize\r\n");
+    //output_high(MIS_FM_CS); // Set CS pin high to deselect the flash
+    //output_high(SMF_CS); // Set CS pin high to deselect the SMF
+    
     output_high(MIS_FM_CS); // Set CS pin high to deselect the flash
     output_high(SMF_CS); // Set CS pin high to deselect the SMF
-    
+
     if (!is_connect(mis_fm)) {
         fprintf(PC, "\t[MIS FM] connect error!\r\n");
-        return;
+        // return;
     }else {
         //fprintf(PC, "\t[MIS FM] is connected\r\n");
     }

@@ -31,12 +31,14 @@
 #include "../lib/tool/smf_queue.h"
 
 // レベル5: アプリケーションヘッダー
+#include "mmj_cigs_device.h"
 #include "mmj_cigs_excute_mission.h"
 #include "mmj_cigs_piclog.h"
 #include "mmj_cigs_func.h"
 #include "mmj_cigs_flash.h"
 #include "mmj_cigs_mode_mission.h"
 #include "mmj_cigs_mode_flash.h"
+
 
 //==============================================================================
 // .cファイル統合（CCS C単一コンパイル単位）
@@ -57,6 +59,7 @@
 
 // アプリケーション実装ファイル
 #include "src/mmj_cigs_flash.c"
+#include "src/mmj_cigs_device.c"
 #include "src/mmj_cigs_func.c"
 #include "src/mmj_cigs_piclog.c"
 #include "src/mmj_cigs_mode_flash.c"

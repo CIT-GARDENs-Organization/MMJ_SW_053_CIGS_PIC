@@ -78,19 +78,19 @@ void write_data_byte(Flash flash_stream, unsigned int32 write_address,int8 write
 
 // ====================== Value List =====================
 #define MANUFACTURER_ID_MICRON 0x20 // Manufacturer ID for Micron flash
-#define READ_ID_DATASIZE 4 // 20 bytes for read ID data
+#define READ_ID_DATASIZE 20 // 20 bytes for read ID data
 
 
 // ====================== Data Structures =====================
 typedef union
 {
-unsigned int8 bytes[READ_ID_DATASIZE]; // 20 bytes for read ID
-struct {
-    unsigned int8 manufacturer_id; // 1 byte
-    unsigned int8 memory_type;     // 1 byte
-    unsigned int8 capacity;        // 1 byte
-    unsigned int8 reserved;    
-} fields;
+    unsigned int8 bytes[READ_ID_DATASIZE]; // 20 bytes for read ID
+    struct {
+        unsigned int8 manufacturer_id; // 1 byte
+        unsigned int8 memory_type;     // 1 byte
+        unsigned int8 capacity;        // 1 byte
+        unsigned int8 reserved;       // 1 byte
+    } fields;
 }READ_ID_DATA;
 
 

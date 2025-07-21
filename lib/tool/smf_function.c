@@ -35,7 +35,11 @@ void data_copy()
         // flash setting
         //flash_setting(mis_fm);
         //flash_setting(smf);
-        if (is_connect(smf) == FALSE)
+        if (!is_connect(mis_fm))
+        {
+            fprintf(PC, "Error: MIS FM is not connected\r\n");
+        }
+        if (!is_connect(smf))
         {
             fprintf(PC, "Error: SMF is not connected\r\n");
             return;

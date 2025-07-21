@@ -35,62 +35,60 @@ void execute_mission(unsigned int8 *content)
       case 0x13:
          mode_sweep_port1(content[1]); // Sweep Port 1 with the given step
          break;
-         
-      // Flash command
-      case ID_FLASH_ERASE_ALL:
-         mode_flash_erase_all(content);
+
+      // ___________________ MISF Commands ______________________
+      case ID_MISF_ERASE_ALL:
+         mode_misf_erase_all(content);
          break;
-      case ID_FLASH_ERASE_1SECTOR:
-         mode_flash_erase_1sector(content);
+      case ID_MISF_ERASE_1SECTOR:
+         mode_misf_erase_1sector(content);
          break;
-      case ID_FLASH_ERASE_4kByte_SUBSECTOR:
-         mode_flash_erase_4kbyte_subsector(content);
+      case ID_MISF_ERASE_4kByte_SUBSECTOR:
+         mode_misf_erase_4kbyte_subsector(content);
          break;
-      case ID_FLASH_ERASE_64kByte_SUBSECTOR:
-         mode_flash_erase_64kbyte_subsector(content);
+      case ID_MISF_ERASE_64kByte_SUBSECTOR:
+         mode_misf_erase_64kbyte_subsector(content);
          break;
-      case ID_FALSH_WRITE_DEMO:
-         mode_flash_write_demo(content);
+      case ID_MISF_WRITE_DEMO:
+         mode_misf_write_demo(content);
          break;
-      case ID_FLASH_WRITE_4kByte_SUBSECTOR:
-         mode_flash_write_4kbyte_subsecotr(content);
+      case ID_MISF_WRITE_4kByte_SUBSECTOR:
+         mode_misf_write_4kbyte_subsector(content);
          break;
-      case ID_FLASH_READ:
-         mode_flash_read(content);
+      case ID_MISF_READ:
+         mode_misf_read(content);
          break;
-      case ID_FLASH_READ_ADDRESS:
-         mode_flash_read_address(content);
+      case ID_MISF_READ_ADDRESS:
+         mode_misf_read_address(content);
          break;
-      case ID_FLASH_ERASE_AND_RESET:
-         mode_flash_erase_and_reset(content);
-         break;
-      case ID_FLASH_SMF_COPY:
-         mode_flash_smf_copy(content);
-         break;
-      case ID_FLASH_SMF_READ:
-         mode_flash_smf_read(content);
-         break;
-      case ID_FLASH_SMF_ERASE:
-         mode_flash_smf_erase(content);
-         break;
-      case ID_FLASH_ADDRESS_RESET:
-         mode_flash_address_reset(content);
-         break;
-      case 0x71: // example command
-         mode_iv_meas_adc();
-         break;
-      case 0x72: // example command
-         mode_iv_meas_adc();
-         break;
-      case 0x73: // example command
-         mode_iv_meas_adc();
+      case ID_MISF_ERASE_AND_RESET:
+         mode_misf_erase_and_reset(content);
          break;
 
-      case 0x70: // example command
-         mode_iv_meas_adc();
+      // ___________________ SMF Commands ______________________
+      /*
+      case ID_SMF_COPY:
+         mode_misf_smf_copy(content);
          break;
+      case ID_SMF_READ:
+         mode_flash_smf_read(content);
+         break;
+      case ID_SMF_ERASE:
+         mode_flash_smf_erase(content);
+         break;
+      case ID_SMF_COPY_FORCE:
+         mode_flash_address_reset(content);
+         break;
+      case ID_SMF_READ_FORCE:
+         mode_flash_smf_read_force(content);
+         break;
+      case ID_SMF_ERASE_FORCE:
+         mode_flash_smf_erase_force(content);
+         break;
+      */   
       default:
          fprintf(PC, "\t\t-> Invalid CMD ID!\r\n");
+         
    }
    fprintf(PC, "\r\n______End execute_mission______\r\n_______________________________\r\n");
 }
@@ -106,7 +104,7 @@ int1 execute_command(Command *command)
       case UPLINK_COMMAND:
          handle_uplink_command(command);
          break;
-      
+         
       case STATUS_CHECK:
          if (handle_status_check(command)){
             return TRUE; // if status is finished, return TRUE

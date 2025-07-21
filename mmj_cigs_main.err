@@ -1,4 +1,4 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 21-7-25 at 17:01
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 21-7-25 at 19:53
 *** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(1,2): Illegal C character in input file  0x80
 *** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(1,2): Illegal C character in input file  0x00
 *** Error 32 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(122,128): Expecting a , or )
@@ -22,71 +22,5 @@ Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS
 *** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\timer.c" Line 22(20,30): Undefined identifier   INT_TIMER1
 *** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\timer.c" Line 29(22,32): Undefined identifier   INT_TIMER1
 *** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\timer.c" Line 30(22,28): Undefined identifier   GLOBAL
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 2(6,22): Functions may not be nested
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 11(66,70): Undefined identifier   data
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 12(65,69): Undefined identifier   data
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 13(65,69): Undefined identifier   data
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 20(16,32): Functions may not be nested
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 25(7,13): Return value not allowed in void function
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 31(7,13): Return value not allowed in void function
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 35(6,23): Functions may not be nested
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 37(4,10): Return value not allowed in void function
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 41(19,39): Functions may not be nested
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 45(8,16): Undefined identifier   mis_type
-*** Error 51 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 51(4,8): A numeric expression must appear here
-*** Error 51 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 57(4,8): A numeric expression must appear here
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.c" Line 65(4,10): Return value not allowed in void function
-*** Error 51 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\uart.c" Line 1(0,1): A numeric expression must appear here
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\uart.c" Line 11(6,24): Functions may not be nested
 *** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\uart.c" Line 14(22,30): Undefined identifier   INT_RDA3
 *** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\uart.c" Line 15(22,28): Undefined identifier   GLOBAL
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\uart.c" Line 19(6,26): Functions may not be nested
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\uart.c" Line 21(11,25): Undefined identifier   receive_signal
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\uart.c" Line 22(5,24): Undefined identifier   receive_signal_size
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 4(9,29): Functions may not be nested
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 9(25,44): Undefined identifier   receive_signal_size
-*** Error 76 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 9(49,50): Expect ;
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 13(59,73): Undefined identifier   receive_signal
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 15(7,13): Return value not allowed in void function
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 17(28,42): Undefined identifier   receive_signal
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 22(7,13): Return value not allowed in void function
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 24(39,58): Undefined identifier   receive_signal_size
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 27(7,13): Return value not allowed in void function
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 30(7,13): Return value not allowed in void function
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 40(4,10): Return value not allowed in void function
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 43(13,39): Functions may not be nested
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 46(19,38): Undefined identifier   receive_signal_size
-*** Error 76 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 46(45,46): Expect ;
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 49(8,22): Undefined identifier   receive_signal
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 52(7,13): Return value not allowed in void function
-*** Error 51 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 54(4,8): A numeric expression must appear here
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 57(7,13): Return value not allowed in void function
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 62(13,29): Functions may not be nested
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 65(11,19): Undefined identifier   frame_id
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 68(58,66): Undefined identifier   frame_id
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 69(4,10): Return value not allowed in void function
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 72(13,22): Functions may not be nested
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 74(33,38): Undefined identifier   frame
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 75(42,47): Undefined identifier   frame
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 76(8,20): Undefined identifier   received_crc
-*** Error 51 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 78(4,8): A numeric expression must appear here
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 81(50,62): Undefined identifier   received_crc
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 83(7,13): Return value not allowed in void function
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 87(13,28): Functions may not be nested
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 89(26,35): Undefined identifier   device_id
-*** Error 51 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 91(4,8): A numeric expression must appear here
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 94(50,59): Undefined identifier   device_id
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 96(7,13): Return value not allowed in void function
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 103(6,22): Functions may not be nested
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 107(32,40): Undefined identifier   frame_id
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 108(21,28): Undefined identifier   content
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 109(28,32): Undefined identifier   size
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 116(13,21): Functions may not be nested
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 118(23,32): Undefined identifier   data_size
-*** Error 76 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 118(37,38): Expect ;
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 122(23,32): Undefined identifier   data_size
-*** Error 76 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication.c" Line 122(37,38): Expect ;
-*** Error 173 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication_driver.c" Line 1(8,20): Functions may not be nested
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication_driver.c" Line 3(43,57): Undefined identifier   receive_signal
-*** Error 127 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication_driver.c" Line 4(4,10): Return value not allowed in void function
-*** Error 199 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\communication_driver.c" Line 5(1,2): User aborted compilation

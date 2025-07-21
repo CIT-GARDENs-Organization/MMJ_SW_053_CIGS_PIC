@@ -26,7 +26,7 @@ typedef union {
 } ad7490_cmd_t;
 
 // Public Function 
-void ad7490_init(void);
+//void ad7490_init(void);
 unsigned int16 ad7490_make_cmd(int8 channel);
 
 

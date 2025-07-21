@@ -1,12 +1,5 @@
 #include "ad7490.h"
 
-void ad7490_init()
-{  
-    fprintf(PC, "AD7490 Initialize\r\n");
-    // Set default register values
-
-    fprintf(PC, "\tComplete\r\n");
-}
 
 unsigned int16 ad7490_make_cmd(int8 channel)
 {
