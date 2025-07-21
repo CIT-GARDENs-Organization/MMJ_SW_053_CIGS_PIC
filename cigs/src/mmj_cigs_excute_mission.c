@@ -5,6 +5,7 @@
 #include "../../lib/tool/smf_queue.h"
 #include "../../lib/communication/mission_tools.h"
 #include "../mmj_cigs_func.h"
+#include "../../lib/communication/communication_driver.h"
 
 
 void execute_mission(unsigned int8 *content)
@@ -31,9 +32,11 @@ void execute_mission(unsigned int8 *content)
       case 0x01:
          mode_measure(content); // check if the flash is connected
          break;
-      case 0x02:
-         //example_02(parameter);
+      case 0x13:
+         mode_sweep_port1(content[1]); // Sweep Port 1 with the given step
          break;
+         
+      // Flash command
       case ID_FLASH_ERASE_ALL:
          mode_flash_erase_all(content);
          break;
@@ -42,6 +45,9 @@ void execute_mission(unsigned int8 *content)
          break;
       case ID_FLASH_ERASE_4kByte_SUBSECTOR:
          mode_flash_erase_4kbyte_subsector(content);
+         break;
+      case ID_FLASH_ERASE_64kByte_SUBSECTOR:
+         mode_flash_erase_64kbyte_subsector(content);
          break;
       case ID_FALSH_WRITE_DEMO:
          mode_flash_write_demo(content);
@@ -55,8 +61,17 @@ void execute_mission(unsigned int8 *content)
       case ID_FLASH_READ_ADDRESS:
          mode_flash_read_address(content);
          break;
+      case ID_FLASH_ERASE_AND_RESET:
+         mode_flash_erase_and_reset(content);
+         break;
       case ID_FLASH_SMF_COPY:
          mode_flash_smf_copy(content);
+         break;
+      case ID_FLASH_SMF_READ:
+         mode_flash_smf_read(content);
+         break;
+      case ID_FLASH_SMF_ERASE:
+         mode_flash_smf_erase(content);
          break;
       case ID_FLASH_ADDRESS_RESET:
          mode_flash_address_reset(content);

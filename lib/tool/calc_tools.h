@@ -7,5 +7,4 @@ void int32_to_be_array(int32 value, int8 buf[4]);
 
 int32 be_array_to_int32(int8 buf[4]);
 
-#include "calc_tools.c"
 #endif // CALC_TOOLS_H

@@ -7,7 +7,7 @@
 
 #device ADC=12
 #use delay(crystal=16MHz)
-//#fuses NOMCLR
+#fuses HS
 
 
 

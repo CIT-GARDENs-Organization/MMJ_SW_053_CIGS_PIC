@@ -11,7 +11,6 @@ void transmit_ack(void);
 void transmit_status(void);
 
 
-#include "communication_driver.c"
 
 #endif
 

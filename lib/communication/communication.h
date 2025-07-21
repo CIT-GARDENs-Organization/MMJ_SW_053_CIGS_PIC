@@ -73,7 +73,6 @@ static void transmit(unsigned int8 data[], int8 data_size);
 
 // ______ Common _________
 
-#include "communication.c"
 
 #endif
 

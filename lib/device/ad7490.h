@@ -1,5 +1,5 @@
-#ifndef     AD7490_H
-#define     AD7490_H
+#ifndef  AD7490_H
+#define  AD7490_H
 
 
 typedef union {
@@ -27,13 +27,9 @@ typedef union {
 
 // Public Function 
 void ad7490_init(void);
-
-
-
-
-// Private Functions
-
 unsigned int16 ad7490_make_cmd(int8 channel);
+
+
 // Resistor Settings
 #define AD7490_EN_WRITE 0b1
 
@@ -63,7 +59,7 @@ unsigned int16 ad7490_make_cmd(int8 channel);
 #define AD7490_VIN15 0b1111
 
 
-#include "ad7490.c"
+
 
 #endif // AD7490_H
 //------------------End of File------------------

@@ -24,7 +24,5 @@ void set_current_sec(unsigned int32 new_sec);
 static void TIMER0_isr();
 
 
-#include "timer.c"
-
 #endif
 

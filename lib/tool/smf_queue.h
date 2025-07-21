@@ -43,7 +43,5 @@ int1 is_empty_smf_data(void);
 
 MissionTypeStruct getMissionTypeStruct(MissionType mis_type);
 
-#include "smf_queue.c"
-
 #endif
 

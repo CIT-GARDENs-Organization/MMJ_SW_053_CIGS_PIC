@@ -6,8 +6,6 @@
 #include "../mmj_cigs_piclog.h"
 
 // ========================== Flash Command ============================
-
-
 void mode_flash_erase_all(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Erase All\r\n");
@@ -19,10 +17,6 @@ void mode_flash_erase_all(unsigned int8 parameter[])
    piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Erase All\r\n");
 }
-
-
-
-
 
 void mode_flash_erase_1sector(unsigned int8 parameter[])
 {
@@ -42,7 +36,6 @@ void mode_flash_erase_1sector(unsigned int8 parameter[])
    fprintf(PC, "End Flash Erase 1 Sector\r\n");
 }
 
-
 void mode_flash_erase_4kbyte_subsector(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Copy 1 Sector\r\n");
@@ -61,6 +54,23 @@ void mode_flash_erase_4kbyte_subsector(unsigned int8 parameter[])
    fprintf(PC, "End Flash Copy 1 Sector\r\n");
 }
 
+void mode_flash_erase_64kbyte_subsector(unsigned int8 parameter[])
+{
+   fprintf(PC, "Start Flash Erase 64kByte Subsector\r\n");
+   unsigned int8 cmd = parameter[0]; // Get the command ID from the parameter array
+   unsigned int32 subsector_address =
+      ((unsigned int32)parameter[1] << 24) |
+      ((unsigned int32)parameter[2] << 16) |
+      ((unsigned int32)parameter[3] << 8)  |
+      ((unsigned int32)parameter[4]);
+   
+   fprintf(PC, "\tSubsector Address: 0x%08LX\r\n", subsector_address);
+   piclog_make(cmd, PICLOG_PARAM_START); // Log the command execution
+   
+   //subsector_64kByte_erase(mis_fm, subsector_address);
+   piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
+   fprintf(PC, "End Flash Erase 64kByte Subsector\r\n");
+}
 
 void mode_flash_write_demo(unsigned int8 parameter[])
 {
@@ -110,7 +120,6 @@ void mode_flash_write_demo(unsigned int8 parameter[])
    fprintf(PC, "End Flash Write Demo\r\n");
 }
 
-
 void mode_flash_write_4kbyte_subsecotr(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Write 4kByte Subsector\r\n");
@@ -122,7 +131,6 @@ void mode_flash_write_4kbyte_subsecotr(unsigned int8 parameter[])
    piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Write 4kByte Subsector\r\n");
 }
-
 
 void mode_flash_read(unsigned int8 uplinkcmd[])
 {
@@ -187,6 +195,17 @@ void mode_flash_read_address(unsigned int8 parameter[])
    fprintf(PC, "End Flash Read Address\r\n");
 }
 
+void mode_flash_erase_and_reset(unsigned int8 parameter[])
+{
+   fprintf(PC, "Start Flash Erase and Reset\r\n");
+   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
+
+   mode_flash_erase_all(parameter); // Erase all flash memory
+   mode_flash_address_reset(parameter); // Reset the address area
+
+   fprintf(PC, "End Flash Erase and Reset\r\n");
+}
+
 
 void mode_flash_smf_copy(unsigned int8 parameter[])
 {
@@ -218,17 +237,14 @@ void mode_flash_smf_read(unsigned int8 parameter[])
    fprintf(PC, "\r\nEnd Flash SMF Read\r\n");
 }
 
-
-void mode_flash_smf_write(unsigned int8 parameter[])
+void mode_flash_smf_erase(unsigned int8 parameter[])
 {
-   fprintf(PC, "Start Flash SMF Write\r\n");
+   fprintf(PC, "Start Flash SMF Erase\r\n");
    flash_setting(smf);
-   unsigned int32 write_address = 0x00000000;
-   int8 write_data[256] = {0x01, 0x02, 0x03, 0x04}; // Example data
-   write_data_bytes(smf, write_address, write_data, 256);
-   fprintf(PC, "End Flash SMF Write\r\n");
-}
-  
+   unsigned int32 erase_address = 0x00000000; // Example address
+   sector_erase(smf, erase_address); // Erase the sector
+   fprintf(PC, "End Flash SMF Erase\r\n");
+}  
 
 void mode_flash_address_reset(unsigned int8 parameter[])
 {

@@ -136,4 +136,13 @@ void mode_iv_meas_adc()
    output_low(CONNECT_CIGS1);
 }
 
+void mode_sweep_port1(unsigned int8 uplinkcmd)
+{
+   sweep_port1(80);
+   SmfDataStruct data;
+   data.mission_type = MEAURE_DATA; // コピーする目的のデータ種別
+   data.src = ADDRESS_MISF_MEASUREMENT_START + misf_meas_use_counter - misf_meas_uncopyed_counter; // コピー元のMIS_FMのアドレス
+   data.size = misf_meas_uncopyed_counter; // コピーするデータのサイズ
+   enqueue_smf_data(&data); // SMFへのデータコピーを実行する
+}
 

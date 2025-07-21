@@ -1,48 +1,43 @@
 #ifndef MMJ_CIGS_MODE_FLASH_H
 #define MMJ_CIGS_MODE_FLASH_H
 
-#define PARAMETER_LENGTH 9
+//#define PARAMETER_LENGTH 9
 
 // ___________MODE FUNCTIONS____________
 
 // Flash command 
 
 void mode_flash_erase_all(unsigned int8 parameter[]);
-
 void mode_flash_erase_1sector(unsigned int8 parameter[]);
-
 void mode_flash_erase_4kbyte_subsector(unsigned int8 parameter[]);
-
-
+void mode_flash_erase_64kbyte_subsector(unsigned int8 parameter[]);
 void mode_flash_write_demo(unsigned int8 parameter[]);
 typedef struct {
     unsigned int8 id;
     unsigned int32 writeaddress;
     unsigned int16 packetnum;
 } FLASH_WRITE_PARAM;
-
-
 void mode_flash_write_4kbyte_subsecotr(unsigned int8 parameter[]);
-
-
 void mode_flash_read(unsigned int8 parameter[]);
 typedef struct{
     unsigned int8 id;
     unsigned int16 readpacketnum;
     unsigned int32 readaddress;
 }FLASH_PARAM;
-
-
 void mode_flash_read_address(unsigned int8 parameter[]);
-
-
+void mode_flash_erase_and_reset(unsigned int8 parameter[]);
 void mode_flash_smf_copy(unsigned int8 parameter[]);
-
-
+void mode_flash_smf_read(unsigned int8 parameter[]);
+void mode_flash_smf_erase(unsigned int8 parameter[]);
 void mode_flash_address_reset(unsigned int8 parameter[]);
 
+// CMD Parameter
+typedef struct {
+    unsigned int8 id;
+    unsigned int32 readaddress;
+    unsigned int16 readpacketnum;
+} FLASH_READ_PARAM;
 
-void mode_flash_smf_read(unsigned int8 parameter[]);
 
 // ______________CMD ID________________
 
@@ -55,6 +50,7 @@ void mode_flash_smf_read(unsigned int8 parameter[]);
 #define ID_FLASH_WRITE_4kByte_SUBSECTOR 0x95
 #define ID_FLASH_READ 0x96
 #define ID_FLASH_READ_ADDRESS 0x97
+#define ID_FLASH_ERASE_AND_RESET 0x98
 #define ID_FLASH_SMF_COPY 0x9A
 #define ID_FLASH_SMF_READ 0x9B
 #define ID_FLASH_SMF_ERASE 0x9C

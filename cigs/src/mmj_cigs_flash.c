@@ -9,16 +9,15 @@ void misf_init()
     output_high(SMF_CS); // Set CS pin high to deselect the SMF
     
     if (!is_connect(mis_fm)) {
-        fprintf(PC, "\tFlash is not connected\r\n");
+        fprintf(PC, "\t[MIS FM] connect error!\r\n");
         return;
     }else {
-        //fprintf(PC, "\tFlash is connected\r\n");
+        //fprintf(PC, "\t[MIS FM] is connected\r\n");
     }
     if (!is_connect(smf)) {
-        fprintf(PC, "\tSMF is not connected\r\n");
-        return;
+        fprintf(PC, "\t[SMF] connect error!\r\n");
     }else {
-        fprintf(PC, "\t SMF is connected\r\n");
+        //fprintf(PC, "\t[SMF] is connected\r\n");
     }
 
     unsigned int8 readdata[PACKET_SIZE];
@@ -38,17 +37,17 @@ void misf_init()
     misf_meas_loop_counter = readdata[27];
     misf_meas_uncopyed_counter = ((unsigned int32)readdata[28] << 24) |((unsigned int32)readdata[29] << 16) |((unsigned int32)readdata[30] << 8) | ((unsigned int32)readdata[31]);
 
-    fprintf(PC, "\tSMF  PICLOG Use Counter      : 0x%08LX\r\n", smf_piclog_use_counter);
-    fprintf(PC, "\tSMF  PICLOG Loop Counter     : 0x%02X\r\n", smf_piclog_loop_counter);
-    fprintf(PC, "\tSMF  MEAS   Use Counter      : 0x%08LX\r\n", smf_meas_use_counter);
-    fprintf(PC, "\tSMF  MEAS   Loop Counter     : 0x%02X\r\n", smf_meas_loop_counter);
-    fprintf(PC, "\tMISF PICLOG Use Counter      : 0x%08LX\r\n", misf_piclog_use_counter);
-    fprintf(PC, "\tMISF PICLOG Uncopyed Counter : 0x%08LX\r\n", misf_piclog_uncopyed_counter);
-    fprintf(PC, "\tMISF PICLOG Loop Counter     : 0x%02X\r\n", misf_piclog_loop_counter);
-    fprintf(PC, "\tMISF PICLOG Write Counter    : 0x%02X\r\n", misf_piclog_write_counter);
-    fprintf(PC, "\tMISF MEAS   Use Counter      : 0x%08LX\r\n", misf_meas_use_counter);
-    fprintf(PC, "\tMISF MEAS   Uncopyed Counter : 0x%08LX\r\n", misf_meas_uncopyed_counter);
-    fprintf(PC, "\tMISF MEAS   Loop Counter     : 0x%02X\r\n", misf_meas_loop_counter);    
+    fprintf(PC, "\t| SMF  | PICLOG | Use Counter      : 0x%08LX\r\n", smf_piclog_use_counter);
+    fprintf(PC, "\t| SMF  | PICLOG | Loop Counter     : 0x%02X\r\n", smf_piclog_loop_counter);
+    fprintf(PC, "\t| SMF  | MEAS   | Use Counter      : 0x%08LX\r\n", smf_meas_use_counter);
+    fprintf(PC, "\t| SMF  | MEAS   | Loop Counter     : 0x%02X\r\n", smf_meas_loop_counter);
+    fprintf(PC, "\t| MISF | PICLOG | Use Counter      : 0x%08LX\r\n", misf_piclog_use_counter);
+    fprintf(PC, "\t| MISF | PICLOG | Uncopyed Counter : 0x%08LX\r\n", misf_piclog_uncopyed_counter);
+    fprintf(PC, "\t| MISF | PICLOG | Loop Counter     : 0x%02X\r\n", misf_piclog_loop_counter);
+    fprintf(PC, "\t| MISF | PICLOG | Write Counter    : 0x%02X\r\n", misf_piclog_write_counter);
+    fprintf(PC, "\t| MISF | MEAS   | Use Counter      : 0x%08LX\r\n", misf_meas_use_counter);
+    fprintf(PC, "\t| MISF | MEAS   | Uncopyed Counter : 0x%08LX\r\n", misf_meas_uncopyed_counter);
+    fprintf(PC, "\t| MISF | MEAS   | Loop Counter     : 0x%02X\r\n", misf_meas_loop_counter);
     fprintf(PC, "\tComplete\r\n");
 }
 

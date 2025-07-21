@@ -27,7 +27,8 @@ typedef struct select_stream_to_flash{
 }Flash;
 
 
-
+Flash mis_fm = {SPI_0, MT25QL128ABA, MIS_FM_CS};
+Flash smf = {SPI_1, MT25QL01GBBB, SMF_CS};
 
 
 
@@ -92,7 +93,6 @@ struct {
 } fields;
 }READ_ID_DATA;
 
-#include "mt25q.c"
 
 #endif
 

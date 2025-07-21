@@ -17,7 +17,6 @@ void smf_erase(void);
 
 
 
-#include "smf_function.c"
 #endif
 
 

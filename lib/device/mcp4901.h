@@ -30,7 +30,5 @@ void mcp4911_init();
 
 unsigned int16 mcp4901_make_cmd(unsigned int16 value);
 
-#include "mcp4901.c"
-
 #endif /* _MCP4911_H_ */
 // ===================== mcp4911.h =====================

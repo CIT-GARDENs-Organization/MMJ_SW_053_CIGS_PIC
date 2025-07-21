@@ -1,17 +1,5 @@
 #include "ad7490.h"
 
-unsigned int16 ad7490_readdata(unsigned int16 channel)
-{
-    spi_xfer(ADC_STREAM, channel); // Dummy transfer to start communication
-    #ifdef AD7490_DEBUG
-        fprintf(PC, "\t[ADC] <<< %04LX\r\n", channel);
-    #endif
-    unsigned int16 ans = spi_xfer(ADC_STREAM);
-    return ans & 0x0FFF; //Conver LSB <--> MSB
-}
-
-
-
 void ad7490_init()
 {  
     fprintf(PC, "AD7490 Initialize\r\n");

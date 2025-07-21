@@ -17,7 +17,6 @@ int1 req_use_smf();
 void finished_use_smf();
 //unsigned int8 calc_crc8(unsigned int8 frame[], int8 payload_size);
 
-#include "mission_tools.c"
 
 #endif
 
