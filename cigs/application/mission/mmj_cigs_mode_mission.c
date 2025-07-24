@@ -1,10 +1,10 @@
-#include "../mmj_cigs_mode_mission.h"
-#include "../mmj_cigs_func.h"
-#include "../../lib/tool/smf_queue.h"
-#include "../../lib/device/mt25q.h"
-#include "../../lib/device/ad7490.h"
-#include "../mmj_cigs_flash.h"
-#include "../mmj_cigs_piclog.h"
+#include "mmj_cigs_mode_mission.h"                    // 同じフォルダのヘッダー
+#include "../../core/measurement/mmj_cigs_func.h"          // 測定機能
+#include "../../../lib/tool/smf_queue.h"                   // ツールライブラリ
+#include "../../../lib/device/mt25q.h"                     // デバイスライブラリ
+#include "../../../lib/device/ad7490.h"                    // ADCライブラリ
+#include "../../core/storage/mmj_cigs_flash.h"             // ストレージ機能
+#include "../../core/logging/mmj_cigs_piclog.h"            // ログ機能
 
 // ___________________ Mode Functions ______________________
 void mode_dummy(unsigned int8 uplinkcmd[])

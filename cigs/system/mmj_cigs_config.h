@@ -1,6 +1,9 @@
 #ifndef MMJ_CIGS_CONFIG_H
 #define MMJ_CIGS_CONFIG_H
 
+
+#define SELF_DEVICE_ID CIGS_PIC
+
 #include <18F67J94.h>
 //#include <16F1789.h>
 #opt 0 // 0 = no optimization, 1 = optimize for speed, 2 = optimize for size
@@ -72,14 +75,17 @@
     // -------------SPI--------------------
     #define SMF_CS PIN_A2
     #define MIS_FM_CS  PIN_A5
+
     #pin_select SCK1=PIN_A3
     #pin_select SDI1=PIN_A0
     #pin_select SDO1=PIN_A1
     #define SMF_STREAM MIS_FM_STREAM
-    //#define MIS_FM_STREAM FLASH_STREAM
-    #use spi (MASTER, SPI1, BAUD=1000000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
+    // #define MIS_FM_STREAM FLASH_STREAM
+    #use spi (MASTER, CLK=PIN_A3, DI=PIN_A1, DO=PIN_A0, BAUD=200000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
+    // #use spi (MASTER, SPI1, BAUD=200000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
+    //#use spi (MASTER, SPI1, BAUD=200000, MODE=0, BITS=8, STREAM=SMF_STREAM)
+    //#use spi (MASTER, CLK=PIN_A3, DI=PIN_A0, DO=PIN_A1, BAUD=200000, MODE=0, BITS=8, STREAM=SMF_STREAM)
 
-    //#use spi (MASTER, SPI1, BAUD=200000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
 
 
     

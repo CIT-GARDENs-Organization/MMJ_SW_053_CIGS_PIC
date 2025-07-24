@@ -1,26 +1,53 @@
-#include "../mmj_cigs_config.h"
-#include "../mmj_cigs_flash.h"
-#include "../../lib/device/mt25q.h"
+#include "mmj_cigs_flash.h"                           // 同じフォルダのヘッダー
+#include "../../system/mmj_cigs_config.h"             // システム設定
+#include "../../../lib/device/mt25q.h"                // デバイスライブラリ
 
 void misf_init()
 {
     fprintf(PC, "MISSION FLASH Initialize\r\n");
-    //output_high(MIS_FM_CS); // Set CS pin high to deselect the flash
-    //output_high(SMF_CS); // Set CS pin high to deselect the SMF
-    
-    output_high(MIS_FM_CS); // Set CS pin high to deselect the flash
-    output_high(SMF_CS); // Set CS pin high to deselect the SMF
 
-    if (!is_connect(mis_fm)) {
-        fprintf(PC, "\t[MIS FM] connect error!\r\n");
-        // return;
-    }else {
-        //fprintf(PC, "\t[MIS FM] is connected\r\n");
+    output_high(MIS_FM_CS);
+    output_high(SMF_CS);
+    delay_ms(100); 
+
+    READ_ID_DATA read_id_data;
+    int8 flash_cmd = CMD_READ_ID;
+    output_low(mis_fm.cs_pin);
+    spi_xfer_and_read_select_stream(mis_fm, &flash_cmd, 1, read_id_data.bytes, READ_ID_DATASIZE);
+    output_high(mis_fm.cs_pin);
+    fprintf(PC, "\t[MIS FM] Flash ID: ");
+    for (unsigned int8 index = 0; index < READ_ID_DATASIZE; index++)
+    {
+        fprintf(PC, "%02X ", read_id_data.bytes[index]);
     }
+    fprintf(PC,"\r\n");
+
+    output_low(smf.cs_pin);
+    spi_xfer_and_read_select_stream(smf, &flash_cmd, 1, read_id_data.bytes, READ_ID_DATASIZE);
+    output_high(smf.cs_pin);
+    fprintf(PC, "\t[SMF] Flash ID: ");
+    for (unsigned int8 index = 0; index < READ_ID_DATASIZE; index++)
+    {
+        fprintf(PC, "%02X ", read_id_data.bytes[index]);
+    }
+    fprintf(PC,"\r\n");
+
+
+
+
+
+
     if (!is_connect(smf)) {
         fprintf(PC, "\t[SMF] connect error!\r\n");
+        // return;
     }else {
-        //fprintf(PC, "\t[SMF] is connected\r\n");
+        fprintf(PC, "\t[SMF] is connected\r\n");
+    }
+    delay_ms(100); // Wait for the flash to stabilize
+    if (!is_connect(mis_fm)) {
+        fprintf(PC, "\t[MIS FM] connect error!\r\n");
+    }else {
+        fprintf(PC, "\t[MIS FM] is connected\r\n");
     }
 
     unsigned int8 readdata[PACKET_SIZE];
@@ -61,6 +88,10 @@ void smf_init()
 
 void write_misf_address_area()
 {
+    if (!is_connect(mis_fm)) {
+        fprintf(PC, "Mission Flash is not connected\r\n");
+        return;
+    }
     //fprintf(PC, "Write MISF Address Area (Big Endian)\r\n");
     unsigned int8 writedata[PACKET_SIZE] = {0x00}; // Initialize write data buffer
 
@@ -120,7 +151,7 @@ void write_misf_address_area()
 
     if (!is_connect(mis_fm)) {
         fprintf(PC, "Mission Flash is not connected\r\n");
-        return;
+        // return;
     }
     subsector_4kByte_erase(mis_fm, ADDRESS_MANEGE_START); // 4KBサブセクタを消去
     // Flash に書き込む

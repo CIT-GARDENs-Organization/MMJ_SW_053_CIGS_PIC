@@ -1,4 +1,4 @@
-#include "mcp4901.h"
+// #include "mcp4901.h"  // ヘッダーファイルから自動的にインクルードされるため不要
 
 unsigned int16 mcp4901_make_cmd(unsigned int16 value)
 {

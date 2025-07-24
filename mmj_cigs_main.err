@@ -1,26 +1,2 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 21-7-25 at 19:53
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(1,2): Illegal C character in input file  0x80
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(1,2): Illegal C character in input file  0x00
-*** Error 32 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(122,128): Expecting a , or )
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0x03
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0xFF
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0xFF
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0xFF
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0x06
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(2,3): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(6,7): Illegal C character in input file  0x15
-*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main.h" Line 25(2,3): Expecting a (
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\timer.c" Line 22(20,30): Undefined identifier   INT_TIMER1
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\timer.c" Line 29(22,32): Undefined identifier   INT_TIMER1
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\timer.c" Line 30(22,28): Undefined identifier   GLOBAL
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\uart.c" Line 14(22,30): Undefined identifier   INT_RDA3
-*** Error 12 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication\uart.c" Line 15(22,28): Undefined identifier   GLOBAL
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 24-7-25 at 15:32
+*** Error 199 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\hardware\mcu\timer.h" Line 7(9,15): User aborted compilation

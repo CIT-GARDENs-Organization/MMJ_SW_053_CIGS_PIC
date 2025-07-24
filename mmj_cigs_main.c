@@ -1,29 +1,23 @@
-#include "cigs/mmj_cigs_main.h"
+#include "cigs/system/mmj_cigs_main.h"  // ヘッダーファイルから自動的にインクルードされるため不要
 
 void main()
 { 
-   delay_ms(500); // wait for power stable
+   delay_ms(1000); // wait for power stable
    fprintf(PC,"\r\n\r\n\r\n============================================================\r\n");
    fprintf(PC,"This is MOMIJI CIGS PIC BBM for MIS7_BBM3.\r\n");
    fprintf(PC,"Last updated on %s %s, by Inoue.\r\n\r\n", __DATE__, __TIME__);
    
-   io_init();
-   //adc_init();
+   //io_init();
    setup_uart_to_boss();
    //setup_timer();
    ad7490_init();
-   mcp4901_init();
    misf_init();
-   mcp4901_1_write(0);
+   
    piclog_make(PICLOG_STARTUP,0x00);
 
    int1 is_finished = FALSE;
    fprintf(PC,"____CIGS PIC Start Operation_____\r\n\r\n");
    
-   //dac_cell.write_spi = spi_cell_write;
-   //dac_cell.cs_pin = PIN_C0;
-
-   //mcp4911_init(&dac_cell);
 
    
    
@@ -59,7 +53,6 @@ void main()
          break;
          
       delay_ms(400);
-      //fprintf(PC,"0x%08LX\r\n", get_current_sec());
       fprintf(PC, ".");
    }
    

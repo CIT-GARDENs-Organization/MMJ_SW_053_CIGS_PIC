@@ -1,11 +1,11 @@
-#include "../mmj_cigs_excute_mission.h"
-#include "../mmj_cigs_mode_mission.h"
-#include "../mmj_cigs_mode_flash.h"
-#include "../../lib/communication/typedef_content.h"
-#include "../../lib/tool/smf_queue.h"
-#include "../../lib/communication/mission_tools.h"
-#include "../mmj_cigs_func.h"
-#include "../../lib/communication/communication_driver.h"
+#include "mmj_cigs_excute_mission.h"                  // 同じフォルダのヘッダー
+#include "mmj_cigs_mode_mission.h"                    // 同じフォルダのヘッダー
+#include "mmj_cigs_mode_flash.h"                      // 同じフォルダのヘッダー
+#include "../../../lib/communication/typedef_content.h"    // 通信ライブラリ
+#include "../../../lib/tool/smf_queue.h"                   // ツールライブラリ
+#include "../../../lib/communication/mission_tools.h"      // ミッションツール
+#include "../../core/measurement/mmj_cigs_func.h"          // 測定機能
+#include "../../../lib/communication/communication_driver.h" // 通信ドライバー
 
 
 void execute_mission(unsigned int8 *content)
@@ -30,7 +30,7 @@ void execute_mission(unsigned int8 *content)
          test_adc();
          break;
       case 0x01:
-         mode_measure(content); // check if the flash is connected
+         //mode_measure(content); // check if the flash is connected
          break;
       case 0x13:
          mode_sweep_port1(content[1]); // Sweep Port 1 with the given step
@@ -79,13 +79,16 @@ void execute_mission(unsigned int8 *content)
       case ID_SMF_COPY_FORCE:
          mode_flash_address_reset(content);
          break;
+      */
       case ID_SMF_READ_FORCE:
-         mode_flash_smf_read_force(content);
+         mode_smf_read_force(content);
          break;
       case ID_SMF_ERASE_FORCE:
-         mode_flash_smf_erase_force(content);
+         mode_smf_erase_force(content);
          break;
-      */   
+      case ID_SMF_RESET:
+         mode_smf_reset(content);
+         break;
       default:
          fprintf(PC, "\t\t-> Invalid CMD ID!\r\n");
          
@@ -161,7 +164,8 @@ void handle_smf_available(Command *command) {
     if (command->content[0] == ALLOW) {
         fprintf(PC, "\t\t-> allowd\r\n");
         status[0] = COPYING;
-        smf_write();
+      //   smf_write();
+         data_copy();
         status[0] = FINISHED;
     } else {
         fprintf(PC, "\t\t-> denyed\r\n");

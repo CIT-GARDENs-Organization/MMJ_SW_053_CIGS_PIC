@@ -17,7 +17,7 @@
 #define BHU_MCU   0x0B
 #define CIGS_PIC  0x0C
 
-#define SELF_DEVICE_ID CIGS_PIC // <- change to your device name
+ // <- change to your device name
 
 
 

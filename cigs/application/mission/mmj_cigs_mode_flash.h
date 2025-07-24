@@ -55,6 +55,7 @@ typedef struct {
 #define ID_SMF_COPY_FORCE 0x93
 #define ID_SMF_READ_FORCE 0x94
 #define ID_SMF_ERASE_FORCE 0x95
+#define ID_SMF_RESET 0x96
 
 // Mode
 void mode_smf_copy(unsigned int8 parameter[]);
@@ -63,7 +64,7 @@ void mode_smf_erase(unsigned int8 parameter[]);
 void mode_smf_copy_force(unsigned int8 parameter[]);
 void mode_smf_read_force(unsigned int8 parameter[]);
 void mode_smf_erase_force(unsigned int8 parameter[]);
-
+void mode_smf_reset(unsigned int8 parameter[]);
 
 #endif // MMJ_CIGS_MODE_FLASH_H
 

@@ -1,3 +1,4 @@
+// #include "communication.h"  // ヘッダーファイルから自動的にインクルードされるため不要
 #include "mission_tools.h"
 #include "../tool/calc_tools.h"
 

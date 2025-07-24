@@ -1,5 +1,14 @@
-#include "ad7490.h"
+// #include "ad7490.h"  // ヘッダーファイルから自動的にインクルードされるため不要
 
+unsigned int16 ad7490_readdata(unsigned int16 channel)
+{
+    spi_xfer(ADC_STREAM, channel); // Dummy transfer to start communication
+    #ifdef AD7490_DEBUG
+        fprintf(PC, "\t[ADC] <<< %04LX\r\n", channel);
+    #endif
+    unsigned int16 ans = spi_xfer(ADC_STREAM);
+    return ans & 0x0FFF; //Conver LSB <--> MSB
+}
 
 unsigned int16 ad7490_make_cmd(int8 channel)
 {

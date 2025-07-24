@@ -1,4 +1,4 @@
-#include "mt25q.h"
+#include "mt25q.h"  // ヘッダーファイルから自動的にインクルードされるため不要
 
 
 
@@ -90,8 +90,7 @@ int8 status_register(Flash flash_stream){
 }
 
 //
-//->success:True,fail:false
- 
+//->success:True,fail:false 
 int8 read_id(Flash flash_stream){
    int8 flash_cmd = CMD_READ_ID;
    int8 chip_id[20];
@@ -562,19 +561,14 @@ void write_data_bytes(Flash flash_stream, unsigned int32 write_start_address, in
 int1 is_connect(Flash flash_stream){
    READ_ID_DATA read_id_data;
    int8 flash_cmd = CMD_READ_ID;
-   output_high(flash_stream.cs_pin);
-   //delay_us(10);
+   output_low(flash_stream.cs_pin);
    spi_xfer_and_read_select_stream(flash_stream, &flash_cmd, 1, read_id_data.bytes, sizeof(read_id_data.bytes));
    output_high(flash_stream.cs_pin);
    //fprintf(PC,"Read ID:%02X", read_id_data.fields.manufacturer_id);
-   
-   fprintf(PC,"Read ID:");
-   
-   for (unsigned int8 i = 0; i < sizeof(read_id_data.bytes); i++) {
-      fprintf(PC, "%02X ", read_id_data.bytes[i]);
-   }
-   
-   fprintf(PC,"\r\n");
+   #ifdef MT25Q_DEBUG
+      fprintf(PC,"Read ID:");
+
+   #endif
    //chip id check
    if(read_id_data.fields.manufacturer_id == MANUFACTURER_ID_MICRON){  
       #ifdef MT25Q_DEBUG

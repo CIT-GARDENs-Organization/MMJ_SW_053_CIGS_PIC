@@ -1,6 +1,0 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 01-6-25 at 19:50
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\src\include\mmj_cigs_func.h" Line 33(24,35): Variable never used:   packet_data
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\flash.h" Line 47(7,10): Variable never used:   smf
-      Memory usage:   ROM=33%      RAM=64% - 67%
-      0 Errors,  2 Warnings.
-Build Successful.

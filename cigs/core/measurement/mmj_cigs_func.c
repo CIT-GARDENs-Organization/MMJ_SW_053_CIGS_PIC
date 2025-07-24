@@ -1,8 +1,9 @@
-#include "../mmj_cigs_config.h"
-#include "../mmj_cigs_func.h"
-#include "../mmj_cigs_device.h"
-#include "../mmj_cigs_flash.h"
-#include "../../lib/communication/mission_tools.h"
+#include "mmj_cigs_func.h"               // 同じフォルダのヘッダー
+#include "../../system/mmj_cigs_config.h"      // システム設定
+#include "../../hardware/devices/ad7490_driver.h"   // デバイス定義  
+#include "../../hardware/devices/mcp4901_driver.h"
+#include "../storage/mmj_cigs_flash.h"               // ストレージ機能
+#include "../../../lib/communication/mission_tools.h"   // 通信ツール
 
 
 

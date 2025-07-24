@@ -1,8 +1,8 @@
-#include "../mmj_cigs_piclog.h"
-#include "../../lib/tool/timer.h"
-#include "../mmj_cigs_flash.h"
+#include "mmj_cigs_piclog.h"                          // 同じフォルダのヘッダー
+#include "../../hardware/mcu/timer.h"                   // タイマーライブラリ  
+#include "../storage/mmj_cigs_flash.h"                 // ストレージ機能
 
-#define PICLOG_DEBUG
+// #define PICLOG_DEBUG
 
 void piclog_make(unsigned int8 function, unsigned int8 parameter)
 {
@@ -28,7 +28,7 @@ void piclog_make(unsigned int8 function, unsigned int8 parameter)
     
     if(is_connect(mis_fm) == FALSE) {
         fprintf(PC, "Mission Flash is not connected\r\n");
-        return;
+        // return;
     }
     
     write_data_bytes(mis_fm, write_address, piclog, PICLOG_PACKET_SIZE);

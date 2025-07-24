@@ -1,6 +1,0 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5���@ - �h�L�������g\CIGS\02_Software\PIC\mmj_cigsIGS_PIC\src\mmj_cigs_pic_main on 23-4-25 at 23:33
->>> Warning 245 "C:\Users\shoin\Chiba Institute of Technology\5���@ - �h�L�������g\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\communication_driver.h" Line 4(61,104): File may have mis-matched #if/#endif
->>> Warning 245 "C:\Users\shoin\Chiba Institute of Technology\5���@ - �h�L�������g\CIGS\02_Software\PIC\MMJ_SW_053mmj_cigsc\include\.\mmj_cigs_pic_main.h" Line 4(61,104): File may have mis-matched #if/#endif
-*** Error 14 "C:\Users\shoin\Chiba Institute of Technology\5���@ - �h�L�������g\CIGS\02_Software\PIC\mmj_cigsIGS_PIC\src\mmj_cigs_pic_main.c" Line 136(61,62): Missing #ENDIF
-      1 Errors,  2 Warnings.
-Build Failed.

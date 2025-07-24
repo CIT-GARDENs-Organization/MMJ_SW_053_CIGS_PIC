@@ -1,9 +1,9 @@
-#include "../mmj_cigs_mode_flash.h"
-#include "../mmj_cigs_func.h"
-#include "../../lib/tool/smf_queue.h"
-#include "../../lib/device/mt25q.h"
-#include "../mmj_cigs_flash.h"
-#include "../mmj_cigs_piclog.h"
+#include "mmj_cigs_mode_flash.h"                      // 同じフォルダのヘッダー
+#include "../../core/measurement/mmj_cigs_func.h"          // 測定機能
+#include "../../../lib/tool/smf_queue.h"                   // ツールライブラリ
+#include "../../../lib/device/mt25q.h"                     // デバイスライブラリ
+#include "../../core/storage/mmj_cigs_flash.h"             // ストレージ機能
+#include "../../core/logging/mmj_cigs_piclog.h"            // ログ機能
 
 // ========================== MISF Command ============================
 void mode_misf_erase_all(unsigned int8 parameter[])
@@ -165,7 +165,7 @@ void mode_misf_read(unsigned int8 uplinkcmd[])
 
    if(is_connect(mis_fm) == FALSE) {
       fprintf(PC, "Mission Flash is not connected\r\n");
-      return;
+      // return;
    }
 
    for (unsigned int32 packetcount = 0; packetcount < flash_param.readpacketnum; packetcount++){
@@ -271,4 +271,79 @@ void mode_misf_address_reset(unsigned int8 parameter[])
 
    piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Address Reset\r\n");
+}
+
+
+// ---------- SMF Command Functions ----------
+void mode_smf_read_force(unsigned int8 parameter[])
+{
+   unsigned int32 address = 
+      ((unsigned int32)parameter[1] << 24) |
+      ((unsigned int32)parameter[2] << 16) |
+      ((unsigned int32)parameter[3] << 8)  |
+      ((unsigned int32)parameter[4]);
+   
+   unsigned int16 packet_num = 
+      ((unsigned int16)parameter[7] << 8) |
+      ((unsigned int16)parameter[8]);
+      
+   unsigned int8 read_data[PACKET_SIZE] = {0x00}; // Initialize read data buffer
+   
+   fprintf(PC, "Start Flash SMF Read Force\r\n");
+   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
+
+   fprintf(PC, "\tAddress  : 0x%08LX\r\n", address);
+   fprintf(PC, "\tPacketNum: 0x%04LX\r\n", packet_num);
+   fprintf(PC, "read data\r\n");
+   for (unsigned int16 packet_count = 0; packet_count < packet_num; packet_count++)
+   {
+      unsigned int32 current_address = address + (packet_count * PACKET_SIZE);
+      //fprintf(PC, "Packet %d: Address 0x%08LX\r\n", packet_count, current_address);
+      
+      // Read data from the SMF
+      read_data_bytes(smf, current_address, read_data, PACKET_SIZE);
+      
+      // Print the read data
+      //fprintf(PC, "Read Data: ");
+      for (unsigned int8 byte_count = 0; byte_count < PACKET_SIZE; byte_count++)
+      {
+         fprintf(PC, "%02X ", read_data[byte_count]);
+      }
+      fprintf(PC, "\r\n");
+   }
+   if(is_connect(smf) == FALSE) {
+      fprintf(PC, "SMF is not connected\r\n");
+      // return;
+   }
+   fprintf(PC, "\r\nEnd Flash SMF Read Force\r\n");
+   piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
+}
+
+void mode_smf_erase_force(unsigned int8 parameter[])
+{
+   fprintf(PC, "Start SMF Erase All\r\n");
+   unsigned int8 cmd = parameter[0]; // Get the command ID from the parameter array
+   piclog_make(cmd, 0x00); // Log the command execution
+   for (unsigned int32 address = ADDRESS_MISF_START; address < ADDRESS_MISF_END; address += SECTOR_64K_BYTE) {
+      sector_erase(smf, address); // Erase each sector
+   }
+   piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
+   fprintf(PC, "End SMF Erase All\r\n");
+}
+
+void mode_smf_reset(unsigned int8 parameter[])
+{
+   fprintf(PC, "Start SMF Reset\r\n");
+   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
+   unsigned int8 writedata[PACKET_SIZE] = {0x00}; // Initialize write data to zero
+   
+   for (unsigned int32 address = 0x04EC0000; address < 0x056BFFFF; address += SECTOR_64K_BYTE) {
+      sector_erase(smf, address); // Erase each sector
+   }
+
+   write_data_bytes(smf, 0x04EC0000, writedata, PACKET_SIZE);
+   smf_init(); // Update the address area after writing
+
+   piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
+   fprintf(PC, "End SMF Reset\r\n");
 }
