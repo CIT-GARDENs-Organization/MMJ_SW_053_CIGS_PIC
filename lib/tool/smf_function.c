@@ -16,33 +16,47 @@ void data_copy()
     
     for (int8 i = 0; !is_empty_smf_data(); i++)
     {
-      fprintf(PC, "Start [%d th] data copy\r\n\r\n", i);
-      
-      // value initialize
-      SmfDataStruct *smf_data = dequeue_smf_data();
-      MissionTypeStruct mission_type = getMissionTypeStruct(smf_data->mission_type);
-      status[i+1] = mission_type.mission_flag; // `i` is assigned mis mcu status flag. so mission_flag start `i+1`
-      unsigned int32 mis_start_address = mission_type.start_address;
-      unsigned int32 mis_end_address = mission_type.end_address;
-      unsigned int32 write_src = smf_data->src;
-      unsigned int32 write_size = smf_data->size;
-      fprintf(PC, "In SMF mission data start   address: %LX\r\n", mis_start_address);
-      fprintf(PC, "In SMF mission data end     address: %LX\r\n", mis_end_address);
-      fprintf(PC, "In MIS FM Write source data address: %LX\r\n", write_src);
-      fprintf(PC, "In MIS FM Write data size          : %lu (0x%lx)\r\n\r\n", write_size, write_size);
-      
-    
+        fprintf(PC, "Start [%d th] data copy\r\n\r\n", i);
+        
+        // value initialize
+        SmfDataStruct *smf_data = dequeue_smf_data();
+        MissionTypeStruct mission_type = getMissionTypeStruct(smf_data->mission_type);
+        status[i+1] = mission_type.mission_flag; // `i` is assigned mis mcu status flag. so mission_flag start `i+1`
+        unsigned int32 mis_start_address = mission_type.start_address;
+        unsigned int32 mis_end_address = mission_type.end_address;
+        unsigned int32 write_src = smf_data->src;
+        unsigned int32 write_size = smf_data->size;
+        fprintf(PC, "In SMF mission data start   address: %LX\r\n", mis_start_address);
+        fprintf(PC, "In SMF mission data end     address: %LX\r\n", mis_end_address);
+        fprintf(PC, "In MIS FM Write source data address: %LX\r\n", write_src);
+        fprintf(PC, "In MIS FM Write data size          : %lu (0x%lx)\r\n\r\n", write_size, write_size);
 
+        if (!is_connect(mis_fm))
+        {
+            fprintf(PC, "Error: MIS FM is not connected\r\n");
+        }    
 
-      // read size area
+        if (!is_connect(smf))
+        {
+          fprintf(PC, "Error: SMF is not connected\r\n");
+        }    
+        /*
+        while (!is_connect(smf))
+        {
+            fprintf(PC, "Error: SMF is not connected\r\n");
+            delay_ms(100);
+        }
+        */
+
+        // read size area
         unsigned int8 used_size_bytes[4];
-        read_data_bytes(SMF, mis_start_address, used_size_bytes, 4);
+        read_data_bytes(smf, mis_start_address, used_size_bytes, 4);
         unsigned int32 used_size = 
-           ((unsigned int32)used_size_bytes[3] << 24) |
-           ((unsigned int32)used_size_bytes[2] << 16) |
-           ((unsigned int32)used_size_bytes[1] << 8)  |
-           ((unsigned int32)used_size_bytes[0]);
-        int8 loop_count = read_data_byte(SMF, mis_start_address + 4);
+            ((unsigned int32)used_size_bytes[3] << 24) |
+            ((unsigned int32)used_size_bytes[2] << 16) |
+            ((unsigned int32)used_size_bytes[1] << 8)  |
+            ((unsigned int32)used_size_bytes[0]);
+        int8 loop_count = read_data_byte(smf, mis_start_address + 4);
         fprintf(PC, "Size area read\r\n");
         fprintf(PC, "used_size = %lu (src 0x%08LX)\r\n", used_size, mis_start_address);
         fprintf(PC, "loop count= %d  (src 0x%08LX)\r\n\r\n", loop_count, mis_start_address + 4);
@@ -65,7 +79,7 @@ void data_copy()
             unsigned int32 erase_ptr = data_region_start;
             while (erase_ptr < data_region_end)
             {
-                subsector_4kByte_erase(SMF, erase_ptr);
+                subsector_4kByte_erase(smf, erase_ptr);
                 erase_ptr += SUBSECTOR_SIZE;     // tips: `value += 0x1000` means add up 4KB (0x1000 = 0d4096)
             }
         }
@@ -75,7 +89,7 @@ void data_copy()
         unsigned int32 erase_start = data_write_addr & ~0xFFF;       // tips: `value & ~0xFFF` means alignment 4KB.
         unsigned int32 erase_end = (data_write_addr + write_size + 0xFFF) & ~0xFFF;
         for (unsigned int32 addr = erase_start; addr < erase_end && addr < mis_end_address; addr += SUBSECTOR_SIZE)
-            subsector_4kByte_erase(SMF, addr);
+            subsector_4kByte_erase(smf, addr);
 
         unsigned int32 remaining = write_size;
         unsigned int32 src_addr = write_src;
@@ -83,21 +97,8 @@ void data_copy()
         {
             unsigned int16 chunk = (remaining > MAX_READ_SIZE) ? MAX_READ_SIZE : remaining; //  = max(MAX_READ_SIZE, rest write_size)
 
-            read_data_bytes(MIS_FM, src_addr, buffer, chunk);
-            fprintf(PC, "[MIS FM]\r\n");
-            for (unsigned int8 byte_count = 0; byte_count < chunk; byte_count++)
-            {
-                fprintf(PC, "%02X ", buffer[byte_count]);
-            }
-            fprintf(PC, "\r\n");
-            write_data_bytes(SMF, data_write_addr, buffer, chunk);
-            fprintf(PC, "[SMF]\r\n");
-            for (unsigned int8 byte_count = 0; byte_count < chunk; byte_count++)
-            {
-                fprintf(PC, "%02X ", buffer[byte_count]);
-            }
-            fprintf(PC, "\r\n");
-
+            read_data_bytes(mis_fm, src_addr, buffer, chunk);
+            write_data_bytes(smf, data_write_addr, buffer, chunk);
             src_addr += chunk;
             data_write_addr += chunk;
             used_size += chunk;
@@ -107,12 +108,12 @@ void data_copy()
 
        // write size area
        fprintf(PC, "Update size area\r\n");
-       subsector_4kByte_erase(SMF, mis_start_address);
-       write_data_byte(SMF, mis_start_address + 0, (used_size >> 0)  & 0xFF);
-       write_data_byte(SMF, mis_start_address + 1, (used_size >> 8)  & 0xFF);
-       write_data_byte(SMF, mis_start_address + 2, (used_size >> 16) & 0xFF);
-       write_data_byte(SMF, mis_start_address + 3, (used_size >> 24) & 0xFF);
-       write_data_byte(SMF, mis_start_address + 4, loop_count);
+       subsector_4kByte_erase(smf, mis_start_address);
+       write_data_byte(smf, mis_start_address + 0, (used_size >> 0)  & 0xFF);
+       write_data_byte(smf, mis_start_address + 1, (used_size >> 8)  & 0xFF);
+       write_data_byte(smf, mis_start_address + 2, (used_size >> 16) & 0xFF);
+       write_data_byte(smf, mis_start_address + 3, (used_size >> 24) & 0xFF);
+       write_data_byte(smf, mis_start_address + 4, loop_count);
         fprintf(PC, "used_size = %ld\r\n", used_size);
         fprintf(PC, "loop_count = %u\r\n\r\n", loop_count);
     }

@@ -562,6 +562,7 @@ int1 is_connect(Flash flash_stream){
    READ_ID_DATA read_id_data;
    int8 flash_cmd = CMD_READ_ID;
    output_low(flash_stream.cs_pin);
+   delay_us(10);  
    spi_xfer_and_read_select_stream(flash_stream, &flash_cmd, 1, read_id_data.bytes, sizeof(read_id_data.bytes));
    output_high(flash_stream.cs_pin);
    //fprintf(PC,"Read ID:%02X", read_id_data.fields.manufacturer_id);

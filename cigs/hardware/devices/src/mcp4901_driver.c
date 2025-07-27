@@ -13,14 +13,14 @@ void mcp4901_init()
     unsigned int16 readdata;
     readdata = ad7490_read(ADC_CIGS1_DAC); // Read a dummy value to initialize the DAC
     fprintf(PC, "%04LX\r\n", readdata);
-    if (readdata == 0xFFFF) {
+    if (readdata == 0xFFFF || readdata == 0x0000) {
         fprintf(PC, "\t[DAC Port 1] Connect error!\r\n");
     } else {
         fprintf(PC, "\t[DAC Port 1] Connect successful\r\n");
     }
     fprintf(PC, "%04LX\r\n", readdata);
     readdata = ad7490_read(ADC_CIGS2_DAC); // Read a dummy value to initialize the second DAC
-    if (readdata == 0xFFFF) {
+    if (readdata == 0xFFFF || readdata == 0x0000) {
         fprintf(PC, "\t[DAC Port 2] Connect error!\r\n");
     } else {
         fprintf(PC, "\t[DAC Port 2] Connect successful\r\n");

@@ -10,7 +10,7 @@ void ad7490_init()
     delay_ms(10); // Wait for the ADC to stabilize
     unsigned int16 readdata = ad7490_read(ADC_TEMP_PY_TOP); // Read a dummy value to initialize the ADC
     fprintf(PC, "%04LX\r\n", readdata);
-    if (readdata == 0xFFFF) {
+    if (readdata == 0xFFFF || readdata == 0x0000) {
         fprintf(PC, "\t[ADC] Connect error!\r\n");
     } else {
         fprintf(PC, "\t[ADC] Connect successful\r\n");
