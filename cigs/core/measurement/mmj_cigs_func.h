@@ -16,7 +16,6 @@ volatile int8 executed_mission_count = 0;
 
 
 
-
 // _________ functions ____________
 #define DATA_BUFFER_SIZE 150
 #define HEADER_SIZE 12

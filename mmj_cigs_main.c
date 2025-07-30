@@ -2,9 +2,9 @@
 
 void main()
 { 
-   delay_ms(1000); // wait for power stable
+   delay_ms(100); // wait for power stable
    fprintf(PC,"\r\n\r\n\r\n============================================================\r\n");
-   fprintf(PC,"This is MOMIJI CIGS PIC BBM for MIS7_BBM3.\r\n");
+   fprintf(PC,"This is MOMIJI CIGS PIC BBM for MIS7_BBM4.\r\n");
    fprintf(PC,"Last updated on %s %s, by Inoue.\r\n\r\n", __DATE__, __TIME__);
    
    //io_init();

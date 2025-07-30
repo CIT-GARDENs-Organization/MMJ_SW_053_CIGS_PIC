@@ -5,10 +5,6 @@
 #include "../storage/mmj_cigs_flash.h"               // ストレージ機能
 #include "../../../lib/communication/mission_tools.h"   // 通信ツール
 
-
-
-
-
 void io_init()
 {
     fprintf(PC, "IO Initialize\r\n");
@@ -400,4 +396,150 @@ void sweep_port2(unsigned int8 measurement_step)
     fprintf(PC, "END SWEEP PORT2\r\n");
 
     fprintf(PC, "Start CIGS data conversion\r\n");  
+}
+/*
+void add_smf_queue_data()
+{
+    SmfDataStruct smf_data;
+    smf_data.type = SMF_DATA_TYPE_CIGS;
+    smf_data.length = PACKET_SIZE;
+    memcpy(smf_data.data, packetdata, PACKET_SIZE);
+    enqueue_smf_data(&smf_data);
+}
+*/
+void add_smf_queue_piclog()
+{}
+
+void convert_datas(MEASUREMENT_DATA measured_data, )
+{
+
+}
+
+void sweep_with_threshold(unsigned int16 curr_threshold, unsigned int16 pd_threshold, unsigned int16 curr_limit)
+{
+    fprintf(PC, "Start SWEEP with threshold\r\n");
+    fprintf(PC, "\tCurrent threshold: %u\r\n", curr_threshold);
+    fprintf(PC, "\tPD threshold: %u\r\n", pd_threshold);
+    fprintf(PC, "\tCurrent limit: %u\r\n", curr_limit);
+    
+    // Enable both CIGS ports
+    output_high(CONNECT_CIGS1);
+    output_high(CONNECT_CIGS2);
+    output_low(EN_NPWR);
+    delay_us(100); // wait for the CIGS to stabilize
+
+    int16 pd_value;
+    int16 count = 0;
+    int16 cigs1_buffer[2][255]; // Buffer for CIGS1 voltage and current data
+    int16 cigs2_buffer[2][255]; // Buffer for CIGS2 voltage and current data
+    
+    // Port status flags
+    int1 cigs1_active = 1; // CIGS1 is active
+    int1 cigs2_active = 1; // CIGS2 is active
+    
+    // Individual step counters for each port
+    int16 cigs1_steps = 0; // Number of steps measured for CIGS1
+    int16 cigs2_steps = 0; // Number of steps measured for CIGS2
+
+    // Initialize DACs to 0
+    mcp4901_1_write(0);
+    mcp4901_2_write(0);
+    delay_ms(10);
+
+    // Read initial PD value
+    pd_value = ad7490_read(ADC_PD);
+    fprintf(PC, "Initial PD value: %d\r\n", pd_value);
+
+    // Continue measurement while at least one port is active
+    while (cigs1_active || cigs2_active)
+    {
+        // Set DAC values for both ports (synchronized timing)
+        mcp4901_1_write(count);
+        mcp4901_2_write(count);
+        delay_ms(1); // wait for DAC to stabilize
+
+        // Read CIGS1 data (port1) only if still active
+        if (cigs1_active) {
+            cigs1_buffer[0][count] = ad7490_read(ADC_CIGS1_VOLT);
+            cigs1_buffer[1][count] = ad7490_read(ADC_CIGS1_CURR);
+            cigs1_steps = count + 1; // Update CIGS1 step counter
+        }
+        
+        // Read CIGS2 data (port2) only if still active
+        if (cigs2_active) {
+            cigs2_buffer[0][count] = ad7490_read(ADC_CIGS2_VOLT);
+            cigs2_buffer[1][count] = ad7490_read(ADC_CIGS2_CURR);
+            cigs2_steps = count + 1; // Update CIGS2 step counter
+        }
+
+        // Monitor progress
+        if (count % 10 == 0) {
+            fprintf(PC, "Step %d - CIGS1: V=%d, I=%d (active=%d) - CIGS2: V=%d, I=%d (active=%d)\r\n", 
+                    count, 
+                    cigs1_active ? cigs1_buffer[0][count] : 0, cigs1_active ? cigs1_buffer[1][count] : 0, cigs1_active,
+                    cigs2_active ? cigs2_buffer[0][count] : 0, cigs2_active ? cigs2_buffer[1][count] : 0, cigs2_active);
+        }
+
+        count++;
+
+        // Check global exit conditions
+        if (count >= 255) {
+            fprintf(PC, "Maximum step count reached: %d\r\n", count);
+            break;
+        }
+        
+        // Check PD threshold (global condition)
+        pd_value = ad7490_read(ADC_PD);
+        if (pd_value < pd_threshold) {
+            fprintf(PC, "PD value below threshold: %d < %u - stopping all measurements\r\n", pd_value, pd_threshold);
+            break;
+        }
+        
+        // Check CIGS1 specific conditions
+        if (cigs1_active) {
+            if (cigs1_buffer[1][count-1] > curr_limit) {
+                fprintf(PC, "CIGS1 current limit reached: %d > %u - stopping CIGS1 at step %d\r\n", cigs1_buffer[1][count-1], curr_limit, cigs1_steps);
+                cigs1_active = 0;
+                output_low(CONNECT_CIGS1); // Disconnect CIGS1
+            }
+            else if (cigs1_buffer[1][count-1] < curr_threshold) {
+                fprintf(PC, "CIGS1 current below threshold: %d < %u - stopping CIGS1 at step %d\r\n", cigs1_buffer[1][count-1], curr_threshold, cigs1_steps);
+                cigs1_active = 0;
+                output_low(CONNECT_CIGS1); // Disconnect CIGS1
+            }
+        }
+        
+        // Check CIGS2 specific conditions
+        if (cigs2_active) {
+            if (cigs2_buffer[1][count-1] > curr_limit) {
+                fprintf(PC, "CIGS2 current limit reached: %d > %u - stopping CIGS2 at step %d\r\n", cigs2_buffer[1][count-1], curr_limit, cigs2_steps);
+                cigs2_active = 0;
+                output_low(CONNECT_CIGS2); // Disconnect CIGS2
+            }
+            else if (cigs2_buffer[1][count-1] < curr_threshold) {
+                fprintf(PC, "CIGS2 current below threshold: %d < %u - stopping CIGS2 at step %d\r\n", cigs2_buffer[1][count-1], curr_threshold, cigs2_steps);
+                cigs2_active = 0;
+                output_low(CONNECT_CIGS2); // Disconnect CIGS2
+            }
+        }
+    }
+
+    // Ensure all connections are disabled
+    output_low(CONNECT_CIGS1);
+    output_low(CONNECT_CIGS2);
+    output_high(EN_NPWR);
+    
+    fprintf(PC, "END SWEEP with threshold - Total steps: %d\r\n", count);
+    fprintf(PC, "CIGS1 measured steps: %d\r\n", cigs1_steps);
+    fprintf(PC, "CIGS2 measured steps: %d\r\n", cigs2_steps);
+    
+    // Data conversion and storage can be added here similar to other sweep functions
+    fprintf(PC, "Start CIGS data conversion\r\n");
+    // TODO: Implement data storage to flash memory if needed
+    fprintf(PC, "End CIGS data conversion\r\n");
+}
+
+void log_meas_data(MEASUREMENT_DATA *measured_data, unsigned int8 port_num, int8 *data_buffer)
+{
+    
 }

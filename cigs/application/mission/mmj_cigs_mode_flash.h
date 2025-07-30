@@ -64,7 +64,7 @@ void mode_smf_erase(unsigned int8 parameter[]);
 void mode_smf_copy_force(unsigned int8 parameter[]);
 void mode_smf_read_force(unsigned int8 parameter[]);
 void mode_smf_erase_force(unsigned int8 parameter[]);
-void mode_smf_reset(unsigned int8 parameter[]);
+void mode_smf_address_reset(unsigned int8 parameter[]);
 
 #endif // MMJ_CIGS_MODE_FLASH_H
 

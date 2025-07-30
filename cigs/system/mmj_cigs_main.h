@@ -19,9 +19,9 @@
 // レベル3: 基本ライブラリヘッダー（型定義・通信・ツール）
 #include "../../lib/communication/typedef_content.h"
 #include "../../lib/communication/value_status.h"
-#include "../../lib/tool/smf_function.h"
 #include "../../lib/tool/calc_tools.h"
 #include "../../lib/tool/smf_queue.h"
+#include "../../lib/tool/mmj_smf_memorymap.h"
 
 // レベル4: デバイスドライバヘッダー
 #include "../../lib/device/mt25q.h"
@@ -59,7 +59,6 @@
 #include "../../lib/device/mcp4901.c"
 #include "../../lib/device/mt25q.c"
 #include "../../lib/tool/calc_tools.c"
-#include "../../lib/tool/smf_function.c"
 #include "../../lib/tool/smf_queue.c"
 #include "../../lib/communication/communication.c"
 #include "../../lib/communication/communication_driver.c"
@@ -67,8 +66,9 @@
 
 // コア機能実装ファイル
 #include "../core/measurement/mmj_cigs_func.c"
-#include "../core/storage/mmj_cigs_flash.c"
 #include "../core/logging/mmj_cigs_piclog.c"
+#include "../core/storage/mmj_cigs_smf.c"
+#include "../core/storage/mmj_cigs_flash.c"
 
 // アプリケーション実装ファイル
 #include "../application/mission/mmj_cigs_excute_mission.c"

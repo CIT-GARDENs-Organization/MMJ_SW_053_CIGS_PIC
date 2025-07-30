@@ -1,3 +1,6 @@
+#include "smf_queue.h"
+#include "mmj_smf_memorymap.h"
+
 
 void enqueue_smf_data(SmfDataStruct *data)
 {   
@@ -8,9 +11,9 @@ void enqueue_smf_data(SmfDataStruct *data)
       
    else
    {
-      smf_queue.smf_data[smf_queue.smf_data_tail].mission_type = data->mission_type;
-      smf_queue.smf_data[smf_queue.smf_data_tail].src         = data->src;
-      smf_queue.smf_data[smf_queue.smf_data_tail].size        = data->size;
+      smf_queue.smf_data[smf_queue.smf_data_tail].func_type = data->func_type;
+      smf_queue.smf_data[smf_queue.smf_data_tail].src       = data->src;
+      smf_queue.smf_data[smf_queue.smf_data_tail].size      = data->size;
 
       smf_queue.smf_data_tail = next_tail;
    }
@@ -38,28 +41,24 @@ int1 is_empty_smf_data(void)
 }
 
 
-MissionTypeStruct getMissionTypeStruct(MissionType mis_type)
+MissionTypeStruct getMissionTypeStruct(mission_id)
 {
    MissionTypeStruct mis_struct = {0};
    
-   if (mis_type == MEAURE_DATA)
+   if (mission_id == ID_CIGS_DATA_TABLE)
    {
-      mis_struct.start_address   = 0x04EC0000;
-      mis_struct.end_address     = 0x056BFFFF;
-      mis_struct.mission_flag    = 0b10000000;
+      mis_struct.start_address = CIGS_DATA_TABLE_START_ADDRESS;
+      mis_struct.end_address   = CIGS_DATA_TABLE_END_ADDRESS;
    }
-   else if (mis_type == PICLOG_DATA)
+   else if (mission_id == ID_CIGS_MEASURE_DATA)
    {
-      mis_struct.start_address   = 0x04DC0000;
-      mis_struct.end_address     = 0x04EBFFFF;
-      mis_struct.mission_flag    = 0b10000001;  
+      mis_struct.start_address = CIGS_MEASURE_DATA_START_ADDRESS;
+      mis_struct.end_address   = CIGS_MEASURE_DATA_END_ADDRESS;
    }
-   else
+   else if (mission_id == ID_CIGS_PICLOG)
    {
-      // undefined mission type. output `ff` as default
-      mis_struct.start_address   = 0xFFFFFFFF;
-      mis_struct.end_address     = 0xFFFFFFFF;
-      mis_struct.mission_flag    = 0b11111111; 
+      mis_struct.start_address = CIGS_PICLOG_START_ADDRESS;
+      mis_struct.end_address   = CIGS_PICLOG_END_ADDRESS;
    }
    
    return mis_struct;

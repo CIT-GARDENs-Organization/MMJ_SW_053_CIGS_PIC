@@ -1,23 +1,29 @@
 #ifndef SMF_QUEUE_H
 #define SMF_QUEUE_H
 
-
-
 typedef enum {
-   MEAURE_DATA,  // <- assign your missoins
-   PICLOG_DATA
-} MissionType;
+   SMF_WRITE,    // SMF書き込み操作
+   SMF_READ,     // SMF読み込み操作
+   SMF_ERASE     // SMF消去操作
+} FunctionType;
+
+/*
+ * 使用例:
+ * SmfDataStruct write_data = {SMF_WRITE, 0x1000, 256};
+ * SmfDataStruct read_data = {SMF_READ, 0x2000, 512};
+ * SmfDataStruct erase_data = {SMF_ERASE, 0x3000, 1024};
+ */
 
 typedef struct {
    unsigned int32 start_address;
    unsigned int32 end_address;
-   int8 mission_flag;
 } MissionTypeStruct;
 
 typedef struct {
-    MissionType   mission_type;
-    unsigned int32 src;
-    unsigned int32 size;
+    FunctionType   func_type;
+    int8 mission_id; 
+    int32 src;
+    int32 size;
 } SmfDataStruct;
 
 #define SMF_DATA_SIZE 16
@@ -39,9 +45,13 @@ void enqueue_smf_data(SmfDataStruct *data);
 
 SmfDataStruct *dequeue_smf_data();
 
+SmfDataStruct *peek_smf_data(void);
+
+void remove_smf_data(void);
+
 int1 is_empty_smf_data(void);
 
-MissionTypeStruct getMissionTypeStruct(MissionType mis_type);
+MissionTypeStruct getMissionTypeStruct(FunctionType func_type);
 
 #endif
 

@@ -25,7 +25,10 @@
         "16f1789.h": "c",
         "value_status.h": "c",
         "mission_tools.h": "c",
-        "mmj_cigs_mode_mission.h": "c"
+        "mmj_cigs_mode_mission.h": "c",
+        "smf_queue.h": "c",
+        "mmj_cigs_smf.h": "c"
     },
-    "C_Cpp.default.configurationProvider": "user.vscode-extension-for-ccsc"
+    "C_Cpp.default.configurationProvider": "user.vscode-extension-for-ccsc",
+    "C_Cpp.configurationWarnings": "disabled"
 }

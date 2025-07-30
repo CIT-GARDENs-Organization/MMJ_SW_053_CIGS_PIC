@@ -140,9 +140,62 @@ void mode_sweep_port1(unsigned int8 uplinkcmd)
 {
    sweep_port1(80);
    SmfDataStruct data;
-   data.mission_type = MEAURE_DATA; // コピーする目的のデータ種別
+   //data.mission_type = MEAURE_DATA; // コピーする目的のデータ種別
    data.src = ADDRESS_MISF_MEASUREMENT_START + misf_meas_use_counter - misf_meas_uncopyed_counter; // コピー元のMIS_FMのアドレス
    data.size = misf_meas_uncopyed_counter; // コピーするデータのサイズ
    enqueue_smf_data(&data); // SMFへのデータコピーを実行する
 }
 
+
+void mode_meas_iv(unsigned int8 uplinkcmd[])
+{
+   fprintf(PC, "Start MODE MEAS IV\r\n");
+   MEAS_IV_CMD cmd = make_meas_iv_cmd(uplinkcmd); // Create the measurement command structure
+   fprintf(PC, "\tID: %02X\r\n", cmd.id);
+   fprintf(PC, "\tSleep Time: %u ms\r\n", cmd.sleep_time);
+   fprintf(PC, "\tCurrent Threshold: %u mA\r\n", cmd.curr_threshold);
+   fprintf(PC, "\tPD Threshold: %u mA\r\n", cmd.pd_threshold);
+   fprintf(PC, "\tCurrent Limit: %u mA\r\n", cmd.curr_limit);
+   fprintf(PC, "\tMeasurement Time: %u ms\r\n", cmd.meas_time);
+   fprintf(PC, "\tIs Finished: %u\r\n", cmd.is_finished);   
+
+   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the end of the command execution
+
+   unsigned int16 start_time = get_current_seconds();
+   unsigned int16 current_sec = 0;
+   while(get_current_seconds() - start_time < cmd.meas_time)
+   {
+      current_sec = get_current_seconds();
+      if (current_sec - start_time >= cmd.meas_time) {
+          break;
+      }
+
+      // Sleep for the specified time
+      delay_ms(cmd.sleep_time);
+   }
+
+
+
+
+
+
+
+
+
+
+   fprintf(PC, "End MODE MEAS IV\r\n");
+}
+
+
+MEAS_IV_CMD make_meas_iv_cmd(unsigned int8 *uplinkcmd[])
+{
+   MEAS_IV_CMD cmd;
+   cmd.id = uplinkcmd[0];
+   cmd.sleep_time = ((unsigned int16)uplinkcmd[1] << 8) | ((unsigned int16)uplinkcmd[2]);
+   cmd.curr_threshold = uplinkcmd[3]<< 4;
+   cmd.pd_threshold = uplinkcmd[4]<< 4;
+   cmd.curr_limit = uplinkcmd[5]<< 4;
+   cmd.meas_time = ((unsigned int16)uplinkcmd[6] << 8) | ((unsigned int16)uplinkcmd[7]);
+   cmd.is_finished = uplinkcmd[8];
+   return cmd;
+}

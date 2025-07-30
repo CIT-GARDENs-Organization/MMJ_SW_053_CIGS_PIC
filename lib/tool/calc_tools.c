@@ -6,22 +6,36 @@ unsigned int8 calc_crc8(unsigned int8 frame[], int8 payload_size)
    return crc;
 }
 
-
-void int32_to_be_array(int32 value, int8 buf[4])
+int1 is_crc_valid(unsigned int8 frame[], int8 payload_size)
 {
-    buf[0] = (int8)(value >> 24);   // MSB
-    buf[1] = (int8)(value >> 16);
-    buf[2] = (int8)(value >>  8);
-    buf[3] = (int8)(value      );   // LSB
+   unsigned int8 received_crc = frame[payload_size - 1]; // CRC is the last byte
+   unsigned int8 calculated_crc = calc_crc8(frame, payload_size - 1);
+   return (received_crc == calculated_crc);
+}
+
+void int32_to_be_array(int32 value, int8 *buf, int8 index)
+{
+    buf[index + 0] = (int8)(value >> 24);   // MSB
+    buf[index + 1] = (int8)(value >> 16);
+    buf[index + 2] = (int8)(value >>  8);
+    buf[index + 3] = (int8)(value      );   // LSB
+}
+
+int32 lsb_array_to_int32(int8 *buf, int8 index)
+{
+    return ((int32)buf[index + 0] <<  0) |
+           ((int32)buf[index + 1] <<  8) |
+           ((int32)buf[index + 2] << 16) |
+           ((int32)buf[index + 3] << 24);
 }
 
 
-int32 be_array_to_int32(int8 buf[4])
+int32 msb_array_to_int32(int8 *buf, int8 index)
 {
-    return ((int32)buf[0] << 24) |
-           ((int32)buf[1] << 16) |
-           ((int32)buf[2] <<  8) |
-           ((int32)buf[3]);
+    return ((int32)buf[index + 0] << 24) |
+           ((int32)buf[index + 1] << 16) |
+           ((int32)buf[index + 2] <<  8) |
+           ((int32)buf[index + 3]);
 }
 
 unsigned int32 int32_lsb_to_msb(unsigned int32 value)
@@ -30,4 +44,12 @@ unsigned int32 int32_lsb_to_msb(unsigned int32 value)
            ((value & 0x0000FF00) << 8)  |
            ((value & 0x00FF0000) >> 8)  |
            ((value & 0xFF000000) >> 24);
+}
+
+unsigned int32 int32_msb_to_lsb(unsigned int32 value)
+{
+    return ((value & 0xFF000000) >> 24) |
+           ((value & 0x00FF0000) >> 8)  |
+           ((value & 0x0000FF00) << 8)  |
+           ((value & 0x000000FF) << 24);
 }

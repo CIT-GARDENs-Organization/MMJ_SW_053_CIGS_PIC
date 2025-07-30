@@ -5,6 +5,7 @@ import re
 import serial
 import serial.tools.list_ports
 import sys
+import argparse
 from datetime import datetime
 
 setting = {
@@ -85,7 +86,19 @@ class Command:
     FRAME_ID_PAYLOAD_LENGTH = {STATUS_CHECK: 0, IS_SMF_AVAILABLE: 1, MIS_MCU_STATUS: 1, UL_CMD: 8, ACK: 0}
     
     @staticmethod
-    def input_payload() -> bytes:
+    def input_payload(cmd_payload=None) -> bytes:
+        if cmd_payload:
+            # コマンドライン引数から受け取った場合
+            print(f'Using command from command line: {cmd_payload}')
+            # 9バイトの16進文字列（18文字）を期待
+            if re.fullmatch('[0-9A-F]{18}', cmd_payload.replace(' ', '').upper()):
+                return bytes.fromhex(cmd_payload.replace(' ', '').upper())
+            else:
+                print(f'{Print.ERROR} Invalid command format: {cmd_payload}')
+                print(f'Expected 9 bytes in hex format (18 characters)')
+                sys.exit(1)
+        
+        # 従来の対話的入力
         print(f'Enter uplink command in hex {Print.BOLD}(CMD ID, CMD Parameter only. {Print.RESET}SFD, Device ID, Frame ID, CRC automatically addition.)')
         print('  __ __ __ __ __ __ __ __ __')
         while True:
@@ -164,6 +177,18 @@ class Communication:
     def setup(self):
         self.select_port()
         self.select_device_id()
+
+    def setup_with_args(self, com_port, baud_rate):
+        """コマンドライン引数で指定されたポートとボーレートで設定"""
+        try:
+            print(f'Using COM port: {com_port} at {baud_rate} baud')
+            self.ser = serial.Serial(com_port, baudrate=int(baud_rate), timeout=1)
+            # デフォルトでCIGS PICを使用
+            self.device_id = bytes.fromhex('0C')
+            print(f'Using device: CIGS PIC (ID: 0C)')
+        except serial.SerialException as e:
+            print(f'{Print.ERROR} Failed to open {com_port}: {str(e)}')
+            sys.exit(1)
 
     def select_port(self):
         print('Select using port')
@@ -279,18 +304,74 @@ def close_and_exit(com) -> None:
     sys.exit()
 
 
-def main():
+def main(com_port=None, baud_rate=None, command=None):
     print(f'\n================================')
     print(f'=== {Print.BOLD}BOSS PIC Simulator v1.00{Print.RESET} ===')
     print(f'================================\n')
 
     com = Communication()
-    com.setup()
+    if com_port and baud_rate:
+        # COMポートとボーレートが指定された場合
+        com.setup_with_args(com_port, baud_rate)
+    else:
+        # 従来の対話的設定
+        com.setup()
 
     print(f'\n{Print.LINE}\n')
-    uplink_command_payload = Command.input_payload()
-    uplink_command = Command.make_command(com.device_id, Command.UL_CMD, uplink_command_payload)
+    
+    # コマンド引数が指定されている場合は単発実行
+    if command:
+        uplink_command_payload = Command.input_payload(command)
+        uplink_command = Command.make_command(com.device_id, Command.UL_CMD, uplink_command_payload)
+        execute_mission(com, uplink_command)
+    else:
+        # インタラクティブモード
+        interactive_mode(com)
 
+def interactive_mode(com):
+    """インタラクティブモードでコマンドを連続実行"""
+    print(f'{Print.INFO} インタラクティブモードで開始しました')
+    print(f'コマンド入力待機中... (\'exit\' で終了)')
+    print(f'使用方法:')
+    print(f'  - 16進数でコマンドを入力: C0 00 00 00 00 00 00 00 00')
+    print(f'  - command_uiからコマンドを送信可能')
+    print(f'  - \'exit\' または Ctrl+C で終了')
+    print(f'{Print.LINE}')
+    
+    try:
+        while True:
+            try:
+                print(f'\n> ', end='', flush=True)
+                user_input = input().strip()
+                
+                if user_input.lower() in ['exit', 'quit', 'q']:
+                    break
+                
+                if not user_input:
+                    continue
+                
+                # コマンドをパース
+                uplink_command_payload = Command.input_payload(user_input)
+                uplink_command = Command.make_command(com.device_id, Command.UL_CMD, uplink_command_payload)
+                
+                # ミッション実行
+                print(f'{Print.INFO} コマンド実行開始...')
+                execute_mission(com, uplink_command)
+                print(f'{Print.INFO} コマンド実行完了')
+                
+            except KeyboardInterrupt:
+                print(f'\n{Print.INFO} ユーザーによって中断されました')
+                break
+            except Exception as e:
+                print(f'{Print.ERROR} エラーが発生しました: {str(e)}')
+                continue
+                
+    finally:
+        print(f'\n{Print.INFO} インタラクティブモードを終了します')
+        com.close()
+
+def execute_mission(com, uplink_command):
+    """ミッションを実行"""
     print(Print.timestamped(f"{Print.INFO} BOSS PIC received uplink command"))
     time.sleep(1)
 
@@ -298,7 +379,8 @@ def main():
     
     while True: # BOSS PIC start continuous communication whith MIS MCU
         if not response:
-            quit_software(com, 1)
+            print(Print.timestamped(f'{Print.ERROR} 応答がありません - ミッション中断'))
+            return False
 
         frame_data = Command.parse_frame(response)
         if frame_data.frame_id == Command.ACK:
@@ -307,7 +389,8 @@ def main():
         elif frame_data.frame_id == Command.MIS_MCU_STATUS:
             print(Print.timestamped(f"{Print.INFO} BOSS PIC receive MIS MCU Status frame"))
             if not frame_data.frame_id:
-                quit_software(com, 2)
+                print(Print.timestamped(f'{Print.ERROR} ACKを受信できませんでした'))
+                return False
 
             if frame_data.payload == Command.BUSY:
                 print(Print.timestamped(f"\t-> Executing mission"))
@@ -322,9 +405,10 @@ def main():
             elif frame_data.payload == Command.FINISHED_MISSION:
                 print(Print.timestamped(f"\t-> Finished mission"))
                 print(Print.timestamped(f"\t -> BOSS PIC power off MIS MCU "))
-                quit_software(com, 0)
+                return True
         else:
-            quit_software(com, 3)
+            print(Print.timestamped(f'{Print.ERROR} 不明なフレームIDです'))
+            return False
 
         time.sleep(1)
         print(Print.timestamped(f"{Print.INFO} BOSS PIC switch CPLD rooting"))
@@ -337,4 +421,11 @@ def main():
         response = com.transmit_and_receive_command(status_check_command)
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description='BOSS PIC Simulator')
+    parser.add_argument('--port', '-p', help='COM port (e.g., COM3)')
+    parser.add_argument('--baud', '-b', help='Baud rate (default: 9600)', default='9600')
+    parser.add_argument('--command', '-c', help='Command to send (9 bytes in hex, e.g., "01 00 00 00 00 00 00 00 00")')
+    
+    args = parser.parse_args()
+    
+    main(args.port, args.baud, args.command)

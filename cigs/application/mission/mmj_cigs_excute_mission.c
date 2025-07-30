@@ -1,6 +1,8 @@
 #include "mmj_cigs_excute_mission.h"                  // 同じフォルダのヘッダー
 #include "mmj_cigs_mode_mission.h"                    // 同じフォルダのヘッダー
 #include "mmj_cigs_mode_flash.h"                      // 同じフォルダのヘッダー
+#include "../../../lib/tool/smf_queue.h"                   // ツールライブラリ
+#include "../../core/storage/mmj_cigs_smf.h"             // ストレージ機能
 #include "../../../lib/communication/typedef_content.h"    // 通信ライブラリ
 #include "../../../lib/tool/smf_queue.h"                   // ツールライブラリ
 #include "../../../lib/communication/mission_tools.h"      // ミッションツール
@@ -66,20 +68,18 @@ void execute_mission(unsigned int8 *content)
          break;
 
       // ___________________ SMF Commands ______________________
-      /*
       case ID_SMF_COPY:
-         mode_misf_smf_copy(content);
+         mode_smf_copy(content);
          break;
       case ID_SMF_READ:
-         mode_flash_smf_read(content);
+         mode_smf_read(content);
          break;
       case ID_SMF_ERASE:
-         mode_flash_smf_erase(content);
+         mode_smf_erase(content);
          break;
       case ID_SMF_COPY_FORCE:
-         mode_flash_address_reset(content);
+         mode_smf_address_reset(content);
          break;
-      */
       case ID_SMF_READ_FORCE:
          mode_smf_read_force(content);
          break;
@@ -87,7 +87,7 @@ void execute_mission(unsigned int8 *content)
          mode_smf_erase_force(content);
          break;
       case ID_SMF_RESET:
-         mode_smf_reset(content);
+         mode_smf_address_reset(content);
          break;
       default:
          fprintf(PC, "\t\t-> Invalid CMD ID!\r\n");
@@ -157,17 +157,47 @@ int1 handle_status_check(Command *command) {
 
 
 void handle_smf_available(Command *command) {
-    fprintf(PC, "\t-> SMF available check\r\n");
-    fprintf(PC, "\t   Transmit Acknolegde\r\n");
-    transmit_ack();
-    
-    if (command->content[0] == ALLOW) {
-        fprintf(PC, "\t\t-> allowd\r\n");
-        status[0] = COPYING;
-      //   smf_write();
-         data_copy();
-        status[0] = FINISHED;
-    } else {
-        fprintf(PC, "\t\t-> denyed\r\n");
-    }
+   fprintf(PC, "\t-> SMF available check\r\n");
+   fprintf(PC, "\t   Transmit Acknowledgement\r\n");
+   transmit_ack();
+   
+   if (command->content[0] == ALLOW) {
+      fprintf(PC, "\t\t-> allowed\r\n");
+      status[0] = COPYING;
+
+      // キューが空になるまでループ処理
+      int8 processed_count = 0;
+      while (!is_empty_smf_data()) {
+         fprintf(PC, "\t\t-> Processing SMF data [%d]\r\n", processed_count);
+         
+         SmfDataStruct *smf_data = dequeue_smf_data();
+         if (smf_data != 0x00) {
+            int8 func_type = smf_data->func_type;
+            if (func_type == 0) {  // SMF_WRITE
+               fprintf(PC, "\t\t-> Executing SMF WRITE (single)\r\n");
+               smf_write(smf_data);
+            }
+            if (func_type == 1) {  // SMF_READ
+               fprintf(PC, "\t\t-> Executing SMF READ (single)\r\n");
+               smf_read(smf_data);
+            }
+            if (func_type == 2) {  // SMF_ERASE
+               fprintf(PC, "\t\t-> Executing SMF ERASE (single)\r\n");
+               smf_erase(smf_data);
+            }
+            if (func_type > 2) {
+               fprintf(PC, "\t\t-> Unknown SMF function type\r\n");
+            }
+            processed_count++;
+         } else {
+            fprintf(PC, "\t\t-> Error: Failed to dequeue SMF data\r\n");
+            break;
+         }
+      }
+      
+      fprintf(PC, "\t\t-> Completed processing %d SMF operations\r\n", processed_count);
+      status[0] = FINISHED;
+   } else {
+      fprintf(PC, "\t\t-> denied\r\n");
+   }
 }

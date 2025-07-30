@@ -1,10 +1,12 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 26-7-25 at 16:50
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 28-7-25 at 17:39
+>>> Warning 225 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.h" Line 6(20,55): Duplicate #define
 >>> Warning 203 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_flash.c" Line 246(1,1): Condition always TRUE
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\hardware\mcu\timer.h" Line 14(16,22): Variable never used:   subsec
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_excute_mission.h" Line 22(15,27): Variable never used:   duration_sec
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 169(23,35): Variable never used:   mission_type
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_mission.c" Line 44(19,27): Variable never used:   readdata
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_mission.c" Line 60(18,28): Variable never used:   sweep_step
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main.c" Line 47(18,22): Variable never used:   flag
-      Memory usage:   ROM=29%      RAM=25% - 60%
-      0 Errors,  6 Warnings.
+      Memory usage:   ROM=31%      RAM=27% - 62%
+      0 Errors,  8 Warnings.
 Build Successful.

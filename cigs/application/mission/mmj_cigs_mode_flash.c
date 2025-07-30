@@ -288,7 +288,10 @@ void mode_smf_read_force(unsigned int8 parameter[])
       ((unsigned int16)parameter[8]);
       
    unsigned int8 read_data[PACKET_SIZE] = {0x00}; // Initialize read data buffer
-   
+   if(!is_connect(smf)) {
+      fprintf(PC, "SMF is not connected\r\n");
+      return;
+   }
    fprintf(PC, "Start Flash SMF Read Force\r\n");
    piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
 
@@ -298,23 +301,14 @@ void mode_smf_read_force(unsigned int8 parameter[])
    for (unsigned int16 packet_count = 0; packet_count < packet_num; packet_count++)
    {
       unsigned int32 current_address = address + (packet_count * PACKET_SIZE);
-      //fprintf(PC, "Packet %d: Address 0x%08LX\r\n", packet_count, current_address);
-      
-      // Read data from the SMF
       read_data_bytes(smf, current_address, read_data, PACKET_SIZE);
-      
-      // Print the read data
-      //fprintf(PC, "Read Data: ");
       for (unsigned int8 byte_count = 0; byte_count < PACKET_SIZE; byte_count++)
       {
          fprintf(PC, "%02X ", read_data[byte_count]);
       }
       fprintf(PC, "\r\n");
    }
-   if(is_connect(smf) == FALSE) {
-      fprintf(PC, "SMF is not connected\r\n");
-      // return;
-   }
+
    fprintf(PC, "\r\nEnd Flash SMF Read Force\r\n");
    piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
 }
@@ -331,7 +325,7 @@ void mode_smf_erase_force(unsigned int8 parameter[])
    fprintf(PC, "End SMF Erase All\r\n");
 }
 
-void mode_smf_reset(unsigned int8 parameter[])
+void mode_smf_address_reset(unsigned int8 parameter[])
 {
    fprintf(PC, "Start SMF Reset\r\n");
    piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
