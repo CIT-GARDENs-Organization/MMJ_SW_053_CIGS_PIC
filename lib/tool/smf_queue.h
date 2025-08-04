@@ -2,9 +2,9 @@
 #define SMF_QUEUE_H
 
 typedef enum {
-   SMF_WRITE,    // SMF書き込み操作
-   SMF_READ,     // SMF読み込み操作
-   SMF_ERASE     // SMF消去操作
+   SMF_WRITE = 0x00,    // SMF書き込み操作
+   SMF_READ = 0x01,     // SMF読み込み操作
+   SMF_ERASE = 0x02     // SMF消去操作
 } FunctionType;
 
 /*
@@ -20,10 +20,10 @@ typedef struct {
 } MissionTypeStruct;
 
 typedef struct {
-    FunctionType   func_type;
     int8 mission_id; 
     int32 src;
     int32 size;
+    FunctionType   func_type;
 } SmfDataStruct;
 
 #define SMF_DATA_SIZE 16

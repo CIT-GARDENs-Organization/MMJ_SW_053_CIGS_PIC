@@ -56,12 +56,12 @@ void mode_sweep_port1(unsigned int8 uplinkcmd);
 #define ID_MEAS_ENVIRONMENT 0xA4
 #define ID_MEAS_ENVIRONMENT_DEBUG 0xA5
 
-void mode_meas_iv(unsigned int8 *uplinkcmd[]);
-void mode_meas_iv_curr_select(unsigned int8 *uplinkcmd[]);
-void mode_meas_iv_pd_select(unsigned int8 *uplinkcmd[]);
-void mode_meas_iv_curr_and_pd_select(unsigned int8 *uplinkcmd[]);
-void mode_meas_environment(unsigned int8 *uplinkcmd[]);
-void mode_meas_environment_debug(unsigned int8 *uplinkcmd[]);
+void mode_meas_iv(unsigned int8 uplinkcmd[]);
+void mode_meas_iv_curr_select(unsigned int8 uplinkcmd[]);
+void mode_meas_iv_pd_select(unsigned int8 uplinkcmd[]);
+void mode_meas_iv_curr_and_pd_select(unsigned int8 uplinkcmd[]);
+void mode_meas_environment(unsigned int8 uplinkcmd[]);
+void mode_meas_environment_debug(unsigned int8 uplinkcmd[]);
 
 typedef struct {
     unsigned int8 id; // Command ID
@@ -73,7 +73,7 @@ typedef struct {
     unsigned int8 is_finished; // Flag to indicate if the measurement is finished
 } MEAS_IV_CMD;
 
-MEAS_IV_CMD make_meas_iv_cmd(unsigned int8 *uplinkcmd[]);
+MEAS_IV_CMD make_meas_iv_cmd(unsigned int8 uplinkcmd[]);
 
 
 

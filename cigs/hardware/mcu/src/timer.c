@@ -42,6 +42,12 @@ unsigned int32 get_current_sec()
    return sec;
 }
 
+unsigned int16 get_current_msec()
+{
+   // Assuming subsec is in deci-seconds (0.01 sec)
+   return (subsec / 10); // Convert deci-seconds to milliseconds
+}
+
 unsigned int16 get_current_day()
 {
    return day;

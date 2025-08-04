@@ -1,4 +1,7 @@
-#ifndef MMJ_CIGS_SMF_H
+#ifndef MMJ_C// カウンター管理関数
+void update_misf_counters(int8 mission_id, int16 transfer_size);
+void reset_misf_counters(int8 mission_id);
+void print_misf_counter_status(int8 mission_id);_SMF_H
 #define MMJ_CIGS_SMF_H
 
 #include "mmj_cigs_smf.h"
@@ -10,6 +13,10 @@
 void smf_write(SmfDataStruct *smf_data);
 void smf_read(SmfDataStruct *smf_data);
 void smf_erase(SmfDataStruct *smf_data);
+
+// カウンター管理関数
+void update_misf_counters(int8 mission_id, int32 transfer_size);
+void reset_misf_counters(int8 mission_id);
 
 
 

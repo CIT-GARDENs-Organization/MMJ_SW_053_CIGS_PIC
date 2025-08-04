@@ -1,7 +1,7 @@
 #include "mmj_cigs_flash.h"                           // 同じフォルダのヘッダー
 #include "../../system/mmj_cigs_config.h"             // システム設定
 #include "../../../lib/device/mt25q.h"                // デバイスライブラリ
-
+#include "../../../lib/tool/calc_tools.h"              // ツールライブラリ
 void misf_init()
 {
     fprintf(PC, "MISSION FLASH Initialize\r\n");
@@ -49,18 +49,17 @@ void misf_init()
     read_data_bytes(mis_fm, ADDRESS_MANEGE_START, readdata, PACKET_SIZE); // Read the PICLOG data header
     
     // Update the flash data header with the read data
-    smf_piclog_use_counter = ((unsigned int32)readdata[0] << 24) | ((unsigned int32)readdata[1] << 16) | ((unsigned int32)readdata[2] << 8) | ((unsigned int32)readdata[3]);
+    smf_piclog_use_counter = msb_array_to_int32(readdata, 0);
     smf_piclog_loop_counter = readdata[4];
-    smf_meas_use_counter = ((unsigned int32)readdata[5] << 24) |((unsigned int32)readdata[6] << 16) |((unsigned int32)readdata[7] << 8) | ((unsigned int32)readdata[8]);
+    smf_meas_use_counter = msb_array_to_int32(readdata, 5);
     smf_meas_loop_counter = readdata[9];
-
-    misf_piclog_use_counter = ((unsigned int32)readdata[10] << 24) |((unsigned int32)readdata[11] << 16) |((unsigned int32)readdata[12] << 8) | ((unsigned int32)readdata[13]);
+    misf_piclog_use_counter = msb_array_to_int32(readdata, 10);
     misf_piclog_loop_counter = readdata[14];
-    misf_piclog_uncopyed_counter = ((unsigned int32)readdata[15] << 24) |((unsigned int32)readdata[16] << 16) |((unsigned int32)readdata[17] << 8) | ((unsigned int32)readdata[18]);
-    misf_piclog_write_counter = ((unsigned int32)readdata[19] << 24) |((unsigned int32)readdata[20] << 16) |((unsigned int32)readdata[21] << 8) | ((unsigned int32)readdata[22]);
-    misf_meas_use_counter = ((unsigned int32)readdata[23] << 24) |((unsigned int32)readdata[24] << 16) |((unsigned int32)readdata[25] << 8) | ((unsigned int32)readdata[26]);
+    misf_piclog_uncopyed_counter = msb_array_to_int32(readdata, 15);
+    misf_piclog_write_counter = msb_array_to_int32(readdata, 19);
+    misf_meas_use_counter = msb_array_to_int32(readdata, 23);
     misf_meas_loop_counter = readdata[27];
-    misf_meas_uncopyed_counter = ((unsigned int32)readdata[28] << 24) |((unsigned int32)readdata[29] << 16) |((unsigned int32)readdata[30] << 8) | ((unsigned int32)readdata[31]);
+    misf_meas_uncopyed_counter = msb_array_to_int32(readdata, 28);
 
     fprintf(PC, "\t| SMF  | PICLOG | Use Counter      : 0x%08LX\r\n", smf_piclog_use_counter);
     fprintf(PC, "\t| SMF  | PICLOG | Loop Counter     : 0x%02X\r\n", smf_piclog_loop_counter);
@@ -155,3 +154,14 @@ void write_misf_address_area()
 
 }
 
+void add_smf_queue(unsigned int8 mission_id)
+{
+    SmfDataStruct data;
+    MissionTypeStruct mis_struct = getMissionTypeStruct(mission_id);
+    data.func_type = SMF_WRITE;
+    data.mission_id = mission_id;
+    data.src = ADDRESS_MISF_MEASUREMENT_START + misf_meas_use_counter - misf_meas_uncopyed_counter; // コピー元のMIS_FMのアドレス
+    data.size = misf_meas_uncopyed_counter; // コピーするデータのサイズ
+
+    enqueue_smf_data(&data);
+}

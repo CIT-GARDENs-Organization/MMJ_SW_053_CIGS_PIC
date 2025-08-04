@@ -9,7 +9,7 @@ void main()
    
    //io_init();
    setup_uart_to_boss();
-   //setup_timer();
+   setup_timer();
    ad7490_init();
    misf_init();
    
@@ -18,7 +18,7 @@ void main()
    int1 is_finished = FALSE;
    fprintf(PC,"____CIGS PIC Start Operation_____\r\n\r\n");
    
-
+   output_low(EN_NPWR);
    
    
    fprintf(PC,"waiting for BOSS PIC command");

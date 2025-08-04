@@ -3,7 +3,7 @@
 
 // _________ values _________
 //#define PARAMETER_LENGTH 8
-#include "../lib/communication/mission_tools.h"
+#include "../../../lib/communication/mission_tools.h"
 
 
 
@@ -17,9 +17,9 @@ void handle_smf_available(Command *command);
 
 
 
-void execute_mission(unsigned int8 *content);
+void execute_mission(int8 *content);
 
-unsigned int8 duration_sec = 30; // duration sec for mission
+int8 duration_sec = 30; // duration sec for mission
 
 
 #endif

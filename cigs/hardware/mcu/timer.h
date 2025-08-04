@@ -17,6 +17,7 @@ volatile unsigned int16 day = 0;
 
 // __________ functions _________
 unsigned int32 get_current_sec();
+unsigned int16 get_current_msec();
 unsigned int16 get_current_day();
 void set_current_sec(unsigned int32 new_sec);
 

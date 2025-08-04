@@ -1,5 +1,5 @@
 #include "mmj_cigs_mode_flash.h"                      // 同じフォルダのヘッダー
-#include "../../core/measurement/mmj_cigs_func.h"          // 測定機能
+#include "../../core/measurement/mmj_cigs_iv.h"          // 測定機能
 #include "../../../lib/tool/smf_queue.h"                   // ツールライブラリ
 #include "../../../lib/device/mt25q.h"                     // デバイスライブラリ
 #include "../../core/storage/mmj_cigs_flash.h"             // ストレージ機能

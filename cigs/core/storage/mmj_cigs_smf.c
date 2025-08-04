@@ -57,7 +57,7 @@ void write_smf_header()
     if (!crc_valid)
     {
         fprintf(PC, "Error: CRC verification failed after %d attempts\r\n", CRC_RETRY_COUNT);
-        return; 
+        // return; 
     }
 }
 
@@ -122,6 +122,10 @@ void smf_write(SmfDataStruct *smf_data)
         loop_count++;
         used_size = 0;
         data_write_addr = data_region_start;
+        
+        // Reset counters when loop occurs
+        reset_misf_counters(smf_data->mission_id);
+        
         unsigned int32 erase_ptr = data_region_start;
         while (erase_ptr < data_region_end)
         {
@@ -145,6 +149,10 @@ void smf_write(SmfDataStruct *smf_data)
 
         read_data_bytes(mis_fm, src_addr, buffer, chunk);
         write_data_bytes(smf, data_write_addr, buffer, chunk);
+        for (unsigned int32 i = 0; i < chunk; i++)
+        {
+            fprintf(PC, "%02X ", buffer[i]);
+        }
         src_addr += chunk;
         data_write_addr += chunk;
         used_size += chunk;
@@ -152,6 +160,10 @@ void smf_write(SmfDataStruct *smf_data)
     }
     // write size area
     write_smf_header();
+    
+    // Update MISF counters for transferred data
+    update_misf_counters(smf_data->mission_id, write_size);
+    
     fprintf(PC, "used_size = %ld\r\n", used_size);
     fprintf(PC, "loop_count = %u\r\n\r\n", loop_count);
 
@@ -256,6 +268,76 @@ void update_smf_partition_by_mission_id(int8 mission_id, int32 used_size, int32 
         partition->loop_counter = loop_counter;
         fprintf(PC, "Updated partition for mission_id %02X: used_size=%ld, loop_counter=%ld\r\n", 
                 mission_id, used_size, loop_counter);
+    }
+}
+
+// カウンター更新関数
+void update_misf_counters(int8 mission_id, int32 transfer_size)
+{
+    switch(mission_id)
+    {
+        case 0x01: // CIGS_MEASURE_DATA
+            misf_meas_uncopyed_counter += transfer_size;
+            fprintf(PC, "MISF Counter Update - Measurement: +%ld, Total: %lu\r\n", 
+                    transfer_size, misf_meas_uncopyed_counter);
+            break;
+            
+        case 0x02: // CIGS_PICLOG  
+            misf_piclog_uncopyed_counter += transfer_size;
+            fprintf(PC, "MISF Counter Update - Piclog: +%ld, Total: %lu\r\n", 
+                    transfer_size, misf_piclog_uncopyed_counter);
+            break;
+            
+        default:
+            fprintf(PC, "Warning: Unknown mission_id %02X for counter update\r\n", mission_id);
+            break;
+    }
+}
+
+// カウンター初期化関数
+void reset_misf_counters(int8 mission_id)
+{
+    switch(mission_id)
+    {
+        case 0x01: // CIGS_MEASURE_DATA
+            misf_meas_uncopyed_counter = 0;
+            fprintf(PC, "Reset misf_meas_uncopyed_counter\r\n");
+            break;
+            
+        case 0x02: // CIGS_PICLOG
+            misf_piclog_uncopyed_counter = 0;
+            fprintf(PC, "Reset misf_piclog_uncopyed_counter\r\n");
+            break;
+            
+        default:
+            fprintf(PC, "Warning: Unknown mission_id %02X for counter reset\r\n", mission_id);
+            break;
+    }
+}
+
+// カウンター状態表示関数
+void print_misf_counter_status(int8 mission_id)
+{
+    switch(mission_id)
+    {
+        case 0x01: // CIGS_MEASURE_DATA
+            fprintf(PC, "MISF Measurement Counters:\r\n");
+            fprintf(PC, "  Use Counter: %lu\r\n", misf_meas_use_counter);
+            fprintf(PC, "  Uncopied Counter: %lu\r\n", misf_meas_uncopyed_counter);
+            fprintf(PC, "  Loop Counter: %u\r\n", misf_meas_loop_counter);
+            break;
+            
+        case 0x02: // CIGS_PICLOG
+            fprintf(PC, "MISF Piclog Counters:\r\n");
+            fprintf(PC, "  Use Counter: %lu\r\n", misf_piclog_use_counter);
+            fprintf(PC, "  Uncopied Counter: %lu\r\n", misf_piclog_uncopyed_counter);
+            fprintf(PC, "  Loop Counter: %u\r\n", misf_piclog_loop_counter);
+            fprintf(PC, "  Write Counter: %u\r\n", misf_piclog_write_counter);
+            break;
+            
+        default:
+            fprintf(PC, "Warning: Unknown mission_id %02X for counter status\r\n", mission_id);
+            break;
     }
 }
 

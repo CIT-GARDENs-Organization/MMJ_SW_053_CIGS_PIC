@@ -34,7 +34,7 @@
 #include "../../lib/communication/mission_tools.h"
 
 // レベル6: コア機能ヘッダー
-#include "../core/measurement/mmj_cigs_func.h"
+#include "../core/measurement/mmj_cigs_iv.h"
 #include "../core/storage/mmj_cigs_flash.h"
 #include "../core/logging/mmj_cigs_piclog.h"
 
@@ -65,7 +65,7 @@
 #include "../../lib/communication/mission_tools.c"
 
 // コア機能実装ファイル
-#include "../core/measurement/mmj_cigs_func.c"
+#include "../core/measurement/mmj_cigs_iv.c"
 #include "../core/logging/mmj_cigs_piclog.c"
 #include "../core/storage/mmj_cigs_smf.c"
 #include "../core/storage/mmj_cigs_flash.c"

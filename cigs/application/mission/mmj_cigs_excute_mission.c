@@ -1,19 +1,20 @@
+#include "../../system/mmj_cigs_config.h"             // システム設定
+#include "../../../lib/communication/value_status.h"    // ステータス定義
 #include "mmj_cigs_excute_mission.h"                  // 同じフォルダのヘッダー
 #include "mmj_cigs_mode_mission.h"                    // 同じフォルダのヘッダー
 #include "mmj_cigs_mode_flash.h"                      // 同じフォルダのヘッダー
 #include "../../../lib/tool/smf_queue.h"                   // ツールライブラリ
 #include "../../core/storage/mmj_cigs_smf.h"             // ストレージ機能
 #include "../../../lib/communication/typedef_content.h"    // 通信ライブラリ
-#include "../../../lib/tool/smf_queue.h"                   // ツールライブラリ
 #include "../../../lib/communication/mission_tools.h"      // ミッションツール
-#include "../../core/measurement/mmj_cigs_func.h"          // 測定機能
+#include "../../core/measurement/mmj_cigs_iv.h"          // 測定機能
 #include "../../../lib/communication/communication_driver.h" // 通信ドライバー
 
 
-void execute_mission(unsigned int8 *content)
+void execute_mission(int8 *content)
 {
    // record to executed mission list
-   unsigned int8 command_id = content[0];
+   int8 command_id = content[0];
    //unsigned int8 *parameter = &content[1];
       
    // execution mission
@@ -22,20 +23,20 @@ void execute_mission(unsigned int8 *content)
    switch(command_id)
    {
       case 0x10: // example command
-         mode_dummy(content);
+         // mode_dummy(content);
          //mode_iv_meas_adc();
          break;
       case 0x11:
-         mode_test_iv(content);
+         // mode_test_iv(content);
          break;
       case 0x12:
-         test_adc();
+         // test_adc();
          break;
       case 0x01:
          //mode_measure(content); // check if the flash is connected
          break;
       case 0x13:
-         mode_sweep_port1(content[1]); // Sweep Port 1 with the given step
+         // mode_sweep_port1(content[1]); // Sweep Port 1 with the given step
          break;
 
       // ___________________ MISF Commands ______________________
@@ -89,6 +90,13 @@ void execute_mission(unsigned int8 *content)
       case ID_SMF_RESET:
          mode_smf_address_reset(content);
          break;
+         
+         
+      // ________________MEAS________________________________
+      case ID_MEAS_IV:
+         mode_meas_iv(content);
+         break;
+            
       default:
          fprintf(PC, "\t\t-> Invalid CMD ID!\r\n");
          
@@ -173,15 +181,17 @@ void handle_smf_available(Command *command) {
          SmfDataStruct *smf_data = dequeue_smf_data();
          if (smf_data != 0x00) {
             int8 func_type = smf_data->func_type;
-            if (func_type == 0) {  // SMF_WRITE
+            fprintf(PC, "func type : 0x%02X",func_type);
+            if (func_type == 0x00) {  // SMF_WRITE
                fprintf(PC, "\t\t-> Executing SMF WRITE (single)\r\n");
                smf_write(smf_data);
             }
-            if (func_type == 1) {  // SMF_READ
+            if (func_type == 0x01) {  // SMF_READ
                fprintf(PC, "\t\t-> Executing SMF READ (single)\r\n");
                smf_read(smf_data);
             }
-            if (func_type == 2) {  // SMF_ERASE
+
+            if (func_type == 0x02) {  // SMF_ERASE
                fprintf(PC, "\t\t-> Executing SMF ERASE (single)\r\n");
                smf_erase(smf_data);
             }
