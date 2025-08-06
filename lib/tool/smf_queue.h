@@ -17,7 +17,7 @@ typedef enum {
 typedef struct {
    unsigned int32 start_address;
    unsigned int32 end_address;
-} MissionTypeStruct;
+} SmfMissionStruct;
 
 typedef struct {
     int8 mission_id; 
@@ -37,9 +37,7 @@ typedef struct {
 
 volatile SmfQueueStruct smf_queue = {0};
 
-
 // ___________________ functions ________________
-
 
 void enqueue_smf_data(SmfDataStruct *data);
 
@@ -51,7 +49,7 @@ void remove_smf_data(void);
 
 int1 is_empty_smf_data(void);
 
-MissionTypeStruct getMissionTypeStruct(FunctionType func_type);
+SmfMissionStruct getMissionTypeStruct(FunctionType func_type);
 
 #endif
 

@@ -11,9 +11,10 @@ void enqueue_smf_data(SmfDataStruct *data)
       
    else
    {
-      smf_queue.smf_data[smf_queue.smf_data_tail].func_type = data->func_type;
-      smf_queue.smf_data[smf_queue.smf_data_tail].src       = data->src;
-      smf_queue.smf_data[smf_queue.smf_data_tail].size      = data->size;
+      smf_queue.smf_data[smf_queue.smf_data_tail].mission_id = data->mission_id;
+      smf_queue.smf_data[smf_queue.smf_data_tail].func_type  = data->func_type;
+      smf_queue.smf_data[smf_queue.smf_data_tail].src        = data->src;
+      smf_queue.smf_data[smf_queue.smf_data_tail].size       = data->size;
 
       smf_queue.smf_data_tail = next_tail;
    }
@@ -41,9 +42,9 @@ int1 is_empty_smf_data(void)
 }
 
 
-MissionTypeStruct getMissionTypeStruct(mission_id)
+SmfMissionStruct getMissionTypeStruct(mission_id)
 {
-   MissionTypeStruct mis_struct = {0};
+   SmfMissionStruct mis_struct = {0};
    
    if (mission_id == ID_CIGS_DATA_TABLE)
    {

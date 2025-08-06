@@ -1,8 +1,108 @@
 #include "mmj_cigs_smf.h"  
 #include "mmj_cigs_flash.h"
+#include "mmj_cigs_mission_manager.h"    // CIGS固有のミッション管理
 #include "../../../lib/tool/smf_queue.h"         // システム設定 
 #include "../../../lib/tool/calc_tools.h"        // SMF処理関数 
 #include "../../../lib/tool/mmj_smf_memorymap.h" 
+
+// 関数プロトタイプ宣言（CCS C対応）
+CigsMissionStruct get_cigs_mission_struct(int8 mission_id);
+
+// ローカル実装（CCS Cリンクエラー回避）
+CigsMissionStruct get_cigs_mission_struct_local(int8 mission_id)
+{
+    CigsMissionStruct mis_struct = {0};
+    
+    switch(mission_id)
+    {
+        case 0x01: // ID_CIGS_MEASURE_DATA
+            mis_struct.mission_id = 0x01;
+            mis_struct.start_address = ADDRESS_MISF_MEASUREMENT_START;
+            mis_struct.end_address = ADDRESS_MISF_MEASUREMENT_END;
+            break;
+            
+        case 0x02: // ID_CIGS_PICLOG
+            mis_struct.mission_id = 0x02;
+            mis_struct.start_address = ADDRESS_MISF_PICLOG_DATA_START;
+            mis_struct.end_address = ADDRESS_MISF_PICLOG_DATA_END;
+            break;
+            
+        default:
+            fprintf(PC, "Error: Unknown CIGS mission_id %02X\r\n", mission_id);
+            break;
+    }
+    
+    return mis_struct;
+}
+
+// ローカルカウンター管理関数
+void update_cigs_uncopyed_counter_local(int8 mission_id, int32 size_change)
+{
+    switch(mission_id)
+    {
+        case 0x01: // CIGS_MEASURE_DATA
+            if (size_change > 0) {
+                misf_meas_uncopyed_counter += size_change;
+                fprintf(PC, "CIGS Mission %02X: +%ld uncopied, Total: %lu\r\n", 
+                        mission_id, size_change, misf_meas_uncopyed_counter);
+            } else if (size_change < 0) {
+                int32 decrease = -size_change;
+                if (misf_meas_uncopyed_counter >= decrease) {
+                    misf_meas_uncopyed_counter -= decrease;
+                    fprintf(PC, "CIGS Mission %02X: -%ld uncopied, Remaining: %lu\r\n", 
+                            mission_id, decrease, misf_meas_uncopyed_counter);
+                } else {
+                    fprintf(PC, "Warning: CIGS Mission %02X cannot decrease below 0 (current: %lu, requested: %ld)\r\n", 
+                            mission_id, misf_meas_uncopyed_counter, decrease);
+                    misf_meas_uncopyed_counter = 0;
+                }
+            }
+            break;
+            
+        case 0x02: // CIGS_PICLOG
+            if (size_change > 0) {
+                misf_piclog_uncopyed_counter += size_change;
+                fprintf(PC, "CIGS Mission %02X: +%ld uncopied, Total: %lu\r\n", 
+                        mission_id, size_change, misf_piclog_uncopyed_counter);
+            } else if (size_change < 0) {
+                int32 decrease = -size_change;
+                if (misf_piclog_uncopyed_counter >= decrease) {
+                    misf_piclog_uncopyed_counter -= decrease;
+                    fprintf(PC, "CIGS Mission %02X: -%ld uncopied, Remaining: %lu\r\n", 
+                            mission_id, decrease, misf_piclog_uncopyed_counter);
+                } else {
+                    fprintf(PC, "Warning: CIGS Mission %02X cannot decrease below 0 (current: %lu, requested: %ld)\r\n", 
+                            mission_id, misf_piclog_uncopyed_counter, decrease);
+                    misf_piclog_uncopyed_counter = 0;
+                }
+            }
+            break;
+            
+        default:
+            fprintf(PC, "Warning: Unknown mission_id %02X for counter update\r\n", mission_id);
+            break;
+    }
+}
+
+void reset_cigs_uncopyed_counter_local(int8 mission_id)
+{
+    switch(mission_id)
+    {
+        case 0x01: // CIGS_MEASURE_DATA
+            misf_meas_uncopyed_counter = 0;
+            fprintf(PC, "CIGS Mission %02X: uncopied counter reset\r\n", mission_id);
+            break;
+            
+        case 0x02: // CIGS_PICLOG
+            misf_piclog_uncopyed_counter = 0;
+            fprintf(PC, "CIGS Mission %02X: uncopied counter reset\r\n", mission_id);
+            break;
+            
+        default:
+            fprintf(PC, "Warning: Unknown mission_id %02X for counter reset\r\n", mission_id);
+            break;
+    }
+} 
 
 #define MAX_READ_SIZE 64
 #define SIZE_AREA_SIZE 0x1000
@@ -69,10 +169,10 @@ void smf_write(SmfDataStruct *smf_data)
     
     int8 buffer[PACKET_SIZE];
 
-    MissionTypeStruct mission_type = getMissionTypeStruct(smf_data->mission_id);
+    CigsMissionStruct mission_struct = get_cigs_mission_struct_local(smf_data->mission_id);
     status[1] = smf_data->mission_id; // `i` is assigned mis mcu status flag. so mission_flag start `i+1`
-    unsigned int32 mis_start_address = mission_type.start_address;
-    unsigned int32 mis_end_address = mission_type.end_address;
+    unsigned int32 mis_start_address = mission_struct.start_address;
+    unsigned int32 mis_end_address = mission_struct.end_address;
     unsigned int32 write_src = smf_data->src;
     unsigned int32 write_size = smf_data->size;
     fprintf(PC, "In SMF mission data start   address: %LX\r\n", mis_start_address);
@@ -123,8 +223,8 @@ void smf_write(SmfDataStruct *smf_data)
         used_size = 0;
         data_write_addr = data_region_start;
         
-        // Reset counters when loop occurs
-        reset_misf_counters(smf_data->mission_id);
+        // ループ発生時にuncopied counterをリセット
+        reset_cigs_uncopyed_counter_local(smf_data->mission_id);
         
         unsigned int32 erase_ptr = data_region_start;
         while (erase_ptr < data_region_end)
@@ -161,8 +261,8 @@ void smf_write(SmfDataStruct *smf_data)
     // write size area
     write_smf_header();
     
-    // Update MISF counters for transferred data
-    update_misf_counters(smf_data->mission_id, write_size);
+    // SMF書き込み成功後、uncopied counterを減らす
+    update_cigs_uncopyed_counter_local(smf_data->mission_id, -write_size);
     
     fprintf(PC, "used_size = %ld\r\n", used_size);
     fprintf(PC, "loop_count = %u\r\n\r\n", loop_count);
@@ -178,7 +278,7 @@ void smf_read(SmfDataStruct *smf_data)
 
     int8 buffer[PACKET_SIZE];
 
-    MissionTypeStruct mission_type = getMissionTypeStruct(smf_data->mission_id);
+    CigsMissionStruct mission_struct = get_cigs_mission_struct_local(smf_data->mission_id);
     status[1] = smf_data->mission_id; // `i` is assigned mis mcu status flag. so mission_flag start `i+1`
     unsigned int32 read_src = smf_data->src;
     unsigned int32 read_size = smf_data->size;
@@ -207,10 +307,10 @@ void smf_erase(SmfDataStruct *smf_data)
     fprintf(PC, "\r\n____________________\r\n");
     fprintf(PC, "___Start smf_erase____\r\n");
 
-    MissionTypeStruct mission_type = getMissionTypeStruct(smf_data->mission_id);
+    CigsMissionStruct mission_struct = get_cigs_mission_struct_local(smf_data->mission_id);
     status[1] = smf_data->mission_id; // `i` is assigned mis mcu status flag. so mission_flag start `i+1`
-    unsigned int32 mis_start_address = mission_type.start_address;
-    unsigned int32 mis_end_address = mission_type.end_address;
+    unsigned int32 mis_start_address = mission_struct.start_address;
+    unsigned int32 mis_end_address = mission_struct.end_address;
     unsigned int32 erase_src = smf_data->src;
     unsigned int32 erase_size = smf_data->size;
     fprintf(PC, "In SMF mission data start   address: %LX\r\n", mis_start_address);
@@ -268,76 +368,6 @@ void update_smf_partition_by_mission_id(int8 mission_id, int32 used_size, int32 
         partition->loop_counter = loop_counter;
         fprintf(PC, "Updated partition for mission_id %02X: used_size=%ld, loop_counter=%ld\r\n", 
                 mission_id, used_size, loop_counter);
-    }
-}
-
-// カウンター更新関数
-void update_misf_counters(int8 mission_id, int32 transfer_size)
-{
-    switch(mission_id)
-    {
-        case 0x01: // CIGS_MEASURE_DATA
-            misf_meas_uncopyed_counter += transfer_size;
-            fprintf(PC, "MISF Counter Update - Measurement: +%ld, Total: %lu\r\n", 
-                    transfer_size, misf_meas_uncopyed_counter);
-            break;
-            
-        case 0x02: // CIGS_PICLOG  
-            misf_piclog_uncopyed_counter += transfer_size;
-            fprintf(PC, "MISF Counter Update - Piclog: +%ld, Total: %lu\r\n", 
-                    transfer_size, misf_piclog_uncopyed_counter);
-            break;
-            
-        default:
-            fprintf(PC, "Warning: Unknown mission_id %02X for counter update\r\n", mission_id);
-            break;
-    }
-}
-
-// カウンター初期化関数
-void reset_misf_counters(int8 mission_id)
-{
-    switch(mission_id)
-    {
-        case 0x01: // CIGS_MEASURE_DATA
-            misf_meas_uncopyed_counter = 0;
-            fprintf(PC, "Reset misf_meas_uncopyed_counter\r\n");
-            break;
-            
-        case 0x02: // CIGS_PICLOG
-            misf_piclog_uncopyed_counter = 0;
-            fprintf(PC, "Reset misf_piclog_uncopyed_counter\r\n");
-            break;
-            
-        default:
-            fprintf(PC, "Warning: Unknown mission_id %02X for counter reset\r\n", mission_id);
-            break;
-    }
-}
-
-// カウンター状態表示関数
-void print_misf_counter_status(int8 mission_id)
-{
-    switch(mission_id)
-    {
-        case 0x01: // CIGS_MEASURE_DATA
-            fprintf(PC, "MISF Measurement Counters:\r\n");
-            fprintf(PC, "  Use Counter: %lu\r\n", misf_meas_use_counter);
-            fprintf(PC, "  Uncopied Counter: %lu\r\n", misf_meas_uncopyed_counter);
-            fprintf(PC, "  Loop Counter: %u\r\n", misf_meas_loop_counter);
-            break;
-            
-        case 0x02: // CIGS_PICLOG
-            fprintf(PC, "MISF Piclog Counters:\r\n");
-            fprintf(PC, "  Use Counter: %lu\r\n", misf_piclog_use_counter);
-            fprintf(PC, "  Uncopied Counter: %lu\r\n", misf_piclog_uncopyed_counter);
-            fprintf(PC, "  Loop Counter: %u\r\n", misf_piclog_loop_counter);
-            fprintf(PC, "  Write Counter: %u\r\n", misf_piclog_write_counter);
-            break;
-            
-        default:
-            fprintf(PC, "Warning: Unknown mission_id %02X for counter status\r\n", mission_id);
-            break;
     }
 }
 

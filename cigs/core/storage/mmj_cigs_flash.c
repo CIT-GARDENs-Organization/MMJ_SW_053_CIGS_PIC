@@ -2,6 +2,35 @@
 #include "../../system/mmj_cigs_config.h"             // システム設定
 #include "../../../lib/device/mt25q.h"                // デバイスライブラリ
 #include "../../../lib/tool/calc_tools.h"              // ツールライブラリ
+
+// Global counter instance
+CounterUnion cigs_counters = {0};
+
+void init_cigs_counters(void)
+{
+    // カウンター全体をクリア
+    for (int8 i = 0; i < 64; i++) {
+        cigs_counters.raw_data[i] = 0;
+    }
+    fprintf(PC, "CIGS Counters initialized (64 bytes cleared)\r\n");
+}
+
+void print_counter_status(void)
+{
+    fprintf(PC, "=== CIGS Counter Status ===\r\n");
+    fprintf(PC, "SMF Piclog Use:     %ld\r\n", smf_piclog_use_counter);
+    fprintf(PC, "SMF Piclog Loop:    %u\r\n", smf_piclog_loop_counter);
+    fprintf(PC, "SMF Meas Use:       %ld\r\n", smf_meas_use_counter);
+    fprintf(PC, "SMF Meas Loop:      %u\r\n", smf_meas_loop_counter);
+    fprintf(PC, "MISF Piclog Use:    %ld\r\n", misf_piclog_use_counter);
+    fprintf(PC, "MISF Piclog Loop:   %u\r\n", misf_piclog_loop_counter);
+    fprintf(PC, "MISF Piclog Uncopy: %ld\r\n", misf_piclog_uncopyed_counter);
+    fprintf(PC, "MISF Piclog Write:  %u\r\n", misf_piclog_write_counter);
+    fprintf(PC, "MISF Meas Use:      %ld\r\n", misf_meas_use_counter);
+    fprintf(PC, "MISF Meas Loop:     %u\r\n", misf_meas_loop_counter);
+    fprintf(PC, "MISF Meas Uncopy:   %ld\r\n", misf_meas_uncopyed_counter);
+    fprintf(PC, "===========================\r\n");
+}
 void misf_init()
 {
     fprintf(PC, "MISSION FLASH Initialize\r\n");
@@ -157,7 +186,7 @@ void write_misf_address_area()
 void add_smf_queue(unsigned int8 mission_id)
 {
     SmfDataStruct data;
-    MissionTypeStruct mis_struct = getMissionTypeStruct(mission_id);
+    SmfMissionStruct mis_struct = getMissionTypeStruct(mission_id);
     data.func_type = SMF_WRITE;
     data.mission_id = mission_id;
     data.src = ADDRESS_MISF_MEASUREMENT_START + misf_meas_use_counter - misf_meas_uncopyed_counter; // コピー元のMIS_FMのアドレス

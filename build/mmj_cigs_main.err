@@ -1,11 +1,104 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 04-8-25 at 15:55
->>> Warning 225 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.h" Line 6(20,55): Duplicate #define
->>> Warning 203 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_flash.c" Line 246(1,1): Condition always TRUE
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_excute_mission.h" Line 22(6,18): Variable never used:   duration_sec
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 173(23,35): Variable never used:   mission_type
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 160(23,33): Variable never used:   mis_struct
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_mission.c" Line 44(19,27): Variable never used:   readdata
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main.c" Line 47(18,22): Variable never used:   flag
-      Memory usage:   ROM=35%      RAM=10% - 75%
-      0 Errors,  7 Warnings.
-Build Successful.
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 05-8-25 at 01:06
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 323(98,99): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 323(98,99): Macro is defined recursivly  "misf_meas_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 329(34,35): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 329(34,35): Macro is defined recursivly  "misf_meas_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 331(39,40): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 331(39,40): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 347(94,95): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 347(94,95): Macro is defined recursivly  "misf_meas_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 351(30,31): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 351(30,31): Macro is defined recursivly  "misf_meas_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 353(35,36): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 353(35,36): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 559(98,99): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 559(98,99): Macro is defined recursivly  "misf_meas_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 561(34,35): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 561(34,35): Macro is defined recursivly  "misf_meas_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 562(39,40): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 562(39,40): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 574(94,95): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 574(94,95): Macro is defined recursivly  "misf_meas_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 576(30,31): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 576(30,31): Macro is defined recursivly  "misf_meas_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 577(35,36): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\measurement\mmj_cigs_iv.c" Line 577(35,36): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 26(92,93): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 26(92,93): Macro is defined recursivly  "misf_piclog_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 37(28,29): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 37(28,29): Macro is defined recursivly  "misf_piclog_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 38(33,34): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 38(33,34): Macro is defined recursivly  "misf_piclog_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 39(30,31): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 39(30,31): Macro is defined recursivly  "misf_piclog_write_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 42(34,35): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 42(34,35): Macro is defined recursivly  "misf_piclog_write_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 43(81,82): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 43(81,82): Macro is defined recursivly  "misf_piclog_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 45(34,35): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.c" Line 45(34,35): Macro is defined recursivly  "misf_piclog_write_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 45(43,44): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 45(43,44): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 47(76,77): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 47(76,77): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 50(47,48): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 50(47,48): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 51(47,48): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 51(47,48): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 53(77,78): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 53(77,78): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 51 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 54(19,23): A numeric expression must appear here
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 56(67,68): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 56(67,68): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 57(47,48): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 57(47,48): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 64(45,46): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 64(45,46): Macro is defined recursivly  "misf_piclog_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 66(78,79): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 66(78,79): Macro is defined recursivly  "misf_piclog_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 69(49,50): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 69(49,50): Macro is defined recursivly  "misf_piclog_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 70(49,50): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 70(49,50): Macro is defined recursivly  "misf_piclog_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 72(79,80): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 72(79,80): Macro is defined recursivly  "misf_piclog_uncopyed_counter"
+*** Error 51 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 73(19,23): A numeric expression must appear here
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 75(69,70): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 75(69,70): Macro is defined recursivly  "misf_piclog_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 76(49,50): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 76(49,50): Macro is defined recursivly  "misf_piclog_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 92(39,40): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 92(39,40): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 97(41,42): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 97(41,42): Macro is defined recursivly  "misf_piclog_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 21(70,71): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 21(70,71): Macro is defined recursivly  "smf_piclog_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 22(70,71): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 22(70,71): Macro is defined recursivly  "smf_piclog_loop_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 23(68,69): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 23(68,69): Macro is defined recursivly  "smf_meas_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 24(68,69): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 24(68,69): Macro is defined recursivly  "smf_meas_loop_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 25(71,72): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 25(71,72): Macro is defined recursivly  "misf_piclog_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 26(71,72): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 26(71,72): Macro is defined recursivly  "misf_piclog_loop_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 27(76,77): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 27(76,77): Macro is defined recursivly  "misf_piclog_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 28(72,73): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 28(72,73): Macro is defined recursivly  "misf_piclog_write_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 29(69,70): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 29(69,70): Macro is defined recursivly  "misf_meas_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 30(69,70): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 30(69,70): Macro is defined recursivly  "misf_meas_loop_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 31(74,75): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 31(74,75): Macro is defined recursivly  "misf_meas_uncopyed_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 81(27,28): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 81(27,28): Macro is defined recursivly  "smf_piclog_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 82(28,29): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 82(28,29): Macro is defined recursivly  "smf_piclog_loop_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 83(25,26): Element is not a member
+*** Error 131 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 83(25,26): Macro is defined recursivly  "smf_meas_use_counter"
+*** Error 56 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 84(26,27): Element is not a member
+      138 Errors,  0 Warnings.
+Build Failed.
