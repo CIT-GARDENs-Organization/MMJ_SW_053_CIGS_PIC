@@ -138,7 +138,7 @@ void handle_uplink_command(Command *command) {
 
    status[0] = EXECUTING_MISSION;
    execute_mission(command->content);
-   if (is_empty_smf_data())
+   if (is_empty_smf_queue())
       status[0] = FINISHED;
    else
       status[0] = SMF_USE_REQ;
@@ -175,7 +175,7 @@ void handle_smf_available(Command *command) {
 
       // キューが空になるまでループ処理
       int8 processed_count = 0;
-      while (!is_empty_smf_data()) {
+      while (!is_empty_smf_queue()) {
          fprintf(PC, "\t\t-> Processing SMF data [%d]\r\n", processed_count);
          
          SmfDataStruct *smf_data = dequeue_smf_data();

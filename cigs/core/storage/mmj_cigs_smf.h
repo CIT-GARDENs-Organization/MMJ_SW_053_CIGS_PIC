@@ -1,22 +1,19 @@
-#ifndef MMJ_C// カウンター管理関数
-void update_misf_counters(int8 mission_id, int16 transfer_size);
-void reset_misf_counters(int8 mission_id);
-void print_misf_counter_status(int8 mission_id);_SMF_H
+#ifndef MMJ_CIGS_SMF_H
 #define MMJ_CIGS_SMF_H
 
-#include "mmj_cigs_smf.h"
+#include "../../../lib/tool/smf_queue.h"  // FlashOperationStruct定義
 
 #define PACKET_SIZE 64  // パケットサイズ定義
 
-
-
-void smf_write(SmfDataStruct *smf_data);
-void smf_read(SmfDataStruct *smf_data);
-void smf_erase(SmfDataStruct *smf_data);
+// SMF操作関数
+void smf_write(FlashOperationStruct *smf_data);
+void smf_read(FlashOperationStruct *smf_data);
+void smf_erase(FlashOperationStruct *smf_data);
 
 // カウンター管理関数
 void update_misf_counters(int8 mission_id, int32 transfer_size);
 void reset_misf_counters(int8 mission_id);
+void print_misf_counter_status(int8 mission_id);
 
 
 
@@ -34,7 +31,7 @@ typedef struct {
     int32 write_bytes[4];
 } PartitionParam;
 
-PartitionParam param = {0};
+extern PartitionParam param;  // extern宣言に変更
 
 
 // MSB形式でpartition_headerに値を設定する関数

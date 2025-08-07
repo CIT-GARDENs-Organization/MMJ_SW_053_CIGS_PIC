@@ -2,60 +2,66 @@
 #include "mmj_smf_memorymap.h"
 
 
-void enqueue_smf_data(SmfDataStruct *data)
+void enqueue_flash_operation(FlashOperationStruct *data)
 {   
-   int8 next_tail = (smf_queue.smf_data_tail + 1) % SMF_DATA_SIZE;
+   int8 next_tail = (flash_queue.tail_index + 1) % SMF_QUEUE_SIZE;
 
-   if(next_tail == smf_queue.smf_data_head)
-      fprintf(PC, "SMF data list is full!!!\r\n");
+   if(next_tail == flash_queue.head_index)
+      printf("Flash queue is full!!!\r\n");
       
    else
    {
-      smf_queue.smf_data[smf_queue.smf_data_tail].func_type = data->func_type;
-      smf_queue.smf_data[smf_queue.smf_data_tail].src       = data->src;
-      smf_queue.smf_data[smf_queue.smf_data_tail].size      = data->size;
+      flash_queue.entries[flash_queue.tail_index].mission_id = data->mission_id;
+      flash_queue.entries[flash_queue.tail_index].func_type  = data->func_type;
+      flash_queue.entries[flash_queue.tail_index].src        = data->src;
+      flash_queue.entries[flash_queue.tail_index].size       = data->size;
+      flash_queue.entries[flash_queue.tail_index].write_mode = data->write_mode;
+      flash_queue.entries[flash_queue.tail_index].source_type = data->source_type;
+      flash_queue.entries[flash_queue.tail_index].misf_start_addr = data->misf_start_addr;
+      flash_queue.entries[flash_queue.tail_index].misf_size = data->misf_size;
+      flash_queue.entries[flash_queue.tail_index].manager = data->manager;
 
-      smf_queue.smf_data_tail = next_tail;
+      flash_queue.tail_index = next_tail;
    }
 }
 
 
-SmfDataStruct *dequeue_smf_data()
+FlashOperationStruct *dequeue_flash_operation()
 {
-   if (smf_queue.smf_data_head == smf_queue.smf_data_tail)
+   if (flash_queue.head_index == flash_queue.tail_index)
    {
-      fprintf(PC, "SMF data list is empty\r\n");
+      printf("Flash queue is empty\r\n");
       return 0x00;
    }
    else
    {
-      int8 current_head = smf_queue.smf_data_head;
-      smf_queue.smf_data_head = (smf_queue.smf_data_head + 1) % SMF_DATA_SIZE;
-      return &smf_queue.smf_data[current_head];
+      int8 current_head = flash_queue.head_index;
+      flash_queue.head_index = (flash_queue.head_index + 1) % SMF_QUEUE_SIZE;
+      return &flash_queue.entries[current_head];
    }
 }
 
-int1 is_empty_smf_data(void)
+int1 is_empty_flash_queue(void)
 {
-   return smf_queue.smf_data_head == smf_queue.smf_data_tail;
+   return flash_queue.head_index == flash_queue.tail_index;
 }
 
 
-MissionTypeStruct getMissionTypeStruct(mission_id)
+SmfMissionStruct get_smf_mission_struct(FunctionType func_type)
 {
-   MissionTypeStruct mis_struct = {0};
+   SmfMissionStruct mis_struct = {0};
    
-   if (mission_id == ID_CIGS_DATA_TABLE)
+   if (func_type == SMF_WRITE)
    {
       mis_struct.start_address = CIGS_DATA_TABLE_START_ADDRESS;
       mis_struct.end_address   = CIGS_DATA_TABLE_END_ADDRESS;
    }
-   else if (mission_id == ID_CIGS_MEASURE_DATA)
+   else if (func_type == SMF_READ)
    {
       mis_struct.start_address = CIGS_MEASURE_DATA_START_ADDRESS;
       mis_struct.end_address   = CIGS_MEASURE_DATA_END_ADDRESS;
    }
-   else if (mission_id == ID_CIGS_PICLOG)
+   else if (func_type == SMF_ERASE)
    {
       mis_struct.start_address = CIGS_PICLOG_START_ADDRESS;
       mis_struct.end_address   = CIGS_PICLOG_END_ADDRESS;

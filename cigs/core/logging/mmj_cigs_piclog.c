@@ -1,12 +1,15 @@
 #include "mmj_cigs_piclog.h"                          // 同じフォルダのヘッダー
 #include "../../hardware/mcu/timer.h"                   // タイマーライブラリ  
 #include "../storage/mmj_cigs_flash.h"                 // ストレージ機能
+#include "../../../lib/tool/smf_queue.h"               // フラッシュ操作キュー
+#include "../../../lib/device/mt25q.h"                 // フラッシュデバイス
 
 // #define PICLOG_DEBUG
+#define MISSION_ID_PICLOG 0x03  // PICLOGミッションID
 
-void piclog_make(unsigned int8 function, unsigned int8 parameter)
+void piclog_make(int8 function, int8 parameter)
 {
-    unsigned int8 piclog[PICLOG_PACKET_SIZE];
+    int8 piclog[PICLOG_PACKET_SIZE];
     int32 time = get_current_sec();
     piclog[0] = (time >> 24) & 0xFF; // Time high byte
     piclog[1] = (time >> 16) & 0xFF;
@@ -16,35 +19,35 @@ void piclog_make(unsigned int8 function, unsigned int8 parameter)
     piclog[5] = parameter;           // Parameter code
 
     #ifdef PICLOG_DEBUG
-        fprintf(PC, "[PICLOG] : ");
-        for (unsigned int8 i = 0; i < PICLOG_PACKET_SIZE; i++) {
-            fprintf(PC, "%02X ", piclog[i]);
+        printf("[PICLOG] : ");
+        for (int8 i = 0; i < PICLOG_PACKET_SIZE; i++) {
+            printf("%02X ", piclog[i]);
         }
-        fprintf(PC, "\r\n");
+        printf("\r\n");
     #endif
 
-    unsigned int32 write_address = ADDRESS_MISF_PICLOG_DATA_START + misf_piclog_use_counter;
-    //fprintf(PC, "Write PICLOG to address: 0x%08LX\r\n", write_address);
+    int32 write_address = ADDRESS_MISF_PICLOG_DATA_START + misf_piclog_use_counter;
+    //printf("Write PICLOG to address: 0x%08LX\r\n", write_address);
     
-    if(is_connect(mis_fm) == FALSE) {
-        fprintf(PC, "Mission Flash is not connected\r\n");
-        // return;
-    }
+    // 統合管理システムを使用してMISFに書き込み
+    MisfSmfManagerStruct* manager = get_misf_smf_manager(MISSION_ID_PICLOG);
     
-    write_data_bytes(mis_fm, write_address, piclog, PICLOG_PACKET_SIZE);
+    write_data_bytes(mis_fm, (int32)write_address, piclog, (int16)PICLOG_PACKET_SIZE);
     
-    // Update the counters
-    misf_piclog_use_counter += PICLOG_PACKET_SIZE;
-    misf_piclog_uncopyed_counter += PICLOG_PACKET_SIZE;
-    misf_piclog_write_counter += PICLOG_PACKET_SIZE;
+    // 統合管理システムでカウンタを更新
+    update_misf_data(MISSION_ID_PICLOG, PICLOG_PACKET_SIZE);
 
     // Next Packet
     if (misf_piclog_write_counter + PICLOG_PACKET_SIZE >=  PACKET_SIZE) {
         write_address = ADDRESS_MISF_PICLOG_DATA_START + misf_piclog_use_counter;
-        write_data_bytes(mis_fm, write_address, PICLOG_BLANK_DATA, PICLOG_PACKET_SIZE);
+        write_data_bytes(mis_fm, (int32)write_address, PICLOG_BLANK_DATA, (int16)PICLOG_PACKET_SIZE);
         misf_piclog_write_counter = 0;
     }
 
+    // 自動転送キューに追加（未コピーデータがある場合）
+    if (get_uncopied_data_size(MISSION_ID_PICLOG) > 0) {
+        enqueue_auto_transfer(MISSION_ID_PICLOG);
+    }
 
     write_misf_address_area(); // Update the address area after writing
     

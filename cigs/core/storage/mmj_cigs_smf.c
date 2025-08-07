@@ -13,12 +13,22 @@ void read_smf_header()
 {
     int8 read_data[PACKET_SIZE];
     int8 retry_count;
+    
+    // 統合管理システムから読み込み操作をキューに追加
+    FlashOperationStruct read_op;
+    read_op.mission_id = 0x01;
+    read_op.func_type = SMF_READ;
+    read_op.src = CIGS_DATA_TABLE_START_ADDRESS;
+    read_op.size = PACKET_SIZE;
+    read_op.manager = get_misf_smf_manager(0x01);
+    enqueue_flash_operation(&read_op);
+    
     for (retry_count = 0; retry_count < CRC_RETRY_COUNT; retry_count++)
     {
         read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, read_data, PACKET_SIZE);
         if (is_crc_valid(read_data, PACKET_SIZE-1))
         {
-            fprintf(PC, "CRC verification passed on attempt %d\r\n", retry_count + 1);
+            printf("CRC verification passed on attempt %u\r\n", retry_count + 1);
             break;
         }
     }
@@ -39,6 +49,17 @@ void write_smf_header()
     writedata[9] = param.piclog.loop_counter;
 
     writedata[63] = calc_crc8(writedata, PACKET_SIZE-1); // CRCを計算してバッファに書き込み
+
+    // 統合管理システムから書き込み操作をキューに追加
+    FlashOperationStruct write_op;
+    write_op.mission_id = 0x01;
+    write_op.func_type = SMF_WRITE;
+    write_op.write_mode = SMF_WRITE_OVERWRITE;
+    write_op.source_type = SOURCE_MISF_MANUAL;
+    write_op.src = CIGS_DATA_TABLE_START_ADDRESS;
+    write_op.size = PACKET_SIZE;
+    write_op.manager = get_misf_smf_manager(0x01);
+    enqueue_flash_operation(&write_op);
 
     int8 readdata[PACKET_SIZE];
     int8 retry_count;
