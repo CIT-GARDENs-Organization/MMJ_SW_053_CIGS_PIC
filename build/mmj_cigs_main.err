@@ -1,4 +1,4 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 28-7-25 at 17:39
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 07-8-25 at 16:28
 >>> Warning 225 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.h" Line 6(20,55): Duplicate #define
 >>> Warning 203 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_flash.c" Line 246(1,1): Condition always TRUE
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\hardware\mcu\timer.h" Line 14(16,22): Variable never used:   subsec
@@ -7,6 +7,6 @@ Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_mission.c" Line 44(19,27): Variable never used:   readdata
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_mission.c" Line 60(18,28): Variable never used:   sweep_step
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main.c" Line 47(18,22): Variable never used:   flag
-      Memory usage:   ROM=31%      RAM=27% - 62%
+      Memory usage:   ROM=32%      RAM=27% - 62%
       0 Errors,  8 Warnings.
 Build Successful.

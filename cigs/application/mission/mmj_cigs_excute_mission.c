@@ -89,8 +89,24 @@ void execute_mission(unsigned int8 *content)
       case ID_SMF_RESET:
          mode_smf_address_reset(content);
          break;
-      default:
+      
+      case ID_MEAS_IV:
+         mode_meas_iv(content);
+         break;
+
+      case ID_MEAS_IV_CURR_AND_PD_SELECT:
+         //mode_meas_iv_curr_and_pd_select(content);
+         break;
+
+      
+      
+      
+      
+         default:
          fprintf(PC, "\t\t-> Invalid CMD ID!\r\n");
+
+
+      
          
    }
    fprintf(PC, "\r\n______End execute_mission______\r\n_______________________________\r\n");

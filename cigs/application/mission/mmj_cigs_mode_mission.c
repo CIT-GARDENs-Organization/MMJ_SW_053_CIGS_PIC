@@ -149,23 +149,24 @@ void mode_sweep_port1(unsigned int8 uplinkcmd)
 
 void mode_meas_iv(unsigned int8 uplinkcmd[])
 {
-   fprintf(PC, "Start MODE MEAS IV\r\n");
+   printf("Start MODE MEAS IV\r\n");
    MEAS_IV_CMD cmd = make_meas_iv_cmd(uplinkcmd); // Create the measurement command structure
-   fprintf(PC, "\tID: %02X\r\n", cmd.id);
-   fprintf(PC, "\tSleep Time: %u ms\r\n", cmd.sleep_time);
-   fprintf(PC, "\tCurrent Threshold: %u mA\r\n", cmd.curr_threshold);
-   fprintf(PC, "\tPD Threshold: %u mA\r\n", cmd.pd_threshold);
-   fprintf(PC, "\tCurrent Limit: %u mA\r\n", cmd.curr_limit);
-   fprintf(PC, "\tMeasurement Time: %u ms\r\n", cmd.meas_time);
-   fprintf(PC, "\tIs Finished: %u\r\n", cmd.is_finished);   
+   printf("\tID: %02X\r\n", cmd.id);
+   printf("\tSleep Time: %d\x ms\r\n", cmd.sleep_time);
+   printf("\tCurrent Threshold: %x mA\r\n", cmd.curr_threshold);
+   printf("\tPD Threshold: %x mA\r\n", cmd.pd_threshold);
+   printf("\tCurrent Limit: %x mA\r\n", cmd.curr_limit);
+   printf("\tMeasurement Time: %x ms\r\n", cmd.meas_time);
+   printf("\tIs Finished: %d\r\n", cmd.is_finished);   
 
-   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the end of the command execution
+   piclog_make(uplinkcmd[0], PICLOG_PARAM_START); // Log the end of the command execution
 
-   unsigned int16 start_time = get_current_seconds();
+   unsigned int16 start_time = get_current_sec();
    unsigned int16 current_sec = 0;
-   while(get_current_seconds() - start_time < cmd.meas_time)
+   while(get_current_sec() - start_time < cmd.meas_time)
    {
-      current_sec = get_current_seconds();
+      sweep_with_threshold(cmd.curr_threshold, cmd.pd_threshold, cmd.curr_limit); // Perform the sweep with the specified thresholds
+      current_sec = get_current_sec();
       if (current_sec - start_time >= cmd.meas_time) {
           break;
       }
@@ -175,7 +176,12 @@ void mode_meas_iv(unsigned int8 uplinkcmd[])
    }
 
 
-
+   SmfDataStruct data;
+   data.func_type = SMF_WRITE; // Set the function type for measurement data
+   data.mission_id = ID_CIGS_MEASURE_DATA; // コピーする目的のデータ種別
+   data.src = ADDRESS_MISF_MEASUREMENT_START + misf_meas_use_counter - misf_meas_uncopyed_counter; // コピー元のMIS_FMのアドレス
+   data.size = misf_meas_uncopyed_counter; // コピーするデータのサイズ
+   enqueue_smf_data(&data); // SMFへのデータコピーを実行する
 
 
 

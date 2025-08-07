@@ -378,7 +378,7 @@
    ³  ³  ³  ³        ÃÄ@PUTCHAR_2_  0/82  Ram=1
    ³  ³  ³  ³        ÃÄ@PUTCHAR_2_  0/82  Ram=1
    ³  ³  ³  ³        ÀÄ@PUTCHAR_2_  0/82  Ram=1
-   ³  ³  ³  ÃÄexecute_mission  0/642  Ram=4
+   ³  ³  ³  ÃÄexecute_mission  0/678  Ram=4
    ³  ³  ³  ³  ÃÄ@PSTRINGC_954  0/48  Ram=3
    ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ÃÄ@PSTRINGCN_954  0/54  Ram=4
@@ -550,7 +550,7 @@
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_954  0/48  Ram=3
    ³  ³  ³  ³  ³  ³     ÀÄ*
-   ³  ³  ³  ³  ³  ÀÄenqueue_smf_data  0/364  Ram=9
+   ³  ³  ³  ³  ³  ÀÄenqueue_smf_data  0/362  Ram=9
    ³  ³  ³  ³  ³     ÀÄ@PSTRINGC_954  0/48  Ram=3
    ³  ³  ³  ³  ³        ÀÄ*
    ³  ³  ³  ³  ÃÄmode_misf_erase_all  0/200  Ram=7
@@ -915,6 +915,38 @@
    ³  ³  ³  ³  ³     ÀÄ*
    ³  ³  ³  ³  ÃÄmode_smf_address_reset  0/436  Ram=71
    ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ÃÄmode_meas_iv  0/582  Ram=32
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_954  0/48  Ram=3
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄmake_meas_iv_cmd  0/204  Ram=16
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_954  0/54  Ram=4
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_954  0/112  Ram=2
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
+   ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_954  0/54  Ram=4
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_954  0/272  Ram=6
+   ³  ³  ³  ³  ³  ³  ÃÄ@DIV88  0/72  Ram=3
+   ³  ³  ³  ³  ³  ³  ÃÄ@DIV88  0/72  Ram=3
+   ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
+   ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
+   ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
+   ³  ³  ³  ³  ³  ³  ÀÄ@PUTCHAR_2_  0/82  Ram=1
+   ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
+   ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/376  Ram=21
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
+   ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
+   ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
+   ³  ³  ³  ³  ³  ÃÄ@delay_ms1  0/46  Ram=1
+   ³  ³  ³  ³  ³  ÃÄ@delay_ms1  0/46  Ram=1
+   ³  ³  ³  ³  ³  ÃÄenqueue_smf_data  0/362  Ram=9
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_954  0/48  Ram=3
+   ³  ³  ³  ³  ³     ÀÄ*
    ³  ³  ³  ³  ÃÄ@PSTRINGC_954  0/48  Ram=3
    ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ÀÄ@PSTRINGC_954  0/48  Ram=3
@@ -943,12 +975,7 @@
    ³  ³     ÃÄ@PSTRINGCN_954  0/54  Ram=4
    ³  ³     ³  ÀÄ*
    ³  ³     ÃÄ@PRINTF_D_954  0/272  Ram=6
-   ³  ³     ³  ÃÄ@DIV88  0/72  Ram=3
-   ³  ³     ³  ÃÄ@DIV88  0/72  Ram=3
-   ³  ³     ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
-   ³  ³     ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
-   ³  ³     ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
-   ³  ³     ³  ÀÄ@PUTCHAR_2_  0/82  Ram=1
+   ³  ³     ³  ÀÄ*
    ³  ³     ÃÄ@PSTRINGCN_954  0/54  Ram=4
    ³  ³     ³  ÀÄ*
    ³  ³     ÃÄdequeue_smf_data  0/90  Ram=2
