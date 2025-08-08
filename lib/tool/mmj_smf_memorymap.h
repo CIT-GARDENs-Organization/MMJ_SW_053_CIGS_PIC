@@ -6,6 +6,40 @@
  * Generated from: MMJ_ICD_021_IICD_06_Memory_map.xlsx
  * Generated at: 2025-07-27 20:54:05
  */
+#define PACKET_SIZE 64
+
+typedef struct {
+    unsigned int32 used_size;
+    unsigned int8 loop_counter;
+    unsigned int8 reserved[3];
+} partition_header_t;
+
+// payloadに複数のpartition_headerを並べる
+typedef union {
+    unsigned int8 bytes[PACKET_SIZE];  // 生データアクセス用
+
+    struct {
+        union {
+            struct {
+                partition_header_t piclog;
+                partition_header_t enviroment;
+                partition_header_t iv_head;
+                partition_header_t iv_data;
+            }cigs;
+            
+            struct {
+                partition_header_t piclog;
+                partition_header_t enviroment;
+                partition_header_t iv_head;
+                partition_header_t iv_data;
+            } satolab;
+            // フラットにアクセスしたいとき用
+            partition_header_t headers[(PACKET_SIZE - 1) / sizeof(partition_header_t)];
+        } payload;
+
+        unsigned int8 crc;  // 最後の1バイト
+    };
+} smf_data_table_t;
 
 // Base Memory Configuration
 #define SMF_SIZE 0x08000000 // 128MB

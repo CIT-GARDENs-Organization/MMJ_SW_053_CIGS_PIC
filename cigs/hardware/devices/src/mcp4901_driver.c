@@ -1,6 +1,6 @@
-#include "../mcp4901_driver.h"                        // 同じデバイスフォルダのヘッダー
-#include "../../../system/mmj_cigs_config.h"             // システム設定
-#include "../../../../lib/device/mcp4901.h"              // DACデバイスライブラリ
+#include "../mcp4901_driver.h"                        
+#include "../../../system/mmj_cigs_config.h"             
+#include "../../../../lib/device/mcp4901.h"       
 
 void mcp4901_init()
 {
@@ -8,8 +8,8 @@ void mcp4901_init()
     output_high(DAC1_CS); 
     output_high(DAC2_CS); 
     delay_ms(10); 
-    mcp4901_1_write(0); 
-    mcp4901_2_write(0); 
+    mcp4901_1_write(10); 
+    mcp4901_2_write(10); 
     unsigned int16 readdata;
     readdata = ad7490_read(ADC_CIGS1_DAC); 
     fprintf(PC, "%04LX\r\n", readdata);

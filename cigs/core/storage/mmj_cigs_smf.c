@@ -15,65 +15,43 @@
 // 初期状態は 0 クリア。
 PartitionParam param = {0};
 
-void read_smf_header()
+void smf_data_table_init()
 {
-    int8 read_data[PACKET_SIZE];
+    FlashData_t smf_data_table = {0};
+    calc_crc8(smf_data_table.bytes, PACKET_SIZE - 1); // CRCを計算して初期化
+
+    write_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table.bytes, PACKET_SIZE);
+
+}
+
+void read_smf_header(smf_data_table_t *smf_data_table)
+{
     int8 retry_count;
-    
-    // 統合管理システムから読み込み操作をキューに追加
-    FlashOperationStruct read_op;
-    read_op.mission_id = 0x01;
-    read_op.func_type = SMF_READ;
-    read_op.src = CIGS_DATA_TABLE_START_ADDRESS;
-    read_op.size = PACKET_SIZE;
-    read_op.manager = get_misf_smf_manager(0x01);
-    enqueue_flash_operation(&read_op);
-    
+
+    read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table->bytes, PACKET_SIZE);
+
     for (retry_count = 0; retry_count < CRC_RETRY_COUNT; retry_count++)
     {
-        read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, read_data, PACKET_SIZE);
-        if (is_crc_valid(read_data, PACKET_SIZE-1))
+        read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table->bytes, PACKET_SIZE);
+        if (is_crc_valid(smf_data_table->bytes, PACKET_SIZE-1))
         {
             printf("CRC verification passed on attempt %u\r\n", retry_count + 1);
             break;
         }
     }
-    param.meas.used_size = lsb_array_to_int32(read_data, 0);
-    param.meas.loop_counter = read_data[4];
-    param.piclog.used_size = lsb_array_to_int32(read_data, 5);
-    param.piclog.loop_counter = read_data[9];
 }
 
 void write_smf_header()
 {
-    int8 writedata[PACKET_SIZE];
 
-    // ヘッダー情報をwritedataに設定
-    int32_to_be_array(param.meas.used_size, writedata, 0);
-    writedata[4] = param.meas.loop_counter;
-    int32_to_be_array(param.piclog.used_size, writedata, 5);
-    writedata[9] = param.piclog.loop_counter;
-
-    writedata[63] = calc_crc8(writedata, PACKET_SIZE-1); // CRCを計算してバッファに書き込み
-
-    // 統合管理システムから書き込み操作をキューに追加
-    FlashOperationStruct write_op;
-    write_op.mission_id = 0x01;
-    write_op.func_type = SMF_WRITE;
-    write_op.write_mode = SMF_WRITE_OVERWRITE;
-    write_op.source_type = SOURCE_MISF_MANUAL;
-    write_op.src = CIGS_DATA_TABLE_START_ADDRESS;
-    write_op.size = PACKET_SIZE;
-    write_op.manager = get_misf_smf_manager(0x01);
-    enqueue_flash_operation(&write_op);
-
-    int8 readdata[PACKET_SIZE];
-    int8 retry_count;
+    FlashData_t flash_data = make_flash_data_table();
+    unsigned int8 readdata[PACKET_SIZE];
+    // int8 retry_count;
     int1 crc_valid = 0;
-    for (retry_count = 0; retry_count < CRC_RETRY_COUNT; retry_count++)
+    for (int8 retry_count = 0; retry_count < CRC_RETRY_COUNT; retry_count++)
     {
         subsector_4kByte_erase(smf, CIGS_DATA_TABLE_START_ADDRESS);
-        write_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, writedata, PACKET_SIZE); // ヘッダーを書き込み
+        write_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, flash_data.bytes, PACKET_SIZE); // ヘッダーを書き込み
         read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, readdata, PACKET_SIZE);
         if (is_crc_valid(readdata, PACKET_SIZE-1))
         {
@@ -92,34 +70,38 @@ void write_smf_header()
 void smf_write(FlashOperationStruct *smf_data)
 {
     fprintf(PC, "\r\n____________________\r\n");
-    fprintf(PC, "___Start copy_data__\r\n");
+    fprintf(PC, "_____Start copy_data____\r\n");
     
-    int8 buffer[PACKET_SIZE];
+    smf_data_table_t smf_data_table;
+    SmfAddressStruct smf_address = get_smf_address_struct(smf_data->mission_id);
+    unsigned int32 mis_start_address = smf_address.start_address;
+    unsigned int32 mis_end_address = smf_address.end_address;
+    unsigned int32 write_src;
+    unsigned int32 write_size;
 
-    SmfMissionStruct mission_type = get_smf_mission_struct(smf_data->func_type);
-    // status[1] = smf_data->mission_id; // `i` is assigned mis mcu status flag. so mission_flag start `i+1`
-    unsigned int32 mis_start_address = mission_type.start_address;
-    unsigned int32 mis_end_address = mission_type.end_address;
-    unsigned int32 write_src = smf_data->src;
-    unsigned int32 write_size = smf_data->size;
-    fprintf(PC, "In SMF mission data start   address: %LX\r\n", mis_start_address);
-    fprintf(PC, "In SMF mission data end     address: %LX\r\n", mis_end_address);
-    fprintf(PC, "In MIS FM Write source data address: %LX\r\n", write_src);
-    fprintf(PC, "In MIS FM Write data size          : %lu (0x%lx)\r\n\r\n", write_size, write_size);
+    //アドレスと自動更新
+    if (smf_data->source_type == SOURCE_MISF_UNCOPIED )
+    {
+        MisfAddressStruct misf_address = get_misf_address_struct(smf_data->mission_id);
+        write_src = misf_address.start_address;
+    }else if(smf_data->source_type == SOURCE_MISF_MANUAL)
+    {
+        // 手動指定データを転送
+        write_src = smf_data->misf_start_addr;
+        write_size = smf_data->misf_size;
+    }
 
     if (!is_connect(mis_fm))
     {
         fprintf(PC, "Error: MIS FM is not connected\r\n");
     }    
-
     if (!is_connect(smf))
     {
         fprintf(PC, "Error: SMF is not connected\r\n");
     }    
 
-
     // read size area with CRC verification retry
-    read_smf_header();
+    read_smf_header(&smf_data_table);
 
     // PartitionParamから値を取得
     int32 used_size = param.meas.used_size;
@@ -164,6 +146,7 @@ void smf_write(FlashOperationStruct *smf_data)
 
     unsigned int32 remaining = write_size;
     unsigned int32 src_addr = write_src;
+    int8 buffer[PACKET_SIZE];
     while (remaining > 0)
     {
         unsigned int16 chunk = (remaining > MAX_READ_SIZE) ? MAX_READ_SIZE : remaining; //  = max(MAX_READ_SIZE, rest write_size)
@@ -199,18 +182,18 @@ void smf_read(FlashOperationStruct *smf_data)
 
     int8 buffer[PACKET_SIZE];
 
-    SmfMissionStruct mission_type = get_smf_mission_struct(smf_data->func_type);
-    // status[1] = smf_data->mission_id; // `i` is assigned mis mcu status flag. so mission_flag start `i+1`
-    unsigned int32 read_src = smf_data->src;
-    unsigned int32 read_size = smf_data->size;
-    fprintf(PC, "In SMF Read source data address: %LX\r\n", read_src);
+    SmfAddressStruct smf_address = get_smf_address_struct(smf_data->mission_id);
+    unsigned int32 read_address = smf_data->misf_start_addr;
+    unsigned int32 read_size = smf_data->misf_size;
+
+    fprintf(PC, "In SMF Read source data address: %LX\r\n", read_address);
     fprintf(PC, "In SMF Read data size          : %lu (0x%lx)\r\n\r\n", read_size, read_size);
 
     if (!is_connect(smf)){
         fprintf(PC, "Error: SMF is not connected\r\n");
     }
     fprintf(PC, "READ DATA FROM SMF...\r\n");
-    for (unsigned int32 addr = read_src; addr < read_src + read_size; addr += PACKET_SIZE)
+    for (unsigned int32 addr = read_address; addr < read_address + read_size; addr += PACKET_SIZE)
     {
         read_data_bytes(smf, addr, buffer, PACKET_SIZE);
         for (unsigned int32 i = 0; i < PACKET_SIZE; i++)
@@ -228,15 +211,10 @@ void smf_erase(FlashOperationStruct *smf_data)
     fprintf(PC, "\r\n____________________\r\n");
     fprintf(PC, "___Start smf_erase____\r\n");
 
-    SmfMissionStruct mission_type = get_smf_mission_struct(smf_data->func_type);
-    // status[1] = smf_data->mission_id; // `i` is assigned mis mcu status flag. so mission_flag start `i+1`
-    unsigned int32 mis_start_address = mission_type.start_address;
-    unsigned int32 mis_end_address = mission_type.end_address;
-    unsigned int32 erase_src = smf_data->src;
-    unsigned int32 erase_size = smf_data->size;
-    fprintf(PC, "In SMF mission data start   address: %LX\r\n", mis_start_address);
-    fprintf(PC, "In SMF mission data end     address: %LX\r\n", mis_end_address);
-    fprintf(PC, "In SMF Erase source data address: %LX\r\n", erase_src);
+    SmfAddressStruct mission_type = get_smf_address_struct(smf_data->mission_id);
+    unsigned int32 erase_address = smf_data->misf_start_addr;
+    unsigned int32 erase_size = smf_data->misf_size;
+    fprintf(PC, "In SMF Erase source data address: %LX\r\n", erase_address);
     fprintf(PC, "In SMF Erase data size          : %lu (0x%lx)\r\n\r\n", erase_size, erase_size);
 
     if (!is_connect(smf)){
@@ -245,21 +223,21 @@ void smf_erase(FlashOperationStruct *smf_data)
     }
 
     // Check if erase operation is within mission_type range
-    if (erase_src < mis_start_address || erase_src >= mis_end_address) {
+    if (erase_address < mission_type.start_address || erase_address >= mission_type.end_address) {
         fprintf(PC, "Error: Erase source address 0x%LX is outside mission range [0x%LX - 0x%LX]\r\n", 
-                erase_src, mis_start_address, mis_end_address);
+                erase_address, mission_type.start_address, mission_type.end_address);
         return;
     }
-    
-    if ((erase_src + erase_size) > mis_end_address) {
-        fprintf(PC, "Error: Erase operation would exceed mission end address 0x%LX\r\n", mis_end_address);
+
+    if ((erase_address + erase_size) > mission_type.end_address) {
+        fprintf(PC, "Error: Erase operation would exceed mission end address 0x%LX\r\n", mission_type.end_address);
         fprintf(PC, "Limiting erase size to stay within mission bounds\r\n");
-        erase_size = mis_end_address - erase_src;
+        erase_size = mission_type.end_address - erase_address;
     }
 
     fprintf(PC, "Erase operation validated within mission range\r\n");
-    subsector_4kByte_erase(smf, erase_src);
-    
+    subsector_4kByte_erase(smf, erase_address);
+
     fprintf(PC, "\r\n___End smf_erase____\r\n");
     fprintf(PC, "____________________\r\n\r\n");
 }

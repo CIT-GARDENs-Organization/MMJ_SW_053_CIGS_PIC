@@ -1,4 +1,9 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 08-8-25 at 19:39
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 09-8-25 at 01:01
+>>> Warning 225 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.h" Line 14(20,23): Duplicate #define
+*** Error 29 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.h" Line 13(1,8): Function definition different from previous definition  make_flash_data_table Param#1
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.h" Line 13(15,16): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.h" Line 20(1,2): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\logging\mmj_cigs_piclog.h" Line 20(3,11): Expecting a (
 *** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(1,2): Illegal C character in input file  0x80
 *** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(1,2): Illegal C character in input file  0x00
 *** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(1,2): Illegal C character in input file  0x85
@@ -21,10 +26,10 @@ Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS
 *** Error 32 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(122,128): Expecting a , or )
 *** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(8,9): Illegal C character in input file  0xBD
 *** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(8,9): Expecting a declaration
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(9,10): Illegal C character in input file  0x0B
-*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(9,10): Expecting a declaration
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(13,14): Illegal C character in input file  0xBA
-*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(11,13): Expecting a (
+*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(11,12): Illegal C character in input file  0xAE
+*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(11,12): Illegal C character in input file  0x60
+*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(11,12): Illegal C character in input file  0xC1
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(10,11): Expecting a (
 *** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(15,16): Illegal C character in input file  0xE6
 *** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(15,16): Illegal C character in input file  0x40
 *** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(15,16): Illegal C character in input file  0x01
@@ -35,68 +40,66 @@ Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS
 *** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(15,16): Illegal C character in input file  0x00
 *** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(15,16): Illegal C character in input file  0x00
 *** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(15,16): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(15,16): Illegal C character in input file  0x40
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0xB0
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0xD7
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x01
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x80
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Illegal C character in input file  0x00
-*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(17,18): Expecting a declaration
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(23,24): Illegal C character in input file  0xAE
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(23,24): Illegal C character in input file  0x04
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(23,24): Illegal C character in input file  0x40
-*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(22,23): Expecting a (
-*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(26,27): Expecting a declaration
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(26,27): Illegal C character in input file  0x04
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(26,27): Illegal C character in input file  0xD0
-*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(26,27): Expecting a declaration
-*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(29,30): Expecting a declaration
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(29,30): Illegal C character in input file  0x04
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(29,30): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(29,30): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(29,30): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(29,30): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(29,30): Illegal C character in input file  0x90
-*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(29,30): Expecting a declaration
-*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Expecting a declaration
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x04
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
-*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(32,33): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 25(15,16): Illegal C character in input file  0x14
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 26(20,26): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 26(26,27): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 26(27,39): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 26(40,53): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 26(54,55): Expecting a declaration
+*** Error 22 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 26(54,55): Bad expression syntax
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 27(12,17): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 28(7,10): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 28(10,11): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 28(43,55): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 28(58,70): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 28(71,83): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 28(85,86): Expecting a declaration
+*** Error 27 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 29(57,58): Expression must evaluate to a constant
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 29(58,59): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 30(7,10): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 30(10,11): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 30(42,53): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 30(56,67): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 30(68,79): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 30(81,82): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 31(10,19): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 31(20,31): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 31(33,34): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 32(10,15): Expecting a declaration
+*** Error 22 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 32(15,16): Bad expression syntax
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 34(12,17): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 35(10,13): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 35(13,14): Expecting a declaration
+--- Info 300 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 28(26,38): More info:   First Declaration of spi_xfer_num
+*** Error 31 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 35(29,41): Identifier is already used in this scope
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 35(44,45): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 35(46,58): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 35(61,73): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 35(74,86): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 35(88,89): Expecting a declaration
+*** Error 27 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 36(60,61): Expression must evaluate to a constant
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 36(61,62): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 37(10,13): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 37(13,14): Expecting a declaration
+--- Info 300 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 30(26,37): More info:   First Declaration of spi_rcv_num
+*** Error 31 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 37(29,40): Identifier is already used in this scope
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 37(43,44): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 37(45,56): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 37(59,70): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 37(71,82): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 37(84,85): Expecting a declaration
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 38(13,22): Expecting a (
+*** Error 48 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 38(23,34): Expecting a (
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 38(36,37): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 39(10,15): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 42(7,14): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 42(14,15): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 43(10,15): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 44(4,5): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 45(4,10): Expecting a declaration
+*** Error 43 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 46(1,2): Expecting a declaration
+*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 49(1,2): Illegal C character in input file  0x80
+*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 49(1,2): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 49(1,2): Illegal C character in input file  0x92
+*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 49(1,2): Illegal C character in input file  0x07
+*** Error 1 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 49(1,2): Illegal C character in input file  0x00

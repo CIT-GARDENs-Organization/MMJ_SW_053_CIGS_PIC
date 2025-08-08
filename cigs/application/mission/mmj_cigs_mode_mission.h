@@ -40,8 +40,6 @@ void mode_dev_time();
 void mode_dev_sweep();
 
 
-void mode_sweep_port1(unsigned int8 uplinkcmd);
-
 // ______________CMD ID________________
 
 // IV command

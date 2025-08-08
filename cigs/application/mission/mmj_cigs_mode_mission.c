@@ -139,7 +139,7 @@ void mode_iv_meas_adc()
 
 void mode_sweep_port1(unsigned int8 uplinkcmd)
 {
-   sweep_port1(80);
+//!   sweep_port1(80);
    FlashOperationStruct data;
    data.func_type = SMF_WRITE;
    data.mission_id = 0x01;

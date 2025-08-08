@@ -78,21 +78,33 @@ typedef struct {
  * };
  */
 
+typedef enum{
+   CIGS_DATA_TABLE,
+   CIGS_PICLOG_DATA,
+   CIGS_ENVIRO_DATA,
+   CIGS_IV_HEADER,
+   CIGS_IV_DATA,
+} MissionID;
+
+
+
 typedef struct {
    int32 start_address;
    int32 end_address;
-} SmfMissionStruct;
+} SmfAddressStruct;
+
+typedef struct{
+   int32 start_address;
+   int32 size;
+} SmfWriteStruct;
 
 typedef struct {
-    int8 mission_id;                // ミッションID
-    int32 src;                      // ソースアドレス（MISFアドレス）
-    int32 size;                     // データサイズ
+    MissionID mission_id;                // ミッションID
     FunctionType func_type;         // 操作タイプ
     SmfWriteMode write_mode;        // 書き込みモード（書き込み時のみ）
     DataSourceType source_type;     // データソースタイプ
     int32 misf_start_addr;          // MISF手動指定時の開始アドレス
     int32 misf_size;                // MISF手動指定時のサイズ
-    MisfSmfManagerStruct *manager;  // MISF/SMF管理構造体へのポインタ
 } FlashOperationStruct;
 
 #define SMF_QUEUE_SIZE 16
@@ -101,8 +113,6 @@ typedef struct {
    int8 head_index;                               // 取り出し位置（読み取りインデックス）
    int8 tail_index;                               // 追加位置（書き込みインデックス）
 } FlashQueueStruct;
-
-
 
 
 
@@ -141,7 +151,7 @@ void remove_flash_operation(void);
 
 int1 is_empty_flash_queue(void);
 
-SmfMissionStruct get_smf_mission_struct(FunctionType func_type);
+SmfAddressStruct get_smf_address_struct(MissionID mission_id);
 
 // 便利な関数
 void enqueue_uncopied_data(int8 mission_id, SmfWriteMode write_mode);

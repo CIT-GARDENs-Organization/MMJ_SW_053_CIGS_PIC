@@ -13,14 +13,10 @@ void enqueue_flash_operation(FlashOperationStruct *data)
    {
       flash_queue.entries[flash_queue.tail_index].mission_id = data->mission_id;
       flash_queue.entries[flash_queue.tail_index].func_type  = data->func_type;
-      flash_queue.entries[flash_queue.tail_index].src        = data->src;
-      flash_queue.entries[flash_queue.tail_index].size       = data->size;
       flash_queue.entries[flash_queue.tail_index].write_mode = data->write_mode;
       flash_queue.entries[flash_queue.tail_index].source_type = data->source_type;
       flash_queue.entries[flash_queue.tail_index].misf_start_addr = data->misf_start_addr;
       flash_queue.entries[flash_queue.tail_index].misf_size = data->misf_size;
-      flash_queue.entries[flash_queue.tail_index].manager = data->manager;
-
       flash_queue.tail_index = next_tail;
    }
 }
@@ -47,26 +43,35 @@ int1 is_empty_flash_queue(void)
 }
 
 
-SmfMissionStruct get_smf_mission_struct(FunctionType func_type)
+SmfAddressStruct get_smf_address_struct(MissionID mission_id)
 {
-   SmfMissionStruct mis_struct = {0};
-   
-   if (func_type == SMF_WRITE)
+   SmfAddressStruct mis_struct = {0};
+
+   if (mission_id == CIGS_DATA_TABLE)
    {
       mis_struct.start_address = CIGS_DATA_TABLE_START_ADDRESS;
       mis_struct.end_address   = CIGS_DATA_TABLE_END_ADDRESS;
    }
-   else if (func_type == SMF_READ)
-   {
-      mis_struct.start_address = CIGS_MEASURE_DATA_START_ADDRESS;
-      mis_struct.end_address   = CIGS_MEASURE_DATA_END_ADDRESS;
-   }
-   else if (func_type == SMF_ERASE)
+   else if (mission_id == CIGS_PICLOG_DATA)
    {
       mis_struct.start_address = CIGS_PICLOG_START_ADDRESS;
       mis_struct.end_address   = CIGS_PICLOG_END_ADDRESS;
    }
-   
+   else if (mission_id == CIGS_ENVIRO_DATA)
+   {
+      mis_struct.start_address = CIGS_PICLOG_START_ADDRESS;
+      mis_struct.end_address   = CIGS_PICLOG_END_ADDRESS;
+   }
+   else if (mission_id == CIGS_IV_HEADER)
+   {
+      mis_struct.start_address = CIGS_PICLOG_END_ADDRESS;
+      mis_struct.end_address   = CIGS_PICLOG_END_ADDRESS;
+   }
+   else if (mission_id == CIGS_IV_DATA)
+   {
+      mis_struct.start_address = CIGS_PICLOG_END_ADDRESS;
+      mis_struct.end_address   = CIGS_PICLOG_END_ADDRESS;
+   }
    return mis_struct;
 }
 

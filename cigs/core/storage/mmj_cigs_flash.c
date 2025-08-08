@@ -6,12 +6,9 @@
 void misf_init()
 {
     fprintf(PC, "MISSION FLASH Initialize\r\n");
-
-    // 初期状態としてCSを非アクティブに
     output_high(MIS_FM_CS);
     output_high(SMF_CS);
     delay_ms(100);
-
     //=== [MIS_FM] READ ID ===//
     READ_ID_DATA misf_read_id_data;
     int8 flash_cmd = CMD_READ_ID;
@@ -57,7 +54,7 @@ void misf_init()
 
     //=== MIS_FMからログ領域読み出し ===//
     FlashData_t flash_data;
-    read_misf_address_area(flash_data.bytes);
+    read_data_bytes(mis_fm, MISF_CIGS_DATA_TABLE_END, flash_data.bytes, PACKET_SIZE);
 
     if (flash_data.packet.crc != calc_crc8(flash_data.bytes, PACKET_SIZE - 1)) {
         fprintf(PC, "\t[MIS FM] CRC error!\r\n");
@@ -69,64 +66,53 @@ void misf_init()
     environment_data  = *((Flash_t*)&flash_data.packet.payload.logdata.environment);
     iv_header         = *((Flash_t*)&flash_data.packet.payload.logdata.iv_header);
     iv_data           = *((Flash_t*)&flash_data.packet.payload.logdata.iv_data);
+    print_flash_status();
 }
 
-void smf_init()
-{
-   //Flash smf = {SPI_1, MT25QL01GBBB, SPI1_CS};
-}
-
-
-
-
-
-void read_misf_address_area(unsigned int8 *data)
-{
-    read_data_bytes(mis_fm, ADDRESS_MANAGE_START, data, PACKET_SIZE);
-}
-
-void write_misf_address_area()
+FlashData_t make_flash_data_table(void)
 {
     FlashData_t flash_data;
-    flash_data.packet.crc = calc_crc8(flash_data.bytes, PACKET_SIZE - 1);
-    flash_data.packet.payload.logdata.piclog.used_counter = piclog_data.used_counter;
-    flash_data.packet.payload.logdata.piclog.uncopied_counter = piclog_data.uncopied_counter;
-    flash_data.packet.payload.logdata.piclog.reserve_counter1 = piclog_data.reserve_counter1;
-    flash_data.packet.payload.logdata.piclog.reserve_counter2 = piclog_data.reserve_counter2;
-    flash_data.packet.payload.logdata.environment.used_counter = environment_data.used_counter;
-    flash_data.packet.payload.logdata.environment.uncopied_counter = environment_data.uncopied_counter;
-    flash_data.packet.payload.logdata.environment.reserve_counter1 = environment_data.reserve_counter1;
-    flash_data.packet.payload.logdata.environment.reserve_counter2 = environment_data.reserve_counter2;
-    flash_data.packet.payload.logdata.iv_header.used_counter = iv_header.used_counter;
-    flash_data.packet.payload.logdata.iv_header.uncopied_counter = iv_header.uncopied_counter;
-    flash_data.packet.payload.logdata.iv_header.reserve_counter1 = iv_header.reserve_counter1;
-    flash_data.packet.payload.logdata.iv_header.reserve_counter2 = iv_header.reserve_counter2;
-    flash_data.packet.payload.logdata.iv_data.used_counter = iv_data.used_counter;
-    flash_data.packet.payload.logdata.iv_data.uncopied_counter = iv_data.uncopied_counter;
-    flash_data.packet.payload.logdata.iv_data.reserve_counter1 = iv_data.reserve_counter1;
-    flash_data.packet.payload.logdata.iv_data.reserve_counter2 = iv_data.reserve_counter2;
+    memset(&flash_data, 0, sizeof(flash_data));
 
-    write_data_bytes(mis_fm, ADDRESS_MANAGE_START, flash_data.bytes, PACKET_SIZE);
+    FlashCounter_t *dst_list[] = {
+        &flash_data.packet.payload.logdata.piclog,
+        &flash_data.packet.payload.logdata.environment,
+        &flash_data.packet.payload.logdata.iv_header,
+        &flash_data.packet.payload.logdata.iv_data
+    };
+    Flash_t *src_list[] = {
+        &piclog_data,
+        &environment_data,
+        &iv_header,
+        &iv_data
+    };
+
+    for(int i=0; i<4; i++){
+        dst_list[i]->used_counter     = src_list[i]->used_counter;
+        dst_list[i]->uncopied_counter = src_list[i]->uncopied_counter;
+        dst_list[i]->reserve_counter1 = src_list[i]->reserve_counter1;
+        dst_list[i]->reserve_counter2 = src_list[i]->reserve_counter2;
+    }
+
+    flash_data.packet.crc = calc_crc8(flash_data.bytes, PACKET_SIZE - 1);
+    return flash_data;
 }
 
-void add_smf_queue(int8 mission_id)
+void write_misf_address_area(void)
+{
+    FlashData_t flash_data = make_flash_data_table();
+
+    write_data_bytes(mis_fm, MISF_CIGS_DATA_TABLE_END, flash_data.bytes, PACKET_SIZE);
+}
+
+void add_smf_queue(MissionID mission_id, FunctionType func_type, SmfWriteMode write_mode)
 {
     FlashOperationStruct data;
-    SmfMissionStruct mis_struct;
-    
     // 構造体の初期化
-    data.func_type = SMF_WRITE;
     data.mission_id = mission_id;
-    data.write_mode = SMF_WRITE_CIRCULAR;
+    data.func_type = func_type;
+    data.write_mode = write_mode;
     data.source_type = SOURCE_MISF_UNCOPIED;
-    data.src = 0;
-    data.size = 0;
-    data.misf_start_addr = 0;
-    data.misf_size = 0;
-    data.manager = 0;
-    
-    //mis_struct = get_smf_mission_struct(SMF_WRITE);
-
     enqueue_flash_operation(&data);
 }
 
@@ -148,7 +134,93 @@ void print_flash_status()
     fprintf(PC, "\t| MISF | IV DATA   | Uncopyed Counter : 0x%08LX\r\n", iv_data.uncopied_counter);
     fprintf(PC, "\t| MISF | IV DATA   | Reserve Counter1 : 0x%02X\r\n", iv_data.reserve_counter1);
     fprintf(PC, "\t| MISF | IV DATA   | Reserve Counter2 : 0x%02X\r\n", iv_data.reserve_counter2);
-
-
     fprintf(PC, "\tComplete\r\n");
+}
+
+void write_smf_header(smf_data_table_t *smf_data_table)
+{
+
+    int8 readdata[PACKET_SIZE];
+    int8 retry_count;
+    int1 crc_valid = 0;
+    for (retry_count = 0; retry_count < CRC_RETRY_COUNT; retry_count++)
+    {
+        subsector_4kByte_erase(smf, CIGS_DATA_TABLE_START_ADDRESS);
+        write_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table->bytes, PACKET_SIZE); // ヘッダーを書き込み
+        read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, readdata, PACKET_SIZE);
+        if (is_crc_valid(readdata, PACKET_SIZE-1))
+        {
+            fprintf(PC, "CRC verification passed on attempt %d\r\n", retry_count + 1);
+            break;
+        }
+    }
+    if (!crc_valid)
+    {
+        fprintf(PC, "Error: CRC verification failed after %d attempts\r\n", CRC_RETRY_COUNT);
+        // return; 
+    }
+}
+
+MisfAddressStruct get_misf_address_struct(MissionID mission_id)
+{
+   MisfAddressStruct mis_struct = {0};
+
+   if (mission_id == CIGS_DATA_TABLE)
+   {
+      mis_struct.start_address = MISF_CIGS_DATA_TABLE_START;
+      mis_struct.end_address   = MISF_CIGS_DATA_TABLE_END;
+   }
+   else if (mission_id == CIGS_PICLOG_DATA)
+   {
+      mis_struct.start_address = MISF_CIGS_PICLOG_START;
+      mis_struct.end_address   = MISF_CIGS_PICLOG_END;
+   }
+   else if (mission_id == CIGS_ENVIRO_DATA)
+   {
+      mis_struct.start_address = MISF_CIGS_ENVIRO_START;
+      mis_struct.end_address   = MISF_CIGS_ENVIRO_END;
+   }
+   else if (mission_id == CIGS_IV_HEADER)
+   {
+      mis_struct.start_address = MISF_CIGS_IV_HEADER_START;
+      mis_struct.end_address   = MISF_CIGS_IV_HEADER_END;
+   }
+   else if (mission_id == CIGS_IV_DATA)
+   {
+      mis_struct.start_address = MISF_CIGS_IV_DATA_START;
+      mis_struct.end_address   = MISF_CIGS_IV_DATA_END;
+   }
+   return mis_struct;
+}
+
+MisfWriteStruct get_misf_write_struct(MissionID mission_id)
+{
+    MisfWriteStruct mis_write_struct = {0};
+
+    if (mission_id == CIGS_DATA_TABLE)
+    {
+        mis_write_struct.start_address = MISF_CIGS_DATA_TABLE_START;
+        mis_write_struct.size = MISF_CIGS_DATA_TABLE_SIZE;
+    }
+    else if (mission_id == CIGS_PICLOG_DATA)
+    {
+        mis_write_struct.start_address = MISF_CIGS_PICLOG_START + piclog_data.used_counter - piclog_data.uncopied_counter;
+        mis_write_struct.size = piclog_data.uncopied_counter;
+    }
+    else if (mission_id == CIGS_ENVIRO_DATA)
+    {
+        mis_write_struct.start_address = MISF_CIGS_ENVIRO_START + environment_data.used_counter - environment_data.uncopied_counter;
+        mis_write_struct.size = environment_data.uncopied_counter;
+    }
+    else if (mission_id == CIGS_IV_HEADER)
+    {
+        mis_write_struct.start_address = MISF_CIGS_IV_HEADER_START + iv_header.used_counter - iv_header.uncopied_counter;
+        mis_write_struct.size = iv_header.uncopied_counter;
+    }
+    else if (mission_id == CIGS_IV_DATA)
+    {
+        mis_write_struct.start_address = MISF_CIGS_IV_DATA_START + iv_data.used_counter - iv_data.uncopied_counter;
+        mis_write_struct.size = iv_data.uncopied_counter;
+    }
+    return mis_write_struct;
 }

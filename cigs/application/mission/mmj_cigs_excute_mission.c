@@ -172,7 +172,7 @@ void handle_smf_available(Command *command) {
    if (command->content[0] == ALLOW) {
       fprintf(PC, "\t\t-> allowed\r\n");
       status[0] = COPYING;
-      /*
+      
       // キューが空になるまでループ処理
       int8 processed_count = 0;
       while (!is_empty_flash_queue()) {
@@ -206,7 +206,7 @@ void handle_smf_available(Command *command) {
       }
       
       fprintf(PC, "\t\t-> Completed processing %d SMF operations\r\n", processed_count);
-      */
+      
       status[0] = FINISHED;
    } else {
       fprintf(PC, "\t\t-> denied\r\n");

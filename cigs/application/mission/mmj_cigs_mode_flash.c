@@ -12,7 +12,7 @@ void mode_misf_erase_all(int8 parameter[])
    int8 cmd = parameter[0]; // Get the command ID from the parameter array
    piclog_make(cmd, 0x00); // Log the command execution
    
-   for (int32 address = ADDRESS_MISF_START; address < ADDRESS_MISF_END; address += SECTOR_64K_BYTE) {
+   for (int32 address = MISF_START; address < MISF_END; address += SECTOR_64K_BYTE) {
       sector_erase(mis_fm, address); // Erase each sector
    }
    piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
@@ -216,7 +216,7 @@ void mode_flash_address_reset(unsigned int8 parameter[])
    piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
    unsigned int8 writedata[PACKET_SIZE] = {0x00}; // Initialize write data to zero
    
-   write_data_bytes(mis_fm, ADDRESS_MANAGE_START, writedata, PACKET_SIZE);
+   write_data_bytes(mis_fm, MISF_CIGS_DATA_TABLE_START, writedata, PACKET_SIZE);
    misf_init(); // Update the address area after writing
 
 
@@ -278,7 +278,7 @@ void mode_misf_address_reset(unsigned int8 parameter[])
    piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
    unsigned int8 writedata[PACKET_SIZE] = {0x00}; // Initialize write data to zero
    
-   write_data_bytes(mis_fm, ADDRESS_MANAGE_START, writedata, PACKET_SIZE);
+   write_data_bytes(mis_fm, MISF_CIGS_DATA_TABLE_START, writedata, PACKET_SIZE);
    misf_init(); // Update the address area after writing
 
 
@@ -337,7 +337,7 @@ void mode_smf_erase_force(int8 parameter[])
    
 
    
-   for (int32 address = ADDRESS_MISF_START; address < ADDRESS_MISF_END; address += SECTOR_64K_BYTE) {
+   for (int32 address = CIGS_DATA_TABLE_START_ADDRESS; address < CIGS_PICLOG_END_ADDRESS; address += SECTOR_64K_BYTE) {
       sector_erase(smf, address); // Erase each sector
    }
    piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
@@ -347,18 +347,14 @@ void mode_smf_erase_force(int8 parameter[])
 void mode_smf_address_reset(int8 parameter[])
 {
    printf("Start SMF Reset\r\n");
-   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
-   int8 writedata[PACKET_SIZE] = {0x00}; // Initialize write data to zero
-   
-   // 統合管理システムから初期化処理
-   //init_misf_smf_manager(parameter[0], 0x04EC0000, 0x056BFFFF - 0x04EC0000, 0x04EC0000, PACKET_SIZE);
-   
+   piclog_make(parameter[0], PICLOG_PARAM_START);
+   int8 writedata[PACKET_SIZE] = {0x00}; 
    for (int32 address = 0x04EC0000; address < 0x056BFFFF; address += SECTOR_64K_BYTE) {
       sector_erase(smf, address); // Erase each sector
    }
 
    write_data_bytes(smf, 0x04EC0000, writedata, PACKET_SIZE);
-   smf_init(); // Update the address area after writing
+   //smf_init(); // Update the address area after writing
 
    piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
    printf("End SMF Reset\r\n");

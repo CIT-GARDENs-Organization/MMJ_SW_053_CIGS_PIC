@@ -3,6 +3,8 @@
 
 #include "../../../lib/tool/smf_queue.h"  // FlashOperationStruct定義
 
+#define CRC_RETRY_COUNT 5
+
 // SMF操作関数
 void smf_write(FlashOperationStruct *smf_data);
 void smf_read(FlashOperationStruct *smf_data);
