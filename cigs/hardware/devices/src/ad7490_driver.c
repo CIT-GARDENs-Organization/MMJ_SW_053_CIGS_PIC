@@ -8,7 +8,8 @@ void ad7490_init()
     fprintf(PC, "AD7490 Initialize\r\n");
     output_high(ADC_CS); // Set CS pin high to deselect the ADC
     delay_ms(10); // Wait for the ADC to stabilize
-    unsigned int16 readdata = ad7490_read(ADC_TEMP_PY_TOP); // Read a dummy value to initialize the ADC
+    unsigned int16 readdata = ad7490_read(ADC_CIGS2_CURR); // Read a dummy value to initialize the ADC
+    delay_ms(1); // Wait for the ADC to stabilize after reading
     fprintf(PC, "\t%04LX\r\n", readdata);
     if (readdata == 0xFFFF || readdata == 0x0000) {
         fprintf(PC, "\tConnect error!\r\n");

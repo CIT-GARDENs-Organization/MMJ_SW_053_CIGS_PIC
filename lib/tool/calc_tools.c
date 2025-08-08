@@ -1,12 +1,15 @@
-unsigned int8 calc_crc8(unsigned int8 frame[], int8 payload_size)
+unsigned int8 calc_crc8(unsigned int8 *frame, int8 payload_size)
 {
-   unsigned int8 crc = frame[0], i = 1;
-   while(i < payload_size)
-      crc ^= frame[i++];
+   if (payload_size <= 0) return 0;
+
+   unsigned int8 crc = *frame++;
+   while (--payload_size > 0)
+      crc ^= *frame++;
+
    return crc;
 }
 
-int1 is_crc_valid(unsigned int8 frame[], int8 payload_size)
+int1 is_crc_valid(unsigned int8 *frame, int8 payload_size)
 {
    unsigned int8 received_crc = frame[payload_size - 1]; // CRC is the last byte
    unsigned int8 calculated_crc = calc_crc8(frame, payload_size - 1);

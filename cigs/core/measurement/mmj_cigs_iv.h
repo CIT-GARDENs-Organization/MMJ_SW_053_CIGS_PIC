@@ -33,6 +33,7 @@ void make_meas_header(unsigned int8 *packetdata, unsigned int8 *cmd);
 
 void sweep(unsigned int8 parameter[]);
 
+void sweep_with_threshold(unsigned int16 curr_threshold, unsigned int16 pd_threshold, unsigned int16 curr_limit);
 
 
 typedef struct{

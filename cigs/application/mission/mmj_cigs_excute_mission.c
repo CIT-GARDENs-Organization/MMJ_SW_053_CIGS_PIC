@@ -138,7 +138,7 @@ void handle_uplink_command(Command *command) {
 
    status[0] = EXECUTING_MISSION;
    execute_mission(command->content);
-   if (is_empty_smf_queue())
+   if (is_empty_flash_queue())
       status[0] = FINISHED;
    else
       status[0] = SMF_USE_REQ;
@@ -172,13 +172,13 @@ void handle_smf_available(Command *command) {
    if (command->content[0] == ALLOW) {
       fprintf(PC, "\t\t-> allowed\r\n");
       status[0] = COPYING;
-
+      /*
       // キューが空になるまでループ処理
       int8 processed_count = 0;
-      while (!is_empty_smf_queue()) {
+      while (!is_empty_flash_queue()) {
          fprintf(PC, "\t\t-> Processing SMF data [%d]\r\n", processed_count);
          
-         SmfDataStruct *smf_data = dequeue_smf_data();
+         FlashOperationStruct *smf_data = dequeue_flash_operation();
          if (smf_data != 0x00) {
             int8 func_type = smf_data->func_type;
             fprintf(PC, "func type : 0x%02X",func_type);
@@ -206,6 +206,7 @@ void handle_smf_available(Command *command) {
       }
       
       fprintf(PC, "\t\t-> Completed processing %d SMF operations\r\n", processed_count);
+      */
       status[0] = FINISHED;
    } else {
       fprintf(PC, "\t\t-> denied\r\n");

@@ -26,27 +26,18 @@ void piclog_make(int8 function, int8 parameter)
         printf("\r\n");
     #endif
 
-    int32 write_address = ADDRESS_MISF_PICLOG_DATA_START + misf_piclog_use_counter;
-    //printf("Write PICLOG to address: 0x%08LX\r\n", write_address);
-    
-    // 統合管理システムを使用してMISFに書き込み
-    MisfSmfManagerStruct* manager = get_misf_smf_manager(MISSION_ID_PICLOG);
+    int32 write_address = ADDRESS_MISF_PICLOG_DATA_START + piclog_data.used_counter;
     
     write_data_bytes(mis_fm, (int32)write_address, piclog, (int16)PICLOG_PACKET_SIZE);
     
     // 統合管理システムでカウンタを更新
-    update_misf_data(MISSION_ID_PICLOG, PICLOG_PACKET_SIZE);
+    write_misf_address_area();
 
     // Next Packet
-    if (misf_piclog_write_counter + PICLOG_PACKET_SIZE >=  PACKET_SIZE) {
-        write_address = ADDRESS_MISF_PICLOG_DATA_START + misf_piclog_use_counter;
+    if (piclog_data.reserve_counter1 + PICLOG_PACKET_SIZE >=  PACKET_SIZE) {
+        write_address = ADDRESS_MISF_PICLOG_DATA_START + piclog_data.used_counter;
         write_data_bytes(mis_fm, (int32)write_address, PICLOG_BLANK_DATA, (int16)PICLOG_PACKET_SIZE);
-        misf_piclog_write_counter = 0;
-    }
-
-    // 自動転送キューに追加（未コピーデータがある場合）
-    if (get_uncopied_data_size(MISSION_ID_PICLOG) > 0) {
-        enqueue_auto_transfer(MISSION_ID_PICLOG);
+        piclog_data.reserve_counter1 = 0;
     }
 
     write_misf_address_area(); // Update the address area after writing

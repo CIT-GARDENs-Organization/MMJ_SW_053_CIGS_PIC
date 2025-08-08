@@ -10,9 +10,7 @@
 
 #device ADC=12
 #use delay(crystal=16MHz)
-#fuses HS
-
-
+#fuses HS, NOWDT, NOBROWNOUT, NOPROTECT
 
 #define PIC18
 //#define PIC16
@@ -76,16 +74,16 @@
     #define SMF_CS PIN_A2
     #define MIS_FM_CS  PIN_A5
 
-    #pin_select SCK1=PIN_A3
+    #pin_select SCK1OUT=PIN_A3
     #pin_select SDI1=PIN_A0
     #pin_select SDO1=PIN_A1
-    #use spi (MASTER, SPI1, BAUD=200000, MODE=0, BITS=8, STREAM=SMF_STREAM)
-    // #use spi (MASTER, CLK=PIN_A3, DI=PIN_A1, DO=PIN_A0, BAUD=200000, MODE=0, BITS=8, STREAM=SMF_STREAM)
+    // #use spi (MASTER, SPI1, BAUD=100000, MODE=0, BITS=8, STREAM=SMF_STREAM)
+    #use spi (MASTER, CLK=PIN_A3, DI=PIN_A1, DO=PIN_A0, BAUD=200000, MODE=0, BITS=8, STREAM=SMF_STREAM)
 
-    #define MIS_FM_STREAM SMF_STREAM 
+    //#define MIS_FM_STREAM SMF_STREAM 
 
     // #define MIS_FM_STREAM FLASH_STREAM PIN_E1
-    #use spi (MASTER, CLK=PIN_D7, DI=PIN_E4, DO=PIN_E1, BAUD=200000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
+    #use spi (MASTER, CLK=PIN_E1, DI=PIN_E0, DO=PIN_E6, BAUD=200000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
     // #use spi (MASTER, SPI1, BAUD=200000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
     //#use spi (MASTER, SPI1, BAUD=200000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
     //#use spi (MASTER, CLK=PIN_A3, DI=PIN_A0, DO=PIN_A1, BAUD=200000, MODE=0, BITS=8, STREAM=SMF_STREAM)
@@ -108,12 +106,11 @@
     #define EN_NPWR PIN_C7
 
 #endif
+
 //-------------I/O port--------------------
-
-
-
-
-
+#use FIXED_IO( A_outputs=SMF_CS, MIS_FM_CS )
+#use FIXED_IO( B_outputs=ADC_CS, DAC1_CS, DAC2_CS )
+#use FIXED_IO( C_outputs=CONNECT_CIGS1, CONNECT_CIGS2, EN_NPWR )
 
 
 // ADC Settings

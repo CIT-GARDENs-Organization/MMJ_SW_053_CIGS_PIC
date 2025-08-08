@@ -7,10 +7,11 @@ void main()
    fprintf(PC,"This is MOMIJI CIGS PIC BBM for MIS7_BBM4.\r\n");
    fprintf(PC,"Last updated on %s %s, by Inoue.\r\n\r\n", __DATE__, __TIME__);
    
-   //io_init();
+   io_init();
    setup_uart_to_boss();
    setup_timer();
    ad7490_init();
+   mcp4901_init();
    misf_init();
    
    piclog_make(PICLOG_STARTUP,0x00);
@@ -68,5 +69,4 @@ void main()
    fprintf(PC, "End main\r\n");
    
 }
-
 // Enf of files

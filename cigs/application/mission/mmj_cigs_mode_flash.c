@@ -12,15 +12,6 @@ void mode_misf_erase_all(int8 parameter[])
    int8 cmd = parameter[0]; // Get the command ID from the parameter array
    piclog_make(cmd, 0x00); // Log the command execution
    
-   // 統合管理システムから消去操作をキューに追加
-   FlashOperationStruct erase_op;
-   erase_op.mission_id = cmd;
-   erase_op.func_type = SMF_ERASE;
-   erase_op.src = ADDRESS_MISF_START;
-   erase_op.size = ADDRESS_MISF_END - ADDRESS_MISF_START;
-   erase_op.manager = get_misf_smf_manager(cmd);
-   enqueue_flash_operation(&erase_op);
-   
    for (int32 address = ADDRESS_MISF_START; address < ADDRESS_MISF_END; address += SECTOR_64K_BYTE) {
       sector_erase(mis_fm, address); // Erase each sector
    }
@@ -41,15 +32,6 @@ void mode_misf_erase_1sector(int8 parameter[])
    printf("\tSector Address: 0x%08LX\r\n", sector_address);
    piclog_make(cmd, PICLOG_PARAM_START); // Log the command execution
    
-   // 統合管理システムから消去操作をキューに追加
-   FlashOperationStruct erase_op;
-   erase_op.mission_id = cmd;
-   erase_op.func_type = SMF_ERASE;
-   erase_op.src = sector_address;
-   erase_op.size = SECTOR_64K_BYTE;
-   erase_op.manager = get_misf_smf_manager(cmd);
-   enqueue_flash_operation(&erase_op);
-   
    sector_erase(mis_fm, sector_address);
    piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
    printf("End Flash Erase 1 Sector\r\n");
@@ -69,7 +51,7 @@ void mode_misf_erase_4kbyte_subsector(int8 parameter[])
    piclog_make(cmd, PICLOG_PARAM_START); // Log the command execution
    
    // 統合管理システムから消去操作をキューに追加
-   enqueue_erase_data(subsector_address, 0x1000); // 4KB消去
+   //enqueue_erase_data(subsector_address, 0x1000); // 4KB消去
    
    subsector_4kByte_erase(mis_fm, 0x00000000);
    piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
@@ -148,8 +130,8 @@ void mode_misf_write_4kbyte_subsector(unsigned int8 parameter[])
    piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
    flash_setting(mis_fm);
    unsigned int32 write_address = 0x00000000;
-   int8 write_data[256] = {0x01, 0x02, 0x03, 0x04}; // Example data
-   write_data_bytes(mis_fm, write_address, write_data, 256);
+   //int8 write_data[256] = {0x01, 0x02, 0x03, 0x04}; // Example data
+   //write_data_bytes(mis_fm, write_address, write_data, 256);
    piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Write 4kByte Subsector\r\n");
 }
@@ -234,7 +216,7 @@ void mode_flash_address_reset(unsigned int8 parameter[])
    piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
    unsigned int8 writedata[PACKET_SIZE] = {0x00}; // Initialize write data to zero
    
-   write_data_bytes(mis_fm, ADDRESS_MANEGE_START, writedata, PACKET_SIZE);
+   write_data_bytes(mis_fm, ADDRESS_MANAGE_START, writedata, PACKET_SIZE);
    misf_init(); // Update the address area after writing
 
 
@@ -252,7 +234,7 @@ void mode_smf_copy(int8 parameter[])
    int8 mission_id = parameter[0];
    
    // 未コピーデータの自動転送をキューに追加
-   enqueue_auto_transfer(mission_id);
+   //enqueue_auto_transfer(mission_id);
    
    // Example copy operation with integration system
    int32 src_address = 0x00000000;
@@ -262,7 +244,7 @@ void mode_smf_copy(int8 parameter[])
    write_data_bytes(smf, dest_address, read_data, 256);
    
    // 転送完了後のカウンタ更新
-   complete_transfer_and_update_counter(mission_id, 256);
+   //complete_transfer_and_update_counter(mission_id, 256);
    
    printf("End Flash SMF Copy\r\n");
 }
@@ -271,10 +253,10 @@ void mode_smf_copy(int8 parameter[])
 void mode_smf_read(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash SMF Read\r\n");
-   int8 read_data[256];
-   //read_data_bytes(smf, read_address, read_data, 256);
+   int8 read_data[PACKET_SIZE];
+   read_data_bytes(smf, read_data, read_data, PACKET_SIZE);
    fprintf(PC, "Read Data: ");
-   for (int i = 0; i < 256; i++)
+   for (int i = 0; i < PACKET_SIZE; i++)
    {
       fprintf(PC, "%02X ", read_data[i]);
    }
@@ -296,7 +278,7 @@ void mode_misf_address_reset(unsigned int8 parameter[])
    piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
    unsigned int8 writedata[PACKET_SIZE] = {0x00}; // Initialize write data to zero
    
-   write_data_bytes(mis_fm, ADDRESS_MANEGE_START, writedata, PACKET_SIZE);
+   write_data_bytes(mis_fm, ADDRESS_MANAGE_START, writedata, PACKET_SIZE);
    misf_init(); // Update the address area after writing
 
 
@@ -327,7 +309,7 @@ void mode_smf_read_force(int8 parameter[])
    piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
 
    // 統合管理システムからキューに追加
-   enqueue_read_data(address, packet_num * PACKET_SIZE);
+   // enqueue_read_data(address, packet_num * PACKET_SIZE);
 
    printf("\tAddress  : 0x%08LX\r\n", address);
    printf("\tPacketNum: 0x%04LX\r\n", packet_num);
@@ -353,14 +335,7 @@ void mode_smf_erase_force(int8 parameter[])
    int8 cmd = parameter[0]; // Get the command ID from the parameter array
    piclog_make(cmd, 0x00); // Log the command execution
    
-   // 統合管理システムから消去操作をキューに追加
-   FlashOperationStruct erase_op;
-   erase_op.mission_id = cmd;
-   erase_op.func_type = SMF_ERASE;
-   erase_op.src = ADDRESS_MISF_START;
-   erase_op.size = ADDRESS_MISF_END - ADDRESS_MISF_START;
-   erase_op.manager = get_misf_smf_manager(cmd);
-   enqueue_flash_operation(&erase_op);
+
    
    for (int32 address = ADDRESS_MISF_START; address < ADDRESS_MISF_END; address += SECTOR_64K_BYTE) {
       sector_erase(smf, address); // Erase each sector
@@ -376,7 +351,7 @@ void mode_smf_address_reset(int8 parameter[])
    int8 writedata[PACKET_SIZE] = {0x00}; // Initialize write data to zero
    
    // 統合管理システムから初期化処理
-   init_misf_smf_manager(parameter[0], 0x04EC0000, 0x056BFFFF - 0x04EC0000, 0x04EC0000, PACKET_SIZE);
+   //init_misf_smf_manager(parameter[0], 0x04EC0000, 0x056BFFFF - 0x04EC0000, 0x04EC0000, PACKET_SIZE);
    
    for (int32 address = 0x04EC0000; address < 0x056BFFFF; address += SECTOR_64K_BYTE) {
       sector_erase(smf, address); // Erase each sector

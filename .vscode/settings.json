@@ -27,7 +27,8 @@
         "mission_tools.h": "c",
         "mmj_cigs_mode_mission.h": "c",
         "smf_queue.h": "c",
-        "mmj_cigs_smf.h": "c"
+        "mmj_cigs_smf.h": "c",
+        "EX_SPI.C": "cpp"
     },
     "C_Cpp.default.configurationProvider": "user.vscode-extension-for-ccsc",
     "C_Cpp.configurationWarnings": "disabled"

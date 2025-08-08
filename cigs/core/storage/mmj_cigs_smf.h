@@ -3,8 +3,6 @@
 
 #include "../../../lib/tool/smf_queue.h"  // FlashOperationStruct定義
 
-#define PACKET_SIZE 64  // パケットサイズ定義
-
 // SMF操作関数
 void smf_write(FlashOperationStruct *smf_data);
 void smf_read(FlashOperationStruct *smf_data);

@@ -38,6 +38,9 @@ void mode_misf_read_address(unsigned int8 parameter[]);
 void mode_misf_erase_and_reset(unsigned int8 parameter[]);
 void mode_misf_address_reset(unsigned int8 parameter[]);
 
+
+
+
 // CMD Parameter
 typedef struct {
     unsigned int8 id;

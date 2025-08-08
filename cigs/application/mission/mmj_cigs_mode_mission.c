@@ -140,15 +140,18 @@ void mode_iv_meas_adc()
 void mode_sweep_port1(unsigned int8 uplinkcmd)
 {
    sweep_port1(80);
-   SmfDataStruct data;
-   //data.mission_type = MEAURE_DATA; // コピーする目的のデータ種別
-   data.src = ADDRESS_MISF_MEASUREMENT_START + misf_meas_use_counter - misf_meas_uncopyed_counter; // コピー元のMIS_FMのアドレス
-   data.size = misf_meas_uncopyed_counter; // コピーするデータのサイズ
-   enqueue_smf_data(&data); // SMFへのデータコピーを実行する
+   FlashOperationStruct data;
+   data.func_type = SMF_WRITE;
+   data.mission_id = 0x01;
+   data.write_mode = SMF_WRITE_CIRCULAR;
+   data.source_type = SOURCE_MISF_UNCOPIED;
+   //data.src = ADDRESS_MISF_MEASUREMENT_START + cigs_counters.counters.misf_meas_use_counter - cigs_counters.counters.misf_meas_uncopyed_counter; // コピー元のMIS_FMのアドレス
+   //data.size = cigs_counters.counters.misf_meas_uncopyed_counter; // コピーするデータのサイズ
+   enqueue_flash_operation(&data); // SMFへのデータコピーを実行する
 }
 
 
-void mode_meas_iv(unsigned int8 uplinkcmd[])
+void mode_meas_iv(unsigned int8 *uplinkcmd)
 {
    fprintf(PC, "Start MODE MEAS IV\r\n");
    MEAS_IV_CMD cmd = make_meas_iv_cmd(uplinkcmd); // Create the measurement command structure
@@ -176,12 +179,14 @@ void mode_meas_iv(unsigned int8 uplinkcmd[])
    }
    piclog_make(cmd.id, PICLOG_PARAM_END); // Log the end of the command execution
 
-   SmfDataStruct data;
-   data.func_type = 0x00;
-   data.mission_id = ID_CIGS_MEASURE_DATA; // コピーする目的のデータ種別
-   data.src = ADDRESS_MISF_MEASUREMENT_START + misf_meas_use_counter - misf_meas_uncopyed_counter; // コピー元のMIS_FMのアドレス
-   data.size = misf_meas_uncopyed_counter; // コピーするデータのサイズ
-   enqueue_smf_data(&data); // SMFへのデータコピーを実行する
+   FlashOperationStruct data;
+   data.func_type = SMF_WRITE;
+   data.mission_id = 0x01; // ID_CIGS_MEASURE_DATA; // コピーする目的のデータ種別
+   data.write_mode = SMF_WRITE_CIRCULAR;
+   data.source_type = SOURCE_MISF_UNCOPIED;
+   //data.src = ADDRESS_MISF_MEASUREMENT_START + cigs_counters.counters.misf_meas_use_counter - cigs_counters.counters.misf_meas_uncopyed_counter; // コピー元のMIS_FMのアドレス
+   //data.size = cigs_counters.counters.misf_meas_uncopyed_counter; // コピーするデータのサイズ
+   enqueue_flash_operation(&data); // SMFへのデータコピーを実行する
 
    fprintf(PC, "End MODE MEAS IV\r\n");
 }

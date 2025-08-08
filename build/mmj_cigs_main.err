@@ -1,11 +1,15 @@
-Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 07-8-25 at 00:59
->>> Warning 225 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.h" Line 6(20,55): Duplicate #define
->>> Warning 203 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_flash.c" Line 246(1,1): Condition always TRUE
+Compiling C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main on 08-8-25 at 20:02
+>>> Warning 226 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_mission.c" Line 183(1,1): Function never called  SMF_WRITE SCR=9857
+>>> Warning 226 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_mission.c" Line 183(1,1): Function never called  SMF_WRITE SCR=9857
+>>> Warning 226 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_mission.c" Line 183(1,1): Function never called  SMF_WRITE SCR=9857
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\lib\tool\smf_queue.h" Line 120(31,47): Variable never used:   misf_smf_manager
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_excute_mission.h" Line 22(6,18): Variable never used:   duration_sec
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 181(23,35): Variable never used:   mission_type
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 160(23,33): Variable never used:   mis_struct
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_smf.c" Line 202(22,34): Variable never used:   mission_type
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\core\storage\mmj_cigs_flash.c" Line 115(22,32): Variable never used:   mis_struct
 >>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_mission.c" Line 44(19,27): Variable never used:   readdata
->>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main.c" Line 47(18,22): Variable never used:   flag
-      Memory usage:   ROM=36%      RAM=10% - 75%
-      0 Errors,  7 Warnings.
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_flash.c" Line 132(19,32): Variable never used:   write_address
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\cigs\application\mission\mmj_cigs_mode_flash.c" Line 234(9,19): Variable never used:   mission_id
+>>> Warning 202 "C:\Users\shoin\Chiba Institute of Technology\5号機 - ドキュメント\CIGS\02_Software\PIC\MMJ_SW_053_CIGS_PIC\mmj_cigs_main.c" Line 48(18,22): Variable never used:   flag
+      Memory usage:   ROM=29%      RAM=25% - 90%
+      0 Errors,  11 Warnings.
 Build Successful.

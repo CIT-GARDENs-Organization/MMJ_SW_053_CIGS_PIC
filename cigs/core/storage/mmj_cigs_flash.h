@@ -8,7 +8,7 @@
 void misf_init(void);
 void update_misf_data_header(void);
 void write_misf_address_area(void);
-
+void read_misf_address_area(unsigned int8 *data);
 
 
 #define PACKET_SIZE 64
@@ -21,8 +21,8 @@ void write_misf_address_area(void);
 // __________MISF-ADDRESS__________
 #define ADDRESS_MISF_START              0x00000000
 #define ADDRESS_MISF_END                0x00F42400
-#define ADDRESS_MANEGE_START            0x00000000
-#define ADDRESS_MANEGE_END              0x0000FFFF
+#define ADDRESS_MANAGE_START            0x00000000
+#define ADDRESS_MANAGE_END              0x0000FFFF
 #define ADDRESS_MISF_PICLOG_INDEX_START 0x00010000
 #define ADDRESS_MISF_PICLOG_INDEX_END   0x0001FFFF
 #define ADDRESS_MISF_PICLOG_DATA_START  0x00020000
@@ -35,19 +35,59 @@ void write_misf_address_area(void);
 #define SECTOR_32K_BYTE 0x8000  // 32KByte
 #define SECTOR_4K_BYTE  0x1000  // 4KByte
 
-// Counter
-unsigned int32  smf_piclog_use_counter;
-unsigned int8   smf_piclog_loop_counter;
-unsigned int32  smf_meas_use_counter;
-unsigned int8   smf_meas_loop_counter;
 
-unsigned int32  misf_piclog_use_counter;
-unsigned int8   misf_piclog_loop_counter;
-unsigned int32  misf_piclog_uncopyed_counter;
-unsigned int8   misf_piclog_write_counter;
-unsigned int32  misf_meas_use_counter;
-unsigned int8   misf_meas_loop_counter;
-unsigned int32  misf_meas_uncopyed_counter;
+
+// Flashに関する構造体。基本的にこれを用いる
+typedef struct {
+    enum{} id;
+    unsigned int32 used_counter;
+    unsigned int32 uncopied_counter;
+    unsigned int8 reserve_counter1;
+    unsigned int8 reserve_counter2;
+} Flash_t;
+
+// Flash_t instances
+Flash_t piclog_data;
+Flash_t environment_data;
+Flash_t iv_header;
+Flash_t iv_data;
+
+// 各データブロックのカウンタ情報
+typedef struct __attribute__((packed)) {
+    unsigned int32 used_counter;
+    unsigned int32 uncopied_counter;
+    unsigned int8 reserve_counter1;
+    unsigned int8 reserve_counter2;
+} FlashCounter_t;
+
+// union定義
+typedef union __attribute__((packed)) {
+    unsigned int8 bytes[PACKET_SIZE];
+    struct {
+        union {
+            unsigned int8 raw[PACKET_SIZE - 2];
+
+            struct __attribute__((packed)) {
+                FlashCounter_t piclog;
+                FlashCounter_t environment;
+                FlashCounter_t iv_header;
+                FlashCounter_t iv_data;
+                // 合計サイズ: (4+4+1+1)*4 = 40 バイト
+            } logdata;
+
+        } payload;
+        unsigned int8 crc;
+    } packet;
+} FlashData_t;
+
+
+
+
+
+
+
+
+
 
 
 #define DATA_HEADER_SIZE 64 
