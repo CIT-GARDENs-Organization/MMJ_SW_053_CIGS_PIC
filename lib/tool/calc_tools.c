@@ -1,4 +1,4 @@
-unsigned int8 calc_crc8(unsigned int8 *frame, int8 payload_size)
+unsigned int8 calc_crc8(unsigned int8 *frame, unsigned int8 payload_size)
 {
    if (payload_size <= 0) return 0;
 
@@ -56,3 +56,4 @@ unsigned int32 int32_msb_to_lsb(unsigned int32 value)
            ((value & 0x0000FF00) << 8)  |
            ((value & 0x000000FF) << 24);
 }
+// End of file

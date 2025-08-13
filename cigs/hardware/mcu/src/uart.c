@@ -5,7 +5,7 @@ static void RDA_isr(void)
       if (boss_receive_buffer_size < RECEIVE_BUFFER_MAX)
          boss_receive_buffer[boss_receive_buffer_size++ % RECEIVE_BUFFER_MAX] = fgetc(BOSS);
 
-   //fprintf(PC, "RDA Interrupt: %d bytes received\r\n", boss_receive_buffer_size);
+   // fprintf(PC, "RDA Interrupt: %d bytes received\r\n", boss_receive_buffer_size);
 }
 
 void setup_uart_to_boss()
@@ -21,4 +21,4 @@ void clear_receive_signal(unsigned int8 receive_signal[], int8 *receive_signal_s
    memset(receive_signal, 0x00, *receive_signal_size);
    *receive_signal_size = 0;
 }
-
+// End of file

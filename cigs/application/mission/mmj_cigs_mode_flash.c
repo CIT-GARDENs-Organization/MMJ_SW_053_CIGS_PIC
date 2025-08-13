@@ -4,6 +4,7 @@
 #include "../../../lib/device/mt25q.h"                     // デバイスライブラリ
 #include "../../core/storage/mmj_cigs_flash.h"             // ストレージ機能
 #include "../../core/logging/mmj_cigs_piclog.h"            // ログ機能
+#include "../../../lib/tool/calc_tools.h"
 
 // ========================== MISF Command ============================
 void mode_misf_erase_all(int8 parameter[])
@@ -209,20 +210,6 @@ void mode_misf_erase_and_reset(unsigned int8 parameter[])
 
    fprintf(PC, "End Flash Erase and Reset\r\n");
 }
-
-void mode_flash_address_reset(unsigned int8 parameter[])
-{
-   fprintf(PC, "Start Flash Address Reset\r\n");
-   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
-   unsigned int8 writedata[PACKET_SIZE] = {0x00}; // Initialize write data to zero
-   
-   write_data_bytes(mis_fm, MISF_CIGS_DATA_TABLE_START, writedata, PACKET_SIZE);
-   misf_init(); // Update the address area after writing
-
-
-   piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
-   fprintf(PC, "End Flash Address Reset\r\n");
-}
 // ========================== SMF Command ============================
 void mode_smf_copy(int8 parameter[])
 {
@@ -275,10 +262,27 @@ void mode_smf_erase(unsigned int8 parameter[])
 void mode_misf_address_reset(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Address Reset\r\n");
-   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
-   unsigned int8 writedata[PACKET_SIZE] = {0x00}; // Initialize write data to zero
-   
-   write_data_bytes(mis_fm, MISF_CIGS_DATA_TABLE_START, writedata, PACKET_SIZE);
+   piclog_make(parameter[0], PICLOG_PARAM_START); 
+   FlashData_t flash_data;
+   memset(flash_data.bytes, 0, PACKET_SIZE);
+   /*
+   for (int i = 0; i < PACKET_SIZE; i++) {
+      fprintf(PC, "%02X ", flash_data.bytes[i]);
+   }
+   */
+   fprintf(PC, "\r\n");
+   flash_data.packet.crc = calc_crc8(flash_data.bytes, PACKET_SIZE-1);
+   for (int i = 0; i < PACKET_SIZE; i++) {
+      fprintf(PC, "%02X ", flash_data.bytes[i]);
+   }
+   fprintf(PC, "\r\n");
+   write_data_bytes(mis_fm, MISF_CIGS_DATA_TABLE_START, flash_data.bytes, PACKET_SIZE);
+   memset(flash_data.bytes, 0, PACKET_SIZE);
+   read_data_bytes(mis_fm, MISF_CIGS_DATA_TABLE_START, flash_data.bytes, PACKET_SIZE);
+   flash_data.packet.crc = calc_crc8(flash_data.bytes, PACKET_SIZE-1);
+   for (int i = 0; i < PACKET_SIZE; i++) {
+      fprintf(PC, "%02X ", flash_data.bytes[i]);
+   }
    misf_init(); // Update the address area after writing
 
 

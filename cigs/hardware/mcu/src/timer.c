@@ -52,5 +52,4 @@ unsigned int16 get_current_day()
 {
    return day;
 }
-
-
+// End of file

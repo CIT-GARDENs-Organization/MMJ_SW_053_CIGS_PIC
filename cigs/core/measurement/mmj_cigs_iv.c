@@ -155,6 +155,7 @@ void sweep_with_threshold(unsigned int16 curr_threshold, unsigned int16 pd_thres
     mcp4901_1_write(1);
     mcp4901_2_write(1);
     ad7490_read(ADC_CIGS1_CURR);
+    ad7490_read(ADC_CIGS1_CURR);
     ad7490_read(ADC_CIGS2_CURR);
     ad7490_read(ADC_CIGS2_CURR);
     delay_ms(200);
@@ -167,7 +168,7 @@ void sweep_with_threshold(unsigned int16 curr_threshold, unsigned int16 pd_thres
         // Set DAC values for both ports (synchronized timing)
         mcp4901_1_write(count);
         mcp4901_2_write(count);
-        delay_ms(1); // wait for DAC to stabilize
+        delay_ms(10); // wait for DAC to stabilize
 
         // Read CIGS1 data (port1) only if still active
         if (port1.active) {
@@ -304,3 +305,4 @@ MEASUREMENT_DATA create_meas_data()
     data.open_voltage = ad7490_read(ADC_CIGS1_VOLT); // Assuming this is the correct ADC channel for open voltage
     return data;
 }
+// End of file

@@ -4,6 +4,7 @@
 
 void enqueue_flash_operation(FlashOperationStruct *data)
 {   
+   fprintf(PC, "Enqueue Flash Operation\r\n");
    int8 next_tail = (flash_queue.tail_index + 1) % SMF_QUEUE_SIZE;
 
    if(next_tail == flash_queue.head_index)
@@ -19,6 +20,8 @@ void enqueue_flash_operation(FlashOperationStruct *data)
       flash_queue.entries[flash_queue.tail_index].misf_size = data->misf_size;
       flash_queue.tail_index = next_tail;
    }
+
+
 }
 
 
@@ -33,6 +36,8 @@ FlashOperationStruct *dequeue_flash_operation()
    {
       int8 current_head = flash_queue.head_index;
       flash_queue.head_index = (flash_queue.head_index + 1) % SMF_QUEUE_SIZE;
+
+
       return &flash_queue.entries[current_head];
    }
 }
@@ -64,14 +69,14 @@ SmfAddressStruct get_smf_address_struct(MissionID mission_id)
    }
    else if (mission_id == CIGS_IV_HEADER)
    {
-      mis_struct.start_address = CIGS_PICLOG_END_ADDRESS;
-      mis_struct.end_address   = CIGS_PICLOG_END_ADDRESS;
+      mis_struct.start_address = CIGS_IV1_HEADER_START_ADDRESS;
+      mis_struct.end_address   = CIGS_IV1_HEADER_END_ADDRESS;
    }
    else if (mission_id == CIGS_IV_DATA)
    {
-      mis_struct.start_address = CIGS_PICLOG_END_ADDRESS;
-      mis_struct.end_address   = CIGS_PICLOG_END_ADDRESS;
+      mis_struct.start_address = CIGS_IV1_DATA_START_ADDRESS;
+      mis_struct.end_address   = CIGS_IV1_DATA_END_ADDRESS;
    }
    return mis_struct;
 }
-
+// End of file

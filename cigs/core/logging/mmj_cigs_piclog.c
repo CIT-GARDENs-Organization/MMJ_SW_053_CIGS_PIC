@@ -10,28 +10,30 @@
 void piclog_make(int8 function, int8 parameter)
 {
     PICLOG_t piclog;
+    memset(piclog.bytes, 0, PICLOG_PACKET_SIZE);
     piclog.fields.time = get_current_sec();
     piclog.fields.function = function;
     piclog.fields.parameter = parameter;
 
-    #ifdef PICLOG_DEBUG
-        printf("[PICLOG] : ");
-        for (int8 i = 0; i < PICLOG_PACKET_SIZE; i++) {
-            printf("%02X ", piclog.bytes[i]);
-        }
-        printf("\r\n");
-    #endif
+    printf("\t[PICLOG] : ");
+    for (int8 i = 0; i < PICLOG_PACKET_SIZE; i++) {
+        printf("%02X ", piclog.bytes[i]);
+    }
+    printf("\r\n");
 
     int32 write_address = MISF_CIGS_PICLOG_START + piclog_data.used_counter;
-    write_data_bytes(mis_fm, (int32)write_address, piclog.bytes, (int16)PICLOG_PACKET_SIZE);
+    write_data_bytes(mis_fm, write_address, piclog.bytes, PICLOG_PACKET_SIZE);
 
-    // 統合管理システムでカウンタを更新
-    write_misf_address_area();
+    piclog_data.used_counter += PICLOG_PACKET_SIZE;
+    piclog_data.uncopied_counter += PICLOG_PACKET_SIZE;
+    piclog_data.reserve_counter1 += PICLOG_PACKET_SIZE;
 
     // Next Packet
     if (piclog_data.reserve_counter1 + PICLOG_PACKET_SIZE >=  PACKET_SIZE) {
         write_address = MISF_CIGS_PICLOG_START + piclog_data.used_counter;
-        write_data_bytes(mis_fm, (int32)write_address, PICLOG_BLANK_DATA, (int16)PICLOG_PACKET_SIZE);
+        write_data_bytes(mis_fm, write_address, PICLOG_BLANK_DATA, sizeof(PICLOG_BLANK_DATA));
+        piclog_data.used_counter += sizeof(PICLOG_BLANK_DATA);
+        piclog_data.uncopied_counter += sizeof(PICLOG_BLANK_DATA);
         piclog_data.reserve_counter1 = 0;
     }
 
@@ -50,3 +52,4 @@ void piclog_make(int8 function, int8 parameter)
         //fprintf(PC, "PICLOG written: %02X %02X %02X %02X %02X %02X\r\n", piclog_data.bytes[0], data[1], data[2], data[3], data[4], data[5]);
     #endif
 }
+// End of file

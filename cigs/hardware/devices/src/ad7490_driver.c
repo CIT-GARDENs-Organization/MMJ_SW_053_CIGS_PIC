@@ -47,3 +47,4 @@ unsigned int16 ad7490_read(int8 channel)
     #endif
     return readdata;
 }
+// End of file

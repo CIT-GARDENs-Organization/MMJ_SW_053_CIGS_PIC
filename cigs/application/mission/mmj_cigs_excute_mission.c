@@ -1,9 +1,10 @@
+#include "../../../lib/tool/smf_queue.h"                   // ツールライブラリ
 #include "../../system/mmj_cigs_config.h"             // システム設定
 #include "../../../lib/communication/value_status.h"    // ステータス定義
 #include "mmj_cigs_excute_mission.h"                  // 同じフォルダのヘッダー
 #include "mmj_cigs_mode_mission.h"                    // 同じフォルダのヘッダー
 #include "mmj_cigs_mode_flash.h"                      // 同じフォルダのヘッダー
-#include "../../../lib/tool/smf_queue.h"                   // ツールライブラリ
+
 #include "../../core/storage/mmj_cigs_smf.h"             // ストレージ機能
 #include "../../../lib/communication/typedef_content.h"    // 通信ライブラリ
 #include "../../../lib/communication/mission_tools.h"      // ミッションツール
@@ -160,55 +161,59 @@ int1 handle_status_check(Command *command) {
    else{
       return FALSE;
    }
-
 }
 
 
-void handle_smf_available(Command *command) {
-   fprintf(PC, "\t-> SMF available check\r\n");
-   fprintf(PC, "\t   Transmit Acknowledgement\r\n");
-   transmit_ack();
-   
-   if (command->content[0] == ALLOW) {
-      fprintf(PC, "\t\t-> allowed\r\n");
-      status[0] = COPYING;
-      
-      // キューが空になるまでループ処理
-      int8 processed_count = 0;
-      while (!is_empty_flash_queue()) {
-         fprintf(PC, "\t\t-> Processing SMF data [%d]\r\n", processed_count);
-         
-         FlashOperationStruct *smf_data = dequeue_flash_operation();
-         if (smf_data != 0x00) {
-            int8 func_type = smf_data->func_type;
-            fprintf(PC, "func type : 0x%02X",func_type);
-            if (func_type == 0x00) {  // SMF_WRITE
-               fprintf(PC, "\t\t-> Executing SMF WRITE (single)\r\n");
-               smf_write(smf_data);
-            }
-            if (func_type == 0x01) {  // SMF_READ
-               fprintf(PC, "\t\t-> Executing SMF READ (single)\r\n");
-               smf_read(smf_data);
-            }
+void handle_smf_available(Command *command)
+{
+    fprintf(PC, "\t-> SMF available check\r\n");
+    fprintf(PC, "\t   Transmit Acknowledgement\r\n");
+    transmit_ack();
 
-            if (func_type == 0x02) {  // SMF_ERASE
-               fprintf(PC, "\t\t-> Executing SMF ERASE (single)\r\n");
-               smf_erase(smf_data);
-            }
-            if (func_type > 2) {
-               fprintf(PC, "\t\t-> Unknown SMF function type\r\n");
-            }
-            processed_count++;
-         } else {
-            fprintf(PC, "\t\t-> Error: Failed to dequeue SMF data\r\n");
+    if (command->content[0] != ALLOW) {
+        fprintf(PC, "\t\t-> denied\r\n");
+        return;
+    }
+
+    fprintf(PC, "\t\t-> allowed\r\n");
+    status[0] = COPYING;
+
+    int8 processed_count = 0;
+
+    while (!is_empty_flash_queue()) {
+        FlashOperationStruct *smf_data = dequeue_flash_operation();
+        if (smf_data == NULL) {
+            fprintf(PC, "\t\t-> dequeue NULL (break)\r\n");
             break;
-         }
-      }
-      
-      fprintf(PC, "\t\t-> Completed processing %d SMF operations\r\n", processed_count);
-      
-      status[0] = FINISHED;
-   } else {
-      fprintf(PC, "\t\t-> denied\r\n");
-   }
+        }
+
+        fprintf(PC, "\t\t-> Dequeued: func=%u mission=%u size=%ld addr=%ld\r\n",
+                (unsigned int)smf_data->func_type,
+                (unsigned int)smf_data->mission_id,
+                smf_data->misf_size,
+                smf_data->misf_start_addr);
+
+        switch (smf_data->func_type) {
+            case ENUM_SMF_WRITE:
+                smf_write(smf_data);
+                break;
+            case ENUM_SMF_READ:
+                smf_read(smf_data);
+                break;
+            case ENUM_SMF_ERASE:
+                smf_erase(smf_data);
+                break;
+            default:
+                fprintf(PC, "\t\t   Unknown func_type=%u\r\n",
+                        (unsigned int)smf_data->func_type);
+                break;
+        }
+        processed_count++;
+    }
+
+    fprintf(PC, "\t\t-> Completed %u operations\r\n",
+            (unsigned int)processed_count);
+
+    status[0] = FINISHED;
 }
+// End of file

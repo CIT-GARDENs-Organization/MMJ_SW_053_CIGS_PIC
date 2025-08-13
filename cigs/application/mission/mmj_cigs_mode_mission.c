@@ -141,7 +141,7 @@ void mode_sweep_port1(unsigned int8 uplinkcmd)
 {
 //!   sweep_port1(80);
    FlashOperationStruct data;
-   data.func_type = SMF_WRITE;
+   data.func_type = ENUM_SMF_WRITE;
    data.mission_id = 0x01;
    data.write_mode = SMF_WRITE_CIRCULAR;
    data.source_type = SOURCE_MISF_UNCOPIED;
@@ -179,16 +179,25 @@ void mode_meas_iv(unsigned int8 *uplinkcmd)
    }
    piclog_make(cmd.id, PICLOG_PARAM_END); // Log the end of the command execution
 
-   FlashOperationStruct data;
-   data.func_type = SMF_WRITE;
-   data.mission_id = 0x01; // ID_CIGS_MEASURE_DATA; // コピーする目的のデータ種別
+   FlashOperationStruct data = {0};
+   data.func_type = ENUM_SMF_WRITE;
+   data.mission_id = CIGS_IV_DATA; // ID_CIGS_MEASURE_DATA; // コピーする目的のデータ種別
    data.write_mode = SMF_WRITE_CIRCULAR;
    data.source_type = SOURCE_MISF_UNCOPIED;
-   //data.src = ADDRESS_MISF_MEASUREMENT_START + cigs_counters.counters.misf_meas_use_counter - cigs_counters.counters.misf_meas_uncopyed_counter; // コピー元のMIS_FMのアドレス
-   //data.size = cigs_counters.counters.misf_meas_uncopyed_counter; // コピーするデータのサイズ
+   // data.src = ADDRESS_MISF_MEASUREMENT_START + cigs_counters.counters.misf_meas_use_counter - cigs_counters.counters.misf_meas_uncopyed_counter; // コピー元のMIS_FMのアドレス
+   // data.size = 0; // コピーするデータのサイズ
+
+   fprintf(PC, "Enqueue Flash Operation\r\n");
+   fprintf(PC, "Mission ID: %02X\r\n", data.mission_id);
+   fprintf(PC, "Function Type: %02X\r\n", data.func_type);
+   fprintf(PC, "Write Mode: %02X\r\n", data.write_mode);
+   fprintf(PC, "Source Type: %02X\r\n", data.source_type);
+   fprintf(PC, "Start Address: %04X\r\n", data.misf_start_addr);
+   fprintf(PC, "Size: %04X\r\n", data.misf_size);
+
    enqueue_flash_operation(&data); // SMFへのデータコピーを実行する
 
-   fprintf(PC, "End MODE MEAS IV\r\n");
+   fprintf(PC, "End MODE MEAS IV mission\r\n");
 }
 
 

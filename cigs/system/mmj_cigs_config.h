@@ -63,8 +63,8 @@
 #ifdef PIC18
     //#include <18F67J94.h>
     //-------------UART--------------------
-    #pin_select TX3=PIN_E3                                                           //TX PIN EXT +/- 6v
-    #pin_select RX3=PIN_F2                                                           //RX PIN EXT +/- 6V
+    #pin_select TX3=PIN_E3                                                          
+    #pin_select RX3=PIN_F2                                                        
     #use rs232(baud=9600, parity=N, UART3, bits=8, stream=BOSS, ERRORS)                      
     
     //#use rs232(baud=9600,parity=N, xmit=PIN_E4,bits=8,stream=PC)
@@ -92,7 +92,7 @@
 
     
 
-    #use spi (MASTER, CLK=PIN_B2, DI=PIN_B4, DO=PIN_B5,  BAUD=1000000, MODE=2, BITS=16, STREAM=ADCDAC_STREAM)
+    #use spi (MASTER, CLK=PIN_B2, DI=PIN_B4, DO=PIN_B5,  BAUD=500000, MODE=2, BITS=16, STREAM=ADCDAC_STREAM)
     #define ADC_CS PIN_B1
     #define ADC_STREAM ADCDAC_STREAM
     #define DAC1_CS PIN_B3

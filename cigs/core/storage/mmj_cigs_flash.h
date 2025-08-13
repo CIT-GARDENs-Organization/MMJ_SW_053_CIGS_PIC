@@ -12,15 +12,15 @@
 
 
 #define MISF_CIGS_DATA_TABLE_START 0x00000000
-#define MISF_CIGS_DATA_TABLE_END   0x0000FFFF
+#define MISF_CIGS_DATA_TABLE_END   0x00000FFF
 #define MISF_CIGS_PICLOG_START    0x00010000
-#define MISF_CIGS_PICLOG_END      0x0001FFFF
-#define MISF_CIGS_ENVIRO_START    0x00020000
-#define MISF_CIGS_ENVIRO_END      0x0002FFFF
-#define MISF_CIGS_IV_HEADER_START 0x00030000
-#define MISF_CIGS_IV_HEADER_END   0x0003FFFF
-#define MISF_CIGS_IV_DATA_START   0x00040000
-#define MISF_CIGS_IV_DATA_END     0x0004FFFF
+#define MISF_CIGS_PICLOG_END      0x00140FFF
+#define MISF_CIGS_ENVIRO_START    0x00281000
+#define MISF_CIGS_ENVIRO_END      0x00320FFF
+#define MISF_CIGS_IV_HEADER_START 0x00321000
+#define MISF_CIGS_IV_HEADER_END   0x00720FFF
+#define MISF_CIGS_IV_DATA_START   0x00721000
+#define MISF_CIGS_IV_DATA_END     0x007C1000
 
 // 重複していた #define はここに一度だけ残す
 // 例: #define SECTOR_4K_BYTE  0x1000  // 4KByte
@@ -56,24 +56,25 @@ typedef struct {
 // ここでは payload 内の logdata.* が FlashCounter_t と仮定
 typedef union {
     struct {
-        struct {
+        union {
             struct {
                 FlashCounter_t piclog;
                 FlashCounter_t environment;
                 FlashCounter_t iv_header;
                 FlashCounter_t iv_data;
-            } logdata;
+            } logdata;  // 合計サイズは63バイト
+            unsigned int8 reserve[63];
         } payload;
-        unsigned int8 crc;
+        unsigned int8 crc;  // 1バイトCRC
     } packet;
-    unsigned int8 bytes[PACKET_SIZE];
+    unsigned int8 bytes[64];
 } FlashData_t;
 
 // グローバルカウンタ（他 .c で定義済みなら extern に）
-Flash_t piclog_data;
-Flash_t environment_data;
-Flash_t iv_header;
-Flash_t iv_data;
+Flash_t piclog_data={FLASH_ID_PICLOG,0,0,0,0};
+Flash_t environment_data={FLASH_ID_ENVIRONMENT,0,0,0,0};
+Flash_t iv_header={FLASH_ID_IV_HEADER,0,0,0,0};
+Flash_t iv_data={FLASH_ID_IV_DATA,0,0,0,0};
 
 // 取得系
 FlashData_t make_flash_data_table(void);
