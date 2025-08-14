@@ -37,8 +37,8 @@ typedef struct {
 } SmfAddressStruct;
 
 typedef struct{
-   int32 start_address;
-   int32 size;
+   int32 misf_start_address;
+   int32 misf_size;
 } SmfWriteStruct;
 
 typedef struct {
@@ -100,4 +100,5 @@ void enqueue_erase_data(int32 smf_addr, int32 size);
 void enqueue_auto_transfer(int8 mission_id);  // 未コピーデータの自動転送
 void complete_transfer_and_update_counter(int8 mission_id, int32 transferred_size);  // 転送完了とカウンタ更新
 
+SmfWriteStruct get_smf_write_struct(MissionID mission_id);
 #endif   //SMF_QUEUE_H

@@ -181,7 +181,7 @@ void sweep_with_threshold(unsigned int16 curr_threshold, unsigned int16 pd_thres
         if (port2.active) {
             port2.data_buffer[0][count] = ad7490_read(ADC_CIGS2_AMP);
             port2.data_buffer[1][count] = ad7490_read(ADC_CIGS2_CURR);
-            fprintf(PC, "CIGS2 data: %04LX, %04LX\r\n", port2.data_buffer[0][count], port2.data_buffer[1][count]);
+            // fprintf(PC, "CIGS2 data: %04LX, %04LX\r\n", port2.data_buffer[0][count], port2.data_buffer[1][count]);
             port2.sweep_step = count + 1; // Update CIGS2 step counter
         }
 

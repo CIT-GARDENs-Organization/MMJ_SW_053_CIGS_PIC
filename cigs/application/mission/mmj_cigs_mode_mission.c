@@ -188,12 +188,12 @@ void mode_meas_iv(unsigned int8 *uplinkcmd)
    // data.size = 0; // コピーするデータのサイズ
 
    fprintf(PC, "Enqueue Flash Operation\r\n");
-   fprintf(PC, "Mission ID: %02X\r\n", data.mission_id);
-   fprintf(PC, "Function Type: %02X\r\n", data.func_type);
-   fprintf(PC, "Write Mode: %02X\r\n", data.write_mode);
-   fprintf(PC, "Source Type: %02X\r\n", data.source_type);
-   fprintf(PC, "Start Address: %04X\r\n", data.misf_start_addr);
-   fprintf(PC, "Size: %04X\r\n", data.misf_size);
+   fprintf(PC, "Mission ID:   %02X\r\n", data.mission_id);
+   fprintf(PC, "Function Type:%02X\r\n", data.func_type);
+   fprintf(PC, "Write Mode:   %02X\r\n", data.write_mode);
+   fprintf(PC, "Source Type:  %02X\r\n", data.source_type);
+   fprintf(PC, "Start Address:%04X\r\n", data.misf_start_addr);
+   fprintf(PC, "Size:         %04X\r\n", data.misf_size);
 
    enqueue_flash_operation(&data); // SMFへのデータコピーを実行する
 

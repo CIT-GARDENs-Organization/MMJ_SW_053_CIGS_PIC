@@ -74,6 +74,7 @@ void smf_write(FlashOperationStruct *smf_data)
     
     smf_data_table_t smf_data_table;
     SmfAddressStruct smf_address = get_smf_address_struct(smf_data->mission_id);
+
     unsigned int32 mis_start_address = smf_address.start_address;
     unsigned int32 mis_end_address = smf_address.end_address;
     unsigned int32 write_src;
@@ -84,6 +85,7 @@ void smf_write(FlashOperationStruct *smf_data)
     {
         MisfAddressStruct misf_address = get_misf_address_struct(smf_data->mission_id);
         write_src = misf_address.start_address;
+        write_size = iv_data.uncopied_counter;
     }else if(smf_data->source_type == SOURCE_MISF_MANUAL)
     {
         // 手動指定データを転送
@@ -91,6 +93,7 @@ void smf_write(FlashOperationStruct *smf_data)
         write_size = smf_data->misf_size;
     }
 
+    // 接続確認
     if (!is_connect(mis_fm))
     {
         fprintf(PC, "Error: MIS FM is not connected\r\n");
@@ -102,14 +105,13 @@ void smf_write(FlashOperationStruct *smf_data)
 
     // read size area with CRC verification retry
     read_smf_header(&smf_data_table);
-
-    // PartitionParamから値を取得
     int32 used_size = param.meas.used_size;
     int8 loop_count = param.meas.loop_counter;
     fprintf(PC, "Size area read\r\n");
-    fprintf(PC, "used_size = %ld (src 0x%08LX)\r\n", used_size, mis_start_address);
-    fprintf(PC, "loop count= %d  (src 0x%08LX)\r\n\r\n", loop_count, mis_start_address + 4);
-    
+    fprintf(PC, "smf_used_size = %ld (src 0x%08LX)\r\n", used_size, mis_start_address);
+    fprintf(PC, "smf_loop count= %d  (src 0x%08LX)\r\n", loop_count, mis_start_address + 4);
+    fprintf(PC, "misf_write_source = 0x%08LX\r\n", write_src);
+    fprintf(PC, "misf_write_size = 0x%08LX\r\n", write_size);
 
     // Calculate data write address and check for wrap-around
     unsigned int32 data_region_start = mis_start_address + SUBSECTOR_SIZE;

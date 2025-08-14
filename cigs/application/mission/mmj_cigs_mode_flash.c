@@ -353,12 +353,10 @@ void mode_smf_address_reset(int8 parameter[])
    printf("Start SMF Reset\r\n");
    piclog_make(parameter[0], PICLOG_PARAM_START);
    int8 writedata[PACKET_SIZE] = {0x00}; 
-   for (int32 address = 0x04EC0000; address < 0x056BFFFF; address += SECTOR_64K_BYTE) {
+   for (int32 address = CIGS_DATA_TABLE_START_ADDRESS; address < CIGS_IV2_DATA_END_ADDRESS; address += SECTOR_64K_BYTE) {
       sector_erase(smf, address); // Erase each sector
    }
-
-   write_data_bytes(smf, 0x04EC0000, writedata, PACKET_SIZE);
-   //smf_init(); // Update the address area after writing
+   smf_data_table_init(); // Update the address area after writing
 
    piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
    printf("End SMF Reset\r\n");

@@ -27,11 +27,11 @@ void main()
    //Start loop
    while(!is_finished)
    {
-      unsigned int16 cigs1_amp = ad7490_read(ADC_CIGS2_AMP);
-      unsigned int16 cigs1_curr = ad7490_read(ADC_CIGS2_CURR);
-      unsigned int16 cigs1_volt = ad7490_read(ADC_CIGS2_VOLT);
+      // unsigned int16 cigs1_amp = ad7490_read(ADC_CIGS2_AMP);
+      // unsigned int16 cigs1_curr = ad7490_read(ADC_CIGS2_CURR);
+      // unsigned int16 cigs1_volt = ad7490_read(ADC_CIGS2_VOLT);
       
-      fprintf(PC, "CIGS1 Amp: %04LX, Current: %04LX, Voltage: %04LX\r\n", cigs1_amp, cigs1_curr, cigs1_volt);
+      // fprintf(PC, "CIGS1 Amp: %04LX, Current: %04LX, Voltage: %04LX\r\n", cigs1_amp, cigs1_curr, cigs1_volt);
       
       // handle from boss commands
       if(boss_receive_buffer_size > 0)
