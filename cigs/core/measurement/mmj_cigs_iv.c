@@ -132,6 +132,7 @@ void sweep_with_threshold(unsigned int16 curr_threshold, unsigned int16 pd_thres
     fprintf(PC, "Start SWEEP with threshold\r\n");
    
     // Enable both CIGS ports
+    output_low(EN_NPWR);
     output_high(CONNECT_CIGS1);
     output_high(CONNECT_CIGS2);
 
@@ -168,20 +169,25 @@ void sweep_with_threshold(unsigned int16 curr_threshold, unsigned int16 pd_thres
         // Set DAC values for both ports (synchronized timing)
         mcp4901_1_write(count);
         mcp4901_2_write(count);
-        delay_ms(10); // wait for DAC to stabilize
+        delay_ms(100); // wait for DAC to stabilize
 
         // Read CIGS1 data (port1) only if still active
         if (port1.active) {
             port1.data_buffer[0][count] = ad7490_read(ADC_CIGS1_AMP);
+            port1.data_buffer[0][count] = ad7490_read(ADC_CIGS1_AMP);
             port1.data_buffer[1][count] = ad7490_read(ADC_CIGS1_CURR);
+            port1.data_buffer[1][count] = ad7490_read(ADC_CIGS1_CURR);
+            // fprintf(PC, "CIGS1 data: %04LD, %04LD\r\n", port1.data_buffer[0][count], port1.data_buffer[1][count]);
             port1.sweep_step = count + 1; // Update CIGS1 step counter
         }
         
         // Read CIGS2 data (port2) only if still active
         if (port2.active) {
             port2.data_buffer[0][count] = ad7490_read(ADC_CIGS2_AMP);
+            port2.data_buffer[0][count] = ad7490_read(ADC_CIGS2_AMP);
             port2.data_buffer[1][count] = ad7490_read(ADC_CIGS2_CURR);
-            // fprintf(PC, "CIGS2 data: %04LX, %04LX\r\n", port2.data_buffer[0][count], port2.data_buffer[1][count]);
+            port2.data_buffer[1][count] = ad7490_read(ADC_CIGS2_CURR);
+            fprintf(PC, "CIGS2 data: %04LD, %04LD\r\n", port2.data_buffer[0][count], port2.data_buffer[1][count]);
             port2.sweep_step = count + 1; // Update CIGS2 step counter
         }
 

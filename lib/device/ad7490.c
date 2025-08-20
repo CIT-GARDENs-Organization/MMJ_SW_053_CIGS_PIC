@@ -18,10 +18,10 @@ unsigned int16 ad7490_make_cmd(int8 channel)
     cmd.fields.reserved1 = 0; // Reserved bits
     cmd.fields.reserved2 = 0; // Reserved bits
     cmd.fields.reserved3 = 0;
-    cmd.fields.coding = 1; // Two's complement
-    cmd.fields.range = 0; // Normal mode
-    cmd.fields.weak_tri = 0; // Strong trigger
-    cmd.fields.shadow = 0; // Direct access
+    cmd.fields.coding = 1; 
+    cmd.fields.range = 0; 
+    cmd.fields.weak_tri = 0; 
+    cmd.fields.shadow = 0; 
     cmd.fields.pm0 = AD7490_PM_AUTO_STANDBY & 0b00000001; // Power mode bits
     cmd.fields.pm1 = (AD7490_PM_AUTO_STANDBY >> 1) & 0b00000001; // Power mode bits
     cmd.fields.add0 = (channel >> 0) & 0b00000001; // Channel address bits

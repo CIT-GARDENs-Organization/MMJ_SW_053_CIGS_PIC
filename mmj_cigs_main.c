@@ -20,8 +20,8 @@ void main()
    fprintf(PC,"____CIGS PIC Start Operation_____\r\n\r\n");
    
    output_low(EN_NPWR);
-   
-   
+   // output_high(EN_NPWR); // Enable power to CIGS
+   // output_high(CONNECT_CIGS2);
    fprintf(PC,"waiting for BOSS PIC command");
    
    //Start loop
@@ -60,7 +60,8 @@ void main()
          break;
          
       delay_ms(400);
-      fprintf(PC, ".");
+      // fprintf(PC, ".");
+      mcp4901_2_write(100);
    }
    
    

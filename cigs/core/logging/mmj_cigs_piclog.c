@@ -37,7 +37,7 @@ void piclog_make(int8 function, int8 parameter)
         piclog_data.reserve_counter1 = 0;
     }
 
-    write_misf_address_area(); // Update the address area after writing
+    // write_misf_address_area(); // Update the address area after writing
     
     /*
     // Add CRC Check

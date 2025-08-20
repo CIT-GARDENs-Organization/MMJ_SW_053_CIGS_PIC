@@ -15,12 +15,14 @@ void misf_init()
         fprintf(PC, "\t[MIS FM] Connected\r\n");
     } else {
         fprintf(PC, "\t[MIS FM] Not Connected\r\n");
+        return;
     }
 
     if (is_connect(smf)) {
         fprintf(PC, "\t[SMF] Connected\r\n");
     } else {
         fprintf(PC, "\t[SMF] Not Connected\r\n");
+        return;
     }
 
     //=== MIS_FM カウンタテーブル読出し ===//
