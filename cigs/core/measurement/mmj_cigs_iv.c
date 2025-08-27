@@ -163,13 +163,17 @@ void sweep_with_threshold(unsigned int16 curr_threshold, unsigned int16 pd_thres
 
     // Read initial PD value
     MEASUREMENT_DATA measured_data = create_meas_data();
+    fprintf(PC, "temp_py_top: %04LD\r\n", measured_data.temp_py_top);
+    fprintf(PC, "temp_py_bot: %04LD\r\n", measured_data.temp_py_bot);
+    fprintf(PC, "temp_mis7: %04LD\r\n", measured_data.temp_mis7);
+    fprintf(PC, "pd: %04LD\r\n", measured_data.pd);
     // Continue measurement while at least one port is active
     while (port1.active || port2.active)
     {
         // Set DAC values for both ports (synchronized timing)
         mcp4901_1_write(count);
         mcp4901_2_write(count);
-        delay_ms(100); // wait for DAC to stabilize
+        delay_ms(1); // wait for DAC to stabilize
 
         // Read CIGS1 data (port1) only if still active
         if (port1.active) {
@@ -187,7 +191,7 @@ void sweep_with_threshold(unsigned int16 curr_threshold, unsigned int16 pd_thres
             port2.data_buffer[0][count] = ad7490_read(ADC_CIGS2_AMP);
             port2.data_buffer[1][count] = ad7490_read(ADC_CIGS2_CURR);
             port2.data_buffer[1][count] = ad7490_read(ADC_CIGS2_CURR);
-            fprintf(PC, "CIGS2 data: %04LD, %04LD\r\n", port2.data_buffer[0][count], port2.data_buffer[1][count]);
+            // fprintf(PC, "CIGS2 data: %04LD, %04LD\r\n", port2.data_buffer[0][count], port2.data_buffer[1][count]);
             port2.sweep_step = count + 1; // Update CIGS2 step counter
         }
 

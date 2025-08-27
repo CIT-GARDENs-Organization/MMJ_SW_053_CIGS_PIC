@@ -1,5 +1,5 @@
 ÀÄmmj_cigs_main
-   ÃÄMAIN  0/1398  Ram=14
+   ÃÄMAIN  0/1396  Ram=14
    ³  ÃÄ@cinit1  (Inline)  Ram=0
    ³  ÃÄ@cinit2  (Inline)  Ram=0
    ³  ÃÄ@delay_ms1  0/46  Ram=1
@@ -890,7 +890,7 @@
    ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
    ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
    ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
-   ³  ³  ³  ³  ³  ÃÄsweep_with_threshold  0/5774  Ram=2075
+   ³  ³  ³  ³  ³  ÃÄsweep_with_threshold  0/5606  Ram=2073
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_954  0/48  Ram=3
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/66  Ram=4
@@ -943,18 +943,8 @@
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_954  0/54  Ram=4
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_LD_954  0/392  Ram=9
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_LD_954  0/394  Ram=9
    ³  ³  ³  ³  ³  ³  ³  ÀÄ@PUTCHAR_2_  0/82  Ram=1
-   ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
-   ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_LD_954  0/392  Ram=9
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
-   ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
-   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_954  0/54  Ram=4
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_LD_954  0/392  Ram=9
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
    ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_954  0/48  Ram=3
@@ -1399,8 +1389,7 @@
    ³  ÃÄ@PSTRINGC_954  0/48  Ram=3
    ³  ³  ÀÄ*
    ³  ÃÄ@delay_ms1  0/46  Ram=1
-   ³  ÃÄmcp4901_2_write  0/66  Ram=4
-   ³  ³  ÀÄ*
+   ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1
    ³  ÃÄ@PSTRINGC_954  0/48  Ram=3
    ³  ³  ÀÄ*
    ³  ÃÄ@PUTCHAR_2_  0/82  Ram=1

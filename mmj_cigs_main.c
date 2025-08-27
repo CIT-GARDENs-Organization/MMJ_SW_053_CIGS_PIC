@@ -31,7 +31,7 @@ void main()
       // unsigned int16 cigs1_curr = ad7490_read(ADC_CIGS2_CURR);
       // unsigned int16 cigs1_volt = ad7490_read(ADC_CIGS2_VOLT);
       
-      // fprintf(PC, "CIGS1 Amp: %04LX, Current: %04LX, Voltage: %04LX\r\n", cigs1_amp, cigs1_curr, cigs1_volt);
+//!      fprintf(PC, "CIGS1 Amp: %04LX, Current: %04LX, Voltage: %04LX\r\n", cigs1_amp, cigs1_curr, cigs1_volt);
       
       // handle from boss commands
       if(boss_receive_buffer_size > 0)
@@ -60,8 +60,8 @@ void main()
          break;
          
       delay_ms(400);
-      // fprintf(PC, ".");
-      mcp4901_2_write(100);
+      fprintf(PC, ".");
+      // mcp4901_2_write(100);
    }
    
    
