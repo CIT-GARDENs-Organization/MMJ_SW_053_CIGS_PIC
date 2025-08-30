@@ -1,0 +1,102 @@
+Compiling C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main on 30-8-25 at 16:24
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\hal\timer.c" Line 16(19,20): Undefined identifier  -- set_current_sec
+*** Error 173 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 25(6,15): Functions may not be nested
+*** Error 173 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 106(13,34): Functions may not be nested
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 121(10,21): Undefined identifier   piclog_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 130(9,17): Undefined identifier   dst_list
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 131(9,17): Undefined identifier   dst_list
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 132(9,17): Undefined identifier   dst_list
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 133(9,17): Undefined identifier   dst_list
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 136(5,15): Undefined identifier   flash_data
+*** Error 127 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 138(5,11): Return value not allowed in void function
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 153(5,16): Undefined identifier   piclog_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 154(5,16): Undefined identifier   piclog_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 172(75,86): Undefined identifier   piclog_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 173(75,86): Undefined identifier   piclog_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 174(74,85): Undefined identifier   piclog_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 175(74,85): Undefined identifier   piclog_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 176(75,91): Undefined identifier   environment_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 177(75,91): Undefined identifier   environment_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 178(74,90): Undefined identifier   environment_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 179(74,90): Undefined identifier   environment_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 181(75,85): Undefined identifier   iv1_header
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 182(75,85): Undefined identifier   iv1_header
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 183(74,84): Undefined identifier   iv1_header
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 184(74,84): Undefined identifier   iv1_header
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 185(75,83): Undefined identifier   iv1_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 186(75,83): Undefined identifier   iv1_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 187(74,82): Undefined identifier   iv1_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 188(74,82): Undefined identifier   iv1_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 190(75,85): Undefined identifier   iv2_header
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 191(75,85): Undefined identifier   iv2_header
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 192(74,84): Undefined identifier   iv2_header
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 193(74,84): Undefined identifier   iv2_header
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 194(75,83): Undefined identifier   iv2_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 195(75,83): Undefined identifier   iv2_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 196(74,82): Undefined identifier   iv2_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 197(74,82): Undefined identifier   iv2_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 269(67,78): Undefined identifier   piclog_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 270(33,44): Undefined identifier   piclog_data
+*** Error 12 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(67,83): Undefined identifier   environment_data
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(1,2): Illegal C character in input file  0x80
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(1,2): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0x13
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0x01
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0xFF
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0xFF
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0xFF
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0x06
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(2,3): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(7,8): Illegal C character in input file  0xB6
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(9,10): Illegal C character in input file  0xF6
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(9,10): Illegal C character in input file  0x07
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(9,10): Illegal C character in input file  0xD6
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(9,10): Illegal C character in input file  0x85
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(9,10): Illegal C character in input file  0xDF
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0xE6
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x40
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x01
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0xD8
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x0B
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0xB0
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0xD7
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x01
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x80
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(15,16): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(23,24): Illegal C character in input file  0x86
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(23,24): Illegal C character in input file  0x05
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(23,24): Illegal C character in input file  0x40
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(26,27): Illegal C character in input file  0x05
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(26,27): Illegal C character in input file  0xD0
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(29,30): Illegal C character in input file  0x05
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(29,30): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(29,30): Illegal C character in input file  0x00
+*** Error 1 "C:\Users\shoin\OneDrive\ï∂åè\GitHub\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.c" Line 274(29,30): Illegal C character in input file  0x00

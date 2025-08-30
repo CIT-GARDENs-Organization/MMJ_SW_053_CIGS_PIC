@@ -67,15 +67,25 @@ SmfAddressStruct get_smf_address_struct(MissionID mission_id)
       mis_struct.start_address = CIGS_PICLOG_START_ADDRESS;
       mis_struct.end_address   = CIGS_PICLOG_END_ADDRESS;
    }
-   else if (mission_id == CIGS_IV_HEADER)
+   else if (mission_id == CIGS_IV1_HEADER)
    {
       mis_struct.start_address = CIGS_IV1_HEADER_START_ADDRESS;
       mis_struct.end_address   = CIGS_IV1_HEADER_END_ADDRESS;
    }
-   else if (mission_id == CIGS_IV_DATA)
+   else if (mission_id == CIGS_IV1_DATA)
    {
       mis_struct.start_address = CIGS_IV1_DATA_START_ADDRESS;
       mis_struct.end_address   = CIGS_IV1_DATA_END_ADDRESS;
+   }
+      else if (mission_id == CIGS_IV2_HEADER)
+   {
+      mis_struct.start_address = CIGS_IV2_HEADER_START_ADDRESS;
+      mis_struct.end_address   = CIGS_IV2_HEADER_END_ADDRESS;
+   }
+   else if (mission_id == CIGS_IV2_DATA)
+   {
+      mis_struct.start_address = CIGS_IV2_DATA_START_ADDRESS;
+      mis_struct.end_address   = CIGS_IV2_DATA_END_ADDRESS;
    }
    return mis_struct;
 }
