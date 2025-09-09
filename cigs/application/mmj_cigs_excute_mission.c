@@ -94,14 +94,17 @@ void execute_mission(int8 *content)
          
          
       // ________________MEAS________________________________
-      case ID_MEAS_DEBUG:
-         mode_iv_test(content);
-         break;
       case ID_MEAS_IV:
          mode_meas_iv(content);
          break;
-      case ID_MEAS_ENVIRONMENT:
-         mode_meas_enviro();
+      case ID_MEAS_DEBUG:
+         mode_meas_iv_debug(content);
+         break;;
+      case ID_MEAS_ENV:
+         mode_meas_env(content);
+         break;
+      case ID_MEAS_ENV_DEBUG:
+         mode_meas_env_debug(content);
          break;
             
       default:

@@ -19,8 +19,12 @@ void main()
    int1 is_finished = FALSE;
    fprintf(PC,"____CIGS PIC Start Operation_____\r\n\r\n");
    
-   output_low(EN_NPWR);
-   
+   enable_negative_power();
+   connect_port1();
+   connect_port2();
+   mcp4901_1_write(0);
+   mcp4901_2_write(0);
+    
    
    fprintf(PC,"waiting for BOSS PIC command");
    
@@ -49,10 +53,10 @@ void main()
          */
          clear_receive_signal(boss_receive_buffer, &boss_receive_buffer_size);
          
-         if(recieve_cmd.is_exist)
-            //is_finished = execute_command(&recieve_cmd); 
-            int1 flag = execute_command(&recieve_cmd);
+         if(recieve_cmd.is_exist){
+            is_finished = execute_command(&recieve_cmd); // FIX: 戻り値を保持
             fprintf(PC,"\r\nwaiting for BOSS PIC command");
+         }
       }
       
       // check `is break while loop`

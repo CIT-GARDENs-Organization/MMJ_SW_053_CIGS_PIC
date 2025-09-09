@@ -8,11 +8,11 @@ void gpio_init() {
 }
 
 void enable_negative_power() {
-    output_high(EN_NPWR);
+    output_low(EN_NPWR);
 }
 
 void disable_negative_power() {
-    output_low(EN_NPWR);
+    output_high(EN_NPWR);
 }
 
 void connect_port1(){

@@ -6,61 +6,11 @@
 #include "../domain/mmj_cigs_flash.h"             // ストレージ機能
 #include "../domain/mmj_cigs_piclog.h"            // ログ機能
 
-// ___________________ Mode Functions ______________________
-void mode_dummy(unsigned int8 uplinkcmd[])
-{
-   fprintf(PC, "Start MODE DUMMY\r\n");
 
-   DUMMY_CMD dummy_cmd;
-   dummy_cmd.id = uplinkcmd[0]; // Get the command ID from the uplink command
-   dummy_cmd.param1 = 
-      ((unsigned int32)uplinkcmd[1] << 24) |
-      ((unsigned int32)uplinkcmd[2] << 16) |
-      ((unsigned int32)uplinkcmd[3] << 8)  |
-      ((unsigned int32)uplinkcmd[4]);
-   dummy_cmd.param2 = 
-      ((unsigned int16)uplinkcmd[5] << 8) |
-      ((unsigned int16)uplinkcmd[6]);
-   fprintf(PC, "\tMODE     : %02X\r\n", dummy_cmd.id);
-   fprintf(PC, "\tParam1   : 0x%08LX\r\n", dummy_cmd.param1);
-   fprintf(PC, "\tParam2   : 0x%04LX\r\n", dummy_cmd.param2);
-
-   piclog_make(dummy_cmd.id, PICLOG_PARAM_START); // Log the command execution
-
-   // This is a dummy function for testing purposes
-   // You can add your own code here
-   piclog_make(dummy_cmd.id, PICLOG_PARAM_END); // Log the end of the command execution
-   fprintf(PC, "End MODE DUMMY\r\n");
-}
-
-
-void mode_test_iv(unsigned int8 *uplinkcmd)
+void mode_meas_iv(unsigned int8 *uplinkcmd_ptr)
 {
    fprintf(PC, "Start MODE MEAS IV\r\n");
-   MEAS_IV_CMD cmd = make_meas_iv_cmd(uplinkcmd); // Create the measurement command structure
-   fprintf(PC, "\tID: %02X\r\n", cmd.id);
-   fprintf(PC, "\tSleep Time: %04LX ms\r\n", cmd.sleep_time);
-   fprintf(PC, "\tCurrent Threshold: %04LX mA\r\n", cmd.curr_threshold);
-   fprintf(PC, "\tPD Threshold: %04LX mA\r\n", cmd.pd_threshold);
-   fprintf(PC, "\tCurrent Limit: %04LX mA\r\n", cmd.curr_limit);
-   fprintf(PC, "\tMeasurement Time: %04LX s\r\n", cmd.meas_time);
-   output_high(CONNECT_CIGS1);
-   output_low(EN_NPWR); // Enable NPWR
-   unsigned int16 readdata;
-
-   test_sweep(cmd.curr_threshold,cmd.curr_limit); // Call the sweep function with the measurement step
-
-   fprintf(PC, "End MODE TEST IV\r\n");
-   output_low(CONNECT_CIGS1);
-   output_high(EN_NPWR); // Disable NPWR
-}
-
-
-
-void mode_meas_iv(unsigned int8 *uplinkcmd)
-{
-   fprintf(PC, "Start MODE MEAS IV\r\n");
-   MEAS_IV_CMD cmd = make_meas_iv_cmd(uplinkcmd); // Create the measurement command structure
+   MEAS_IV_CMD cmd = make_meas_iv_cmd(uplinkcmd_ptr); // Create the measurement command structure
    fprintf(PC, "\tID: %02X\r\n", cmd.id);
    fprintf(PC, "\tSleep Time: %04LX ms\r\n", cmd.sleep_time);
    fprintf(PC, "\tCurrent Threshold: %04LX mA\r\n", cmd.curr_threshold);
@@ -105,37 +55,29 @@ void mode_meas_iv(unsigned int8 *uplinkcmd)
    fprintf(PC, "End MODE MEAS IV mission\r\n");
 }
 
-void mode_iv_test(unsigned int8 *uplinkcmd)
+void mode_meas_iv_debug(unsigned int8 *uplinkcmd_ptr)
 {
-   fprintf(PC, "Start MODE IV TEST \r\n");
-   MEAS_IV_CMD cmd = make_meas_iv_cmd(uplinkcmd); // Create the measurement command structure
-   fprintf(PC, "\tID: %02X\r\n", cmd.id);
-   fprintf(PC, "\tSleep Time: %04LX ms\r\n", cmd.sleep_time);
-   fprintf(PC, "\tCurrent Threshold: %04LX mA\r\n", cmd.curr_threshold);
-   fprintf(PC, "\tPD Threshold: %04LX mA\r\n", cmd.pd_threshold);
-   fprintf(PC, "\tCurrent Limit: %04LX mA\r\n", cmd.curr_limit);
-   fprintf(PC, "\tMeasurement Time: %04LX s\r\n", cmd.meas_time);
-//!   fprintf(PC, "\tIs Finished: %u\r\n", cmd.is_finished);
+   fprintf(PC, "[IVDBG] Start MODE IV DEBUG\r\n");
 
-   piclog_make(cmd.id, PICLOG_PARAM_START); // Log the start of the command execution
+   MEAS_IV_CMD cmd = make_meas_iv_cmd(uplinkcmd_ptr); // Create the measurement command structure
 
-   unsigned int16 start_time = get_current_sec();
-   unsigned int16 current_sec = 0;
-   while(get_current_sec() - start_time < cmd.meas_time)
-   {
-      current_sec = get_current_sec();
-      if (current_sec - start_time >= cmd.meas_time) {
-          break;
-      }
-      test_sweep(cmd.curr_threshold, cmd.curr_limit); // Perform the sweep with thresholds
-      delay_ms(cmd.sleep_time);
-   }
-   piclog_make(cmd.id, PICLOG_PARAM_END); // Log the end of the command execution
+   fprintf(PC, "[IVDBG] ID: %02X\r\n", cmd.id);
+   fprintf(PC, "[IVDBG] Sleep Time: %lu ms\r\n", cmd.sleep_time);
+   fprintf(PC, "[IVDBG] Current Threshold: %lu mA\r\n", cmd.curr_threshold);
+   fprintf(PC, "[IVDBG] PD Threshold: %lu mA\r\n", cmd.pd_threshold);
+   fprintf(PC, "[IVDBG] Current Limit: %lu mA\r\n", cmd.curr_limit);
+   fprintf(PC, "[IVDBG] Measurement Time: %lu s\r\n", cmd.meas_time);
 
+   piclog_make(cmd.id, PICLOG_PARAM_START); // Log start
 
+   unsigned int32 start_time = get_current_time_10ms();
+   unsigned int32 current_time = 0;
+   test_sweep(cmd.curr_threshold, cmd.curr_limit);
 
-
+   piclog_make(cmd.id, PICLOG_PARAM_END);
+   fprintf(PC, "[IVDBG] End MODE IV DEBUG\r\n");
 }
+
 
 
 
@@ -153,7 +95,7 @@ MEAS_IV_CMD make_meas_iv_cmd(unsigned int8 *uplinkcmd[])
    return cmd;
 }
 
-void mode_meas_enviro()
+void mode_meas_env(unsigned int8 *uplinkcmd_ptr)
 {
    unsigned int16 interval = 100;   // 測定間隔 [秒]
    unsigned int16 end_time = 0xFFFF;
@@ -213,7 +155,13 @@ void mode_meas_enviro()
            fprintf(PC, "0x%04LX, 0x%04LX, 0x%04LX, 0x%04LX\r\n", temp_top, temp_bot, temp_mis7, PD);
        }
 
-       delay_ms(100);  // 過負荷防止用
+       delay_ms(1);  // 過負荷防止用
    }
 }
 
+void mode_meas_env_debug(unsigned int8 *uplinkcmd_ptr)
+{
+   fprintf(PC, "Start MODE MEAS ENV DEBUG\r\n");
+   // Add debug-specific implementation here
+   fprintf(PC, "End MODE MEAS ENV DEBUG\r\n");
+}

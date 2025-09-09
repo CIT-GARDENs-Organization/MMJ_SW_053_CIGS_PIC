@@ -6,14 +6,17 @@
 #include "../lib/communication/mission_tools.h"   // 通信ツール
 #include "../hal/timer.h"
 
-void test_sweep(unsigned int16 curr_threshold,unsigned int16 curr_limit)
+void test_sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit)
 {
     fprintf(PC, ".");
-   
+    
     // Enable both CIGS ports
     connect_port1();
     connect_port2();
-
+    mcp4901_1_write(0); 
+    mcp4901_2_write(0);
+    delay_ms(100);
+    
     // Init Port1
     sweep_config_t port1 = {0};
     port1.port_num = 1;
@@ -22,79 +25,62 @@ void test_sweep(unsigned int16 curr_threshold,unsigned int16 curr_limit)
 
     // Init Port2
     sweep_config_t port2 = {0};
-    port2.port_num = 2;
+    port2.port_num = 2; 
     port2.sweep_step = 0;
     port2.active = 1;
 
     int16 count = 1;
-    
-    // Initialize DACs to 0
-    mcp4901_1_write(1);
-    mcp4901_2_write(1);
-
     iv_env_t measured_data = create_meas_data();
+
     while (port1.active || port2.active)
     {
-        mcp4901_1_write(count);
-        mcp4901_2_write(count);
-        delay_us(10); // wait for DAC to stabilize
+        // 出力設定
+        if (port1.active) {
+            mcp4901_1_write(count);
+        } else {
+            mcp4901_1_write(0);  // 閾値到達後は0出力
+        }
 
+        if (port2.active) {
+            mcp4901_2_write(count);
+        } else {
+            mcp4901_2_write(0);
+        }
+
+        delay_us(100);
+
+        // データ取得
         if (port1.active) {
             port1.data_buffer[0][count] = ad7490_read(ADC_CIGS1_AMP);
             port1.data_buffer[1][count] = ad7490_read(ADC_CIGS1_CURR);
-            port1.sweep_step = count + 1; // Update CIGS1 step counter
+            port1.sweep_step = count + 1;
+            if (port1.data_buffer[1][count] < curr_limit) {
+                port1.active = 0;  // 閾値到達で測定終了
+            }
         }
-        
 
         if (port2.active) {
             port2.data_buffer[0][count] = ad7490_read(ADC_CIGS2_AMP);
             port2.data_buffer[1][count] = ad7490_read(ADC_CIGS2_CURR);
-            // fprintf(PC, "CIGS2 data: %04LX, %04LX\r\n", port2.data_buffer[0][count], port2.data_buffer[1][count]);
-            port2.sweep_step = count + 1; // Update CIGS2 step counter
+            port2.sweep_step = count + 1;
+            if (port2.data_buffer[1][count] < curr_limit) {
+                port2.active = 0;
+            }
         }
 
         count++;
-
-        // Check global exit conditions
         if (count >= 255) {
-            // fprintf(PC, "Maximum step count reached: %ld\r\n", count);
             break;
-        }
-        
-        // Check CIGS1 specific conditions
-        if (port1.active) {
-            if (port1.data_buffer[1][count-1] < curr_limit) {
-                // fprintf(PC, "CIGS1 current limit reached:");
-                port1.active = 0;
-                output_low(CONNECT_CIGS1); // Disconnect CIGS1
-            }
-            else if (port1.data_buffer[1][count-1] < curr_threshold) {
-                // fprintf(PC, "CIGS1 current below threshold");
-                port1.active = 0;
-                output_low(CONNECT_CIGS1); // Disconnect CIGS1
-            }
-        }
-        
-        // Check CIGS2 specific conditions
-        if (port2.active) {
-            if (port2.data_buffer[1][count-1] < curr_limit) {
-                // fprintf(PC, "CIGS2 current limit reached: ");
-                port2.active = 0;
-                output_low(CONNECT_CIGS2); // Disconnect CIGS2
-            }
-            else if (port2.data_buffer[1][count-1] < curr_threshold) {
-                // fprintf(PC, "CIGS2 current below threshold:");
-                port2.active = 0;
-                output_low(CONNECT_CIGS2); // Disconnect CIGS2
-            }
         }
     }
 
-    // Ensure all connections are disabled
-    output_low(CONNECT_CIGS1);
-    output_low(CONNECT_CIGS2);
-    log_meas_data_with_print(&measured_data, &port1); // Log data for CIGS1
-    log_meas_data_with_print(&measured_data, &port2); // Log data for CIGS2
+    fprintf(PC, "sweep step : %04LX\r\n", count);
+
+    // 接続は維持
+    fprintf(PC, "port1\r\n");
+    log_meas_data_with_print(&measured_data, &port1);
+    fprintf(PC, "port2\r\n");
+    log_meas_data_with_print(&measured_data, &port2);
 }
 
 
@@ -103,8 +89,8 @@ void sweep(  unsigned int16 curr_threshold, unsigned int16 curr_limit)
     fprintf(PC, ".");
    
     // Enable both CIGS ports
-    output_high(CONNECT_CIGS1);
-    output_high(CONNECT_CIGS2);
+    connect_port1();
+    connect_port2();
 
     // delay_us(100); // wait for the CIGS to stabilize
 
@@ -120,7 +106,7 @@ void sweep(  unsigned int16 curr_threshold, unsigned int16 curr_limit)
     port2.sweep_step = 0;
     port2.active = 1;
 
-    int16 count = 1;
+    int16 count = 0;
     
     // Initialize DACs to 0
     mcp4901_1_write(1);
@@ -131,66 +117,54 @@ void sweep(  unsigned int16 curr_threshold, unsigned int16 curr_limit)
     {
         mcp4901_1_write(count);
         mcp4901_2_write(count);
-        delay_us(10); // wait for DAC to stabilize
-
+        delay_us(10); 
         if (port1.active) {
             port1.data_buffer[0][count] = ad7490_read(ADC_CIGS1_AMP);
             port1.data_buffer[1][count] = ad7490_read(ADC_CIGS1_CURR);
             port1.sweep_step = count + 1; // Update CIGS1 step counter
         }
-        
-
         if (port2.active) {
             port2.data_buffer[0][count] = ad7490_read(ADC_CIGS2_AMP);
             port2.data_buffer[1][count] = ad7490_read(ADC_CIGS2_CURR);
             // fprintf(PC, "CIGS2 data: %04LX, %04LX\r\n", port2.data_buffer[0][count], port2.data_buffer[1][count]);
             port2.sweep_step = count + 1; // Update CIGS2 step counter
         }
-
         count++;
-
-        // Check global exit conditions
         if (count >= 255) {
             // fprintf(PC, "Maximum step count reached: %ld\r\n", count);
             break;
         }
-        
-        // Check CIGS1 specific conditions
         if (port1.active) {
             if (port1.data_buffer[1][count-1] < curr_limit) {
                 // fprintf(PC, "CIGS1 current limit reached:");
                 port1.active = 0;
-                output_low(CONNECT_CIGS1); // Disconnect CIGS1
+                disconnect_port1(); // Disconnect CIGS1
             }
             else if (port1.data_buffer[1][count-1] < curr_threshold) {
                 // fprintf(PC, "CIGS1 current below threshold");
                 port1.active = 0;
-                output_low(CONNECT_CIGS1); // Disconnect CIGS1
+                disconnect_port1();
             }
         }
-        
-        // Check CIGS2 specific conditions
         if (port2.active) {
             if (port2.data_buffer[1][count-1] < curr_limit) {
                 // fprintf(PC, "CIGS2 current limit reached: ");
                 port2.active = 0;
-                output_low(CONNECT_CIGS2); // Disconnect CIGS2
+                disconnect_port2();
             }
             else if (port2.data_buffer[1][count-1] < curr_threshold) {
                 // fprintf(PC, "CIGS2 current below threshold:");
                 port2.active = 0;
-                output_low(CONNECT_CIGS2); // Disconnect CIGS2
+                disconnect_port2();
             }
         }
     }
 
     // Ensure all connections are disabled
-    output_low(CONNECT_CIGS1);
-    output_low(CONNECT_CIGS2);
-    log_meas_data(&measured_data, &port1); // Log data for CIGS1
-    log_meas_data(&measured_data, &port2); // Log data for CIGS2
-
-    //fprintf(PC, "End SWEEP with threshold\r\n");
+    disconnect_port1();
+    disconnect_port2();
+    log_meas_data(&measured_data, &port1);
+    log_meas_data(&measured_data, &port2);
 }
 
 
@@ -383,6 +357,11 @@ void log_meas_data_with_print(iv_env_t *measured_data_ptr, sweep_config_t *port_
             break;
         }
 
+    }
+                // デバッグ表示
+    fprintf(PC, "\r\n");
+    for (unsigned int32 j = 0; j < PACKET_SIZE; j++) {
+        fprintf(PC, "%02X ", packetdata[j]);
     }
     // fprintf(PC, "End CIGS data conversion\r\n");
     write_misf_address_area(); // Write the mission flash address area

@@ -1,7 +1,7 @@
 #ifndef MMJ_CIGS_FLASH_H
 #define MMJ_CIGS_FLASH_H
 
-#include <string.h>
+//#include <string.h>
 #include "../hal/mmj_cigs_config.h"
 
 #ifndef PACKET_SIZE

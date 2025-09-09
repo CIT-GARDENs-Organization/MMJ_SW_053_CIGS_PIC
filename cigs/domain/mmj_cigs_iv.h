@@ -16,20 +16,6 @@ volatile int8 executed_mission_count = 0;
 #define DATA_SIZE_PER_STEP 3 // data0 + data1 12bitずつ
 
 
-
-
-// _________ functions ____________
-/*
-#define DATA_BUFFER_SIZE 150
-#define HEADER_SIZE 12
-volatile unsigned int16 data_buffer [DATA_BUFFER_SIZE*2] = {0x00} ;
-volatile unsigned int32 measured_time = 0 ;
-volatile unsigned int16 measured_open_voltage = 0 ;
-volatile unsigned int16 measured_pd = 0 ;
-volatile unsigned int16 measured_temp_top = 0 ;
-volatile unsigned int16 measured_temp_bot = 0 ;     
-*/
-
 void make_meas_header(unsigned int8 *packetdata, unsigned int8 *cmd);
 
 

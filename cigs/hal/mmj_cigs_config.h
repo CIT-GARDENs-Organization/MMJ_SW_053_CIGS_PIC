@@ -105,7 +105,7 @@
     #define DAC2_STREAM ADCDAC_STREAM
 
     // DI/O___
-    #define CONNECT_CIGS1 PIN_C0
+    #define CONNECT_CIGS1 PIN_C3
     #define CONNECT_CIGS2 PIN_C5
     #define EN_NPWR PIN_C7
 

@@ -40,23 +40,18 @@ void mode_misf_erase_1sector(int8 parameter[])
 
 void mode_misf_erase_4kbyte_subsector(int8 parameter[])
 {
-   printf("Start Flash Copy 1 Sector\r\n");
-   int8 cmd = parameter[0]; // Get the command ID from the parameter array
+   printf("Start Flash Erase 4kByte Subsector\r\n");
+   int8 cmd = parameter[0];
    int32 subsector_address =
       ((int32)parameter[1] << 24) |
       ((int32)parameter[2] << 16) |
       ((int32)parameter[3] << 8)  |
       ((int32)parameter[4]);
-   
    printf("\tSubsector Address: 0x%08LX\r\n", subsector_address);
-   piclog_make(cmd, PICLOG_PARAM_START); // Log the command execution
-   
-   // 統合管理システムから消去操作をキューに追加
-   //enqueue_erase_data(subsector_address, 0x1000); // 4KB消去
-   
-   subsector_4kByte_erase(mis_fm, 0x00000000);
-   piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
-   printf("End Flash Copy 1 Sector\r\n");
+   piclog_make(cmd, PICLOG_PARAM_START);
+   subsector_4kByte_erase(mis_fm, subsector_address); // FIX: 固定0消去→指定アドレス
+   piclog_make(cmd, PICLOG_PARAM_END);
+   printf("End Flash Erase 4kByte Subsector\r\n");
 }
 
 void mode_misf_erase_64kbyte_subsector(unsigned int8 parameter[])
@@ -116,7 +111,19 @@ void mode_misf_write_demo(unsigned int8 parameter[])
       }
 
       unsigned int32 current_address = flash_write_param.writeaddress + (p * PACKET_SIZE);
-
+      // FLASH 終端チェック (MISF_END は最終アドレス想定: inclusive)
+      if(current_address > MISF_END){
+         fprintf(PC, "\r\n[FLASH] Write address 0x%08LX exceeds device end 0x%08LX -> abort\r\n", current_address, (unsigned int32)MISF_END);
+         piclog_make(flash_write_param.id, PICLOG_PARAM_END);
+         break;
+      }
+      if(current_address + (PACKET_SIZE - 1) > MISF_END){
+         unsigned int32 remain = (MISF_END - current_address) + 1; // 書込可能残り
+         fprintf(PC, "\r\n[FLASH] Reached end. Partial write %lu bytes (packet truncated).\r\n", remain);
+         write_data_bytes(mis_fm, current_address, writedata, (unsigned int16)remain);
+         piclog_make(flash_write_param.id, PICLOG_PARAM_END);
+         break;
+      }
       write_data_bytes(mis_fm, current_address, writedata, PACKET_SIZE);
    }
 
@@ -137,25 +144,25 @@ void mode_misf_write_4kbyte_subsector(unsigned int8 parameter[])
    fprintf(PC, "End Flash Write 4kByte Subsector\r\n");
 }
 
+// 共通: uplinkcmd[1..4]=ADDR (BE), uplinkcmd[7..8]=PACKET数 (BE) 最低9バイト必須
+static int1 parse_flash_read_param(const unsigned int8 *p, FLASH_PARAM *out){
+   if(!p || !out) return FALSE;
+   out->id = p[0];
+   out->readaddress = ((unsigned int32)p[1] << 24) | ((unsigned int32)p[2] << 16) | ((unsigned int32)p[3] << 8) | ((unsigned int32)p[4]);
+   out->readpacketnum = ((unsigned int16)p[7] << 8) | ((unsigned int16)p[8]);
+   return TRUE;
+}
+
 void mode_misf_read(unsigned int8 uplinkcmd[])
 {
    fprintf(PC, "Start Flash Read\r\n");
    piclog_make(uplinkcmd[0], PICLOG_PARAM_START); // Log the command execution
    FLASH_PARAM flash_param = {0};
-   // for(unsigned int8 i = 0; i < PARAMETER_LENGTH; i++)
-   // {
-   //    fprintf(PC, "Parameter[%d]: %02X\r\n", i, parameter[i]);
-   // }
-   flash_param.id = uplinkcmd[0];
-   flash_param.readaddress = 
-   ((unsigned int32)uplinkcmd[1] << 24) |
-   ((unsigned int32)uplinkcmd[2] << 16) |
-   ((unsigned int32)uplinkcmd[3] << 8)  |
-   ((unsigned int32)uplinkcmd[4]);
-
-   flash_param.readpacketnum =
-    ((unsigned int16)uplinkcmd[7] << 8) |
-    ((unsigned int16)uplinkcmd[8]);
+   if(!parse_flash_read_param(uplinkcmd, &flash_param)){
+      fprintf(PC, "Read param parse error\r\n");
+      piclog_make(uplinkcmd[0], PICLOG_PARAM_END);
+      return;
+   }
 
    fprintf(PC, "\tMODE     : %02X\r\n", flash_param.id);
    fprintf(PC, "\tAddress  : 0x%08LX\r\n", flash_param.readaddress);
@@ -170,14 +177,26 @@ void mode_misf_read(unsigned int8 uplinkcmd[])
 
    if(is_connect(mis_fm) == FALSE) {
       fprintf(PC, "Mission Flash is not connected\r\n");
-      // return;
+      piclog_make(flash_param.id, PICLOG_PARAM_END);
+      return; // FIX: 接続失敗時終了
    }
 
    for (unsigned int32 packetcount = 0; packetcount < flash_param.readpacketnum; packetcount++){
       read_address = flash_param.readaddress + packetcount * PACKET_SIZE;
-
-      //fprintf(PC, "Packet %lu: Address 0x%08LX\r\n", packetcount, read_address);
-      
+      // 終端チェック
+      if(read_address > MISF_END){
+         fprintf(PC, "[FLASH] Read address 0x%08LX exceeds device end 0x%08LX -> stop\r\n", read_address, (unsigned int32)MISF_END);
+         break;
+      }
+      if(read_address + (PACKET_SIZE - 1) > MISF_END){
+         unsigned int32 remain = (MISF_END - read_address) + 1;
+         fprintf(PC, "[FLASH] End reached. Partial read %lu bytes.\r\n", remain);
+         read_data_bytes(mis_fm, read_address, readdata, remain);
+         for (unsigned int8 bytecount = 0; bytecount < remain; bytecount++)
+            fprintf(PC, "%02X ", readdata[bytecount]);
+         fprintf(PC, "\r\n");
+         break;
+      }
       read_data_bytes(mis_fm, read_address, readdata, PACKET_SIZE);
       for (unsigned int8 bytecount = 0; bytecount < PACKET_SIZE; bytecount++){
          fprintf(PC,"%02X ",readdata[bytecount]);
@@ -241,12 +260,11 @@ void mode_smf_read(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash SMF Read\r\n");
    int8 read_data[PACKET_SIZE];
-   read_data_bytes(smf, read_data, read_data, PACKET_SIZE);
+   unsigned int32 address = 0; // TODO: parameter からアドレス取得拡張可
+   read_data_bytes(smf, address, read_data, PACKET_SIZE); // FIX: 誤引数順
    fprintf(PC, "Read Data: ");
    for (int i = 0; i < PACKET_SIZE; i++)
-   {
       fprintf(PC, "%02X ", read_data[i]);
-   }
    fprintf(PC, "\r\nEnd Flash SMF Read\r\n");
 }
 

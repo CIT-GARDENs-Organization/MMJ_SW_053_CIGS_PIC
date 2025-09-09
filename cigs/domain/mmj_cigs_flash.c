@@ -208,10 +208,11 @@ void write_smf_header(smf_data_table_t *smf_data_table)
     for (retry_count = 0; retry_count < CRC_RETRY_COUNT; retry_count++)
     {
         subsector_4kByte_erase(smf, CIGS_DATA_TABLE_START_ADDRESS);
-        write_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table->bytes, PACKET_SIZE); // ヘッダーを書き込み
+        write_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table->bytes, PACKET_SIZE);
         read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, readdata, PACKET_SIZE);
         if (is_crc_valid(readdata, PACKET_SIZE-1))
         {
+            crc_valid = 1; // FIX: フラグ更新
             fprintf(PC, "CRC verification passed on attempt %d\r\n", retry_count + 1);
             break;
         }

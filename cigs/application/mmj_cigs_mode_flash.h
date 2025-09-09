@@ -40,16 +40,6 @@ void mode_misf_address_reset(unsigned int8 parameter[]);
 
 
 
-
-// CMD Parameter
-typedef struct {
-    unsigned int8 id;
-    unsigned int32 readaddress;
-    unsigned int16 readpacketnum;
-} FLASH_READ_PARAM;
-
-
-
 // ___________SMF FUNCTIONS____________
 // Command
 #define ID_SMF_COPY 0x90
