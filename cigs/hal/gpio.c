@@ -1,5 +1,7 @@
 #include "mmj_cigs_config.h"
 #include "gpio.h"
+#include "../../lib/tool/types.h"
+
 
 void gpio_init() {
     enable_negative_power();
@@ -8,11 +10,23 @@ void gpio_init() {
 }
 
 void enable_negative_power() {
-    output_low(EN_NPWR);
+    output_low(EN_NPWR1);
 }
 
-void disable_negative_power() {
-    output_high(EN_NPWR);
+void connect_negative_power1(int1 state) {
+    if (state) {
+        output_low(EN_NPWR1);
+    } else {
+        output_high(EN_NPWR1);
+    }
+}
+
+void connect_negative_power2(int1 state) {
+    if (state) {
+        output_high(EN_NPWR2);
+    } else {
+        output_low(EN_NPWR2);
+    }
 }
 
 void connect_port1(){

@@ -11,45 +11,71 @@
 #define CRC_RETRY_COUNT 5     // CRC検証のリトライ回数 (smf_queue.hの値と整合するなら一元化検討)
 
 
+
 PartitionParam param = {0};
+
+
+const ADDRESS_AREA_T SMF_ADDRESS_TABLE[FLASH_ID_COUNT] = {
+    { CIGS_DATA_TABLE_START_ADDRESS,   CIGS_DATA_TABLE_END_ADDRESS,   MISF_CIGS_DATA_TABLE_SIZE },
+    { CIGS_PICLOG_START_ADDRESS,       CIGS_PICLOG_END_ADDRESS,       MISF_CIGS_PICLOG_SIZE },
+    { CIGS_ENVIRO_START_ADDRESS,       CIGS_ENVIRO_END_ADDRESS,       MISF_CIGS_ENVIRO_SIZE },
+    { CIGS_IV1_HEADER_START_ADDRESS,   CIGS_IV1_HEADER_END_ADDRESS,   MISF_CIGS_IV1_HEADER_SIZE },
+    { CIGS_IV1_DATA_START_ADDRESS,     CIGS_IV1_DATA_END_ADDRESS,     MISF_CIGS_IV1_DATA_SIZE },
+    { CIGS_IV2_HEADER_START_ADDRESS,   CIGS_IV2_HEADER_END_ADDRESS,   MISF_CIGS_IV2_HEADER_SIZE },
+    { CIGS_IV2_DATA_START_ADDRESS,     CIGS_IV2_DATA_END_ADDRESS,     MISF_CIGS_IV2_DATA_SIZE }
+};
+
+
+
+
 
 void smf_data_table_init()
 {
+    fprintf(PC, "SMF Data Table Initialize\r\n");
     FlashData_t smf_data_table = {0};
     calc_crc8(smf_data_table.bytes, PACKET_SIZE - 1); // CRCを計算して初期化
 
     write_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table.bytes, PACKET_SIZE);
-
 }
 
 void read_smf_header(smf_data_table_t *smf_data_table)
 {
     int8 retry_count;
 
-    read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table->bytes, PACKET_SIZE);
-
     for (retry_count = 0; retry_count < CRC_RETRY_COUNT; retry_count++)
     {
-        read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table->bytes, PACKET_SIZE);
+        // ヘッダを読み出し
+        read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, 
+                        smf_data_table->bytes, PACKET_SIZE);
+
+        // CRC検証
         if (is_crc_valid(smf_data_table->bytes, PACKET_SIZE-1))
         {
-            printf("CRC verification passed on attempt %u\r\n", retry_count + 1);
-            break;
+            printf("CRC verification passed on attempt %d\r\n", retry_count + 1);
+            return; // 成功したら終了
         }
+        // NGなら少し待って再試行
+        delay_ms(5);
     }
+
+    // ここまで来たら失敗
+    printf("CRC verification failed after %d attempts\r\n", CRC_RETRY_COUNT);
+
+    // 読み込み失敗時は初期化しておく
+    smf_data_table_init();
+
+    return;
 }
 
-void write_smf_header()
-{
 
-    FlashData_t flash_data = make_flash_data_table();
-    unsigned int8 readdata[PACKET_SIZE];
-    // int8 retry_count;
+void smf_write_header(smf_data_table_t *smf_data_table)
+{
     int1 crc_valid = 0;
+    int8 readdata[PACKET_SIZE];
     for (int8 retry_count = 0; retry_count < CRC_RETRY_COUNT; retry_count++)
     {
         subsector_4kByte_erase(smf, CIGS_DATA_TABLE_START_ADDRESS);
-        write_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, flash_data.bytes, PACKET_SIZE); // ヘッダーを書き込み
+        write_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table->bytes, PACKET_SIZE); // ヘッダーを書き込み
         read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, readdata, PACKET_SIZE);
         if (is_crc_valid(readdata, PACKET_SIZE-1))
         {
@@ -68,37 +94,9 @@ void write_smf_header()
 
 void smf_write(FlashOperationStruct *smf_data_ptr)
 {
-    fprintf(PC, "\r\n_________________________\r\n");
-    fprintf(PC, "_____Start copy_data____\r\n");
+    fprintf(PC, "\r\n_______________________________\r\n");
+    fprintf(PC, "_________Start copy_data_________\r\n");
     
-    smf_data_table_t smf_data_table;
-    SmfAddressStruct smf_address = get_smf_address_struct(smf_data_ptr->mission_id);
-
-    unsigned int32 mis_start_address = smf_address.start_address;
-    unsigned int32 mis_end_address = smf_address.end_address;
-    unsigned int32 write_src;
-    unsigned int32 write_size;
-
-    //アドレスと自動更新
-    if (smf_data_ptr->source_type == SOURCE_MISF_UNCOPIED )
-    {
-        MisfAddressStruct misf_address = get_misf_address_struct(smf_data_ptr->mission_id);
-        write_src = misf_address.start_address;
-        switch(smf_data_ptr->mission_id){
-            case CIGS_PICLOG_DATA: write_size = piclog_data_ptr->uncopied_counter; break;
-            case CIGS_ENVIRO_DATA: write_size = environment_data_ptr->uncopied_counter; break;
-            case CIGS_IV1_HEADER:  write_size = iv1_header_ptr->uncopied_counter; break;
-            case CIGS_IV1_DATA:    write_size = iv1_data_ptr->uncopied_counter; break;
-            case CIGS_IV2_HEADER:  write_size = iv2_header_ptr->uncopied_counter; break;
-            case CIGS_IV2_DATA:    write_size = iv2_data_ptr->uncopied_counter; break;
-            default: write_size = 0; break;
-        }
-    }else if(smf_data_ptr->source_type == SOURCE_MISF_MANUAL)
-    {
-        write_src = smf_data_ptr->misf_start_addr;
-        write_size = smf_data_ptr->misf_size;
-    }
-
     // 接続確認
     if (!is_connect(mis_fm))
     {
@@ -111,88 +109,76 @@ void smf_write(FlashOperationStruct *smf_data_ptr)
         return;
     }    
 
-    // read size area with CRC verification retry
+
+    smf_data_table_t smf_data_table;
     read_smf_header(&smf_data_table);
-    // data_table パーティションは削除。必要なら別カウンタ運用へ拡張。
-    int32 used_size = 0;
-    int8 loop_count = 0;
-    fprintf(PC, "Size area read\r\n");
-    fprintf(PC, "smf_used_size = %ld (src 0x%08LX)\r\n", used_size, mis_start_address);
-    fprintf(PC, "smf_loop count= %d  (src 0x%08LX)\r\n", loop_count, mis_start_address + 4);
-    fprintf(PC, "misf_write_source = 0x%08LX\r\n", write_src);
-    fprintf(PC, "misf_write_size = 0x%08LX\r\n", write_size);
-
-    // Calculate data write address and check for wrap-around
-    unsigned int32 data_region_start = mis_start_address + SUBSECTOR_SIZE;
-    unsigned int32 data_region_end = mis_end_address;
-    unsigned int32 data_region_size = data_region_end - data_region_start;
-    unsigned int32 data_write_addr = data_region_start + used_size;
 
 
-    // Delete the first part in advance in case of looping
-    if ((used_size + write_size) > data_region_size)
+    unsigned int32 write_src;
+    unsigned int32 write_size;
+
+    //アドレスと自動更新
+    if (smf_data_ptr->source_type == SOURCE_MISF_UNCOPIED )
     {
-        fprintf(PC, "Wrap triggered: Resetting data_write_addr to start\r\n");
-        loop_count++;
-        used_size = 0;
-        data_write_addr = data_region_start;
+        write_src = MISF_ADDRESS_TABLE[smf_data_ptr->mission_id].start + flash_counter_table[smf_data_ptr->mission_id].used_counter - flash_counter_table[smf_data_ptr->mission_id].uncopied_counter;
+        write_size = flash_counter_table[smf_data_ptr->mission_id].uncopied_counter;
+    }else if(smf_data_ptr->source_type == SOURCE_MISF_MANUAL)
+    {
+        write_src = smf_data_ptr->misf_start_addr;
+        write_size = smf_data_ptr->misf_size;
+    }
+
+    unsigned int32 smf_address_start = SMF_ADDRESS_TABLE[smf_data_ptr->mission_id].start;
+    unsigned int32 smf_address_end   = SMF_ADDRESS_TABLE[smf_data_ptr->mission_id].end;
+    unsigned int32 misf_address_start = MISF_ADDRESS_TABLE[smf_data_ptr->mission_id].start;
+    unsigned int32 misf_address_end   = MISF_ADDRESS_TABLE[smf_data_ptr->mission_id].end;
+
+
+
+    // Print SMF ADDRESS
+    fprintf(PC,"[SMF ADDRESS]\r\n");
+    fprintf(PC, "\t------------\t-------------\t-------------\r\n");
+    fprintf(PC, "\tSTART\t0x%08LX\r\n", smf_address_start);
+    fprintf(PC, "\tEND\t0x%08LX\r\n", smf_address_end);
+    fprintf(PC, "\tUSED\t0x%08LX\r\n", smf_data_table.fields.headers[smf_data_ptr->mission_id].used_size);
+    fprintf(PC, "\tNEXT\t0x%08LX\r\n", smf_address_start + smf_data_table.fields.headers[smf_data_ptr->mission_id].used_size);
+
+    // Print MISF ADDRESS
+    fprintf(PC,"[MISF ADDRESS]\r\n");
+    fprintf(PC, "\t------------\t-------------\t-------------\r\n");
+    fprintf(PC, "\tSTART\t0x%08LX\r\n", misf_address_start);
+    fprintf(PC, "\tEND\t0x%08LX\r\n", misf_address_end);
+    fprintf(PC, "\tSRC\t0x%08LX\r\n", write_src);
+    fprintf(PC, "\tSIZE\t0x%08LX\r\n", write_size);
+    fprintf(PC, "\t------------\t-------------\t-------------\r\n");
+
+
+    unsigned int8 buffer[PACKET_SIZE] = {0};
+    unsigned int32 smf_write_address;
+    unsigned int32 misf_read_address;
+
+    while (write_size > 0)
+    {
+        fprintf(PC, "Remaining size to write: %lu bytes\r\n", write_size);
+        memset(buffer, 0, PACKET_SIZE);
+        smf_write_address = smf_address_start + smf_data_table.fields.headers[smf_data_ptr->mission_id].used_size;
+        misf_read_address = write_src;
+
+        read_data_bytes(mis_fm, misf_read_address, buffer, PACKET_SIZE);
+        write_data_bytes(smf, smf_write_address, buffer, PACKET_SIZE);
+        smf_data_table.fields.headers[smf_data_ptr->mission_id].used_size += PACKET_SIZE;
+        flash_counter_table[smf_data_ptr->mission_id].uncopied_counter -= PACKET_SIZE;
         
-    // Reset counters when loop occurs (typo fix smf_data_ptr)
-    reset_misf_counters(smf_data_ptr->mission_id);
-        
-        unsigned int32 erase_ptr = data_region_start;
-        while (erase_ptr < data_region_end)
-        {
-            subsector_4kByte_erase(smf, erase_ptr);
-            erase_ptr += SUBSECTOR_SIZE;     // tips: `value += 0x1000` means add up 4KB (0x1000 = 0d4096)
-        }
+        write_src += PACKET_SIZE;
+        write_size -= PACKET_SIZE;
     }
 
 
-    // Erase the space you will be writing in now
-    unsigned int32 erase_start = data_write_addr & ~0xFFF;       // 4KB境界へ切下げ
-    unsigned int32 erase_end = (data_write_addr + write_size + 0xFFF) & ~0xFFF; // 書込末尾を4KB境界へ丸め上げ
-    for (unsigned int32 addr = erase_start; addr < erase_end && addr < mis_end_address; addr += SUBSECTOR_SIZE)
-        subsector_4kByte_erase(smf, addr);
-
-    unsigned int32 remaining = write_size;
-    unsigned int32 src_addr = write_src;
-    int8 buffer[PACKET_SIZE];
-    while (remaining > 0)
-    {
-        unsigned int16 chunk = (remaining > MAX_READ_SIZE) ? MAX_READ_SIZE : (unsigned int16)remaining;
-        if(data_write_addr + chunk > mis_end_address){
-            unsigned int32 fit = mis_end_address - data_write_addr;
-            if(fit == 0){
-                fprintf(PC, "[SMF] Reached end address 0x%08LX, stop writing\r\n", mis_end_address);
-                break;
-            }
-            chunk = (unsigned int16)fit;
-            fprintf(PC, "[SMF] Truncate last chunk to %u bytes at end\r\n", chunk);
-        }
-
-        read_data_bytes(mis_fm, src_addr, buffer, chunk);
-        write_data_bytes(smf, data_write_addr, buffer, chunk);
-        for (unsigned int32 i = 0; i < chunk; i++)
-        {
-            fprintf(PC, "%02X ", buffer[i]);
-        }
-        src_addr += chunk;
-        data_write_addr += chunk;
-        used_size += chunk;
-        remaining -= chunk;
-    }
     // write size area
-    write_smf_header();
+    smf_write_header(&smf_data_table);
     
-    // Update MISF counters for transferred data
-    update_misf_counters(smf_data_ptr->mission_id, write_size);
-    
-    fprintf(PC, "used_size = %ld\r\n", used_size);
-    fprintf(PC, "loop_count = %u\r\n\r\n", loop_count);
-
-    fprintf(PC, "\r\n___End copy_data____\r\n");
-    fprintf(PC, "____________________\r\n\r\n");
+    fprintf(PC, "\r\n_________End copy_data__________\r\n");
+    fprintf(PC, "n_______________________________\r\n\r\n");
 }
 
 void smf_read(FlashOperationStruct *smf_data)
@@ -289,7 +275,7 @@ SMF_PARTITION* get_smf_partition_by_mission_id(int8 mission_id)
     switch(mission_id)
     {
         case 0x01:  // CIGS_MEASURE_DATA
-            return &param.meas;
+            return &param.iv1_data;
         case 0x02:  // CIGS_PICLOG
             return &param.piclog;
         default:
@@ -329,7 +315,7 @@ void update_misf_counters(int8 mission_id, int32 transfer_size)
         unsigned int32 before = target->uncopied_counter;
         if(transfer_size >= before) target->uncopied_counter = 0; else target->uncopied_counter -= transfer_size;
         fprintf(PC, "[MISF] mission %u uncopied_counter %08LX -> %08LX (-%lu)\r\n", mission_id, before, target->uncopied_counter, transfer_size);
-        write_misf_address_area();
+        misf_update_address_area();
     } else {
         fprintf(PC, "[MISF] update_misf_counters: mission %u not handled\r\n", mission_id);
     }
@@ -350,7 +336,7 @@ void reset_misf_counters(int8 mission_id)
     }
     if(target){
         target->uncopied_counter = 0;
-        write_misf_address_area();
+        misf_update_address_area();
         fprintf(PC, "[MISF] mission %u uncopied_counter reset\r\n", mission_id);
     }
 }

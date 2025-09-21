@@ -22,7 +22,7 @@ void ad7490_init()
 unsigned int16 ad7490_read(int8 channel)
 {   
     unsigned int16 cmd = ad7490_make_cmd(channel);
-    
+    // fprintf(PC, "\t[ADC] Command: %04LX\r\n", cmd);
     output_low(ADC_CS); 
     delay_us(10); 
     spi_xfer(ADC_STREAM, cmd); 

@@ -22,7 +22,7 @@ typedef enum {
 
 
 typedef enum{
-   CIGS_DATA_TABLE,
+   CIGS_DATA_TABLE = 0x00,
    CIGS_PICLOG_DATA,
    CIGS_ENVIRO_DATA,
    CIGS_IV1_HEADER,

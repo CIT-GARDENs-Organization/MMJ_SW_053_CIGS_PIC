@@ -14,32 +14,7 @@ typedef struct {
     unsigned int8 reserved[3];
 } partition_header_t;
 
-// payloadに複数のpartition_headerを並べる
-typedef union {
-    unsigned int8 bytes[PACKET_SIZE];  // 生データアクセス用
 
-    struct {
-        union {
-            struct {
-                partition_header_t piclog;
-                partition_header_t enviroment;
-                partition_header_t iv_head;
-                partition_header_t iv_data;
-            }cigs;
-            
-            struct {
-                partition_header_t piclog;
-                partition_header_t enviroment;
-                partition_header_t iv_head;
-                partition_header_t iv_data;
-            } satolab;
-            // フラットにアクセスしたいとき用
-            partition_header_t headers[(PACKET_SIZE - 1) / sizeof(partition_header_t)];
-        } payload;
-
-        unsigned int8 crc;  // 最後の1バイト
-    };
-} smf_data_table_t;
 
 // Base Memory Configuration
 #define SMF_SIZE 0x08000000 // 128MB
@@ -171,12 +146,13 @@ typedef union {
 #define BHU_SENSOR_DATA_DATA_SIZE_END_ADDRESS 0x05992FFF
 #define BHU_MCU_LOG_DATA_SIZE_START_ADDRESS 0x06993000
 #define BHU_MCU_LOG_DATA_SIZE_END_ADDRESS 0x06993FFF
+// CIGS related partitions
 #define CIGS_DATA_TABLE_START_ADDRESS 0x06AA0000
 #define CIGS_DATA_TABLE_END_ADDRESS 0x06AA0FFF
 #define CIGS_PICLOG_START_ADDRESS 0x06AA1000
 #define CIGS_PICLOG_END_ADDRESS 0x06AA1FFF
 #define CIGS_ENVIRO_START_ADDRESS 0x06AA2000
-#define CIGS_ENVIRO_END_ADDRESS 0x06AA2FFF
+#define CIGS_ENVIRO_END_ADDRESS 0x06B41FFF
 #define CIGS_IV1_HEADER_START_ADDRESS 0x06B42000
 #define CIGS_IV1_HEADER_END_ADDRESS 0x06BE1FFF
 #define CIGS_IV1_DATA_START_ADDRESS 0x06BE2000

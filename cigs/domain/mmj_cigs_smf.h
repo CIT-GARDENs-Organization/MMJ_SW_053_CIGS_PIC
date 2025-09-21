@@ -3,8 +3,16 @@
 
 #include "../lib/tool/smf_queue.h"  // FlashOperationStruct定義
 #include "../hal/mmj_cigs_config.h" // int8,int32 型など(CCS C) 依存
+#include "mmj_cigs_flash.h"       // MISF_ADDRESS_TABLE, flash_counter_table 依存
 
 #define CRC_RETRY_COUNT 5
+
+extern const ADDRESS_AREA_T MISF_ADDRESS_TABLE[];
+extern FlashCounter_t smf_counter_table[];
+
+
+
+
 
 // Mission ID 列挙（smf_queue.h の MissionID と整合させる）
 typedef enum{
@@ -28,7 +36,6 @@ void reset_misf_counters(int8 mission_id);
 void print_misf_counter_status(int8 mission_id);
 
 
-
 // SMF Partition Header
 typedef struct {
     int32 used_size;
@@ -48,6 +55,17 @@ typedef struct {
 } PartitionParam;
 
 extern PartitionParam param;  // extern宣言に変更
+
+typedef union {
+    unsigned int8 bytes[PACKET_SIZE];  // 生データアクセス用
+    struct {
+        partition_header_t headers[7];
+        unsigned int8 reserved[7];
+        unsigned int8 crc;  // 最後の1バイト
+    } fields;
+} smf_data_table_t;
+void smf_write_header(smf_data_table_t *smf_data_table);
+
 
 
 // MSB形式でpartition_headerに値を設定する関数（piclog等必要分のみ）

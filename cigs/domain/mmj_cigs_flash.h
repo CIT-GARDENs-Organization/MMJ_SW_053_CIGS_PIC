@@ -18,14 +18,25 @@
 // Flash Address
 #define MISF_CIGS_DATA_TABLE_START 0x00000000
 #define MISF_CIGS_DATA_TABLE_END   0x00000FFF
+#define MISF_CIGS_DATA_TABLE_SIZE  0x00001000
 #define MISF_CIGS_PICLOG_START    0x00010000
 #define MISF_CIGS_PICLOG_END      0x00140FFF
+#define MISF_CIGS_PICLOG_SIZE     0x00010000
 #define MISF_CIGS_ENVIRO_START    0x00281000
 #define MISF_CIGS_ENVIRO_END      0x00320FFF
-#define MISF_CIGS_IV_HEADER_START 0x00721000
-#define MISF_CIGS_IV_HEADER_END   0x007C0FFF
-#define MISF_CIGS_IV_DATA_START   0x007C1000
-#define MISF_CIGS_IV_DATA_END     0x00BC0FFF
+#define MISF_CIGS_ENVIRO_SIZE     0x00010000
+#define MISF_CIGS_IV1_HEADER_START 0x00721000
+#define MISF_CIGS_IV1_HEADER_END   0x007C0FFF
+#define MISF_CIGS_IV1_HEADER_SIZE  0x00010000
+#define MISF_CIGS_IV1_DATA_START   0x007C1000
+#define MISF_CIGS_IV1_DATA_END     0x00BC0FFF
+#define MISF_CIGS_IV1_DATA_SIZE    0x00010000
+#define MISF_CIGS_IV2_HEADER_START 0x00721000
+#define MISF_CIGS_IV2_HEADER_END   0x007C0FFF
+#define MISF_CIGS_IV2_HEADER_SIZE  0x00010000
+#define MISF_CIGS_IV2_DATA_START   0x007C1000
+#define MISF_CIGS_IV2_DATA_END     0x00BC0FFF
+#define MISF_CIGS_IV2_DATA_SIZE    0x00010000
 
 // 重複していた #define はここに一度だけ残す
 // 例: #define SECTOR_4K_BYTE  0x1000  // 4KByte
@@ -91,7 +102,7 @@ extern Flash_t *iv2_data_ptr;
 
 // 取得系
 FlashData_t make_flash_data_table(void);
-void write_misf_address_area(void);
+void misf_update_address_area(void);
 void print_flash_status(void);
 
 // MISF アドレス/書き込み構造体
@@ -111,5 +122,20 @@ MisfWriteStruct  get_misf_write_struct(MissionID mission_id);
 // キュー投入
 void add_smf_queue(MissionID mission_id, FunctionType func_type, SmfWriteMode write_mode);
 void misf_init();
+
+typedef struct {
+    unsigned int32 start;
+    unsigned int32 end;
+    unsigned int32 size;
+} ADDRESS_AREA_T;
+
+
+extern const ADDRESS_AREA_T MISF_ADDRESS_TABLE[];
+extern FlashCounter_t flash_counter_table[];
+extern FlashCounter_t *flash_counter_table_ptr[];
+
+void print_MISF_ADDRESS_TABLE(void);
+
+void misf_write_data(FlashDataId_t id, unsigned int8 *data_ptr, unsigned int16 size);
 #endif
 //------------------End of File------------------

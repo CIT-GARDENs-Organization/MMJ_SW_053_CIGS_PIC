@@ -225,10 +225,10 @@ void subsector_32kByte_erase(Flash flash_stream, unsigned int32 subsector_addres
       unsigned int8 flash_cmd[5];
       
       flash_cmd[0] = CMD_4BYTE_SUBSECTOR_32KB_ERASE;
-      flash_cmd[1] = (unsigned int8)((subsector_address>>24) & 0xff);   // 0x _ _ 00 00 00
-      flash_cmd[2] = (unsigned int8)((subsector_address>>16) & 0xff);   // 0x 00 _ _ 00 00
-      flash_cmd[3] = (unsigned int8)((subsector_address>>8) & 0xff);    // 0x 00 00 _ _ 00
-      flash_cmd[4] = (unsigned int8)((subsector_address) & 0xff);       // 0x 00 00 00 _ _
+      flash_cmd[1] = (unsigned int8)((subsector_address>>24) & 0xff);   // 0x __ 00 00 00
+      flash_cmd[2] = (unsigned int8)((subsector_address>>16) & 0xff);   // 0x 00 __ 00 00
+      flash_cmd[3] = (unsigned int8)((subsector_address>>8) & 0xff);    // 0x 00 00 __ 00
+      flash_cmd[4] = (unsigned int8)((subsector_address) & 0xff);       // 0x 00 00 00 __
       
       //Write enable sequence
       output_low(flash_stream.cs_pin);

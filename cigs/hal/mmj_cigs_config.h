@@ -63,59 +63,59 @@
 #ifdef PIC18
     //#include <18F67J94.h>
     //-------------UART--------------------
+    // BOSS command port
     #pin_select TX3=PIN_E3                                                          
     #pin_select RX3=PIN_F2                                                        
     #use rs232(baud=9600, parity=N, UART3, bits=8, stream=BOSS, ERRORS)                      
     
-
+    // PC debug port
     #pin_select TX4=PIN_E5
     #pin_select RX4=PIN_D4  
     #use rs232(baud=9600,parity=N, UART4, bits=8,stream=PC, ERRORS)
-    // #use rs232(baud=9600,parity=N, xmit=PIN_E4, bits=8,stream=PC)
-    // #use rs232(baud=9600,parity=N, xmit=PIN_B6, bits=8, stream=PC)
 
     // -------------SPI--------------------
+    // Shared Mission Flash
     #define SMF_CS PIN_A2
-    #define MIS_FM_CS  PIN_A5
-
     #pin_select SCK1OUT=PIN_A3
     #pin_select SDI1=PIN_A0
     #pin_select SDO1=PIN_A1
-    // #use spi (MASTER, SPI1, BAUD=100000, MODE=0, BITS=8, STREAM=SMF_STREAM)
+    // #use spi (MASTER, SPI1, BAUD=200000, MODE=0, BITS=8, STREAM=SMF_STREAM)
     #use spi (MASTER, CLK=PIN_A3, DI=PIN_A1, DO=PIN_A0, BAUD=200000, MODE=0, BITS=8, STREAM=SMF_STREAM)
 
-    //#define MIS_FM_STREAM SMF_STREAM 
 
-    // #define MIS_FM_STREAM FLASH_STREAM PIN_E1
+    // Mission Flash
+    #define MIS_FM_CS  PIN_G0
     #use spi (MASTER, CLK=PIN_E1, DI=PIN_E0, DO=PIN_E6, BAUD=200000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
-    // #use spi (MASTER, SPI1, BAUD=200000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
-    //#use spi (MASTER, SPI1, BAUD=200000, MODE=0, BITS=8, STREAM=MIS_FM_STREAM)
-    //#use spi (MASTER, CLK=PIN_A3, DI=PIN_A0, DO=PIN_A1, BAUD=200000, MODE=0, BITS=8, STREAM=SMF_STREAM)
 
 
-
-    
-
-    #use spi (MASTER, CLK=PIN_B2, DI=PIN_B4, DO=PIN_B5,  BAUD=500000, MODE=2, BITS=16, STREAM=ADCDAC_STREAM)
+    // ADC  
     #define ADC_CS PIN_B1
-    #define ADC_STREAM ADCDAC_STREAM
-    #define DAC1_CS PIN_B3
-    #define DAC1_STREAM ADCDAC_STREAM
-    #define DAC2_CS PIN_B0
-    #define DAC2_STREAM ADCDAC_STREAM
+    // #pin_select SCK2OUT=PIN_B2
+    // #pin_select SDI2=PIN_B4
+    // #pin_select SDO2=PIN_B5
+    // #use spi (MASTER, SPI2, BAUD=200000, MODE=2, BITS=16, STREAM=ADC_STREAM)
+    #use spi (MASTER, CLK=PIN_B2, DI=PIN_B4, DO=PIN_B5, BAUD=200000, MODE=2, BITS=16, STREAM=ADC_STREAM)
+
+    // DAC
+    #define DAC1_CS PIN_D7
+    #define DAC2_CS PIN_D6
+    #use spi (MASTER, CLK=PIN_D5, DO=PIN_D4,  BAUD=200000, MODE=2, BITS=16, STREAM=DAC_STREAM)
+
 
     // DI/O___
     #define CONNECT_CIGS1 PIN_C3
     #define CONNECT_CIGS2 PIN_C5
-    #define EN_NPWR PIN_C7
+    #define EN_NPWR1 PIN_C7
+    #define EN_NPWR2 PIN_C6
 
 #endif
 
 //-------------I/O port--------------------
-#use FIXED_IO( A_outputs=SMF_CS, MIS_FM_CS )
-#use FIXED_IO( B_outputs=ADC_CS, DAC1_CS, DAC2_CS )
-#use FIXED_IO( C_outputs=CONNECT_CIGS1, CONNECT_CIGS2, EN_NPWR )
-
+#use FIXED_IO( A_outputs=SMF_CS )
+#use FIXED_IO( B_outputs=ADC_CS )
+#use FIXED_IO( C_outputs=CONNECT_CIGS1, CONNECT_CIGS2, EN_NPWR1, EN_NPWR2 )
+#use FIXED_IO( D_outputs=DAC1_CS, DAC2_CS )
+#use FIXED_IO( G_outputs=MIS_FM_CS )
 
 // ADC Settings
 #define ADC_CIGS1_VOLT      AD7490_VIN0

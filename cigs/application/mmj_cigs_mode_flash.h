@@ -28,7 +28,7 @@ typedef struct {
     unsigned int16 packetnum;
 } FLASH_WRITE_PARAM;
 void mode_misf_write_4kbyte_subsector(unsigned int8 parameter[]);
-void mode_misf_read(unsigned int8 parameter[]);
+void mode_misf_read(unsigned int8 *uplinkcmd_ptr);
 typedef struct{
     unsigned int8 id;
     unsigned int16 readpacketnum;

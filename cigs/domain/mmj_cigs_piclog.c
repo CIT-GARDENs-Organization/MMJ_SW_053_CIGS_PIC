@@ -22,32 +22,6 @@ void piclog_make(int8 function, int8 parameter)
     }
     printf("\r\n");
 
-    int32 write_address = MISF_CIGS_PICLOG_START + piclog_data_ptr->used_counter;
-    write_data_bytes(mis_fm, write_address, piclog_ptr->bytes, PICLOG_PACKET_SIZE);
-
-    piclog_data_ptr->used_counter += PICLOG_PACKET_SIZE;
-    piclog_data_ptr->uncopied_counter += PICLOG_PACKET_SIZE;
-    piclog_data_ptr->reserve_counter1 += PICLOG_PACKET_SIZE;
-
-    // Next Packet
-    if (piclog_data_ptr->reserve_counter1 + PICLOG_PACKET_SIZE >=  PACKET_SIZE) {
-        write_address = MISF_CIGS_PICLOG_START + piclog_data_ptr->used_counter;
-        write_data_bytes(mis_fm, write_address, PICLOG_BLANK_DATA, sizeof(PICLOG_BLANK_DATA));
-        piclog_data_ptr->used_counter += sizeof(PICLOG_BLANK_DATA);
-        piclog_data_ptr->uncopied_counter += sizeof(PICLOG_BLANK_DATA);
-        piclog_data_ptr->reserve_counter1 = 0;
-    }
-
-    write_misf_address_area(); // Update the address area after writing
-    
-    /*
-    // Add CRC Check
-    if (misf_piclog_write_counter >= MISF_PICLOG_MAX_COUNT) {
-        write_address = ADDRESS_MISF_PICLOG_DATA_START + misf_piclog_use_counter;
-        write_data_bytes(mis_fm, write_address, *PICLOG_BLANK_DATA, PICLOG_BLANK_SIZE);
-        unsigned int8 piclog_data_header[PICLOG_BLANK_SIZE] = {0x00, 0x00, 0x00}; // Initialize blank data
-        misf_piclog_write_counter = 0; // Reset if max count reached
-    }
-    */
+    misf_write_data(FLASH_ID_PICLOG, piclog_ptr->bytes, PICLOG_PACKET_SIZE);
 }
 // End of file

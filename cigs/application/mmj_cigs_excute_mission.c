@@ -106,10 +106,14 @@ void execute_mission(int8 *content)
       case ID_MEAS_ENV_DEBUG:
          mode_meas_env_debug(content);
          break;
-            
+     
+     case 0xA4:
+          sweep_with_print();
+          break;
+     
       default:
          fprintf(PC, "\t\t-> Invalid CMD ID!\r\n");
-         
+         break;
    }
    fprintf(PC, "\r\n______End execute_mission______\r\n_______________________________\r\n");
 }
@@ -191,11 +195,12 @@ void handle_smf_available(Command *command)
 
     while (!is_empty_flash_queue()) {
         FlashOperationStruct *smf_data = dequeue_flash_operation();
+        /*
         if (smf_data == NULL) {
             fprintf(PC, "\t\t-> dequeue NULL (break)\r\n");
             break;
         }
-
+         */
         fprintf(PC, "\t\t-> Dequeued: func=%u mission=%u size=%ld addr=%ld\r\n",
                 (unsigned int)smf_data->func_type,
                 (unsigned int)smf_data->mission_id,

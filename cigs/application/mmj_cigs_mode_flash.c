@@ -144,26 +144,23 @@ void mode_misf_write_4kbyte_subsector(unsigned int8 parameter[])
    fprintf(PC, "End Flash Write 4kByte Subsector\r\n");
 }
 
-// 共通: uplinkcmd[1..4]=ADDR (BE), uplinkcmd[7..8]=PACKET数 (BE) 最低9バイト必須
-static int1 parse_flash_read_param(const unsigned int8 *p, FLASH_PARAM *out){
-   if(!p || !out) return FALSE;
-   out->id = p[0];
-   out->readaddress = ((unsigned int32)p[1] << 24) | ((unsigned int32)p[2] << 16) | ((unsigned int32)p[3] << 8) | ((unsigned int32)p[4]);
-   out->readpacketnum = ((unsigned int16)p[7] << 8) | ((unsigned int16)p[8]);
-   return TRUE;
-}
 
-void mode_misf_read(unsigned int8 uplinkcmd[])
+void mode_misf_read(unsigned int8 *uplinkcmd_ptr)
 {
    fprintf(PC, "Start Flash Read\r\n");
-   piclog_make(uplinkcmd[0], PICLOG_PARAM_START); // Log the command execution
-   FLASH_PARAM flash_param = {0};
-   if(!parse_flash_read_param(uplinkcmd, &flash_param)){
-      fprintf(PC, "Read param parse error\r\n");
-      piclog_make(uplinkcmd[0], PICLOG_PARAM_END);
-      return;
-   }
 
+
+   FLASH_PARAM flash_param = {0};
+   flash_param.id = uplinkcmd_ptr[0];
+   flash_param.readaddress = -
+      ((unsigned int32)uplinkcmd_ptr[1] << 24) |
+      ((unsigned int32)uplinkcmd_ptr[2] << 16) |
+      ((unsigned int32)uplinkcmd_ptr[3] << 8)  |
+      ((unsigned int32)uplinkcmd_ptr[4]);
+   flash_param.readpacketnum = 
+      ((unsigned int16)uplinkcmd_ptr[6] << 8) |
+      ((unsigned int16)uplinkcmd_ptr[7]);
+      piclog_make(flash_param.id, PICLOG_PARAM_START); // Log the command execution
    fprintf(PC, "\tMODE     : %02X\r\n", flash_param.id);
    fprintf(PC, "\tAddress  : 0x%08LX\r\n", flash_param.readaddress);
    fprintf(PC, "\tPacketNum: 0x%04LX\r\n", flash_param.readpacketnum);

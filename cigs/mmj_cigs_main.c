@@ -4,7 +4,7 @@ void main()
 { 
    delay_ms(100); // wait for power stable
    fprintf(PC,"\r\n\r\n\r\n============================================================\r\n");
-   fprintf(PC,"This is MOMIJI CIGS PIC BBM for MIS7_BBM4.\r\n");
+   fprintf(PC,"This is MOMIJI CIGS PIC BBM for MIS7_BBM6.\r\n");
    fprintf(PC,"Last updated on %s %s, by Inoue.\r\n\r\n", __DATE__, __TIME__);
    
    // io_init();
@@ -19,12 +19,12 @@ void main()
    int1 is_finished = FALSE;
    fprintf(PC,"____CIGS PIC Start Operation_____\r\n\r\n");
    
-   enable_negative_power();
+   //enable_negative_power();
    connect_port1();
    connect_port2();
    mcp4901_1_write(0);
    mcp4901_2_write(0);
-    
+   connect_negative_power2(TRUE); // CIGS2 Negative Power ON
    
    fprintf(PC,"waiting for BOSS PIC command");
    
