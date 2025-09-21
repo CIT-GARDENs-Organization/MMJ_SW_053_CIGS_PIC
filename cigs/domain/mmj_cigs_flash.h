@@ -10,7 +10,7 @@
 
 
 #define MISF_START 0x00000000
-#define MISF_END   0x000FFFFF
+#define MISF_END   0x00BC0FFF
 #define SECTOR_64K_BYTE  0x10000
 
 #define MISF_CIGS_DATA_TABLE_SIZE 64
@@ -18,25 +18,25 @@
 // Flash Address
 #define MISF_CIGS_DATA_TABLE_START 0x00000000
 #define MISF_CIGS_DATA_TABLE_END   0x00000FFF
-#define MISF_CIGS_DATA_TABLE_SIZE  0x00001000
+#define MISF_CIGS_DATA_TABLE_SIZE  4096
 #define MISF_CIGS_PICLOG_START    0x00010000
 #define MISF_CIGS_PICLOG_END      0x00140FFF
-#define MISF_CIGS_PICLOG_SIZE     0x00010000
+#define MISF_CIGS_PICLOG_SIZE     1310720
 #define MISF_CIGS_ENVIRO_START    0x00281000
 #define MISF_CIGS_ENVIRO_END      0x00320FFF
-#define MISF_CIGS_ENVIRO_SIZE     0x00010000
+#define MISF_CIGS_ENVIRO_SIZE     1310720
 #define MISF_CIGS_IV1_HEADER_START 0x00721000
 #define MISF_CIGS_IV1_HEADER_END   0x007C0FFF
-#define MISF_CIGS_IV1_HEADER_SIZE  0x00010000
+#define MISF_CIGS_IV1_HEADER_SIZE  655360
 #define MISF_CIGS_IV1_DATA_START   0x007C1000
 #define MISF_CIGS_IV1_DATA_END     0x00BC0FFF
-#define MISF_CIGS_IV1_DATA_SIZE    0x00010000
+#define MISF_CIGS_IV1_DATA_SIZE    4194304
 #define MISF_CIGS_IV2_HEADER_START 0x00721000
 #define MISF_CIGS_IV2_HEADER_END   0x007C0FFF
-#define MISF_CIGS_IV2_HEADER_SIZE  0x00010000
+#define MISF_CIGS_IV2_HEADER_SIZE  655360
 #define MISF_CIGS_IV2_DATA_START   0x007C1000
 #define MISF_CIGS_IV2_DATA_END     0x00BC0FFF
-#define MISF_CIGS_IV2_DATA_SIZE    0x00010000
+#define MISF_CIGS_IV2_DATA_SIZE    4194304
 
 // 重複していた #define はここに一度だけ残す
 // 例: #define SECTOR_4K_BYTE  0x1000  // 4KByte
@@ -136,6 +136,6 @@ extern FlashCounter_t *flash_counter_table_ptr[];
 
 void print_MISF_ADDRESS_TABLE(void);
 
-void misf_write_data(FlashDataId_t id, unsigned int8 *data_ptr, unsigned int16 size);
+void misf_write_data(FlashDataId_t id, int8 *data_ptr, unsigned int16 size);
 #endif
 //------------------End of File------------------

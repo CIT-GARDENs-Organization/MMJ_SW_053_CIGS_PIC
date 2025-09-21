@@ -256,14 +256,37 @@ void mode_smf_copy(int8 parameter[])
 void mode_smf_read(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash SMF Read\r\n");
-   int8 read_data[PACKET_SIZE];
-   unsigned int32 address = 0; // TODO: parameter からアドレス取得拡張可
-   read_data_bytes(smf, address, read_data, PACKET_SIZE); // FIX: 誤引数順
-   fprintf(PC, "Read Data: ");
-   for (int i = 0; i < PACKET_SIZE; i++)
-      fprintf(PC, "%02X ", read_data[i]);
+   unsigned int32 read_address = 
+      ((unsigned int32)parameter[1] << 24) |
+      ((unsigned int32)parameter[2] << 16) |
+      ((unsigned int32)parameter[3] << 8)  |
+      ((unsigned int32)parameter[4]);
+   unsigned int16 read_packetnum = 
+      ((unsigned int16)parameter[6] << 8) |
+      ((unsigned int16)parameter[7]);
+   
+   unsigned int8 read_data[PACKET_SIZE];
+
+   fprintf(PC, "\tAddress  : 0x%08LX\r\n", read_address);
+   fprintf(PC, "\tPacketNum: 0x%04LX\r\n", read_packetnum);
+   fprintf(PC, "Read Data\r\n");
+
+   while (read_packetnum > 0) {
+      fprintf(PC, "Remaining packets to read: %lu\r\n", read_packetnum);
+
+      read_data_bytes(smf, read_address, read_data, PACKET_SIZE);
+
+      for (int i = 0; i < PACKET_SIZE; i++) {
+         fprintf(PC, "%02X ", read_data[i]);
+      }
+      fprintf(PC, "\r\n");
+
+      read_address += PACKET_SIZE;
+      read_packetnum--;
+   }
    fprintf(PC, "\r\nEnd Flash SMF Read\r\n");
 }
+
 
 void mode_smf_erase(unsigned int8 parameter[])
 {

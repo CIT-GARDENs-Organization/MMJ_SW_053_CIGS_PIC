@@ -120,7 +120,7 @@ void print_misf_address_table()
     fprintf(PC, "\t------------\t-------------\t-------------\r\n");
 }
 
-void misf_write_data(FlashDataId_t id, unsigned int8 *data_ptr, unsigned int16 size)
+void misf_write_data(FlashDataId_t id, int8 *data_ptr, unsigned int16 size)
 {
     // パケット境界チェック
     if (flash_counter_table[id].reserve_counter1 + size > PACKET_SIZE-1) {
@@ -154,6 +154,12 @@ void misf_write_data(FlashDataId_t id, unsigned int8 *data_ptr, unsigned int16 s
         // データ書き込み
         unsigned int32 write_address = MISF_ADDRESS_TABLE[id].start + flash_counter_table[id].used_counter;
         write_data_bytes(mis_fm, write_address, data_ptr, size);
+        fprintf(PC, "ADDRESS 0x%08LX DATA ", write_address);
+        for (unsigned int32 j = 0; j < size; j++) {
+            fprintf(PC, "%02X ", data_ptr[j]);
+        }
+        fprintf(PC, "\r\n");
+
         flash_counter_table[id].used_counter     += size;
         flash_counter_table[id].uncopied_counter += size;
         unsigned int8 crc = calc_crc8(data_ptr, size);

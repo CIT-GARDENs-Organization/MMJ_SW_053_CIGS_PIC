@@ -39,7 +39,7 @@ void print_misf_counter_status(int8 mission_id);
 // SMF Partition Header
 typedef struct {
     int32 used_size;
-    int32 loop_counter;
+    int8 loop_counter;
     int8 reserved[3];
 } SMF_PARTITION;
 
@@ -59,14 +59,14 @@ extern PartitionParam param;  // extern宣言に変更
 typedef union {
     unsigned int8 bytes[PACKET_SIZE];  // 生データアクセス用
     struct {
-        partition_header_t headers[7];
+        SMF_PARTITION headers[7];
         unsigned int8 reserved[7];
         unsigned int8 crc;  // 最後の1バイト
     } fields;
 } smf_data_table_t;
+
 void smf_write_header(smf_data_table_t *smf_data_table);
-
-
+void print_smf_counter_status(smf_data_table_t *smf_data_table);
 
 // MSB形式でpartition_headerに値を設定する関数（piclog等必要分のみ）
 void set_piclog_used_size_msb(int32 value);

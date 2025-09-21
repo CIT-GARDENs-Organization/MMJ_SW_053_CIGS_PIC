@@ -202,7 +202,8 @@ void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned in
             port1.data_buffer[count].voltage = ad7490_read(ADC_CIGS1_AMP);
             port1.data_buffer[count].current = ad7490_read(ADC_CIGS1_CURR);
             port1.sweep_step = count + 1; 
-            if (port1.data_buffer[count-1].current < curr_limit) {
+            // fprintf(PC, "%04LX,%04LX,", port1.data_buffer[count].voltage, port1.data_buffer[count].current);
+            if (port1.data_buffer[count].current < curr_limit) {
                 port1.active = 0;
                 disconnect_port1();
             }
@@ -211,7 +212,7 @@ void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned in
             port2.data_buffer[count].voltage = ad7490_read(ADC_CIGS2_AMP);
             port2.data_buffer[count].current = ad7490_read(ADC_CIGS2_CURR);
             port2.sweep_step = count + 1;
-            if (port2.data_buffer[count-1].current < curr_limit) {
+            if (port2.data_buffer[count].current < curr_limit) {
                 port2.active = 0;
                 disconnect_port2();
             } 
@@ -233,7 +234,7 @@ void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned in
 
 void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
 {
-    unsigned int8 packetdata[PACKET_SIZE] = {0x00}; 
+    int8 packetdata[PACKET_SIZE] = {0x00}; 
     unsigned int8 packetdata_index = 0;
 
     // ==== ヘッダ＋環境データ書き込み ====
@@ -263,7 +264,7 @@ void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
         if (packetdata_index + 3 >= PACKET_SIZE - 1) {
             switch (port_data_ptr -> port_num) {
                 case 1:
-                    fprintf(PC, "DATA WRITE IV1\r\n");
+                    // fprintf(PC, "DATA WRITE IV1\r\n");
                     misf_write_data(FLASH_ID_IV1_DATA, packetdata, PACKET_SIZE-1);
                     break;
                 case 2:
@@ -286,6 +287,10 @@ void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
         {
             case 1:
                 misf_write_data(FLASH_ID_IV1_DATA, packetdata, PACKET_SIZE-1);
+                // for (unsigned int32 j = 0; j < PACKET_SIZE; j++) {
+                    // fprintf(PC, "%02X ", packetdata[j]);
+                // }
+                fprintf(PC, "\r\n");
                 break;
             case 2:
                 misf_write_data(FLASH_ID_IV2_DATA, packetdata, PACKET_SIZE-1);

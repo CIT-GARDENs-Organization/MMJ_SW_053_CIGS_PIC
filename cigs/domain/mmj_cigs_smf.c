@@ -32,8 +32,8 @@ const ADDRESS_AREA_T SMF_ADDRESS_TABLE[FLASH_ID_COUNT] = {
 void smf_data_table_init()
 {
     fprintf(PC, "SMF Data Table Initialize\r\n");
-    FlashData_t smf_data_table = {0};
-    calc_crc8(smf_data_table.bytes, PACKET_SIZE - 1); // CRCを計算して初期化
+    smf_data_table_t smf_data_table = {0};
+    smf_data_table.fields.crc = calc_crc8(smf_data_table.bytes, PACKET_SIZE - 1); // CRCを計算して初期化
 
     write_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table.bytes, PACKET_SIZE);
 }
@@ -45,9 +45,8 @@ void read_smf_header(smf_data_table_t *smf_data_table)
     for (retry_count = 0; retry_count < CRC_RETRY_COUNT; retry_count++)
     {
         // ヘッダを読み出し
-        read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, 
-                        smf_data_table->bytes, PACKET_SIZE);
-
+        read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table->bytes, PACKET_SIZE);
+        print_smf_counter_status(smf_data_table);
         // CRC検証
         if (is_crc_valid(smf_data_table->bytes, PACKET_SIZE-1))
         {
@@ -72,6 +71,8 @@ void smf_write_header(smf_data_table_t *smf_data_table)
 {
     int1 crc_valid = 0;
     int8 readdata[PACKET_SIZE];
+    smf_data_table->fields.crc = calc_crc8(smf_data_table->bytes, PACKET_SIZE - 1); // CRCを更新
+
     for (int8 retry_count = 0; retry_count < CRC_RETRY_COUNT; retry_count++)
     {
         subsector_4kByte_erase(smf, CIGS_DATA_TABLE_START_ADDRESS);
@@ -91,6 +92,17 @@ void smf_write_header(smf_data_table_t *smf_data_table)
     }
 }
 
+void print_smf_counter_status(smf_data_table_t *smf_data_table)
+{
+    fprintf(PC, "\r\n[SMF Counter Status]\r\n");
+    fprintf(PC, "PICLOG     : Used=%lu, Uncopied=%u\r\n", smf_data_table->fields.headers[CIGS_PICLOG_DATA].used_size, smf_data_table->fields.headers[CIGS_PICLOG_DATA].loop_counter);
+    fprintf(PC, "ENVIRO     : Used=%lu, Uncopied=%u\r\n", smf_data_table->fields.headers[CIGS_ENVIRO_DATA].used_size, smf_data_table->fields.headers[CIGS_ENVIRO_DATA].loop_counter);
+    fprintf(PC, "IV1_HEADER : Used=%lu, Uncopied=%u\r\n", smf_data_table->fields.headers[CIGS_IV1_HEADER].used_size, smf_data_table->fields.headers[CIGS_IV1_HEADER].loop_counter);
+    fprintf(PC, "IV1_DATA   : Used=%lu, Uncopied=%u\r\n", smf_data_table->fields.headers[CIGS_IV1_DATA].used_size, smf_data_table->fields.headers[CIGS_IV1_DATA].loop_counter);
+    fprintf(PC, "IV2_HEADER : Used=%lu, Uncopied=%u\r\n", smf_data_table->fields.headers[CIGS_IV2_HEADER].used_size, smf_data_table->fields.headers[CIGS_IV2_HEADER].loop_counter);
+    fprintf(PC, "IV2_DATA   : Used=%lu, Uncopied=%u\r\n", smf_data_table->fields.headers[CIGS_IV2_DATA].used_size, smf_data_table->fields.headers[CIGS_IV2_DATA].loop_counter);
+    fprintf(PC, "------------------------------\r\n\r\n");
+}
 
 void smf_write(FlashOperationStruct *smf_data_ptr)
 {
@@ -153,18 +165,24 @@ void smf_write(FlashOperationStruct *smf_data_ptr)
     fprintf(PC, "\t------------\t-------------\t-------------\r\n");
 
 
-    unsigned int8 buffer[PACKET_SIZE] = {0};
+    unsigned int8 buffer[PACKET_SIZE];
     unsigned int32 smf_write_address;
     unsigned int32 misf_read_address;
 
     while (write_size > 0)
     {
         fprintf(PC, "Remaining size to write: %lu bytes\r\n", write_size);
-        memset(buffer, 0, PACKET_SIZE);
+        memset(buffer, 0x11, PACKET_SIZE);
         smf_write_address = smf_address_start + smf_data_table.fields.headers[smf_data_ptr->mission_id].used_size;
         misf_read_address = write_src;
 
         read_data_bytes(mis_fm, misf_read_address, buffer, PACKET_SIZE);
+        fprintf(PC, "MISF DATA\r\n");
+        for (unsigned int32 j = 0; j < PACKET_SIZE; j++) {
+            fprintf(PC, "%02X ", buffer[j]);
+        }
+        fprintf(PC, "\r\n");
+
         write_data_bytes(smf, smf_write_address, buffer, PACKET_SIZE);
         smf_data_table.fields.headers[smf_data_ptr->mission_id].used_size += PACKET_SIZE;
         flash_counter_table[smf_data_ptr->mission_id].uncopied_counter -= PACKET_SIZE;
@@ -178,7 +196,7 @@ void smf_write(FlashOperationStruct *smf_data_ptr)
     smf_write_header(&smf_data_table);
     
     fprintf(PC, "\r\n_________End copy_data__________\r\n");
-    fprintf(PC, "n_______________________________\r\n\r\n");
+    fprintf(PC, "_______________________________\r\n\r\n");
 }
 
 void smf_read(FlashOperationStruct *smf_data)
