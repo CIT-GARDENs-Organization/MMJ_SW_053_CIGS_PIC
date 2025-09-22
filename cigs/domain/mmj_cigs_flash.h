@@ -131,8 +131,8 @@ typedef struct {
 
 
 extern const ADDRESS_AREA_T MISF_ADDRESS_TABLE[];
-extern FlashCounter_t flash_counter_table[];
-extern FlashCounter_t *flash_counter_table_ptr[];
+extern FlashCounter_t misf_counter_table[];
+extern FlashCounter_t *misf_counter_table_ptr[];
 
 void print_MISF_ADDRESS_TABLE(void);
 

@@ -1,4 +1,4 @@
-Compiling C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main on 21-9-25 at 13:36
+Compiling C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main on 22-9-25 at 18:42
 >>> Warning 225 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_flash.h" Line 21(34,40): Duplicate #define
 >>> Warning 225 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_smf.c" Line 11(24,120): Duplicate #define
 >>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\hal\timer.h" Line 13(16,20): Variable never used:   dsec
@@ -7,7 +7,8 @@ Compiling C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main on 
 >>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\application\mmj_cigs_excute_mission.h" Line 22(6,18): Variable never used:   duration_sec
 >>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_iv.c" Line 11(20,34): Variable never used:   curr_threshold
 >>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_iv.c" Line 34(14,27): Variable never used:   measured_data
->>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_iv.c" Line 311(20,31): Variable never used:   sweep_index
+>>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_iv.c" Line 114(14,27): Variable never used:   measured_data
+>>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_iv.c" Line 300(20,31): Variable never used:   sweep_index
 >>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\domain\mmj_cigs_smf.h" Line 11(23,40): Variable never used:   smf_counter_table
 >>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\application\mmj_cigs_mode_mission.c" Line 22(19,29): Variable never used:   start_time
 >>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\application\mmj_cigs_mode_mission.c" Line 23(19,30): Variable never used:   current_sec
@@ -16,7 +17,7 @@ Compiling C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main on 
 >>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\application\mmj_cigs_mode_mission.c" Line 101(19,27): Variable never used:   end_time
 >>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\application\mmj_cigs_mode_flash.c" Line 140(19,32): Variable never used:   write_address
 >>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\application\mmj_cigs_mode_flash.c" Line 237(9,19): Variable never used:   mission_id
->>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\application\mmj_cigs_mode_flash.c" Line 393(9,18): Variable never used:   writedata
-      Memory usage:   ROM=54%      RAM=15% - 85%
-      0 Errors,  18 Warnings.
+>>> Warning 202 "C:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\application\mmj_cigs_mode_flash.c" Line 390(9,18): Variable never used:   writedata
+      Memory usage:   ROM=52%      RAM=15% - 85%
+      0 Errors,  19 Warnings.
 Build Successful.

@@ -89,7 +89,7 @@ void execute_mission(int8 *content)
          mode_smf_erase_force(content);
          break;
       case ID_SMF_RESET:
-         mode_smf_address_reset(content);
+         smf_data_table_init();
          break;
          
          

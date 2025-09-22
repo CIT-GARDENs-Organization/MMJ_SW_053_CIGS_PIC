@@ -3,7 +3,7 @@
 
 #include "../lib/tool/smf_queue.h"  // FlashOperationStruct定義
 #include "../hal/mmj_cigs_config.h" // int8,int32 型など(CCS C) 依存
-#include "mmj_cigs_flash.h"       // MISF_ADDRESS_TABLE, flash_counter_table 依存
+#include "mmj_cigs_flash.h"       // MISF_ADDRESS_TABLE, misf_counter_table 依存
 
 #define CRC_RETRY_COUNT 5
 

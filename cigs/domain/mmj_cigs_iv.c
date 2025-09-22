@@ -1,9 +1,9 @@
-#include "mmj_cigs_iv.h"               // 同じフォルダのヘッダー
-#include "../hal/mmj_cigs_config.h"      // システム設定
-#include "../device_driver/ad7490_driver.h"   // デバイス定義  
+#include "mmj_cigs_iv.h"              
+#include "../hal/mmj_cigs_config.h"      
+#include "../device_driver/ad7490_driver.h"  
 #include "../device_driver/mcp4901_driver.h"
-#include "mmj_cigs_flash.h"               // ストレージ機能
-#include "../lib/communication/mission_tools.h"   // 通信ツール
+#include "mmj_cigs_flash.h"               
+#include "../lib/communication/mission_tools.h"   
 #include "../hal/timer.h"
 
 void sweep_with_print()
@@ -112,57 +112,44 @@ void test_sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit)
 
     int16 count = 1;
     iv_env_t measured_data = create_meas_data();
-
     while (port1.active || port2.active)
     {
-        // 出力設定
-        if (port1.active) {
-            mcp4901_1_write(count);
-        } else {
-            mcp4901_1_write(0);  // 閾値到達後は0出力
-        }
-
-        if (port2.active) {
-            mcp4901_2_write(count);
-        } else {
-            mcp4901_2_write(0);
-        }
-
-        delay_us(100);
-
-        // データ取得
+        mcp4901_1_write(count);
+        mcp4901_2_write(count);
+        delay_us(10); 
         if (port1.active) {
             port1.data_buffer[count].voltage = ad7490_read(ADC_CIGS1_AMP);
             port1.data_buffer[count].current = ad7490_read(ADC_CIGS1_CURR);
-            fprintf(PC, "%04LX,%04LX,", port1.data_buffer[count].voltage, port1.data_buffer[count].current);  
-            port1.sweep_step = count + 1;
+            port1.sweep_step = count + 1; 
+            // fprintf(PC, "%04LX,%04LX,", port1.data_buffer[count].voltage, port1.data_buffer[count].current);
             if (port1.data_buffer[count].current < curr_limit) {
-                port1.active = 0;  // 閾値到達で測定終了
+                port1.active = 0;
+                disconnect_port1();
             }
         }
-
         if (port2.active) {
             port2.data_buffer[count].voltage = ad7490_read(ADC_CIGS2_AMP);
             port2.data_buffer[count].current = ad7490_read(ADC_CIGS2_CURR);
             port2.sweep_step = count + 1;
             if (port2.data_buffer[count].current < curr_limit) {
                 port2.active = 0;
-            }
+                disconnect_port2();
+            } 
         }
-
         count++;
         if (count >= 255) {
+            // fprintf(PC, "Maximum step count reached: %ld\r\n", count);
             break;
         }
     }
 
-    fprintf(PC, "sweep step : %04LX\r\n", count);
+    for (int i = 0; i < count; i++) {
 
-    // 接続は維持
-    fprintf(PC, "\r\nport1\r\n");
-    log_meas_data_with_print(&measured_data, &port1);
-    fprintf(PC, "\r\nport2\r\n");
-    log_meas_data_with_print(&measured_data, &port2);
+        fprintf(PC, "%04LX,%04LX,%04LX,%04LX\r\n",
+            port1.data_buffer[i].voltage, port1.data_buffer[i].current,
+            port2.data_buffer[i].voltage, port2.data_buffer[i].current);
+    }
+
 }
 
 void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned int16 pd_limit)
@@ -234,69 +221,71 @@ void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned in
 
 void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
 {
-    int8 packetdata[PACKET_SIZE] = {0x00}; 
-    unsigned int8 packetdata_index = 0;
+    iv_data_packet_t data_packet = {0};
+    iv_data_packet_t *data_packet_ptr = &data_packet;
+    
+    // ヘッダ情報の設定
+    data_packet.header.start_marker = START_MAKER;
+    data_packet.header.time_sec = measured_data_ptr->time / 1000;
+    data_packet.header.time_msec = measured_data_ptr->time % 1000;
 
-    // ==== ヘッダ＋環境データ書き込み ====
-    packetdata[packetdata_index++] = START_MAKER;  // 最初のパケットだけ
-    // timeヘッダ
-    packetdata[packetdata_index++] = (measured_data_ptr->time >> 24) & 0xFF;
-    packetdata[packetdata_index++] = (measured_data_ptr->time >> 16) & 0xFF;
-    packetdata[packetdata_index++] = (measured_data_ptr->time >> 8) & 0xFF;
-    packetdata[packetdata_index++] = measured_data_ptr->time & 0xFF;
-    // 環境データ
-    packetdata[packetdata_index++] = (measured_data_ptr->pd >> 4) & 0xFF;
-    packetdata[packetdata_index++] = ((measured_data_ptr->pd & 0x0F) << 4) | ((measured_data_ptr->temp_py_top >> 8) & 0x0F);
-    packetdata[packetdata_index++] = measured_data_ptr->temp_py_top & 0xFF;
-    packetdata[packetdata_index++] = (measured_data_ptr->temp_py_bot >> 4) & 0xFF;
-    packetdata[packetdata_index++] = ((measured_data_ptr->temp_py_bot & 0x0F) << 4) | ((measured_data_ptr->temp_mis7 >> 8) & 0x0F);
-    packetdata[packetdata_index++] = measured_data_ptr->temp_mis7 & 0xFF;
-
-
-    for (unsigned int16 i = 0; i < port_data_ptr->sweep_step ; i++) {
-        unsigned int16 data0 = port_data_ptr->data_buffer[i].voltage;
-        unsigned int16 data1 = port_data_ptr->data_buffer[i].current;
-
-        packetdata[packetdata_index++] = (data0 >> 4) & 0xFF;
-        packetdata[packetdata_index++] = ((data0 & 0x0F) << 4) | ((data1 >> 8) & 0x0F);
-        packetdata[packetdata_index++] = data1 & 0xFF;
-
-        if (packetdata_index + 3 >= PACKET_SIZE - 1) {
-            switch (port_data_ptr -> port_num) {
-                case 1:
-                    // fprintf(PC, "DATA WRITE IV1\r\n");
-                    misf_write_data(FLASH_ID_IV1_DATA, packetdata, PACKET_SIZE-1);
-                    break;
-                case 2:
-                    misf_write_data(FLASH_ID_IV2_DATA, packetdata, PACKET_SIZE-1);
-                    break;
-                default:
-                    break;
-            }
-            packetdata_index = 0;
-            memset(packetdata, 0x00, PACKET_SIZE);
-        }
+    // 環境データの設定
+    data_packet.header.env_data[0].data[0] = (measured_data_ptr->pd >> 4) & 0xFF;
+    data_packet.header.env_data[0].data[1] = ((measured_data_ptr->pd & 0x0F) << 4) | ((measured_data_ptr->temp_py_top >> 8) & 0x0F);
+    data_packet.header.env_data[0].data[2] = measured_data_ptr->temp_py_top & 0xFF;
+    data_packet.header.env_data[1].data[0] = (measured_data_ptr->temp_py_bot >> 4) & 0xFF;
+    data_packet.header.env_data[1].data[1] = ((measured_data_ptr->temp_py_bot & 0x0F) << 4) | ((measured_data_ptr->temp_mis7 >> 8) & 0x0F);
+    data_packet.header.env_data[1].data[2] = measured_data_ptr->temp_mis7 & 0xFF;
+    
+    // IVデータの1パケット目
+    unsigned int16 iv_index = 0;
+    for (unsigned int16 i = 0; i < 16 && iv_index < port_data_ptr->sweep_step; i++, iv_index++){
+        data_packet.header.iv_data[i].data[0] = (port_data_ptr->data_buffer[i].voltage >> 4) & 0xFF;
+        data_packet.header.iv_data[i].data[1] = ((port_data_ptr->data_buffer[i].voltage & 0x0F) << 4) | ((port_data_ptr->data_buffer[i].current >> 8) & 0x0F);
+        data_packet.header.iv_data[i].data[2] = port_data_ptr->data_buffer[i].current & 0xFF;
+    }
+    switch (port_data_ptr -> port_num) {
+        case 1:
+            misf_write_data(FLASH_ID_IV1_DATA, data_packet_ptr->raw, PACKET_SIZE-1);
+            break;
+        case 2:
+            misf_write_data(FLASH_ID_IV2_DATA, data_packet_ptr->raw, PACKET_SIZE-1);
+            break;
+        default:
+            break;
     }
 
-    // 最後に残ったデータの処理
-    if (packetdata_index > 0) {
-        for (unsigned int8 j = packetdata_index; j < PACKET_SIZE - 1; j++) {
-            packetdata[j] = 0x00;
+    // 2パケット目以降のIVデータ
+    while (iv_index < port_data_ptr->sweep_step) {
+        // 新しいパケットの初期化（ゼロクリア）
+        memset(data_packet_ptr->raw, 0x00, sizeof(data_packet.raw));
+
+        unsigned int16 step_in_packet = 0;
+
+        // データを詰める
+        for (; step_in_packet < 21 && iv_index < port_data_ptr->sweep_step;
+            step_in_packet++, iv_index++) {
+            data_packet.data.iv_data[step_in_packet].data[0] =
+                (port_data_ptr->data_buffer[iv_index].voltage >> 4) & 0xFF;
+            data_packet.data.iv_data[step_in_packet].data[1] =
+                ((port_data_ptr->data_buffer[iv_index].voltage & 0x0F) << 4) |
+                ((port_data_ptr->data_buffer[iv_index].current >> 8) & 0x0F);
+            data_packet.data.iv_data[step_in_packet].data[2] =
+                port_data_ptr->data_buffer[iv_index].current & 0xFF;
         }
-        switch (port_data_ptr->port_num)
-        {
-            case 1:
-                misf_write_data(FLASH_ID_IV1_DATA, packetdata, PACKET_SIZE-1);
-                // for (unsigned int32 j = 0; j < PACKET_SIZE; j++) {
-                    // fprintf(PC, "%02X ", packetdata[j]);
-                // }
-                fprintf(PC, "\r\n");
-                break;
-            case 2:
-                misf_write_data(FLASH_ID_IV2_DATA, packetdata, PACKET_SIZE-1);
-                break;
-            default:
-                break;
+
+        // 残り領域を 0x00 で埋める（未使用部分）
+        for (; step_in_packet < 21; step_in_packet++) {
+            data_packet.data.iv_data[step_in_packet].data[0] = 0x00;
+            data_packet.data.iv_data[step_in_packet].data[1] = 0x00;
+            data_packet.data.iv_data[step_in_packet].data[2] = 0x00;
+        }
+
+        // フラッシュに書き込み
+        if (port_data_ptr->port_num == 1) {
+            misf_write_data(FLASH_ID_IV1_DATA, data_packet_ptr->raw, PACKET_SIZE - 1);
+        } else if (port_data_ptr->port_num == 2) {
+            misf_write_data(FLASH_ID_IV2_DATA, data_packet_ptr->raw, PACKET_SIZE - 1);
         }
     }
 }

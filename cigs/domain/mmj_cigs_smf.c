@@ -32,9 +32,12 @@ const ADDRESS_AREA_T SMF_ADDRESS_TABLE[FLASH_ID_COUNT] = {
 void smf_data_table_init()
 {
     fprintf(PC, "SMF Data Table Initialize\r\n");
+    for ( unsigned int32 address = CIGS_DATA_TABLE_START_ADDRESS; address < CIGS_IV2_DATA_END_ADDRESS; address += SUBSECTOR_SIZE )
+    {
+        subsector_4kByte_erase(smf, address);
+    }
     smf_data_table_t smf_data_table = {0};
-    smf_data_table.fields.crc = calc_crc8(smf_data_table.bytes, PACKET_SIZE - 1); // CRCを計算して初期化
-
+    smf_data_table.fields.crc = calc_crc8(smf_data_table.bytes, PACKET_SIZE - 1); // CRCを計算して初期化    
     write_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table.bytes, PACKET_SIZE);
 }
 
@@ -62,6 +65,7 @@ void read_smf_header(smf_data_table_t *smf_data_table)
 
     // 読み込み失敗時は初期化しておく
     smf_data_table_init();
+    read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table->bytes, PACKET_SIZE);
 
     return;
 }
@@ -132,8 +136,8 @@ void smf_write(FlashOperationStruct *smf_data_ptr)
     //アドレスと自動更新
     if (smf_data_ptr->source_type == SOURCE_MISF_UNCOPIED )
     {
-        write_src = MISF_ADDRESS_TABLE[smf_data_ptr->mission_id].start + flash_counter_table[smf_data_ptr->mission_id].used_counter - flash_counter_table[smf_data_ptr->mission_id].uncopied_counter;
-        write_size = flash_counter_table[smf_data_ptr->mission_id].uncopied_counter;
+        write_src = MISF_ADDRESS_TABLE[smf_data_ptr->mission_id].start + misf_counter_table[smf_data_ptr->mission_id].used_counter - misf_counter_table[smf_data_ptr->mission_id].uncopied_counter;
+        write_size = misf_counter_table[smf_data_ptr->mission_id].uncopied_counter;
     }else if(smf_data_ptr->source_type == SOURCE_MISF_MANUAL)
     {
         write_src = smf_data_ptr->misf_start_addr;
@@ -185,7 +189,7 @@ void smf_write(FlashOperationStruct *smf_data_ptr)
 
         write_data_bytes(smf, smf_write_address, buffer, PACKET_SIZE);
         smf_data_table.fields.headers[smf_data_ptr->mission_id].used_size += PACKET_SIZE;
-        flash_counter_table[smf_data_ptr->mission_id].uncopied_counter -= PACKET_SIZE;
+        misf_counter_table[smf_data_ptr->mission_id].uncopied_counter -= PACKET_SIZE;
         
         write_src += PACKET_SIZE;
         write_size -= PACKET_SIZE;

@@ -272,15 +272,12 @@ void mode_smf_read(unsigned int8 parameter[])
    fprintf(PC, "Read Data\r\n");
 
    while (read_packetnum > 0) {
-      fprintf(PC, "Remaining packets to read: %lu\r\n", read_packetnum);
-
       read_data_bytes(smf, read_address, read_data, PACKET_SIZE);
 
       for (int i = 0; i < PACKET_SIZE; i++) {
          fprintf(PC, "%02X ", read_data[i]);
       }
       fprintf(PC, "\r\n");
-
       read_address += PACKET_SIZE;
       read_packetnum--;
    }

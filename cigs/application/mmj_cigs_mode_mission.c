@@ -48,7 +48,7 @@ void mode_meas_iv(unsigned int8 *uplinkcmd_ptr)
    fprintf(PC, "Write Mode:   %02X\r\n", data.write_mode);
    fprintf(PC, "Source Type:  %02X\r\n", data.source_type);
    fprintf(PC, "Start Address:%04X\r\n", data.misf_start_addr);
-   fprintf(PC, "Size:         %04X\r\n", flash_counter_table[CIGS_IV1_DATA].uncopied_counter);
+   fprintf(PC, "Size:         %04X\r\n", misf_counter_table[CIGS_IV1_DATA].uncopied_counter);
 
    enqueue_flash_operation(&data); // SMFへのデータコピーを実行する
 

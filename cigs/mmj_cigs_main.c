@@ -24,7 +24,7 @@ void main()
    connect_port2();
    mcp4901_1_write(0);
    mcp4901_2_write(0);
-   connect_negative_power2(TRUE); // CIGS2 Negative Power ON
+   connect_negative_power1(TRUE); // CIGS1 Negative Power ON
    
    fprintf(PC,"waiting for BOSS PIC command");
    

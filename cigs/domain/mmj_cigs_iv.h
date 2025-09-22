@@ -8,7 +8,7 @@ volatile unsigned int8 mission_datas[MISSION_DATA_SIZE] = {0x00};
 volatile int8 executed_mission_count = 0;
 */
 
-#define START_MAKER 0xFF
+#define START_MAKER 0xFFFF
 #define RESERVED_VALUE 0x00
 
 #define HEADER_SIZE 5  // START_MAKER + time (4バイト)
@@ -65,6 +65,28 @@ typedef struct{
     iv_data_t data_buffer[0xFF];
     int1 active;
 } sweep_config_t;
+
+typedef struct 
+{
+    unsigned int8 data[3];
+} meas_data_t;
+
+typedef union{
+    unsigned int8 raw[PACKET_SIZE-1];
+
+    struct {
+        unsigned int16 start_marker;
+        unsigned int32 time_sec;
+        unsigned int16 time_msec;
+        meas_data_t env_data[2];
+        meas_data_t iv_data[16];
+
+    }header;
+    struct {
+        meas_data_t iv_data[21];
+    }data;
+} iv_data_packet_t;
+
 
 
 iv_env_t create_meas_data();
