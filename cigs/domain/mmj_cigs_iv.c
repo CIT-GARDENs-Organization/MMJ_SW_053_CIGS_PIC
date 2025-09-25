@@ -91,11 +91,16 @@ void test_sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit)
 {
     fprintf(PC, ".");
     
-    // Enable both CIGS ports
+    
     connect_port1();
     connect_port2();
+    // Enable both CIGS ports
     mcp4901_1_write(0); 
     mcp4901_2_write(0);
+    connect_port1();
+    connect_port2();
+
+    // Stabilization wait
     delay_ms(100);
     
     // Init Port1
@@ -118,10 +123,12 @@ void test_sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit)
         mcp4901_2_write(count);
         delay_us(10); 
         if (port1.active) {
+            unsigned int32 ans = ad7490_read(ADC_CIGS1_CURR);
+            ans += ad7490_read(ADC_CIGS1_CURR);
+            ans = ans/2;
             port1.data_buffer[count].voltage = ad7490_read(ADC_CIGS1_AMP);
-            port1.data_buffer[count].current = ad7490_read(ADC_CIGS1_CURR);
+            port1.data_buffer[count].current = ans;
             port1.sweep_step = count + 1; 
-            // fprintf(PC, "%04LX,%04LX,", port1.data_buffer[count].voltage, port1.data_buffer[count].current);
             if (port1.data_buffer[count].current < curr_limit) {
                 port1.active = 0;
                 disconnect_port1();
@@ -224,7 +231,7 @@ void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
     iv_data_packet_t data_packet = {0};
     iv_data_packet_t *data_packet_ptr = &data_packet;
     
-    // ヘッダ情報の設定
+    // ヘッダ情報の設定n
     data_packet.header.start_marker = START_MAKER;
     data_packet.header.time_sec = measured_data_ptr->time / 1000;
     data_packet.header.time_msec = measured_data_ptr->time % 1000;
@@ -412,5 +419,19 @@ iv_env_t create_meas_data()
     data.temp_mis7      = ad7490_read(ADC_TEMP_MIS7);
     data.pd             = ad7490_read(ADC_PD);
     return data;
+}
+
+unsigned int16 calc_pd_value(unsigned int16 data)
+{
+    // ADCの12ビット値を電力密度（mW/cm²）に変換する例
+    // ここでは仮に1 LSB = 0.1 mW/cm²とする
+    return (unsigned int16)(data * 0.1);
+}
+
+unsigned int16 calc_curr_value(unsigned int16 data)
+{
+    float voltage_mv = (float)(data * ADC_REF_VOLTAGE_MV / ADC_MAX_READING); // 12ビットADCの場合
+    float current_ma = (ADC_CURR_REF_VOLTAGE_MV - voltage_mv) / (SHUNT_RESISTANCE_OHM * AMP_GAIN); // mA単位
+    return (unsigned int16)current_ma;
 }
 // End of file

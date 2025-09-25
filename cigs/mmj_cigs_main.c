@@ -27,56 +27,32 @@ void main()
    connect_negative_power1(TRUE); // CIGS1 Negative Power ON
    
    fprintf(PC,"waiting for BOSS PIC command");
-   
+
    //Start loop
-   while(!is_finished)
+   while(TRUE)
    {
-      // unsigned int16 cigs1_amp = ad7490_read(ADC_CIGS2_AMP);
-      // unsigned int16 cigs1_curr = ad7490_read(ADC_CIGS2_CURR);
-      // unsigned int16 cigs1_volt = ad7490_read(ADC_CIGS2_VOLT);
-      
-      // fprintf(PC, "CIGS1 Amp: %04LX, Current: %04LX, Voltage: %04LX\r\n", cigs1_amp, cigs1_curr, cigs1_volt);
-      
-      // handle from boss commands
       if(boss_receive_buffer_size > 0)
       {
          //Command command = make_command(boss_receive_buffer, boss_receive_buffer_size);
          volatile Command recieve_cmd = make_receive_command(boss_receive_buffer, boss_receive_buffer_size);
-         /*
-         fprintf(PC, "Frame ID: %X\r\n", recieve_cmd.frame_id);
-         fprintf(PC, "Content size: %u\r\n", recieve_cmd.size);
-         fprintf(PC, "payload: ");
-         for(int8 i = 0; i < recieve_cmd.size; i++)
-            fprintf(PC, "%X ", recieve_cmd.content[i]);
-         fprintf(PC, "\r\n\r\n");
-         fprintf(PC, "is_exist: %d\r\n", recieve_cmd.is_exist);
-         */
          clear_receive_signal(boss_receive_buffer, &boss_receive_buffer_size);
          
          if(recieve_cmd.is_exist){
             is_finished = execute_command(&recieve_cmd); // FIX: 戻り値を保持
-            fprintf(PC,"\r\nwaiting for BOSS PIC command");
+            if (is_finished == TRUE)
+            {
+               fprintf(PC, "\r\n\r\n======\r\n\r\nFinished process.\r\n");
+            }else{
+               fprintf(PC,"\r\nwaiting for BOSS PIC command");
+            }
          }
       }
-      
-      // check `is break while loop`
-      if(is_finished == TRUE)
-         break;
          
-      delay_ms(400);
+      delay_ms(500);
       fprintf(PC, ".");
-   }
-   
-   
-   fprintf(PC, "\r\n\r\n======\r\n\r\nFinished process.\r\nWait for BOSS PIC turn off me");
-   
-   while (TRUE)
-   {
-      fprintf(PC, ".");
-      delay_ms(1000);
    }
    
    fprintf(PC, "End main\r\n");
    
 }
-// Enf of files
+// End of files

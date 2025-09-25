@@ -106,11 +106,26 @@ void execute_mission(int8 *content)
       case ID_MEAS_ENV_DEBUG:
          mode_meas_env_debug(content);
          break;
-     
-     case 0xA4:
+      
+      case 0xA4:
           sweep_with_print();
           break;
-     
+      
+
+      // ________________Others______________________________
+      case 0xB0:
+         unsigned int32 total_seconds = get_current_sec();
+         unsigned int16 days;
+         unsigned int8 hours, minutes, seconds;
+         days    = total_seconds / 86400;
+         hours   = (total_seconds % 86400) / 3600;
+         minutes = (total_seconds % 3600) / 60;
+         seconds = total_seconds % 60;
+
+         fprintf(PC, "\t\t-> Get time to %lu days, %02u:%02u:%02u\r\n",
+               days, hours, minutes, seconds);
+         break;
+
       default:
          fprintf(PC, "\t\t-> Invalid CMD ID!\r\n");
          break;
@@ -138,6 +153,10 @@ int1 execute_command(Command *command)
       
       case IS_SMF_AVAILABLE:
          handle_smf_available(command);
+         break;
+      
+      case SEND_TIME:
+         handle_recieve_time(command);
          break;
    }
    return FALSE;
@@ -229,5 +248,31 @@ void handle_smf_available(Command *command)
             (unsigned int)processed_count);
 
     status[0] = FINISHED;
+}
+
+void handle_recieve_time(Command *command)
+{
+   fprintf(PC, "\t-> TIME Receive\r\n");
+   fprintf(PC, "\t   Transmit Acknolegde\r\n");
+   transmit_ack();
+
+   // 4バイト(MSB, big-endian)に詰められた MM/DD hh:mm:ss を復元
+   // [31:26]=0, [25:22]=month(1-12), [21:17]=day(1-31), [16:12]=hour(0-23), [11:6]=minute(0-59), [5:0]=second(0-59)
+   unsigned int32 total_seconds = ((unsigned int32)command->content[0] << 24) |
+                      ((unsigned int32)command->content[1] << 16) |
+                      ((unsigned int32)command->content[2] << 8)  |
+                      ((unsigned int32)command->content[3]);
+
+   set_current_sec(total_seconds);
+   unsigned int16 days;
+   unsigned int8 hours, minutes, seconds;
+   days    = total_seconds / 86400;
+   hours   = (total_seconds % 86400) / 3600;
+   minutes = (total_seconds % 3600) / 60;
+   seconds = total_seconds % 60;
+
+   fprintf(PC, "\t\t-> Set time to %lu days, %02u:%02u:%02u\r\n",
+           days, hours, minutes, seconds);
+
 }
 // End of file

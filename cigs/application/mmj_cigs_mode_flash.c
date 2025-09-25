@@ -325,7 +325,6 @@ void mode_misf_address_reset(unsigned int8 parameter[])
    fprintf(PC, "End Flash Address Reset\r\n");
 }
 
-
 // ---------- SMF Command Functions ----------
 void mode_smf_read_force(int8 parameter[])
 {

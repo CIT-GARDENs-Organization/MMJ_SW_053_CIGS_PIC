@@ -94,5 +94,20 @@ void log_meas_data(iv_env_t *environment_data_ptr, sweep_config_t *port_data);
 void log_meas_data_with_print(iv_env_t *environment_data_ptr, sweep_config_t *port_data);
 
 void sweep_with_print();
+
+unsigned int16 calc_pd_value(unsigned int16 data);
+// 
+unsigned int16 calc_curr_value(unsigned int16 data);
+#define SHUNT_RESISTANCE_OHM 0.1
+#define AMP_GAIN 200
+#define ADC_REF_VOLTAGE_MV 2500 
+#define ADC_MAX_READING 4095
+#define ADC_CURR_REF_VOLTAGE_MV 1250
+
+
+
+
+
+
 #endif
 //------------------End of File------------------

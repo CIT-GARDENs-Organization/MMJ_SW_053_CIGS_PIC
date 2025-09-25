@@ -31,5 +31,6 @@
         "EX_SPI.C": "cpp"
     },
     "C_Cpp.default.configurationProvider": "user.vscode-extension-for-ccsc",
-    "C_Cpp.configurationWarnings": "disabled"
+    "C_Cpp.configurationWarnings": "disabled",
+    "ccscHelper.Program.programmer": "PK4"
 }

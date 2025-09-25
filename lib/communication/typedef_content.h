@@ -8,7 +8,8 @@ typedef enum {
     IDLE              = 0x03,
     SMF_USE_REQ       = 0x04,
     COPYING           = 0x05,
-    FINISHED          = 0x06
+    FINISHED          = 0x06,
+    TIME_REQ          = 0x07
 } MisMcuStatusContent;
 
 

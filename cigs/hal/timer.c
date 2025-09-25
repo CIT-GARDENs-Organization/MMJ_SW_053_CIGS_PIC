@@ -1,55 +1,57 @@
 #include "timer.h"
 
 int8 subsec;
+unsigned int16 time_ms = 0;
+unsigned int32 time_sec = 0;
 
-#INT_TIMER1
+#INT_TIMER0
+void TIMER0_isr()
+{
+   set_timer0(0xEC78);  // 10msごとにリロード
+   time_ms += 10;
+   if (time_ms >= 1000) {
+      time_ms = 0;
+   }
+}
+
+#INT_TIMER1 
 void TIMER1_isr()
 {
-   set_timer1(TIMER_ISR_10MSEC); 
-   tick_10ms++;
+   set_timer1(TIMER_ISR_1S); 
+   time_ms += 1000;
+   if (time_ms >= 1000) {
+      time_ms = 0;
+      time_sec++;
+   }
 }
 
 void timer_init()
 {
    fprintf(PC, "Timer Initialize\r\n");
    clear_interrupt(INT_TIMER1);
-   tick_10ms = 0;
+   time_ms = 0;
+   time_sec = 0;
    setup_timer_1(T1_EXTERNAL | T1_DIV_BY_1 | T1_ENABLE_SOSC);
-   set_timer1(TIMER_ISR_10MSEC); 
+   setup_timer_0(RTCC_INTERNAL|RTCC_DIV_64|RTCC_8_BIT);
+   set_timer1(TIMER_ISR_1S); 
    enable_interrupts(INT_TIMER1);   
+   enable_interrupts(INT_TIMER0);
    enable_interrupts(GLOBAL);
    fprintf(PC, "\tComplete\r\n");
 }
 
-void set_current_10msec(unsigned int32 new_10msec)
+void set_current_sec(unsigned int32 new_sec)
 {
-   tick_10ms = new_10msec;
+   time_sec = new_sec;
 }
-
-unsigned int32 get_current_time_10ms()
-{
-   return tick_10ms;
-}
-
 
 unsigned int32 get_current_sec()
 {
-   return subsec;
+   return time_sec;
 }
 
 unsigned int16 get_current_msec()
 {
-   // Assuming subsec is in deci-seconds (0.01 sec)
-   return (subsec / 10); // Convert deci-seconds to milliseconds
+   return time_ms;
 }
 
-unsigned int16 get_current_day()
-{
-   return day;
-}
-
-
-void add_current_msec(unsigned int32 add_msec)
-{
-   subsec += add_msec; // Convert milliseconds to deci-seconds
-}

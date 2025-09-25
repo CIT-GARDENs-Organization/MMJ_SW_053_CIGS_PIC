@@ -15,6 +15,7 @@ int1 handle_status_check(Command *command);
 
 void handle_smf_available(Command *command);
 
+void handle_recieve_time(Command *command);
 
 
 void execute_mission(int8 *content);

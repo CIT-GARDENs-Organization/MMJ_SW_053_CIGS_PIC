@@ -65,6 +65,7 @@ class Command:
     # flame id (mis mcu receive)
     STATUS_CHECK = b'\x01'
     IS_SMF_AVAILABLE = b'\x02'
+    SEND_TIME = b'\x03'
 
     # IS_SMF_AVAILABLE payload
     ALLOW = b'\x01'
@@ -83,7 +84,7 @@ class Command:
     UL_CMD = b'\x00'
     ACK = b'\x0F'
 
-    FRAME_ID_PAYLOAD_LENGTH = {STATUS_CHECK: 0, IS_SMF_AVAILABLE: 1, MIS_MCU_STATUS: 1, UL_CMD: 8, ACK: 0}
+    FRAME_ID_PAYLOAD_LENGTH = {STATUS_CHECK: 0, IS_SMF_AVAILABLE: 1, SEND_TIME: 4, MIS_MCU_STATUS: 1, UL_CMD: 8, ACK: 0}
     
     @staticmethod
     def input_payload(cmd_payload=None) -> bytes:
@@ -164,6 +165,27 @@ class Command:
             return FrameData(Command.MIS_MCU_STATUS, data[2].to_bytes())
         else:
             return FrameData(None, None)
+    
+    @staticmethod
+    def pack_datetime_to_4bytes(dt: datetime | None = None) -> bytes:
+        """
+        現在日時を年初(1/1 00:00:00)からの経過秒として4バイト(MSB, big-endian)で返す。
+        その年の1月1日 00:00:00を基準(0秒)として、現在時刻までの経過秒数を計算。
+        """
+        if dt is None:
+            dt = datetime.now()
+        
+        # 年初(1月1日 00:00:00)からの経過秒を計算
+        year_start = datetime(dt.year, 1, 1, 0, 0, 0)
+        elapsed_seconds = int((dt - year_start).total_seconds())
+        
+        # 4バイト範囲チェック（最大約136年分だが、1年は約31,536,000秒なので問題なし）
+        if elapsed_seconds > 0xFFFFFFFF:
+            elapsed_seconds = 0xFFFFFFFF
+        elif elapsed_seconds < 0:
+            elapsed_seconds = 0
+            
+        return elapsed_seconds.to_bytes(4, 'big')
     
 # role of communications in general
 class Communication:
@@ -304,7 +326,26 @@ def close_and_exit(com) -> None:
     sys.exit()
 
 
-def main(com_port=None, baud_rate=None, command=None):
+def send_current_time(com: Communication) -> bool:
+    """現在時刻(MM/DD hh:mm:ss)を4バイトに詰めてSEND_TIMEで送信する。ACKを期待。"""
+    payload = Command.pack_datetime_to_4bytes()
+    assert com.device_id is not None
+    device_id: bytes = com.device_id  # type: ignore[assignment]
+    cmd = Command.make_command(device_id, Command.SEND_TIME, payload)
+    print(Print.timestamped(f"{Print.INFO} SEND_TIME を送信 (payload={Print.space_every_two_str(payload)})"))
+    resp = com.transmit_and_receive_command(cmd)
+    if not resp:
+        print(Print.timestamped(f"{Print.ERROR} SEND_TIME の応答がありません"))
+        return False
+    frame = Command.parse_frame(resp)
+    if frame.frame_id == Command.ACK:
+        print(Print.timestamped(f"{Print.INFO} SEND_TIME の ACK を受信"))
+        return True
+    print(Print.timestamped(f"{Print.ERROR} SEND_TIME 後の応答がACKではありません"))
+    return False
+
+
+def main(com_port=None, baud_rate=None, command=None, send_time_with_command=False):
     print(f'\n================================')
     print(f'=== {Print.BOLD}BOSS PIC Simulator v1.00{Print.RESET} ===')
     print(f'================================\n')
@@ -321,8 +362,15 @@ def main(com_port=None, baud_rate=None, command=None):
     
     # コマンド引数が指定されている場合は単発実行
     if command:
+        # -c と -t の組み合わせで時刻送信を選択可能
+        if send_time_with_command:
+            if not send_current_time(com):
+                print(Print.timestamped(f"{Print.ERROR} 時刻送信に失敗しました"))
+        # UL_CMD を送信
         uplink_command_payload = Command.input_payload(command)
-        uplink_command = Command.make_command(com.device_id, Command.UL_CMD, uplink_command_payload)
+        assert com.device_id is not None
+        device_id: bytes = com.device_id  # type: ignore[assignment]
+        uplink_command = Command.make_command(device_id, Command.UL_CMD, uplink_command_payload)
         execute_mission(com, uplink_command)
     else:
         # インタラクティブモード
@@ -334,6 +382,8 @@ def interactive_mode(com):
     print(f'コマンド入力待機中... (\'exit\' で終了)')
     print(f'使用方法:')
     print(f'  - 16進数でコマンドを入力: C0 00 00 00 00 00 00 00 00')
+    print(f'  - コマンド末尾に " -t" を付けると時刻送信後にコマンド送信')
+    print(f'  - "time" と入力で現在の MM/DD hh:mm:ss を4バイト(SEND_TIME)で送信')
     print(f'  - command_uiからコマンドを送信可能')
     print(f'  - \'exit\' または Ctrl+C で終了')
     print(f'{Print.LINE}')
@@ -350,9 +400,41 @@ def interactive_mode(com):
                 if not user_input:
                     continue
                 
-                # コマンドをパース
-                uplink_command_payload = Command.input_payload(user_input)
-                uplink_command = Command.make_command(com.device_id, Command.UL_CMD, uplink_command_payload)
+                # ショートカット: 現在時刻を送信
+                if user_input.lower() in ['time', 't']:
+                    payload = Command.pack_datetime_to_4bytes()
+                    assert com.device_id is not None
+                    device_id: bytes = com.device_id  # type: ignore[assignment]
+                    cmd = Command.make_command(device_id, Command.SEND_TIME, payload)
+                    print(Print.timestamped(f"{Print.INFO} SEND_TIME を送信 (payload={Print.space_every_two_str(payload)})"))
+                    resp = com.transmit_and_receive_command(cmd)
+                    if not resp:
+                        print(Print.timestamped(f'{Print.ERROR} 応答がありません - 中断'))
+                        continue
+                    frame = Command.parse_frame(resp)
+                    if frame.frame_id == Command.ACK:
+                        print(Print.timestamped(f"{Print.INFO} ACK 受信"))
+                    else:
+                        print(Print.timestamped(f"{Print.ERROR} 予期しない応答"))
+                    continue
+                
+                # コマンド末尾に -t があるかチェック
+                send_time_first = False
+                command_input = user_input
+                if user_input.strip().endswith(' -t'):
+                    send_time_first = True
+                    command_input = user_input.strip()[:-3].strip()  # -t を除去
+                
+                # 時刻送信（-t指定時のみ）
+                if send_time_first:
+                    if not send_current_time(com):
+                        print(Print.timestamped(f"{Print.ERROR} 時刻送信に失敗しました"))
+                
+                # UL_CMD を送信
+                uplink_command_payload = Command.input_payload(command_input)
+                assert com.device_id is not None
+                device_id: bytes = com.device_id  # type: ignore[assignment]
+                uplink_command = Command.make_command(device_id, Command.UL_CMD, uplink_command_payload)
                 
                 # ミッション実行
                 print(f'{Print.INFO} コマンド実行開始...')
@@ -425,7 +507,32 @@ if __name__ == '__main__':
     parser.add_argument('--port', '-p', help='COM port (e.g., COM3)')
     parser.add_argument('--baud', '-b', help='Baud rate (default: 9600)', default='9600')
     parser.add_argument('--command', '-c', help='Command to send (9 bytes in hex, e.g., "01 00 00 00 00 00 00 00 00")')
+    parser.add_argument('--send-time', '-t', action='store_true', help='Send current time before command (use with -c) or standalone')
     
     args = parser.parse_args()
     
-    main(args.port, args.baud, args.command)
+    # --send-time のみの場合は時刻送信して終了
+    if args.send_time and not args.command:
+        com = Communication()
+        if args.port and args.baud:
+            com.setup_with_args(args.port, args.baud)
+        else:
+            com.setup()
+        payload = Command.pack_datetime_to_4bytes()
+        assert com.device_id is not None
+        device_id: bytes = com.device_id  # type: ignore[assignment]
+        cmd = Command.make_command(device_id, Command.SEND_TIME, payload)
+        print(Print.timestamped(f"{Print.INFO} SEND_TIME を送信 (payload={Print.space_every_two_str(payload)})"))
+        resp = com.transmit_and_receive_command(cmd)
+        if not resp:
+            print(Print.timestamped(f'{Print.ERROR} 応答がありません - 終了'))
+        else:
+            frame = Command.parse_frame(resp)
+            if frame.frame_id == Command.ACK:
+                print(Print.timestamped(f"{Print.INFO} ACK 受信"))
+            else:
+                print(Print.timestamped(f"{Print.ERROR} 予期しない応答"))
+        com.close()
+        sys.exit(0)
+
+    main(args.port, args.baud, args.command, args.send_time)

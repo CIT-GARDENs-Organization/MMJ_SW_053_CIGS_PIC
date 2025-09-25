@@ -27,11 +27,11 @@ static void TIMER0_isr();
 #define TIMER_ISR_1S 0x8000 // 1秒ごとのタイマー割り込み
 #define TIMER_ISR_100MSEC 0xF313 // 100ミリ秒ごとのタイマー割り込み
 #define TIMER_ISR_10MSEC 0xFEA8 // 10ミリ秒ごとのタイマー割り込み
+#define TIMER_ISR_25MSEC 0xFC8D // 25ミリ秒ごとのタイマー割り込み
 
-unsigned int32 get_current_msec();
-void set_current_msec(unsigned int32 msec);
-void add_current_msec(unsigned int32 msec);
-
+void set_current_sec(unsigned int32 new_sec);
+unsigned int32 get_current_sec();
+unsigned int16 get_current_msec();
 
 
 #endif

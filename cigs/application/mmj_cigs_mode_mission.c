@@ -43,15 +43,29 @@ void mode_meas_iv(unsigned int8 *uplinkcmd_ptr)
 
 
    fprintf(PC, "Enqueue Flash Operation\r\n");
-   fprintf(PC, "Mission ID:   %02X\r\n", data.mission_id);
-   fprintf(PC, "Function Type:%02X\r\n", data.func_type);
-   fprintf(PC, "Write Mode:   %02X\r\n", data.write_mode);
-   fprintf(PC, "Source Type:  %02X\r\n", data.source_type);
-   fprintf(PC, "Start Address:%04X\r\n", data.misf_start_addr);
-   fprintf(PC, "Size:         %04X\r\n", misf_counter_table[CIGS_IV1_DATA].uncopied_counter);
+   fprintf(PC, "\tMission ID:   %02X\r\n", data.mission_id);
+   fprintf(PC, "\tFunction Type:%02X\r\n", data.func_type);
+   fprintf(PC, "\tWrite Mode:   %02X\r\n", data.write_mode);
+   fprintf(PC, "\tSource Type:  %02X\r\n", data.source_type);
+   fprintf(PC, "\tStart Address:%04X\r\n", data.misf_start_addr);
+   fprintf(PC, "\tSize:         %04X\r\n", misf_counter_table[CIGS_IV1_DATA].uncopied_counter);
 
    enqueue_flash_operation(&data); // SMFへのデータコピーを実行する
 
+   FlashOperationStruct piclog = {0};
+   piclog.func_type = ENUM_SMF_WRITE;
+   piclog.mission_id = FLASH_ID_PICLOG; // ID_CIGS_MEASURE_DATA; // コピーする目的のデータ種別
+   piclog.write_mode = SMF_WRITE_CIRCULAR;
+   piclog.source_type = SOURCE_MISF_UNCOPIED;
+
+   fprintf(PC, "Enqueue Flash Operation\r\n");
+   fprintf(PC, "\tMission ID:   %02X\r\n", piclog.mission_id);
+   fprintf(PC, "\tFunction Type:%02X\r\n", piclog.func_type);
+   fprintf(PC, "\tWrite Mode:   %02X\r\n", piclog.write_mode);
+   fprintf(PC, "\tSource Type:  %02X\r\n", piclog.source_type);
+   fprintf(PC, "\tStart Address:%04X\r\n", piclog.misf_start_addr);
+   fprintf(PC, "\tSize:         %04X\r\n", misf_counter_table[FLASH_ID_PICLOG].uncopied_counter);
+   enqueue_flash_operation(&piclog); // SMFへのデータコピーを実行する
    fprintf(PC, "End MODE MEAS IV mission\r\n");
 }
 
@@ -60,7 +74,7 @@ void mode_meas_iv_debug(unsigned int8 *uplinkcmd_ptr)
    fprintf(PC, "Start MODE IV DEBUG\r\n");
 
    MEAS_IV_CMD cmd = make_meas_iv_cmd(uplinkcmd_ptr); // Create the measurement command structure
-
+   
    fprintf(PC, "\tID: %02X\r\n", cmd.id);
    fprintf(PC, "\tSleepTime:        0x%04X\r\n", cmd.sleep_time);
    fprintf(PC, "\tLogCurrThreshold: 0x%04X\r\n", cmd.curr_threshold);
@@ -70,7 +84,7 @@ void mode_meas_iv_debug(unsigned int8 *uplinkcmd_ptr)
 
    piclog_make(cmd.id, PICLOG_PARAM_START); // Log start
 
-   unsigned int32 start_time = get_current_time_10ms();
+   unsigned int32 start_time = get_current_sec();
    unsigned int32 current_time = 0;
    test_sweep(cmd.curr_threshold, cmd.curr_limit);
 
@@ -89,7 +103,7 @@ MEAS_IV_CMD make_meas_iv_cmd(unsigned int8 *uplinkcmd[])
    cmd.sleep_time = ((unsigned int16)uplinkcmd[1] << 8) | ((unsigned int16)uplinkcmd[2]);
    cmd.curr_threshold = (unsigned int16)uplinkcmd[3]<< 4;
    cmd.pd_threshold = (unsigned int16)uplinkcmd[4]<< 4;
-   cmd.curr_limit = (unsigned int16)uplinkcmd[5]<< 4;
+   cmd.curr_limit = calc_curr_value((unsigned int16)uplinkcmd[5]<< 4);
    cmd.meas_time = ((unsigned int16)uplinkcmd[6] << 8) | ((unsigned int16)uplinkcmd[7]);
 //!  cmd.is_finished = uplinkcmd[8];
    return cmd;
@@ -100,7 +114,7 @@ void mode_meas_env(unsigned int8 *uplinkcmd_ptr)
    unsigned int16 interval = 100;   // 測定間隔 [秒]
    unsigned int16 end_time = 0xFFFF;
 
-   unsigned int32 current_time = get_current_time_10ms();
+   unsigned int32 current_time = get_current_sec();
    unsigned int32 last_time = current_time - interval;  // 最初にすぐ測定するため
 
    // loging data
@@ -116,7 +130,7 @@ void mode_meas_env(unsigned int8 *uplinkcmd_ptr)
    fprintf(PC, "temp_top, temp_bot, temp_mis7, pd\r\n");
 
    while (true) {
-       current_time = get_current_time_10ms();
+       current_time = get_current_sec();
 
        // intervalごとに測定
        if ((current_time - last_time) >= interval) {
