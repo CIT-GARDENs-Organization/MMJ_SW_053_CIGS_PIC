@@ -23,6 +23,9 @@ void set_current_10msec(unsigned int32 new_10msec);
 #INT_TIMER0
 static void TIMER0_isr();
 
+#INT_TIMER1 
+static void TIMER1_isr();
+
 // Clock Freq : 32.768kHz
 #define TIMER_ISR_1S 0x8000 // 1秒ごとのタイマー割り込み
 #define TIMER_ISR_100MSEC 0xF313 // 100ミリ秒ごとのタイマー割り込み

@@ -1,5 +1,5 @@
-ÀÄmmj_cigs_main
-   ÃÄMAIN  1/1666  Ram=14
+ÀÄmmj_sato_main
+   ÃÄMAIN  1/1452  Ram=14
    ³  ÃÄ@cinit1  (Inline)  Ram=0
    ³  ÃÄ@cinit2  (Inline)  Ram=0
    ³  ÃÄ@delay_ms1  0/46  Ram=1
@@ -12,13 +12,13 @@
    ³  ÃÄsetup_uart_to_boss  0/42  Ram=0
    ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ÃÄtimer_init  0/80  Ram=0
+   ³  ÃÄtimer_init  0/82  Ram=0
    ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ÃÄad7490_init  0/264  Ram=2
    ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÃÄ@delay_ms1  0/46  Ram=1
-   ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ÃÄad7490_make_cmd  0/112  Ram=4
    ³  ³  ³  ÃÄ@SPI_XFER_3  0/102  Ram=7
    ³  ³  ³  ÀÄ@SPI_XFER_3  0/102  Ram=7
@@ -31,13 +31,13 @@
    ³  ÃÄmcp4901_init  0/460  Ram=2
    ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÃÄ@delay_ms1  0/46  Ram=1
-   ³  ³  ÃÄmcp4901_1_write  0/66  Ram=4
+   ³  ³  ÃÄmcp4901_1_write  0/62  Ram=4
    ³  ³  ³  ÃÄmcp4901_make_cmd  0/340  Ram=6
-   ³  ³  ³  ÀÄ@SPI_XFER_4  0/90  Ram=7
-   ³  ³  ÃÄmcp4901_2_write  0/66  Ram=4
+   ³  ³  ³  ÀÄ@SPI_XFER_4  0/88  Ram=7
+   ³  ³  ÃÄmcp4901_2_write  0/62  Ram=4
    ³  ³  ³  ÃÄmcp4901_make_cmd  0/340  Ram=6
-   ³  ³  ³  ÀÄ@SPI_XFER_4  0/90  Ram=7
-   ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ÀÄ@SPI_XFER_4  0/88  Ram=7
+   ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ÀÄ*
    ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
@@ -45,12 +45,12 @@
    ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ÀÄ*
    ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ÃÄmisf_init  0/590  Ram=69
+   ³  ÃÄmisf_init  0/696  Ram=69
    ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÃÄis_connect  0/200  Ram=25
    ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
@@ -69,6 +69,11 @@
    ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÃÄ@MEMSET  0/36  Ram=0
+   ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ÃÄread_data_bytes  0/532  Ram=28
    ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
    ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
@@ -173,29 +178,78 @@
    ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ÃÄ@MEMSET  0/36  Ram=0
    ³  ³  ÃÄget_current_sec  0/18  Ram=0
    ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ÀÄmisf_write_data  0/2074  Ram=159
-   ³  ³     ÃÄ@MEMSET  0/36  Ram=0
-   ³  ³     ÃÄ@const1433  0/104  Ram=0
-   ³  ³     ÃÄwrite_data_bytes  0/900  Ram=29
+   ³  ³  ÃÄmisf_write_data  0/2518  Ram=163
+   ³  ³  ³  ÃÄ@const1485  0/104  Ram=0
+   ³  ³  ³  ÃÄwrite_data_bytes  0/844  Ram=29
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄspi_xfer_select_stream  0/240  Ram=13
+   ³  ³  ³  ³  ³  ÃÄ@SPI_XFER_2  0/96  Ram=6
+   ³  ³  ³  ³  ³  ÀÄ@SPI_XFER_1  0/96  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄspi_xfer_two_datas_select_stream  0/380  Ram=18
+   ³  ³  ³  ³  ³  ÃÄ@SPI_XFER_2  0/96  Ram=6
+   ³  ³  ³  ³  ³  ÃÄ@SPI_XFER_2  0/96  Ram=6
+   ³  ³  ³  ³  ³  ÃÄ@SPI_XFER_1  0/96  Ram=6
+   ³  ³  ³  ³  ³  ÀÄ@SPI_XFER_1  0/96  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄspi_xfer_select_stream  0/240  Ram=13
+   ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄspi_xfer_two_datas_select_stream  0/380  Ram=18
+   ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÃÄstatus_register  0/160  Ram=6
+   ³  ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ³  ÃÄspi_xfer_and_read_select_stream  0/564  Ram=28
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ³  ÀÄ@WRITEBITA  0/84  Ram=6
+   ³  ³  ³  ³  ÀÄ@delay_ms1  0/46  Ram=1
+   ³  ³  ³  ÃÄ@MEMSET  0/36  Ram=0
+   ³  ³  ³  ÃÄ@const1485  0/104  Ram=0
+   ³  ³  ³  ÃÄwrite_data_bytes  0/844  Ram=29
+   ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ÃÄread_data_bytes  0/532  Ram=28
+   ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ÃÄcalc_crc8  0/108  Ram=4
+   ³  ³  ³  ÃÄwrite_data_bytes  0/844  Ram=29
+   ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ÃÄ@const1485  0/104  Ram=0
+   ³  ³  ³  ÃÄwrite_data_bytes  0/844  Ram=29
+   ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ÃÄcalc_crc8  0/108  Ram=4
+   ³  ³  ³  ÃÄ@const1485  0/104  Ram=0
+   ³  ³  ³  ÃÄwrite_data_bytes  0/844  Ram=29
+   ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ÃÄ@const1485  0/104  Ram=0
+   ³  ³  ³  ÀÄwrite_data_bytes  0/844  Ram=29
+   ³  ³  ³     ÀÄ*
+   ³  ³  ÀÄmisf_update_address_area  0/140  Ram=68
+   ³  ³     ÃÄmake_flash_data_table  0/354  Ram=70
+   ³  ³     ³  ÃÄ@MEMSET  0/36  Ram=0
+   ³  ³     ³  ÀÄcalc_crc8  0/108  Ram=4
+   ³  ³     ÃÄsubsector_4kByte_erase  0/804  Ram=25
    ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
    ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
    ³  ³     ³  ÃÄspi_xfer_select_stream  0/240  Ram=13
-   ³  ³     ³  ³  ÃÄ@SPI_XFER_2  0/96  Ram=6
-   ³  ³     ³  ³  ÀÄ@SPI_XFER_1  0/96  Ram=6
-   ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ÃÄspi_xfer_two_datas_select_stream  0/380  Ram=18
-   ³  ³     ³  ³  ÃÄ@SPI_XFER_2  0/96  Ram=6
-   ³  ³     ³  ³  ÃÄ@SPI_XFER_2  0/96  Ram=6
-   ³  ³     ³  ³  ÃÄ@SPI_XFER_1  0/96  Ram=6
-   ³  ³     ³  ³  ÀÄ@SPI_XFER_1  0/96  Ram=6
+   ³  ³     ³  ³  ÀÄ*
    ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
    ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
    ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
@@ -206,77 +260,27 @@
    ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
    ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
    ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ÃÄspi_xfer_two_datas_select_stream  0/380  Ram=18
+   ³  ³     ³  ÃÄspi_xfer_select_stream  0/240  Ram=13
+   ³  ³     ³  ³  ÀÄ*
+   ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
+   ³  ³     ³  ÃÄspi_xfer_select_stream  0/240  Ram=13
    ³  ³     ³  ³  ÀÄ*
    ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
    ³  ³     ³  ÃÄ@WRITEBITA  0/84  Ram=6
    ³  ³     ³  ÃÄstatus_register  0/160  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄspi_xfer_and_read_select_stream  0/564  Ram=28
-   ³  ³     ³  ³  ³  ÀÄ*
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÀÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ÃÄ@delay_ms1  0/46  Ram=1
+   ³  ³     ³  ³  ÀÄ*
    ³  ³     ³  ÀÄ@delay_ms1  0/46  Ram=1
-   ³  ³     ÃÄread_data_bytes  0/532  Ram=28
-   ³  ³     ³  ÀÄ*
-   ³  ³     ÃÄcalc_crc8  0/108  Ram=4
-   ³  ³     ÃÄwrite_data_bytes  0/900  Ram=29
-   ³  ³     ³  ÀÄ*
-   ³  ³     ÃÄ@const1433  0/104  Ram=0
-   ³  ³     ÃÄwrite_data_bytes  0/900  Ram=29
-   ³  ³     ³  ÀÄ*
-   ³  ³     ÃÄcalc_crc8  0/108  Ram=4
-   ³  ³     ÃÄ@const1433  0/104  Ram=0
-   ³  ³     ÃÄwrite_data_bytes  0/900  Ram=29
-   ³  ³     ³  ÀÄ*
-   ³  ³     ÃÄmisf_update_address_area  0/142  Ram=68
-   ³  ³     ³  ÃÄmake_flash_data_table  0/352  Ram=70
-   ³  ³     ³  ³  ÃÄ@MEMSET  0/36  Ram=0
-   ³  ³     ³  ³  ÀÄcalc_crc8  0/108  Ram=4
-   ³  ³     ³  ÃÄsector_erase  0/856  Ram=25
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄspi_xfer_select_stream  0/240  Ram=13
-   ³  ³     ³  ³  ³  ÀÄ*
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄspi_xfer_select_stream  0/240  Ram=13
-   ³  ³     ³  ³  ³  ÀÄ*
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄspi_xfer_select_stream  0/240  Ram=13
-   ³  ³     ³  ³  ³  ÀÄ*
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄspi_xfer_select_stream  0/240  Ram=13
-   ³  ³     ³  ³  ³  ÀÄ*
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
-   ³  ³     ³  ³  ÃÄstatus_register  0/160  Ram=6
-   ³  ³     ³  ³  ³  ÀÄ*
-   ³  ³     ³  ³  ÃÄ@delay_ms1  0/46  Ram=1
-   ³  ³     ³  ³  ÀÄ@delay_ms1  0/46  Ram=1
-   ³  ³     ³  ÀÄwrite_data_bytes  0/900  Ram=29
-   ³  ³     ³     ÀÄ*
-   ³  ³     ÃÄ@const1433  0/104  Ram=0
-   ³  ³     ÃÄwrite_data_bytes  0/900  Ram=29
-   ³  ³     ³  ÀÄ*
-   ³  ³     ÀÄmisf_update_address_area  0/142  Ram=68
+   ³  ³     ÀÄwrite_data_bytes  0/844  Ram=29
    ³  ³        ÀÄ*
    ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ÃÄconnect_port1  0/8  Ram=0
    ³  ÃÄconnect_port2  0/8  Ram=0
-   ³  ÃÄmcp4901_1_write  0/66  Ram=4
+   ³  ÃÄmcp4901_1_write  0/62  Ram=4
    ³  ³  ÀÄ*
-   ³  ÃÄmcp4901_2_write  0/66  Ram=4
+   ³  ÃÄmcp4901_2_write  0/62  Ram=4
    ³  ³  ÀÄ*
    ³  ÃÄconnect_negative_power1  0/36  Ram=1
    ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
@@ -304,11 +308,11 @@
    ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ÀÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ÃÄclear_receive_signal  0/62  Ram=6
+   ³  ÃÄclear_receive_signal  0/60  Ram=6
    ³  ³  ÀÄ@MEMSET  0/36  Ram=0
    ³  ÃÄexecute_command  0/136  Ram=2
    ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ÃÄ@goto32990  0/40  Ram=0
+   ³  ³  ÃÄ@goto24621  0/40  Ram=0
    ³  ³  ÃÄhandle_uplink_command  0/104  Ram=4
    ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
@@ -319,44 +323,16 @@
    ³  ³  ³  ³        ÃÄ@PUTCHARI_BIU_1  0/16  Ram=0
    ³  ³  ³  ³        ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³        ÀÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ÃÄexecute_mission  0/1226  Ram=22
+   ³  ³  ³  ÃÄexecute_mission  0/1468  Ram=26
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ÃÄmode_misf_erase_all  0/220  Ram=7
+   ³  ³  ³  ³  ÃÄmode_misf_erase_all  0/222  Ram=7
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄsector_erase  0/856  Ram=25
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄmode_misf_erase_1sector  0/408  Ram=18
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄsector_erase  0/856  Ram=25
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄmode_misf_erase_4kbyte_subsector  0/408  Ram=18
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄsubsector_4kByte_erase  0/860  Ram=25
+   ³  ³  ³  ³  ³  ÃÄsector_erase  0/860  Ram=25
    ³  ³  ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
    ³  ³  ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
    ³  ³  ³  ³  ³  ³  ÃÄspi_xfer_select_stream  0/240  Ram=13
@@ -385,7 +361,35 @@
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÃÄ@delay_ms1  0/46  Ram=1
    ³  ³  ³  ³  ³  ³  ÀÄ@delay_ms1  0/46  Ram=1
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄmode_misf_erase_1sector  0/408  Ram=18
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄsector_erase  0/860  Ram=25
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄmode_misf_erase_4kbyte_subsector  0/408  Ram=18
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄsubsector_4kByte_erase  0/804  Ram=25
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄmode_misf_erase_64kbyte_subsector  0/372  Ram=18
@@ -395,14 +399,14 @@
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄmode_misf_write_demo  0/1538  Ram=97
+   ³  ³  ³  ³  ÃÄmode_misf_write_demo  0/1600  Ram=97
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
@@ -414,7 +418,7 @@
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
@@ -429,35 +433,35 @@
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_L32U_9600_31781_31772  0/262  Ram=12
    ³  ³  ³  ³  ³  ³  ÃÄ@DIV3232  0/218  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ@DIV3232  0/218  Ram=13
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  0/900  Ram=29
+   ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  0/844  Ram=29
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  0/900  Ram=29
+   ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  0/844  Ram=29
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄmode_misf_write_4kbyte_subsector  0/116  Ram=7
+   ³  ³  ³  ³  ÃÄmode_misf_write_4kbyte_subsector  0/120  Ram=7
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄflash_setting  0/48  Ram=4
    ³  ³  ³  ³  ³  ³  ÃÄ@WRITEBITA  0/84  Ram=6
    ³  ³  ³  ³  ³  ³  ÀÄ@WRITEBITA  0/84  Ram=6
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄmode_misf_read  0/1894  Ram=98
+   ³  ³  ³  ³  ÃÄmode_misf_read  0/2046  Ram=98
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
@@ -469,13 +473,13 @@
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ³  ÃÄis_connect  0/200  Ram=25
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
@@ -498,7 +502,12 @@
    ³  ³  ³  ³  ³  ÃÄread_data_bytes  0/532  Ram=28
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄmode_misf_read_address  0/276  Ram=10
@@ -513,29 +522,29 @@
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄmode_misf_erase_and_reset  0/86  Ram=3
+   ³  ³  ³  ³  ÃÄmode_misf_erase_and_reset  0/88  Ram=3
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄmode_misf_erase_all  0/220  Ram=7
+   ³  ³  ³  ³  ³  ÃÄmode_misf_erase_all  0/222  Ram=7
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄmode_misf_address_reset  0/496  Ram=69
+   ³  ³  ³  ³  ³  ÃÄmode_misf_address_reset  0/500  Ram=69
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÃÄ@MEMSET  0/36  Ram=0
    ³  ³  ³  ³  ³  ³  ÃÄcalc_crc8  0/108  Ram=4
    ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  0/900  Ram=29
+   ³  ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  0/844  Ram=29
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÃÄ@MEMSET  0/36  Ram=0
    ³  ³  ³  ³  ³  ³  ÃÄread_data_bytes  0/532  Ram=28
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÃÄcalc_crc8  0/108  Ram=4
    ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ³  ÃÄmisf_init  0/590  Ram=69
+   ³  ³  ³  ³  ³  ³  ÃÄmisf_init  0/696  Ram=69
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
@@ -547,10 +556,10 @@
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄread_data_bytes  0/532  Ram=28
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  0/900  Ram=29
+   ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  0/844  Ram=29
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄmode_smf_read  0/714  Ram=84
+   ³  ³  ³  ³  ÃÄmode_smf_read  0/754  Ram=84
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
@@ -569,31 +578,31 @@
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ³  ÃÄflash_setting  0/48  Ram=4
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄsector_erase  0/856  Ram=25
+   ³  ³  ³  ³  ³  ÃÄsector_erase  0/860  Ram=25
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄmode_smf_address_reset  0/378  Ram=71
+   ³  ³  ³  ³  ÃÄmode_smf_address_reset  0/384  Ram=71
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄsector_erase  0/856  Ram=25
+   ³  ³  ³  ³  ³  ÃÄsector_erase  0/860  Ram=25
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄsmf_data_table_init  0/386  Ram=68
+   ³  ³  ³  ³  ³  ÃÄsmf_data_table_init  0/384  Ram=68
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ³  ÃÄsubsector_4kByte_erase  0/860  Ram=25
+   ³  ³  ³  ³  ³  ³  ÃÄsubsector_4kByte_erase  0/804  Ram=25
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÃÄcalc_crc8  0/108  Ram=4
-   ³  ³  ³  ³  ³  ³  ÀÄwrite_data_bytes  0/900  Ram=29
+   ³  ³  ³  ³  ³  ³  ÀÄwrite_data_bytes  0/844  Ram=29
    ³  ³  ³  ³  ³  ³     ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄmode_smf_read_force  0/1006  Ram=90
+   ³  ³  ³  ³  ÃÄmode_smf_read_force  0/1072  Ram=90
    ³  ³  ³  ³  ³  ÃÄis_connect  0/200  Ram=25
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
@@ -608,107 +617,134 @@
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÀÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÀÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³     ÀÄ*
-   ³  ³  ³  ³  ÃÄmode_smf_erase_force  0/234  Ram=7
+   ³  ³  ³  ³  ÃÄmode_smf_erase_force  0/236  Ram=7
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄsector_erase  0/856  Ram=25
+   ³  ³  ³  ³  ³  ÃÄsector_erase  0/860  Ram=25
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄsmf_data_table_init  0/386  Ram=68
+   ³  ³  ³  ³  ÃÄsmf_data_table_init  0/384  Ram=68
    ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ÃÄmode_meas_iv  0/1720  Ram=47
+   ³  ³  ³  ³  ÃÄmode_meas_iv  0/1504  Ram=52
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄmake_meas_iv_cmd  0/272  Ram=16
-   ³  ³  ³  ³  ³  ³  ÀÄcalc_curr_value  0/230  Ram=14
-   ³  ³  ³  ³  ³  ³     ÃÄ@MUL1616  0/34  Ram=5
-   ³  ³  ³  ³  ³  ³     ÃÄ@DIV1616  0/126  Ram=5
-   ³  ³  ³  ³  ³  ³     ÃÄ@ITOF  0/70  Ram=2
-   ³  ³  ³  ³  ³  ³     ÃÄ@ADDFF  0/1196  Ram=16
-   ³  ³  ³  ³  ³  ³     ÃÄ@DIVFF  0/712  Ram=14
-   ³  ³  ³  ³  ³  ³     ÀÄ@SFTOI  0/90  Ram=4
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄmake_meas_iv_cmd  0/248  Ram=15
+   ³  ³  ³  ³  ³  ³  ÀÄ@MUL1616  0/34  Ram=5
+   ³  ³  ³  ³  ³  ÃÄprint_meas_iv_cmd  0/606  Ram=10
+   ³  ³  ³  ³  ³  ³  ÃÄcalc_pd_value  0/16  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄcalc_curr_value  0/274  Ram=14
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@ITOF  0/70  Ram=2
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@MULFF  0/332  Ram=11
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@DIVFF  0/710  Ram=14
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@ADDFF  0/1196  Ram=16
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@DIVFF  0/710  Ram=14
+   ³  ³  ³  ³  ³  ³  ³  ÀÄ@SFTOI  0/90  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄcalc_curr_value  0/274  Ram=14
+   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_LU_9600_31781_31772  0/288  Ram=9
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_LU_9600_31781_31772  0/288  Ram=9
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_LU_9600_31781_31772  0/288  Ram=9
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_LU_9600_31781_31772  0/288  Ram=9
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_LU_9600_31781_31772  0/288  Ram=9
+   ³  ³  ³  ³  ³  ³  ÀÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
-   ³  ³  ³  ³  ³  ÃÄsweep  0/5008  Ram=2072
+   ³  ³  ³  ³  ³  ÃÄsweep  0/3186  Ram=1076
+   ³  ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
+   ³  ³  ³  ³  ³  ³  ÃÄ@PUTCHARI_BIU_2  0/16  Ram=0
    ³  ³  ³  ³  ³  ³  ÃÄconnect_port1  0/8  Ram=0
    ³  ³  ³  ³  ³  ³  ÃÄconnect_port2  0/8  Ram=0
-   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÃÄcreate_meas_data  0/130  Ram=12
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@MEMSET  0/36  Ram=0
    ³  ³  ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
-   ³  ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÀÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ³  ÀÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³     ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
+   ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
+   ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
    ³  ³  ³  ³  ³  ³  ÃÄdisconnect_port1  0/8  Ram=0
-   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
+   ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
+   ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
    ³  ³  ³  ³  ³  ³  ÃÄdisconnect_port2  0/8  Ram=0
    ³  ³  ³  ³  ³  ³  ÃÄdisconnect_port1  0/8  Ram=0
    ³  ³  ³  ³  ³  ³  ÃÄdisconnect_port2  0/8  Ram=0
-   ³  ³  ³  ³  ³  ³  ÃÄlog_meas_data  0/2628  Ram=85
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@DIV3232  0/218  Ram=13
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@DIV3232  0/218  Ram=13
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
-   ³  ³  ³  ³  ³  ³  ³  ÃÄmisf_write_data  0/2074  Ram=159
+   ³  ³  ³  ³  ³  ³  ÃÄlog_meas_data  0/2176  Ram=146
+   ³  ³  ³  ³  ³  ³  ³  ÃÄcalc_crc8  0/108  Ram=4
+   ³  ³  ³  ³  ³  ³  ³  ÃÄmisf_write_data  0/2518  Ram=163
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÃÄmisf_write_data  0/2074  Ram=159
+   ³  ³  ³  ³  ³  ³  ³  ÃÄcalc_crc8  0/108  Ram=4
+   ³  ³  ³  ³  ³  ³  ³  ÃÄmisf_write_data  0/2518  Ram=163
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÃÄ@MEMSET  0/36  Ram=0
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
    ³  ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
-   ³  ³  ³  ³  ³  ³  ³  ÃÄmisf_write_data  0/2074  Ram=159
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
+   ³  ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
+   ³  ³  ³  ³  ³  ³  ³  ÃÄcalc_crc8  0/108  Ram=4
+   ³  ³  ³  ³  ³  ³  ³  ÃÄmisf_write_data  0/2518  Ram=163
    ³  ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ³  ÀÄmisf_write_data  0/2074  Ram=159
+   ³  ³  ³  ³  ³  ³  ³  ÃÄcalc_crc8  0/108  Ram=4
+   ³  ³  ³  ³  ³  ³  ³  ÀÄmisf_write_data  0/2518  Ram=163
    ³  ³  ³  ³  ³  ³  ³     ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÀÄlog_meas_data  0/2628  Ram=85
-   ³  ³  ³  ³  ³  ³     ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄlog_meas_data  0/2176  Ram=146
+   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÀÄget_current_msec  0/14  Ram=0
    ³  ³  ³  ³  ³  ÃÄ@delay_ms1  0/46  Ram=1
    ³  ³  ³  ³  ³  ÃÄ@delay_ms1  0/46  Ram=1
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄcheck_and_respond_to_boss  0/64  Ram=0
+   ³  ³  ³  ³  ³  ³  ÃÄclear_receive_signal  0/60  Ram=6
+   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÀÄtransmit_status  0/24  Ram=0
+   ³  ³  ³  ³  ³  ³     ÀÄtransmit_command  0/148  Ram=25
+   ³  ³  ³  ³  ³  ³        ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
+   ³  ³  ³  ³  ³  ÃÄmisf_update_address_area  0/140  Ram=68
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
@@ -742,9 +778,9 @@
    ³  ³  ³  ³  ³  ÃÄenqueue_flash_operation  0/634  Ram=9
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄmode_meas_iv_debug  0/738  Ram=23
+   ³  ³  ³  ³  ÃÄmode_meas_iv_debug  0/740  Ram=23
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÃÄmake_meas_iv_cmd  0/272  Ram=16
+   ³  ³  ³  ³  ³  ÃÄmake_meas_iv_cmd  0/248  Ram=15
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
@@ -758,35 +794,35 @@
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
    ³  ³  ³  ³  ³  ÃÄtest_sweep  0/5492  Ram=2083
    ³  ³  ³  ³  ³  ³  ÃÄconnect_port1  0/8  Ram=0
    ³  ³  ³  ³  ³  ³  ÃÄconnect_port2  0/8  Ram=0
-   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÃÄconnect_port1  0/8  Ram=0
    ³  ³  ³  ³  ³  ³  ÃÄconnect_port2  0/8  Ram=0
    ³  ³  ³  ³  ³  ³  ÃÄ@delay_ms1  0/46  Ram=1
    ³  ³  ³  ³  ³  ³  ÃÄcreate_meas_data  0/130  Ram=12
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÃÄdisconnect_port1  0/8  Ram=0
-   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ³  ÃÄdisconnect_port2  0/8  Ram=0
    ³  ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
@@ -801,68 +837,52 @@
    ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÀÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/292  Ram=13
+   ³  ³  ³  ³  ³  ÃÄpiclog_make  0/296  Ram=13
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄmode_meas_env  0/1256  Ram=42
+   ³  ³  ³  ³  ÃÄmode_meas_env  0/250  Ram=36
    ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
-   ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  0/900  Ram=29
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄmisf_update_address_area  0/142  Ram=68
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  0/900  Ram=29
-   ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÀÄ@delay_ms1  0/46  Ram=1
-   ³  ³  ³  ³  ÃÄmode_meas_env_debug  0/36  Ram=2
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄsweep_with_print  0/5514  Ram=2079
+   ³  ³  ³  ³  ÃÄsweep_with_print  0/5906  Ram=2079
    ³  ³  ³  ³  ³  ÃÄconnect_port1  0/8  Ram=0
    ³  ³  ³  ³  ³  ÃÄconnect_port2  0/8  Ram=0
-   ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@delay_ms1  0/46  Ram=1
    ³  ³  ³  ³  ³  ÃÄcreate_meas_data  0/130  Ram=12
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ÃÄmcp4901_1_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/66  Ram=4
+   ³  ³  ³  ³  ³  ÃÄmcp4901_2_write  0/62  Ram=4
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄad7490_read  0/140  Ram=7
+   ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
    ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
    ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
@@ -875,7 +895,37 @@
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ³  ÀÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ÃÄlog_meas_data  0/2176  Ram=146
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÃÄlog_meas_data  0/2176  Ram=146
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÀÄmisf_update_address_area  0/140  Ram=68
+   ³  ³  ³  ³  ³     ÀÄ*
+   ³  ³  ³  ³  ÃÄmode_meas_pd  0/560  Ram=26
+   ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ³  ÃÄ@MUL1616  0/34  Ram=5
+   ³  ³  ³  ³  ³  ÃÄget_current_msec  0/14  Ram=0
+   ³  ³  ³  ³  ³  ÃÄ@MUL3232  0/116  Ram=14
+   ³  ³  ³  ³  ³  ÃÄget_current_msec  0/14  Ram=0
+   ³  ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
+   ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄconnect_port1  0/8  Ram=0
+   ³  ³  ³  ³  ÃÄconnect_port2  0/8  Ram=0
+   ³  ³  ³  ³  ÃÄmcp4901_1_write  0/62  Ram=4
+   ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ÃÄmcp4901_2_write  0/62  Ram=4
+   ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
+   ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ÃÄad7490_read  0/128  Ram=7
+   ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@delay_ms1  0/46  Ram=1
    ³  ³  ³  ³  ÃÄget_current_sec  0/18  Ram=0
    ³  ³  ³  ³  ÃÄ@DIV3232  0/218  Ram=13
    ³  ³  ³  ³  ÃÄ@DIV3232  0/218  Ram=13
@@ -899,9 +949,8 @@
    ³  ³  ÃÄhandle_status_check  0/86  Ram=2
    ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ÃÄtransmit_status  0/26  Ram=0
-   ³  ³  ³  ³  ÀÄtransmit_command  0/148  Ram=25
-   ³  ³  ³  ³     ÀÄ*
+   ³  ³  ³  ÃÄtransmit_status  0/24  Ram=0
+   ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ÃÄhandle_smf_available  1/706  Ram=15
    ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
@@ -911,7 +960,7 @@
    ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ÃÄis_empty_flash_queue  0/30  Ram=0
-   ³  ³  ³  ÃÄdequeue_flash_operation  0/100  Ram=2
+   ³  ³  ³  ÃÄdequeue_flash_operation  0/98  Ram=2
    ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ÃÄ@PRINTF_U_9600_31781_31772  0/188  Ram=2
@@ -926,7 +975,7 @@
    ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ÃÄ@PRINTF_L32D_9600_31781_31772  0/390  Ram=12
    ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ÃÄsmf_write  1/2820  Ram=176
+   ³  ³  ³  ÃÄsmf_write  1/3536  Ram=173
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄis_connect  0/200  Ram=25
@@ -935,47 +984,73 @@
    ³  ³  ³  ³  ÃÄis_connect  0/200  Ram=25
    ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄread_smf_header  0/400  Ram=5
+   ³  ³  ³  ³  ÃÄread_smf_header  0/386  Ram=5
    ³  ³  ³  ³  ³  ÃÄread_data_bytes  0/532  Ram=28
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄprint_smf_counter_status  0/1034  Ram=7
+   ³  ³  ³  ³  ³  ÃÄprint_smf_counter_status  0/1700  Ram=10
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_L32U_9600_31781_31772  0/262  Ram=12
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_U_9600_31781_31772  0/188  Ram=2
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_L32U_9600_31781_31772  0/262  Ram=12
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_U_9600_31781_31772  0/188  Ram=2
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_L32U_9600_31781_31772  0/262  Ram=12
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_U_9600_31781_31772  0/188  Ram=2
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_L32U_9600_31781_31772  0/262  Ram=12
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_U_9600_31781_31772  0/188  Ram=2
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_L32U_9600_31781_31772  0/262  Ram=12
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_U_9600_31781_31772  0/188  Ram=2
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_L32U_9600_31781_31772  0/262  Ram=12
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_U_9600_31781_31772  0/188  Ram=2
-   ³  ³  ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ³  ÃÄis_crc_valid  0/78  Ram=6
    ³  ³  ³  ³  ³  ³  ÀÄcalc_crc8  0/108  Ram=4
@@ -983,81 +1058,91 @@
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_9600_31781_31772  0/310  Ram=6
    ³  ³  ³  ³  ³  ³  ÃÄ@DIV88  0/72  Ram=3
    ³  ³  ³  ³  ³  ³  ÀÄ@DIV88  0/72  Ram=3
-   ³  ³  ³  ³  ³  ÃÄ@delay_ms1  0/46  Ram=1
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_9600_31781_31772  0/310  Ram=6
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄsmf_data_table_init  0/386  Ram=68
+   ³  ³  ³  ³  ³  ÃÄsmf_data_table_init  0/384  Ram=68
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄread_data_bytes  0/532  Ram=28
    ³  ³  ³  ³  ³     ÀÄ*
-   ³  ³  ³  ³  ÃÄ@const1433  0/104  Ram=0
-   ³  ³  ³  ³  ÃÄ@const1866  0/104  Ram=0
-   ³  ³  ³  ³  ÃÄ@const1866  0/104  Ram=0
-   ³  ³  ³  ³  ÃÄ@const1433  0/104  Ram=0
-   ³  ³  ³  ³  ÃÄ@const1433  0/104  Ram=0
+   ³  ³  ³  ³  ÃÄ@const1485  0/104  Ram=0
+   ³  ³  ³  ³  ÃÄ@const1932  0/104  Ram=0
+   ³  ³  ³  ³  ÃÄ@const1932  0/104  Ram=0
+   ³  ³  ³  ³  ÃÄ@const1485  0/104  Ram=0
+   ³  ³  ³  ³  ÃÄ@const1485  0/104  Ram=0
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ÃÄ@PRINTF_L32U_9600_31781_31772  0/262  Ram=12
+   ³  ³  ³  ³  ÃÄ@PRINTF_D_9600_31781_31772  0/310  Ram=6
    ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄ@MEMSET  0/36  Ram=0
    ³  ³  ³  ³  ÃÄread_data_bytes  0/532  Ram=28
    ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
-   ³  ³  ³  ³  ÃÄwrite_data_bytes  0/900  Ram=29
+   ³  ³  ³  ³  ÃÄwrite_data_bytes  0/844  Ram=29
    ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ÃÄsmf_write_header  0/464  Ram=72
+   ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
+   ³  ³  ³  ³  ÃÄprint_smf_counter_status  0/1700  Ram=10
+   ³  ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ³  ÃÄsmf_write_header  0/380  Ram=72
    ³  ³  ³  ³  ³  ÃÄcalc_crc8  0/108  Ram=4
-   ³  ³  ³  ³  ³  ÃÄsubsector_4kByte_erase  0/860  Ram=25
+   ³  ³  ³  ³  ³  ÃÄsubsector_4kByte_erase  0/804  Ram=25
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  0/900  Ram=29
+   ³  ³  ³  ³  ³  ÃÄwrite_data_bytes  0/844  Ram=29
    ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÃÄread_data_bytes  0/532  Ram=28
    ³  ³  ³  ³  ³  ³  ÀÄ*
@@ -1066,16 +1151,15 @@
    ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_9600_31781_31772  0/310  Ram=6
    ³  ³  ³  ³  ³  ³  ÀÄ*
-   ³  ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
-   ³  ³  ³  ³  ³  ÃÄ@PRINTF_D_9600_31781_31772  0/310  Ram=6
-   ³  ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ³  ÀÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
+   ³  ³  ³  ³  ÃÄmisf_update_address_area  0/140  Ram=68
+   ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ÃÄsmf_read  0/1834  Ram=102
+   ³  ³  ³  ÃÄsmf_read  0/1836  Ram=102
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄget_smf_address_struct  0/396  Ram=9
+   ³  ³  ³  ³  ÃÄget_smf_address_struct  0/392  Ram=9
    ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
@@ -1126,7 +1210,7 @@
    ³  ³  ³  ÃÄsmf_erase  1/1666  Ram=30
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄget_smf_address_struct  0/396  Ram=9
+   ³  ³  ³  ³  ÃÄget_smf_address_struct  0/392  Ram=9
    ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
@@ -1167,7 +1251,7 @@
    ³  ³  ³  ³  ÃÄ@PRINTF_X_9600_31781_31772  0/124  Ram=2
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ³  ³  ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ³  ³  ³  ³  ÃÄsubsector_4kByte_erase  0/860  Ram=25
+   ³  ³  ³  ³  ÃÄsubsector_4kByte_erase  0/804  Ram=25
    ³  ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ³  ÃÄ@PSTRINGCN_9600_31781_31772  0/58  Ram=4
    ³  ³  ³  ³  ÃÄ@PRINTF_L32U_9600_31781_31772  0/262  Ram=12
@@ -1207,7 +1291,7 @@
    ³  ÃÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
    ³  ÃÄ@delay_ms1  0/46  Ram=1
    ³  ÀÄ@PSTRINGC_9600_31781_31772  0/54  Ram=3
-   ÃÄTIMER0_isr  0/76  Ram=0
-   ÃÄTIMER1_isr  0/90  Ram=0
+   ÃÄTIMER0_isr  0/136  Ram=0
+   ÃÄTIMER1_isr  0/34  Ram=0
    ÀÄboss_receive_isr  0/72  Ram=4
       ÀÄ@GETCH_BIU_1  0/40  Ram=0

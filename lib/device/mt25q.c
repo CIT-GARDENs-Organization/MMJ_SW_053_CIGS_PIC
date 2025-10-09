@@ -3,7 +3,7 @@
 
 
 //send multi bytes
-void spi_xfer_select_stream(Flash flash_stream, int8 *write_data, unsigned int16 write_amount){
+void spi_xfer_select_stream(Flash flash_stream, unsigned int8 *write_data, unsigned int16 write_amount){
    switch(flash_stream.spi_stream_id){
       case SPI_0:
          for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
@@ -22,7 +22,7 @@ void spi_xfer_select_stream(Flash flash_stream, int8 *write_data, unsigned int16
 }
 
 //send multi bytes then receive multi bytes 
-void spi_xfer_and_read_select_stream(Flash flash_stream, int8 *write_data, unsigned int16 write_amount, int8 *read_data, unsigned int32 read_amount){
+void spi_xfer_and_read_select_stream(Flash flash_stream, unsigned int8 *write_data, unsigned int16 write_amount, unsigned int8 *read_data, unsigned int32 read_amount){
    switch(flash_stream.spi_stream_id){
       case SPI_0:
       for(unsigned int16 spi_xfer_num = 0;spi_xfer_num < write_amount;spi_xfer_num++)
@@ -46,7 +46,7 @@ void spi_xfer_and_read_select_stream(Flash flash_stream, int8 *write_data, unsig
 }
 
 //send multi bytes(ex:cmd) then send other multi bytes(for write multi bytes) 
-void spi_xfer_two_datas_select_stream(Flash flash_stream, int8 *cmd_data, unsigned int8 cmd_amount, int8 *write_data, unsigned int16 write_amount){
+void spi_xfer_two_datas_select_stream(Flash flash_stream, unsigned int8 *cmd_data, unsigned int8 cmd_amount, unsigned int8 *write_data, unsigned int16 write_amount){
    switch(flash_stream.spi_stream_id){
       case SPI_0:
       for(unsigned int8 spi_xfer_num = 0;spi_xfer_num < cmd_amount;spi_xfer_num++)
@@ -325,12 +325,8 @@ void subsector_4kByte_erase(Flash flash_stream, unsigned int32 subsector_address
    //wait process finished
    unsigned int8 timeout_counter = 0;
    while((status_register(flash_stream) & 0x01) == 1){                           //masking status bit
-      if(timeout_counter > 10)
-         delay_ms(200);
-      else
-         delay_ms(10);   
-      
-      if(timeout_counter > 100){
+      delay_ms(1);   
+      if(timeout_counter > 1000){
          #ifdef MT25Q_DEBUG
             fprintf(PC,"flash timeout\r\n");
          #endif
@@ -469,12 +465,8 @@ void write_data_byte(Flash flash_stream, unsigned int32 write_address, unsigned 
    //wait process finished
    unsigned int8 timeout_counter = 0;
    while((status_register(flash_stream) & 0x01) == 1){                           //masking status bit
-      if(timeout_counter > 10)
-         delay_ms(200);
-      else
-         delay_ms(10);   
-      
-      if(timeout_counter > 100){
+      delay_ms(1);   
+      if(timeout_counter > 1000){
          #ifdef MT25Q_DEBUG
             fprintf(PC,"flash timeout\r\n");
          #endif
@@ -488,7 +480,7 @@ void write_data_byte(Flash flash_stream, unsigned int32 write_address, unsigned 
    return;
 }
  
-void write_data_bytes(Flash flash_stream, unsigned int32 write_start_address, int8 *write_data, unsigned int16 write_amount){
+void write_data_bytes(Flash flash_stream, unsigned int32 write_start_address, unsigned int8 *write_data, unsigned int16 write_amount){
    if(flash_stream.flash_model == MT25QL128ABA){
       int8 write_enable_cmd = CMD_WRITE_ENABLE;
       unsigned int8 flash_cmd[4];
@@ -539,12 +531,8 @@ void write_data_bytes(Flash flash_stream, unsigned int32 write_start_address, in
    //wait process finished
    unsigned int8 timeout_counter = 0;
    while((status_register(flash_stream) & 0x01) == 1){                           //masking status bit
-      if(timeout_counter > 10)
-         delay_ms(200);
-      else
-         delay_ms(10);   
-      
-      if(timeout_counter > 100){
+      delay_ms(1);
+      if(timeout_counter > 1000){
          #ifdef MT25Q_DEBUG
             fprintf(PC,"flash timeout\r\n");
          #endif

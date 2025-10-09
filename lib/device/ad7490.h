@@ -1,6 +1,23 @@
 #ifndef  AD7490_H
 #define  AD7490_H
 
+// === AD7490 Control Word ===
+// Bit[15]   : WRITE (常に0)
+// Bit[14:13]: SEQ mode (シーケンス設定)
+// Bit[12]   : SHADOW (0=disabled, 1=enabled)
+// Bit[11]   : Don't Care
+// Bit[10]   : PM1 (Power Management)
+// Bit[9]    : PM0
+// Bit[8]    : REFSEL (0=internal, 1=external)
+// Bit[7]    : Coding (0=straight binary, 1=twos complement)
+// Bit[6]    : Don't Care
+// Bit[5]    : ADD2
+// Bit[4]    : ADD1
+// Bit[3]    : ADD0
+// Bit[2]    : DIFF (0=single-ended, 1=differential)
+// Bit[1:0]  : Don't Care
+
+
 
 typedef union {
     unsigned int16 value; // 16-bit value for direct access
@@ -34,31 +51,91 @@ unsigned int16 ad7490_make_cmd(int8 channel);
 #define AD7490_EN_WRITE 0b1
 
 // Power Mode Register
-#define AD7490_PM_NORMAL 0b00000000
+#define AD7490_PM_NORMAL 0b00000011
 #define AD7490_PM_SHUTDOWN 0b00000001
 #define AD7490_PM_AUTO_SHUTDOWN 0b00000010
-#define AD7490_PM_AUTO_STANDBY 0b00000011
+#define AD7490_PM_AUTO_STANDBY 0b00000000
 
 
-// ADC Channel Register
-#define AD7490_VIN0 0b0000
-#define AD7490_VIN1 0b0001
-#define AD7490_VIN2 0b0010
-#define AD7490_VIN3 0b0011
-#define AD7490_VIN4 0b0100
-#define AD7490_VIN5 0b0101
-#define AD7490_VIN6 0b0110
-#define AD7490_VIN7 0b0111
-#define AD7490_VIN8 0b1000
-#define AD7490_VIN9 0b1001
-#define AD7490_VIN10 0b1010
-#define AD7490_VIN11 0b1011
-#define AD7490_VIN12 0b1100
-#define AD7490_VIN13 0b1101
-#define AD7490_VIN14 0b1110
-#define AD7490_VIN15 0b1111
+// ----------------------------
+// WRITE bit
+// ----------------------------
+typedef enum {
+    AD7490_WRITE_DISABLE = 0,  // 書き込み無効
+    AD7490_WRITE_ENABLE  = 1   // 書き込み有効
+} ad7490_write_t;
 
+// ----------------------------
+// SEQ bit
+// ----------------------------
+typedef enum {
+    AD7490_SEQ_DISABLE = 0,
+    AD7490_SEQ_ENABLE  = 1
+} ad7490_seq_t;
 
+// ----------------------------
+// CODING bit
+// ----------------------------
+typedef enum {
+    AD7490_CODING_BINARY  = 0, // ストレートバイナリ
+    AD7490_CODING_TWOS    = 1  // Two’s complement
+} ad7490_coding_t;
+
+// ----------------------------
+// RANGE bit
+// ----------------------------
+typedef enum {
+    AD7490_RANGE_2REF  = 0, // 0〜2*REFIN
+    AD7490_RANGE_REF   = 1  // 0〜REFIN
+} ad7490_range_t;
+
+// ----------------------------
+// WEAK/TRI bit
+// ----------------------------
+typedef enum {
+    AD7490_DOUT_TRI   = 0, // Three-state
+    AD7490_DOUT_WEAK  = 1  // Weakly driven
+} ad7490_dout_t;
+
+// ----------------------------
+// SHADOW bit
+// ----------------------------
+typedef enum {
+    AD7490_SHADOW_DISABLE = 0,
+    AD7490_SHADOW_ENABLE  = 1
+} ad7490_shadow_t;
+
+// ----------------------------
+// Power Mode (PM1, PM0)
+// ----------------------------
+typedef enum {
+    AD7490_PWR_NORMAL    = 0, // 00
+    AD7490_PWR_FULLDOWN  = 1, // 01
+    AD7490_PWR_AUTO      = 2, // 10
+    AD7490_PWR_SHUTDOWN  = 3  // 11
+} ad7490_pwr_mode_t;
+
+// ----------------------------
+// Channel Address (ADD3–ADD0)
+// ----------------------------
+typedef enum {
+    AD7490_CH0  = 0,
+    AD7490_CH1  = 1,
+    AD7490_CH2  = 2,
+    AD7490_CH3  = 3,
+    AD7490_CH4  = 4,
+    AD7490_CH5  = 5,
+    AD7490_CH6  = 6,
+    AD7490_CH7  = 7,
+    AD7490_CH8  = 8,
+    AD7490_CH9  = 9,
+    AD7490_CH10 = 10,
+    AD7490_CH11 = 11,
+    AD7490_CH12 = 12,
+    AD7490_CH13 = 13,
+    AD7490_CH14 = 14,
+    AD7490_CH15 = 15
+} ad7490_channel_t;
 
 
 #endif // AD7490_H

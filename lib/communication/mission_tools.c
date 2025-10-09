@@ -71,9 +71,10 @@ void finished_use_smf()
 
 void check_and_respond_to_boss()
 {
-   if (kbhit())
+   if (boss_receive_buffer_size > 0)
    {
-      fgetc(BOSS);
+      clear_receive_signal(boss_receive_buffer, &boss_receive_buffer_size);
+      fprintf(PC, "\r\n");
       transmit_status();
    }
 }

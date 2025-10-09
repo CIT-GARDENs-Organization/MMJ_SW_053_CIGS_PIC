@@ -1,5 +1,5 @@
 #include "mcp4901_driver.h"                        
-#include "../hal/mmj_cigs_config.h"             
+#include "../hal/cigs_config.h"             
 #include "../lib/device/mcp4901.h"       
 
 // #define MCP4901_DEBUG
@@ -13,7 +13,7 @@ void mcp4901_init()
     mcp4901_1_write(10); 
     mcp4901_2_write(10); 
     unsigned int16 readdata;
-    readdata = ad7490_read(ADC_CIGS1_VREF); 
+    readdata = ad7490_read(ADC_DIODE_INNER_VREF); 
     fprintf(PC, "%04LX\r\n", readdata);
     if (readdata == 0xFFFF || readdata == 0x0000) {
         fprintf(PC, "\t[DAC Port 1] Connect error!\r\n");
@@ -21,7 +21,7 @@ void mcp4901_init()
         fprintf(PC, "\t[DAC Port 1] Connect successful\r\n");
     }
     fprintf(PC, "%04LX\r\n", readdata);
-    readdata = ad7490_read(ADC_CIGS2_VREF); 
+    readdata = ad7490_read(ADC_DIODE_OUTER_VREF); 
     if (readdata == 0xFFFF || readdata == 0x0000) {
         fprintf(PC, "\t[DAC Port 2] Connect error!\r\n");
     } else {
@@ -38,7 +38,7 @@ void mcp4901_1_write(unsigned int16 value)
       fprintf(PC, "\t[DAC] <<< %04LX\r\n", cmd);
     #endif
     output_low(DAC1_CS); 
-    delay_us(10); 
+    delay_us(1); 
     spi_xfer(DAC_STREAM, cmd); 
     output_high(DAC1_CS); 
 }
@@ -50,7 +50,7 @@ void mcp4901_2_write(unsigned int16 value)
       fprintf(PC, "\t[DAC] <<< %04LX\r\n", cmd);
    #endif
    output_low(DAC2_CS); 
-   delay_us(100); 
+   delay_us(1); 
    spi_xfer(DAC_STREAM, cmd); 
    output_high(DAC2_CS); 
 }

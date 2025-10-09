@@ -2,8 +2,8 @@
 #define MMJ_CIGS_SMF_H
 
 #include "../lib/tool/smf_queue.h"  // FlashOperationStruct定義
-#include "../hal/mmj_cigs_config.h" // int8,int32 型など(CCS C) 依存
-#include "mmj_cigs_flash.h"       // MISF_ADDRESS_TABLE, misf_counter_table 依存
+#include "../hal/sato_config.h" // int8,int32 型など(CCS C) 依存
+#include "sato_flash.h"       // MISF_ADDRESS_TABLE, misf_counter_table 依存
 
 #define CRC_RETRY_COUNT 5
 
@@ -39,8 +39,7 @@ void print_misf_counter_status(int8 mission_id);
 // SMF Partition Header
 typedef struct {
     int32 used_size;
-    int8 loop_counter;
-    int8 reserved[3];
+    int32 reserved;
 } SMF_PARTITION;
 
 // パーティション管理構造体

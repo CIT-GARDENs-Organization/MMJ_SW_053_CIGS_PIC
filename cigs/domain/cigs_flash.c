@@ -1,26 +1,8 @@
-#include "mmj_cigs_flash.h"                           
-#include "../hal/mmj_cigs_config.h"             
+#include "cigs_flash.h"                           
+#include "../hal/cigs_config.h"             
 #include "../lib/device/mt25q.h"                
 #include "../lib/tool/calc_tools.h"             
 #include "../lib/tool/smf_queue.h"              
-
-// 実体宣言
-Flash_t data_table = {FLASH_ID_DATA_TABLE, 0, 0, 0};
-Flash_t piclog_data = {FLASH_ID_PICLOG, 0, 0, 0};
-Flash_t environment_data = {FLASH_ID_ENVIRONMENT, 0, 0, 0};
-Flash_t iv1_header = {FLASH_ID_IV1_HEADER, 0, 0, 0};
-Flash_t iv1_data = {FLASH_ID_IV1_DATA, 0, 0, 0};
-Flash_t iv2_header = {FLASH_ID_IV2_HEADER, 0, 0, 0};
-Flash_t iv2_data = {FLASH_ID_IV2_DATA, 0, 0, 0};
-
-// ポインタ設定
-Flash_t *data_table_ptr = &data_table;
-Flash_t *piclog_data_ptr = &piclog_data;
-Flash_t *environment_data_ptr = &environment_data;
-Flash_t *iv1_header_ptr = &iv1_header;
-Flash_t *iv1_data_ptr = &iv1_data;
-Flash_t *iv2_header_ptr = &iv2_header;
-Flash_t *iv2_data_ptr = &iv2_data;
 
 const ADDRESS_AREA_T MISF_ADDRESS_TABLE[FLASH_ID_COUNT] = {
     { MISF_CIGS_DATA_TABLE_START,   MISF_CIGS_DATA_TABLE_END,   MISF_CIGS_DATA_TABLE_SIZE },
@@ -34,8 +16,6 @@ const ADDRESS_AREA_T MISF_ADDRESS_TABLE[FLASH_ID_COUNT] = {
 
 FlashCounter_t misf_counter_table[FLASH_ID_COUNT];
 FlashCounter_t *misf_counter_table_ptr[FLASH_ID_COUNT] = {&misf_counter_table[0], &misf_counter_table[1], &misf_counter_table[2], &misf_counter_table[3], &misf_counter_table[4], &misf_counter_table[5], &misf_counter_table[6]};
-
-
 
 void misf_init()
 {
@@ -59,29 +39,13 @@ void misf_init()
     FlashData_t read_header;
     FlashData_t *read_header_ptr = &read_header;
     memset(read_header_ptr, 0x00, sizeof(FlashData_t));
-    read_data_bytes(mis_fm, MISF_CIGS_DATA_TABLE_START, read_header_ptr->bytes, PACKET_SIZE);
+    fprintf(PC, "\t[MIS FM] %08LX\r\n", MISF_ADDRESS_TABLE[FLASH_ID_DATA_TABLE].start);
+    read_data_bytes(mis_fm, MISF_ADDRESS_TABLE[FLASH_ID_DATA_TABLE].start, read_header_ptr->bytes, PACKET_SIZE);
 
     // CRC 検証
     if (read_header_ptr->packet.crc != calc_crc8(read_header_ptr->bytes, PACKET_SIZE - 1)) {
         fprintf(PC, "\t[MIS FM] CRC error -> initialize counters\r\n");
-        // デフォルト初期化
-        /*
-        piclog_data.id        = FLASH_ID_PICLOG;
-        environment_data.id   = FLASH_ID_ENVIRONMENT;
-        iv_header.id          = FLASH_ID_IV_HEADER;
-        iv_data.id            = FLASH_ID_IV_DATA;
-        piclog_data.used_counter = 0;
-        piclog_data.uncopied_counter = 0;
-        environment_data.used_counter = 0;
-        environment_data.uncopied_counter = 0;
-        iv_header.used_counter = 0;
-        iv_header.uncopied_counter = 0;
-        iv_data.used_counter = 0;
-        iv_data.uncopied_counter = 0;
-        misf_update_address_area();   // 初期テーブル書込み
-        print_flash_status();
-        return;
-        */
+        
     }
     misf_counter_table[FLASH_ID_PICLOG]       = read_header_ptr->packet.payload.logdata.piclog;
     misf_counter_table[FLASH_ID_ENVIRONMENT]  = read_header_ptr->packet.payload.logdata.environment;
@@ -117,13 +81,36 @@ void print_misf_address_table()
     fprintf(PC, "\tIV2 DATA\tUsed\t\t0x%08LX\r\n", misf_counter_table[FLASH_ID_IV2_DATA].used_counter);
     fprintf(PC, "\t\t\tUncopyed\t0x%08LX\r\n", misf_counter_table[FLASH_ID_IV2_DATA].uncopied_counter);
     fprintf(PC, "\t\t\tReserve\t\t0x%02X/ 0x%02X\r\n", misf_counter_table[FLASH_ID_IV2_DATA].reserve_counter1,misf_counter_table[FLASH_ID_IV2_DATA].reserve_counter2);
-    fprintf(PC, "\t------------\t-------------\t-------------\r\n");
+    fprintf(PC, "\t==================================================\r\n");
 }
 
-void misf_write_data(FlashDataId_t id, int8 *data_ptr, unsigned int16 size)
+void misf_write_data(FlashDataId_t id, unsigned int8 *data_ptr, unsigned int16 size)
 {
+    /*
+    fprintf(PC, "[MIS FM] Write Data Size:%lu\r\n", size);
+    fprintf(PC, "%08LX\r\n", MISF_ADDRESS_TABLE[id].start);
+    fprintf(PC, "%08LX\r\n", misf_counter_table[id].used_counter);
+    fprintf(PC, "%08LX\r\n", misf_counter_table[id].reserve_counter1);
+    for (unsigned int32 j = 0; j < size; j++) {
+        fprintf(PC, "%02X ", data_ptr[j]);
+    }
+    fprintf(PC, "\r\n");
+    */
     // パケット境界チェック
-    if (misf_counter_table[id].reserve_counter1 + size > PACKET_SIZE-1) {
+    if (size == PACKET_SIZE){
+        // fprintf(PC, "PACKET SIZE 64\r\n");
+        unsigned int32 write_address = MISF_ADDRESS_TABLE[id].start + misf_counter_table[id].used_counter;
+        write_data_bytes(mis_fm, write_address, data_ptr, size);
+        // for (unsigned int32 j = 0; j < size; j++) {
+            // fprintf(PC, "%02X ", data_ptr[j]);
+        // }
+        misf_counter_table[id].used_counter     += size;
+        misf_counter_table[id].uncopied_counter += size;
+
+        return;
+    }
+    
+    else if (misf_counter_table[id].reserve_counter1 + size == PACKET_SIZE-1) {
         unsigned int8 blank_size = PACKET_SIZE - 1 - misf_counter_table[id].reserve_counter1;
         // fprintf(PC, "0x%02X", blank_size);
         unsigned int8 blank_data[PACKET_SIZE];
@@ -149,8 +136,9 @@ void misf_write_data(FlashDataId_t id, int8 *data_ptr, unsigned int16 size)
         misf_counter_table[id].used_counter     += blank_size + 1;
         misf_counter_table[id].uncopied_counter += blank_size + 1;
         misf_counter_table[id].reserve_counter1  = 0;
-    }
-    if (misf_counter_table[id].reserve_counter1 + size == PACKET_SIZE-1){
+        return;
+
+    }else  if(misf_counter_table[id].reserve_counter1 + size == PACKET_SIZE-1){
         // データ書き込み
         unsigned int32 write_address = MISF_ADDRESS_TABLE[id].start + misf_counter_table[id].used_counter;
         write_data_bytes(mis_fm, write_address, data_ptr, size);
@@ -174,12 +162,13 @@ void misf_write_data(FlashDataId_t id, int8 *data_ptr, unsigned int16 size)
         misf_counter_table[id].reserve_counter1  = 0;
 
         // アドレステーブル更新
-        misf_update_address_area();
+        // misf_update_address_area();
         return;
     }
 
     // データ書き込み
     unsigned int32 write_address = MISF_ADDRESS_TABLE[id].start + misf_counter_table[id].used_counter;
+    // fprintf(PC, "ADDRESS 0x%08LX DATA ", write_address);
     write_data_bytes(mis_fm, write_address, data_ptr, size);
 
     // カウンタ更新
@@ -188,7 +177,7 @@ void misf_write_data(FlashDataId_t id, int8 *data_ptr, unsigned int16 size)
     misf_counter_table[id].reserve_counter1 += size;
 
     // アドレステーブル更新
-    misf_update_address_area();
+    // misf_update_address_area();
 }
 
 FlashData_t make_flash_data_table(void)
@@ -217,19 +206,10 @@ void misf_update_address_area(void)
     FlashData_t flash_data = make_flash_data_table();
     FlashData_t *flash_data_ptr = &flash_data;
 
-    sector_erase(mis_fm, MISF_CIGS_DATA_TABLE_START);
-    write_data_bytes(mis_fm, MISF_CIGS_DATA_TABLE_START, flash_data_ptr->bytes, PACKET_SIZE);
+    subsector_4kByte_erase(mis_fm, MISF_ADDRESS_TABLE[FLASH_ID_DATA_TABLE].start);
+    write_data_bytes(mis_fm, MISF_ADDRESS_TABLE[FLASH_ID_DATA_TABLE].start, flash_data_ptr->bytes, PACKET_SIZE);
 }
 
-
-// PICLOG 更新後に呼ばれる関数例 (piclog_write 内で既に misf_update_address_area 呼んでいる場合は不要)
-static void update_piclog_counters_after_write(unsigned int16 wrote_size)
-{
-    piclog_data.used_counter     += wrote_size;
-    piclog_data.uncopied_counter += wrote_size;
-    // 必要なら wrap 処理追加
-    misf_update_address_area();
-}
 
 void add_smf_queue(MissionID mission_id, FunctionType func_type, SmfWriteMode write_mode)
 {
@@ -267,67 +247,6 @@ void write_smf_header(smf_data_table_t *smf_data_table)
     }
 }
 
-MisfAddressStruct get_misf_address_struct(MissionID mission_id)
-{
-   MisfAddressStruct mis_struct = {0};
 
-   if (mission_id == CIGS_DATA_TABLE)
-   {
-      mis_struct.start_address = MISF_CIGS_DATA_TABLE_START;
-      mis_struct.end_address   = MISF_CIGS_DATA_TABLE_END;
-   }
-   else if (mission_id == CIGS_PICLOG_DATA)
-   {
-      mis_struct.start_address = MISF_CIGS_PICLOG_START;
-      mis_struct.end_address   = MISF_CIGS_PICLOG_END;
-   }
-   else if (mission_id == CIGS_ENVIRO_DATA)
-   {
-      mis_struct.start_address = MISF_CIGS_ENVIRO_START;
-      mis_struct.end_address   = MISF_CIGS_ENVIRO_END;
-   }
-   else if (mission_id == CIGS_IV1_HEADER)
-   {
-      mis_struct.start_address = MISF_CIGS_IV1_HEADER_START;
-      mis_struct.end_address   = MISF_CIGS_IV1_HEADER_END;
-   }
-   else if (mission_id == CIGS_IV1_DATA)
-   {
-      mis_struct.start_address = MISF_CIGS_IV1_DATA_START;
-      mis_struct.end_address   = MISF_CIGS_IV1_DATA_END;
-   }
-   return mis_struct;
-}
 
-MisfWriteStruct get_misf_write_struct(MissionID mission_id)
-{
-    MisfWriteStruct mis_write_struct = {0};
-
-    if (mission_id == CIGS_DATA_TABLE)
-    {
-        mis_write_struct.start_address = MISF_CIGS_DATA_TABLE_START;
-        mis_write_struct.size = MISF_CIGS_DATA_TABLE_SIZE;
-    }
-    else if (mission_id == CIGS_PICLOG_DATA)
-    {
-        mis_write_struct.start_address = MISF_CIGS_PICLOG_START + piclog_data.used_counter - piclog_data.uncopied_counter;
-        mis_write_struct.size = piclog_data.uncopied_counter;
-    }
-    else if (mission_id == CIGS_ENVIRO_DATA)
-    {
-        mis_write_struct.start_address = MISF_CIGS_ENVIRO_START + environment_data.used_counter - environment_data.uncopied_counter;
-        mis_write_struct.size = environment_data.uncopied_counter;
-    }
-    else if (mission_id == CIGS_IV1_HEADER)
-    {
-        mis_write_struct.start_address = MISF_CIGS_IV1_HEADER_START + iv1_header.used_counter - iv1_header.uncopied_counter;
-        mis_write_struct.size = iv1_header.uncopied_counter;
-    }
-    else if (mission_id == CIGS_IV1_DATA)
-    {
-        mis_write_struct.start_address = MISF_CIGS_IV1_DATA_START + iv1_data.used_counter - iv1_data.uncopied_counter;
-        mis_write_struct.size = iv1_data.uncopied_counter;
-    }
-    return mis_write_struct;
-}
 // End of file

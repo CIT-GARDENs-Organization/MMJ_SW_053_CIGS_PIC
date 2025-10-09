@@ -1,6 +1,6 @@
-#include "mmj_cigs_piclog.h"                          // 同じフォルダのヘッダー
-#include "../hal/timer.h"                   // タイマーライブラリ  
-#include "mmj_cigs_flash.h"                 // ストレージ機能
+#include "sato_piclog.h"                          // 同じフォルダのヘッダー
+#include "../cigs/hal/timer.h"                   // タイマーライブラリ
+#include "sato_flash.h"                 // ストレージ機能
 #include "../lib/tool/smf_queue.h"               // フラッシュ操作キュー
 #include "../lib/device/mt25q.h"                 // フラッシュデバイス
 
@@ -23,5 +23,6 @@ void piclog_make(int8 function, int8 parameter)
     printf("\r\n");
 
     misf_write_data(FLASH_ID_PICLOG, piclog_ptr->bytes, PICLOG_PACKET_SIZE);
+    misf_update_address_area();
 }
 // End of file

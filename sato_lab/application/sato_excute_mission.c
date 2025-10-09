@@ -1,21 +1,21 @@
 #include "../lib/tool/smf_queue.h"                   // ツールライブラリ
-#include "../hal/mmj_cigs_config.h"             // システム設定
+#include "../hal/sato_config.h"             // システム設定
 #include "../lib/communication/value_status.h"    // ステータス定義
-#include "mmj_cigs_excute_mission.h"                  // 同じフォルダのヘッダー
-#include "mmj_cigs_mode_mission.h"                    // 同じフォルダのヘッダー
-#include "mmj_cigs_mode_flash.h"                      // 同じフォルダのヘッダー
+#include "sato_excute_mission.h"                  // 同じフォルダのヘッダー
+#include "sato_mode_mission.h"                    // 同じフォルダのヘッダー
+#include "sato_mode_flash.h"                      // 同じフォルダのヘッダー
 
-#include "../domain/mmj_cigs_smf.h"             // ストレージ機能
+#include "../domain/sato_smf.h"             // ストレージ機能
 #include "../lib/communication/typedef_content.h"    // 通信ライブラリ
 #include "../lib/communication/mission_tools.h"      // ミッションツール
-#include "../domain/mmj_cigs_iv.h"          // 測定機能
+#include "../domain/sato_iv.h"          // 測定機能
 #include "../lib/communication/communication_driver.h" // 通信ドライバー
 
 
-void execute_mission(int8 *content)
+void execute_mission(int8 *uplink_cmt_ptr)
 {
    // record to executed mission list
-   int8 command_id = content[0];
+   int8 command_id = uplink_cmt_ptr[0];
    //unsigned int8 *parameter = &content[1];
       
    // execution mission
@@ -42,51 +42,51 @@ void execute_mission(int8 *content)
 
       // ___________________ MISF Commands ______________________
       case ID_MISF_ERASE_ALL:
-         mode_misf_erase_all(content);
+         mode_misf_erase_all(uplink_cmt_ptr);
          break;
       case ID_MISF_ERASE_1SECTOR:
-         mode_misf_erase_1sector(content);
+         mode_misf_erase_1sector(uplink_cmt_ptr);
          break;
       case ID_MISF_ERASE_4kByte_SUBSECTOR:
-         mode_misf_erase_4kbyte_subsector(content);
+         mode_misf_erase_4kbyte_subsector(uplink_cmt_ptr);
          break;
       case ID_MISF_ERASE_64kByte_SUBSECTOR:
-         mode_misf_erase_64kbyte_subsector(content);
+         mode_misf_erase_64kbyte_subsector(uplink_cmt_ptr);
          break;
       case ID_MISF_WRITE_DEMO:
-         mode_misf_write_demo(content);
+         mode_misf_write_demo(uplink_cmt_ptr);
          break;
       case ID_MISF_WRITE_4kByte_SUBSECTOR:
-         mode_misf_write_4kbyte_subsector(content);
+         mode_misf_write_4kbyte_subsector(uplink_cmt_ptr);
          break;
       case ID_MISF_READ:
-         mode_misf_read(content);
+         mode_misf_read(uplink_cmt_ptr);
          break;
       case ID_MISF_READ_ADDRESS:
-         mode_misf_read_address(content);
+         mode_misf_read_address(uplink_cmt_ptr);
          break;
       case ID_MISF_ERASE_AND_RESET:
-         mode_misf_erase_and_reset(content);
+         mode_misf_erase_and_reset(uplink_cmt_ptr);
          break;
 
       // ___________________ SMF Commands ______________________
       case ID_SMF_COPY:
-         mode_smf_copy(content);
+         mode_smf_copy(uplink_cmt_ptr);
          break;
       case ID_SMF_READ:
-         mode_smf_read(content);
+         mode_smf_read(uplink_cmt_ptr);
          break;
       case ID_SMF_ERASE:
-         mode_smf_erase(content);
+         mode_smf_erase(uplink_cmt_ptr);
          break;
       case ID_SMF_COPY_FORCE:
-         mode_smf_address_reset(content);
+         mode_smf_address_reset(uplink_cmt_ptr);
          break;
       case ID_SMF_READ_FORCE:
-         mode_smf_read_force(content);
+         mode_smf_read_force(uplink_cmt_ptr);
          break;
       case ID_SMF_ERASE_FORCE:
-         mode_smf_erase_force(content);
+         mode_smf_erase_force(uplink_cmt_ptr);
          break;
       case ID_SMF_RESET:
          smf_data_table_init();
@@ -95,22 +95,38 @@ void execute_mission(int8 *content)
          
       // ________________MEAS________________________________
       case ID_MEAS_IV:
-         mode_meas_iv(content);
+         mode_meas_iv(uplink_cmt_ptr);
          break;
       case ID_MEAS_DEBUG:
-         mode_meas_iv_debug(content);
-         break;;
+         mode_meas_iv_debug(uplink_cmt_ptr);
+         break;
       case ID_MEAS_ENV:
-         mode_meas_env(content);
+         mode_meas_env(uplink_cmt_ptr);
          break;
-      case ID_MEAS_ENV_DEBUG:
-         mode_meas_env_debug(content);
+      case ID_MEAS_ENV_PRINT:
+         // mode_meas_env_debug(uplink_cmt_ptr);
          break;
-      
-      case 0xA4:
-          sweep_with_print();
-          break;
-      
+      case ID_MEAS_IV_PRINT:
+         sweep_with_print();
+         break;
+      case ID_MEAS_PD:
+         mode_meas_pd(uplink_cmt_ptr);
+         break;
+      case 0xA6:
+         connect_port1();
+         connect_port2();
+         unsigned int16 cell1_curr;
+         unsigned int16 cell2_curr;
+         mcp4901_1_write(10); 
+         mcp4901_2_write(10);
+         while (TRUE)
+         {  
+            cell1_curr = ad7490_read(ADC_CIGS1_CURR);
+            cell2_curr = ad7490_read(ADC_CIGS2_CURR);
+            fprintf(PC, "%04LX,%04LX\r\n", cell1_curr, cell2_curr);
+            delay_ms(1000);
+         }
+         break;
 
       // ________________Others______________________________
       case 0xB0:

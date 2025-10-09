@@ -1,5 +1,5 @@
-#include "mmj_cigs_smf.h"  
-#include "mmj_cigs_flash.h"
+#include "sato_smf.h"  
+#include "sato_flash.h"
 #include "../lib/device/mt25q.h"              // Flash device definitions
 #include "../lib/tool/smf_queue.h"            // システム設定 
 #include "../lib/tool/calc_tools.h"           // SMF処理関数 
@@ -50,14 +50,14 @@ void read_smf_header(smf_data_table_t *smf_data_table)
         // ヘッダを読み出し
         read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table->bytes, PACKET_SIZE);
         print_smf_counter_status(smf_data_table);
+
         // CRC検証
-        if (is_crc_valid(smf_data_table->bytes, PACKET_SIZE-1))
+        if (is_crc_valid(smf_data_table->bytes, PACKET_SIZE))
         {
-            printf("CRC verification passed on attempt %d\r\n", retry_count + 1);
             return; // 成功したら終了
         }
         // NGなら少し待って再試行
-        delay_ms(5);
+        printf("CRC ERROR %d\r\n", retry_count + 1);
     }
 
     // ここまで来たら失敗
@@ -82,11 +82,9 @@ void smf_write_header(smf_data_table_t *smf_data_table)
         subsector_4kByte_erase(smf, CIGS_DATA_TABLE_START_ADDRESS);
         write_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, smf_data_table->bytes, PACKET_SIZE); // ヘッダーを書き込み
         read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, readdata, PACKET_SIZE);
-        if (is_crc_valid(readdata, PACKET_SIZE-1))
+        if (is_crc_valid(readdata, PACKET_SIZE))
         {
-            crc_valid = 1; // FIX
-            fprintf(PC, "CRC verification passed on attempt %d\r\n", retry_count + 1);
-            break;
+            crc_valid = 1; // FIX            break;
         }
     }
     if (!crc_valid)
@@ -99,16 +97,18 @@ void smf_write_header(smf_data_table_t *smf_data_table)
 void print_smf_counter_status(smf_data_table_t *smf_data_table)
 {
     fprintf(PC, "\r\n[SMF Counter Status]\r\n");
-    fprintf(PC, "PICLOG     : Used=%lu, Uncopied=%u\r\n", smf_data_table->fields.headers[CIGS_PICLOG_DATA].used_size, smf_data_table->fields.headers[CIGS_PICLOG_DATA].loop_counter);
-    fprintf(PC, "ENVIRO     : Used=%lu, Uncopied=%u\r\n", smf_data_table->fields.headers[CIGS_ENVIRO_DATA].used_size, smf_data_table->fields.headers[CIGS_ENVIRO_DATA].loop_counter);
-    fprintf(PC, "IV1_HEADER : Used=%lu, Uncopied=%u\r\n", smf_data_table->fields.headers[CIGS_IV1_HEADER].used_size, smf_data_table->fields.headers[CIGS_IV1_HEADER].loop_counter);
-    fprintf(PC, "IV1_DATA   : Used=%lu, Uncopied=%u\r\n", smf_data_table->fields.headers[CIGS_IV1_DATA].used_size, smf_data_table->fields.headers[CIGS_IV1_DATA].loop_counter);
-    fprintf(PC, "IV2_HEADER : Used=%lu, Uncopied=%u\r\n", smf_data_table->fields.headers[CIGS_IV2_HEADER].used_size, smf_data_table->fields.headers[CIGS_IV2_HEADER].loop_counter);
-    fprintf(PC, "IV2_DATA   : Used=%lu, Uncopied=%u\r\n", smf_data_table->fields.headers[CIGS_IV2_DATA].used_size, smf_data_table->fields.headers[CIGS_IV2_DATA].loop_counter);
-    fprintf(PC, "------------------------------\r\n\r\n");
+    fprintf(PC, "\tPARTITION\tUSED\t\tRESERVE\r\n");
+    fprintf(PC, "\t---------\t----------\t----------\r\n");
+    fprintf(PC, "\tPICLOG\t\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_PICLOG_DATA].used_size, smf_data_table->fields.headers[CIGS_PICLOG_DATA].reserved);
+    fprintf(PC, "\tENVIRO\t\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_ENVIRO_DATA].used_size, smf_data_table->fields.headers[CIGS_ENVIRO_DATA].reserved);
+    fprintf(PC, "\tIV1_HEADER\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV1_HEADER].used_size, smf_data_table->fields.headers[CIGS_IV1_HEADER].reserved);
+    fprintf(PC, "\tIV1_DATA\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV1_DATA].used_size, smf_data_table->fields.headers[CIGS_IV1_DATA].reserved);
+    fprintf(PC, "\tIV2_HEADER\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV2_HEADER].used_size, smf_data_table->fields.headers[CIGS_IV2_HEADER].reserved);
+    fprintf(PC, "\tIV2_DATA\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV2_DATA].used_size, smf_data_table->fields.headers[CIGS_IV2_DATA].reserved);
+    fprintf(PC, "\t==========================================\r\n\r\n");
 }
 
-void smf_write(FlashOperationStruct *smf_data_ptr)
+void smf_write(FlashOperationStruct *smf_queue_ptr)
 {
     fprintf(PC, "\r\n_______________________________\r\n");
     fprintf(PC, "_________Start copy_data_________\r\n");
@@ -130,75 +130,119 @@ void smf_write(FlashOperationStruct *smf_data_ptr)
     read_smf_header(&smf_data_table);
 
 
-    unsigned int32 write_src;
-    unsigned int32 write_size;
+    unsigned int32 misf_write_src;
+    unsigned int32 misf_write_size;
 
     //アドレスと自動更新
-    if (smf_data_ptr->source_type == SOURCE_MISF_UNCOPIED )
+    if (smf_queue_ptr->source_type == SOURCE_MISF_UNCOPIED )
     {
-        write_src = MISF_ADDRESS_TABLE[smf_data_ptr->mission_id].start + misf_counter_table[smf_data_ptr->mission_id].used_counter - misf_counter_table[smf_data_ptr->mission_id].uncopied_counter;
-        write_size = misf_counter_table[smf_data_ptr->mission_id].uncopied_counter;
-    }else if(smf_data_ptr->source_type == SOURCE_MISF_MANUAL)
+        misf_write_src = MISF_ADDRESS_TABLE[smf_queue_ptr->mission_id].start + misf_counter_table[smf_queue_ptr->mission_id].used_counter - misf_counter_table[smf_queue_ptr->mission_id].uncopied_counter;
+        misf_write_size = misf_counter_table[smf_queue_ptr->mission_id].uncopied_counter;
+    }else if(smf_queue_ptr->source_type == SOURCE_MISF_MANUAL)
     {
-        write_src = smf_data_ptr->misf_start_addr;
-        write_size = smf_data_ptr->misf_size;
+        misf_write_src = smf_queue_ptr->misf_start_addr;
+        misf_write_size = smf_queue_ptr->misf_size;
     }
 
-    unsigned int32 smf_address_start = SMF_ADDRESS_TABLE[smf_data_ptr->mission_id].start;
-    unsigned int32 smf_address_end   = SMF_ADDRESS_TABLE[smf_data_ptr->mission_id].end;
-    unsigned int32 misf_address_start = MISF_ADDRESS_TABLE[smf_data_ptr->mission_id].start;
-    unsigned int32 misf_address_end   = MISF_ADDRESS_TABLE[smf_data_ptr->mission_id].end;
+    unsigned int32 smf_address_start = SMF_ADDRESS_TABLE[smf_queue_ptr->mission_id].start;
+    unsigned int32 smf_address_end   = SMF_ADDRESS_TABLE[smf_queue_ptr->mission_id].end;
+    unsigned int32 misf_address_start = MISF_ADDRESS_TABLE[smf_queue_ptr->mission_id].start;
+    unsigned int32 misf_address_end   = MISF_ADDRESS_TABLE[smf_queue_ptr->mission_id].end;
 
-
-
-    // Print SMF ADDRESS
-    fprintf(PC,"[SMF ADDRESS]\r\n");
-    fprintf(PC, "\t------------\t-------------\t-------------\r\n");
-    fprintf(PC, "\tSTART\t0x%08LX\r\n", smf_address_start);
-    fprintf(PC, "\tEND\t0x%08LX\r\n", smf_address_end);
-    fprintf(PC, "\tUSED\t0x%08LX\r\n", smf_data_table.fields.headers[smf_data_ptr->mission_id].used_size);
-    fprintf(PC, "\tNEXT\t0x%08LX\r\n", smf_address_start + smf_data_table.fields.headers[smf_data_ptr->mission_id].used_size);
+    switch ( smf_queue_ptr->mission_id )
+    {
+        case CIGS_DATA_TABLE:
+            fprintf(PC, "FLASH ID: CIGS_DATA_TABLE\r\n");
+            break;
+        case CIGS_PICLOG_DATA:
+            fprintf(PC, "FLASH ID: CIGS_PICLOG_DATA\r\n");
+            break;
+        case CIGS_ENVIRO_DATA:
+            fprintf(PC, "FLASH ID: CIGS_ENVIRO_DATA\r\n");
+            break;
+        case CIGS_IV1_HEADER:
+            fprintf(PC, "FLASH ID: CIGS_IV1_HEADER\r\n");
+            break;
+        case CIGS_IV1_DATA:
+            fprintf(PC, "FLASH ID: CIGS_IV1_DATA\r\n");
+            break;
+        case CIGS_IV2_HEADER:
+            fprintf(PC, "FLASH ID: CIGS_IV2_HEADER\r\n");
+            break;
+        case CIGS_IV2_DATA:
+            fprintf(PC, "FLASH ID: CIGS_IV2_DATA\r\n");
+            break;
+        default:
+            fprintf(PC, "Error: Invalid mission ID %d\r\n", smf_queue_ptr->mission_id);
+            return;
+    }
 
     // Print MISF ADDRESS
     fprintf(PC,"[MISF ADDRESS]\r\n");
-    fprintf(PC, "\t------------\t-------------\t-------------\r\n");
+    fprintf(PC, "\tParam\tData\r\n");
+    fprintf(PC, "\t-----\t----------\r\n");
     fprintf(PC, "\tSTART\t0x%08LX\r\n", misf_address_start);
     fprintf(PC, "\tEND\t0x%08LX\r\n", misf_address_end);
-    fprintf(PC, "\tSRC\t0x%08LX\r\n", write_src);
-    fprintf(PC, "\tSIZE\t0x%08LX\r\n", write_size);
-    fprintf(PC, "\t------------\t-------------\t-------------\r\n");
+    fprintf(PC, "\tSRC\t0x%08LX\r\n", misf_write_src);
+    fprintf(PC, "\tSIZE\t0x%08LX\r\n", misf_write_size);
+    fprintf(PC, "\t-----\t----------\r\n");
+
+    // Print SMF ADDRESS
+    fprintf(PC,"[SMF ADDRESS]\r\n");
+    fprintf(PC, "\tParam\tData\r\n");
+    fprintf(PC, "\t-----\t----------\r\n");
+    fprintf(PC, "\tSTART\t0x%08LX\r\n", smf_address_start);
+    fprintf(PC, "\tEND\t0x%08LX\r\n", smf_address_end);
+    fprintf(PC, "\tUSED\t0x%08LX\r\n", smf_data_table.fields.headers[smf_queue_ptr->mission_id].used_size);
+    fprintf(PC, "\tNEXT\t0x%08LX\r\n", smf_address_start + smf_data_table.fields.headers[smf_queue_ptr->mission_id].used_size);
+    fprintf(PC, "\t-----\t----------\r\n");
+
+
 
 
     unsigned int8 buffer[PACKET_SIZE];
     unsigned int32 smf_write_address;
     unsigned int32 misf_read_address;
 
-    while (write_size > 0)
+    misf_read_address = misf_write_src;
+
+
+    fprintf(PC, "WRITE DATA TO SMF\r\n");
+    while (misf_write_size > 0)
     {
-        fprintf(PC, "Remaining size to write: %lu bytes\r\n", write_size);
+
         memset(buffer, 0x11, PACKET_SIZE);
-        smf_write_address = smf_address_start + smf_data_table.fields.headers[smf_data_ptr->mission_id].used_size;
-        misf_read_address = write_src;
+        smf_write_address = smf_address_start + smf_data_table.fields.headers[smf_queue_ptr->mission_id].used_size;
 
         read_data_bytes(mis_fm, misf_read_address, buffer, PACKET_SIZE);
-        fprintf(PC, "MISF DATA\r\n");
-        for (unsigned int32 j = 0; j < PACKET_SIZE; j++) {
-            fprintf(PC, "%02X ", buffer[j]);
-        }
-        fprintf(PC, "\r\n");
-
+        fprintf(PC," ");
         write_data_bytes(smf, smf_write_address, buffer, PACKET_SIZE);
-        smf_data_table.fields.headers[smf_data_ptr->mission_id].used_size += PACKET_SIZE;
-        misf_counter_table[smf_data_ptr->mission_id].uncopied_counter -= PACKET_SIZE;
+        fprintf(PC,".");
+        // counter update
+        smf_data_table.fields.headers[smf_queue_ptr->mission_id].used_size += PACKET_SIZE;
+        if (misf_counter_table[smf_queue_ptr->mission_id].uncopied_counter >= PACKET_SIZE){
+            misf_counter_table[smf_queue_ptr->mission_id].uncopied_counter -= PACKET_SIZE;
+        }else{
+            unsigned int8 add = PACKET_SIZE - misf_counter_table[smf_queue_ptr->mission_id].uncopied_counter;
+            misf_counter_table[smf_queue_ptr->mission_id].uncopied_counter = 0;
+            misf_counter_table[smf_queue_ptr->mission_id].used_counter += add;
+            misf_counter_table[smf_queue_ptr->mission_id].reserve_counter1 = 0;
+        }
+        misf_read_address += PACKET_SIZE;
+        if (misf_write_size > PACKET_SIZE){
+            misf_write_size -= PACKET_SIZE;
+        }else{
+            misf_write_size = 0;
+        }
         
-        write_src += PACKET_SIZE;
-        write_size -= PACKET_SIZE;
     }
+    fprintf(PC, "\r\n");
 
-
+    fprintf(PC, "SMF Counter Update\r\n");
+    print_smf_counter_status(&smf_data_table);
     // write size area
     smf_write_header(&smf_data_table);
-    
+    misf_update_address_area();
     fprintf(PC, "\r\n_________End copy_data__________\r\n");
     fprintf(PC, "_______________________________\r\n\r\n");
 }
@@ -291,97 +335,4 @@ void smf_erase(FlashOperationStruct *smf_data)
     fprintf(PC, "____________________\r\n\r\n");
 }
 
-// mission_idから対応するSMF_PARTITIONを取得する関数
-SMF_PARTITION* get_smf_partition_by_mission_id(int8 mission_id)
-{
-    switch(mission_id)
-    {
-        case 0x01:  // CIGS_MEASURE_DATA
-            return &param.iv1_data;
-        case 0x02:  // CIGS_PICLOG
-            return &param.piclog;
-        default:
-            fprintf(PC, "Error: Unknown mission_id: %02X\r\n", mission_id);
-            return 0x00;  // NULL pointer
-    }
-}
-
-// mission_idに対応するパーティション情報を更新する関数
-void update_smf_partition_by_mission_id(int8 mission_id, int32 used_size, int32 loop_counter)
-{
-    SMF_PARTITION* partition = get_smf_partition_by_mission_id(mission_id);
-    if (partition != 0x00)
-    {
-        partition->used_size = used_size;
-        partition->loop_counter = loop_counter;
-        fprintf(PC, "Updated partition for mission_id %02X: used_size=%ld, loop_counter=%ld\r\n", 
-                mission_id, used_size, loop_counter);
-    }
-}
-
-// カウンター更新関数
-void update_misf_counters(int8 mission_id, int32 transfer_size)
-{
-    // MISF 側 uncopied_counter を転送サイズ分減少 (下限0)
-    Flash_t *target = 0x00;
-    switch(mission_id){
-        case CIGS_PICLOG_DATA: target = piclog_data_ptr; break;
-        case CIGS_ENVIRO_DATA: target = environment_data_ptr; break;
-        case CIGS_IV1_HEADER:  target = iv1_header_ptr; break;
-        case CIGS_IV1_DATA:    target = iv1_data_ptr; break;
-        case CIGS_IV2_HEADER:  target = iv2_header_ptr; break;
-        case CIGS_IV2_DATA:    target = iv2_data_ptr; break;
-        default: break; // DATA_TABLE などは対象外
-    }
-    if(target){
-        unsigned int32 before = target->uncopied_counter;
-        if(transfer_size >= before) target->uncopied_counter = 0; else target->uncopied_counter -= transfer_size;
-        fprintf(PC, "[MISF] mission %u uncopied_counter %08LX -> %08LX (-%lu)\r\n", mission_id, before, target->uncopied_counter, transfer_size);
-        misf_update_address_area();
-    } else {
-        fprintf(PC, "[MISF] update_misf_counters: mission %u not handled\r\n", mission_id);
-    }
-}
-
-// カウンター初期化関数
-void reset_misf_counters(int8 mission_id)
-{
-    Flash_t *target = 0x00;
-    switch(mission_id){
-        case CIGS_PICLOG_DATA: target = piclog_data_ptr; break;
-        case CIGS_ENVIRO_DATA: target = environment_data_ptr; break;
-        case CIGS_IV1_HEADER:  target = iv1_header_ptr; break;
-        case CIGS_IV1_DATA:    target = iv1_data_ptr; break;
-        case CIGS_IV2_HEADER:  target = iv2_header_ptr; break;
-        case CIGS_IV2_DATA:    target = iv2_data_ptr; break;
-        default: break;
-    }
-    if(target){
-        target->uncopied_counter = 0;
-        misf_update_address_area();
-        fprintf(PC, "[MISF] mission %u uncopied_counter reset\r\n", mission_id);
-    }
-}
-
-// カウンター状態表示関数
-void print_misf_counter_status(int8 mission_id)
-{
-    Flash_t *target = 0x00;
-    switch(mission_id){
-        case CIGS_PICLOG_DATA: target = piclog_data_ptr; break;
-        case CIGS_ENVIRO_DATA: target = environment_data_ptr; break;
-        case CIGS_IV1_HEADER:  target = iv1_header_ptr; break;
-        case CIGS_IV1_DATA:    target = iv1_data_ptr; break;
-        case CIGS_IV2_HEADER:  target = iv2_header_ptr; break;
-        case CIGS_IV2_DATA:    target = iv2_data_ptr; break;
-        default: break;
-    }
-    if(target){
-        fprintf(PC, "[MISF] mission %u status: used=0x%08LX uncopied=0x%08LX r1=0x%02X r2=0x%02X\r\n",
-                mission_id, target->used_counter, target->uncopied_counter,
-                target->reserve_counter1, target->reserve_counter2);
-    } else {
-        fprintf(PC, "[MISF] print status: mission %u not handled\r\n", mission_id);
-    }
-}
 // End of file

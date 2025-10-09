@@ -2,7 +2,7 @@
 #define MMJ_CIGS_MAIN_H
 
 
-#define SELF_DEVICE_ID CIGS_PIC
+#define SELF_DEVICE_ID SATO_PIC
 
 
 #opt 0 // 0 = no optimization
@@ -12,14 +12,14 @@
 //==============================================================================
 
 // レベル1: システム設定
-#include "hal/cigs_config.h"
+#include "hal/sato_config.h"
 
 // レベル2: ハードウェア抽象化層  
-#include "hal/timer.h"
-#include "hal/uart.h"
-#include "hal/gpio.h"
-#include "device_driver/ad7490_driver.h"
-#include "device_driver/mcp4901_driver.h"
+#include "../cigs/hal/timer.h"
+#include "../cigs/hal/uart.h"
+#include "../cigs/hal/gpio.h"
+#include "../cigs/device_driver/ad7490_driver.h"
+#include "../cigs/device_driver/mcp4901_driver.h"
 
 // レベル3: 基本ライブラリヘッダー（型定義・通信・ツール）
 #include "../lib/communication/typedef_content.h"
@@ -39,14 +39,14 @@
 #include "../lib/communication/mission_tools.h"
 
 // レベル6: コア機能ヘッダー
-#include "domain/cigs_iv.h"
-#include "domain/cigs_flash.h"
-#include "domain/cigs_piclog.h"
+#include "domain/sato_iv.h"
+#include "domain/sato_flash.h"
+#include "domain/sato_piclog.h"
 
 // レベル7: アプリケーションヘッダー
-#include "application/cigs_excute_mission.h"
-#include "application/cigs_mode_mission.h"
-#include "application/cigs_mode_flash.h"
+#include "application/sato_excute_mission.h"
+#include "application/sato_mode_mission.h"
+#include "application/sato_mode_flash.h"
 
 
 //==============================================================================
@@ -55,11 +55,11 @@
 
 // ハードウェア層実装ファイル
 // 実装は各 .c からビルドするためヘッダーでの取り込みは不要。必要なら下記のように直下参照に修正。
-#include "hal/timer.c"
-#include "hal/uart.c"
-#include "hal/gpio.c"
-#include "device_driver/ad7490_driver.c"
-#include "device_driver/mcp4901_driver.c"
+#include "../cigs/hal/timer.c"
+#include "../cigs/hal/uart.c"
+#include "../cigs/hal/gpio.c"
+#include "../cigs/device_driver/ad7490_driver.c"
+#include "../cigs/device_driver/mcp4901_driver.c"
 
 // ライブラリ実装ファイル
 #include "../lib/device/ad7490.c"
@@ -72,15 +72,15 @@
 #include "../lib/communication/mission_tools.c"
 
 // コア機能実装ファイル
-#include "domain/cigs_iv.c"
-#include "domain/cigs_piclog.c"
-#include "domain/cigs_smf.c"
-#include "domain/cigs_flash.c"
+#include "domain/sato_iv.c"
+#include "domain/sato_piclog.c"
+#include "domain/sato_smf.c"
+#include "domain/sato_flash.c"
 
 // アプリケーション実装ファイル
-#include "application/cigs_excute_mission.c"
-#include "application/cigs_mode_mission.c"
-#include "application/cigs_mode_flash.c"
+#include "application/sato_excute_mission.c"
+#include "application/sato_mode_mission.c"
+#include "application/sato_mode_flash.c"
 
 #endif // MMJ_CIGS_MAIN_H
 //------------------End of File------------------

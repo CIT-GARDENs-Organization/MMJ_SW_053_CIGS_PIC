@@ -8,7 +8,7 @@ volatile unsigned int8 mission_datas[MISSION_DATA_SIZE] = {0x00};
 volatile int8 executed_mission_count = 0;
 */
 
-#define START_MAKER 0xFFFF
+#define START_MAKER 0xFF
 #define RESERVED_VALUE 0x00
 
 #define HEADER_SIZE 5  // START_MAKER + time (4バイト)
@@ -20,7 +20,6 @@ void make_meas_header(unsigned int8 *packetdata, unsigned int8 *cmd);
 
 
 // void sweep(unsigned int8 parameter[]);
-
 void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned int16 pd_threshold);
 void test_sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit);
 
@@ -62,28 +61,40 @@ typedef struct {
 typedef struct{
     unsigned int8 port_num; 
     unsigned int16 sweep_step;
-    iv_data_t data_buffer[0xFF];
+    unsigned int8 data_buffer[0x200];
     int1 active;
 } sweep_config_t;
+
+typedef struct{
+    unsigned int8 port_num; 
+    unsigned int16 sweep_step;
+    iv_data_t data_buffer[0xFF];
+    int1 active;
+} sweep_debug_config_t;
 
 typedef struct 
 {
     unsigned int8 data[3];
 } meas_data_t;
 
+#define PACKET_IV_HEADER_SIZE 51
+#define IV_HEADER_SIZE 17
+#define PACKET_IV_DATA_SIZE  63
+#define IV_DATA_SIZE  21
+
 typedef union{
-    unsigned int8 raw[PACKET_SIZE-1];
-
+    unsigned int8 raw[PACKET_SIZE];
     struct {
-        unsigned int16 start_marker;
+        unsigned int8 start_marker;
         unsigned int32 time_sec;
-        unsigned int16 time_msec;
+        unsigned int8 time_msec;
         meas_data_t env_data[2];
-        meas_data_t iv_data[16];
-
+        unsigned int8 ivdata[PACKET_IV_HEADER_SIZE];
+        unsigned int8 crc;
     }header;
     struct {
-        meas_data_t iv_data[21];
+        unsigned int8 iv_data[PACKET_IV_DATA_SIZE];
+        unsigned int8 crc;
     }data;
 } iv_data_packet_t;
 
@@ -98,7 +109,7 @@ void sweep_with_print();
 unsigned int16 calc_pd_value(unsigned int16 data);
 // 
 unsigned int16 calc_curr_value(unsigned int16 data);
-#define SHUNT_RESISTANCE_OHM 0.1
+#define SHUNT_RESISTANCE_OHM 0.05
 #define AMP_GAIN 200
 #define ADC_REF_VOLTAGE_MV 2500 
 #define ADC_MAX_READING 4095

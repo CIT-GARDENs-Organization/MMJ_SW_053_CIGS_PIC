@@ -12,10 +12,10 @@
 #define FLASH_STREAM3 SMF_STREAM // dont use
 
 typedef enum spi_stream{
-    SPI_0,
+    SPI_0 = 0,
     SPI_1,
     SPI_2,
-    SPI_3,
+    SPI_3
 }SpiStreamId;
 
 #define MT25QL128ABA 0x00     //Mission Flash

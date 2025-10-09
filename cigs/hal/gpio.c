@@ -1,4 +1,4 @@
-#include "mmj_cigs_config.h"
+#include "cigs_config.h"
 #include "gpio.h"
 #include "../../lib/tool/types.h"
 

@@ -1,9 +1,9 @@
-#include "mmj_cigs_mode_flash.h"                      // 同じフォルダのヘッダー
-#include "../domain/mmj_cigs_iv.h"          // 測定機能
+#include "cigs_mode_flash.h"                      // 同じフォルダのヘッダー
+#include "../domain/cigs_iv.h"          // 測定機能
 #include "../lib/tool/smf_queue.h"                   // ツールライブラリ
 #include "../lib/device/mt25q.h"                     // デバイスライブラリ
-#include "../domain/mmj_cigs_flash.h"             // ストレージ機能
-#include "../domain/mmj_cigs_piclog.h"            // ログ機能
+#include "../domain/cigs_flash.h"             // ストレージ機能
+#include "../domain/cigs_piclog.h"            // ログ機能
 #include "../lib/tool/calc_tools.h"
 
 // ========================== MISF Command ============================
@@ -170,7 +170,7 @@ void mode_misf_read(unsigned int8 *uplinkcmd_ptr)
 
    unsigned int8 readdata[PACKET_SIZE] = {0x00}; // Initialize read data buffer
    unsigned int32 read_address;
-   fprintf(PC, "READ DATA\r\n");
+   fprintf(PC, "ADDRESS  :\r\n");
 
    if(is_connect(mis_fm) == FALSE) {
       fprintf(PC, "Mission Flash is not connected\r\n");
@@ -180,6 +180,7 @@ void mode_misf_read(unsigned int8 *uplinkcmd_ptr)
 
    for (unsigned int32 packetcount = 0; packetcount < flash_param.readpacketnum; packetcount++){
       read_address = flash_param.readaddress + packetcount * PACKET_SIZE;
+      // fprintf(PC, "ADDRESS 0x%08LX DATA ",read_address);
       // 終端チェック
       if(read_address > MISF_END){
          fprintf(PC, "[FLASH] Read address 0x%08LX exceeds device end 0x%08LX -> stop\r\n", read_address, (unsigned int32)MISF_END);
@@ -195,6 +196,7 @@ void mode_misf_read(unsigned int8 *uplinkcmd_ptr)
          break;
       }
       read_data_bytes(mis_fm, read_address, readdata, PACKET_SIZE);
+      fprintf(PC, "%08LX : ",read_address);
       for (unsigned int8 bytecount = 0; bytecount < PACKET_SIZE; bytecount++){
          fprintf(PC,"%02X ",readdata[bytecount]);
       }
@@ -375,7 +377,7 @@ void mode_smf_erase_force(int8 parameter[])
    
 
    
-   for (int32 address = CIGS_DATA_TABLE_START_ADDRESS; address < CIGS_PICLOG_END_ADDRESS; address += SECTOR_64K_BYTE) {
+   for (int32 address = CIGS_DATA_TABLE_START_ADDRESS; address < CIGS_IV2_DATA_END_ADDRESS; address += SECTOR_64K_BYTE) {
       sector_erase(smf, address); // Erase each sector
    }
    piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution

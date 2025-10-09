@@ -28,7 +28,12 @@
         "mmj_cigs_mode_mission.h": "c",
         "smf_queue.h": "c",
         "mmj_cigs_smf.h": "c",
-        "EX_SPI.C": "cpp"
+        "EX_SPI.C": "cpp",
+        "ad7490_driver.h": "c",
+        "mmj_smf_memorymap.h": "c",
+        "cigs_excute_mission.h": "c",
+        "cigs_piclog.h": "c",
+        "cigs_flash.h": "c"
     },
     "C_Cpp.default.configurationProvider": "user.vscode-extension-for-ccsc",
     "C_Cpp.configurationWarnings": "disabled",
