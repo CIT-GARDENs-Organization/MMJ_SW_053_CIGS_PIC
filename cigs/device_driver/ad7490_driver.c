@@ -57,7 +57,7 @@ void ad7490_init()
     fprintf(PC, "AD7490 Initialize\r\n");
     output_high(ADC_CS); 
     delay_ms(10); 
-    unsigned int16 readdata = ad7490_read(ADC_DIODE_INNER_CURR);
+    unsigned int16 readdata = ad7490_read(ADC_CIGS1_CURR);
     delay_ms(1);
     fprintf(PC, "\t%04LX\r\n", readdata);
     if (readdata == 0xFFFF || readdata == 0x0000) {

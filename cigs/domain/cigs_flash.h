@@ -108,6 +108,7 @@ void print_flash_status(void);
 void add_smf_queue(MissionID mission_id, FunctionType func_type, SmfWriteMode write_mode);
 void misf_init();
 
+// Flash 操作用構造体
 typedef struct {
     unsigned int32 start;
     unsigned int32 end;

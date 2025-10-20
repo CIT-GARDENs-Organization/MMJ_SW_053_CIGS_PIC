@@ -10,8 +10,15 @@
 extern const ADDRESS_AREA_T MISF_ADDRESS_TABLE[];
 extern FlashCounter_t smf_counter_table[];
 
+extern int1 smf_update_flag[10]; // SMF更新フラグ
 
 
+// SMF管理用構造体
+typedef struct {
+    ADDRESS_AREA_T header_area;
+    ADDRESS_AREA_T data_area;
+} SMF_AREA_T;
+#define SMF_ID_COUNT 7
 
 
 // Mission ID 列挙（smf_queue.h の MissionID と整合させる）
@@ -42,18 +49,8 @@ typedef struct {
     int32 reserved;
 } SMF_PARTITION;
 
-// パーティション管理構造体
-typedef struct {
-    SMF_PARTITION piclog;     // データテーブル領域は利用しないため削除
-    SMF_PARTITION env;
-    SMF_PARTITION iv1_header;
-    SMF_PARTITION iv1_data;
-    SMF_PARTITION iv2_header;
-    SMF_PARTITION iv2_data;
-    int32 write_bytes[4];
-} PartitionParam;
 
-extern PartitionParam param;  // extern宣言に変更
+
 
 typedef union {
     unsigned int8 bytes[PACKET_SIZE];  // 生データアクセス用

@@ -33,7 +33,10 @@
         "mmj_smf_memorymap.h": "c",
         "cigs_excute_mission.h": "c",
         "cigs_piclog.h": "c",
-        "cigs_flash.h": "c"
+        "cigs_flash.h": "c",
+        "cigs_smf.h": "c",
+        "EX_CRC_HW.C": "cpp",
+        "EX_CRC.C": "cpp"
     },
     "C_Cpp.default.configurationProvider": "user.vscode-extension-for-ccsc",
     "C_Cpp.configurationWarnings": "disabled",

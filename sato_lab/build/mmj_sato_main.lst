@@ -1,4 +1,4 @@
-CCS PCH C Compiler, Version 5.104, 57077               05-10-25 21:41
+CCS PCH C Compiler, Version 5.104, 57077               15-10-25 17:18
 
                Filename:   c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\sato_lab\build\mmj_sato_main.lst
 
@@ -3840,15 +3840,15 @@ CCS PCH C Compiler, Version 5.104, 57077               05-10-25 21:41
 01F16:  DATA 0D,0A
 01F18:  DATA 0D,0A
 01F1A:  DATA 00,00
-01F1C:  DATA 35,2D
-01F1E:  DATA 4F,63
-01F20:  DATA 74,2D
-01F22:  DATA 32,35
-01F24:  DATA 00,00
-01F26:  DATA 32,31
-01F28:  DATA 3A,34
-01F2A:  DATA 31,3A
-01F2C:  DATA 35,34
+01F1C:  DATA 31,35
+01F1E:  DATA 2D,4F
+01F20:  DATA 63,74
+01F22:  DATA 2D,32
+01F24:  DATA 35,00
+01F26:  DATA 31,37
+01F28:  DATA 3A,31
+01F2A:  DATA 38,3A
+01F2C:  DATA 30,39
 01F2E:  DATA 00,00
 01F30:  DATA 5F,5F
 01F32:  DATA 5F,5F
@@ -6768,7 +6768,71 @@ CCS PCH C Compiler, Version 5.104, 57077               05-10-25 21:41
 ....................     IDF_CIGS_IV2_DATA = 0xC6,
 .................... }
 .................... */
+.................... // DATA ID for CIGS
+.................... #define DATA_ID_CIGS_DATA_TABLE 0xC0
+.................... #define DATA_ID_CIGS_PICLOG 0xC1
+.................... #define DATA_ID_CIGS_ENVIRO 0xC2
+.................... #define DATA_ID_CIGS_IV1_HEADER 0xC3
+.................... #define DATA_ID_CIGS_IV1_DATA 0xC4
+.................... #define DATA_ID_CIGS_IV2_HEADER 0xC5
+.................... #define DATA_ID_CIGS_IV2_DATA 0xC6
+.................... 
+.................... // FLASH ADDRESS for CIGS
+.................... #define SMF_DATA_TABLE_HEADER_START_ADDRESS   0x073B0000
+.................... #define SMF_DATA_TABLE_HEADER_END_ADDRESS     0x073B0FFF
+.................... #define SMF_DATA_TABLE_DATA_START_ADDRESS     0x073B1000
+.................... #define SMF_DATA_TABLE_DATA_END_ADDRESS       0x073B1FFF
+.................... 
+.................... #define SMF_PICLOG_HEADER_START_ADDRESS       0x073B2000
+.................... #define SMF_PICLOG_HEADER_END_ADDRESS         0x073B2FFF
+.................... #define SMF_PICLOG_DATA_START_ADDRESS         0x073B3000
+.................... #define SMF_PICLOG_DATA_END_ADDRESS           0x073C2FFF
+.................... 
+.................... #define SMF_ENVIRO_HEADER_START_ADDRESS       0x073C3000
+.................... #define SMF_ENVIRO_HEADER_END_ADDRESS         0x073C3FFF
+.................... #define SMF_ENVIRO_DATA_START_ADDRESS         0x073C4000
+.................... #define SMF_ENVIRO_DATA_END_ADDRESS           0x07463FFF
+.................... 
+.................... #define SMF_IV1_HEADER_HEADER_START_ADDRESS   0x07464000
+.................... #define SMF_IV1_HEADER_HEADER_END_ADDRESS     0x07464FFF
+.................... #define SMF_IV1_HEADER_DATA_START_ADDRESS     0x07465000
+.................... #define SMF_IV1_HEADER_DATA_END_ADDRESS       0x07504FFF
+.................... 
+.................... #define SMF_IV1_DATA_HEADER_START_ADDRESS     0x07505000
+.................... #define SMF_IV1_DATA_HEADER_END_ADDRESS       0x07505FFF
+.................... #define SMF_IV1_DATA_DATA_START_ADDRESS       0x07506000
+.................... #define SMF_IV1_DATA_DATA_END_ADDRESS         0x07905FFF
+.................... 
+.................... #define SMF_IV2_HEADER_HEADER_START_ADDRESS   0x07906000
+.................... #define SMF_IV2_HEADER_HEADER_END_ADDRESS     0x07906FFF
+.................... #define SMF_IV2_HEADER_DATA_START_ADDRESS     0x07907000
+.................... #define SMF_IV2_HEADER_DATA_END_ADDRESS       0x079A6FFF
+.................... 
+.................... #define SMF_IV2_DATA_HEADER_START_ADDRESS     0x079A7000
+.................... #define SMF_IV2_DATA_HEADER_END_ADDRESS       0x079A7FFF
+.................... #define SMF_IV2_DATA_DATA_START_ADDRESS       0x079A8000
+.................... #define SMF_IV2_DATA_DATA_END_ADDRESS         0x07DA7FFF
+.................... 
+.................... 
+.................... // FLASH SIZE for CIGS
+.................... #define SMF_DATA_TABLE_SIZE  4096
+.................... #define SMF_PICLOG_SIZE     1310720
+.................... #define SMF_ENVIRO_SIZE     1310720
+.................... #define SMF_IV1_HEADER_SIZE  655360
+.................... #define SMF_IV1_DATA_SIZE    4194304
+.................... #define SMF_IV2_HEADER_SIZE  655360
+.................... #define SMF_IV2_DATA_SIZE    4194304
+.................... 
 .................... #endif // SMF_MEMORY_MAP_H
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
 .................... 
 .................... 
 .................... // レベル4: デバイスドライバヘッダー
@@ -12778,7 +12842,71 @@ CCS PCH C Compiler, Version 5.104, 57077               05-10-25 21:41
 ....................     IDF_CIGS_IV2_DATA = 0xC6,
 .................... }
 .................... */
+.................... // DATA ID for CIGS
+.................... #define DATA_ID_CIGS_DATA_TABLE 0xC0
+.................... #define DATA_ID_CIGS_PICLOG 0xC1
+.................... #define DATA_ID_CIGS_ENVIRO 0xC2
+.................... #define DATA_ID_CIGS_IV1_HEADER 0xC3
+.................... #define DATA_ID_CIGS_IV1_DATA 0xC4
+.................... #define DATA_ID_CIGS_IV2_HEADER 0xC5
+.................... #define DATA_ID_CIGS_IV2_DATA 0xC6
+.................... 
+.................... // FLASH ADDRESS for CIGS
+.................... #define SMF_DATA_TABLE_HEADER_START_ADDRESS   0x073B0000
+.................... #define SMF_DATA_TABLE_HEADER_END_ADDRESS     0x073B0FFF
+.................... #define SMF_DATA_TABLE_DATA_START_ADDRESS     0x073B1000
+.................... #define SMF_DATA_TABLE_DATA_END_ADDRESS       0x073B1FFF
+.................... 
+.................... #define SMF_PICLOG_HEADER_START_ADDRESS       0x073B2000
+.................... #define SMF_PICLOG_HEADER_END_ADDRESS         0x073B2FFF
+.................... #define SMF_PICLOG_DATA_START_ADDRESS         0x073B3000
+.................... #define SMF_PICLOG_DATA_END_ADDRESS           0x073C2FFF
+.................... 
+.................... #define SMF_ENVIRO_HEADER_START_ADDRESS       0x073C3000
+.................... #define SMF_ENVIRO_HEADER_END_ADDRESS         0x073C3FFF
+.................... #define SMF_ENVIRO_DATA_START_ADDRESS         0x073C4000
+.................... #define SMF_ENVIRO_DATA_END_ADDRESS           0x07463FFF
+.................... 
+.................... #define SMF_IV1_HEADER_HEADER_START_ADDRESS   0x07464000
+.................... #define SMF_IV1_HEADER_HEADER_END_ADDRESS     0x07464FFF
+.................... #define SMF_IV1_HEADER_DATA_START_ADDRESS     0x07465000
+.................... #define SMF_IV1_HEADER_DATA_END_ADDRESS       0x07504FFF
+.................... 
+.................... #define SMF_IV1_DATA_HEADER_START_ADDRESS     0x07505000
+.................... #define SMF_IV1_DATA_HEADER_END_ADDRESS       0x07505FFF
+.................... #define SMF_IV1_DATA_DATA_START_ADDRESS       0x07506000
+.................... #define SMF_IV1_DATA_DATA_END_ADDRESS         0x07905FFF
+.................... 
+.................... #define SMF_IV2_HEADER_HEADER_START_ADDRESS   0x07906000
+.................... #define SMF_IV2_HEADER_HEADER_END_ADDRESS     0x07906FFF
+.................... #define SMF_IV2_HEADER_DATA_START_ADDRESS     0x07907000
+.................... #define SMF_IV2_HEADER_DATA_END_ADDRESS       0x079A6FFF
+.................... 
+.................... #define SMF_IV2_DATA_HEADER_START_ADDRESS     0x079A7000
+.................... #define SMF_IV2_DATA_HEADER_END_ADDRESS       0x079A7FFF
+.................... #define SMF_IV2_DATA_DATA_START_ADDRESS       0x079A8000
+.................... #define SMF_IV2_DATA_DATA_END_ADDRESS         0x07DA7FFF
+.................... 
+.................... 
+.................... // FLASH SIZE for CIGS
+.................... #define SMF_DATA_TABLE_SIZE  4096
+.................... #define SMF_PICLOG_SIZE     1310720
+.................... #define SMF_ENVIRO_SIZE     1310720
+.................... #define SMF_IV1_HEADER_SIZE  655360
+.................... #define SMF_IV1_DATA_SIZE    4194304
+.................... #define SMF_IV2_HEADER_SIZE  655360
+.................... #define SMF_IV2_DATA_SIZE    4194304
+.................... 
 .................... #endif // SMF_MEMORY_MAP_H
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
 .................... 
 .................... 
 .................... 
@@ -25029,7 +25157,71 @@ CCS PCH C Compiler, Version 5.104, 57077               05-10-25 21:41
 ....................     IDF_CIGS_IV2_DATA = 0xC6,
 .................... }
 .................... */
+.................... // DATA ID for CIGS
+.................... #define DATA_ID_CIGS_DATA_TABLE 0xC0
+.................... #define DATA_ID_CIGS_PICLOG 0xC1
+.................... #define DATA_ID_CIGS_ENVIRO 0xC2
+.................... #define DATA_ID_CIGS_IV1_HEADER 0xC3
+.................... #define DATA_ID_CIGS_IV1_DATA 0xC4
+.................... #define DATA_ID_CIGS_IV2_HEADER 0xC5
+.................... #define DATA_ID_CIGS_IV2_DATA 0xC6
+.................... 
+.................... // FLASH ADDRESS for CIGS
+.................... #define SMF_DATA_TABLE_HEADER_START_ADDRESS   0x073B0000
+.................... #define SMF_DATA_TABLE_HEADER_END_ADDRESS     0x073B0FFF
+.................... #define SMF_DATA_TABLE_DATA_START_ADDRESS     0x073B1000
+.................... #define SMF_DATA_TABLE_DATA_END_ADDRESS       0x073B1FFF
+.................... 
+.................... #define SMF_PICLOG_HEADER_START_ADDRESS       0x073B2000
+.................... #define SMF_PICLOG_HEADER_END_ADDRESS         0x073B2FFF
+.................... #define SMF_PICLOG_DATA_START_ADDRESS         0x073B3000
+.................... #define SMF_PICLOG_DATA_END_ADDRESS           0x073C2FFF
+.................... 
+.................... #define SMF_ENVIRO_HEADER_START_ADDRESS       0x073C3000
+.................... #define SMF_ENVIRO_HEADER_END_ADDRESS         0x073C3FFF
+.................... #define SMF_ENVIRO_DATA_START_ADDRESS         0x073C4000
+.................... #define SMF_ENVIRO_DATA_END_ADDRESS           0x07463FFF
+.................... 
+.................... #define SMF_IV1_HEADER_HEADER_START_ADDRESS   0x07464000
+.................... #define SMF_IV1_HEADER_HEADER_END_ADDRESS     0x07464FFF
+.................... #define SMF_IV1_HEADER_DATA_START_ADDRESS     0x07465000
+.................... #define SMF_IV1_HEADER_DATA_END_ADDRESS       0x07504FFF
+.................... 
+.................... #define SMF_IV1_DATA_HEADER_START_ADDRESS     0x07505000
+.................... #define SMF_IV1_DATA_HEADER_END_ADDRESS       0x07505FFF
+.................... #define SMF_IV1_DATA_DATA_START_ADDRESS       0x07506000
+.................... #define SMF_IV1_DATA_DATA_END_ADDRESS         0x07905FFF
+.................... 
+.................... #define SMF_IV2_HEADER_HEADER_START_ADDRESS   0x07906000
+.................... #define SMF_IV2_HEADER_HEADER_END_ADDRESS     0x07906FFF
+.................... #define SMF_IV2_HEADER_DATA_START_ADDRESS     0x07907000
+.................... #define SMF_IV2_HEADER_DATA_END_ADDRESS       0x079A6FFF
+.................... 
+.................... #define SMF_IV2_DATA_HEADER_START_ADDRESS     0x079A7000
+.................... #define SMF_IV2_DATA_HEADER_END_ADDRESS       0x079A7FFF
+.................... #define SMF_IV2_DATA_DATA_START_ADDRESS       0x079A8000
+.................... #define SMF_IV2_DATA_DATA_END_ADDRESS         0x07DA7FFF
+.................... 
+.................... 
+.................... // FLASH SIZE for CIGS
+.................... #define SMF_DATA_TABLE_SIZE  4096
+.................... #define SMF_PICLOG_SIZE     1310720
+.................... #define SMF_ENVIRO_SIZE     1310720
+.................... #define SMF_IV1_HEADER_SIZE  655360
+.................... #define SMF_IV1_DATA_SIZE    4194304
+.................... #define SMF_IV2_HEADER_SIZE  655360
+.................... #define SMF_IV2_DATA_SIZE    4194304
+.................... 
 .................... #endif // SMF_MEMORY_MAP_H
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
 .................... 
 .................... 
 .................... #define MAX_READ_SIZE 64

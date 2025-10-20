@@ -42,6 +42,7 @@
 #include "domain/cigs_iv.h"
 #include "domain/cigs_flash.h"
 #include "domain/cigs_piclog.h"
+#include "domain/cigs_smf.h"
 
 // レベル7: アプリケーションヘッダー
 #include "application/cigs_excute_mission.h"
