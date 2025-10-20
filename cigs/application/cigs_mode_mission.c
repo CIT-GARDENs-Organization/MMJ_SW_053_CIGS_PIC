@@ -36,8 +36,6 @@ void mode_meas_iv(unsigned int8 *uplinkcmd_ptr)
    data.mission_id = CIGS_IV1_DATA; // ID_CIGS_MEASURE_DATA; // コピーする目的のデータ種別
    data.write_mode = SMF_WRITE_CIRCULAR;
    data.source_type = SOURCE_MISF_UNCOPIED;
-
-
    fprintf(PC, "\r\nADD SMF QUEUE\r\n");
    fprintf(PC, "\tMission ID:   %02X\r\n", data.mission_id);
    fprintf(PC, "\tFunction Type:%02X\r\n", data.func_type);
@@ -45,8 +43,22 @@ void mode_meas_iv(unsigned int8 *uplinkcmd_ptr)
    fprintf(PC, "\tSource Type:  %02X\r\n", data.source_type);
    fprintf(PC, "\tStart Address:%04X\r\n", data.misf_start_addr);
    fprintf(PC, "\tSize:         %04X\r\n", misf_counter_table[CIGS_IV1_DATA].uncopied_counter);
-
    enqueue_flash_operation(&data); // SMFへのデータコピーを実行する
+
+
+   data.func_type = ENUM_SMF_WRITE;
+   data.mission_id = CIGS_IV2_DATA; // ID_CIGS_MEASURE_DATA; // コピーする目的のデータ種別
+   data.write_mode = SMF_WRITE_CIRCULAR;
+   data.source_type = SOURCE_MISF_UNCOPIED;
+   fprintf(PC, "\r\nADD SMF QUEUE\r\n");
+   fprintf(PC, "\tMission ID:   %02X\r\n", data.mission_id);
+   fprintf(PC, "\tFunction Type:%02X\r\n", data.func_type);
+   fprintf(PC, "\tWrite Mode:   %02X\r\n", data.write_mode);
+   fprintf(PC, "\tSource Type:  %02X\r\n", data.source_type);
+   fprintf(PC, "\tStart Address:%04X\r\n", data.misf_start_addr);
+   fprintf(PC, "\tSize:         %04X\r\n", misf_counter_table[CIGS_IV2_DATA].uncopied_counter);
+   enqueue_flash_operation(&data); // SMFへのデータコピーを実行する
+
 
    FlashOperationStruct piclog = {0};
    piclog.func_type = ENUM_SMF_WRITE;

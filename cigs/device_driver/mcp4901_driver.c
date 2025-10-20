@@ -13,7 +13,7 @@ void mcp4901_init()
     mcp4901_1_write(10); 
     mcp4901_2_write(10); 
     unsigned int16 readdata;
-    readdata = ad7490_read(ADC_DIODE_INNER_VREF); 
+    readdata = ad7490_read(ADC_CIGS1_CURR); 
     fprintf(PC, "%04LX\r\n", readdata);
     if (readdata == 0xFFFF || readdata == 0x0000) {
         fprintf(PC, "\t[DAC Port 1] Connect error!\r\n");
@@ -21,7 +21,7 @@ void mcp4901_init()
         fprintf(PC, "\t[DAC Port 1] Connect successful\r\n");
     }
     fprintf(PC, "%04LX\r\n", readdata);
-    readdata = ad7490_read(ADC_DIODE_OUTER_VREF); 
+    readdata = ad7490_read(ADC_CIGS2_CURR); 
     if (readdata == 0xFFFF || readdata == 0x0000) {
         fprintf(PC, "\t[DAC Port 2] Connect error!\r\n");
     } else {

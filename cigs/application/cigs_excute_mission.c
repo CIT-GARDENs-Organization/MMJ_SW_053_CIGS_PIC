@@ -257,13 +257,40 @@ void handle_smf_available(Command *command)
                         (unsigned int)smf_data->func_type);
                 break;
         }
-        processed_count++;
+         processed_count++;
+         unsigned int8 smf_id;
+         switch (smf_data->mission_id) {
+            case CIGS_DATA_TABLE:
+               smf_id = DATA_ID_CIGS_DATA_TABLE;
+               break;
+            case CIGS_PICLOG_DATA:
+               smf_id = DATA_ID_CIGS_PICLOG;
+               break;
+            case CIGS_ENVIRO_DATA:
+               smf_id = DATA_ID_CIGS_ENVIRO;
+               break;
+            case CIGS_IV1_HEADER:
+               smf_id = DATA_ID_CIGS_IV1_HEADER;
+               break;
+            case CIGS_IV1_DATA:
+               smf_id = DATA_ID_CIGS_IV1_DATA;
+               break;
+            case CIGS_IV2_HEADER:
+               smf_id = DATA_ID_CIGS_IV2_HEADER;
+               break;
+            case CIGS_IV2_DATA:
+               smf_id = DATA_ID_CIGS_IV2_DATA;
+                break;
+            default:
+                break;
+         }
+         
     }
 
     fprintf(PC, "\t\t-> Completed %u operations\r\n",
             (unsigned int)processed_count);
-
-    status[0] = FINISHED;
+      status[1] = 0xC0;
+      status[0] = FINISHED;
 }
 
 void handle_recieve_time(Command *command)

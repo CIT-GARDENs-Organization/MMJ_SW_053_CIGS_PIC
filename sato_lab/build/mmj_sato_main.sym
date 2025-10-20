@@ -1224,7 +1224,7 @@ ROM Allocation:
 00F6E4  smf_read
 00FE10  set_current_sec
 00FE24  execute_command
-00FEAC  @goto59831
+00FEAC  @goto1508
 010000  smf_write
 010DD0  smf_erase
 011452  handle_smf_available
@@ -1251,7 +1251,7 @@ Project Files:
     ..\lib\communication\value_status.h                     [16-9-25 11:46  CRC=D872A938]
     ..\lib\tool\calc_tools.h                                [16-9-25 11:46  CRC=C40F6EA4]
     ..\lib\tool\smf_queue.h                                 [20-9-25 17:21  CRC=C4629A23]
-    ..\lib\tool\mmj_smf_memorymap.h                         [04-10-25 19:43  CRC=E4FB652C]
+    ..\lib\tool\mmj_smf_memorymap.h                         [15-10-25 01:02  CRC=3C6C809C]
     ..\lib\device\mt25q.h                                   [30-9-25 19:46  CRC=1183BDB9]
     ..\lib\device\ad7490.h                                  [02-10-25 18:26  CRC=33D32650]
     ..\lib\device\mcp4901.h                                 [16-9-25 11:46  CRC=6A890493]
@@ -1289,9 +1289,9 @@ Project Files:
     application\sato_mode_mission.c                         [05-10-25 20:00  CRC=AE88ED05]
     application\sato_mode_flash.c                           [05-10-25 20:02  CRC=5CDA0F92]
 
-Source signature=7C96786C
+Source signature=D40793DC
 Program memory checksum=0000
-Hex file CRC=ABF2
+Hex file CRC=9297
 
 Units:
     c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\sato_lab\mmj_sato_main (main)
