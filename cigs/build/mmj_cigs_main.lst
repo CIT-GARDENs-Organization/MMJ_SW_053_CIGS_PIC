@@ -1,9 +1,9 @@
-CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
+CCS PCH C Compiler, Version 5.104, 57077               21-10-25 20:59
 
-               Filename:   c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\build\mmj_cigs_main.lst
+               Filename:   build\mmj_cigs_main.lst
 
-               ROM used:   72492 bytes (55%)
-                           Largest free fragment is 58480
+               ROM used:   72490 bytes (55%)
+                           Largest free fragment is 58478
                RAM used:   410 (11%) at main() level
                            2862 (80%) worst case
                Stack used: 8 locations (7 in main + 1 for interrupts)
@@ -11,7 +11,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 
 *
 00000:  NOP   
-00002:  GOTO   11640
+00002:  GOTO   1163C
 *
 00008:  NOP   
 0000A:  NOP   
@@ -83,7 +83,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 .................... #define MMJ_CIGS_MAIN_H
 .................... 
 .................... 
-.................... #define SELF_DEVICE_ID CIGS_PIC
+.................... #define SELF_DEVICE_ID SATO_PIC
 .................... 
 .................... 
 .................... #opt 0 // 0 = no optimization
@@ -3871,15 +3871,15 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 01F54:  DATA 0D,0A
 01F56:  DATA 0D,0A
 01F58:  DATA 00,00
-01F5A:  DATA 31,39
+01F5A:  DATA 32,31
 01F5C:  DATA 2D,4F
 01F5E:  DATA 63,74
 01F60:  DATA 2D,32
 01F62:  DATA 35,00
-01F64:  DATA 31,38
-01F66:  DATA 3A,33
-01F68:  DATA 32,3A
-01F6A:  DATA 35,36
+01F64:  DATA 32,30
+01F66:  DATA 3A,35
+01F68:  DATA 39,3A
+01F6A:  DATA 34,33
 01F6C:  DATA 00,00
 01F6E:  DATA 5F,5F
 01F70:  DATA 5F,5F
@@ -5974,28 +5974,28 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 0ED22:  MOVLB  E
 0ED24:  MOVWF  xF9
 0ED26:  MOVLB  0
-0ED28:  GOTO   F60A (RETURN)
+0ED28:  GOTO   F606 (RETURN)
 *
-11618:  ADDWF  FE8,W
-1161A:  CLRF   FF7
-1161C:  RLCF   FF7,F
-1161E:  ADDLW  39
-11620:  MOVWF  FF6
-11622:  MOVLW  16
-11624:  ADDWFC FF7,F
-11626:  MOVLW  01
-11628:  MOVWF  FF8
-1162A:  MOVWF  FFB
-1162C:  TBLRD*-
-1162E:  MOVF   FF5,W
-11630:  MOVWF  FFA
-11632:  TBLRD*
-11634:  MOVF   FF5,W
-11636:  MOVWF  FF9
-11638:  DATA C0,15
-1163A:  DATA D0,15
-1163C:  DATA F0,15
-1163E:  DATA 00,16
+11614:  ADDWF  FE8,W
+11616:  CLRF   FF7
+11618:  RLCF   FF7,F
+1161A:  ADDLW  35
+1161C:  MOVWF  FF6
+1161E:  MOVLW  16
+11620:  ADDWFC FF7,F
+11622:  MOVLW  01
+11624:  MOVWF  FF8
+11626:  MOVWF  FFB
+11628:  TBLRD*-
+1162A:  MOVF   FF5,W
+1162C:  MOVWF  FFA
+1162E:  TBLRD*
+11630:  MOVF   FF5,W
+11632:  MOVWF  FF9
+11634:  DATA BC,15
+11636:  DATA CC,15
+11638:  DATA EC,15
+1163A:  DATA FC,15
 .................... 
 .................... #list
 .................... 
@@ -6515,10 +6515,291 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 .................... #ifndef VALUE_STATUS_H
 .................... #define VALUE_STATUS_H
 .................... 
-.................... // there is used in main.c and mission
+.................... #include "../tool/mmj_smf_memorymap.h"
+.................... #ifndef SMF_MEMORY_MAP_H
+.................... #define SMF_MEMORY_MAP_H
+.................... 
+.................... /*
+....................  * Auto-generated Memory Map Header
+....................  * Generated from: MMJ_ICD_021_IICD_06_Memory_map.xlsx
+....................  * Generated at: 2025-07-27 20:54:05
+....................  */
+.................... #define PACKET_SIZE 64
+.................... 
+.................... typedef struct {
+....................     unsigned int32 used_size;
+....................     unsigned int8 loop_counter;
+....................     unsigned int8 reserved[3];
+.................... } partition_header_t;
+.................... 
+.................... 
+.................... typedef enum smf_memory_id_t{
+....................     // SATO
+....................     SMF_SATO_DATA_TABLE = 0xA0,
+....................     SMF_SATO_PICLOG = 0xA1,
+....................     SMF_SATO_INNER_DIODE_HEADER = 0xA2,
+....................     SMF_SATO_INNER_DIODE_DATA = 0xA3,
+....................     SMF_SATO_OUTER_DIODE_HEADER = 0xA4,
+....................     SMF_SATO_OUTER_DIODE_DATA = 0xA5,
+.................... 
+....................     // CIGS related IDs
+....................     SMF_CIGS_DATA_TABLE = 0xC0,
+....................     SMF_CIGS_PICLOG = 0xC1,
+....................     SMF_CIGS_ENVIRO = 0xC2,
+....................     SMF_CIGS_IV1_HEADER = 0xC3,
+....................     SMF_CIGS_IV1_DATA = 0xC4,
+....................     SMF_CIGS_IV2_HEADER = 0xC5,
+....................     SMF_CIGS_IV2_DATA = 0xC6,
+.................... };
+.................... 
+.................... 
+.................... 
+.................... // Base Memory Configuration
+.................... // #define SMF_SIZE 0x08000000 // 128MB
+.................... #define SMF_START_ADDRESS 0x00000000
+.................... #define SMF_END_ADDRESS   0x07FFFFFF
+.................... 
+.................... 
+.................... // ===== Device IDs from メモリマップ  =====
+.................... #define MAIN_DEVICE_ID 0x10
+.................... #define COM_DEVICE_ID 0x20
+.................... #define APRS_DEVICE_ID 0x60
+.................... #define CAM_DEVICE_ID 0x70
+.................... #define CHO_DEVICE_ID 0x80
+.................... #define SATO_DEVICE_ID 0x90
+.................... #define BHU_DEVICE_ID 0xB0
+.................... #define CIGS_DEVICE_ID 0xC0
+.................... 
+.................... // ===== Data IDs from メモリマップ  =====
+.................... #define ID_MAIN_ADDRESS_AREA 0x10
+.................... #define ID_MAIN_ADDRESS 0x11
+.................... #define ID_MAIN_RESERVED_COMMAND 0x12
+.................... #define ID_MAIN_HK 0x14
+.................... #define ID_MAIN_HSHK 0x15
+.................... #define ID_MAIN_LSHK 0x16
+.................... #define ID_MAIN_PIC_LOG 0x1F
+.................... #define ID_COM_RSSI_TRX_T_LOG 0x20
+.................... #define ID_COM_PIC_LOG 0x2F
+.................... #define ID_APRS_PIC_DATA_TABLE 0x60
+.................... #define ID_APRS_APRS 0x61
+.................... #define ID_APRS_IN_VEHICLE_COMMUNICATION_MISSION 0x62
+.................... #define ID_APRS_TLE_DATA 0x63
+.................... #define ID_APRS_ECOSYSTEM 0x67
+.................... #define ID_APRS_PIC_LOG 0x6F
+.................... #define ID_CAM_CHIBANY_THUMBNAIL_IMAGE_DATA_SIZE 0x70
+.................... #define ID_CAM_CHIBANY_IMAGE_DATA_SIZE 0x71
+.................... #define ID_CAM_CHIBANY_VIDEO_SIZE 0x72
+.................... #define ID_CAM_POLLEN_THUMBNAIL_IMAGE_DATA_SIZE 0x73
+.................... #define ID_CAM_POLEN_IMAGE_DATA_SIZE 0x74
+.................... #define ID_CAM_POLLEN_VIDEO_DATA_SIZE 0x75
+.................... #define ID_CAM_MCU_LOG_DATA_SIZE 0x7F
+.................... #define ID_CHO_GREECE_THUMBNAIL_IMAGE_DATA_SIZE 0x80
+.................... #define ID_CHO_GREECE_IMAGE_DATA_SIZE 0x81
+.................... #define ID_CHO_SENSOR_DATA_SIZE 0x82
+.................... #define ID_CHO_MCU_LOG_DATA_SIZE 0x8F
+.................... #define ID_SATO_PIC_DATA_TABLE 0x90
+.................... #define ID_SATO_CYCLE_MODE_DATA 0x91
+.................... #define ID_SATO_RANDOM_MODE_DATA 0x92
+.................... #define ID_SATO_MULTIPLE_POINT_MODE_DATA 0x93
+.................... #define ID_SATO_VOLTAGE_SWEEP_MODE_DATA 0x94
+.................... #define ID_SATO_PIC_LOG 0x9F
+.................... #define ID_BHU_FOREST_THUMBNAIL_IMAGE_DATA_SIZE 0xB0
+.................... #define ID_BHU_FOREST_IMAGE_DATA_SIZE 0xB1
+.................... #define ID_BHU_SENSOR_DATA_DATA_SIZE 0xB2
+.................... #define ID_BHU_MCU_LOG_DATA_SIZE 0xBF
+.................... #define ID_CIGS_DATA_TABLE 0xC0
+.................... #define ID_CIGS_MEASURE_DATA 0xC1
+.................... #define ID_CIGS_PICLOG 0xCF
+.................... 
+.................... // ===== Memory Address Mappings from メモリマップ  =====
+.................... #define MAIN_ADDRESS_AREA_START_ADDRESS 0x00000000
+.................... #define MAIN_ADDRESS_AREA_END_ADDRESS 0x00000FFF
+.................... #define MAIN_ADDRESS_START_ADDRESS 0x00001000
+.................... #define MAIN_ADDRESS_END_ADDRESS 0x00001FFF
+.................... #define MAIN_RESERVED_COMMAND_START_ADDRESS 0x00002000
+.................... #define MAIN_RESERVED_COMMAND_END_ADDRESS 0x00003FFF
+.................... #define MAIN_HK_START_ADDRESS 0x00004000
+.................... #define MAIN_HK_END_ADDRESS 0x02003FFF
+.................... #define MAIN_HSHK_START_ADDRESS 0x02004000
+.................... #define MAIN_HSHK_END_ADDRESS 0x02103FFF
+.................... #define MAIN_LSHK_START_ADDRESS 0x02104000
+.................... #define MAIN_LSHK_END_ADDRESS 0x02303FFF
+.................... #define MAIN_PIC_LOG_START_ADDRESS 0x02304000
+.................... #define MAIN_PIC_LOG_END_ADDRESS 0x0240FFFF
+.................... #define COM_RSSI_TRX_T_LOG_START_ADDRESS 0x02800000
+.................... #define COM_RSSI_TRX_T_LOG_END_ADDRESS 0x028FFFFF
+.................... #define COM_PIC_LOG_START_ADDRESS 0x02900000
+.................... #define COM_PIC_LOG_END_ADDRESS 0x029FFFFF
+.................... #define APRS_PIC_DATA_TABLE_START_ADDRESS 0x02C00000
+.................... #define APRS_PIC_DATA_TABLE_END_ADDRESS 0x02C00FFF
+.................... #define APRS_APRS_START_ADDRESS 0x02C01000
+.................... #define APRS_APRS_END_ADDRESS 0x02D00FFF
+.................... #define APRS_IN_VEHICLE_COMMUNICATION_MISSION_START_ADDRESS 0x02D01000
+.................... #define APRS_IN_VEHICLE_COMMUNICATION_MISSION_END_ADDRESS 0x02D01FFF
+.................... #define APRS_TLE_DATA_START_ADDRESS 0x02D02000
+.................... #define APRS_TLE_DATA_END_ADDRESS 0x02D02FFF
+.................... #define APRS_ECOSYSTEM_START_ADDRESS 0x02D03000
+.................... #define APRS_ECOSYSTEM_END_ADDRESS 0x02E02FFF
+.................... #define APRS_PIC_LOG_START_ADDRESS 0x02E03000
+.................... #define APRS_PIC_LOG_END_ADDRESS 0x02E03FFF
+.................... #define CAM_CHIBANY_THUMBNAIL_IMAGE_DATA_SIZE_START_ADDRESS 0x02F10000
+.................... #define CAM_CHIBANY_THUMBNAIL_IMAGE_DATA_SIZE_END_ADDRESS 0x02F10FFF
+.................... #define CAM_CHIBANY_IMAGE_DATA_SIZE_START_ADDRESS 0x03311000
+.................... #define CAM_CHIBANY_IMAGE_DATA_SIZE_END_ADDRESS 0x03311FFF
+.................... #define CAM_CHIBANY_VIDEO_SIZE_START_ADDRESS 0x03712000
+.................... #define CAM_CHIBANY_VIDEO_SIZE_END_ADDRESS 0x03712FFF
+.................... #define CAM_POLLEN_THUMBNAIL_IMAGE_DATA_SIZE_START_ADDRESS 0x03B13000
+.................... #define CAM_POLLEN_THUMBNAIL_IMAGE_DATA_SIZE_END_ADDRESS 0x03B13FFF
+.................... #define CAM_POLEN_IMAGE_DATA_SIZE_START_ADDRESS 0x03F14000
+.................... #define CAM_POLEN_IMAGE_DATA_SIZE_END_ADDRESS 0x03F14FFF
+.................... #define CAM_POLLEN_VIDEO_DATA_SIZE_START_ADDRESS 0x04315000
+.................... #define CAM_POLLEN_VIDEO_DATA_SIZE_END_ADDRESS 0x04315FFF
+.................... #define CAM_MCU_LOG_DATA_SIZE_START_ADDRESS 0x04320000
+.................... #define CAM_MCU_LOG_DATA_SIZE_END_ADDRESS 0x04320FFF
+.................... #define CHO_GREECE_THUMBNAIL_IMAGE_DATA_SIZE_START_ADDRESS 0x04440000
+.................... #define CHO_GREECE_THUMBNAIL_IMAGE_DATA_SIZE_END_ADDRESS 0x04440FFF
+.................... #define CHO_GREECE_IMAGE_DATA_SIZE_START_ADDRESS 0x04451000
+.................... #define CHO_GREECE_IMAGE_DATA_SIZE_END_ADDRESS 0x04451FFF
+.................... #define CHO_SENSOR_DATA_SIZE_START_ADDRESS 0x04852000
+.................... #define CHO_SENSOR_DATA_SIZE_END_ADDRESS 0x04852FFF
+.................... #define CHO_MCU_LOG_DATA_SIZE_START_ADDRESS 0x04863000
+.................... #define CHO_MCU_LOG_DATA_SIZE_END_ADDRESS 0x04863FFF
+.................... #define SATO_PIC_DATA_TABLE_START_ADDRESS 0x04980000
+.................... #define SATO_PIC_DATA_TABLE_END_ADDRESS 0x04980FFF
+.................... #define SATO_CYCLE_MODE_DATA_START_ADDRESS 0x04981000
+.................... #define SATO_CYCLE_MODE_DATA_END_ADDRESS 0x04A80FFF
+.................... #define SATO_RANDOM_MODE_DATA_START_ADDRESS 0x04A81000
+.................... #define SATO_RANDOM_MODE_DATA_END_ADDRESS 0x04E80FFF
+.................... #define SATO_MULTIPLE_POINT_MODE_DATA_START_ADDRESS 0x04E81000
+.................... #define SATO_MULTIPLE_POINT_MODE_DATA_END_ADDRESS 0x04F80FFF
+.................... #define SATO_VOLTAGE_SWEEP_MODE_DATA_START_ADDRESS 0x04F81000
+.................... #define SATO_VOLTAGE_SWEEP_MODE_DATA_END_ADDRESS 0x05080FFF
+.................... #define SATO_PIC_LOG_START_ADDRESS 0x05081000
+.................... #define SATO_PIC_LOG_END_ADDRESS 0x05081FFF
+.................... #define BHU_FOREST_THUMBNAIL_IMAGE_DATA_SIZE_START_ADDRESS 0x05190000
+.................... #define BHU_FOREST_THUMBNAIL_IMAGE_DATA_SIZE_END_ADDRESS 0x05190FFF
+.................... #define BHU_FOREST_IMAGE_DATA_SIZE_START_ADDRESS 0x05591000
+.................... #define BHU_FOREST_IMAGE_DATA_SIZE_END_ADDRESS 0x05591FFF
+.................... #define BHU_SENSOR_DATA_DATA_SIZE_START_ADDRESS 0x05992000
+.................... #define BHU_SENSOR_DATA_DATA_SIZE_END_ADDRESS 0x05992FFF
+.................... #define BHU_MCU_LOG_DATA_SIZE_START_ADDRESS 0x06993000
+.................... #define BHU_MCU_LOG_DATA_SIZE_END_ADDRESS   0x06993FFF
+.................... // CIGS related partitions
+.................... #define CIGS_DATA_TABLE_START_ADDRESS   0x06AA0000
+.................... #define CIGS_DATA_TABLE_END_ADDRESS     0x06AA0FFF
+.................... #define CIGS_PICLOG_START_ADDRESS       0x06AA1000
+.................... #define CIGS_PICLOG_END_ADDRESS         0x06AB0FFF
+.................... #define CIGS_ENVIRO_START_ADDRESS       0x06AB1000
+.................... #define CIGS_ENVIRO_END_ADDRESS         0x06B50FFF
+.................... #define CIGS_IV1_HEADER_START_ADDRESS   0x06B51000
+.................... #define CIGS_IV1_HEADER_END_ADDRESS     0x06BF0FFF
+.................... #define CIGS_IV1_DATA_START_ADDRESS     0x06BF1000
+.................... #define CIGS_IV1_DATA_END_ADDRESS       0x06FF0FFF
+.................... #define CIGS_IV2_HEADER_START_ADDRESS   0x06FF1000
+.................... #define CIGS_IV2_HEADER_END_ADDRESS     0x07090FFF
+.................... #define CIGS_IV2_DATA_START_ADDRESS     0x07091000
+.................... #define CIGS_IV2_DATA_END_ADDRESS       0x07490FFF
+.................... 
+.................... /*
+.................... enum smf_memory_id{
+....................     // SATO
+....................     SATO_DATA_TABLE = 0xA0,
+....................     SATO_PICLOG = 0xA1,
+....................     SATO_INNER_DIODE_HEADER = 0xA2,
+....................     SATO_INNER_DIODE_DATA = 0xA3,
+....................     SATO_OUTER_DIODE_HEADER = 0xA4,
+....................     SATO_OUTER_DIODE_DATA = 0xA5,
+.................... 
+....................     // CIGS related IDs
+....................     IDF_CIGS_DATA_TABLE = 0xC0,
+....................     IDF_CIGS_PICLOG = 0xC1,
+....................     IDF_CIGS_ENVIRO = 0xC2,
+....................     IDF_CIGS_IV1_HEADER = 0xC3,
+....................     IDF_CIGS_IV1_DATA = 0xC4,
+....................     IDF_CIGS_IV2_HEADER = 0xC5,
+....................     IDF_CIGS_IV2_DATA = 0xC6,
+.................... }
+.................... */
+.................... // DATA ID for CIGS
+.................... #define DATA_ID_CIGS_PICLOG 0xA0
+.................... #define DATA_ID_CIGS_IV1_DATA 0xA1
+.................... #define DATA_ID_CIGS_IV2_DATA 0xA2
+.................... 
+.................... 
+.................... // legacy by CIGS
+.................... #define DATA_ID_CIGS_DATA_TABLE 0xC0
+.................... #define DATA_ID_CIGS_ENVIRO 0xC2
+.................... #define DATA_ID_CIGS_IV1_HEADER 0xC3
+.................... #define DATA_ID_CIGS_IV2_HEADER 0xC5
+.................... 
+.................... 
+.................... // FLASH ADDRESS for CIGS
+.................... // FLASH SIZE for CIGS
+.................... #define SMF_PICLOG_SIZE     4096
+.................... #define SMF_IV1_DATA_SIZE    3579904
+.................... #define SMF_IV2_DATA_SIZE    3579904
+.................... 
+.................... #define SMF_PICLOG_HEADER_START_ADDRESS       0x05290000
+.................... #define SMF_PICLOG_HEADER_END_ADDRESS         SMF_PICLOG_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_PICLOG_DATA_START_ADDRESS         SMF_PICLOG_HEADER_END_ADDRESS + 1
+.................... #define SMF_PICLOG_DATA_END_ADDRESS           SMF_PICLOG_DATA_START_ADDRESS + SMF_PICLOG_SIZE - 1
+.................... 
+.................... #define SMF_IV1_DATA_HEADER_START_ADDRESS     0x05292000
+.................... #define SMF_IV1_DATA_HEADER_END_ADDRESS       SMF_IV1_DATA_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV1_DATA_DATA_START_ADDRESS       SMF_IV1_DATA_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV1_DATA_DATA_END_ADDRESS         SMF_IV1_DATA_DATA_START_ADDRESS + SMF_IV1_DATA_SIZE - 1
+.................... 
+.................... #define SMF_IV2_DATA_HEADER_START_ADDRESS     0x055FD000
+.................... #define SMF_IV2_DATA_HEADER_END_ADDRESS       SMF_IV2_DATA_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV2_DATA_DATA_START_ADDRESS       SMF_IV2_DATA_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV2_DATA_DATA_END_ADDRESS         SMF_IV2_DATA_DATA_START_ADDRESS + SMF_IV2_DATA_SIZE - 1
+.................... 
+.................... 
+.................... 
+.................... 
+.................... /*
+.................... legacy memory map for CIGS
+.................... */
+.................... // #define SMF_DATA_TABLE_SIZE  4096
+.................... // #define SMF_ENVIRO_SIZE     1310720
+.................... // #define SMF_IV1_HEADER_SIZE  655360
+.................... // #define SMF_IV2_HEADER_SIZE  655360
+.................... 
+.................... #define _RESERVED_ADDRESS                     0x07D8A000
+.................... #define SMF_DATA_TABLE_HEADER_START_ADDRESS   _RESERVED_ADDRESS
+.................... #define SMF_DATA_TABLE_HEADER_END_ADDRESS     SMF_DATA_TABLE_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_DATA_TABLE_DATA_START_ADDRESS     SMF_DATA_TABLE_HEADER_END_ADDRESS + 1
+.................... #define SMF_DATA_TABLE_DATA_END_ADDRESS       SMF_DATA_TABLE_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #define SMF_ENVIRO_HEADER_START_ADDRESS       SMF_DATA_TABLE_DATA_END_ADDRESS + 1
+.................... #define SMF_ENVIRO_HEADER_END_ADDRESS         SMF_ENVIRO_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_ENVIRO_DATA_START_ADDRESS         SMF_ENVIRO_HEADER_END_ADDRESS + 1
+.................... #define SMF_ENVIRO_DATA_END_ADDRESS           SMF_ENVIRO_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #define SMF_IV1_HEADER_HEADER_START_ADDRESS   SMF_ENVIRO_DATA_END_ADDRESS + 1
+.................... #define SMF_IV1_HEADER_HEADER_END_ADDRESS     SMF_IV1_HEADER_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV1_HEADER_DATA_START_ADDRESS     SMF_IV1_HEADER_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV1_HEADER_DATA_END_ADDRESS       SMF_IV1_HEADER_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #define SMF_IV2_HEADER_HEADER_START_ADDRESS   SMF_IV1_HEADER_DATA_END_ADDRESS + 1
+.................... #define SMF_IV2_HEADER_HEADER_END_ADDRESS     SMF_IV2_HEADER_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV2_HEADER_DATA_START_ADDRESS     SMF_IV2_HEADER_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV2_HEADER_DATA_END_ADDRESS       SMF_IV2_HEADER_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #endif // SMF_MEMORY_MAP_H
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
+.................... 
 .................... 
 .................... volatile int1 is_use_smf_req_in_mission = FALSE;
-.................... volatile int8 status[4] = {IDLE, 0, 0, 0};
+.................... volatile int8 status[4] = {IDLE, DATA_ID_CIGS_PICLOG, DATA_ID_CIGS_IV1_DATA, DATA_ID_CIGS_IV2_DATA};
 .................... 
 .................... 
 .................... #endif
@@ -6686,7 +6967,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 .................... 
 .................... 
 .................... // Base Memory Configuration
-.................... #define SMF_SIZE 0x08000000 // 128MB
+.................... // #define SMF_SIZE 0x08000000 // 128MB
 .................... #define SMF_START_ADDRESS 0x00000000
 .................... #define SMF_END_ADDRESS   0x07FFFFFF
 .................... 
@@ -6852,59 +7133,70 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 .................... }
 .................... */
 .................... // DATA ID for CIGS
+.................... #define DATA_ID_CIGS_PICLOG 0xA0
+.................... #define DATA_ID_CIGS_IV1_DATA 0xA1
+.................... #define DATA_ID_CIGS_IV2_DATA 0xA2
+.................... 
+.................... 
+.................... // legacy by CIGS
 .................... #define DATA_ID_CIGS_DATA_TABLE 0xC0
-.................... #define DATA_ID_CIGS_PICLOG 0xC1
 .................... #define DATA_ID_CIGS_ENVIRO 0xC2
 .................... #define DATA_ID_CIGS_IV1_HEADER 0xC3
-.................... #define DATA_ID_CIGS_IV1_DATA 0xC4
 .................... #define DATA_ID_CIGS_IV2_HEADER 0xC5
-.................... #define DATA_ID_CIGS_IV2_DATA 0xC6
+.................... 
 .................... 
 .................... // FLASH ADDRESS for CIGS
-.................... #define SMF_DATA_TABLE_HEADER_START_ADDRESS   0x073B0000
-.................... #define SMF_DATA_TABLE_HEADER_END_ADDRESS     0x073B0FFF
-.................... #define SMF_DATA_TABLE_DATA_START_ADDRESS     0x073B1000
-.................... #define SMF_DATA_TABLE_DATA_END_ADDRESS       0x073B1FFF
-.................... 
-.................... #define SMF_PICLOG_HEADER_START_ADDRESS       0x073B2000
-.................... #define SMF_PICLOG_HEADER_END_ADDRESS         0x073B2FFF
-.................... #define SMF_PICLOG_DATA_START_ADDRESS         0x073B3000
-.................... #define SMF_PICLOG_DATA_END_ADDRESS           0x073C2FFF
-.................... 
-.................... #define SMF_ENVIRO_HEADER_START_ADDRESS       0x073C3000
-.................... #define SMF_ENVIRO_HEADER_END_ADDRESS         0x073C3FFF
-.................... #define SMF_ENVIRO_DATA_START_ADDRESS         0x073C4000
-.................... #define SMF_ENVIRO_DATA_END_ADDRESS           0x07463FFF
-.................... 
-.................... #define SMF_IV1_HEADER_HEADER_START_ADDRESS   0x07464000
-.................... #define SMF_IV1_HEADER_HEADER_END_ADDRESS     0x07464FFF
-.................... #define SMF_IV1_HEADER_DATA_START_ADDRESS     0x07465000
-.................... #define SMF_IV1_HEADER_DATA_END_ADDRESS       0x07504FFF
-.................... 
-.................... #define SMF_IV1_DATA_HEADER_START_ADDRESS     0x07505000
-.................... #define SMF_IV1_DATA_HEADER_END_ADDRESS       0x07505FFF
-.................... #define SMF_IV1_DATA_DATA_START_ADDRESS       0x07506000
-.................... #define SMF_IV1_DATA_DATA_END_ADDRESS         0x07905FFF
-.................... 
-.................... #define SMF_IV2_HEADER_HEADER_START_ADDRESS   0x07906000
-.................... #define SMF_IV2_HEADER_HEADER_END_ADDRESS     0x07906FFF
-.................... #define SMF_IV2_HEADER_DATA_START_ADDRESS     0x07907000
-.................... #define SMF_IV2_HEADER_DATA_END_ADDRESS       0x079A6FFF
-.................... 
-.................... #define SMF_IV2_DATA_HEADER_START_ADDRESS     0x079A7000
-.................... #define SMF_IV2_DATA_HEADER_END_ADDRESS       0x079A7FFF
-.................... #define SMF_IV2_DATA_DATA_START_ADDRESS       0x079A8000
-.................... #define SMF_IV2_DATA_DATA_END_ADDRESS         0x07DA7FFF
-.................... 
-.................... 
 .................... // FLASH SIZE for CIGS
-.................... #define SMF_DATA_TABLE_SIZE  4096
-.................... #define SMF_PICLOG_SIZE     1310720
-.................... #define SMF_ENVIRO_SIZE     1310720
-.................... #define SMF_IV1_HEADER_SIZE  655360
-.................... #define SMF_IV1_DATA_SIZE    4194304
-.................... #define SMF_IV2_HEADER_SIZE  655360
-.................... #define SMF_IV2_DATA_SIZE    4194304
+.................... #define SMF_PICLOG_SIZE     4096
+.................... #define SMF_IV1_DATA_SIZE    3579904
+.................... #define SMF_IV2_DATA_SIZE    3579904
+.................... 
+.................... #define SMF_PICLOG_HEADER_START_ADDRESS       0x05290000
+.................... #define SMF_PICLOG_HEADER_END_ADDRESS         SMF_PICLOG_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_PICLOG_DATA_START_ADDRESS         SMF_PICLOG_HEADER_END_ADDRESS + 1
+.................... #define SMF_PICLOG_DATA_END_ADDRESS           SMF_PICLOG_DATA_START_ADDRESS + SMF_PICLOG_SIZE - 1
+.................... 
+.................... #define SMF_IV1_DATA_HEADER_START_ADDRESS     0x05292000
+.................... #define SMF_IV1_DATA_HEADER_END_ADDRESS       SMF_IV1_DATA_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV1_DATA_DATA_START_ADDRESS       SMF_IV1_DATA_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV1_DATA_DATA_END_ADDRESS         SMF_IV1_DATA_DATA_START_ADDRESS + SMF_IV1_DATA_SIZE - 1
+.................... 
+.................... #define SMF_IV2_DATA_HEADER_START_ADDRESS     0x055FD000
+.................... #define SMF_IV2_DATA_HEADER_END_ADDRESS       SMF_IV2_DATA_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV2_DATA_DATA_START_ADDRESS       SMF_IV2_DATA_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV2_DATA_DATA_END_ADDRESS         SMF_IV2_DATA_DATA_START_ADDRESS + SMF_IV2_DATA_SIZE - 1
+.................... 
+.................... 
+.................... 
+.................... 
+.................... /*
+.................... legacy memory map for CIGS
+.................... */
+.................... // #define SMF_DATA_TABLE_SIZE  4096
+.................... // #define SMF_ENVIRO_SIZE     1310720
+.................... // #define SMF_IV1_HEADER_SIZE  655360
+.................... // #define SMF_IV2_HEADER_SIZE  655360
+.................... 
+.................... #define _RESERVED_ADDRESS                     0x07D8A000
+.................... #define SMF_DATA_TABLE_HEADER_START_ADDRESS   _RESERVED_ADDRESS
+.................... #define SMF_DATA_TABLE_HEADER_END_ADDRESS     SMF_DATA_TABLE_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_DATA_TABLE_DATA_START_ADDRESS     SMF_DATA_TABLE_HEADER_END_ADDRESS + 1
+.................... #define SMF_DATA_TABLE_DATA_END_ADDRESS       SMF_DATA_TABLE_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #define SMF_ENVIRO_HEADER_START_ADDRESS       SMF_DATA_TABLE_DATA_END_ADDRESS + 1
+.................... #define SMF_ENVIRO_HEADER_END_ADDRESS         SMF_ENVIRO_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_ENVIRO_DATA_START_ADDRESS         SMF_ENVIRO_HEADER_END_ADDRESS + 1
+.................... #define SMF_ENVIRO_DATA_END_ADDRESS           SMF_ENVIRO_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #define SMF_IV1_HEADER_HEADER_START_ADDRESS   SMF_ENVIRO_DATA_END_ADDRESS + 1
+.................... #define SMF_IV1_HEADER_HEADER_END_ADDRESS     SMF_IV1_HEADER_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV1_HEADER_DATA_START_ADDRESS     SMF_IV1_HEADER_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV1_HEADER_DATA_END_ADDRESS       SMF_IV1_HEADER_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #define SMF_IV2_HEADER_HEADER_START_ADDRESS   SMF_IV1_HEADER_DATA_END_ADDRESS + 1
+.................... #define SMF_IV2_HEADER_HEADER_END_ADDRESS     SMF_IV2_HEADER_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV2_HEADER_DATA_START_ADDRESS     SMF_IV2_HEADER_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV2_HEADER_DATA_END_ADDRESS       SMF_IV2_HEADER_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
 .................... 
 .................... #endif // SMF_MEMORY_MAP_H
 .................... 
@@ -8555,18 +8847,18 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 02132:  MOVWF  FF8
 02134:  MOVLB  0
 02136:  CALL   202E
-0213A:  GOTO   11A28 (RETURN)
+0213A:  GOTO   11A2A (RETURN)
 .................... }
 .................... 
 .................... void set_current_sec(unsigned int32 new_sec)
 .................... {
 ....................    time_sec = new_sec;
 *
-0FF9A:  MOVFF  1A9,185
-0FF9E:  MOVFF  1A8,184
-0FFA2:  MOVFF  1A7,183
-0FFA6:  MOVFF  1A6,182
-0FFAA:  GOTO   11398 (RETURN)
+0FF96:  MOVFF  1A9,185
+0FF9A:  MOVFF  1A8,184
+0FF9E:  MOVFF  1A7,183
+0FFA2:  MOVFF  1A6,182
+0FFA6:  GOTO   11394 (RETURN)
 .................... }
 .................... 
 .................... unsigned int32 get_current_sec()
@@ -8684,7 +8976,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 020E0:  MOVLW  00
 020E2:  MOVWF  FF8
 020E4:  CALL   202E
-020E8:  GOTO   11A24 (RETURN)
+020E8:  GOTO   11A26 (RETURN)
 .................... }
 .................... 
 .................... void clear_receive_signal(unsigned int8 receive_signal[], int8 *receive_signal_size)
@@ -8921,7 +9213,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 04F92:  MOVWF  F94
 04F94:  BSF    F8B.7
 ....................     }
-04F96:  GOTO   11A82 (RETURN)
+04F96:  GOTO   11A84 (RETURN)
 .................... }
 .................... 
 .................... void connect_negative_power2(int1 state) {
@@ -9443,7 +9735,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 0240C:  MOVLW  00
 0240E:  MOVWF  FF8
 02410:  CALL   202E
-02414:  GOTO   11A2C (RETURN)
+02414:  GOTO   11A2E (RETURN)
 .................... }
 .................... 
 .................... unsigned int16 ad7490_read(int8 channel)
@@ -9974,7 +10266,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 02800:  MOVLW  00
 02802:  MOVWF  FF8
 02804:  CALL   202E
-02808:  GOTO   11A30 (RETURN)
+02808:  GOTO   11A32 (RETURN)
 .................... }
 .................... 
 .................... 
@@ -13508,7 +13800,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 .................... 
 .................... 
 .................... // Base Memory Configuration
-.................... #define SMF_SIZE 0x08000000 // 128MB
+.................... // #define SMF_SIZE 0x08000000 // 128MB
 .................... #define SMF_START_ADDRESS 0x00000000
 .................... #define SMF_END_ADDRESS   0x07FFFFFF
 .................... 
@@ -13674,59 +13966,70 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 .................... }
 .................... */
 .................... // DATA ID for CIGS
+.................... #define DATA_ID_CIGS_PICLOG 0xA0
+.................... #define DATA_ID_CIGS_IV1_DATA 0xA1
+.................... #define DATA_ID_CIGS_IV2_DATA 0xA2
+.................... 
+.................... 
+.................... // legacy by CIGS
 .................... #define DATA_ID_CIGS_DATA_TABLE 0xC0
-.................... #define DATA_ID_CIGS_PICLOG 0xC1
 .................... #define DATA_ID_CIGS_ENVIRO 0xC2
 .................... #define DATA_ID_CIGS_IV1_HEADER 0xC3
-.................... #define DATA_ID_CIGS_IV1_DATA 0xC4
 .................... #define DATA_ID_CIGS_IV2_HEADER 0xC5
-.................... #define DATA_ID_CIGS_IV2_DATA 0xC6
+.................... 
 .................... 
 .................... // FLASH ADDRESS for CIGS
-.................... #define SMF_DATA_TABLE_HEADER_START_ADDRESS   0x073B0000
-.................... #define SMF_DATA_TABLE_HEADER_END_ADDRESS     0x073B0FFF
-.................... #define SMF_DATA_TABLE_DATA_START_ADDRESS     0x073B1000
-.................... #define SMF_DATA_TABLE_DATA_END_ADDRESS       0x073B1FFF
-.................... 
-.................... #define SMF_PICLOG_HEADER_START_ADDRESS       0x073B2000
-.................... #define SMF_PICLOG_HEADER_END_ADDRESS         0x073B2FFF
-.................... #define SMF_PICLOG_DATA_START_ADDRESS         0x073B3000
-.................... #define SMF_PICLOG_DATA_END_ADDRESS           0x073C2FFF
-.................... 
-.................... #define SMF_ENVIRO_HEADER_START_ADDRESS       0x073C3000
-.................... #define SMF_ENVIRO_HEADER_END_ADDRESS         0x073C3FFF
-.................... #define SMF_ENVIRO_DATA_START_ADDRESS         0x073C4000
-.................... #define SMF_ENVIRO_DATA_END_ADDRESS           0x07463FFF
-.................... 
-.................... #define SMF_IV1_HEADER_HEADER_START_ADDRESS   0x07464000
-.................... #define SMF_IV1_HEADER_HEADER_END_ADDRESS     0x07464FFF
-.................... #define SMF_IV1_HEADER_DATA_START_ADDRESS     0x07465000
-.................... #define SMF_IV1_HEADER_DATA_END_ADDRESS       0x07504FFF
-.................... 
-.................... #define SMF_IV1_DATA_HEADER_START_ADDRESS     0x07505000
-.................... #define SMF_IV1_DATA_HEADER_END_ADDRESS       0x07505FFF
-.................... #define SMF_IV1_DATA_DATA_START_ADDRESS       0x07506000
-.................... #define SMF_IV1_DATA_DATA_END_ADDRESS         0x07905FFF
-.................... 
-.................... #define SMF_IV2_HEADER_HEADER_START_ADDRESS   0x07906000
-.................... #define SMF_IV2_HEADER_HEADER_END_ADDRESS     0x07906FFF
-.................... #define SMF_IV2_HEADER_DATA_START_ADDRESS     0x07907000
-.................... #define SMF_IV2_HEADER_DATA_END_ADDRESS       0x079A6FFF
-.................... 
-.................... #define SMF_IV2_DATA_HEADER_START_ADDRESS     0x079A7000
-.................... #define SMF_IV2_DATA_HEADER_END_ADDRESS       0x079A7FFF
-.................... #define SMF_IV2_DATA_DATA_START_ADDRESS       0x079A8000
-.................... #define SMF_IV2_DATA_DATA_END_ADDRESS         0x07DA7FFF
-.................... 
-.................... 
 .................... // FLASH SIZE for CIGS
-.................... #define SMF_DATA_TABLE_SIZE  4096
-.................... #define SMF_PICLOG_SIZE     1310720
-.................... #define SMF_ENVIRO_SIZE     1310720
-.................... #define SMF_IV1_HEADER_SIZE  655360
-.................... #define SMF_IV1_DATA_SIZE    4194304
-.................... #define SMF_IV2_HEADER_SIZE  655360
-.................... #define SMF_IV2_DATA_SIZE    4194304
+.................... #define SMF_PICLOG_SIZE     4096
+.................... #define SMF_IV1_DATA_SIZE    3579904
+.................... #define SMF_IV2_DATA_SIZE    3579904
+.................... 
+.................... #define SMF_PICLOG_HEADER_START_ADDRESS       0x05290000
+.................... #define SMF_PICLOG_HEADER_END_ADDRESS         SMF_PICLOG_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_PICLOG_DATA_START_ADDRESS         SMF_PICLOG_HEADER_END_ADDRESS + 1
+.................... #define SMF_PICLOG_DATA_END_ADDRESS           SMF_PICLOG_DATA_START_ADDRESS + SMF_PICLOG_SIZE - 1
+.................... 
+.................... #define SMF_IV1_DATA_HEADER_START_ADDRESS     0x05292000
+.................... #define SMF_IV1_DATA_HEADER_END_ADDRESS       SMF_IV1_DATA_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV1_DATA_DATA_START_ADDRESS       SMF_IV1_DATA_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV1_DATA_DATA_END_ADDRESS         SMF_IV1_DATA_DATA_START_ADDRESS + SMF_IV1_DATA_SIZE - 1
+.................... 
+.................... #define SMF_IV2_DATA_HEADER_START_ADDRESS     0x055FD000
+.................... #define SMF_IV2_DATA_HEADER_END_ADDRESS       SMF_IV2_DATA_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV2_DATA_DATA_START_ADDRESS       SMF_IV2_DATA_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV2_DATA_DATA_END_ADDRESS         SMF_IV2_DATA_DATA_START_ADDRESS + SMF_IV2_DATA_SIZE - 1
+.................... 
+.................... 
+.................... 
+.................... 
+.................... /*
+.................... legacy memory map for CIGS
+.................... */
+.................... // #define SMF_DATA_TABLE_SIZE  4096
+.................... // #define SMF_ENVIRO_SIZE     1310720
+.................... // #define SMF_IV1_HEADER_SIZE  655360
+.................... // #define SMF_IV2_HEADER_SIZE  655360
+.................... 
+.................... #define _RESERVED_ADDRESS                     0x07D8A000
+.................... #define SMF_DATA_TABLE_HEADER_START_ADDRESS   _RESERVED_ADDRESS
+.................... #define SMF_DATA_TABLE_HEADER_END_ADDRESS     SMF_DATA_TABLE_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_DATA_TABLE_DATA_START_ADDRESS     SMF_DATA_TABLE_HEADER_END_ADDRESS + 1
+.................... #define SMF_DATA_TABLE_DATA_END_ADDRESS       SMF_DATA_TABLE_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #define SMF_ENVIRO_HEADER_START_ADDRESS       SMF_DATA_TABLE_DATA_END_ADDRESS + 1
+.................... #define SMF_ENVIRO_HEADER_END_ADDRESS         SMF_ENVIRO_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_ENVIRO_DATA_START_ADDRESS         SMF_ENVIRO_HEADER_END_ADDRESS + 1
+.................... #define SMF_ENVIRO_DATA_END_ADDRESS           SMF_ENVIRO_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #define SMF_IV1_HEADER_HEADER_START_ADDRESS   SMF_ENVIRO_DATA_END_ADDRESS + 1
+.................... #define SMF_IV1_HEADER_HEADER_END_ADDRESS     SMF_IV1_HEADER_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV1_HEADER_DATA_START_ADDRESS     SMF_IV1_HEADER_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV1_HEADER_DATA_END_ADDRESS       SMF_IV1_HEADER_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #define SMF_IV2_HEADER_HEADER_START_ADDRESS   SMF_IV1_HEADER_DATA_END_ADDRESS + 1
+.................... #define SMF_IV2_HEADER_HEADER_END_ADDRESS     SMF_IV2_HEADER_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV2_HEADER_DATA_START_ADDRESS     SMF_IV2_HEADER_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV2_HEADER_DATA_END_ADDRESS       SMF_IV2_HEADER_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
 .................... 
 .................... #endif // SMF_MEMORY_MAP_H
 .................... 
@@ -14614,7 +14917,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 054AA:  MOVWF  01
 054AC:  MOVLW  01
 054AE:  MOVWF  02
-054B0:  GOTO   11AAC (RETURN)
+054B0:  GOTO   11AAE (RETURN)
 .................... }
 .................... 
 .................... static int8 trim_receive_signal_header(unsigned int8 receive_signal[], int8 receive_signal_size)
@@ -14924,7 +15227,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 ....................    if (SELF_DEVICE_ID == device_id)
 051F2:  MOVLB  1
 051F4:  MOVF   xB6,W
-051F6:  SUBLW  0C
+051F6:  SUBLW  0A
 051F8:  BTFSC  FD8.2
 051FA:  BRA    5202
 051FC:  MOVLB  0
@@ -14986,7 +15289,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 05272:  MOVWF  xC2
 05274:  MOVLB  0
 05276:  CALL   2064
-0527A:  MOVLW  0C
+0527A:  MOVLW  0A
 0527C:  MOVLB  9
 0527E:  MOVWF  xE8
 05280:  MOVLW  37
@@ -25398,7 +25701,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 .................... 
 .................... 
 .................... // Base Memory Configuration
-.................... #define SMF_SIZE 0x08000000 // 128MB
+.................... // #define SMF_SIZE 0x08000000 // 128MB
 .................... #define SMF_START_ADDRESS 0x00000000
 .................... #define SMF_END_ADDRESS   0x07FFFFFF
 .................... 
@@ -25564,59 +25867,70 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 .................... }
 .................... */
 .................... // DATA ID for CIGS
+.................... #define DATA_ID_CIGS_PICLOG 0xA0
+.................... #define DATA_ID_CIGS_IV1_DATA 0xA1
+.................... #define DATA_ID_CIGS_IV2_DATA 0xA2
+.................... 
+.................... 
+.................... // legacy by CIGS
 .................... #define DATA_ID_CIGS_DATA_TABLE 0xC0
-.................... #define DATA_ID_CIGS_PICLOG 0xC1
 .................... #define DATA_ID_CIGS_ENVIRO 0xC2
 .................... #define DATA_ID_CIGS_IV1_HEADER 0xC3
-.................... #define DATA_ID_CIGS_IV1_DATA 0xC4
 .................... #define DATA_ID_CIGS_IV2_HEADER 0xC5
-.................... #define DATA_ID_CIGS_IV2_DATA 0xC6
+.................... 
 .................... 
 .................... // FLASH ADDRESS for CIGS
-.................... #define SMF_DATA_TABLE_HEADER_START_ADDRESS   0x073B0000
-.................... #define SMF_DATA_TABLE_HEADER_END_ADDRESS     0x073B0FFF
-.................... #define SMF_DATA_TABLE_DATA_START_ADDRESS     0x073B1000
-.................... #define SMF_DATA_TABLE_DATA_END_ADDRESS       0x073B1FFF
-.................... 
-.................... #define SMF_PICLOG_HEADER_START_ADDRESS       0x073B2000
-.................... #define SMF_PICLOG_HEADER_END_ADDRESS         0x073B2FFF
-.................... #define SMF_PICLOG_DATA_START_ADDRESS         0x073B3000
-.................... #define SMF_PICLOG_DATA_END_ADDRESS           0x073C2FFF
-.................... 
-.................... #define SMF_ENVIRO_HEADER_START_ADDRESS       0x073C3000
-.................... #define SMF_ENVIRO_HEADER_END_ADDRESS         0x073C3FFF
-.................... #define SMF_ENVIRO_DATA_START_ADDRESS         0x073C4000
-.................... #define SMF_ENVIRO_DATA_END_ADDRESS           0x07463FFF
-.................... 
-.................... #define SMF_IV1_HEADER_HEADER_START_ADDRESS   0x07464000
-.................... #define SMF_IV1_HEADER_HEADER_END_ADDRESS     0x07464FFF
-.................... #define SMF_IV1_HEADER_DATA_START_ADDRESS     0x07465000
-.................... #define SMF_IV1_HEADER_DATA_END_ADDRESS       0x07504FFF
-.................... 
-.................... #define SMF_IV1_DATA_HEADER_START_ADDRESS     0x07505000
-.................... #define SMF_IV1_DATA_HEADER_END_ADDRESS       0x07505FFF
-.................... #define SMF_IV1_DATA_DATA_START_ADDRESS       0x07506000
-.................... #define SMF_IV1_DATA_DATA_END_ADDRESS         0x07905FFF
-.................... 
-.................... #define SMF_IV2_HEADER_HEADER_START_ADDRESS   0x07906000
-.................... #define SMF_IV2_HEADER_HEADER_END_ADDRESS     0x07906FFF
-.................... #define SMF_IV2_HEADER_DATA_START_ADDRESS     0x07907000
-.................... #define SMF_IV2_HEADER_DATA_END_ADDRESS       0x079A6FFF
-.................... 
-.................... #define SMF_IV2_DATA_HEADER_START_ADDRESS     0x079A7000
-.................... #define SMF_IV2_DATA_HEADER_END_ADDRESS       0x079A7FFF
-.................... #define SMF_IV2_DATA_DATA_START_ADDRESS       0x079A8000
-.................... #define SMF_IV2_DATA_DATA_END_ADDRESS         0x07DA7FFF
-.................... 
-.................... 
 .................... // FLASH SIZE for CIGS
-.................... #define SMF_DATA_TABLE_SIZE  4096
-.................... #define SMF_PICLOG_SIZE     1310720
-.................... #define SMF_ENVIRO_SIZE     1310720
-.................... #define SMF_IV1_HEADER_SIZE  655360
-.................... #define SMF_IV1_DATA_SIZE    4194304
-.................... #define SMF_IV2_HEADER_SIZE  655360
-.................... #define SMF_IV2_DATA_SIZE    4194304
+.................... #define SMF_PICLOG_SIZE     4096
+.................... #define SMF_IV1_DATA_SIZE    3579904
+.................... #define SMF_IV2_DATA_SIZE    3579904
+.................... 
+.................... #define SMF_PICLOG_HEADER_START_ADDRESS       0x05290000
+.................... #define SMF_PICLOG_HEADER_END_ADDRESS         SMF_PICLOG_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_PICLOG_DATA_START_ADDRESS         SMF_PICLOG_HEADER_END_ADDRESS + 1
+.................... #define SMF_PICLOG_DATA_END_ADDRESS           SMF_PICLOG_DATA_START_ADDRESS + SMF_PICLOG_SIZE - 1
+.................... 
+.................... #define SMF_IV1_DATA_HEADER_START_ADDRESS     0x05292000
+.................... #define SMF_IV1_DATA_HEADER_END_ADDRESS       SMF_IV1_DATA_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV1_DATA_DATA_START_ADDRESS       SMF_IV1_DATA_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV1_DATA_DATA_END_ADDRESS         SMF_IV1_DATA_DATA_START_ADDRESS + SMF_IV1_DATA_SIZE - 1
+.................... 
+.................... #define SMF_IV2_DATA_HEADER_START_ADDRESS     0x055FD000
+.................... #define SMF_IV2_DATA_HEADER_END_ADDRESS       SMF_IV2_DATA_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV2_DATA_DATA_START_ADDRESS       SMF_IV2_DATA_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV2_DATA_DATA_END_ADDRESS         SMF_IV2_DATA_DATA_START_ADDRESS + SMF_IV2_DATA_SIZE - 1
+.................... 
+.................... 
+.................... 
+.................... 
+.................... /*
+.................... legacy memory map for CIGS
+.................... */
+.................... // #define SMF_DATA_TABLE_SIZE  4096
+.................... // #define SMF_ENVIRO_SIZE     1310720
+.................... // #define SMF_IV1_HEADER_SIZE  655360
+.................... // #define SMF_IV2_HEADER_SIZE  655360
+.................... 
+.................... #define _RESERVED_ADDRESS                     0x07D8A000
+.................... #define SMF_DATA_TABLE_HEADER_START_ADDRESS   _RESERVED_ADDRESS
+.................... #define SMF_DATA_TABLE_HEADER_END_ADDRESS     SMF_DATA_TABLE_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_DATA_TABLE_DATA_START_ADDRESS     SMF_DATA_TABLE_HEADER_END_ADDRESS + 1
+.................... #define SMF_DATA_TABLE_DATA_END_ADDRESS       SMF_DATA_TABLE_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #define SMF_ENVIRO_HEADER_START_ADDRESS       SMF_DATA_TABLE_DATA_END_ADDRESS + 1
+.................... #define SMF_ENVIRO_HEADER_END_ADDRESS         SMF_ENVIRO_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_ENVIRO_DATA_START_ADDRESS         SMF_ENVIRO_HEADER_END_ADDRESS + 1
+.................... #define SMF_ENVIRO_DATA_END_ADDRESS           SMF_ENVIRO_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #define SMF_IV1_HEADER_HEADER_START_ADDRESS   SMF_ENVIRO_DATA_END_ADDRESS + 1
+.................... #define SMF_IV1_HEADER_HEADER_END_ADDRESS     SMF_IV1_HEADER_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV1_HEADER_DATA_START_ADDRESS     SMF_IV1_HEADER_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV1_HEADER_DATA_END_ADDRESS       SMF_IV1_HEADER_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... 
+.................... #define SMF_IV2_HEADER_HEADER_START_ADDRESS   SMF_IV1_HEADER_DATA_END_ADDRESS + 1
+.................... #define SMF_IV2_HEADER_HEADER_END_ADDRESS     SMF_IV2_HEADER_HEADER_START_ADDRESS + SUBSECTOR_SIZE - 1
+.................... #define SMF_IV2_HEADER_DATA_START_ADDRESS     SMF_IV2_HEADER_HEADER_END_ADDRESS + 1
+.................... #define SMF_IV2_HEADER_DATA_END_ADDRESS       SMF_IV2_HEADER_DATA_START_ADDRESS + SUBSECTOR_SIZE - 1
 .................... 
 .................... #endif // SMF_MEMORY_MAP_H
 .................... 
@@ -25948,7 +26262,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 0F0AE:  MOVWF  FF8
 0F0B0:  CALL   202E
 ....................         return;
-0F0B4:  GOTO   FF96
+0F0B4:  GOTO   FF92
 ....................     }    
 ....................     if (!is_connect(smf))
 0F0B8:  MOVFF  119,23A
@@ -25969,7 +26283,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 0F0DE:  MOVWF  FF8
 0F0E0:  CALL   202E
 ....................         return;
-0F0E4:  GOTO   FF96
+0F0E4:  GOTO   FF92
 ....................     }    
 .................... 
 .................... 
@@ -26313,7 +26627,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 0F3D0:  GOTO   F408
 0F3D4:  XORLW  01
 0F3D6:  BTFSC  FD8.2
-0F3D8:  GOTO   F448
+0F3D8:  GOTO   F44A
 0F3DC:  XORLW  03
 0F3DE:  BTFSC  FD8.2
 0F3E0:  GOTO   F48A
@@ -26322,14 +26636,14 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 0F3E8:  GOTO   F4CC
 0F3EC:  XORLW  07
 0F3EE:  BTFSC  FD8.2
-0F3F0:  GOTO   F50E
+0F3F0:  GOTO   F50C
 0F3F4:  XORLW  01
 0F3F6:  BTFSC  FD8.2
-0F3F8:  GOTO   F550
+0F3F8:  GOTO   F54E
 0F3FC:  XORLW  03
 0F3FE:  BTFSC  FD8.2
-0F400:  GOTO   F592
-0F404:  GOTO   F5D4
+0F400:  GOTO   F58E
+0F404:  GOTO   F5D0
 ....................     {
 ....................         case CIGS_DATA_TABLE:
 ....................             fprintf(PC, "FLASH ID: CIGS_DATA_TABLE\r\n");
@@ -26344,66 +26658,66 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 0F418:  MOVLW  07
 0F41A:  MOVLB  1
 0F41C:  MOVWF  xB2
-0F41E:  MOVLW  3B
+0F41E:  MOVLW  D8
 0F420:  MOVWF  xB1
-0F422:  CLRF   xB0
-0F424:  CLRF   xAF
+0F422:  MOVLW  A0
+0F424:  MOVWF  xB0
+0F426:  CLRF   xAF
 ....................             smf_data_address_start = SMF_DATA_TABLE_DATA_START_ADDRESS;
-0F426:  MOVLW  07
-0F428:  MOVWF  xB6
-0F42A:  MOVLW  3B
-0F42C:  MOVWF  xB5
-0F42E:  MOVLW  10
-0F430:  MOVWF  xB4
-0F432:  CLRF   xB3
+0F428:  MOVLW  07
+0F42A:  MOVWF  xB6
+0F42C:  MOVLW  D8
+0F42E:  MOVWF  xB5
+0F430:  MOVLW  B0
+0F432:  MOVWF  xB4
+0F434:  CLRF   xB3
 ....................             smf_data_address_end = SMF_DATA_TABLE_DATA_END_ADDRESS;
-0F434:  MOVLW  07
-0F436:  MOVWF  xBA
-0F438:  MOVLW  3B
-0F43A:  MOVWF  xB9
-0F43C:  MOVLW  1F
-0F43E:  MOVWF  xB8
-0F440:  SETF   xB7
+0F436:  MOVLW  07
+0F438:  MOVWF  xBA
+0F43A:  MOVLW  D8
+0F43C:  MOVWF  xB9
+0F43E:  MOVLW  BF
+0F440:  MOVWF  xB8
+0F442:  SETF   xB7
 ....................             break;
-0F442:  MOVLB  0
-0F444:  GOTO   F62A
+0F444:  MOVLB  0
+0F446:  GOTO   F626
 ....................         case CIGS_PICLOG_DATA:
 ....................             fprintf(PC, "FLASH ID: CIGS_PICLOG_DATA\r\n");
-0F448:  MOVLW  F0
-0F44A:  MOVWF  FF6
-0F44C:  MOVLW  08
-0F44E:  MOVWF  FF7
-0F450:  MOVLW  00
-0F452:  MOVWF  FF8
-0F454:  CALL   202E
+0F44A:  MOVLW  F0
+0F44C:  MOVWF  FF6
+0F44E:  MOVLW  08
+0F450:  MOVWF  FF7
+0F452:  MOVLW  00
+0F454:  MOVWF  FF8
+0F456:  CALL   202E
 ....................             smf_header_address_start = SMF_PICLOG_HEADER_START_ADDRESS;
-0F458:  MOVLW  07
-0F45A:  MOVLB  1
-0F45C:  MOVWF  xB2
-0F45E:  MOVLW  3B
-0F460:  MOVWF  xB1
-0F462:  MOVLW  20
-0F464:  MOVWF  xB0
+0F45A:  MOVLW  05
+0F45C:  MOVLB  1
+0F45E:  MOVWF  xB2
+0F460:  MOVLW  29
+0F462:  MOVWF  xB1
+0F464:  CLRF   xB0
 0F466:  CLRF   xAF
 ....................             smf_data_address_start = SMF_PICLOG_DATA_START_ADDRESS;
-0F468:  MOVLW  07
+0F468:  MOVLW  05
 0F46A:  MOVWF  xB6
-0F46C:  MOVLW  3B
+0F46C:  MOVLW  29
 0F46E:  MOVWF  xB5
-0F470:  MOVLW  30
+0F470:  MOVLW  10
 0F472:  MOVWF  xB4
 0F474:  CLRF   xB3
 ....................             smf_data_address_end = SMF_PICLOG_DATA_END_ADDRESS;
-0F476:  MOVLW  07
+0F476:  MOVLW  05
 0F478:  MOVWF  xBA
-0F47A:  MOVLW  3C
+0F47A:  MOVLW  29
 0F47C:  MOVWF  xB9
-0F47E:  MOVLW  2F
+0F47E:  MOVLW  1F
 0F480:  MOVWF  xB8
 0F482:  SETF   xB7
 ....................             break;
 0F484:  MOVLB  0
-0F486:  GOTO   F62A
+0F486:  GOTO   F626
 ....................         case CIGS_ENVIRO_DATA:
 ....................             fprintf(PC, "FLASH ID: CIGS_ENVIRO_DATA\r\n");
 0F48A:  MOVLW  0E
@@ -26417,30 +26731,30 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 0F49A:  MOVLW  07
 0F49C:  MOVLB  1
 0F49E:  MOVWF  xB2
-0F4A0:  MOVLW  3C
+0F4A0:  MOVLW  D8
 0F4A2:  MOVWF  xB1
-0F4A4:  MOVLW  30
+0F4A4:  MOVLW  C0
 0F4A6:  MOVWF  xB0
 0F4A8:  CLRF   xAF
 ....................             smf_data_address_start = SMF_ENVIRO_DATA_START_ADDRESS;
 0F4AA:  MOVLW  07
 0F4AC:  MOVWF  xB6
-0F4AE:  MOVLW  3C
+0F4AE:  MOVLW  D8
 0F4B0:  MOVWF  xB5
-0F4B2:  MOVLW  40
+0F4B2:  MOVLW  D0
 0F4B4:  MOVWF  xB4
 0F4B6:  CLRF   xB3
 ....................             smf_data_address_end = SMF_ENVIRO_DATA_END_ADDRESS;
 0F4B8:  MOVLW  07
 0F4BA:  MOVWF  xBA
-0F4BC:  MOVLW  46
+0F4BC:  MOVLW  D8
 0F4BE:  MOVWF  xB9
-0F4C0:  MOVLW  3F
+0F4C0:  MOVLW  DF
 0F4C2:  MOVWF  xB8
 0F4C4:  SETF   xB7
 ....................             break;
 0F4C6:  MOVLB  0
-0F4C8:  GOTO   F62A
+0F4C8:  GOTO   F626
 ....................         case CIGS_IV1_HEADER:
 ....................             fprintf(PC, "FLASH ID: CIGS_IV1_HEADER\r\n");
 0F4CC:  MOVLW  2C
@@ -26454,1239 +26768,1237 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 0F4DC:  MOVLW  07
 0F4DE:  MOVLB  1
 0F4E0:  MOVWF  xB2
-0F4E2:  MOVLW  46
+0F4E2:  MOVLW  D8
 0F4E4:  MOVWF  xB1
-0F4E6:  MOVLW  40
+0F4E6:  MOVLW  E0
 0F4E8:  MOVWF  xB0
 0F4EA:  CLRF   xAF
 ....................             smf_data_address_start = SMF_IV1_HEADER_DATA_START_ADDRESS;
 0F4EC:  MOVLW  07
 0F4EE:  MOVWF  xB6
-0F4F0:  MOVLW  46
+0F4F0:  MOVLW  D8
 0F4F2:  MOVWF  xB5
-0F4F4:  MOVLW  50
+0F4F4:  MOVLW  F0
 0F4F6:  MOVWF  xB4
 0F4F8:  CLRF   xB3
 ....................             smf_data_address_end = SMF_IV1_HEADER_DATA_END_ADDRESS;
 0F4FA:  MOVLW  07
 0F4FC:  MOVWF  xBA
-0F4FE:  MOVLW  50
+0F4FE:  MOVLW  D8
 0F500:  MOVWF  xB9
-0F502:  MOVLW  4F
-0F504:  MOVWF  xB8
-0F506:  SETF   xB7
+0F502:  SETF   xB8
+0F504:  SETF   xB7
 ....................             break;
-0F508:  MOVLB  0
-0F50A:  GOTO   F62A
+0F506:  MOVLB  0
+0F508:  GOTO   F626
 ....................         case CIGS_IV1_DATA:
 ....................             fprintf(PC, "FLASH ID: CIGS_IV1_DATA\r\n");
-0F50E:  MOVLW  48
-0F510:  MOVWF  FF6
-0F512:  MOVLW  09
-0F514:  MOVWF  FF7
-0F516:  MOVLW  00
-0F518:  MOVWF  FF8
-0F51A:  CALL   202E
+0F50C:  MOVLW  48
+0F50E:  MOVWF  FF6
+0F510:  MOVLW  09
+0F512:  MOVWF  FF7
+0F514:  MOVLW  00
+0F516:  MOVWF  FF8
+0F518:  CALL   202E
 ....................             smf_header_address_start = SMF_IV1_DATA_HEADER_START_ADDRESS;
-0F51E:  MOVLW  07
-0F520:  MOVLB  1
-0F522:  MOVWF  xB2
-0F524:  MOVLW  50
-0F526:  MOVWF  xB1
-0F528:  MOVLW  50
-0F52A:  MOVWF  xB0
-0F52C:  CLRF   xAF
+0F51C:  MOVLW  05
+0F51E:  MOVLB  1
+0F520:  MOVWF  xB2
+0F522:  MOVLW  29
+0F524:  MOVWF  xB1
+0F526:  MOVLW  20
+0F528:  MOVWF  xB0
+0F52A:  CLRF   xAF
 ....................             smf_data_address_start = SMF_IV1_DATA_DATA_START_ADDRESS;
-0F52E:  MOVLW  07
-0F530:  MOVWF  xB6
-0F532:  MOVLW  50
-0F534:  MOVWF  xB5
-0F536:  MOVLW  60
-0F538:  MOVWF  xB4
-0F53A:  CLRF   xB3
+0F52C:  MOVLW  05
+0F52E:  MOVWF  xB6
+0F530:  MOVLW  29
+0F532:  MOVWF  xB5
+0F534:  MOVLW  30
+0F536:  MOVWF  xB4
+0F538:  CLRF   xB3
 ....................             smf_data_address_end = SMF_IV1_DATA_DATA_END_ADDRESS;
-0F53C:  MOVLW  07
-0F53E:  MOVWF  xBA
-0F540:  MOVLW  90
-0F542:  MOVWF  xB9
-0F544:  MOVLW  5F
-0F546:  MOVWF  xB8
-0F548:  SETF   xB7
+0F53A:  MOVLW  05
+0F53C:  MOVWF  xBA
+0F53E:  MOVLW  5F
+0F540:  MOVWF  xB9
+0F542:  MOVLW  CF
+0F544:  MOVWF  xB8
+0F546:  SETF   xB7
 ....................             break;
-0F54A:  MOVLB  0
-0F54C:  GOTO   F62A
+0F548:  MOVLB  0
+0F54A:  GOTO   F626
 ....................         case CIGS_IV2_HEADER:
 ....................             fprintf(PC, "FLASH ID: CIGS_IV2_HEADER\r\n");
-0F550:  MOVLW  62
-0F552:  MOVWF  FF6
-0F554:  MOVLW  09
-0F556:  MOVWF  FF7
-0F558:  MOVLW  00
-0F55A:  MOVWF  FF8
-0F55C:  CALL   202E
+0F54E:  MOVLW  62
+0F550:  MOVWF  FF6
+0F552:  MOVLW  09
+0F554:  MOVWF  FF7
+0F556:  MOVLW  00
+0F558:  MOVWF  FF8
+0F55A:  CALL   202E
 ....................             smf_header_address_start = SMF_IV2_HEADER_HEADER_START_ADDRESS;
-0F560:  MOVLW  07
-0F562:  MOVLB  1
-0F564:  MOVWF  xB2
-0F566:  MOVLW  90
-0F568:  MOVWF  xB1
-0F56A:  MOVLW  60
-0F56C:  MOVWF  xB0
-0F56E:  CLRF   xAF
+0F55E:  MOVLW  07
+0F560:  MOVLB  1
+0F562:  MOVWF  xB2
+0F564:  MOVLW  D9
+0F566:  MOVWF  xB1
+0F568:  CLRF   xB0
+0F56A:  CLRF   xAF
 ....................             smf_data_address_start = SMF_IV2_HEADER_DATA_START_ADDRESS;
-0F570:  MOVLW  07
-0F572:  MOVWF  xB6
-0F574:  MOVLW  90
-0F576:  MOVWF  xB5
-0F578:  MOVLW  70
-0F57A:  MOVWF  xB4
-0F57C:  CLRF   xB3
+0F56C:  MOVLW  07
+0F56E:  MOVWF  xB6
+0F570:  MOVLW  D9
+0F572:  MOVWF  xB5
+0F574:  MOVLW  10
+0F576:  MOVWF  xB4
+0F578:  CLRF   xB3
 ....................             smf_data_address_end = SMF_IV2_HEADER_DATA_END_ADDRESS;
-0F57E:  MOVLW  07
-0F580:  MOVWF  xBA
-0F582:  MOVLW  9A
-0F584:  MOVWF  xB9
-0F586:  MOVLW  6F
-0F588:  MOVWF  xB8
-0F58A:  SETF   xB7
+0F57A:  MOVLW  07
+0F57C:  MOVWF  xBA
+0F57E:  MOVLW  D9
+0F580:  MOVWF  xB9
+0F582:  MOVLW  1F
+0F584:  MOVWF  xB8
+0F586:  SETF   xB7
 ....................             break;
-0F58C:  MOVLB  0
-0F58E:  GOTO   F62A
+0F588:  MOVLB  0
+0F58A:  GOTO   F626
 ....................         case CIGS_IV2_DATA:
 ....................             fprintf(PC, "FLASH ID: CIGS_IV2_DATA\r\n");
-0F592:  MOVLW  7E
-0F594:  MOVWF  FF6
-0F596:  MOVLW  09
-0F598:  MOVWF  FF7
-0F59A:  MOVLW  00
-0F59C:  MOVWF  FF8
-0F59E:  CALL   202E
+0F58E:  MOVLW  7E
+0F590:  MOVWF  FF6
+0F592:  MOVLW  09
+0F594:  MOVWF  FF7
+0F596:  MOVLW  00
+0F598:  MOVWF  FF8
+0F59A:  CALL   202E
 ....................             smf_header_address_start = SMF_IV2_DATA_HEADER_START_ADDRESS;
-0F5A2:  MOVLW  07
-0F5A4:  MOVLB  1
-0F5A6:  MOVWF  xB2
-0F5A8:  MOVLW  9A
-0F5AA:  MOVWF  xB1
-0F5AC:  MOVLW  70
-0F5AE:  MOVWF  xB0
-0F5B0:  CLRF   xAF
+0F59E:  MOVLW  05
+0F5A0:  MOVLB  1
+0F5A2:  MOVWF  xB2
+0F5A4:  MOVLW  5F
+0F5A6:  MOVWF  xB1
+0F5A8:  MOVLW  D0
+0F5AA:  MOVWF  xB0
+0F5AC:  CLRF   xAF
 ....................             smf_data_address_start = SMF_IV2_DATA_DATA_START_ADDRESS;
-0F5B2:  MOVLW  07
-0F5B4:  MOVWF  xB6
-0F5B6:  MOVLW  9A
-0F5B8:  MOVWF  xB5
-0F5BA:  MOVLW  80
-0F5BC:  MOVWF  xB4
-0F5BE:  CLRF   xB3
+0F5AE:  MOVLW  05
+0F5B0:  MOVWF  xB6
+0F5B2:  MOVLW  5F
+0F5B4:  MOVWF  xB5
+0F5B6:  MOVLW  E0
+0F5B8:  MOVWF  xB4
+0F5BA:  CLRF   xB3
 ....................             smf_data_address_end = SMF_IV2_DATA_DATA_END_ADDRESS;
-0F5C0:  MOVLW  07
-0F5C2:  MOVWF  xBA
-0F5C4:  MOVLW  DA
-0F5C6:  MOVWF  xB9
-0F5C8:  MOVLW  7F
-0F5CA:  MOVWF  xB8
-0F5CC:  SETF   xB7
+0F5BC:  MOVLW  05
+0F5BE:  MOVWF  xBA
+0F5C0:  MOVLW  96
+0F5C2:  MOVWF  xB9
+0F5C4:  MOVLW  7F
+0F5C6:  MOVWF  xB8
+0F5C8:  SETF   xB7
 ....................             break;
-0F5CE:  MOVLB  0
-0F5D0:  GOTO   F62A
+0F5CA:  MOVLB  0
+0F5CC:  GOTO   F626
 ....................         default:
 ....................             fprintf(PC, "Error: Invalid mission ID %d\r\n", smf_queue_ptr->mission_id);
-0F5D4:  MOVLB  1
-0F5D6:  MOVF   xA1,W
-0F5D8:  MOVWF  FE9
-0F5DA:  MOVF   xA2,W
-0F5DC:  MOVWF  FEA
-0F5DE:  MOVFF  FEF,210
-0F5E2:  MOVLW  98
-0F5E4:  MOVWF  FF6
-0F5E6:  MOVLW  09
-0F5E8:  MOVWF  FF7
-0F5EA:  MOVLW  00
-0F5EC:  MOVWF  FF8
-0F5EE:  MOVLW  1A
-0F5F0:  MOVLB  9
-0F5F2:  MOVWF  xC2
-0F5F4:  MOVLB  0
-0F5F6:  CALL   2064
-0F5FA:  MOVFF  210,211
-0F5FE:  MOVLW  18
-0F600:  MOVLB  2
-0F602:  MOVWF  x12
-0F604:  MOVLB  0
-0F606:  GOTO   EBF4
-0F60A:  MOVLW  0D
-0F60C:  BTFSS  FA6.6
-0F60E:  GOTO   F60C
-0F612:  MOVLB  E
-0F614:  MOVWF  xF9
-0F616:  MOVLW  0A
-0F618:  MOVLB  0
-0F61A:  BTFSS  FA6.6
-0F61C:  GOTO   F61A
-0F620:  MOVLB  E
-0F622:  MOVWF  xF9
+0F5D0:  MOVLB  1
+0F5D2:  MOVF   xA1,W
+0F5D4:  MOVWF  FE9
+0F5D6:  MOVF   xA2,W
+0F5D8:  MOVWF  FEA
+0F5DA:  MOVFF  FEF,210
+0F5DE:  MOVLW  98
+0F5E0:  MOVWF  FF6
+0F5E2:  MOVLW  09
+0F5E4:  MOVWF  FF7
+0F5E6:  MOVLW  00
+0F5E8:  MOVWF  FF8
+0F5EA:  MOVLW  1A
+0F5EC:  MOVLB  9
+0F5EE:  MOVWF  xC2
+0F5F0:  MOVLB  0
+0F5F2:  CALL   2064
+0F5F6:  MOVFF  210,211
+0F5FA:  MOVLW  18
+0F5FC:  MOVLB  2
+0F5FE:  MOVWF  x12
+0F600:  MOVLB  0
+0F602:  GOTO   EBF4
+0F606:  MOVLW  0D
+0F608:  BTFSS  FA6.6
+0F60A:  GOTO   F608
+0F60E:  MOVLB  E
+0F610:  MOVWF  xF9
+0F612:  MOVLW  0A
+0F614:  MOVLB  0
+0F616:  BTFSS  FA6.6
+0F618:  GOTO   F616
+0F61C:  MOVLB  E
+0F61E:  MOVWF  xF9
 ....................             return;
-0F624:  MOVLB  0
-0F626:  GOTO   FF96
+0F620:  MOVLB  0
+0F622:  GOTO   FF92
 ....................     }
 .................... 
 ....................     // Print MISF ADDRESS
 ....................     fprintf(PC,"[MISF ADDRESS]\r\n");
-0F62A:  MOVLW  B8
-0F62C:  MOVWF  FF6
-0F62E:  MOVLW  09
-0F630:  MOVWF  FF7
-0F632:  MOVLW  00
-0F634:  MOVWF  FF8
-0F636:  CALL   202E
+0F626:  MOVLW  B8
+0F628:  MOVWF  FF6
+0F62A:  MOVLW  09
+0F62C:  MOVWF  FF7
+0F62E:  MOVLW  00
+0F630:  MOVWF  FF8
+0F632:  CALL   202E
 ....................     fprintf(PC, "\tParam\tData\r\n");
-0F63A:  MOVLW  CA
-0F63C:  MOVWF  FF6
-0F63E:  MOVLW  09
-0F640:  MOVWF  FF7
-0F642:  MOVLW  00
-0F644:  MOVWF  FF8
-0F646:  CALL   202E
+0F636:  MOVLW  CA
+0F638:  MOVWF  FF6
+0F63A:  MOVLW  09
+0F63C:  MOVWF  FF7
+0F63E:  MOVLW  00
+0F640:  MOVWF  FF8
+0F642:  CALL   202E
 ....................     fprintf(PC, "\t-----\t----------\r\n");
-0F64A:  MOVLW  D8
-0F64C:  MOVWF  FF6
-0F64E:  MOVLW  09
-0F650:  MOVWF  FF7
-0F652:  MOVLW  00
-0F654:  MOVWF  FF8
-0F656:  CALL   202E
+0F646:  MOVLW  D8
+0F648:  MOVWF  FF6
+0F64A:  MOVLW  09
+0F64C:  MOVWF  FF7
+0F64E:  MOVLW  00
+0F650:  MOVWF  FF8
+0F652:  CALL   202E
 ....................     fprintf(PC, "\tSTART\t0x%08LX\r\n", misf_address_start);
-0F65A:  MOVLW  EC
-0F65C:  MOVWF  FF6
-0F65E:  MOVLW  09
-0F660:  MOVWF  FF7
-0F662:  MOVLW  00
-0F664:  MOVWF  FF8
-0F666:  MOVLW  09
-0F668:  MOVLB  9
-0F66A:  MOVWF  xC2
-0F66C:  MOVLB  0
-0F66E:  CALL   2064
-0F672:  MOVFF  1BE,9E8
-0F676:  MOVLW  37
-0F678:  MOVLB  9
-0F67A:  MOVWF  xE9
-0F67C:  MOVLB  0
-0F67E:  CALL   2294
-0F682:  MOVFF  1BD,9E8
-0F686:  MOVLW  37
-0F688:  MOVLB  9
-0F68A:  MOVWF  xE9
-0F68C:  MOVLB  0
-0F68E:  CALL   2294
-0F692:  MOVFF  1BC,9E8
-0F696:  MOVLW  37
-0F698:  MOVLB  9
-0F69A:  MOVWF  xE9
-0F69C:  MOVLB  0
-0F69E:  CALL   2294
-0F6A2:  MOVFF  1BB,9E8
-0F6A6:  MOVLW  37
-0F6A8:  MOVLB  9
-0F6AA:  MOVWF  xE9
-0F6AC:  MOVLB  0
-0F6AE:  CALL   2294
-0F6B2:  MOVLW  0D
-0F6B4:  BTFSS  FA6.6
-0F6B6:  GOTO   F6B4
-0F6BA:  MOVLB  E
-0F6BC:  MOVWF  xF9
-0F6BE:  MOVLW  0A
-0F6C0:  MOVLB  0
-0F6C2:  BTFSS  FA6.6
-0F6C4:  GOTO   F6C2
-0F6C8:  MOVLB  E
-0F6CA:  MOVWF  xF9
+0F656:  MOVLW  EC
+0F658:  MOVWF  FF6
+0F65A:  MOVLW  09
+0F65C:  MOVWF  FF7
+0F65E:  MOVLW  00
+0F660:  MOVWF  FF8
+0F662:  MOVLW  09
+0F664:  MOVLB  9
+0F666:  MOVWF  xC2
+0F668:  MOVLB  0
+0F66A:  CALL   2064
+0F66E:  MOVFF  1BE,9E8
+0F672:  MOVLW  37
+0F674:  MOVLB  9
+0F676:  MOVWF  xE9
+0F678:  MOVLB  0
+0F67A:  CALL   2294
+0F67E:  MOVFF  1BD,9E8
+0F682:  MOVLW  37
+0F684:  MOVLB  9
+0F686:  MOVWF  xE9
+0F688:  MOVLB  0
+0F68A:  CALL   2294
+0F68E:  MOVFF  1BC,9E8
+0F692:  MOVLW  37
+0F694:  MOVLB  9
+0F696:  MOVWF  xE9
+0F698:  MOVLB  0
+0F69A:  CALL   2294
+0F69E:  MOVFF  1BB,9E8
+0F6A2:  MOVLW  37
+0F6A4:  MOVLB  9
+0F6A6:  MOVWF  xE9
+0F6A8:  MOVLB  0
+0F6AA:  CALL   2294
+0F6AE:  MOVLW  0D
+0F6B0:  BTFSS  FA6.6
+0F6B2:  GOTO   F6B0
+0F6B6:  MOVLB  E
+0F6B8:  MOVWF  xF9
+0F6BA:  MOVLW  0A
+0F6BC:  MOVLB  0
+0F6BE:  BTFSS  FA6.6
+0F6C0:  GOTO   F6BE
+0F6C4:  MOVLB  E
+0F6C6:  MOVWF  xF9
 ....................     fprintf(PC, "\tEND\t0x%08LX\r\n", misf_address_end);
-0F6CC:  MOVLW  FE
-0F6CE:  MOVWF  FF6
-0F6D0:  MOVLW  09
-0F6D2:  MOVWF  FF7
-0F6D4:  MOVLW  00
-0F6D6:  MOVWF  FF8
-0F6D8:  MOVLW  07
-0F6DA:  MOVLB  9
-0F6DC:  MOVWF  xC2
-0F6DE:  MOVLB  0
-0F6E0:  CALL   2064
-0F6E4:  MOVFF  1C2,9E8
-0F6E8:  MOVLW  37
-0F6EA:  MOVLB  9
-0F6EC:  MOVWF  xE9
-0F6EE:  MOVLB  0
-0F6F0:  CALL   2294
-0F6F4:  MOVFF  1C1,9E8
-0F6F8:  MOVLW  37
-0F6FA:  MOVLB  9
-0F6FC:  MOVWF  xE9
-0F6FE:  MOVLB  0
-0F700:  CALL   2294
-0F704:  MOVFF  1C0,9E8
-0F708:  MOVLW  37
-0F70A:  MOVLB  9
-0F70C:  MOVWF  xE9
-0F70E:  MOVLB  0
-0F710:  CALL   2294
-0F714:  MOVFF  1BF,9E8
-0F718:  MOVLW  37
-0F71A:  MOVLB  9
-0F71C:  MOVWF  xE9
-0F71E:  MOVLB  0
-0F720:  CALL   2294
-0F724:  MOVLW  0D
-0F726:  BTFSS  FA6.6
-0F728:  GOTO   F726
-0F72C:  MOVLB  E
-0F72E:  MOVWF  xF9
-0F730:  MOVLW  0A
-0F732:  MOVLB  0
-0F734:  BTFSS  FA6.6
-0F736:  GOTO   F734
-0F73A:  MOVLB  E
-0F73C:  MOVWF  xF9
+0F6C8:  MOVLW  FE
+0F6CA:  MOVWF  FF6
+0F6CC:  MOVLW  09
+0F6CE:  MOVWF  FF7
+0F6D0:  MOVLW  00
+0F6D2:  MOVWF  FF8
+0F6D4:  MOVLW  07
+0F6D6:  MOVLB  9
+0F6D8:  MOVWF  xC2
+0F6DA:  MOVLB  0
+0F6DC:  CALL   2064
+0F6E0:  MOVFF  1C2,9E8
+0F6E4:  MOVLW  37
+0F6E6:  MOVLB  9
+0F6E8:  MOVWF  xE9
+0F6EA:  MOVLB  0
+0F6EC:  CALL   2294
+0F6F0:  MOVFF  1C1,9E8
+0F6F4:  MOVLW  37
+0F6F6:  MOVLB  9
+0F6F8:  MOVWF  xE9
+0F6FA:  MOVLB  0
+0F6FC:  CALL   2294
+0F700:  MOVFF  1C0,9E8
+0F704:  MOVLW  37
+0F706:  MOVLB  9
+0F708:  MOVWF  xE9
+0F70A:  MOVLB  0
+0F70C:  CALL   2294
+0F710:  MOVFF  1BF,9E8
+0F714:  MOVLW  37
+0F716:  MOVLB  9
+0F718:  MOVWF  xE9
+0F71A:  MOVLB  0
+0F71C:  CALL   2294
+0F720:  MOVLW  0D
+0F722:  BTFSS  FA6.6
+0F724:  GOTO   F722
+0F728:  MOVLB  E
+0F72A:  MOVWF  xF9
+0F72C:  MOVLW  0A
+0F72E:  MOVLB  0
+0F730:  BTFSS  FA6.6
+0F732:  GOTO   F730
+0F736:  MOVLB  E
+0F738:  MOVWF  xF9
 ....................     fprintf(PC, "\tSRC\t0x%08LX\r\n", misf_write_src);
-0F73E:  MOVLW  0E
-0F740:  MOVWF  FF6
-0F742:  MOVLW  0A
-0F744:  MOVWF  FF7
-0F746:  MOVLW  00
-0F748:  MOVWF  FF8
-0F74A:  MOVLW  07
-0F74C:  MOVLB  9
-0F74E:  MOVWF  xC2
-0F750:  MOVLB  0
-0F752:  CALL   2064
-0F756:  MOVFF  1A6,9E8
-0F75A:  MOVLW  37
-0F75C:  MOVLB  9
-0F75E:  MOVWF  xE9
-0F760:  MOVLB  0
-0F762:  CALL   2294
-0F766:  MOVFF  1A5,9E8
-0F76A:  MOVLW  37
-0F76C:  MOVLB  9
-0F76E:  MOVWF  xE9
-0F770:  MOVLB  0
-0F772:  CALL   2294
-0F776:  MOVFF  1A4,9E8
-0F77A:  MOVLW  37
-0F77C:  MOVLB  9
-0F77E:  MOVWF  xE9
-0F780:  MOVLB  0
-0F782:  CALL   2294
-0F786:  MOVFF  1A3,9E8
-0F78A:  MOVLW  37
-0F78C:  MOVLB  9
-0F78E:  MOVWF  xE9
-0F790:  MOVLB  0
-0F792:  CALL   2294
-0F796:  MOVLW  0D
-0F798:  BTFSS  FA6.6
-0F79A:  GOTO   F798
-0F79E:  MOVLB  E
-0F7A0:  MOVWF  xF9
-0F7A2:  MOVLW  0A
-0F7A4:  MOVLB  0
-0F7A6:  BTFSS  FA6.6
-0F7A8:  GOTO   F7A6
-0F7AC:  MOVLB  E
-0F7AE:  MOVWF  xF9
+0F73A:  MOVLW  0E
+0F73C:  MOVWF  FF6
+0F73E:  MOVLW  0A
+0F740:  MOVWF  FF7
+0F742:  MOVLW  00
+0F744:  MOVWF  FF8
+0F746:  MOVLW  07
+0F748:  MOVLB  9
+0F74A:  MOVWF  xC2
+0F74C:  MOVLB  0
+0F74E:  CALL   2064
+0F752:  MOVFF  1A6,9E8
+0F756:  MOVLW  37
+0F758:  MOVLB  9
+0F75A:  MOVWF  xE9
+0F75C:  MOVLB  0
+0F75E:  CALL   2294
+0F762:  MOVFF  1A5,9E8
+0F766:  MOVLW  37
+0F768:  MOVLB  9
+0F76A:  MOVWF  xE9
+0F76C:  MOVLB  0
+0F76E:  CALL   2294
+0F772:  MOVFF  1A4,9E8
+0F776:  MOVLW  37
+0F778:  MOVLB  9
+0F77A:  MOVWF  xE9
+0F77C:  MOVLB  0
+0F77E:  CALL   2294
+0F782:  MOVFF  1A3,9E8
+0F786:  MOVLW  37
+0F788:  MOVLB  9
+0F78A:  MOVWF  xE9
+0F78C:  MOVLB  0
+0F78E:  CALL   2294
+0F792:  MOVLW  0D
+0F794:  BTFSS  FA6.6
+0F796:  GOTO   F794
+0F79A:  MOVLB  E
+0F79C:  MOVWF  xF9
+0F79E:  MOVLW  0A
+0F7A0:  MOVLB  0
+0F7A2:  BTFSS  FA6.6
+0F7A4:  GOTO   F7A2
+0F7A8:  MOVLB  E
+0F7AA:  MOVWF  xF9
 ....................     fprintf(PC, "\tSIZE\t0x%08LX\r\n", misf_write_size);
-0F7B0:  MOVLW  1E
-0F7B2:  MOVWF  FF6
-0F7B4:  MOVLW  0A
-0F7B6:  MOVWF  FF7
-0F7B8:  MOVLW  00
-0F7BA:  MOVWF  FF8
-0F7BC:  MOVLW  08
-0F7BE:  MOVLB  9
-0F7C0:  MOVWF  xC2
-0F7C2:  MOVLB  0
-0F7C4:  CALL   2064
-0F7C8:  MOVFF  1AA,9E8
-0F7CC:  MOVLW  37
-0F7CE:  MOVLB  9
-0F7D0:  MOVWF  xE9
-0F7D2:  MOVLB  0
-0F7D4:  CALL   2294
-0F7D8:  MOVFF  1A9,9E8
-0F7DC:  MOVLW  37
-0F7DE:  MOVLB  9
-0F7E0:  MOVWF  xE9
-0F7E2:  MOVLB  0
-0F7E4:  CALL   2294
-0F7E8:  MOVFF  1A8,9E8
-0F7EC:  MOVLW  37
-0F7EE:  MOVLB  9
-0F7F0:  MOVWF  xE9
-0F7F2:  MOVLB  0
-0F7F4:  CALL   2294
-0F7F8:  MOVFF  1A7,9E8
-0F7FC:  MOVLW  37
-0F7FE:  MOVLB  9
-0F800:  MOVWF  xE9
-0F802:  MOVLB  0
-0F804:  CALL   2294
-0F808:  MOVLW  0D
-0F80A:  BTFSS  FA6.6
-0F80C:  GOTO   F80A
-0F810:  MOVLB  E
-0F812:  MOVWF  xF9
-0F814:  MOVLW  0A
-0F816:  MOVLB  0
-0F818:  BTFSS  FA6.6
-0F81A:  GOTO   F818
-0F81E:  MOVLB  E
-0F820:  MOVWF  xF9
+0F7AC:  MOVLW  1E
+0F7AE:  MOVWF  FF6
+0F7B0:  MOVLW  0A
+0F7B2:  MOVWF  FF7
+0F7B4:  MOVLW  00
+0F7B6:  MOVWF  FF8
+0F7B8:  MOVLW  08
+0F7BA:  MOVLB  9
+0F7BC:  MOVWF  xC2
+0F7BE:  MOVLB  0
+0F7C0:  CALL   2064
+0F7C4:  MOVFF  1AA,9E8
+0F7C8:  MOVLW  37
+0F7CA:  MOVLB  9
+0F7CC:  MOVWF  xE9
+0F7CE:  MOVLB  0
+0F7D0:  CALL   2294
+0F7D4:  MOVFF  1A9,9E8
+0F7D8:  MOVLW  37
+0F7DA:  MOVLB  9
+0F7DC:  MOVWF  xE9
+0F7DE:  MOVLB  0
+0F7E0:  CALL   2294
+0F7E4:  MOVFF  1A8,9E8
+0F7E8:  MOVLW  37
+0F7EA:  MOVLB  9
+0F7EC:  MOVWF  xE9
+0F7EE:  MOVLB  0
+0F7F0:  CALL   2294
+0F7F4:  MOVFF  1A7,9E8
+0F7F8:  MOVLW  37
+0F7FA:  MOVLB  9
+0F7FC:  MOVWF  xE9
+0F7FE:  MOVLB  0
+0F800:  CALL   2294
+0F804:  MOVLW  0D
+0F806:  BTFSS  FA6.6
+0F808:  GOTO   F806
+0F80C:  MOVLB  E
+0F80E:  MOVWF  xF9
+0F810:  MOVLW  0A
+0F812:  MOVLB  0
+0F814:  BTFSS  FA6.6
+0F816:  GOTO   F814
+0F81A:  MOVLB  E
+0F81C:  MOVWF  xF9
 ....................     fprintf(PC, "\t-----\t----------\r\n");
-0F822:  MOVLW  2E
-0F824:  MOVWF  FF6
-0F826:  MOVLW  0A
-0F828:  MOVWF  FF7
-0F82A:  MOVLW  00
-0F82C:  MOVWF  FF8
-0F82E:  MOVLB  0
-0F830:  CALL   202E
+0F81E:  MOVLW  2E
+0F820:  MOVWF  FF6
+0F822:  MOVLW  0A
+0F824:  MOVWF  FF7
+0F826:  MOVLW  00
+0F828:  MOVWF  FF8
+0F82A:  MOVLB  0
+0F82C:  CALL   202E
 .................... 
 ....................     // Print SMF ADDRESS
 ....................     fprintf(PC,"[SMF ADDRESS]\r\n");
-0F834:  MOVLW  42
-0F836:  MOVWF  FF6
-0F838:  MOVLW  0A
-0F83A:  MOVWF  FF7
-0F83C:  MOVLW  00
-0F83E:  MOVWF  FF8
-0F840:  CALL   202E
+0F830:  MOVLW  42
+0F832:  MOVWF  FF6
+0F834:  MOVLW  0A
+0F836:  MOVWF  FF7
+0F838:  MOVLW  00
+0F83A:  MOVWF  FF8
+0F83C:  CALL   202E
 ....................     fprintf(PC, "\tParam\tData\r\n");
-0F844:  MOVLW  52
-0F846:  MOVWF  FF6
-0F848:  MOVLW  0A
-0F84A:  MOVWF  FF7
-0F84C:  MOVLW  00
-0F84E:  MOVWF  FF8
-0F850:  CALL   202E
+0F840:  MOVLW  52
+0F842:  MOVWF  FF6
+0F844:  MOVLW  0A
+0F846:  MOVWF  FF7
+0F848:  MOVLW  00
+0F84A:  MOVWF  FF8
+0F84C:  CALL   202E
 ....................     fprintf(PC, "\t-----\t----------\r\n");
-0F854:  MOVLW  60
-0F856:  MOVWF  FF6
-0F858:  MOVLW  0A
-0F85A:  MOVWF  FF7
-0F85C:  MOVLW  00
-0F85E:  MOVWF  FF8
-0F860:  CALL   202E
+0F850:  MOVLW  60
+0F852:  MOVWF  FF6
+0F854:  MOVLW  0A
+0F856:  MOVWF  FF7
+0F858:  MOVLW  00
+0F85A:  MOVWF  FF8
+0F85C:  CALL   202E
 ....................     fprintf(PC, "\tSTART\t0x%08LX\r\n", smf_data_address_start);
-0F864:  MOVLW  74
-0F866:  MOVWF  FF6
-0F868:  MOVLW  0A
-0F86A:  MOVWF  FF7
-0F86C:  MOVLW  00
-0F86E:  MOVWF  FF8
-0F870:  MOVLW  09
-0F872:  MOVLB  9
-0F874:  MOVWF  xC2
-0F876:  MOVLB  0
-0F878:  CALL   2064
-0F87C:  MOVFF  1B6,9E8
-0F880:  MOVLW  37
-0F882:  MOVLB  9
-0F884:  MOVWF  xE9
-0F886:  MOVLB  0
-0F888:  CALL   2294
-0F88C:  MOVFF  1B5,9E8
-0F890:  MOVLW  37
-0F892:  MOVLB  9
-0F894:  MOVWF  xE9
-0F896:  MOVLB  0
-0F898:  CALL   2294
-0F89C:  MOVFF  1B4,9E8
-0F8A0:  MOVLW  37
-0F8A2:  MOVLB  9
-0F8A4:  MOVWF  xE9
-0F8A6:  MOVLB  0
-0F8A8:  CALL   2294
-0F8AC:  MOVFF  1B3,9E8
-0F8B0:  MOVLW  37
-0F8B2:  MOVLB  9
-0F8B4:  MOVWF  xE9
-0F8B6:  MOVLB  0
-0F8B8:  CALL   2294
-0F8BC:  MOVLW  0D
-0F8BE:  BTFSS  FA6.6
-0F8C0:  GOTO   F8BE
-0F8C4:  MOVLB  E
-0F8C6:  MOVWF  xF9
-0F8C8:  MOVLW  0A
-0F8CA:  MOVLB  0
-0F8CC:  BTFSS  FA6.6
-0F8CE:  GOTO   F8CC
-0F8D2:  MOVLB  E
-0F8D4:  MOVWF  xF9
+0F860:  MOVLW  74
+0F862:  MOVWF  FF6
+0F864:  MOVLW  0A
+0F866:  MOVWF  FF7
+0F868:  MOVLW  00
+0F86A:  MOVWF  FF8
+0F86C:  MOVLW  09
+0F86E:  MOVLB  9
+0F870:  MOVWF  xC2
+0F872:  MOVLB  0
+0F874:  CALL   2064
+0F878:  MOVFF  1B6,9E8
+0F87C:  MOVLW  37
+0F87E:  MOVLB  9
+0F880:  MOVWF  xE9
+0F882:  MOVLB  0
+0F884:  CALL   2294
+0F888:  MOVFF  1B5,9E8
+0F88C:  MOVLW  37
+0F88E:  MOVLB  9
+0F890:  MOVWF  xE9
+0F892:  MOVLB  0
+0F894:  CALL   2294
+0F898:  MOVFF  1B4,9E8
+0F89C:  MOVLW  37
+0F89E:  MOVLB  9
+0F8A0:  MOVWF  xE9
+0F8A2:  MOVLB  0
+0F8A4:  CALL   2294
+0F8A8:  MOVFF  1B3,9E8
+0F8AC:  MOVLW  37
+0F8AE:  MOVLB  9
+0F8B0:  MOVWF  xE9
+0F8B2:  MOVLB  0
+0F8B4:  CALL   2294
+0F8B8:  MOVLW  0D
+0F8BA:  BTFSS  FA6.6
+0F8BC:  GOTO   F8BA
+0F8C0:  MOVLB  E
+0F8C2:  MOVWF  xF9
+0F8C4:  MOVLW  0A
+0F8C6:  MOVLB  0
+0F8C8:  BTFSS  FA6.6
+0F8CA:  GOTO   F8C8
+0F8CE:  MOVLB  E
+0F8D0:  MOVWF  xF9
 ....................     fprintf(PC, "\tEND\t0x%08LX\r\n", smf_data_address_end);
-0F8D6:  MOVLW  86
-0F8D8:  MOVWF  FF6
-0F8DA:  MOVLW  0A
-0F8DC:  MOVWF  FF7
-0F8DE:  MOVLW  00
-0F8E0:  MOVWF  FF8
-0F8E2:  MOVLW  07
-0F8E4:  MOVLB  9
-0F8E6:  MOVWF  xC2
-0F8E8:  MOVLB  0
-0F8EA:  CALL   2064
-0F8EE:  MOVFF  1BA,9E8
-0F8F2:  MOVLW  37
-0F8F4:  MOVLB  9
-0F8F6:  MOVWF  xE9
-0F8F8:  MOVLB  0
-0F8FA:  CALL   2294
-0F8FE:  MOVFF  1B9,9E8
-0F902:  MOVLW  37
-0F904:  MOVLB  9
-0F906:  MOVWF  xE9
-0F908:  MOVLB  0
-0F90A:  CALL   2294
-0F90E:  MOVFF  1B8,9E8
-0F912:  MOVLW  37
-0F914:  MOVLB  9
-0F916:  MOVWF  xE9
-0F918:  MOVLB  0
-0F91A:  CALL   2294
-0F91E:  MOVFF  1B7,9E8
-0F922:  MOVLW  37
-0F924:  MOVLB  9
-0F926:  MOVWF  xE9
-0F928:  MOVLB  0
-0F92A:  CALL   2294
-0F92E:  MOVLW  0D
-0F930:  BTFSS  FA6.6
-0F932:  GOTO   F930
-0F936:  MOVLB  E
-0F938:  MOVWF  xF9
-0F93A:  MOVLW  0A
-0F93C:  MOVLB  0
-0F93E:  BTFSS  FA6.6
-0F940:  GOTO   F93E
-0F944:  MOVLB  E
-0F946:  MOVWF  xF9
+0F8D2:  MOVLW  86
+0F8D4:  MOVWF  FF6
+0F8D6:  MOVLW  0A
+0F8D8:  MOVWF  FF7
+0F8DA:  MOVLW  00
+0F8DC:  MOVWF  FF8
+0F8DE:  MOVLW  07
+0F8E0:  MOVLB  9
+0F8E2:  MOVWF  xC2
+0F8E4:  MOVLB  0
+0F8E6:  CALL   2064
+0F8EA:  MOVFF  1BA,9E8
+0F8EE:  MOVLW  37
+0F8F0:  MOVLB  9
+0F8F2:  MOVWF  xE9
+0F8F4:  MOVLB  0
+0F8F6:  CALL   2294
+0F8FA:  MOVFF  1B9,9E8
+0F8FE:  MOVLW  37
+0F900:  MOVLB  9
+0F902:  MOVWF  xE9
+0F904:  MOVLB  0
+0F906:  CALL   2294
+0F90A:  MOVFF  1B8,9E8
+0F90E:  MOVLW  37
+0F910:  MOVLB  9
+0F912:  MOVWF  xE9
+0F914:  MOVLB  0
+0F916:  CALL   2294
+0F91A:  MOVFF  1B7,9E8
+0F91E:  MOVLW  37
+0F920:  MOVLB  9
+0F922:  MOVWF  xE9
+0F924:  MOVLB  0
+0F926:  CALL   2294
+0F92A:  MOVLW  0D
+0F92C:  BTFSS  FA6.6
+0F92E:  GOTO   F92C
+0F932:  MOVLB  E
+0F934:  MOVWF  xF9
+0F936:  MOVLW  0A
+0F938:  MOVLB  0
+0F93A:  BTFSS  FA6.6
+0F93C:  GOTO   F93A
+0F940:  MOVLB  E
+0F942:  MOVWF  xF9
 ....................     fprintf(PC, "\t-----\t----------\r\n");
-0F948:  MOVLW  96
-0F94A:  MOVWF  FF6
-0F94C:  MOVLW  0A
-0F94E:  MOVWF  FF7
-0F950:  MOVLW  00
-0F952:  MOVWF  FF8
-0F954:  MOVLB  0
-0F956:  CALL   202E
+0F944:  MOVLW  96
+0F946:  MOVWF  FF6
+0F948:  MOVLW  0A
+0F94A:  MOVWF  FF7
+0F94C:  MOVLW  00
+0F94E:  MOVWF  FF8
+0F950:  MOVLB  0
+0F952:  CALL   202E
 .................... 
 .................... 
 ....................     // Erase Area
 ....................     fprintf(PC, "ERASE SMF AREA\r\n");
-0F95A:  MOVLW  AA
-0F95C:  MOVWF  FF6
-0F95E:  MOVLW  0A
-0F960:  MOVWF  FF7
-0F962:  MOVLW  00
-0F964:  MOVWF  FF8
-0F966:  CALL   202E
+0F956:  MOVLW  AA
+0F958:  MOVWF  FF6
+0F95A:  MOVLW  0A
+0F95C:  MOVWF  FF7
+0F95E:  MOVLW  00
+0F960:  MOVWF  FF8
+0F962:  CALL   202E
 ....................     for ( unsigned int32 address = smf_data_address_start; address < smf_data_address_end; address += SUBSECTOR_SIZE )
-0F96A:  MOVFF  1B6,1C6
-0F96E:  MOVFF  1B5,1C5
-0F972:  MOVFF  1B4,1C4
-0F976:  MOVFF  1B3,1C3
-0F97A:  MOVLB  1
-0F97C:  MOVF   xC6,W
-0F97E:  SUBWF  xBA,W
-0F980:  BTFSC  FD8.0
-0F982:  BRA    F98A
-0F984:  MOVLB  0
-0F986:  GOTO   FA0C
-0F98A:  MOVLB  0
-0F98C:  BTFSS  FD8.2
-0F98E:  GOTO   F9D4
-0F992:  MOVLB  1
-0F994:  MOVF   xC5,W
-0F996:  SUBWF  xB9,W
-0F998:  BTFSC  FD8.0
-0F99A:  BRA    F9A2
-0F99C:  MOVLB  0
-0F99E:  GOTO   FA0C
-0F9A2:  MOVLB  0
-0F9A4:  BTFSS  FD8.2
-0F9A6:  GOTO   F9D4
-0F9AA:  MOVLB  1
-0F9AC:  MOVF   xC4,W
-0F9AE:  SUBWF  xB8,W
-0F9B0:  BTFSC  FD8.0
-0F9B2:  BRA    F9BA
-0F9B4:  MOVLB  0
-0F9B6:  GOTO   FA0C
-0F9BA:  MOVLB  0
-0F9BC:  BTFSS  FD8.2
-0F9BE:  GOTO   F9D4
-0F9C2:  MOVLB  1
-0F9C4:  MOVF   xB7,W
-0F9C6:  SUBWF  xC3,W
-0F9C8:  BTFSS  FD8.0
-0F9CA:  BRA    F9D2
-0F9CC:  MOVLB  0
-0F9CE:  GOTO   FA0C
-0F9D2:  MOVLB  0
+0F966:  MOVFF  1B6,1C6
+0F96A:  MOVFF  1B5,1C5
+0F96E:  MOVFF  1B4,1C4
+0F972:  MOVFF  1B3,1C3
+0F976:  MOVLB  1
+0F978:  MOVF   xC6,W
+0F97A:  SUBWF  xBA,W
+0F97C:  BTFSC  FD8.0
+0F97E:  BRA    F986
+0F980:  MOVLB  0
+0F982:  GOTO   FA08
+0F986:  MOVLB  0
+0F988:  BTFSS  FD8.2
+0F98A:  GOTO   F9D0
+0F98E:  MOVLB  1
+0F990:  MOVF   xC5,W
+0F992:  SUBWF  xB9,W
+0F994:  BTFSC  FD8.0
+0F996:  BRA    F99E
+0F998:  MOVLB  0
+0F99A:  GOTO   FA08
+0F99E:  MOVLB  0
+0F9A0:  BTFSS  FD8.2
+0F9A2:  GOTO   F9D0
+0F9A6:  MOVLB  1
+0F9A8:  MOVF   xC4,W
+0F9AA:  SUBWF  xB8,W
+0F9AC:  BTFSC  FD8.0
+0F9AE:  BRA    F9B6
+0F9B0:  MOVLB  0
+0F9B2:  GOTO   FA08
+0F9B6:  MOVLB  0
+0F9B8:  BTFSS  FD8.2
+0F9BA:  GOTO   F9D0
+0F9BE:  MOVLB  1
+0F9C0:  MOVF   xB7,W
+0F9C2:  SUBWF  xC3,W
+0F9C4:  BTFSS  FD8.0
+0F9C6:  BRA    F9CE
+0F9C8:  MOVLB  0
+0F9CA:  GOTO   FA08
+0F9CE:  MOVLB  0
 ....................     {
 ....................         subsector_4kByte_erase(smf, address);
-0F9D4:  MOVFF  119,A07
-0F9D8:  MOVFF  118,A06
-0F9DC:  MOVFF  117,A05
-0F9E0:  MOVFF  116,A04
-0F9E4:  MOVFF  1C6,A0B
-0F9E8:  MOVFF  1C5,A0A
-0F9EC:  MOVFF  1C4,A09
-0F9F0:  MOVFF  1C3,A08
-0F9F4:  CALL   4A8C
-0F9F8:  MOVLW  10
-0F9FA:  MOVLB  1
-0F9FC:  ADDWF  xC4,F
+0F9D0:  MOVFF  119,A07
+0F9D4:  MOVFF  118,A06
+0F9D8:  MOVFF  117,A05
+0F9DC:  MOVFF  116,A04
+0F9E0:  MOVFF  1C6,A0B
+0F9E4:  MOVFF  1C5,A0A
+0F9E8:  MOVFF  1C4,A09
+0F9EC:  MOVFF  1C3,A08
+0F9F0:  CALL   4A8C
+0F9F4:  MOVLW  10
+0F9F6:  MOVLB  1
+0F9F8:  ADDWF  xC4,F
+0F9FA:  MOVLW  00
+0F9FC:  ADDWFC xC5,F
 0F9FE:  MOVLW  00
-0FA00:  ADDWFC xC5,F
-0FA02:  MOVLW  00
-0FA04:  ADDWFC xC6,F
-0FA06:  MOVLB  0
-0FA08:  GOTO   F97A
+0FA00:  ADDWFC xC6,F
+0FA02:  MOVLB  0
+0FA04:  GOTO   F976
 ....................     }
 ....................     fprintf(PC, "\tERASE SMF AREA DONE\r\n");
-0FA0C:  MOVLW  BC
-0FA0E:  MOVWF  FF6
-0FA10:  MOVLW  0A
-0FA12:  MOVWF  FF7
-0FA14:  MOVLW  00
-0FA16:  MOVWF  FF8
-0FA18:  CALL   202E
+0FA08:  MOVLW  BC
+0FA0A:  MOVWF  FF6
+0FA0C:  MOVLW  0A
+0FA0E:  MOVWF  FF7
+0FA10:  MOVLW  00
+0FA12:  MOVWF  FF8
+0FA14:  CALL   202E
 .................... 
 ....................     // Write Data
 ....................     unsigned int8 buffer[PACKET_SIZE];
 ....................     unsigned int32 smf_write_address = smf_data_address_start;
 ....................     unsigned int32 misf_read_address = misf_write_src;
-0FA1C:  MOVFF  1B6,20A
-0FA20:  MOVFF  1B5,209
-0FA24:  MOVFF  1B4,208
-0FA28:  MOVFF  1B3,207
-0FA2C:  MOVFF  1A6,20E
-0FA30:  MOVFF  1A5,20D
-0FA34:  MOVFF  1A4,20C
-0FA38:  MOVFF  1A3,20B
+0FA18:  MOVFF  1B6,20A
+0FA1C:  MOVFF  1B5,209
+0FA20:  MOVFF  1B4,208
+0FA24:  MOVFF  1B3,207
+0FA28:  MOVFF  1A6,20E
+0FA2C:  MOVFF  1A5,20D
+0FA30:  MOVFF  1A4,20C
+0FA34:  MOVFF  1A3,20B
 ....................     fprintf(PC, "WRITE DATA TO SMF\r\n");
-0FA3C:  MOVLW  D4
-0FA3E:  MOVWF  FF6
-0FA40:  MOVLW  0A
-0FA42:  MOVWF  FF7
-0FA44:  MOVLW  00
-0FA46:  MOVWF  FF8
-0FA48:  CALL   202E
+0FA38:  MOVLW  D4
+0FA3A:  MOVWF  FF6
+0FA3C:  MOVLW  0A
+0FA3E:  MOVWF  FF7
+0FA40:  MOVLW  00
+0FA42:  MOVWF  FF8
+0FA44:  CALL   202E
 ....................     while (misf_write_size > 0)
-0FA4C:  MOVLB  1
-0FA4E:  MOVF   xA7,F
-0FA50:  BTFSC  FD8.2
-0FA52:  BRA    FA5A
-0FA54:  MOVLB  0
-0FA56:  GOTO   FA8C
-0FA5A:  MOVLB  0
-0FA5C:  MOVLB  1
-0FA5E:  MOVF   xA8,F
-0FA60:  BTFSC  FD8.2
-0FA62:  BRA    FA6A
-0FA64:  MOVLB  0
-0FA66:  GOTO   FA8C
-0FA6A:  MOVLB  0
-0FA6C:  MOVLB  1
-0FA6E:  MOVF   xA9,F
-0FA70:  BTFSC  FD8.2
-0FA72:  BRA    FA7A
-0FA74:  MOVLB  0
-0FA76:  GOTO   FA8C
-0FA7A:  MOVLB  0
-0FA7C:  MOVLB  1
-0FA7E:  MOVF   xAA,F
-0FA80:  BTFSS  FD8.2
-0FA82:  BRA    FA8A
-0FA84:  MOVLB  0
-0FA86:  GOTO   FDB4
-0FA8A:  MOVLB  0
+0FA48:  MOVLB  1
+0FA4A:  MOVF   xA7,F
+0FA4C:  BTFSC  FD8.2
+0FA4E:  BRA    FA56
+0FA50:  MOVLB  0
+0FA52:  GOTO   FA88
+0FA56:  MOVLB  0
+0FA58:  MOVLB  1
+0FA5A:  MOVF   xA8,F
+0FA5C:  BTFSC  FD8.2
+0FA5E:  BRA    FA66
+0FA60:  MOVLB  0
+0FA62:  GOTO   FA88
+0FA66:  MOVLB  0
+0FA68:  MOVLB  1
+0FA6A:  MOVF   xA9,F
+0FA6C:  BTFSC  FD8.2
+0FA6E:  BRA    FA76
+0FA70:  MOVLB  0
+0FA72:  GOTO   FA88
+0FA76:  MOVLB  0
+0FA78:  MOVLB  1
+0FA7A:  MOVF   xAA,F
+0FA7C:  BTFSS  FD8.2
+0FA7E:  BRA    FA86
+0FA80:  MOVLB  0
+0FA82:  GOTO   FDB0
+0FA86:  MOVLB  0
 ....................     {
 ....................         memset(buffer, 0x11, PACKET_SIZE);
-0FA8C:  MOVLW  01
-0FA8E:  MOVWF  FEA
-0FA90:  MOVLW  C7
-0FA92:  MOVWF  FE9
-0FA94:  MOVLW  11
-0FA96:  MOVWF  00
-0FA98:  CLRF   02
-0FA9A:  MOVLW  40
-0FA9C:  MOVWF  01
-0FA9E:  CALL   209E
+0FA88:  MOVLW  01
+0FA8A:  MOVWF  FEA
+0FA8C:  MOVLW  C7
+0FA8E:  MOVWF  FE9
+0FA90:  MOVLW  11
+0FA92:  MOVWF  00
+0FA94:  CLRF   02
+0FA96:  MOVLW  40
+0FA98:  MOVWF  01
+0FA9A:  CALL   209E
 ....................         read_data_bytes(mis_fm, misf_read_address, buffer, PACKET_SIZE);
-0FAA2:  MOVFF  115,AED
-0FAA6:  MOVFF  114,AEC
-0FAAA:  MOVFF  113,AEB
-0FAAE:  MOVFF  112,AEA
-0FAB2:  MOVFF  20E,AF1
-0FAB6:  MOVFF  20D,AF0
-0FABA:  MOVFF  20C,AEF
-0FABE:  MOVFF  20B,AEE
-0FAC2:  MOVLW  01
-0FAC4:  MOVLB  A
-0FAC6:  MOVWF  xF3
-0FAC8:  MOVLW  C7
-0FACA:  MOVWF  xF2
-0FACC:  CLRF   xF7
-0FACE:  CLRF   xF6
-0FAD0:  CLRF   xF5
-0FAD2:  MOVLW  40
-0FAD4:  MOVWF  xF4
-0FAD6:  MOVLB  0
-0FAD8:  CALL   2C1C
+0FA9E:  MOVFF  115,AED
+0FAA2:  MOVFF  114,AEC
+0FAA6:  MOVFF  113,AEB
+0FAAA:  MOVFF  112,AEA
+0FAAE:  MOVFF  20E,AF1
+0FAB2:  MOVFF  20D,AF0
+0FAB6:  MOVFF  20C,AEF
+0FABA:  MOVFF  20B,AEE
+0FABE:  MOVLW  01
+0FAC0:  MOVLB  A
+0FAC2:  MOVWF  xF3
+0FAC4:  MOVLW  C7
+0FAC6:  MOVWF  xF2
+0FAC8:  CLRF   xF7
+0FACA:  CLRF   xF6
+0FACC:  CLRF   xF5
+0FACE:  MOVLW  40
+0FAD0:  MOVWF  xF4
+0FAD2:  MOVLB  0
+0FAD4:  CALL   2C1C
 ....................         fprintf(PC," ");
-0FADC:  MOVLW  20
-0FADE:  BTFSS  FA6.6
-0FAE0:  GOTO   FADE
-0FAE4:  MOVLB  E
-0FAE6:  MOVWF  xF9
+0FAD8:  MOVLW  20
+0FADA:  BTFSS  FA6.6
+0FADC:  GOTO   FADA
+0FAE0:  MOVLB  E
+0FAE2:  MOVWF  xF9
 ....................         write_data_bytes(smf, smf_write_address, buffer, PACKET_SIZE);
-0FAE8:  MOVFF  119,AED
-0FAEC:  MOVFF  118,AEC
-0FAF0:  MOVFF  117,AEB
-0FAF4:  MOVFF  116,AEA
-0FAF8:  MOVFF  20A,AF1
-0FAFC:  MOVFF  209,AF0
-0FB00:  MOVFF  208,AEF
-0FB04:  MOVFF  207,AEE
-0FB08:  MOVLW  01
-0FB0A:  MOVLB  A
-0FB0C:  MOVWF  xF3
-0FB0E:  MOVLW  C7
-0FB10:  MOVWF  xF2
-0FB12:  CLRF   xF5
-0FB14:  MOVLW  40
-0FB16:  MOVWF  xF4
-0FB18:  MOVLB  0
-0FB1A:  CALL   3C88
+0FAE4:  MOVFF  119,AED
+0FAE8:  MOVFF  118,AEC
+0FAEC:  MOVFF  117,AEB
+0FAF0:  MOVFF  116,AEA
+0FAF4:  MOVFF  20A,AF1
+0FAF8:  MOVFF  209,AF0
+0FAFC:  MOVFF  208,AEF
+0FB00:  MOVFF  207,AEE
+0FB04:  MOVLW  01
+0FB06:  MOVLB  A
+0FB08:  MOVWF  xF3
+0FB0A:  MOVLW  C7
+0FB0C:  MOVWF  xF2
+0FB0E:  CLRF   xF5
+0FB10:  MOVLW  40
+0FB12:  MOVWF  xF4
+0FB14:  MOVLB  0
+0FB16:  CALL   3C88
 ....................         fprintf(PC,".");
-0FB1E:  MOVLW  2E
-0FB20:  BTFSS  FA6.6
-0FB22:  GOTO   FB20
-0FB26:  MOVLB  E
-0FB28:  MOVWF  xF9
+0FB1A:  MOVLW  2E
+0FB1C:  BTFSS  FA6.6
+0FB1E:  GOTO   FB1C
+0FB22:  MOVLB  E
+0FB24:  MOVWF  xF9
 ....................         // counter update
 ....................         if (misf_counter_table[smf_queue_ptr->mission_id].uncopied_counter >= PACKET_SIZE){
-0FB2A:  MOVLB  1
-0FB2C:  MOVF   xA1,W
-0FB2E:  MOVWF  FE9
-0FB30:  MOVF   xA2,W
-0FB32:  MOVWF  FEA
-0FB34:  MOVF   FEF,W
-0FB36:  MULLW  0A
-0FB38:  MOVF   FF3,W
-0FB3A:  MOVLB  2
-0FB3C:  CLRF   x11
-0FB3E:  MOVWF  x10
-0FB40:  MOVLW  04
-0FB42:  ADDWF  x10,W
-0FB44:  MOVWF  01
-0FB46:  MOVLW  00
-0FB48:  ADDWFC x11,W
-0FB4A:  MOVWF  03
-0FB4C:  MOVF   01,W
-0FB4E:  ADDLW  22
-0FB50:  MOVWF  FE9
-0FB52:  MOVLW  01
-0FB54:  ADDWFC 03,W
-0FB56:  MOVWF  FEA
-0FB58:  MOVFF  FEF,210
-0FB5C:  MOVFF  FEC,211
-0FB60:  MOVFF  FEC,212
-0FB64:  MOVFF  FEC,213
+0FB26:  MOVLB  1
+0FB28:  MOVF   xA1,W
+0FB2A:  MOVWF  FE9
+0FB2C:  MOVF   xA2,W
+0FB2E:  MOVWF  FEA
+0FB30:  MOVF   FEF,W
+0FB32:  MULLW  0A
+0FB34:  MOVF   FF3,W
+0FB36:  MOVLB  2
+0FB38:  CLRF   x11
+0FB3A:  MOVWF  x10
+0FB3C:  MOVLW  04
+0FB3E:  ADDWF  x10,W
+0FB40:  MOVWF  01
+0FB42:  MOVLW  00
+0FB44:  ADDWFC x11,W
+0FB46:  MOVWF  03
+0FB48:  MOVF   01,W
+0FB4A:  ADDLW  22
+0FB4C:  MOVWF  FE9
+0FB4E:  MOVLW  01
+0FB50:  ADDWFC 03,W
+0FB52:  MOVWF  FEA
+0FB54:  MOVFF  FEF,210
+0FB58:  MOVFF  FEC,211
+0FB5C:  MOVFF  FEC,212
+0FB60:  MOVFF  FEC,213
+0FB64:  MOVF   FED,F
+0FB66:  MOVF   FED,F
 0FB68:  MOVF   FED,F
-0FB6A:  MOVF   FED,F
-0FB6C:  MOVF   FED,F
-0FB6E:  MOVF   x13,F
-0FB70:  BTFSC  FD8.2
-0FB72:  BRA    FB7A
-0FB74:  MOVLB  0
-0FB76:  GOTO   FBAE
-0FB7A:  MOVLB  0
-0FB7C:  MOVLB  2
-0FB7E:  MOVF   x12,F
-0FB80:  BTFSC  FD8.2
-0FB82:  BRA    FB8A
-0FB84:  MOVLB  0
-0FB86:  GOTO   FBAE
-0FB8A:  MOVLB  0
-0FB8C:  MOVLB  2
-0FB8E:  MOVF   x11,F
-0FB90:  BTFSC  FD8.2
-0FB92:  BRA    FB9A
-0FB94:  MOVLB  0
-0FB96:  GOTO   FBAE
-0FB9A:  MOVLB  0
-0FB9C:  MOVLB  2
-0FB9E:  MOVF   x10,W
-0FBA0:  SUBLW  3F
-0FBA2:  BTFSS  FD8.0
-0FBA4:  BRA    FBAC
-0FBA6:  MOVLB  0
-0FBA8:  GOTO   FC16
-0FBAC:  MOVLB  0
+0FB6A:  MOVF   x13,F
+0FB6C:  BTFSC  FD8.2
+0FB6E:  BRA    FB76
+0FB70:  MOVLB  0
+0FB72:  GOTO   FBAA
+0FB76:  MOVLB  0
+0FB78:  MOVLB  2
+0FB7A:  MOVF   x12,F
+0FB7C:  BTFSC  FD8.2
+0FB7E:  BRA    FB86
+0FB80:  MOVLB  0
+0FB82:  GOTO   FBAA
+0FB86:  MOVLB  0
+0FB88:  MOVLB  2
+0FB8A:  MOVF   x11,F
+0FB8C:  BTFSC  FD8.2
+0FB8E:  BRA    FB96
+0FB90:  MOVLB  0
+0FB92:  GOTO   FBAA
+0FB96:  MOVLB  0
+0FB98:  MOVLB  2
+0FB9A:  MOVF   x10,W
+0FB9C:  SUBLW  3F
+0FB9E:  BTFSS  FD8.0
+0FBA0:  BRA    FBA8
+0FBA2:  MOVLB  0
+0FBA4:  GOTO   FC12
+0FBA8:  MOVLB  0
 ....................             misf_counter_table[smf_queue_ptr->mission_id].uncopied_counter -= PACKET_SIZE;
-0FBAE:  MOVLB  1
-0FBB0:  MOVF   xA1,W
-0FBB2:  MOVWF  FE9
-0FBB4:  MOVF   xA2,W
-0FBB6:  MOVWF  FEA
-0FBB8:  MOVF   FEF,W
-0FBBA:  MULLW  0A
-0FBBC:  MOVF   FF3,W
-0FBBE:  MOVLB  2
-0FBC0:  CLRF   x11
-0FBC2:  MOVWF  x10
-0FBC4:  MOVLW  04
-0FBC6:  ADDWF  x10,W
-0FBC8:  MOVWF  01
-0FBCA:  MOVLW  00
-0FBCC:  ADDWFC x11,W
-0FBCE:  MOVWF  03
-0FBD0:  MOVF   01,W
-0FBD2:  ADDLW  22
-0FBD4:  MOVWF  FE9
-0FBD6:  MOVLW  01
-0FBD8:  ADDWFC 03,W
-0FBDA:  MOVWF  FEA
-0FBDC:  MOVLW  40
-0FBDE:  SUBWF  FEF,W
-0FBE0:  MOVWF  00
-0FBE2:  MOVLW  00
-0FBE4:  SUBWFB FEC,W
-0FBE6:  MOVWF  01
-0FBE8:  MOVLW  00
-0FBEA:  SUBWFB FEC,W
-0FBEC:  MOVWF  02
-0FBEE:  MOVLW  00
-0FBF0:  SUBWFB FEC,W
-0FBF2:  MOVWF  03
+0FBAA:  MOVLB  1
+0FBAC:  MOVF   xA1,W
+0FBAE:  MOVWF  FE9
+0FBB0:  MOVF   xA2,W
+0FBB2:  MOVWF  FEA
+0FBB4:  MOVF   FEF,W
+0FBB6:  MULLW  0A
+0FBB8:  MOVF   FF3,W
+0FBBA:  MOVLB  2
+0FBBC:  CLRF   x11
+0FBBE:  MOVWF  x10
+0FBC0:  MOVLW  04
+0FBC2:  ADDWF  x10,W
+0FBC4:  MOVWF  01
+0FBC6:  MOVLW  00
+0FBC8:  ADDWFC x11,W
+0FBCA:  MOVWF  03
+0FBCC:  MOVF   01,W
+0FBCE:  ADDLW  22
+0FBD0:  MOVWF  FE9
+0FBD2:  MOVLW  01
+0FBD4:  ADDWFC 03,W
+0FBD6:  MOVWF  FEA
+0FBD8:  MOVLW  40
+0FBDA:  SUBWF  FEF,W
+0FBDC:  MOVWF  00
+0FBDE:  MOVLW  00
+0FBE0:  SUBWFB FEC,W
+0FBE2:  MOVWF  01
+0FBE4:  MOVLW  00
+0FBE6:  SUBWFB FEC,W
+0FBE8:  MOVWF  02
+0FBEA:  MOVLW  00
+0FBEC:  SUBWFB FEC,W
+0FBEE:  MOVWF  03
+0FBF0:  MOVF   FED,F
+0FBF2:  MOVF   FED,F
 0FBF4:  MOVF   FED,F
-0FBF6:  MOVF   FED,F
-0FBF8:  MOVF   FED,F
-0FBFA:  MOVFF  00,FEF
-0FBFE:  MOVFF  01,FEC
-0FC02:  MOVFF  02,FEC
-0FC06:  MOVFF  03,FEC
+0FBF6:  MOVFF  00,FEF
+0FBFA:  MOVFF  01,FEC
+0FBFE:  MOVFF  02,FEC
+0FC02:  MOVFF  03,FEC
+0FC06:  MOVF   FED,F
+0FC08:  MOVF   FED,F
 0FC0A:  MOVF   FED,F
-0FC0C:  MOVF   FED,F
-0FC0E:  MOVF   FED,F
-0FC10:  MOVLB  0
+0FC0C:  MOVLB  0
 ....................         }else{
-0FC12:  GOTO   FD28
+0FC0E:  GOTO   FD24
 ....................             unsigned int8 add = PACKET_SIZE - misf_counter_table[smf_queue_ptr->mission_id].uncopied_counter;
-0FC16:  MOVLB  1
-0FC18:  MOVF   xA1,W
-0FC1A:  MOVWF  FE9
-0FC1C:  MOVF   xA2,W
-0FC1E:  MOVWF  FEA
-0FC20:  MOVF   FEF,W
-0FC22:  MULLW  0A
-0FC24:  MOVF   FF3,W
-0FC26:  MOVLB  2
-0FC28:  CLRF   x11
-0FC2A:  MOVWF  x10
-0FC2C:  MOVLW  04
-0FC2E:  ADDWF  x10,W
-0FC30:  MOVWF  01
-0FC32:  MOVLW  00
-0FC34:  ADDWFC x11,W
-0FC36:  MOVWF  03
-0FC38:  MOVF   01,W
-0FC3A:  ADDLW  22
-0FC3C:  MOVWF  FE9
-0FC3E:  MOVLW  01
-0FC40:  ADDWFC 03,W
-0FC42:  MOVWF  FEA
-0FC44:  MOVFF  FEF,00
-0FC48:  MOVFF  FEC,01
-0FC4C:  MOVFF  FEC,02
-0FC50:  MOVFF  FEC,03
+0FC12:  MOVLB  1
+0FC14:  MOVF   xA1,W
+0FC16:  MOVWF  FE9
+0FC18:  MOVF   xA2,W
+0FC1A:  MOVWF  FEA
+0FC1C:  MOVF   FEF,W
+0FC1E:  MULLW  0A
+0FC20:  MOVF   FF3,W
+0FC22:  MOVLB  2
+0FC24:  CLRF   x11
+0FC26:  MOVWF  x10
+0FC28:  MOVLW  04
+0FC2A:  ADDWF  x10,W
+0FC2C:  MOVWF  01
+0FC2E:  MOVLW  00
+0FC30:  ADDWFC x11,W
+0FC32:  MOVWF  03
+0FC34:  MOVF   01,W
+0FC36:  ADDLW  22
+0FC38:  MOVWF  FE9
+0FC3A:  MOVLW  01
+0FC3C:  ADDWFC 03,W
+0FC3E:  MOVWF  FEA
+0FC40:  MOVFF  FEF,00
+0FC44:  MOVFF  FEC,01
+0FC48:  MOVFF  FEC,02
+0FC4C:  MOVFF  FEC,03
+0FC50:  MOVF   FED,F
+0FC52:  MOVF   FED,F
 0FC54:  MOVF   FED,F
-0FC56:  MOVF   FED,F
-0FC58:  MOVF   FED,F
-0FC5A:  MOVLW  40
-0FC5C:  BSF    FD8.0
-0FC5E:  SUBFWB 00,W
-0FC60:  MOVWF  x0F
-0FC62:  MOVLB  0
+0FC56:  MOVLW  40
+0FC58:  BSF    FD8.0
+0FC5A:  SUBFWB 00,W
+0FC5C:  MOVWF  x0F
+0FC5E:  MOVLB  0
 ....................             misf_counter_table[smf_queue_ptr->mission_id].uncopied_counter = 0;
-0FC64:  MOVLB  1
-0FC66:  MOVF   xA1,W
-0FC68:  MOVWF  FE9
-0FC6A:  MOVF   xA2,W
-0FC6C:  MOVWF  FEA
-0FC6E:  MOVF   FEF,W
-0FC70:  MULLW  0A
-0FC72:  MOVF   FF3,W
-0FC74:  MOVLB  2
-0FC76:  CLRF   x11
-0FC78:  MOVWF  x10
-0FC7A:  MOVLW  04
-0FC7C:  ADDWF  x10,W
-0FC7E:  MOVWF  01
-0FC80:  MOVLW  00
-0FC82:  ADDWFC x11,W
-0FC84:  MOVWF  03
-0FC86:  MOVF   01,W
-0FC88:  ADDLW  22
-0FC8A:  MOVWF  FE9
-0FC8C:  MOVLW  01
-0FC8E:  ADDWFC 03,W
-0FC90:  MOVWF  FEA
-0FC92:  CLRF   FEF
+0FC60:  MOVLB  1
+0FC62:  MOVF   xA1,W
+0FC64:  MOVWF  FE9
+0FC66:  MOVF   xA2,W
+0FC68:  MOVWF  FEA
+0FC6A:  MOVF   FEF,W
+0FC6C:  MULLW  0A
+0FC6E:  MOVF   FF3,W
+0FC70:  MOVLB  2
+0FC72:  CLRF   x11
+0FC74:  MOVWF  x10
+0FC76:  MOVLW  04
+0FC78:  ADDWF  x10,W
+0FC7A:  MOVWF  01
+0FC7C:  MOVLW  00
+0FC7E:  ADDWFC x11,W
+0FC80:  MOVWF  03
+0FC82:  MOVF   01,W
+0FC84:  ADDLW  22
+0FC86:  MOVWF  FE9
+0FC88:  MOVLW  01
+0FC8A:  ADDWFC 03,W
+0FC8C:  MOVWF  FEA
+0FC8E:  CLRF   FEF
+0FC90:  CLRF   FEC
+0FC92:  CLRF   FEC
 0FC94:  CLRF   FEC
-0FC96:  CLRF   FEC
-0FC98:  CLRF   FEC
+0FC96:  MOVF   FED,F
+0FC98:  MOVF   FED,F
 0FC9A:  MOVF   FED,F
-0FC9C:  MOVF   FED,F
-0FC9E:  MOVF   FED,F
 ....................             misf_counter_table[smf_queue_ptr->mission_id].used_counter += add;
-0FCA0:  MOVLB  1
-0FCA2:  MOVF   xA1,W
-0FCA4:  MOVWF  FE9
-0FCA6:  MOVF   xA2,W
-0FCA8:  MOVWF  FEA
-0FCAA:  MOVF   FEF,W
-0FCAC:  MULLW  0A
-0FCAE:  MOVF   FF3,W
-0FCB0:  MOVLB  2
-0FCB2:  CLRF   x11
-0FCB4:  MOVWF  x10
-0FCB6:  MOVLW  22
-0FCB8:  ADDWF  x10,W
-0FCBA:  MOVWF  FE9
-0FCBC:  MOVLW  01
-0FCBE:  ADDWFC x11,W
-0FCC0:  MOVWF  FEA
-0FCC2:  MOVF   x0F,W
-0FCC4:  ADDWF  FEF,W
-0FCC6:  MOVWF  00
-0FCC8:  MOVLW  00
-0FCCA:  ADDWFC FEC,W
-0FCCC:  MOVWF  01
-0FCCE:  MOVLW  00
-0FCD0:  ADDWFC FEC,W
-0FCD2:  MOVWF  02
-0FCD4:  MOVLW  00
-0FCD6:  ADDWFC FEC,W
-0FCD8:  MOVWF  03
+0FC9C:  MOVLB  1
+0FC9E:  MOVF   xA1,W
+0FCA0:  MOVWF  FE9
+0FCA2:  MOVF   xA2,W
+0FCA4:  MOVWF  FEA
+0FCA6:  MOVF   FEF,W
+0FCA8:  MULLW  0A
+0FCAA:  MOVF   FF3,W
+0FCAC:  MOVLB  2
+0FCAE:  CLRF   x11
+0FCB0:  MOVWF  x10
+0FCB2:  MOVLW  22
+0FCB4:  ADDWF  x10,W
+0FCB6:  MOVWF  FE9
+0FCB8:  MOVLW  01
+0FCBA:  ADDWFC x11,W
+0FCBC:  MOVWF  FEA
+0FCBE:  MOVF   x0F,W
+0FCC0:  ADDWF  FEF,W
+0FCC2:  MOVWF  00
+0FCC4:  MOVLW  00
+0FCC6:  ADDWFC FEC,W
+0FCC8:  MOVWF  01
+0FCCA:  MOVLW  00
+0FCCC:  ADDWFC FEC,W
+0FCCE:  MOVWF  02
+0FCD0:  MOVLW  00
+0FCD2:  ADDWFC FEC,W
+0FCD4:  MOVWF  03
+0FCD6:  MOVF   FED,F
+0FCD8:  MOVF   FED,F
 0FCDA:  MOVF   FED,F
-0FCDC:  MOVF   FED,F
-0FCDE:  MOVF   FED,F
-0FCE0:  MOVFF  00,FEF
-0FCE4:  MOVFF  01,FEC
-0FCE8:  MOVFF  02,FEC
-0FCEC:  MOVFF  03,FEC
+0FCDC:  MOVFF  00,FEF
+0FCE0:  MOVFF  01,FEC
+0FCE4:  MOVFF  02,FEC
+0FCE8:  MOVFF  03,FEC
+0FCEC:  MOVF   FED,F
+0FCEE:  MOVF   FED,F
 0FCF0:  MOVF   FED,F
-0FCF2:  MOVF   FED,F
-0FCF4:  MOVF   FED,F
 ....................             misf_counter_table[smf_queue_ptr->mission_id].reserve_counter1 = 0;
-0FCF6:  MOVLB  1
-0FCF8:  MOVF   xA1,W
-0FCFA:  MOVWF  FE9
-0FCFC:  MOVF   xA2,W
-0FCFE:  MOVWF  FEA
-0FD00:  MOVF   FEF,W
-0FD02:  MULLW  0A
-0FD04:  MOVF   FF3,W
-0FD06:  MOVLB  2
-0FD08:  CLRF   x11
-0FD0A:  MOVWF  x10
-0FD0C:  MOVLW  08
-0FD0E:  ADDWF  x10,W
-0FD10:  MOVWF  01
-0FD12:  MOVLW  00
-0FD14:  ADDWFC x11,W
-0FD16:  MOVWF  03
-0FD18:  MOVF   01,W
-0FD1A:  ADDLW  22
-0FD1C:  MOVWF  FE9
-0FD1E:  MOVLW  01
-0FD20:  ADDWFC 03,W
-0FD22:  MOVWF  FEA
-0FD24:  CLRF   FEF
-0FD26:  MOVLB  0
+0FCF2:  MOVLB  1
+0FCF4:  MOVF   xA1,W
+0FCF6:  MOVWF  FE9
+0FCF8:  MOVF   xA2,W
+0FCFA:  MOVWF  FEA
+0FCFC:  MOVF   FEF,W
+0FCFE:  MULLW  0A
+0FD00:  MOVF   FF3,W
+0FD02:  MOVLB  2
+0FD04:  CLRF   x11
+0FD06:  MOVWF  x10
+0FD08:  MOVLW  08
+0FD0A:  ADDWF  x10,W
+0FD0C:  MOVWF  01
+0FD0E:  MOVLW  00
+0FD10:  ADDWFC x11,W
+0FD12:  MOVWF  03
+0FD14:  MOVF   01,W
+0FD16:  ADDLW  22
+0FD18:  MOVWF  FE9
+0FD1A:  MOVLW  01
+0FD1C:  ADDWFC 03,W
+0FD1E:  MOVWF  FEA
+0FD20:  CLRF   FEF
+0FD22:  MOVLB  0
 ....................         }
 ....................         misf_read_address += PACKET_SIZE;
-0FD28:  MOVLW  40
-0FD2A:  MOVLB  2
-0FD2C:  ADDWF  x0B,F
+0FD24:  MOVLW  40
+0FD26:  MOVLB  2
+0FD28:  ADDWF  x0B,F
+0FD2A:  MOVLW  00
+0FD2C:  ADDWFC x0C,F
 0FD2E:  MOVLW  00
-0FD30:  ADDWFC x0C,F
+0FD30:  ADDWFC x0D,F
 0FD32:  MOVLW  00
-0FD34:  ADDWFC x0D,F
-0FD36:  MOVLW  00
-0FD38:  ADDWFC x0E,F
+0FD34:  ADDWFC x0E,F
 ....................         smf_write_address += PACKET_SIZE;
-0FD3A:  MOVLW  40
-0FD3C:  ADDWF  x07,F
+0FD36:  MOVLW  40
+0FD38:  ADDWF  x07,F
+0FD3A:  MOVLW  00
+0FD3C:  ADDWFC x08,F
 0FD3E:  MOVLW  00
-0FD40:  ADDWFC x08,F
+0FD40:  ADDWFC x09,F
 0FD42:  MOVLW  00
-0FD44:  ADDWFC x09,F
-0FD46:  MOVLW  00
-0FD48:  ADDWFC x0A,F
+0FD44:  ADDWFC x0A,F
 ....................         if (misf_write_size > PACKET_SIZE){
-0FD4A:  MOVLB  1
-0FD4C:  MOVF   xAA,F
-0FD4E:  BTFSC  FD8.2
-0FD50:  BRA    FD58
-0FD52:  MOVLB  0
-0FD54:  GOTO   FD8C
-0FD58:  MOVLB  0
-0FD5A:  MOVLB  1
-0FD5C:  MOVF   xA9,F
-0FD5E:  BTFSC  FD8.2
-0FD60:  BRA    FD68
-0FD62:  MOVLB  0
-0FD64:  GOTO   FD8C
-0FD68:  MOVLB  0
-0FD6A:  MOVLB  1
-0FD6C:  MOVF   xA8,F
-0FD6E:  BTFSC  FD8.2
-0FD70:  BRA    FD78
-0FD72:  MOVLB  0
-0FD74:  GOTO   FD8C
-0FD78:  MOVLB  0
-0FD7A:  MOVLB  1
-0FD7C:  MOVF   xA7,W
-0FD7E:  SUBLW  40
-0FD80:  BTFSS  FD8.0
-0FD82:  BRA    FD8A
-0FD84:  MOVLB  0
-0FD86:  GOTO   FDA4
-0FD8A:  MOVLB  0
+0FD46:  MOVLB  1
+0FD48:  MOVF   xAA,F
+0FD4A:  BTFSC  FD8.2
+0FD4C:  BRA    FD54
+0FD4E:  MOVLB  0
+0FD50:  GOTO   FD88
+0FD54:  MOVLB  0
+0FD56:  MOVLB  1
+0FD58:  MOVF   xA9,F
+0FD5A:  BTFSC  FD8.2
+0FD5C:  BRA    FD64
+0FD5E:  MOVLB  0
+0FD60:  GOTO   FD88
+0FD64:  MOVLB  0
+0FD66:  MOVLB  1
+0FD68:  MOVF   xA8,F
+0FD6A:  BTFSC  FD8.2
+0FD6C:  BRA    FD74
+0FD6E:  MOVLB  0
+0FD70:  GOTO   FD88
+0FD74:  MOVLB  0
+0FD76:  MOVLB  1
+0FD78:  MOVF   xA7,W
+0FD7A:  SUBLW  40
+0FD7C:  BTFSS  FD8.0
+0FD7E:  BRA    FD86
+0FD80:  MOVLB  0
+0FD82:  GOTO   FDA0
+0FD86:  MOVLB  0
 ....................             misf_write_size -= PACKET_SIZE;
-0FD8C:  MOVLW  40
-0FD8E:  MOVLB  1
-0FD90:  SUBWF  xA7,F
+0FD88:  MOVLW  40
+0FD8A:  MOVLB  1
+0FD8C:  SUBWF  xA7,F
+0FD8E:  MOVLW  00
+0FD90:  SUBWFB xA8,F
 0FD92:  MOVLW  00
-0FD94:  SUBWFB xA8,F
+0FD94:  SUBWFB xA9,F
 0FD96:  MOVLW  00
-0FD98:  SUBWFB xA9,F
-0FD9A:  MOVLW  00
-0FD9C:  SUBWFB xAA,F
-0FD9E:  MOVLB  0
+0FD98:  SUBWFB xAA,F
+0FD9A:  MOVLB  0
 ....................         }else{
-0FDA0:  GOTO   FDB0
+0FD9C:  GOTO   FDAC
 ....................             misf_write_size = 0;
-0FDA4:  MOVLB  1
-0FDA6:  CLRF   xAA
-0FDA8:  CLRF   xA9
-0FDAA:  CLRF   xA8
-0FDAC:  CLRF   xA7
-0FDAE:  MOVLB  0
+0FDA0:  MOVLB  1
+0FDA2:  CLRF   xAA
+0FDA4:  CLRF   xA9
+0FDA6:  CLRF   xA8
+0FDA8:  CLRF   xA7
+0FDAA:  MOVLB  0
 ....................         }
-0FDB0:  GOTO   FA4C
+0FDAC:  GOTO   FA48
 ....................         
 ....................     }
 ....................     fprintf(PC, "\r\n");
-0FDB4:  MOVLW  0D
-0FDB6:  BTFSS  FA6.6
-0FDB8:  GOTO   FDB6
-0FDBC:  MOVLB  E
-0FDBE:  MOVWF  xF9
-0FDC0:  MOVLW  0A
-0FDC2:  MOVLB  0
-0FDC4:  BTFSS  FA6.6
-0FDC6:  GOTO   FDC4
-0FDCA:  MOVLB  E
-0FDCC:  MOVWF  xF9
+0FDB0:  MOVLW  0D
+0FDB2:  BTFSS  FA6.6
+0FDB4:  GOTO   FDB2
+0FDB8:  MOVLB  E
+0FDBA:  MOVWF  xF9
+0FDBC:  MOVLW  0A
+0FDBE:  MOVLB  0
+0FDC0:  BTFSS  FA6.6
+0FDC2:  GOTO   FDC0
+0FDC6:  MOVLB  E
+0FDC8:  MOVWF  xF9
 .................... 
 ....................     // Update SMF Counter Status
 ....................     fprintf(PC, "UPDATE SMF COUNTER STATUS\r\n");
-0FDCE:  MOVLW  E8
-0FDD0:  MOVWF  FF6
-0FDD2:  MOVLW  0A
-0FDD4:  MOVWF  FF7
-0FDD6:  MOVLW  00
-0FDD8:  MOVWF  FF8
-0FDDA:  MOVLB  0
-0FDDC:  CALL   202E
+0FDCA:  MOVLW  E8
+0FDCC:  MOVWF  FF6
+0FDCE:  MOVLW  0A
+0FDD0:  MOVWF  FF7
+0FDD2:  MOVLW  00
+0FDD4:  MOVWF  FF8
+0FDD6:  MOVLB  0
+0FDD8:  CALL   202E
 ....................     subsector_4kByte_erase(SMF, smf_header_address_start);
-0FDE0:  MOVFF  119,A07
-0FDE4:  MOVFF  118,A06
-0FDE8:  MOVFF  117,A05
-0FDEC:  MOVFF  116,A04
-0FDF0:  MOVFF  1B2,A0B
-0FDF4:  MOVFF  1B1,A0A
-0FDF8:  MOVFF  1B0,A09
-0FDFC:  MOVFF  1AF,A08
-0FE00:  CALL   4A8C
+0FDDC:  MOVFF  119,A07
+0FDE0:  MOVFF  118,A06
+0FDE4:  MOVFF  117,A05
+0FDE8:  MOVFF  116,A04
+0FDEC:  MOVFF  1B2,A0B
+0FDF0:  MOVFF  1B1,A0A
+0FDF4:  MOVFF  1B0,A09
+0FDF8:  MOVFF  1AF,A08
+0FDFC:  CALL   4A8C
 ....................     write_data_byte(SMF, smf_header_address_start + 0, (used_size >> 24)  & 0xFF);
-0FE04:  MOVFF  1AE,211
-0FE08:  MOVLB  2
-0FE0A:  CLRF   x12
-0FE0C:  CLRF   x13
-0FE0E:  CLRF   x14
-0FE10:  CLRF   x12
-0FE12:  CLRF   x13
-0FE14:  CLRF   x14
-0FE16:  MOVFF  119,21C
-0FE1A:  MOVFF  118,21B
-0FE1E:  MOVFF  117,21A
-0FE22:  MOVFF  116,219
-0FE26:  MOVFF  1B2,220
-0FE2A:  MOVFF  1B1,21F
-0FE2E:  MOVFF  1B0,21E
-0FE32:  MOVFF  1AF,21D
-0FE36:  MOVFF  211,221
-0FE3A:  MOVLB  0
-0FE3C:  CALL   ED2C
+0FE00:  MOVFF  1AE,211
+0FE04:  MOVLB  2
+0FE06:  CLRF   x12
+0FE08:  CLRF   x13
+0FE0A:  CLRF   x14
+0FE0C:  CLRF   x12
+0FE0E:  CLRF   x13
+0FE10:  CLRF   x14
+0FE12:  MOVFF  119,21C
+0FE16:  MOVFF  118,21B
+0FE1A:  MOVFF  117,21A
+0FE1E:  MOVFF  116,219
+0FE22:  MOVFF  1B2,220
+0FE26:  MOVFF  1B1,21F
+0FE2A:  MOVFF  1B0,21E
+0FE2E:  MOVFF  1AF,21D
+0FE32:  MOVFF  211,221
+0FE36:  MOVLB  0
+0FE38:  CALL   ED2C
 ....................     write_data_byte(SMF, smf_header_address_start + 1, (used_size >> 16)  & 0xFF);
-0FE40:  MOVLW  01
-0FE42:  MOVLB  1
-0FE44:  ADDWF  xAF,W
-0FE46:  MOVLB  2
-0FE48:  MOVWF  x10
-0FE4A:  MOVLW  00
-0FE4C:  MOVLB  1
-0FE4E:  ADDWFC xB0,W
-0FE50:  MOVLB  2
-0FE52:  MOVWF  x11
-0FE54:  MOVLW  00
-0FE56:  MOVLB  1
-0FE58:  ADDWFC xB1,W
-0FE5A:  MOVLB  2
-0FE5C:  MOVWF  x12
-0FE5E:  MOVLW  00
-0FE60:  MOVLB  1
-0FE62:  ADDWFC xB2,W
-0FE64:  MOVLB  2
-0FE66:  MOVWF  x13
-0FE68:  MOVFF  1AD,215
-0FE6C:  MOVFF  1AE,216
-0FE70:  CLRF   x17
-0FE72:  CLRF   x18
-0FE74:  CLRF   x16
-0FE76:  CLRF   x17
-0FE78:  CLRF   x18
-0FE7A:  MOVFF  119,21C
-0FE7E:  MOVFF  118,21B
-0FE82:  MOVFF  117,21A
-0FE86:  MOVFF  116,219
-0FE8A:  MOVFF  213,220
-0FE8E:  MOVFF  212,21F
-0FE92:  MOVFF  211,21E
-0FE96:  MOVFF  210,21D
-0FE9A:  MOVFF  215,221
-0FE9E:  MOVLB  0
-0FEA0:  CALL   ED2C
+0FE3C:  MOVLW  01
+0FE3E:  MOVLB  1
+0FE40:  ADDWF  xAF,W
+0FE42:  MOVLB  2
+0FE44:  MOVWF  x10
+0FE46:  MOVLW  00
+0FE48:  MOVLB  1
+0FE4A:  ADDWFC xB0,W
+0FE4C:  MOVLB  2
+0FE4E:  MOVWF  x11
+0FE50:  MOVLW  00
+0FE52:  MOVLB  1
+0FE54:  ADDWFC xB1,W
+0FE56:  MOVLB  2
+0FE58:  MOVWF  x12
+0FE5A:  MOVLW  00
+0FE5C:  MOVLB  1
+0FE5E:  ADDWFC xB2,W
+0FE60:  MOVLB  2
+0FE62:  MOVWF  x13
+0FE64:  MOVFF  1AD,215
+0FE68:  MOVFF  1AE,216
+0FE6C:  CLRF   x17
+0FE6E:  CLRF   x18
+0FE70:  CLRF   x16
+0FE72:  CLRF   x17
+0FE74:  CLRF   x18
+0FE76:  MOVFF  119,21C
+0FE7A:  MOVFF  118,21B
+0FE7E:  MOVFF  117,21A
+0FE82:  MOVFF  116,219
+0FE86:  MOVFF  213,220
+0FE8A:  MOVFF  212,21F
+0FE8E:  MOVFF  211,21E
+0FE92:  MOVFF  210,21D
+0FE96:  MOVFF  215,221
+0FE9A:  MOVLB  0
+0FE9C:  CALL   ED2C
 ....................     write_data_byte(SMF, smf_header_address_start + 2, (used_size >> 8) & 0xFF);
-0FEA4:  MOVLW  02
-0FEA6:  MOVLB  1
-0FEA8:  ADDWF  xAF,W
-0FEAA:  MOVLB  2
-0FEAC:  MOVWF  x10
-0FEAE:  MOVLW  00
-0FEB0:  MOVLB  1
-0FEB2:  ADDWFC xB0,W
-0FEB4:  MOVLB  2
-0FEB6:  MOVWF  x11
-0FEB8:  MOVLW  00
-0FEBA:  MOVLB  1
-0FEBC:  ADDWFC xB1,W
-0FEBE:  MOVLB  2
-0FEC0:  MOVWF  x12
-0FEC2:  MOVLW  00
-0FEC4:  MOVLB  1
-0FEC6:  ADDWFC xB2,W
-0FEC8:  MOVLB  2
-0FECA:  MOVWF  x13
-0FECC:  MOVFF  1AC,215
-0FED0:  MOVFF  1AD,216
-0FED4:  MOVFF  1AE,217
-0FED8:  CLRF   x18
-0FEDA:  CLRF   x16
-0FEDC:  CLRF   x17
-0FEDE:  CLRF   x18
-0FEE0:  MOVFF  119,21C
-0FEE4:  MOVFF  118,21B
-0FEE8:  MOVFF  117,21A
-0FEEC:  MOVFF  116,219
-0FEF0:  MOVFF  213,220
-0FEF4:  MOVFF  212,21F
-0FEF8:  MOVFF  211,21E
-0FEFC:  MOVFF  210,21D
-0FF00:  MOVFF  215,221
-0FF04:  MOVLB  0
-0FF06:  CALL   ED2C
+0FEA0:  MOVLW  02
+0FEA2:  MOVLB  1
+0FEA4:  ADDWF  xAF,W
+0FEA6:  MOVLB  2
+0FEA8:  MOVWF  x10
+0FEAA:  MOVLW  00
+0FEAC:  MOVLB  1
+0FEAE:  ADDWFC xB0,W
+0FEB0:  MOVLB  2
+0FEB2:  MOVWF  x11
+0FEB4:  MOVLW  00
+0FEB6:  MOVLB  1
+0FEB8:  ADDWFC xB1,W
+0FEBA:  MOVLB  2
+0FEBC:  MOVWF  x12
+0FEBE:  MOVLW  00
+0FEC0:  MOVLB  1
+0FEC2:  ADDWFC xB2,W
+0FEC4:  MOVLB  2
+0FEC6:  MOVWF  x13
+0FEC8:  MOVFF  1AC,215
+0FECC:  MOVFF  1AD,216
+0FED0:  MOVFF  1AE,217
+0FED4:  CLRF   x18
+0FED6:  CLRF   x16
+0FED8:  CLRF   x17
+0FEDA:  CLRF   x18
+0FEDC:  MOVFF  119,21C
+0FEE0:  MOVFF  118,21B
+0FEE4:  MOVFF  117,21A
+0FEE8:  MOVFF  116,219
+0FEEC:  MOVFF  213,220
+0FEF0:  MOVFF  212,21F
+0FEF4:  MOVFF  211,21E
+0FEF8:  MOVFF  210,21D
+0FEFC:  MOVFF  215,221
+0FF00:  MOVLB  0
+0FF02:  CALL   ED2C
 ....................     write_data_byte(SMF, smf_header_address_start + 3, (used_size >> 0) & 0xFF);
-0FF0A:  MOVLW  03
-0FF0C:  MOVLB  1
-0FF0E:  ADDWF  xAF,W
-0FF10:  MOVLB  2
-0FF12:  MOVWF  x10
-0FF14:  MOVLW  00
-0FF16:  MOVLB  1
-0FF18:  ADDWFC xB0,W
-0FF1A:  MOVLB  2
-0FF1C:  MOVWF  x11
-0FF1E:  MOVLW  00
-0FF20:  MOVLB  1
-0FF22:  ADDWFC xB1,W
-0FF24:  MOVLB  2
-0FF26:  MOVWF  x12
-0FF28:  MOVLW  00
-0FF2A:  MOVLB  1
-0FF2C:  ADDWFC xB2,W
-0FF2E:  MOVLB  2
-0FF30:  MOVWF  x13
-0FF32:  MOVFF  1AE,218
-0FF36:  MOVFF  1AD,217
-0FF3A:  MOVFF  1AC,216
-0FF3E:  MOVFF  1AB,215
-0FF42:  CLRF   x16
-0FF44:  CLRF   x17
-0FF46:  CLRF   x18
-0FF48:  MOVFF  119,21C
-0FF4C:  MOVFF  118,21B
-0FF50:  MOVFF  117,21A
-0FF54:  MOVFF  116,219
-0FF58:  MOVFF  213,220
-0FF5C:  MOVFF  212,21F
-0FF60:  MOVFF  211,21E
-0FF64:  MOVFF  210,21D
-0FF68:  MOVFF  215,221
-0FF6C:  MOVLB  0
-0FF6E:  CALL   ED2C
+0FF06:  MOVLW  03
+0FF08:  MOVLB  1
+0FF0A:  ADDWF  xAF,W
+0FF0C:  MOVLB  2
+0FF0E:  MOVWF  x10
+0FF10:  MOVLW  00
+0FF12:  MOVLB  1
+0FF14:  ADDWFC xB0,W
+0FF16:  MOVLB  2
+0FF18:  MOVWF  x11
+0FF1A:  MOVLW  00
+0FF1C:  MOVLB  1
+0FF1E:  ADDWFC xB1,W
+0FF20:  MOVLB  2
+0FF22:  MOVWF  x12
+0FF24:  MOVLW  00
+0FF26:  MOVLB  1
+0FF28:  ADDWFC xB2,W
+0FF2A:  MOVLB  2
+0FF2C:  MOVWF  x13
+0FF2E:  MOVFF  1AE,218
+0FF32:  MOVFF  1AD,217
+0FF36:  MOVFF  1AC,216
+0FF3A:  MOVFF  1AB,215
+0FF3E:  CLRF   x16
+0FF40:  CLRF   x17
+0FF42:  CLRF   x18
+0FF44:  MOVFF  119,21C
+0FF48:  MOVFF  118,21B
+0FF4C:  MOVFF  117,21A
+0FF50:  MOVFF  116,219
+0FF54:  MOVFF  213,220
+0FF58:  MOVFF  212,21F
+0FF5C:  MOVFF  211,21E
+0FF60:  MOVFF  210,21D
+0FF64:  MOVFF  215,221
+0FF68:  MOVLB  0
+0FF6A:  CALL   ED2C
 .................... 
 ....................     // print_smf_counter_status(&smf_data_table);
 ....................     // write size area
 ....................     // smf_write_header(&smf_data_table);
 ....................     misf_update_address_area();
-0FF72:  CALL   4DB0
+0FF6E:  CALL   4DB0
 ....................     fprintf(PC, "\r\n_________End copy_data__________\r\n");
-0FF76:  MOVLW  04
-0FF78:  MOVWF  FF6
-0FF7A:  MOVLW  0B
-0FF7C:  MOVWF  FF7
-0FF7E:  MOVLW  00
-0FF80:  MOVWF  FF8
-0FF82:  CALL   202E
+0FF72:  MOVLW  04
+0FF74:  MOVWF  FF6
+0FF76:  MOVLW  0B
+0FF78:  MOVWF  FF7
+0FF7A:  MOVLW  00
+0FF7C:  MOVWF  FF8
+0FF7E:  CALL   202E
 ....................     fprintf(PC, "_______________________________\r\n\r\n");
-0FF86:  MOVLW  2A
-0FF88:  MOVWF  FF6
-0FF8A:  MOVLW  0B
-0FF8C:  MOVWF  FF7
-0FF8E:  MOVLW  00
-0FF90:  MOVWF  FF8
-0FF92:  CALL   202E
-0FF96:  GOTO   11136 (RETURN)
+0FF82:  MOVLW  2A
+0FF84:  MOVWF  FF6
+0FF86:  MOVLW  0B
+0FF88:  MOVWF  FF7
+0FF8A:  MOVLW  00
+0FF8C:  MOVWF  FF8
+0FF8E:  CALL   202E
+0FF92:  GOTO   11136 (RETURN)
 .................... }
 .................... 
 .................... void smf_read(FlashOperationStruct *smf_data)
@@ -32556,10 +32868,10 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 .................... #ifndef VALUE_STATUS_H
 .................... #define VALUE_STATUS_H
 .................... 
-.................... // there is used in main.c and mission
+.................... #include "../tool/mmj_smf_memorymap.h"
 .................... 
 .................... volatile int1 is_use_smf_req_in_mission = FALSE;
-.................... volatile int8 status[4] = {IDLE, 0, 0, 0};
+.................... volatile int8 status[4] = {IDLE, DATA_ID_CIGS_PICLOG, DATA_ID_CIGS_IV1_DATA, DATA_ID_CIGS_IV2_DATA};
 .................... 
 .................... 
 .................... #endif
@@ -33650,74 +33962,74 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 .................... {
 ....................    fprintf(PC, "Start execute_command\r\n");
 *
-11590:  MOVLW  20
-11592:  MOVWF  FF6
-11594:  MOVLW  13
-11596:  MOVWF  FF7
-11598:  MOVLW  00
-1159A:  MOVWF  FF8
-1159C:  CALL   202E
+1158C:  MOVLW  20
+1158E:  MOVWF  FF6
+11590:  MOVLW  13
+11592:  MOVWF  FF7
+11594:  MOVLW  00
+11596:  MOVWF  FF8
+11598:  CALL   202E
 ....................    
 ....................    switch(command->frame_id)
-115A0:  MOVLB  1
-115A2:  MOVF   x99,W
-115A4:  MOVWF  FE9
-115A6:  MOVF   x9A,W
-115A8:  MOVWF  FEA
-115AA:  MOVF   FEF,W
-115AC:  ADDLW  FC
-115AE:  BTFSS  FD8.0
-115B0:  BRA    115B8
-115B2:  MOVLB  0
-115B4:  GOTO   11610
-115B8:  ADDLW  04
-115BA:  MOVLB  0
-115BC:  GOTO   11618
+1159C:  MOVLB  1
+1159E:  MOVF   x99,W
+115A0:  MOVWF  FE9
+115A2:  MOVF   x9A,W
+115A4:  MOVWF  FEA
+115A6:  MOVF   FEF,W
+115A8:  ADDLW  FC
+115AA:  BTFSS  FD8.0
+115AC:  BRA    115B4
+115AE:  MOVLB  0
+115B0:  GOTO   1160C
+115B4:  ADDLW  04
+115B6:  MOVLB  0
+115B8:  GOTO   11614
 ....................    {
 ....................       case UPLINK_COMMAND:
 ....................          handle_uplink_command(command);
-115C0:  MOVFF  19A,19C
-115C4:  MOVFF  199,19B
-115C8:  GOTO   E94E
+115BC:  MOVFF  19A,19C
+115C0:  MOVFF  199,19B
+115C4:  GOTO   E94E
 ....................          break;
-115CC:  GOTO   11610
+115C8:  GOTO   1160C
 ....................          
 ....................       case STATUS_CHECK:
 ....................          if (handle_status_check(command)){
-115D0:  MOVFF  19A,19C
-115D4:  MOVFF  199,19B
-115D8:  GOTO   E9B6
-115DC:  MOVF   01,F
-115DE:  BTFSC  FD8.2
-115E0:  GOTO   115EC
+115CC:  MOVFF  19A,19C
+115D0:  MOVFF  199,19B
+115D4:  GOTO   E9B6
+115D8:  MOVF   01,F
+115DA:  BTFSC  FD8.2
+115DC:  GOTO   115E8
 ....................             return TRUE; // if status is finished, return TRUE
-115E4:  MOVLW  01
-115E6:  MOVWF  01
-115E8:  GOTO   11614
+115E0:  MOVLW  01
+115E2:  MOVWF  01
+115E4:  GOTO   11610
 ....................          }        
 ....................          break;
-115EC:  GOTO   11610
+115E8:  GOTO   1160C
 ....................       
 ....................       case IS_SMF_AVAILABLE:
 ....................          handle_smf_available(command);
-115F0:  MOVFF  19A,19C
-115F4:  MOVFF  199,19B
-115F8:  GOTO   10F44
+115EC:  MOVFF  19A,19C
+115F0:  MOVFF  199,19B
+115F4:  GOTO   10F44
 ....................          break;
-115FC:  GOTO   11610
+115F8:  GOTO   1160C
 ....................       
 ....................       case SEND_TIME:
 ....................          handle_recieve_time(command);
-11600:  MOVFF  19A,19C
-11604:  MOVFF  199,19B
-11608:  GOTO   112A8
+115FC:  MOVFF  19A,19C
+11600:  MOVFF  199,19B
+11604:  GOTO   112A4
 ....................          break;
-1160C:  GOTO   11610
+11608:  GOTO   1160C
 ....................    }
 ....................    return FALSE;
-11610:  MOVLW  00
-11612:  MOVWF  01
-11614:  GOTO   11B00 (RETURN)
+1160C:  MOVLW  00
+1160E:  MOVWF  01
+11610:  GOTO   11B02 (RETURN)
 .................... }
 .................... 
 .................... 
@@ -33774,7 +34086,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 ....................       status[0] = SMF_USE_REQ;
 0E9AE:  MOVLW  04
 0E9B0:  MOVWF  4C
-0E9B2:  GOTO   115CC (RETURN)
+0E9B2:  GOTO   115C8 (RETURN)
 .................... 
 ....................    //return TRUE; // ここでTRUEを返すことで、実行後に何か処理をすることができる
 ....................    
@@ -33826,7 +34138,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 0EA02:  MOVWF  01
 0EA04:  GOTO   EA08
 ....................    }
-0EA08:  GOTO   115DC (RETURN)
+0EA08:  GOTO   115D8 (RETURN)
 .................... }
 .................... 
 .................... 
@@ -33877,7 +34189,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 10F94:  MOVWF  FF8
 10F96:  CALL   202E
 ....................         return;
-10F9A:  GOTO   112A4
+10F9A:  GOTO   112A0
 ....................     }
 .................... 
 ....................     fprintf(PC, "\t\t-> allowed\r\n");
@@ -34165,7 +34477,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 11208:  GOTO   11258
 ....................             case CIGS_PICLOG_DATA:
 ....................                smf_id = DATA_ID_CIGS_PICLOG;
-1120C:  MOVLW  C1
+1120C:  MOVLW  A0
 1120E:  MOVLB  1
 11210:  MOVWF  xA0
 ....................                break;
@@ -34189,7 +34501,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 1122C:  GOTO   11258
 ....................             case CIGS_IV1_DATA:
 ....................                smf_id = DATA_ID_CIGS_IV1_DATA;
-11230:  MOVLW  C4
+11230:  MOVLW  A1
 11232:  MOVLB  1
 11234:  MOVWF  xA0
 ....................                break;
@@ -34205,7 +34517,7 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 11244:  GOTO   11258
 ....................             case CIGS_IV2_DATA:
 ....................                smf_id = DATA_ID_CIGS_IV2_DATA;
-11248:  MOVLW  C6
+11248:  MOVLW  A2
 1124A:  MOVLB  1
 1124C:  MOVWF  xA0
 ....................                 break;
@@ -34249,35 +34561,32 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 11294:  MOVWF  xC2
 11296:  MOVLB  0
 11298:  CALL   2064
-....................       status[1] = 0xC0;
-1129C:  MOVLW  C0
-1129E:  MOVWF  4D
 ....................       status[0] = FINISHED;
-112A0:  MOVLW  06
-112A2:  MOVWF  4C
-112A4:  GOTO   115FC (RETURN)
+1129C:  MOVLW  06
+1129E:  MOVWF  4C
+112A0:  GOTO   115F8 (RETURN)
 .................... }
 .................... 
 .................... void handle_recieve_time(Command *command)
 .................... {
 ....................    fprintf(PC, "\t-> TIME Receive\r\n");
-112A8:  MOVLW  80
-112AA:  MOVWF  FF6
-112AC:  MOVLW  14
-112AE:  MOVWF  FF7
-112B0:  MOVLW  00
-112B2:  MOVWF  FF8
-112B4:  CALL   202E
+112A4:  MOVLW  80
+112A6:  MOVWF  FF6
+112A8:  MOVLW  14
+112AA:  MOVWF  FF7
+112AC:  MOVLW  00
+112AE:  MOVWF  FF8
+112B0:  CALL   202E
 ....................    fprintf(PC, "\t   Transmit Acknolegde\r\n");
-112B8:  MOVLW  94
-112BA:  MOVWF  FF6
-112BC:  MOVLW  14
-112BE:  MOVWF  FF7
-112C0:  MOVLW  00
-112C2:  MOVWF  FF8
-112C4:  CALL   202E
+112B4:  MOVLW  94
+112B6:  MOVWF  FF6
+112B8:  MOVLW  14
+112BA:  MOVWF  FF7
+112BC:  MOVLW  00
+112BE:  MOVWF  FF8
+112C0:  CALL   202E
 ....................    transmit_ack();
-112C8:  CALL   5652
+112C4:  CALL   5652
 .................... 
 ....................    // 4バイト(MSB, big-endian)に詰められた MM/DD hh:mm:ss を復元
 ....................    // [31:26]=0, [25:22]=month(1-12), [21:17]=day(1-31), [16:12]=hour(0-23), [11:6]=minute(0-59), [5:0]=second(0-59)
@@ -34285,293 +34594,293 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 ....................                       ((unsigned int32)command->content[1] << 16) |
 ....................                       ((unsigned int32)command->content[2] << 8)  |
 ....................                       ((unsigned int32)command->content[3]);
-112CC:  MOVLW  03
-112CE:  MOVLB  1
-112D0:  ADDWF  x9B,W
-112D2:  MOVWF  FE9
-112D4:  MOVLW  00
-112D6:  ADDWFC x9C,W
-112D8:  MOVWF  FEA
-112DA:  MOVF   FEF,W
-112DC:  CLRF   xA9
-112DE:  CLRF   xA8
-112E0:  CLRF   xA7
-112E2:  MOVWF  xA6
-112E4:  MOVFF  1A6,1A9
-112E8:  CLRF   xA6
-112EA:  CLRF   xA7
-112EC:  CLRF   xA8
-112EE:  MOVLW  04
-112F0:  ADDWF  x9B,W
-112F2:  MOVWF  FE9
-112F4:  MOVLW  00
-112F6:  ADDWFC x9C,W
-112F8:  MOVWF  FEA
-112FA:  MOVF   FEF,W
-112FC:  CLRF   xAE
-112FE:  CLRF   xAD
-11300:  CLRF   xAC
-11302:  MOVWF  xAB
-11304:  MOVFF  1AC,03
-11308:  MOVFF  1AB,02
-1130C:  CLRF   00
-1130E:  CLRF   01
-11310:  MOVF   00,W
-11312:  IORWF  xA6,F
-11314:  MOVF   01,W
-11316:  IORWF  xA7,F
-11318:  MOVF   02,W
-1131A:  IORWF  xA8,F
-1131C:  MOVF   03,W
-1131E:  IORWF  xA9,F
-11320:  MOVLW  05
-11322:  ADDWF  x9B,W
-11324:  MOVWF  FE9
-11326:  MOVLW  00
-11328:  ADDWFC x9C,W
-1132A:  MOVWF  FEA
-1132C:  MOVF   FEF,W
-1132E:  CLRF   xAE
-11330:  CLRF   xAD
-11332:  CLRF   xAC
-11334:  MOVWF  xAB
-11336:  MOVFF  1AD,03
-1133A:  MOVFF  1AC,02
-1133E:  MOVFF  1AB,01
-11342:  CLRF   00
-11344:  MOVF   00,W
-11346:  IORWF  xA6,F
-11348:  MOVF   01,W
-1134A:  IORWF  xA7,F
-1134C:  MOVF   02,W
-1134E:  IORWF  xA8,F
-11350:  MOVF   03,W
-11352:  IORWF  xA9,F
-11354:  MOVLW  06
-11356:  ADDWF  x9B,W
-11358:  MOVWF  FE9
-1135A:  MOVLW  00
-1135C:  ADDWFC x9C,W
-1135E:  MOVWF  FEA
-11360:  MOVF   FEF,W
-11362:  MOVWF  00
-11364:  CLRF   01
-11366:  CLRF   02
-11368:  CLRF   03
-1136A:  MOVF   00,W
-1136C:  IORWF  xA6,W
-1136E:  MOVWF  x9D
-11370:  MOVF   01,W
-11372:  IORWF  xA7,W
-11374:  MOVWF  x9E
-11376:  MOVF   02,W
-11378:  IORWF  xA8,W
-1137A:  MOVWF  x9F
-1137C:  MOVF   03,W
-1137E:  IORWF  xA9,W
-11380:  MOVWF  xA0
+112C8:  MOVLW  03
+112CA:  MOVLB  1
+112CC:  ADDWF  x9B,W
+112CE:  MOVWF  FE9
+112D0:  MOVLW  00
+112D2:  ADDWFC x9C,W
+112D4:  MOVWF  FEA
+112D6:  MOVF   FEF,W
+112D8:  CLRF   xA9
+112DA:  CLRF   xA8
+112DC:  CLRF   xA7
+112DE:  MOVWF  xA6
+112E0:  MOVFF  1A6,1A9
+112E4:  CLRF   xA6
+112E6:  CLRF   xA7
+112E8:  CLRF   xA8
+112EA:  MOVLW  04
+112EC:  ADDWF  x9B,W
+112EE:  MOVWF  FE9
+112F0:  MOVLW  00
+112F2:  ADDWFC x9C,W
+112F4:  MOVWF  FEA
+112F6:  MOVF   FEF,W
+112F8:  CLRF   xAE
+112FA:  CLRF   xAD
+112FC:  CLRF   xAC
+112FE:  MOVWF  xAB
+11300:  MOVFF  1AC,03
+11304:  MOVFF  1AB,02
+11308:  CLRF   00
+1130A:  CLRF   01
+1130C:  MOVF   00,W
+1130E:  IORWF  xA6,F
+11310:  MOVF   01,W
+11312:  IORWF  xA7,F
+11314:  MOVF   02,W
+11316:  IORWF  xA8,F
+11318:  MOVF   03,W
+1131A:  IORWF  xA9,F
+1131C:  MOVLW  05
+1131E:  ADDWF  x9B,W
+11320:  MOVWF  FE9
+11322:  MOVLW  00
+11324:  ADDWFC x9C,W
+11326:  MOVWF  FEA
+11328:  MOVF   FEF,W
+1132A:  CLRF   xAE
+1132C:  CLRF   xAD
+1132E:  CLRF   xAC
+11330:  MOVWF  xAB
+11332:  MOVFF  1AD,03
+11336:  MOVFF  1AC,02
+1133A:  MOVFF  1AB,01
+1133E:  CLRF   00
+11340:  MOVF   00,W
+11342:  IORWF  xA6,F
+11344:  MOVF   01,W
+11346:  IORWF  xA7,F
+11348:  MOVF   02,W
+1134A:  IORWF  xA8,F
+1134C:  MOVF   03,W
+1134E:  IORWF  xA9,F
+11350:  MOVLW  06
+11352:  ADDWF  x9B,W
+11354:  MOVWF  FE9
+11356:  MOVLW  00
+11358:  ADDWFC x9C,W
+1135A:  MOVWF  FEA
+1135C:  MOVF   FEF,W
+1135E:  MOVWF  00
+11360:  CLRF   01
+11362:  CLRF   02
+11364:  CLRF   03
+11366:  MOVF   00,W
+11368:  IORWF  xA6,W
+1136A:  MOVWF  x9D
+1136C:  MOVF   01,W
+1136E:  IORWF  xA7,W
+11370:  MOVWF  x9E
+11372:  MOVF   02,W
+11374:  IORWF  xA8,W
+11376:  MOVWF  x9F
+11378:  MOVF   03,W
+1137A:  IORWF  xA9,W
+1137C:  MOVWF  xA0
 .................... 
 ....................    set_current_sec(total_seconds);
-11382:  MOVFF  1A0,1A9
-11386:  MOVFF  19F,1A8
-1138A:  MOVFF  19E,1A7
-1138E:  MOVFF  19D,1A6
-11392:  MOVLB  0
-11394:  GOTO   FF9A
+1137E:  MOVFF  1A0,1A9
+11382:  MOVFF  19F,1A8
+11386:  MOVFF  19E,1A7
+1138A:  MOVFF  19D,1A6
+1138E:  MOVLB  0
+11390:  GOTO   FF96
 ....................    unsigned int16 days;
 ....................    unsigned int8 hours, minutes, seconds;
 ....................    days    = total_seconds / 86400;
-11398:  BCF    FD8.1
-1139A:  MOVFF  1A0,215
-1139E:  MOVFF  19F,214
-113A2:  MOVFF  19E,213
-113A6:  MOVFF  19D,212
-113AA:  MOVLB  2
-113AC:  CLRF   x19
-113AE:  MOVLW  01
-113B0:  MOVWF  x18
-113B2:  MOVLW  51
-113B4:  MOVWF  x17
-113B6:  MOVLW  80
-113B8:  MOVWF  x16
-113BA:  MOVLB  0
-113BC:  CALL   5F4A
-113C0:  MOVFF  01,1A2
-113C4:  MOVFF  00,1A1
+11394:  BCF    FD8.1
+11396:  MOVFF  1A0,215
+1139A:  MOVFF  19F,214
+1139E:  MOVFF  19E,213
+113A2:  MOVFF  19D,212
+113A6:  MOVLB  2
+113A8:  CLRF   x19
+113AA:  MOVLW  01
+113AC:  MOVWF  x18
+113AE:  MOVLW  51
+113B0:  MOVWF  x17
+113B2:  MOVLW  80
+113B4:  MOVWF  x16
+113B6:  MOVLB  0
+113B8:  CALL   5F4A
+113BC:  MOVFF  01,1A2
+113C0:  MOVFF  00,1A1
 ....................    hours   = (total_seconds % 86400) / 3600;
-113C8:  BSF    FD8.1
-113CA:  MOVLW  01
-113CC:  MOVWF  FEA
-113CE:  MOVLW  A6
-113D0:  MOVWF  FE9
-113D2:  MOVFF  1A0,215
-113D6:  MOVFF  19F,214
-113DA:  MOVFF  19E,213
-113DE:  MOVFF  19D,212
-113E2:  MOVLB  2
-113E4:  CLRF   x19
-113E6:  MOVLW  01
-113E8:  MOVWF  x18
-113EA:  MOVLW  51
-113EC:  MOVWF  x17
-113EE:  MOVLW  80
-113F0:  MOVWF  x16
-113F2:  MOVLB  0
-113F4:  CALL   5F4A
-113F8:  MOVFF  1A9,1AD
-113FC:  MOVFF  1A8,1AC
-11400:  MOVFF  1A7,1AB
-11404:  MOVFF  1A6,1AA
-11408:  MOVFF  FEA,1AF
-1140C:  MOVFF  FE9,1AE
-11410:  BCF    FD8.1
-11412:  MOVFF  1AD,215
-11416:  MOVFF  1AC,214
-1141A:  MOVFF  1AB,213
-1141E:  MOVFF  1AA,212
-11422:  MOVLB  2
-11424:  CLRF   x19
-11426:  CLRF   x18
-11428:  MOVLW  0E
-1142A:  MOVWF  x17
-1142C:  MOVLW  10
-1142E:  MOVWF  x16
-11430:  MOVLB  0
-11432:  CALL   5F4A
-11436:  MOVFF  1AF,FEA
-1143A:  MOVFF  1AE,FE9
-1143E:  MOVFF  00,1A3
+113C4:  BSF    FD8.1
+113C6:  MOVLW  01
+113C8:  MOVWF  FEA
+113CA:  MOVLW  A6
+113CC:  MOVWF  FE9
+113CE:  MOVFF  1A0,215
+113D2:  MOVFF  19F,214
+113D6:  MOVFF  19E,213
+113DA:  MOVFF  19D,212
+113DE:  MOVLB  2
+113E0:  CLRF   x19
+113E2:  MOVLW  01
+113E4:  MOVWF  x18
+113E6:  MOVLW  51
+113E8:  MOVWF  x17
+113EA:  MOVLW  80
+113EC:  MOVWF  x16
+113EE:  MOVLB  0
+113F0:  CALL   5F4A
+113F4:  MOVFF  1A9,1AD
+113F8:  MOVFF  1A8,1AC
+113FC:  MOVFF  1A7,1AB
+11400:  MOVFF  1A6,1AA
+11404:  MOVFF  FEA,1AF
+11408:  MOVFF  FE9,1AE
+1140C:  BCF    FD8.1
+1140E:  MOVFF  1AD,215
+11412:  MOVFF  1AC,214
+11416:  MOVFF  1AB,213
+1141A:  MOVFF  1AA,212
+1141E:  MOVLB  2
+11420:  CLRF   x19
+11422:  CLRF   x18
+11424:  MOVLW  0E
+11426:  MOVWF  x17
+11428:  MOVLW  10
+1142A:  MOVWF  x16
+1142C:  MOVLB  0
+1142E:  CALL   5F4A
+11432:  MOVFF  1AF,FEA
+11436:  MOVFF  1AE,FE9
+1143A:  MOVFF  00,1A3
 ....................    minutes = (total_seconds % 3600) / 60;
-11442:  BSF    FD8.1
-11444:  MOVLW  01
-11446:  MOVWF  FEA
-11448:  MOVLW  A6
-1144A:  MOVWF  FE9
-1144C:  MOVFF  1A0,215
-11450:  MOVFF  19F,214
-11454:  MOVFF  19E,213
-11458:  MOVFF  19D,212
-1145C:  MOVLB  2
-1145E:  CLRF   x19
-11460:  CLRF   x18
-11462:  MOVLW  0E
-11464:  MOVWF  x17
-11466:  MOVLW  10
-11468:  MOVWF  x16
-1146A:  MOVLB  0
-1146C:  CALL   5F4A
-11470:  MOVFF  1A9,1AD
-11474:  MOVFF  1A8,1AC
-11478:  MOVFF  1A7,1AB
-1147C:  MOVFF  1A6,1AA
-11480:  MOVFF  FEA,1AF
-11484:  MOVFF  FE9,1AE
-11488:  BCF    FD8.1
-1148A:  MOVFF  1AD,215
-1148E:  MOVFF  1AC,214
-11492:  MOVFF  1AB,213
-11496:  MOVFF  1AA,212
-1149A:  MOVLB  2
-1149C:  CLRF   x19
-1149E:  CLRF   x18
-114A0:  CLRF   x17
-114A2:  MOVLW  3C
-114A4:  MOVWF  x16
-114A6:  MOVLB  0
-114A8:  CALL   5F4A
-114AC:  MOVFF  1AF,FEA
-114B0:  MOVFF  1AE,FE9
-114B4:  MOVFF  00,1A4
+1143E:  BSF    FD8.1
+11440:  MOVLW  01
+11442:  MOVWF  FEA
+11444:  MOVLW  A6
+11446:  MOVWF  FE9
+11448:  MOVFF  1A0,215
+1144C:  MOVFF  19F,214
+11450:  MOVFF  19E,213
+11454:  MOVFF  19D,212
+11458:  MOVLB  2
+1145A:  CLRF   x19
+1145C:  CLRF   x18
+1145E:  MOVLW  0E
+11460:  MOVWF  x17
+11462:  MOVLW  10
+11464:  MOVWF  x16
+11466:  MOVLB  0
+11468:  CALL   5F4A
+1146C:  MOVFF  1A9,1AD
+11470:  MOVFF  1A8,1AC
+11474:  MOVFF  1A7,1AB
+11478:  MOVFF  1A6,1AA
+1147C:  MOVFF  FEA,1AF
+11480:  MOVFF  FE9,1AE
+11484:  BCF    FD8.1
+11486:  MOVFF  1AD,215
+1148A:  MOVFF  1AC,214
+1148E:  MOVFF  1AB,213
+11492:  MOVFF  1AA,212
+11496:  MOVLB  2
+11498:  CLRF   x19
+1149A:  CLRF   x18
+1149C:  CLRF   x17
+1149E:  MOVLW  3C
+114A0:  MOVWF  x16
+114A2:  MOVLB  0
+114A4:  CALL   5F4A
+114A8:  MOVFF  1AF,FEA
+114AC:  MOVFF  1AE,FE9
+114B0:  MOVFF  00,1A4
 ....................    seconds = total_seconds % 60;
-114B8:  BSF    FD8.1
-114BA:  MOVLW  01
-114BC:  MOVWF  FEA
-114BE:  MOVLW  A6
-114C0:  MOVWF  FE9
-114C2:  MOVFF  1A0,215
-114C6:  MOVFF  19F,214
-114CA:  MOVFF  19E,213
-114CE:  MOVFF  19D,212
-114D2:  MOVLB  2
-114D4:  CLRF   x19
-114D6:  CLRF   x18
-114D8:  CLRF   x17
-114DA:  MOVLW  3C
-114DC:  MOVWF  x16
-114DE:  MOVLB  0
-114E0:  CALL   5F4A
-114E4:  MOVFF  1A6,1A5
+114B4:  BSF    FD8.1
+114B6:  MOVLW  01
+114B8:  MOVWF  FEA
+114BA:  MOVLW  A6
+114BC:  MOVWF  FE9
+114BE:  MOVFF  1A0,215
+114C2:  MOVFF  19F,214
+114C6:  MOVFF  19E,213
+114CA:  MOVFF  19D,212
+114CE:  MOVLB  2
+114D0:  CLRF   x19
+114D2:  CLRF   x18
+114D4:  CLRF   x17
+114D6:  MOVLW  3C
+114D8:  MOVWF  x16
+114DA:  MOVLB  0
+114DC:  CALL   5F4A
+114E0:  MOVFF  1A6,1A5
 .................... 
 ....................    fprintf(PC, "\t\t-> Set time to %lu days, %02u:%02u:%02u\r\n",
 ....................            days, hours, minutes, seconds);
-114E8:  MOVLW  AE
-114EA:  MOVWF  FF6
-114EC:  MOVLW  14
-114EE:  MOVWF  FF7
-114F0:  MOVLW  00
-114F2:  MOVWF  FF8
-114F4:  MOVLW  11
-114F6:  MOVLB  9
-114F8:  MOVWF  xC2
-114FA:  MOVLB  0
-114FC:  CALL   2064
-11500:  MOVLW  10
-11502:  MOVWF  FE9
-11504:  MOVFF  1A2,1EA
-11508:  MOVFF  1A1,1E9
-1150C:  CALL   8BB6
-11510:  MOVLW  C2
-11512:  MOVWF  FF6
-11514:  MOVLW  14
-11516:  MOVWF  FF7
-11518:  MOVLW  00
-1151A:  MOVWF  FF8
-1151C:  MOVLW  07
-1151E:  MOVLB  9
-11520:  MOVWF  xC2
-11522:  MOVLB  0
-11524:  CALL   2064
-11528:  MOVFF  1A3,1AF
-1152C:  MOVLW  01
-1152E:  MOVLB  1
-11530:  MOVWF  xB0
-11532:  MOVLB  0
-11534:  CALL   E2B8
-11538:  MOVLW  3A
-1153A:  BTFSS  FA6.6
-1153C:  GOTO   1153A
-11540:  MOVLB  E
-11542:  MOVWF  xF9
-11544:  MOVFF  1A4,1AF
-11548:  MOVLW  01
-1154A:  MOVLB  1
-1154C:  MOVWF  xB0
-1154E:  MOVLB  0
-11550:  CALL   E2B8
-11554:  MOVLW  3A
-11556:  BTFSS  FA6.6
-11558:  GOTO   11556
-1155C:  MOVLB  E
-1155E:  MOVWF  xF9
-11560:  MOVFF  1A5,1AF
-11564:  MOVLW  01
-11566:  MOVLB  1
-11568:  MOVWF  xB0
-1156A:  MOVLB  0
-1156C:  CALL   E2B8
-11570:  MOVLW  0D
-11572:  BTFSS  FA6.6
-11574:  GOTO   11572
-11578:  MOVLB  E
-1157A:  MOVWF  xF9
-1157C:  MOVLW  0A
-1157E:  MOVLB  0
-11580:  BTFSS  FA6.6
-11582:  GOTO   11580
-11586:  MOVLB  E
-11588:  MOVWF  xF9
-1158A:  MOVLB  0
-1158C:  GOTO   1160C (RETURN)
+114E4:  MOVLW  AE
+114E6:  MOVWF  FF6
+114E8:  MOVLW  14
+114EA:  MOVWF  FF7
+114EC:  MOVLW  00
+114EE:  MOVWF  FF8
+114F0:  MOVLW  11
+114F2:  MOVLB  9
+114F4:  MOVWF  xC2
+114F6:  MOVLB  0
+114F8:  CALL   2064
+114FC:  MOVLW  10
+114FE:  MOVWF  FE9
+11500:  MOVFF  1A2,1EA
+11504:  MOVFF  1A1,1E9
+11508:  CALL   8BB6
+1150C:  MOVLW  C2
+1150E:  MOVWF  FF6
+11510:  MOVLW  14
+11512:  MOVWF  FF7
+11514:  MOVLW  00
+11516:  MOVWF  FF8
+11518:  MOVLW  07
+1151A:  MOVLB  9
+1151C:  MOVWF  xC2
+1151E:  MOVLB  0
+11520:  CALL   2064
+11524:  MOVFF  1A3,1AF
+11528:  MOVLW  01
+1152A:  MOVLB  1
+1152C:  MOVWF  xB0
+1152E:  MOVLB  0
+11530:  CALL   E2B8
+11534:  MOVLW  3A
+11536:  BTFSS  FA6.6
+11538:  GOTO   11536
+1153C:  MOVLB  E
+1153E:  MOVWF  xF9
+11540:  MOVFF  1A4,1AF
+11544:  MOVLW  01
+11546:  MOVLB  1
+11548:  MOVWF  xB0
+1154A:  MOVLB  0
+1154C:  CALL   E2B8
+11550:  MOVLW  3A
+11552:  BTFSS  FA6.6
+11554:  GOTO   11552
+11558:  MOVLB  E
+1155A:  MOVWF  xF9
+1155C:  MOVFF  1A5,1AF
+11560:  MOVLW  01
+11562:  MOVLB  1
+11564:  MOVWF  xB0
+11566:  MOVLB  0
+11568:  CALL   E2B8
+1156C:  MOVLW  0D
+1156E:  BTFSS  FA6.6
+11570:  GOTO   1156E
+11574:  MOVLB  E
+11576:  MOVWF  xF9
+11578:  MOVLW  0A
+1157A:  MOVLB  0
+1157C:  BTFSS  FA6.6
+1157E:  GOTO   1157C
+11582:  MOVLB  E
+11584:  MOVWF  xF9
+11586:  MOVLB  0
+11588:  GOTO   11608 (RETURN)
 .................... 
 .................... }
 .................... // End of file
@@ -42003,695 +42312,698 @@ CCS PCH C Compiler, Version 5.104, 57077               19-10-25 18:32
 .................... 
 .................... void main()
 *
-11640:  CLRF   FF8
-11642:  BCF    FF1.2
-11644:  BCF    F9F.0
-11646:  BCF    FA9.5
-11648:  BSF    FD0.7
-1164A:  BSF    07.7
-1164C:  MOVLB  E
-1164E:  MOVLW  55
+1163C:  CLRF   FF8
+1163E:  BCF    FF1.2
+11640:  BCF    F9F.0
+11642:  BCF    FA9.5
+11644:  BSF    FD0.7
+11646:  BSF    07.7
+11648:  MOVLB  E
+1164A:  MOVLW  55
+1164C:  MOVWF  F7E
+1164E:  MOVLW  AA
 11650:  MOVWF  F7E
-11652:  MOVLW  AA
-11654:  MOVWF  F7E
-11656:  BCF    F66.6
-11658:  MOVLW  F9
-1165A:  MOVWF  x2C
-1165C:  MOVLW  F6
-1165E:  MOVWF  x2D
-11660:  MOVLW  0F
-11662:  MOVWF  x2E
-11664:  MOVLW  40
-11666:  MOVWF  x12
-11668:  MOVLW  30
-1166A:  MOVWF  x13
-1166C:  MOVLW  20
-1166E:  MOVWF  x22
-11670:  MOVLW  30
-11672:  MOVWF  x24
-11674:  MOVLW  55
+11652:  BCF    F66.6
+11654:  MOVLW  F9
+11656:  MOVWF  x2C
+11658:  MOVLW  F6
+1165A:  MOVWF  x2D
+1165C:  MOVLW  0F
+1165E:  MOVWF  x2E
+11660:  MOVLW  40
+11662:  MOVWF  x12
+11664:  MOVLW  30
+11666:  MOVWF  x13
+11668:  MOVLW  20
+1166A:  MOVWF  x22
+1166C:  MOVLW  30
+1166E:  MOVWF  x24
+11670:  MOVLW  55
+11672:  MOVWF  F7E
+11674:  MOVLW  AA
 11676:  MOVWF  F7E
-11678:  MOVLW  AA
-1167A:  MOVWF  F7E
-1167C:  BSF    F66.6
-1167E:  CLRF   F9B
-11680:  CLRF   F64
-11682:  CLRF   F65
-11684:  CLRF   F66
-11686:  MOVLW  02
-11688:  MOVWF  FD3
-1168A:  CLRF   1B
-1168C:  MOVLB  F
-1168E:  BSF    x2D.3
-11690:  MOVLW  A0
-11692:  MOVWF  x2B
-11694:  MOVLW  01
-11696:  MOVWF  x2C
-11698:  MOVLW  A6
-1169A:  MOVWF  x2E
-1169C:  MOVLW  90
-1169E:  MOVWF  x2F
-116A0:  MOVLB  E
-116A2:  BSF    xFD.3
-116A4:  MOVLW  A0
-116A6:  MOVWF  xFB
-116A8:  MOVLW  01
-116AA:  MOVWF  xFC
-116AC:  MOVLW  A6
-116AE:  MOVWF  xFE
-116B0:  MOVLW  90
-116B2:  MOVWF  xFF
-116B4:  BSF    F92.1
-116B6:  BCF    F92.0
-116B8:  BCF    F92.3
-116BA:  BCF    F89.3
-116BC:  BSF    F96.0
-116BE:  BCF    F96.6
-116C0:  BCF    F96.1
-116C2:  BCF    F8D.1
-116C4:  BSF    F93.4
-116C6:  BCF    F93.5
-116C8:  BCF    F93.2
-116CA:  BSF    F8A.2
-116CC:  BCF    F95.4
-116CE:  BCF    F95.5
-116D0:  BSF    F8C.5
-116D2:  CLRF   1F
-116D4:  CLRF   1E
-116D6:  CLRF   1D
-116D8:  CLRF   1C
-116DA:  CLRF   23
-116DC:  CLRF   22
-116DE:  CLRF   21
-116E0:  CLRF   20
-116E2:  CLRF   27
-116E4:  CLRF   26
-116E6:  CLRF   25
-116E8:  CLRF   24
-116EA:  CLRF   29
-116EC:  CLRF   28
-116EE:  CLRF   4A
-116F0:  BCF    4B.0
-116F2:  MOVLW  1E
-116F4:  MOVLB  1
-116F6:  MOVWF  x7C
-116F8:  CLRF   x81
-116FA:  CLRF   x80
-116FC:  CLRF   x7F
-116FE:  CLRF   x7E
-11700:  CLRF   x85
-11702:  CLRF   x84
-11704:  CLRF   x83
-11706:  CLRF   x82
-11708:  CLRF   x87
-1170A:  CLRF   x86
-1170C:  MOVLB  E
-1170E:  CLRF   xD9
-11710:  CLRF   xDA
-11712:  CLRF   xCE
-11714:  CLRF   xCF
-11716:  CLRF   xD0
-11718:  CLRF   xD1
-1171A:  CLRF   xD2
-1171C:  CLRF   xD3
-1171E:  CLRF   xD4
-11720:  CLRF   xD5
-11722:  CLRF   x45
-11724:  CLRF   x46
-11726:  CLRF   x47
-11728:  BCF    x8D.7
-1172A:  BCF    x8D.6
-1172C:  BCF    x8D.5
-1172E:  MOVLB  F
-11730:  CLRF   x53
-11732:  CLRF   x38
-11734:  CLRF   x37
-11736:  MOVLB  0
-11738:  CLRF   2A
-1173A:  CLRF   2B
-1173C:  CLRF   2C
-1173E:  CLRF   2D
-11740:  CLRF   2E
-11742:  CLRF   2F
-11744:  CLRF   30
-11746:  CLRF   31
-11748:  CLRF   32
-1174A:  CLRF   33
-1174C:  CLRF   34
-1174E:  CLRF   35
-11750:  CLRF   36
-11752:  CLRF   37
-11754:  CLRF   38
-11756:  CLRF   39
-11758:  CLRF   3A
-1175A:  CLRF   3B
-1175C:  CLRF   3C
-1175E:  CLRF   3D
-11760:  CLRF   3E
-11762:  CLRF   3F
-11764:  CLRF   40
-11766:  CLRF   41
-11768:  CLRF   42
-1176A:  CLRF   43
-1176C:  CLRF   44
-1176E:  CLRF   45
-11770:  CLRF   46
-11772:  CLRF   47
-11774:  CLRF   48
-11776:  CLRF   49
-11778:  MOVLW  03
-1177A:  MOVWF  4C
-1177C:  CLRF   4D
-1177E:  CLRF   4E
-11780:  CLRF   4F
-11782:  CLRF   50
-11784:  CLRF   51
-11786:  CLRF   52
-11788:  CLRF   53
-1178A:  CLRF   54
-1178C:  CLRF   55
-1178E:  CLRF   56
-11790:  CLRF   57
-11792:  CLRF   58
-11794:  CLRF   59
-11796:  CLRF   5A
-11798:  CLRF   5B
-1179A:  CLRF   5C
-1179C:  CLRF   5D
-1179E:  CLRF   5E
-117A0:  CLRF   5F
-117A2:  CLRF   x60
-117A4:  CLRF   x61
-117A6:  CLRF   x62
-117A8:  CLRF   x63
-117AA:  CLRF   x64
-117AC:  CLRF   x65
-117AE:  CLRF   x66
-117B0:  CLRF   x67
-117B2:  CLRF   x68
-117B4:  CLRF   x69
-117B6:  CLRF   x6A
-117B8:  CLRF   x6B
-117BA:  CLRF   x6C
-117BC:  CLRF   x6D
-117BE:  CLRF   x6E
-117C0:  CLRF   x6F
-117C2:  CLRF   x70
-117C4:  CLRF   x71
-117C6:  CLRF   x72
-117C8:  CLRF   x73
-117CA:  CLRF   x74
-117CC:  CLRF   x75
-117CE:  CLRF   x76
-117D0:  CLRF   x77
-117D2:  CLRF   x78
-117D4:  CLRF   x79
-117D6:  CLRF   x7A
-117D8:  CLRF   x7B
-117DA:  CLRF   x7C
-117DC:  CLRF   x7D
-117DE:  CLRF   x7E
-117E0:  CLRF   x7F
-117E2:  CLRF   x80
-117E4:  CLRF   x81
-117E6:  CLRF   x82
-117E8:  CLRF   x83
-117EA:  CLRF   x84
-117EC:  CLRF   x85
-117EE:  CLRF   x86
-117F0:  CLRF   x87
-117F2:  CLRF   x88
-117F4:  CLRF   x89
-117F6:  CLRF   x8A
-117F8:  CLRF   x8B
-117FA:  CLRF   x8C
-117FC:  CLRF   x8D
-117FE:  CLRF   x8E
-11800:  CLRF   x8F
-11802:  CLRF   x90
-11804:  CLRF   x91
-11806:  CLRF   x92
-11808:  CLRF   x93
-1180A:  CLRF   x94
-1180C:  CLRF   x95
-1180E:  CLRF   x96
-11810:  CLRF   x97
-11812:  CLRF   x98
-11814:  CLRF   x99
-11816:  CLRF   x9A
-11818:  CLRF   x9B
-1181A:  CLRF   x9C
-1181C:  CLRF   x9D
-1181E:  CLRF   x9E
-11820:  CLRF   x9F
-11822:  CLRF   xA0
-11824:  CLRF   xA1
-11826:  CLRF   xA2
-11828:  CLRF   xA3
-1182A:  CLRF   xA4
-1182C:  CLRF   xA5
-1182E:  CLRF   xA6
-11830:  CLRF   xA7
-11832:  CLRF   xA8
-11834:  CLRF   xA9
-11836:  CLRF   xAA
-11838:  CLRF   xAB
-1183A:  CLRF   xAC
-1183C:  CLRF   xAD
-1183E:  CLRF   xAE
-11840:  CLRF   xAF
-11842:  CLRF   xB0
-11844:  CLRF   xB1
-11846:  CLRF   xB2
-11848:  CLRF   xB3
-1184A:  CLRF   xB4
-1184C:  CLRF   xB5
-1184E:  CLRF   xB6
-11850:  CLRF   xB7
-11852:  CLRF   xB8
-11854:  CLRF   xB9
-11856:  CLRF   xBA
-11858:  CLRF   xBB
-1185A:  CLRF   xBC
-1185C:  CLRF   xBD
-1185E:  CLRF   xBE
-11860:  CLRF   xBF
-11862:  CLRF   xC0
-11864:  CLRF   xC1
-11866:  CLRF   xC2
-11868:  CLRF   xC3
-1186A:  CLRF   xC4
-1186C:  CLRF   xC5
-1186E:  CLRF   xC6
-11870:  CLRF   xC7
-11872:  CLRF   xC8
-11874:  CLRF   xC9
-11876:  CLRF   xCA
-11878:  CLRF   xCB
-1187A:  CLRF   xCC
-1187C:  CLRF   xCD
-1187E:  CLRF   xCE
-11880:  CLRF   xCF
-11882:  CLRF   xD0
-11884:  CLRF   xD1
-11886:  CLRF   xD2
-11888:  CLRF   xD3
-1188A:  CLRF   xD4
-1188C:  CLRF   xD5
-1188E:  CLRF   xD6
-11890:  CLRF   xD7
-11892:  CLRF   xD8
-11894:  CLRF   xD9
-11896:  CLRF   xDA
-11898:  CLRF   xDB
-1189A:  CLRF   xDC
-1189C:  CLRF   xDD
-1189E:  CLRF   xDE
-118A0:  CLRF   xDF
-118A2:  CLRF   xE0
-118A4:  CLRF   xE1
-118A6:  CLRF   xE2
-118A8:  CLRF   xE3
-118AA:  CLRF   xE4
-118AC:  CLRF   xE5
-118AE:  CLRF   xE6
-118B0:  CLRF   xE7
-118B2:  CLRF   xE8
-118B4:  CLRF   xE9
-118B6:  CLRF   xEA
-118B8:  CLRF   xEB
-118BA:  CLRF   xEC
-118BC:  CLRF   xED
-118BE:  CLRF   xEE
-118C0:  CLRF   xEF
-118C2:  CLRF   xF0
-118C4:  CLRF   xF1
-118C6:  CLRF   xF2
-118C8:  CLRF   xF3
-118CA:  CLRF   xF4
-118CC:  CLRF   xF5
-118CE:  CLRF   xF6
-118D0:  CLRF   xF7
-118D2:  CLRF   xF8
-118D4:  CLRF   xF9
-118D6:  CLRF   xFA
-118D8:  CLRF   xFB
-118DA:  CLRF   xFC
-118DC:  CLRF   xFD
-118DE:  CLRF   xFE
-118E0:  CLRF   xFF
-118E2:  MOVLB  1
-118E4:  CLRF   x00
-118E6:  CLRF   x01
-118E8:  CLRF   x02
-118EA:  CLRF   x03
-118EC:  CLRF   x04
-118EE:  CLRF   x05
-118F0:  CLRF   x06
-118F2:  CLRF   x07
-118F4:  CLRF   x08
-118F6:  CLRF   x09
-118F8:  CLRF   x0A
-118FA:  CLRF   x0B
-118FC:  CLRF   x0C
-118FE:  CLRF   x0D
-11900:  CLRF   x0E
-11902:  CLRF   x0F
-11904:  CLRF   x10
-11906:  CLRF   x11
-11908:  CLRF   x12
-1190A:  CLRF   x13
-1190C:  MOVLW  30
-1190E:  MOVWF  x14
-11910:  MOVLW  7C
-11912:  MOVWF  x15
-11914:  MOVLW  01
-11916:  MOVWF  x16
-11918:  MOVLW  01
-1191A:  MOVWF  x17
-1191C:  MOVLW  02
-1191E:  MOVWF  x18
-11920:  MOVLW  7C
-11922:  MOVWF  x19
-11924:  CLRF   x1A
-11926:  MOVLW  09
-11928:  MOVWF  x1B
-1192A:  MOVLW  01
-1192C:  MOVWF  x1C
-1192E:  CLRF   x1D
-11930:  MOVLW  02
-11932:  MOVWF  x1E
-11934:  MOVLW  01
-11936:  MOVWF  x1F
-11938:  MOVLW  03
-1193A:  MOVWF  x20
-1193C:  MOVLW  04
-1193E:  MOVWF  x21
-11940:  MOVLW  01
-11942:  MOVWF  x69
-11944:  MOVLW  22
-11946:  MOVWF  x68
-11948:  MOVLW  01
-1194A:  MOVWF  x6B
-1194C:  MOVLW  2C
-1194E:  MOVWF  x6A
-11950:  MOVLW  01
-11952:  MOVWF  x6D
-11954:  MOVLW  36
-11956:  MOVWF  x6C
-11958:  MOVLW  01
-1195A:  MOVWF  x6F
-1195C:  MOVLW  40
-1195E:  MOVWF  x6E
-11960:  MOVLW  01
-11962:  MOVWF  x71
-11964:  MOVLW  4A
-11966:  MOVWF  x70
-11968:  MOVLW  01
-1196A:  MOVWF  x73
-1196C:  MOVLW  54
-1196E:  MOVWF  x72
-11970:  MOVLW  01
-11972:  MOVWF  x75
-11974:  MOVLW  5E
-11976:  MOVWF  x74
-11978:  CLRF   x88
-1197A:  CLRF   x89
-1197C:  CLRF   x8A
-1197E:  CLRF   x8B
-11980:  MOVLB  0
+11678:  BSF    F66.6
+1167A:  CLRF   F9B
+1167C:  CLRF   F64
+1167E:  CLRF   F65
+11680:  CLRF   F66
+11682:  MOVLW  02
+11684:  MOVWF  FD3
+11686:  CLRF   1B
+11688:  MOVLB  F
+1168A:  BSF    x2D.3
+1168C:  MOVLW  A0
+1168E:  MOVWF  x2B
+11690:  MOVLW  01
+11692:  MOVWF  x2C
+11694:  MOVLW  A6
+11696:  MOVWF  x2E
+11698:  MOVLW  90
+1169A:  MOVWF  x2F
+1169C:  MOVLB  E
+1169E:  BSF    xFD.3
+116A0:  MOVLW  A0
+116A2:  MOVWF  xFB
+116A4:  MOVLW  01
+116A6:  MOVWF  xFC
+116A8:  MOVLW  A6
+116AA:  MOVWF  xFE
+116AC:  MOVLW  90
+116AE:  MOVWF  xFF
+116B0:  BSF    F92.1
+116B2:  BCF    F92.0
+116B4:  BCF    F92.3
+116B6:  BCF    F89.3
+116B8:  BSF    F96.0
+116BA:  BCF    F96.6
+116BC:  BCF    F96.1
+116BE:  BCF    F8D.1
+116C0:  BSF    F93.4
+116C2:  BCF    F93.5
+116C4:  BCF    F93.2
+116C6:  BSF    F8A.2
+116C8:  BCF    F95.4
+116CA:  BCF    F95.5
+116CC:  BSF    F8C.5
+116CE:  CLRF   1F
+116D0:  CLRF   1E
+116D2:  CLRF   1D
+116D4:  CLRF   1C
+116D6:  CLRF   23
+116D8:  CLRF   22
+116DA:  CLRF   21
+116DC:  CLRF   20
+116DE:  CLRF   27
+116E0:  CLRF   26
+116E2:  CLRF   25
+116E4:  CLRF   24
+116E6:  CLRF   29
+116E8:  CLRF   28
+116EA:  CLRF   4A
+116EC:  BCF    4B.0
+116EE:  MOVLW  1E
+116F0:  MOVLB  1
+116F2:  MOVWF  x7C
+116F4:  CLRF   x81
+116F6:  CLRF   x80
+116F8:  CLRF   x7F
+116FA:  CLRF   x7E
+116FC:  CLRF   x85
+116FE:  CLRF   x84
+11700:  CLRF   x83
+11702:  CLRF   x82
+11704:  CLRF   x87
+11706:  CLRF   x86
+11708:  MOVLB  E
+1170A:  CLRF   xD9
+1170C:  CLRF   xDA
+1170E:  CLRF   xCE
+11710:  CLRF   xCF
+11712:  CLRF   xD0
+11714:  CLRF   xD1
+11716:  CLRF   xD2
+11718:  CLRF   xD3
+1171A:  CLRF   xD4
+1171C:  CLRF   xD5
+1171E:  CLRF   x45
+11720:  CLRF   x46
+11722:  CLRF   x47
+11724:  BCF    x8D.7
+11726:  BCF    x8D.6
+11728:  BCF    x8D.5
+1172A:  MOVLB  F
+1172C:  CLRF   x53
+1172E:  CLRF   x38
+11730:  CLRF   x37
+11732:  MOVLB  0
+11734:  CLRF   2A
+11736:  CLRF   2B
+11738:  CLRF   2C
+1173A:  CLRF   2D
+1173C:  CLRF   2E
+1173E:  CLRF   2F
+11740:  CLRF   30
+11742:  CLRF   31
+11744:  CLRF   32
+11746:  CLRF   33
+11748:  CLRF   34
+1174A:  CLRF   35
+1174C:  CLRF   36
+1174E:  CLRF   37
+11750:  CLRF   38
+11752:  CLRF   39
+11754:  CLRF   3A
+11756:  CLRF   3B
+11758:  CLRF   3C
+1175A:  CLRF   3D
+1175C:  CLRF   3E
+1175E:  CLRF   3F
+11760:  CLRF   40
+11762:  CLRF   41
+11764:  CLRF   42
+11766:  CLRF   43
+11768:  CLRF   44
+1176A:  CLRF   45
+1176C:  CLRF   46
+1176E:  CLRF   47
+11770:  CLRF   48
+11772:  CLRF   49
+11774:  MOVLW  03
+11776:  MOVWF  4C
+11778:  MOVLW  A0
+1177A:  MOVWF  4D
+1177C:  MOVLW  A1
+1177E:  MOVWF  4E
+11780:  MOVLW  A2
+11782:  MOVWF  4F
+11784:  CLRF   50
+11786:  CLRF   51
+11788:  CLRF   52
+1178A:  CLRF   53
+1178C:  CLRF   54
+1178E:  CLRF   55
+11790:  CLRF   56
+11792:  CLRF   57
+11794:  CLRF   58
+11796:  CLRF   59
+11798:  CLRF   5A
+1179A:  CLRF   5B
+1179C:  CLRF   5C
+1179E:  CLRF   5D
+117A0:  CLRF   5E
+117A2:  CLRF   5F
+117A4:  CLRF   x60
+117A6:  CLRF   x61
+117A8:  CLRF   x62
+117AA:  CLRF   x63
+117AC:  CLRF   x64
+117AE:  CLRF   x65
+117B0:  CLRF   x66
+117B2:  CLRF   x67
+117B4:  CLRF   x68
+117B6:  CLRF   x69
+117B8:  CLRF   x6A
+117BA:  CLRF   x6B
+117BC:  CLRF   x6C
+117BE:  CLRF   x6D
+117C0:  CLRF   x6E
+117C2:  CLRF   x6F
+117C4:  CLRF   x70
+117C6:  CLRF   x71
+117C8:  CLRF   x72
+117CA:  CLRF   x73
+117CC:  CLRF   x74
+117CE:  CLRF   x75
+117D0:  CLRF   x76
+117D2:  CLRF   x77
+117D4:  CLRF   x78
+117D6:  CLRF   x79
+117D8:  CLRF   x7A
+117DA:  CLRF   x7B
+117DC:  CLRF   x7C
+117DE:  CLRF   x7D
+117E0:  CLRF   x7E
+117E2:  CLRF   x7F
+117E4:  CLRF   x80
+117E6:  CLRF   x81
+117E8:  CLRF   x82
+117EA:  CLRF   x83
+117EC:  CLRF   x84
+117EE:  CLRF   x85
+117F0:  CLRF   x86
+117F2:  CLRF   x87
+117F4:  CLRF   x88
+117F6:  CLRF   x89
+117F8:  CLRF   x8A
+117FA:  CLRF   x8B
+117FC:  CLRF   x8C
+117FE:  CLRF   x8D
+11800:  CLRF   x8E
+11802:  CLRF   x8F
+11804:  CLRF   x90
+11806:  CLRF   x91
+11808:  CLRF   x92
+1180A:  CLRF   x93
+1180C:  CLRF   x94
+1180E:  CLRF   x95
+11810:  CLRF   x96
+11812:  CLRF   x97
+11814:  CLRF   x98
+11816:  CLRF   x99
+11818:  CLRF   x9A
+1181A:  CLRF   x9B
+1181C:  CLRF   x9C
+1181E:  CLRF   x9D
+11820:  CLRF   x9E
+11822:  CLRF   x9F
+11824:  CLRF   xA0
+11826:  CLRF   xA1
+11828:  CLRF   xA2
+1182A:  CLRF   xA3
+1182C:  CLRF   xA4
+1182E:  CLRF   xA5
+11830:  CLRF   xA6
+11832:  CLRF   xA7
+11834:  CLRF   xA8
+11836:  CLRF   xA9
+11838:  CLRF   xAA
+1183A:  CLRF   xAB
+1183C:  CLRF   xAC
+1183E:  CLRF   xAD
+11840:  CLRF   xAE
+11842:  CLRF   xAF
+11844:  CLRF   xB0
+11846:  CLRF   xB1
+11848:  CLRF   xB2
+1184A:  CLRF   xB3
+1184C:  CLRF   xB4
+1184E:  CLRF   xB5
+11850:  CLRF   xB6
+11852:  CLRF   xB7
+11854:  CLRF   xB8
+11856:  CLRF   xB9
+11858:  CLRF   xBA
+1185A:  CLRF   xBB
+1185C:  CLRF   xBC
+1185E:  CLRF   xBD
+11860:  CLRF   xBE
+11862:  CLRF   xBF
+11864:  CLRF   xC0
+11866:  CLRF   xC1
+11868:  CLRF   xC2
+1186A:  CLRF   xC3
+1186C:  CLRF   xC4
+1186E:  CLRF   xC5
+11870:  CLRF   xC6
+11872:  CLRF   xC7
+11874:  CLRF   xC8
+11876:  CLRF   xC9
+11878:  CLRF   xCA
+1187A:  CLRF   xCB
+1187C:  CLRF   xCC
+1187E:  CLRF   xCD
+11880:  CLRF   xCE
+11882:  CLRF   xCF
+11884:  CLRF   xD0
+11886:  CLRF   xD1
+11888:  CLRF   xD2
+1188A:  CLRF   xD3
+1188C:  CLRF   xD4
+1188E:  CLRF   xD5
+11890:  CLRF   xD6
+11892:  CLRF   xD7
+11894:  CLRF   xD8
+11896:  CLRF   xD9
+11898:  CLRF   xDA
+1189A:  CLRF   xDB
+1189C:  CLRF   xDC
+1189E:  CLRF   xDD
+118A0:  CLRF   xDE
+118A2:  CLRF   xDF
+118A4:  CLRF   xE0
+118A6:  CLRF   xE1
+118A8:  CLRF   xE2
+118AA:  CLRF   xE3
+118AC:  CLRF   xE4
+118AE:  CLRF   xE5
+118B0:  CLRF   xE6
+118B2:  CLRF   xE7
+118B4:  CLRF   xE8
+118B6:  CLRF   xE9
+118B8:  CLRF   xEA
+118BA:  CLRF   xEB
+118BC:  CLRF   xEC
+118BE:  CLRF   xED
+118C0:  CLRF   xEE
+118C2:  CLRF   xEF
+118C4:  CLRF   xF0
+118C6:  CLRF   xF1
+118C8:  CLRF   xF2
+118CA:  CLRF   xF3
+118CC:  CLRF   xF4
+118CE:  CLRF   xF5
+118D0:  CLRF   xF6
+118D2:  CLRF   xF7
+118D4:  CLRF   xF8
+118D6:  CLRF   xF9
+118D8:  CLRF   xFA
+118DA:  CLRF   xFB
+118DC:  CLRF   xFC
+118DE:  CLRF   xFD
+118E0:  CLRF   xFE
+118E2:  CLRF   xFF
+118E4:  MOVLB  1
+118E6:  CLRF   x00
+118E8:  CLRF   x01
+118EA:  CLRF   x02
+118EC:  CLRF   x03
+118EE:  CLRF   x04
+118F0:  CLRF   x05
+118F2:  CLRF   x06
+118F4:  CLRF   x07
+118F6:  CLRF   x08
+118F8:  CLRF   x09
+118FA:  CLRF   x0A
+118FC:  CLRF   x0B
+118FE:  CLRF   x0C
+11900:  CLRF   x0D
+11902:  CLRF   x0E
+11904:  CLRF   x0F
+11906:  CLRF   x10
+11908:  CLRF   x11
+1190A:  CLRF   x12
+1190C:  CLRF   x13
+1190E:  MOVLW  30
+11910:  MOVWF  x14
+11912:  MOVLW  7C
+11914:  MOVWF  x15
+11916:  MOVLW  01
+11918:  MOVWF  x16
+1191A:  MOVLW  01
+1191C:  MOVWF  x17
+1191E:  MOVLW  02
+11920:  MOVWF  x18
+11922:  MOVLW  7C
+11924:  MOVWF  x19
+11926:  CLRF   x1A
+11928:  MOVLW  09
+1192A:  MOVWF  x1B
+1192C:  MOVLW  01
+1192E:  MOVWF  x1C
+11930:  CLRF   x1D
+11932:  MOVLW  02
+11934:  MOVWF  x1E
+11936:  MOVLW  01
+11938:  MOVWF  x1F
+1193A:  MOVLW  03
+1193C:  MOVWF  x20
+1193E:  MOVLW  04
+11940:  MOVWF  x21
+11942:  MOVLW  01
+11944:  MOVWF  x69
+11946:  MOVLW  22
+11948:  MOVWF  x68
+1194A:  MOVLW  01
+1194C:  MOVWF  x6B
+1194E:  MOVLW  2C
+11950:  MOVWF  x6A
+11952:  MOVLW  01
+11954:  MOVWF  x6D
+11956:  MOVLW  36
+11958:  MOVWF  x6C
+1195A:  MOVLW  01
+1195C:  MOVWF  x6F
+1195E:  MOVLW  40
+11960:  MOVWF  x6E
+11962:  MOVLW  01
+11964:  MOVWF  x71
+11966:  MOVLW  4A
+11968:  MOVWF  x70
+1196A:  MOVLW  01
+1196C:  MOVWF  x73
+1196E:  MOVLW  54
+11970:  MOVWF  x72
+11972:  MOVLW  01
+11974:  MOVWF  x75
+11976:  MOVLW  5E
+11978:  MOVWF  x74
+1197A:  CLRF   x88
+1197C:  CLRF   x89
+1197E:  CLRF   x8A
+11980:  CLRF   x8B
+11982:  MOVLB  0
 .................... { 
 ....................    delay_ms(100); // wait for power stable
-11982:  MOVLW  64
-11984:  MOVLB  B
-11986:  MOVWF  x02
-11988:  MOVLB  0
-1198A:  CALL   2000
+11984:  MOVLW  64
+11986:  MOVLB  B
+11988:  MOVWF  x02
+1198A:  MOVLB  0
+1198C:  CALL   2000
 ....................    fprintf(PC,"\r\n\r\n\r\n============================================================\r\n");
-1198E:  MOVLW  C0
-11990:  MOVWF  FF6
-11992:  MOVLW  1E
-11994:  MOVWF  FF7
-11996:  MOVLW  00
-11998:  MOVWF  FF8
-1199A:  CALL   202E
+11990:  MOVLW  C0
+11992:  MOVWF  FF6
+11994:  MOVLW  1E
+11996:  MOVWF  FF7
+11998:  MOVLW  00
+1199A:  MOVWF  FF8
+1199C:  CALL   202E
 ....................    fprintf(PC,"This is MOMIJI CIGS PIC BBM for MIS7_BBM6.\r\n");
-1199E:  MOVLW  06
-119A0:  MOVWF  FF6
-119A2:  MOVLW  1F
-119A4:  MOVWF  FF7
-119A6:  MOVLW  00
-119A8:  MOVWF  FF8
-119AA:  CALL   202E
+119A0:  MOVLW  06
+119A2:  MOVWF  FF6
+119A4:  MOVLW  1F
+119A6:  MOVWF  FF7
+119A8:  MOVLW  00
+119AA:  MOVWF  FF8
+119AC:  CALL   202E
 ....................    fprintf(PC,"Last updated on %s %s, by Inoue.\r\n\r\n", __DATE__, __TIME__);
-119AE:  MOVLW  34
-119B0:  MOVWF  FF6
-119B2:  MOVLW  1F
-119B4:  MOVWF  FF7
-119B6:  MOVLW  00
-119B8:  MOVWF  FF8
-119BA:  MOVLW  10
-119BC:  MOVLB  9
-119BE:  MOVWF  xC2
-119C0:  MOVLB  0
-119C2:  CALL   2064
-119C6:  MOVLW  5A
-119C8:  MOVWF  FF6
-119CA:  MOVLW  1F
-119CC:  MOVWF  FF7
-119CE:  MOVLW  00
-119D0:  MOVWF  FF8
-119D2:  CALL   202E
-119D6:  MOVLW  20
-119D8:  BTFSS  FA6.6
-119DA:  GOTO   119D8
-119DE:  MOVLB  E
-119E0:  MOVWF  xF9
-119E2:  MOVLW  64
-119E4:  MOVWF  FF6
-119E6:  MOVLW  1F
-119E8:  MOVWF  FF7
-119EA:  MOVLW  00
-119EC:  MOVWF  FF8
-119EE:  MOVLB  0
-119F0:  CALL   202E
-119F4:  MOVLW  49
-119F6:  MOVWF  FF6
-119F8:  MOVLW  1F
-119FA:  MOVWF  FF7
-119FC:  MOVLW  00
-119FE:  MOVWF  FF8
-11A00:  MOVLW  0F
-11A02:  MOVLB  9
-11A04:  MOVWF  xC2
-11A06:  MOVLB  0
-11A08:  CALL   2064
+119B0:  MOVLW  34
+119B2:  MOVWF  FF6
+119B4:  MOVLW  1F
+119B6:  MOVWF  FF7
+119B8:  MOVLW  00
+119BA:  MOVWF  FF8
+119BC:  MOVLW  10
+119BE:  MOVLB  9
+119C0:  MOVWF  xC2
+119C2:  MOVLB  0
+119C4:  CALL   2064
+119C8:  MOVLW  5A
+119CA:  MOVWF  FF6
+119CC:  MOVLW  1F
+119CE:  MOVWF  FF7
+119D0:  MOVLW  00
+119D2:  MOVWF  FF8
+119D4:  CALL   202E
+119D8:  MOVLW  20
+119DA:  BTFSS  FA6.6
+119DC:  GOTO   119DA
+119E0:  MOVLB  E
+119E2:  MOVWF  xF9
+119E4:  MOVLW  64
+119E6:  MOVWF  FF6
+119E8:  MOVLW  1F
+119EA:  MOVWF  FF7
+119EC:  MOVLW  00
+119EE:  MOVWF  FF8
+119F0:  MOVLB  0
+119F2:  CALL   202E
+119F6:  MOVLW  49
+119F8:  MOVWF  FF6
+119FA:  MOVLW  1F
+119FC:  MOVWF  FF7
+119FE:  MOVLW  00
+11A00:  MOVWF  FF8
+11A02:  MOVLW  0F
+11A04:  MOVLB  9
+11A06:  MOVWF  xC2
+11A08:  MOVLB  0
+11A0A:  CALL   2064
 ....................    memset(smf_update_flag, 0, sizeof(smf_update_flag));
-11A0C:  MOVLW  01
-11A0E:  MOVWF  FEA
-11A10:  MOVLW  7A
-11A12:  MOVWF  FE9
-11A14:  CLRF   00
-11A16:  CLRF   02
-11A18:  MOVLW  02
-11A1A:  MOVWF  01
-11A1C:  CALL   209E
+11A0E:  MOVLW  01
+11A10:  MOVWF  FEA
+11A12:  MOVLW  7A
+11A14:  MOVWF  FE9
+11A16:  CLRF   00
+11A18:  CLRF   02
+11A1A:  MOVLW  02
+11A1C:  MOVWF  01
+11A1E:  CALL   209E
 ....................    // io_init();
 ....................    setup_uart_to_boss();
-11A20:  GOTO   20C2
+11A22:  GOTO   20C2
 ....................    timer_init();
-11A24:  GOTO   20EC
+11A26:  GOTO   20EC
 ....................    ad7490_init();
-11A28:  GOTO   2310
+11A2A:  GOTO   2310
 ....................    mcp4901_init();
-11A2C:  GOTO   2640
+11A2E:  GOTO   2640
 ....................    misf_init();
-11A30:  CALL   36B2
+11A32:  CALL   36B2
 ....................    
 ....................    piclog_make(PICLOG_STARTUP,0x00);
-11A34:  MOVLB  2
-11A36:  CLRF   x06
-11A38:  CLRF   x07
-11A3A:  MOVLB  0
-11A3C:  CALL   4E3E
+11A36:  MOVLB  2
+11A38:  CLRF   x06
+11A3A:  CLRF   x07
+11A3C:  MOVLB  0
+11A3E:  CALL   4E3E
 .................... 
 ....................    int1 is_finished = FALSE;
-11A40:  MOVLB  1
-11A42:  BCF    x8C.0
+11A42:  MOVLB  1
+11A44:  BCF    x8C.0
 ....................    fprintf(PC,"____CIGS PIC Start Operation_____\r\n\r\n");
-11A44:  MOVLW  6E
-11A46:  MOVWF  FF6
-11A48:  MOVLW  1F
-11A4A:  MOVWF  FF7
-11A4C:  MOVLW  00
-11A4E:  MOVWF  FF8
-11A50:  MOVLB  0
-11A52:  CALL   202E
+11A46:  MOVLW  6E
+11A48:  MOVWF  FF6
+11A4A:  MOVLW  1F
+11A4C:  MOVWF  FF7
+11A4E:  MOVLW  00
+11A50:  MOVWF  FF8
+11A52:  MOVLB  0
+11A54:  CALL   202E
 ....................    
 ....................    //enable_negative_power();
 ....................    connect_port1();
-11A56:  CALL   4F66
+11A58:  CALL   4F66
 ....................    connect_port2();
-11A5A:  CALL   4F6E
+11A5C:  CALL   4F6E
 ....................    mcp4901_1_write(0);
-11A5E:  MOVLB  9
-11A60:  CLRF   xDD
-11A62:  CLRF   xDC
-11A64:  MOVLB  0
-11A66:  CALL   25C4
+11A60:  MOVLB  9
+11A62:  CLRF   xDD
+11A64:  CLRF   xDC
+11A66:  MOVLB  0
+11A68:  CALL   25C4
 ....................    mcp4901_2_write(0);
-11A6A:  MOVLB  9
-11A6C:  CLRF   xDD
-11A6E:  CLRF   xDC
-11A70:  MOVLB  0
-11A72:  CALL   2602
+11A6C:  MOVLB  9
+11A6E:  CLRF   xDD
+11A70:  CLRF   xDC
+11A72:  MOVLB  0
+11A74:  CALL   2602
 ....................    connect_negative_power1(TRUE); // CIGS1 Negative Power ON
-11A76:  MOVLW  01
-11A78:  MOVLB  1
-11A7A:  MOVWF  x99
-11A7C:  MOVLB  0
-11A7E:  GOTO   4F76
+11A78:  MOVLW  01
+11A7A:  MOVLB  1
+11A7C:  MOVWF  x99
+11A7E:  MOVLB  0
+11A80:  GOTO   4F76
 ....................    
 ....................    fprintf(PC,"waiting for BOSS PIC command");
-11A82:  MOVLW  94
-11A84:  MOVWF  FF6
-11A86:  MOVLW  1F
-11A88:  MOVWF  FF7
-11A8A:  MOVLW  00
-11A8C:  MOVWF  FF8
-11A8E:  CALL   202E
+11A84:  MOVLW  94
+11A86:  MOVWF  FF6
+11A88:  MOVLW  1F
+11A8A:  MOVWF  FF7
+11A8C:  MOVLW  00
+11A8E:  MOVWF  FF8
+11A90:  CALL   202E
 .................... 
 ....................    //Start loop
 ....................    while(TRUE)
 ....................    {
 ....................       if(boss_receive_buffer_size > 0)
-11A92:  MOVF   4A,F
-11A94:  BTFSC  FD8.2
-11A96:  GOTO   11B38
+11A94:  MOVF   4A,F
+11A96:  BTFSC  FD8.2
+11A98:  GOTO   11B3A
 ....................       {
 ....................          //Command command = make_command(boss_receive_buffer, boss_receive_buffer_size);
 ....................          volatile Command recieve_cmd = make_receive_command(boss_receive_buffer, boss_receive_buffer_size);
-11A9A:  MOVLB  1
-11A9C:  CLRF   xA0
-11A9E:  MOVLW  2A
-11AA0:  MOVWF  x9F
-11AA2:  MOVFF  4A,1A1
-11AA6:  MOVLB  0
-11AA8:  GOTO   52B2
-11AAC:  MOVFF  02,03
-11AB0:  MOVF   01,W
-11AB2:  MOVWF  FE1
-11AB4:  MOVFF  03,FE2
-11AB8:  MOVLW  01
-11ABA:  MOVWF  FEA
-11ABC:  MOVLW  8D
-11ABE:  MOVWF  FE9
-11AC0:  MOVLW  0C
-11AC2:  MOVWF  01
-11AC4:  MOVFF  FE6,FEE
-11AC8:  DECFSZ 01,F
-11ACA:  GOTO   11AC4
+11A9C:  MOVLB  1
+11A9E:  CLRF   xA0
+11AA0:  MOVLW  2A
+11AA2:  MOVWF  x9F
+11AA4:  MOVFF  4A,1A1
+11AA8:  MOVLB  0
+11AAA:  GOTO   52B2
+11AAE:  MOVFF  02,03
+11AB2:  MOVF   01,W
+11AB4:  MOVWF  FE1
+11AB6:  MOVFF  03,FE2
+11ABA:  MOVLW  01
+11ABC:  MOVWF  FEA
+11ABE:  MOVLW  8D
+11AC0:  MOVWF  FE9
+11AC2:  MOVLW  0C
+11AC4:  MOVWF  01
+11AC6:  MOVFF  FE6,FEE
+11ACA:  DECFSZ 01,F
+11ACC:  GOTO   11AC6
 ....................          clear_receive_signal(boss_receive_buffer, &boss_receive_buffer_size);
-11ACE:  MOVLB  1
-11AD0:  CLRF   xE0
-11AD2:  MOVLW  2A
-11AD4:  MOVWF  xDF
-11AD6:  CLRF   xE2
-11AD8:  MOVLW  4A
-11ADA:  MOVWF  xE1
-11ADC:  MOVLB  0
-11ADE:  CALL   54B4
+11AD0:  MOVLB  1
+11AD2:  CLRF   xE0
+11AD4:  MOVLW  2A
+11AD6:  MOVWF  xDF
+11AD8:  CLRF   xE2
+11ADA:  MOVLW  4A
+11ADC:  MOVWF  xE1
+11ADE:  MOVLB  0
+11AE0:  CALL   54B4
 ....................          
 ....................          if(recieve_cmd.is_exist){
-11AE2:  MOVLB  1
-11AE4:  BTFSC  x8F.0
-11AE6:  BRA    11AEE
-11AE8:  MOVLB  0
-11AEA:  GOTO   11B38
-11AEE:  MOVLB  0
+11AE4:  MOVLB  1
+11AE6:  BTFSC  x8F.0
+11AE8:  BRA    11AF0
+11AEA:  MOVLB  0
+11AEC:  GOTO   11B3A
+11AF0:  MOVLB  0
 ....................             is_finished = execute_command(&recieve_cmd); // FIX: 戻り値を保持
-11AF0:  MOVLW  01
-11AF2:  MOVLB  1
-11AF4:  MOVWF  x9A
-11AF6:  MOVLW  8D
-11AF8:  MOVWF  x99
-11AFA:  MOVLB  0
-11AFC:  GOTO   11590
-11B00:  MOVLB  1
-11B02:  BCF    x8C.0
-11B04:  BTFSC  01.0
-11B06:  BSF    x8C.0
+11AF2:  MOVLW  01
+11AF4:  MOVLB  1
+11AF6:  MOVWF  x9A
+11AF8:  MOVLW  8D
+11AFA:  MOVWF  x99
+11AFC:  MOVLB  0
+11AFE:  GOTO   1158C
+11B02:  MOVLB  1
+11B04:  BCF    x8C.0
+11B06:  BTFSC  01.0
+11B08:  BSF    x8C.0
 ....................             if (is_finished == TRUE)
-11B08:  BTFSC  x8C.0
-11B0A:  BRA    11B12
-11B0C:  MOVLB  0
-11B0E:  GOTO   11B28
-11B12:  MOVLB  0
+11B0A:  BTFSC  x8C.0
+11B0C:  BRA    11B14
+11B0E:  MOVLB  0
+11B10:  GOTO   11B2A
+11B14:  MOVLB  0
 ....................             {
 ....................                fprintf(PC, "\r\n\r\n======\r\n\r\nFinished process.\r\n");
-11B14:  MOVLW  B2
-11B16:  MOVWF  FF6
-11B18:  MOVLW  1F
-11B1A:  MOVWF  FF7
-11B1C:  MOVLW  00
-11B1E:  MOVWF  FF8
-11B20:  CALL   202E
+11B16:  MOVLW  B2
+11B18:  MOVWF  FF6
+11B1A:  MOVLW  1F
+11B1C:  MOVWF  FF7
+11B1E:  MOVLW  00
+11B20:  MOVWF  FF8
+11B22:  CALL   202E
 ....................                
 .................... 
 ....................             }else{
-11B24:  GOTO   11B38
+11B26:  GOTO   11B3A
 ....................                fprintf(PC,"\r\nwaiting for BOSS PIC command");
-11B28:  MOVLW  D4
-11B2A:  MOVWF  FF6
-11B2C:  MOVLW  1F
-11B2E:  MOVWF  FF7
-11B30:  MOVLW  00
-11B32:  MOVWF  FF8
-11B34:  CALL   202E
+11B2A:  MOVLW  D4
+11B2C:  MOVWF  FF6
+11B2E:  MOVLW  1F
+11B30:  MOVWF  FF7
+11B32:  MOVLW  00
+11B34:  MOVWF  FF8
+11B36:  CALL   202E
 ....................             }
 ....................          }
 ....................       }
 ....................          
 ....................       delay_ms(500);
-11B38:  MOVLW  02
-11B3A:  MOVLB  1
-11B3C:  MOVWF  x99
-11B3E:  MOVLB  0
-11B40:  MOVLW  FA
-11B42:  MOVLB  B
-11B44:  MOVWF  x02
-11B46:  MOVLB  0
-11B48:  CALL   2000
-11B4C:  MOVLB  1
-11B4E:  DECFSZ x99,F
-11B50:  BRA    11B56
-11B52:  BRA    11B5A
-11B54:  MOVLB  0
+11B3A:  MOVLW  02
+11B3C:  MOVLB  1
+11B3E:  MOVWF  x99
+11B40:  MOVLB  0
+11B42:  MOVLW  FA
+11B44:  MOVLB  B
+11B46:  MOVWF  x02
+11B48:  MOVLB  0
+11B4A:  CALL   2000
+11B4E:  MOVLB  1
+11B50:  DECFSZ x99,F
+11B52:  BRA    11B58
+11B54:  BRA    11B5C
 11B56:  MOVLB  0
-11B58:  BRA    11B40
+11B58:  MOVLB  0
+11B5A:  BRA    11B42
 ....................       fprintf(PC, ".");
-11B5A:  MOVLW  2E
-11B5C:  MOVLB  0
-11B5E:  BTFSS  FA6.6
-11B60:  GOTO   11B5E
-11B64:  MOVLB  E
-11B66:  MOVWF  xF9
-11B68:  MOVLB  0
-11B6A:  GOTO   11A92
+11B5C:  MOVLW  2E
+11B5E:  MOVLB  0
+11B60:  BTFSS  FA6.6
+11B62:  GOTO   11B60
+11B66:  MOVLB  E
+11B68:  MOVWF  xF9
+11B6A:  MOVLB  0
+11B6C:  GOTO   11A94
 ....................    }
 ....................    
 ....................    fprintf(PC, "End main\r\n");
-11B6E:  MOVLW  F4
-11B70:  MOVWF  FF6
-11B72:  MOVLW  1F
-11B74:  MOVWF  FF7
-11B76:  MOVLW  00
-11B78:  MOVWF  FF8
-11B7A:  CALL   202E
+11B70:  MOVLW  F4
+11B72:  MOVWF  FF6
+11B74:  MOVLW  1F
+11B76:  MOVWF  FF7
+11B78:  MOVLW  00
+11B7A:  MOVWF  FF8
+11B7C:  CALL   202E
 ....................    
 .................... }
 .................... // End of files
-11B7E:  SLEEP 
+11B80:  SLEEP 
 
 Configuration Fuses:
    Word  1: F6A0   STVREN NOXINST NODEBUG NOBROWNOUT BORV18 NOPROTECT

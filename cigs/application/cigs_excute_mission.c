@@ -162,9 +162,8 @@ int1 execute_command(Command *command)
          break;
          
       case STATUS_CHECK:
-         if (handle_status_check(command)){
+         if (handle_status_check(command))
             return TRUE; // if status is finished, return TRUE
-         }        
          break;
       
       case IS_SMF_AVAILABLE:
@@ -289,7 +288,6 @@ void handle_smf_available(Command *command)
 
     fprintf(PC, "\t\t-> Completed %u operations\r\n",
             (unsigned int)processed_count);
-      status[1] = 0xC0;
       status[0] = FINISHED;
 }
 

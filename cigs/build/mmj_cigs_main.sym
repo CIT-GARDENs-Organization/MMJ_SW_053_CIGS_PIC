@@ -58,33 +58,33 @@
 199-19A execute_command.Command
 199     connect_negative_power1.state
 199     MAIN.@SCRATCH1
-19B-19C handle_smf_available.Command
 19B-19C handle_status_check.Command
-19B-19C handle_uplink_command.Command
 19B-19C handle_recieve_time.Command
-19D-1A0 handle_recieve_time.total_seconds
+19B-19C handle_smf_available.Command
+19B-19C handle_uplink_command.Command
 19D     handle_smf_available.processed_count
+19D-1A0 handle_recieve_time.total_seconds
 19D     handle_uplink_command.@SCRATCH1
 19E-19F handle_smf_available.smf_data
 19E     handle_uplink_command.@SCRATCH2
-19F-1A0 make_receive_command.receive_signal
 19F-1A0 execute_mission.uplink_cmt_ptr
+19F-1A0 make_receive_command.receive_signal
 1A0     handle_smf_available.smf_id
-1A1     make_receive_command.receive_signal_size
-1A1-1A2 smf_read.smf_data
 1A1-1A2 handle_recieve_time.days
-1A1     dequeue_flash_operation.current_head
-1A1     execute_mission.command_id
-1A1-1A2 smf_write.smf_queue_ptr
 1A1-1A2 smf_erase.smf_data
+1A1     dequeue_flash_operation.current_head
+1A1     make_receive_command.receive_signal_size
+1A1-1A2 smf_write.smf_queue_ptr
+1A1     execute_mission.command_id
+1A1-1A2 smf_read.smf_data
 1A1     handle_smf_available.@SCRATCH1
-1A2-1A3 execute_mission.cell1_curr
 1A2-1AD make_receive_command.Command
+1A2-1A3 execute_mission.cell1_curr
 1A2     dequeue_flash_operation.@SCRATCH1
 1A2     handle_smf_available.@SCRATCH2
+1A3-1A6 smf_write.misf_write_src
 1A3     handle_recieve_time.hours
 1A3-1E2 smf_read.buffer
-1A3-1A6 smf_write.misf_write_src
 1A3-1AA smf_erase.mission_type
 1A3     handle_smf_available.@SCRATCH3
 1A4     handle_recieve_time.minutes
@@ -92,8 +92,8 @@
 1A4     handle_smf_available.@SCRATCH4
 1A5     handle_recieve_time.seconds
 1A5     handle_smf_available.@SCRATCH5
-1A6-1A9 execute_mission.total_seconds
 1A6-1A9 set_current_sec.new_sec
+1A6-1A9 execute_mission.total_seconds
 1A6     handle_smf_available.@SCRATCH6
 1A6     handle_recieve_time.@SCRATCH1
 1A7-1AA smf_write.misf_write_size
@@ -106,40 +106,40 @@
 1AA-1AB execute_mission.days
 1AA     handle_smf_available.@SCRATCH10
 1AA     handle_recieve_time.@SCRATCH5
-1AB-1AE smf_write.used_size
-1AB-1AE smf_erase.erase_address
 1AB-1AE @PRINTF_L32D_9600_31781_31772.P1
+1AB-1AE smf_erase.erase_address
+1AB-1AE smf_write.used_size
 1AB     handle_recieve_time.@SCRATCH6
 1AC     execute_mission.hours
 1AC     handle_recieve_time.@SCRATCH7
 1AD     execute_mission.minutes
 1AD     handle_recieve_time.@SCRATCH8
-1AE     make_receive_command.i
 1AE     execute_mission.seconds
+1AE     make_receive_command.i
 1AE     handle_recieve_time.@SCRATCH9
+1AF-1B0 mode_misf_write_4kbyte_subsector.parameter
+1AF-1B0 sweep_with_print.curr_threshold
+1AF-1B0 mode_meas_pd.uplinkcmd_ptr
 1AF-1B0 mode_misf_erase_64kbyte_subsector.parameter
+1AF-1B2 smf_write.smf_header_address_start
+1AF-1B0 mode_smf_read_force.parameter
+1AF-1B0 mode_smf_copy.parameter
+1AF-1B0 mode_smf_read.parameter
+1AF-1B0 mode_meas_iv_debug.uplinkcmd_ptr
+1AF-1B0 mode_misf_erase_4kbyte_subsector.parameter
+1AF-1B0 mode_misf_write_demo.parameter
+1AF-1B0 mode_misf_erase_and_reset.parameter
+1AF     @PRINTF_U_9600_31781_31772.P1
+1AF-1B0 mode_misf_read.uplinkcmd_ptr
+1AF-1B0 mode_smf_address_reset.parameter
+1AF-1B0 mode_meas_env.uplinkcmd_ptr
+1AF-1B0 mode_smf_erase.parameter
+1AF     make_receive_command.frame_start_position
 1AF-1B2 smf_erase.erase_size
 1AF-1B0 mode_misf_erase_1sector.parameter
-1AF-1B0 mode_misf_erase_and_reset.parameter
-1AF     make_receive_command.frame_start_position
-1AF-1B0 mode_misf_write_4kbyte_subsector.parameter
-1AF-1B0 mode_smf_erase.parameter
-1AF-1B0 mode_meas_pd.uplinkcmd_ptr
-1AF     @PRINTF_U_9600_31781_31772.P1
-1AF-1B0 mode_meas_iv_debug.uplinkcmd_ptr
-1AF-1B0 mode_smf_address_reset.parameter
-1AF-1B0 sweep_with_print.curr_threshold
-1AF-1B0 mode_smf_read.parameter
-1AF-1B0 mode_misf_write_demo.parameter
-1AF-1B0 mode_smf_read_force.parameter
-1AF-1B2 smf_write.smf_header_address_start
-1AF-1B0 mode_smf_copy.parameter
-1AF-1B0 mode_misf_read_address.parameter
-1AF-1B0 mode_misf_read.uplinkcmd_ptr
-1AF-1B0 mode_meas_iv.uplinkcmd_ptr
-1AF-1B0 mode_misf_erase_4kbyte_subsector.parameter
 1AF-1B0 mode_smf_erase_force.parameter
-1AF-1B0 mode_meas_env.uplinkcmd_ptr
+1AF-1B0 mode_misf_read_address.parameter
+1AF-1B0 mode_meas_iv.uplinkcmd_ptr
 1AF     execute_mission.@SCRATCH1
 1AF     @PRINTF_L32D_9600_31781_31772.@SCRATCH1
 1AF     handle_recieve_time.@SCRATCH10
@@ -148,26 +148,26 @@
 1B0     execute_mission.@SCRATCH2
 1B0     @PRINTF_L32D_9600_31781_31772.@SCRATCH2
 1B0     handle_recieve_time.@SCRATCH11
-1B1-1F0 mode_smf_address_reset.writedata
-1B1-1BC mode_meas_iv_debug.cmd
-1B1-1B7 mode_misf_read.FLASH_PARAM
-1B1     mode_smf_erase_force.cmd
-1B1-1B4 mode_smf_read_force.address
-1B1-1B2 mode_meas_pd.interval_ms
-1B1-1B4 mode_smf_read.read_address
-1B1-1B2 mode_misf_erase_all.parameter
-1B1     mode_smf_copy.mission_id
-1B1-1B2 sweep_with_print.curr_limit
-1B1-1B2 mode_misf_address_reset.parameter
-1B1-1B7 mode_misf_write_demo.FLASH_WRITE_PARAM
-1B1     mode_misf_erase_4kbyte_subsector.cmd
-1B1-1B4 mode_misf_write_4kbyte_subsector.write_address
-1B1     mode_misf_erase_64kbyte_subsector.cmd
-1B1-1B4 mode_misf_read_address.read_address
 1B1     mode_misf_erase_1sector.cmd
+1B1-1B7 mode_misf_read.FLASH_PARAM
+1B1-1B7 mode_misf_write_demo.FLASH_WRITE_PARAM
+1B1-1B2 sweep_with_print.curr_limit
+1B1-1BC mode_meas_iv_debug.cmd
+1B1-1B2 mode_misf_address_reset.parameter
+1B1-1B4 mode_misf_write_4kbyte_subsector.write_address
+1B1-1F0 mode_smf_address_reset.writedata
 1B1-1B4 mode_smf_erase.erase_address
-1B1-1B2 mode_meas_env.interval
+1B1-1B2 mode_misf_erase_all.parameter
+1B1     mode_smf_erase_force.cmd
+1B1-1B4 mode_smf_read.read_address
 1B1-1BB mode_meas_iv.cmd
+1B1     mode_misf_erase_64kbyte_subsector.cmd
+1B1-1B2 mode_meas_pd.interval_ms
+1B1-1B2 mode_meas_env.interval
+1B1-1B4 mode_smf_read_force.address
+1B1-1B4 mode_misf_read_address.read_address
+1B1     mode_smf_copy.mission_id
+1B1     mode_misf_erase_4kbyte_subsector.cmd
 1B1     execute_mission.@SCRATCH3
 1B1     @PRINTF_L32D_9600_31781_31772.@SCRATCH3
 1B1     mode_misf_erase_and_reset.@SCRATCH1
@@ -179,35 +179,35 @@
 1B2     make_receive_command.frame_id
 1B2     execute_mission.@SCRATCH4
 1B2     @PRINTF_L32D_9600_31781_31772.@SCRATCH4
-1B3-1B6 smf_erase.erase_end
 1B3-1B4 mode_meas_pd.meas_time_s
-1B3-5B2 sweep_with_print.port1
-1B3     mode_misf_erase_all.cmd
+1B3-1B6 smf_erase.erase_end
 1B3-1F2 mode_misf_address_reset.flash_data
 1B3-1B4 mode_meas_env.end_time
-1B3-1B6 smf_write.smf_data_address_start
 1B3     make_receive_command.content_size
+1B3-5B2 sweep_with_print.port1
+1B3-1B6 smf_write.smf_data_address_start
+1B3     mode_misf_erase_all.cmd
 1B3     execute_mission.@SCRATCH5
 1B3     @PRINTF_L32D_9600_31781_31772.@SCRATCH5
 1B4-1B7 mode_misf_erase_all.address
 1B4     make_receive_command.receive_frame_size
 1B4     execute_mission.@SCRATCH6
 1B4     @PRINTF_L32D_9600_31781_31772.@SCRATCH6
-1B5     get_content_size.frame_id
-1B5-1B6 trim_receive_signal_header.receive_signal
 1B5-1B6 mode_smf_read.read_packetnum
-1B5-1B6 mode_smf_read_force.packet_num
-1B5-1B8 mode_meas_env.current_time
 1B5-1B6 check_crc.frame
-1B5-1B8 mode_misf_read_address.read_data
+1B5-1B8 mode_meas_env.current_time
 1B5-1B8 mode_meas_pd.start_time_ms
+1B5-1B6 mode_smf_read_force.packet_num
+1B5-1B6 trim_receive_signal_header.receive_signal
+1B5     get_content_size.frame_id
+1B5-1B8 mode_misf_read_address.read_data
 1B5     make_receive_command.@SCRATCH1
 1B5     execute_mission.@SCRATCH7
 1B5     @PRINTF_L32D_9600_31781_31772.@SCRATCH7
 1B5     mode_misf_write_4kbyte_subsector.@SCRATCH1
-1B6-1B9 mode_smf_copy.dest_address
-1B6     check_device_id.device_id
 1B6     get_content_size.i
+1B6     check_device_id.device_id
+1B6-1B9 mode_smf_copy.dest_address
 1B6     make_receive_command.@SCRATCH2
 1B6     execute_mission.@SCRATCH8
 1B6     @PRINTF_L32D_9600_31781_31772.@SCRATCH8
@@ -215,11 +215,11 @@
 1B6     mode_misf_erase_4kbyte_subsector.@SCRATCH1
 1B6     mode_misf_erase_64kbyte_subsector.@SCRATCH1
 1B7     trim_receive_signal_header.receive_signal_size
-1B7-1F6 mode_smf_read_force.read_data
 1B7-1BA smf_erase.current
-1B7-1F6 mode_smf_read.read_data
+1B7-1F6 mode_smf_read_force.read_data
 1B7     check_crc.receive_frame_size
 1B7-1BA smf_write.smf_data_address_end
+1B7-1F6 mode_smf_read.read_data
 1B7     make_receive_command.@SCRATCH3
 1B7     get_content_size.@SCRATCH1
 1B7     execute_mission.@SCRATCH9
@@ -227,17 +227,17 @@
 1B7     mode_misf_erase_4kbyte_subsector.@SCRATCH2
 1B7     mode_misf_erase_64kbyte_subsector.@SCRATCH2
 1B8-1F7 mode_misf_read.readdata
-1B8-1F7 mode_misf_write_demo.writedata
 1B8     check_crc.received_crc
+1B8-1F7 mode_misf_write_demo.writedata
 1B8     trim_receive_signal_header.i
 1B8     get_content_size.@SCRATCH2
 1B8     execute_mission.@SCRATCH10
 1B8     mode_misf_erase_1sector.@SCRATCH3
 1B8     mode_misf_erase_4kbyte_subsector.@SCRATCH3
 1B8     mode_misf_erase_64kbyte_subsector.@SCRATCH3
+1B9-1BC mode_meas_pd.current_time_ms
 1B9     check_crc.collect_crc
 1B9-1BC mode_meas_env.last_time
-1B9-1BC mode_meas_pd.current_time_ms
 1B9     trim_receive_signal_header.@SCRATCH1
 1B9     mode_misf_erase_1sector.@SCRATCH4
 1B9     mode_misf_erase_4kbyte_subsector.@SCRATCH4
@@ -258,8 +258,8 @@
 1BC     mode_misf_erase_4kbyte_subsector.@SCRATCH7
 1BC     mode_misf_erase_64kbyte_subsector.@SCRATCH7
 1BD-1C0 mode_meas_pd.meas_time_ms
-1BD-1C2 mode_meas_env.logdata
 1BD-1C0 mode_meas_iv_debug.start_time
+1BD-1C2 mode_meas_env.logdata
 1BD     smf_erase.@SCRATCH3
 1BD     mode_misf_erase_1sector.@SCRATCH8
 1BD     mode_misf_erase_4kbyte_subsector.@SCRATCH8
@@ -276,10 +276,10 @@
 1C0     mode_misf_erase_1sector.@SCRATCH11
 1C0     mode_misf_erase_4kbyte_subsector.@SCRATCH11
 1C0     mode_misf_erase_64kbyte_subsector.@SCRATCH11
-1C1-1C4 mode_meas_iv_debug.current_time
 1C1-1C2 mode_meas_pd.pd
-1C3-1C4 mode_meas_env.temp_top
+1C1-1C4 mode_meas_iv_debug.current_time
 1C3-1C6 smf_write.address
+1C3-1C4 mode_meas_env.temp_top
 1C3     mode_meas_pd.@SCRATCH1
 1C4-1C5 mode_meas_iv.time_ms
 1C4     mode_meas_pd.@SCRATCH2
@@ -289,15 +289,15 @@
 1C5     mode_meas_pd.@SCRATCH3
 1C6     mode_meas_iv.counter
 1C6     mode_meas_pd.@SCRATCH4
-1C7-206 smf_write.buffer
 1C7-1C8 test_sweep.curr_limit
-1C7-1D2 mode_meas_iv.data
+1C7-206 smf_write.buffer
 1C7-1C8 mode_meas_env.temp_mis7
+1C7-1D2 mode_meas_iv.data
 1C7     mode_meas_pd.@SCRATCH5
 1C8     mode_meas_pd.@SCRATCH6
-1C9-1CA mode_meas_env.pd
-1C9-1CC @MUL3232.P1
 1C9-5C8 test_sweep.port1
+1C9-1CC @MUL3232.P1
+1C9-1CA mode_meas_env.pd
 1CB-1CE mode_meas_env.write_address
 1CD-1D0 @MUL3232.P1
 1CF     mode_meas_env.@SCRATCH1
@@ -311,45 +311,45 @@
 1D4     @MUL3232.@SCRATCH4
 1D5     @MUL3232.@SCRATCH5
 1D6     @MUL3232.@SCRATCH6
-1DF-1E0 clear_receive_signal.receive_signal
 1DF     transmit_command.frame_id
-1DF-1E0 print_meas_iv_cmd.cmd_ptr
-1DF-1E0 sweep.curr_threshold
 1DF-1E0 enqueue_flash_operation.data
+1DF-1E0 sweep.curr_threshold
+1DF-1E0 clear_receive_signal.receive_signal
+1DF-1E0 print_meas_iv_cmd.cmd_ptr
 1DF     mode_meas_iv.@SCRATCH1
 1E0-1E1 transmit_command.content
 1E0     mode_meas_iv.@SCRATCH2
-1E1-1E2 clear_receive_signal.receive_signal_size
 1E1-1E2 sweep.curr_limit
 1E1-1E2 print_meas_iv_cmd.pd_value
 1E1     enqueue_flash_operation.next_tail
+1E1-1E2 clear_receive_signal.receive_signal_size
 1E1     mode_meas_iv.@SCRATCH3
 1E2     transmit_command.size
 1E2     enqueue_flash_operation.@SCRATCH1
 1E2     mode_meas_iv.@SCRATCH4
-1E3-1E4 print_meas_iv_cmd.sweep_limit
 1E3-1F2 transmit_command.data
-1E3-1EA smf_read.smf_address
 1E3-1E4 sweep.pd_limit
+1E3-1EA smf_read.smf_address
+1E3-1E4 print_meas_iv_cmd.sweep_limit
 1E3     clear_receive_signal.@SCRATCH1
 1E3     enqueue_flash_operation.@SCRATCH2
 1E4     clear_receive_signal.@SCRATCH2
 1E4     enqueue_flash_operation.@SCRATCH3
 1E5-1E6 print_meas_iv_cmd.log_threshold
-1E5-1E6 make_meas_iv_cmd.uplinkcmd_ptr
 1E5-1E8 sweep.start_time_ms
+1E5-1E6 make_meas_iv_cmd.uplinkcmd_ptr
 1E5     enqueue_flash_operation.@SCRATCH4
 1E6     enqueue_flash_operation.@SCRATCH5
 1E7-1F1 make_meas_iv_cmd.cmd
 1E7     enqueue_flash_operation.@SCRATCH6
 1E7     print_meas_iv_cmd.@SCRATCH1
 1E8     print_meas_iv_cmd.@SCRATCH2
-1E9-1EA @PRINTF_LU_9600_31781_31772.P1
-1E9-3EC sweep.port1
-1E9-1EA calc_curr_value.data
 1E9-1EA calc_pd_value.data
-1EB-1EE calc_curr_value.voltage_mv
+1E9-3EC sweep.port1
+1E9-1EA @PRINTF_LU_9600_31781_31772.P1
+1E9-1EA calc_curr_value.data
 1EB-1EE smf_read.read_address
+1EB-1EE calc_curr_value.voltage_mv
 1EB     @PRINTF_LU_9600_31781_31772.@SCRATCH1
 1EC     @PRINTF_LU_9600_31781_31772.@SCRATCH2
 1ED     @PRINTF_LU_9600_31781_31772.@SCRATCH3
@@ -363,57 +363,57 @@
 1F2     make_meas_iv_cmd.@SCRATCH1
 1F3-1F6 @ADDFF.P1
 1F3-1F4 @ITOF.P2
-1F3-1F6 @SFTOI.P3
-1F3-1F6 smf_read.mission_remaining
-1F3     mode_misf_address_reset.i
 1F3     transmit_command.payload_size
+1F3     mode_misf_address_reset.i
+1F3-1F6 @SFTOI.P1
+1F3-1F6 smf_read.mission_remaining
 1F3     calc_curr_value.@SCRATCH1
 1F3     make_meas_iv_cmd.@SCRATCH2
 1F4     transmit_command.data_size
 1F4     mode_misf_address_reset.i
 1F4     calc_curr_value.@SCRATCH2
-1F5-234 misf_init.read_header
-1F5-1F6 transmit.data
-1F5-1F8 sector_erase.flash_stream
 1F5-1F8 smf_data_table_init.address
+1F5-1F6 transmit.data
+1F5-234 misf_init.read_header
+1F5-1F8 sector_erase.flash_stream
 1F5     transmit_command.@SCRATCH1
 1F5     calc_curr_value.@SCRATCH3
 1F5     mode_misf_address_reset.@SCRATCH1
 1F5     mode_smf_address_reset.@SCRATCH1
 1F6     transmit_command.@SCRATCH2
 1F6     calc_curr_value.@SCRATCH4
-1F7     transmit.data_size
 1F7-1FA smf_read.end_address
-1F7-1FA @DIVFF.P1
-1F7-1FA @ADDFF.P2
-1F7-1FA @MULFF.P3
 1F7     mode_smf_read.i
+1F7     transmit.data_size
+1F7-1FA @MULFF.P1
+1F7-1FA @DIVFF.P2
 1F7-1F8 mode_smf_read_force.packet_count
+1F7-1FA @ADDFF.P1
 1F7     transmit_command.@SCRATCH3
-1F8-1FB mode_misf_read.read_address
 1F8     transmit.i
 1F8-1F9 mode_misf_write_demo.p
+1F8-1FB mode_misf_read.read_address
 1F8     mode_smf_read.@SCRATCH1
-1F9-1FC sector_erase.sector_address
 1F9-238 smf_data_table_init.smf_data_table
-1F9     transmit.i
+1F9-1FC sector_erase.sector_address
 1F9-1FC mode_smf_read_force.current_address
+1F9     transmit.i
 1F9     mode_smf_read.@SCRATCH2
 1FA-1FB mode_misf_write_demo.base_value
 1FA     transmit.@SCRATCH1
 1FA     mode_smf_read.@SCRATCH3
 1FB-1FE smf_read.addr
-1FB-1FE @DIVFF.P1
-1FB-1FE @MULFF.P2
+1FB-1FE @MULFF.P1
+1FB-1FE @DIVFF.P2
 1FB     @ADDFF.@SCRATCH1
 1FB     mode_smf_read.@SCRATCH4
 1FC-1FF mode_misf_read.packetcount
 1FC     mode_misf_write_demo.i
 1FC     @ADDFF.@SCRATCH2
 1FC     mode_smf_read.@SCRATCH5
-1FD     mode_smf_read_force.byte_count
 1FD     sector_erase.write_enable_cmd
 1FD-200 mode_misf_write_demo.current_address
+1FD     mode_smf_read_force.byte_count
 1FD     @ADDFF.@SCRATCH3
 1FD     mode_smf_read.@SCRATCH6
 1FE-201 sector_erase.flash_cmd
@@ -456,14 +456,14 @@
 205     smf_read.@SCRATCH3
 205     mode_misf_write_demo.@SCRATCH1
 205     mode_smf_read_force.@SCRATCH8
-206     piclog_make.function
 206-209 @PRINTF_L32U_9600_31781_31772.P1
+206     piclog_make.function
 206     smf_read.@SCRATCH4
 206     mode_misf_write_demo.@SCRATCH2
 206     mode_misf_read.@SCRATCH1
 206     mode_smf_read_force.@SCRATCH9
-207     piclog_make.parameter
 207-20A smf_write.smf_write_address
+207     piclog_make.parameter
 207     mode_misf_write_demo.@SCRATCH3
 207     mode_misf_read.@SCRATCH2
 207     mode_smf_read_force.@SCRATCH10
@@ -480,8 +480,8 @@
 20A     @PRINTF_L32U_9600_31781_31772.@SCRATCH1
 20A     mode_misf_write_demo.@SCRATCH6
 20A     mode_misf_read.@SCRATCH5
-20B-20E smf_write.misf_read_address
 20B-212 get_smf_address_struct.mis_struct
+20B-20E smf_write.misf_read_address
 20B     sector_erase.@SCRATCH3
 20B     @PRINTF_L32U_9600_31781_31772.@SCRATCH2
 20B     mode_misf_write_demo.@SCRATCH7
@@ -575,9 +575,9 @@
 9B3-9B4 sweep_with_print.count
 9B5-9C0 sweep_with_print.measured_data
 9C1     sweep_with_print.i
+9C2-A01 misf_update_address_area.flash_data
 9C2     @PSTRINGCN_9600_31781_31772.P1
 9C2-9C3 log_meas_data.measured_data_ptr
-9C2-A01 misf_update_address_area.flash_data
 9C2     @PSTRINGC_9600_31781_31772.@SCRATCH1
 9C2     sweep_with_print.@SCRATCH1
 9C3     @PSTRINGC_9600_31781_31772.@SCRATCH2
@@ -606,8 +606,8 @@
 9DC-9DD mcp4901_2_write.value
 9DC     test_sweep.@SCRATCH1
 9DD     test_sweep.@SCRATCH2
-9DE-9DF mcp4901_2_write.cmd
 9DE-9DF mcp4901_1_write.cmd
+9DE-9DF mcp4901_2_write.cmd
 9DE     test_sweep.@SCRATCH3
 9DF     test_sweep.@SCRATCH4
 9E0-9E1 mcp4901_make_cmd.value
@@ -647,8 +647,8 @@ A04-A07 subsector_4kByte_erase.flash_stream
 A04     misf_update_address_area.@SCRATCH1
 A05     misf_update_address_area.@SCRATCH2
 A06-A07 log_meas_data.data_packet_ptr
-A08-A0B subsector_4kByte_erase.subsector_address
 A08     log_meas_data.i
+A08-A0B subsector_4kByte_erase.subsector_address
 A09-A48 log_meas_data.read_back
 A0A-A49 make_flash_data_table.flash_data
 A0C     subsector_4kByte_erase.write_enable_cmd
@@ -691,25 +691,25 @@ AE0     misf_write_data.crc
 AE1-AE4 misf_write_data.write_address
 AE5     misf_write_data.crc
 AE6-AE9 misf_write_data.write_address
-AEA-AED write_data_bytes.flash_stream
-AEA-AEB calc_crc8.frame
 AEA-AED read_data_bytes.flash_stream
+AEA-AEB calc_crc8.frame
+AEA-AED write_data_bytes.flash_stream
 AEA     misf_write_data.@SCRATCH1
 AEB     misf_write_data.@SCRATCH2
 AEC     calc_crc8.payload_size
 AEC     misf_write_data.@SCRATCH3
 AED     calc_crc8.crc
 AED     misf_write_data.@SCRATCH4
-AEE-AF1 read_data_bytes.read_start_address
 AEE-AF1 write_data_bytes.write_start_address
+AEE-AF1 read_data_bytes.read_start_address
 AEE     misf_write_data.@SCRATCH5
 AEF     misf_write_data.@SCRATCH6
 AF0     misf_write_data.@SCRATCH7
 AF1     misf_write_data.@SCRATCH8
 AF2-AF3 read_data_bytes.read_data
 AF2-AF3 write_data_bytes.write_data
-AF4-AF7 read_data_bytes.read_amount
 AF4-AF5 write_data_bytes.write_amount
+AF4-AF7 read_data_bytes.read_amount
 AF6     write_data_bytes.write_enable_cmd
 AF7-AFA write_data_bytes.flash_cmd
 AF8-AFB read_data_bytes.flash_cmd
@@ -718,8 +718,8 @@ AFC-B00 write_data_bytes.flash_cmd
 AFC-B00 read_data_bytes.flash_cmd
 B01     write_data_bytes.timeout_counter
 B01     read_data_bytes.@SCRATCH1
-B02-B05 spi_xfer_select_stream.flash_stream
 B02-B05 spi_xfer_two_datas_select_stream.flash_stream
+B02-B05 spi_xfer_select_stream.flash_stream
 B02     @delay_ms1.P1
 B02-B05 status_register.flash_stream
 B02     read_data_bytes.@SCRATCH2
@@ -730,28 +730,28 @@ B04     read_data_bytes.@SCRATCH4
 B04     write_data_bytes.@SCRATCH3
 B05     read_data_bytes.@SCRATCH5
 B05     write_data_bytes.@SCRATCH4
+B06     status_register.flash_cmd
 B06-B07 spi_xfer_two_datas_select_stream.cmd_data
 B06-B07 spi_xfer_select_stream.write_data
-B06     status_register.flash_cmd
 B06     write_data_bytes.@SCRATCH5
 B07     status_register.status_reg
-B08-B09 spi_xfer_select_stream.write_amount
-B08     @WRITEBITA.P1
 B08     spi_xfer_two_datas_select_stream.cmd_amount
+B08     @WRITEBITA.P1
+B08-B09 spi_xfer_select_stream.write_amount
 B08-B0B spi_xfer_and_read_select_stream.flash_stream
 B09-B0A spi_xfer_two_datas_select_stream.write_data
 B09     @WRITEBITA.P1
-B0A-B0B @WRITEBITA.P1
 B0A-B0B spi_xfer_select_stream.spi_xfer_num
+B0A-B0B @WRITEBITA.P1
 B0B-B0C spi_xfer_two_datas_select_stream.write_amount
-B0C-B0D spi_xfer_select_stream.spi_xfer_num
 B0C-B0D spi_xfer_and_read_select_stream.write_data
+B0C-B0D spi_xfer_select_stream.spi_xfer_num
 B0D     spi_xfer_two_datas_select_stream.spi_xfer_num
 B0E-B0F spi_xfer_and_read_select_stream.write_amount
 B0E-B0F spi_xfer_two_datas_select_stream.spi_xfer_num
 B0E     spi_xfer_select_stream.@SCRATCH1
-B10     spi_xfer_two_datas_select_stream.spi_xfer_num
 B10-B11 spi_xfer_and_read_select_stream.read_data
+B10     spi_xfer_two_datas_select_stream.spi_xfer_num
 B11-B12 spi_xfer_two_datas_select_stream.spi_xfer_num
 B12-B15 spi_xfer_and_read_select_stream.read_amount
 B13     spi_xfer_two_datas_select_stream.@SCRATCH1
@@ -761,12 +761,12 @@ B1C-B1D spi_xfer_and_read_select_stream.spi_xfer_num
 B1E-B21 spi_xfer_and_read_select_stream.spi_rcv_num
 B22     spi_xfer_and_read_select_stream.@SCRATCH1
 B23     spi_xfer_and_read_select_stream.@SCRATCH2
-B24     @SPI_XFER_1.P1
-B24     @SPI_XFER_2.P2
-B25     @SPI_XFER_1.P1
-B25     @SPI_XFER_2.P2
-B26     @SPI_XFER_2.P1
-B26     @SPI_XFER_1.P2
+B24     @SPI_XFER_2.P1
+B24     @SPI_XFER_1.P2
+B25     @SPI_XFER_2.P1
+B25     @SPI_XFER_1.P2
+B26     @SPI_XFER_1.P1
+B26     @SPI_XFER_2.P2
 B27     @SPI_XFER_1.@SCRATCH1
 B27     @SPI_XFER_2.@SCRATCH1
 B28     @SPI_XFER_1.@SCRATCH2
@@ -780,11 +780,11 @@ EEF.3   MDOUT
 F08     CCP_7
 F08     CCP_7_LOW
 F09     CCP_7_HIGH
-F0B     CCP_6_LOW
 F0B     CCP_6
+F0B     CCP_6_LOW
 F0C     CCP_6_HIGH
-F0E     CCP_5_LOW
 F0E     CCP_5
+F0E     CCP_5_LOW
 F0F     CCP_5_HIGH
 F11     CCP_4
 F11     CCP_4_LOW
@@ -793,11 +793,11 @@ F21     DSGPR3
 F22     DSGPR2
 F23     DSGPR1
 F24     DSGPR0
-F41     CCP_10_LOW
 F41     CCP_10
+F41     CCP_10_LOW
 F42     CCP_10_HIGH
-F44     CCP_9_LOW
 F44     CCP_9
+F44     CCP_9_LOW
 F45     CCP_9_HIGH
 F47     CCP_8_LOW
 F47     CCP_8
@@ -805,25 +805,25 @@ F48     CCP_8_HIGH
 F4A     CCP_3_LOW
 F4A     CCP_3
 F4B     CCP_3_HIGH
-F4F     CCP_2_LOW
 F4F     CCP_2
+F4F     CCP_2_LOW
 F50     CCP_2_HIGH
 F83     PSP_DATA
-FBA     CCP_1_LOW
 FBA     CCP_1
+FBA     CCP_1_LOW
 FBB     CCP_1_HIGH
 FC4.0   C1OUT
 FC4.1   C2OUT
 FC4.2   C3OUT
-FE1-FE2 @WRITE_PACKED_MEMORY.P1
-FE1-FE2 @READ_PACKED_MEMORY.P2
-FE9-FEA @MEMSET.P1
-FE9-FEA @READ_PACKED_MEMORY.P2
-FE9-FEA @WRITE_PROGRAM_MEMORY.P3
-FE9-FEA @WRITE_PACKED_MEMORY.P4
-FE9-FEA @READ_PROGRAM_MEMORY.P5
-FF6-FF8 @READ_PROGRAM_MEMORY.P1
-FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @MEMSET.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FE9-FEA @WRITE_PACKED_MEMORY.P5
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
 
 ROM Allocation:
 0000E6  MISF_ADDRESS_TABLE.call
@@ -1212,79 +1212,79 @@ ROM Allocation:
 00EBF4  @PRINTF_D_9600_31781_31772
 00ED2C  write_data_byte
 00F068  smf_write
-00FF9A  set_current_sec
+00FF96  set_current_sec
 010000  get_smf_address_struct
 010188  smf_read
 0108C2  smf_erase
 010F44  handle_smf_available
-0112A8  handle_recieve_time
-011590  execute_command
-011618  @goto60000
-011640  MAIN
-011640  @cinit1
-011738  @cinit2
+0112A4  handle_recieve_time
+01158C  execute_command
+011614  @goto1809
+01163C  MAIN
+01163C  @cinit1
+011734  @cinit2
 0135  NEXT
 
 Project Directory:
-    c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\
+    C:\Users\harut\Desktop\MMJ_SW_053_CIGS_PIC\cigs\
 
 Project Files:
-    mmj_cigs_main.c                                         [15-10-25 18:52  CRC=886EC271]
-    mmj_cigs_main.h                                         [19-10-25 17:41  CRC=337C6097]
-    hal\cigs_config.h                                       [05-10-25 16:39  CRC=D820BA04]
-    ..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F67J94.h [13-5-21 13:54  CRC=CB5C8DE4]
-    hal\timer.h                                             [25-9-25 20:56  CRC=D68DDF5F]
-    hal\uart.h                                              [16-9-25 11:46  CRC=70A896CF]
-    hal\gpio.h                                              [18-9-25 13:59  CRC=E4670BCE]
-    device_driver\ad7490_driver.h                           [16-9-25 11:46  CRC=D872A938]
-    device_driver\mcp4901_driver.h                          [16-9-25 11:46  CRC=D63E48F4]
-    ..\lib\communication\typedef_content.h                  [23-9-25 14:41  CRC=0783F434]
-    ..\lib\communication\value_status.h                     [16-9-25 11:46  CRC=D872A938]
-    ..\lib\tool\calc_tools.h                                [16-9-25 11:46  CRC=C40F6EA4]
-    ..\lib\tool\smf_queue.h                                 [20-9-25 17:21  CRC=C4629A23]
-    ..\lib\tool\mmj_smf_memorymap.h                         [15-10-25 21:49  CRC=3C6C809C]
-    ..\lib\device\mt25q.h                                   [30-9-25 19:46  CRC=1183BDB9]
-    ..\lib\device\ad7490.h                                  [02-10-25 18:26  CRC=33D32650]
-    ..\lib\device\mcp4901.h                                 [16-9-25 11:46  CRC=6A890493]
-    ..\lib\communication\communication.h                    [16-9-25 11:46  CRC=87D4C82C]
-    ..\lib\communication\frame.h                            [23-9-25 14:41  CRC=320EFF35]
-    ..\lib\communication\communication_driver.h             [16-9-25 11:46  CRC=861F8EE4]
-    ..\lib\communication\mission_tools.h                    [16-9-25 11:46  CRC=AC2A773F]
-    domain\cigs_iv.h                                        [26-9-25 16:30  CRC=7904231C]
-    domain\cigs_flash.h                                     [15-10-25 17:33  CRC=EDB6BE02]
-    domain\cigs_piclog.h                                    [16-9-25 11:46  CRC=48A01A16]
-    domain\cigs_smf.h                                       [15-10-25 18:27  CRC=2962CBC8]
-    application\cigs_excute_mission.h                       [15-10-25 17:34  CRC=8FD97282]
-    application\cigs_mode_mission.h                         [28-9-25 18:07  CRC=F75DE9A9]
-    application\cigs_mode_flash.h                           [19-9-25 14:23  CRC=7AC97D12]
-    hal\timer.c                                             [26-9-25 14:35  CRC=2F210632]
-    hal\uart.c                                              [25-9-25 12:28  CRC=A8007B5A]
-    hal\gpio.c                                              [05-10-25 17:21  CRC=AD570323]
-    ..\lib\tool\types.h                                     [16-9-25 12:59  CRC=00000000]
-    device_driver\ad7490_driver.c                           [15-10-25 17:29  CRC=5B43373A]
-    device_driver\mcp4901_driver.c                          [15-10-25 17:30  CRC=AA6C5C73]
-    ..\lib\device\ad7490.c                                  [05-10-25 16:40  CRC=A2F1A2C0]
-    ..\lib\device\mcp4901.c                                 [16-9-25 11:46  CRC=290C8EFF]
-    ..\lib\device\mt25q.c                                   [26-9-25 18:23  CRC=F545E48C]
-    ..\lib\tool\calc_tools.c                                [16-9-25 11:46  CRC=1AACF827]
-    ..\lib\tool\smf_queue.c                                 [16-9-25 11:46  CRC=57EF6543]
-    ..\lib\communication\communication.c                    [16-9-25 11:46  CRC=DE9E8B17]
-    ..\lib\communication\communication_driver.c             [16-9-25 11:46  CRC=552DB4C1]
-    ..\lib\communication\mission_tools.c                    [25-9-25 20:17  CRC=930938D5]
-    domain\cigs_iv.c                                        [05-10-25 17:21  CRC=5B82DBC0]
-    domain\cigs_piclog.c                                    [05-10-25 17:21  CRC=A5E95385]
-    domain\cigs_smf.c                                       [19-10-25 18:32  CRC=E06A79BC]
-    domain\cigs_flash.c                                     [05-10-25 17:21  CRC=3EB3DBFA]
-    application\cigs_excute_mission.c                       [19-10-25 17:41  CRC=03EBF456]
-    application\cigs_mode_mission.c                         [15-10-25 18:36  CRC=478B6BF5]
-    application\cigs_mode_flash.c                           [05-10-25 17:21  CRC=5CDA0F92]
+    mmj_cigs_main.c                                         [21-10-25 10:34  CRC=886EC271]
+    mmj_cigs_main.h                                         [21-10-25 20:43  CRC=337C6097]
+    hal\cigs_config.h                                       [21-10-25 10:34  CRC=D820BA04]
+    ..\..\..\..\..\Program Files (x86)\PICC\Devices\18F67J94.h [13-5-21 13:54  CRC=CB5C8DE4]
+    hal\timer.h                                             [21-10-25 10:34  CRC=D68DDF5F]
+    hal\uart.h                                              [21-10-25 10:34  CRC=70A896CF]
+    hal\gpio.h                                              [21-10-25 10:34  CRC=E4670BCE]
+    device_driver\ad7490_driver.h                           [21-10-25 10:34  CRC=D872A938]
+    device_driver\mcp4901_driver.h                          [21-10-25 10:34  CRC=D63E48F4]
+    ..\lib\communication\typedef_content.h                  [21-10-25 10:34  CRC=0783F434]
+    ..\lib\communication\value_status.h                     [21-10-25 20:51  CRC=D63E48F4]
+    ..\lib\tool\mmj_smf_memorymap.h                         [21-10-25 20:59  CRC=7A92E7FF]
+    ..\lib\tool\calc_tools.h                                [21-10-25 10:34  CRC=C40F6EA4]
+    ..\lib\tool\smf_queue.h                                 [21-10-25 20:19  CRC=C4629A23]
+    ..\lib\device\mt25q.h                                   [21-10-25 10:34  CRC=1183BDB9]
+    ..\lib\device\ad7490.h                                  [21-10-25 10:34  CRC=33D32650]
+    ..\lib\device\mcp4901.h                                 [21-10-25 10:34  CRC=6A890493]
+    ..\lib\communication\communication.h                    [21-10-25 10:34  CRC=87D4C82C]
+    ..\lib\communication\frame.h                            [21-10-25 10:34  CRC=320EFF35]
+    ..\lib\communication\communication_driver.h             [21-10-25 10:34  CRC=861F8EE4]
+    ..\lib\communication\mission_tools.h                    [21-10-25 10:34  CRC=AC2A773F]
+    domain\cigs_iv.h                                        [21-10-25 10:34  CRC=7904231C]
+    domain\cigs_flash.h                                     [21-10-25 19:44  CRC=EDB6BE02]
+    domain\cigs_piclog.h                                    [21-10-25 10:34  CRC=48A01A16]
+    domain\cigs_smf.h                                       [21-10-25 20:19  CRC=2962CBC8]
+    application\cigs_excute_mission.h                       [21-10-25 20:19  CRC=8FD97282]
+    application\cigs_mode_mission.h                         [21-10-25 10:34  CRC=F75DE9A9]
+    application\cigs_mode_flash.h                           [21-10-25 20:19  CRC=7AC97D12]
+    hal\timer.c                                             [21-10-25 10:34  CRC=2F210632]
+    hal\uart.c                                              [21-10-25 10:34  CRC=A8007B5A]
+    hal\gpio.c                                              [21-10-25 10:34  CRC=AD570323]
+    ..\lib\tool\types.h                                     [21-10-25 10:34  CRC=00000000]
+    device_driver\ad7490_driver.c                           [21-10-25 10:34  CRC=5B43373A]
+    device_driver\mcp4901_driver.c                          [21-10-25 10:34  CRC=AA6C5C73]
+    ..\lib\device\ad7490.c                                  [21-10-25 10:34  CRC=A2F1A2C0]
+    ..\lib\device\mcp4901.c                                 [21-10-25 10:34  CRC=290C8EFF]
+    ..\lib\device\mt25q.c                                   [21-10-25 10:34  CRC=F545E48C]
+    ..\lib\tool\calc_tools.c                                [21-10-25 10:34  CRC=1AACF827]
+    ..\lib\tool\smf_queue.c                                 [21-10-25 20:19  CRC=57EF6543]
+    ..\lib\communication\communication.c                    [21-10-25 10:34  CRC=DE9E8B17]
+    ..\lib\communication\communication_driver.c             [21-10-25 10:34  CRC=552DB4C1]
+    ..\lib\communication\mission_tools.c                    [21-10-25 10:34  CRC=930938D5]
+    domain\cigs_iv.c                                        [21-10-25 10:34  CRC=5B82DBC0]
+    domain\cigs_piclog.c                                    [21-10-25 10:34  CRC=A5E95385]
+    domain\cigs_smf.c                                       [21-10-25 20:19  CRC=E06A79BC]
+    domain\cigs_flash.c                                     [21-10-25 20:19  CRC=3EB3DBFA]
+    application\cigs_excute_mission.c                       [21-10-25 20:50  CRC=B2FC6E7F]
+    application\cigs_mode_mission.c                         [21-10-25 10:34  CRC=478B6BF5]
+    application\cigs_mode_flash.c                           [21-10-25 20:19  CRC=5CDA0F92]
 
-Source signature=FFEC6568
+Source signature=EAEEE6B0
 Program memory checksum=0000
-Hex file CRC=9FA4
+Hex file CRC=A4A9
 
 Units:
-    c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main (main)
+    C:\Users\harut\Desktop\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main (main)
 
 Compiler Settings:
     Processor:      PIC18F67J94
@@ -1296,9 +1296,13 @@ Compiler Settings:
     Compile Mode:   CCS5
 
 Output Files:
+    XREF file:   build\mmj_cigs_main.xsym
     Errors:      build\mmj_cigs_main.err
+    Ext Symbols: build\mmj_cigs_main.esym
     INHX32:      build\mmj_cigs_main.hex
     Symbols:     build\mmj_cigs_main.sym
     List:        build\mmj_cigs_main.lst
-    Debug/eCOD:  build\mmj_cigs_main.cod
+    Debug/COFF:  build\mmj_cigs_main.cof
     Project:     mmj_cigs_main.ccspjt
+    Call Tree:   build\mmj_cigs_main.tre
+    Statistics:  build\mmj_cigs_main.STA
