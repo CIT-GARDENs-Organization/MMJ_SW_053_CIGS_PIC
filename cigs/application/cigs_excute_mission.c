@@ -127,6 +127,23 @@ void execute_mission(int8 *uplink_cmt_ptr)
             delay_ms(1000);
          }
          break;
+      case 0xA7:
+         connect_port1();
+         connect_port2();
+         mode_meas_iv_1sweep(uplink_cmt_ptr);
+         break;
+
+      case 0xA8:
+         connect_port1();
+         connect_port2();
+         mode_meas_iv_port1(uplink_cmt_ptr);
+         break;
+      
+      case 0xA9:
+         connect_port1();
+         connect_port2();
+         mode_meas_iv_port2(uplink_cmt_ptr);
+      break;
 
       // ________________Others______________________________
       case 0xB0:

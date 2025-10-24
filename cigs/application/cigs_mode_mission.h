@@ -18,6 +18,9 @@ void mode_meas_iv_debug(unsigned int8 *uplinkcmd_ptr);
 void mode_meas_env(unsigned int8 *uplinkcmd_ptr);
 void mode_meas_env_debug(unsigned int8 *uplinkcmd_ptr);
 void mode_meas_pd(unsigned int8 *uplinkcmd_ptr);
+void mode_meas_iv_1sweep(unsigned int8 *uplinkcmd_ptr);
+void mode_meas_iv_port1(unsigned int8 *uplinkcmd_ptr);
+void mode_meas_iv_port2(unsigned int8 *uplinkcmd_ptr);
 
 typedef union {
     unsigned int8 raw;

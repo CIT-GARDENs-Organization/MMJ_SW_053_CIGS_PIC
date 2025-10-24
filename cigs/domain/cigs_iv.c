@@ -248,6 +248,61 @@ void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned in
 }
 
 
+void sweep_port1(unsigned int16 curr_limit)
+{
+    unsigned int32 start_time_ms = get_current_sec();
+    fputc('.', PC);
+    // Enable both CIGS ports
+    connect_port1();
+
+    // Init Port1
+    sweep_config_t port1 = {0};
+    port1.port_num = 1;
+    port1.sweep_step = 0;
+    port1.active = 1;
+
+    int16 count = 0;
+    
+    // Initialize DACs to 0
+    mcp4901_1_write(1);
+    unsigned int16 volt;
+    unsigned int16 curr;
+    iv_env_t measured_data = create_meas_data();
+    while (port1.active)
+    {
+        mcp4901_1_write(count);
+        // mcp4901_2_write(count);
+        delay_us(1); 
+        if (port1.active) {
+            volt = ad7490_read(ADC_CIGS1_AMP);
+            curr = ad7490_read(ADC_CIGS1_CURR);
+            // ad7490_read_2port(ADC_CIGS1_AMP, ADC_CIGS1_CURR, &volt, &curr);
+            // fprintf(PC, "%04LX,%04LX,", volt, curr);
+            port1.data_buffer[count*3]= (volt  >> 4) & 0xFF;
+            port1.data_buffer[count*3+1]= ((volt & 0x0F) << 4) | ((curr >> 8) & 0x0F);
+            port1.data_buffer[count*3+2]= curr & 0xFF;
+            port1.sweep_step = count + 1; 
+            // fprintf(PC, "%04LX,%04LX,", port1.data_buffer[count].voltage, port1.data_buffer[count].current);
+            if (curr< curr_limit) {
+                port1.active = 0;
+                disconnect_port1();
+            }
+        }
+        count++;
+        if (count >= 255) {
+            // fprintf(PC, "Maximum step count reached: %ld\r\n", count);
+            break;
+        }
+    }
+    // unsigned int32 end_time_ms = get_current_msec();
+    // Ensure all connections are disabled3
+    disconnect_port1();
+    log_meas_data(&measured_data, &port1);
+}
+
+
+
+
 void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
 {
     iv_data_packet_t data_packet = {0};
@@ -303,7 +358,7 @@ void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
     }
 
     // ========================データパケットの処理========================
-    unsigned int16 iv_index = PACKET_IV_HEADER_SIZE;
+    unsigned int16 iv_index = IV_HEADER_SIZE;
     // パケットごとに繰り返す
     while (iv_index < port_data_ptr->sweep_step) {
         unsigned int16 step_in_packet = 0;
