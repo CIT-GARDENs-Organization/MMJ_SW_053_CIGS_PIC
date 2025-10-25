@@ -16,7 +16,7 @@
 
 ## 4. 関数名
 - 小文字のスネークケースを使用する。
-    例: `init_timer()`, `read_adc_value()`
+    例: `timer_init()`, `read_adc_value()`
 
 ## 5. マクロ
 - 全て大文字のスネークケースを使用する。
@@ -48,7 +48,7 @@
      * @brief Initialize the timer module.
      * @param config Pointer to the timer configuration structure.
      */
-    void init_timer(const TimerConfig *p_config);
+    void timer_init(const TimerConfig *p_config);
     ```
 
 ## 11. その他
