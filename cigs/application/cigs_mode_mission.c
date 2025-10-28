@@ -14,6 +14,7 @@ void mode_meas_iv_1sweep(unsigned int8 *uplinkcmd_ptr)
    mode_misf_erase_and_reset(uplinkcmd_ptr);
 
    meas_iv_param_t cmd = make_meas_iv_cmd(uplinkcmd_ptr); // Create the measurement command structure
+   cmd.sweep_limit = 0x0030;
    sweep(cmd.log_threshold, cmd.sweep_limit, cmd.pd_threshold);
 
    FlashOperationStruct data = {0};
@@ -45,7 +46,7 @@ void mode_meas_iv_1sweep(unsigned int8 *uplinkcmd_ptr)
    enqueue_flash_operation(&data); // SMFへのデータコピーを実行する
 
    misf_update_address_area();
-
+   print_misf_address_table();
 }
 
 void mode_meas_iv_port1(unsigned int8 *uplinkcmd_ptr)

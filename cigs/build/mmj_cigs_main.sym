@@ -604,7 +604,6 @@
 9C1     sweep_with_print.i
 9C2     @PSTRINGCN_9600_31781_31772.P1
 9C2-9C3 log_meas_data.measured_data_ptr
-9C2-A01 misf_update_address_area.flash_data
 9C2     @PSTRINGC_9600_31781_31772.@SCRATCH1
 9C2     sweep_with_print.@SCRATCH1
 9C3     @PSTRINGC_9600_31781_31772.@SCRATCH2
@@ -629,20 +628,20 @@
 9CD     sweep_with_print.@SCRATCH12
 9D7-9DA test_sweep.ans
 9DB     test_sweep.i
-9DC-9DD mcp4901_1_write.value
 9DC-9DD mcp4901_2_write.value
+9DC-9DD mcp4901_1_write.value
 9DC     test_sweep.@SCRATCH1
 9DD     test_sweep.@SCRATCH2
 9DE-9DF mcp4901_1_write.cmd
 9DE-9DF mcp4901_2_write.cmd
 9DE     test_sweep.@SCRATCH3
 9DF     test_sweep.@SCRATCH4
-9E0-9E1 mcp4901_make_cmd.value
 9E0-9E1 @SPI_XFER_4.P1
+9E0-9E1 mcp4901_make_cmd.value
 9E0     test_sweep.@SCRATCH5
 9E1     test_sweep.@SCRATCH6
-9E2-9ED create_meas_data.data
 9E2-9E3 mcp4901_make_cmd.cmd
+9E2-9ED create_meas_data.data
 9E2     @SPI_XFER_4.P1
 9E2     test_sweep.@SCRATCH7
 9E3     @SPI_XFER_4.P1
@@ -661,44 +660,24 @@
 9EF-9F0 ad7490_read.cmd
 9F1-9F2 ad7490_read.ans
 9F3-9F4 ad7490_read.readdata
-9F5-9F6 @SPI_XFER_3.P1
 9F5     ad7490_make_cmd.channel
+9F5-9F6 @SPI_XFER_3.P1
 9F6-9F7 ad7490_make_cmd.cmd
 9F7     @SPI_XFER_3.P1
 9F8     @SPI_XFER_3.P1
 9F8     ad7490_make_cmd.@SCRATCH1
 9F9     @SPI_XFER_3.@SCRATCH1
 9FA     @SPI_XFER_3.@SCRATCH2
-A02-A03 misf_update_address_area.flash_data_ptr
-A04-A07 subsector_4kByte_erase.flash_stream
-A04     misf_update_address_area.@SCRATCH1
-A05     misf_update_address_area.@SCRATCH2
 A06-A07 log_meas_data.data_packet_ptr
 A08     log_meas_data.i
-A08-A0B subsector_4kByte_erase.subsector_address
 A09-A48 log_meas_data.read_back
-A0A-A49 make_flash_data_table.flash_data
-A0C     subsector_4kByte_erase.write_enable_cmd
-A0D-A10 subsector_4kByte_erase.flash_cmd
-A11     subsector_4kByte_erase.write_enable_cmd
-A12-A16 subsector_4kByte_erase.flash_cmd
-A17     subsector_4kByte_erase.timeout_counter
-A18     subsector_4kByte_erase.@SCRATCH1
-A19     subsector_4kByte_erase.@SCRATCH2
-A1A     subsector_4kByte_erase.@SCRATCH3
-A1B     subsector_4kByte_erase.@SCRATCH4
-A1C     subsector_4kByte_erase.@SCRATCH5
 A49-A4A log_meas_data.iv_index
-A4A-A4B make_flash_data_table.flash_data_ptr
 A4B-A4C log_meas_data.step_in_packet
-A4C     make_flash_data_table.@SCRATCH1
+A4D-A8C misf_update_address_area.flash_data
 A4D     log_meas_data.@SCRATCH1
-A4D     make_flash_data_table.@SCRATCH2
 A4E     log_meas_data.@SCRATCH2
-A4E     make_flash_data_table.@SCRATCH3
 A4F     misf_write_data.id
 A4F     log_meas_data.@SCRATCH3
-A4F     make_flash_data_table.@SCRATCH4
 A50-A51 misf_write_data.data_ptr
 A50     log_meas_data.@SCRATCH4
 A51-A52 @MUL1616.P1
@@ -711,8 +690,29 @@ A54-A57 misf_write_data.write_address
 A55     @MUL1616.@SCRATCH1
 A58     misf_write_data.blank_size
 A59-A98 misf_write_data.blank_data
+A8D-A8E misf_update_address_area.flash_data_ptr
+A8F-A92 subsector_4kByte_erase.flash_stream
+A8F     misf_update_address_area.@SCRATCH1
+A90     misf_update_address_area.@SCRATCH2
+A93-A96 subsector_4kByte_erase.subsector_address
+A95-AD4 make_flash_data_table.flash_data
+A97     subsector_4kByte_erase.write_enable_cmd
+A98-A9B subsector_4kByte_erase.flash_cmd
 A99-A9C misf_write_data.write_address
+A9C     subsector_4kByte_erase.write_enable_cmd
 A9D-ADB misf_write_data.packet_data
+A9D-AA1 subsector_4kByte_erase.flash_cmd
+AA2     subsector_4kByte_erase.timeout_counter
+AA3     subsector_4kByte_erase.@SCRATCH1
+AA4     subsector_4kByte_erase.@SCRATCH2
+AA5     subsector_4kByte_erase.@SCRATCH3
+AA6     subsector_4kByte_erase.@SCRATCH4
+AA7     subsector_4kByte_erase.@SCRATCH5
+AD5-AD6 make_flash_data_table.flash_data_ptr
+AD7     make_flash_data_table.@SCRATCH1
+AD8     make_flash_data_table.@SCRATCH2
+AD9     make_flash_data_table.@SCRATCH3
+ADA     make_flash_data_table.@SCRATCH4
 ADC-ADF misf_write_data.read_address
 AE0     misf_write_data.crc
 AE1-AE4 misf_write_data.write_address
@@ -788,10 +788,10 @@ B1C-B1D spi_xfer_and_read_select_stream.spi_xfer_num
 B1E-B21 spi_xfer_and_read_select_stream.spi_rcv_num
 B22     spi_xfer_and_read_select_stream.@SCRATCH1
 B23     spi_xfer_and_read_select_stream.@SCRATCH2
-B24     @SPI_XFER_1.P1
-B24     @SPI_XFER_2.P2
-B25     @SPI_XFER_2.P1
-B25     @SPI_XFER_1.P2
+B24     @SPI_XFER_2.P1
+B24     @SPI_XFER_1.P2
+B25     @SPI_XFER_1.P1
+B25     @SPI_XFER_2.P2
 B26     @SPI_XFER_2.P1
 B26     @SPI_XFER_1.P2
 B27     @SPI_XFER_1.@SCRATCH1
@@ -1186,164 +1186,164 @@ ROM Allocation:
 002ECA  read_data_bytes
 0030EA  calc_crc8
 003156  print_MISF_ADDRESS_TABLE
-003960  misf_init
-003C18  get_current_sec
-003C2A  spi_xfer_select_stream
-003D1A  spi_xfer_two_datas_select_stream
-003E96  status_register
-003F36  write_data_bytes
-00428E  misf_write_data
-004BDA  make_flash_data_table
-004D3A  subsector_4kByte_erase
-00505E  misf_update_address_area
-0050EC  piclog_make
-005214  connect_port1
-00521C  connect_port2
-005224  connect_negative_power1
-005248  trim_receive_signal_header
-0052F0  get_content_size
-0053B0  check_crc
-0054A0  check_device_id
-005560  make_receive_command
-005762  clear_receive_signal
-00579E  @PUTCHARI_BIU_1
-0057AE  transmit
-00586C  transmit_command
-005900  transmit_ack
-005914  sector_erase
-005C76  mode_misf_erase_all
-005D54  mode_misf_erase_1sector
-005EEC  mode_misf_erase_4kbyte_subsector
-006084  mode_misf_erase_64kbyte_subsector
-0061F8  @DIV3232
-0062D2  @PRINTF_L32U_9600_31781_31772
-0063D8  mode_misf_write_demo
-006A22  flash_setting
-006A52  mode_misf_write_4kbyte_subsector
-006ACA  mode_misf_read
-0072CE  mode_misf_read_address
-0073E2  mode_misf_address_reset
-0075D6  mode_misf_erase_and_reset
-00762C  mode_smf_copy
-007708  mode_smf_read
-0079DA  mode_smf_erase
-007A42  smf_data_table_init
-007BC4  mode_smf_address_reset
-007D42  mode_smf_read_force
-008154  mode_smf_erase_force
-008240  @MUL1616
-008262  make_meas_iv_cmd
-00835A  calc_pd_value
-00836A  @ITOF
-0083B0  @MULFF
-00850E  @DIVFF
-0087FC  @ADDFF
-008CF6  @SFTOI
-008D50  calc_curr_value
-008E62  @PRINTF_LU_9600_31781_31772
-008F7E  print_meas_iv_cmd
-0091DC  @PUTCHARI_BIU_2
-0091EA  create_meas_data
-00926C  disconnect_port1
-009274  disconnect_port2
-00927C  log_meas_data
-009B3A  get_current_msec
-009B48  sweep
-00A7D4  transmit_status
-00A7EC  check_and_respond_to_boss
-00A82C  enqueue_flash_operation
-00AA8C  mode_meas_iv
-00B264  test_sweep
-00C7DA  mode_meas_iv_debug
-00CABC  mode_meas_env
-00CBA4  sweep_with_print
-00E2AC  @MUL3232
-00E320  mode_meas_pd
-00E518  mode_meas_iv_1sweep
-00E9BA  sweep_port1
-00F012  mode_meas_iv_port1
-00F296  mode_meas_iv_port2
-00F51A  @DIV88
-00F562  @PRINTF_U_9600_31781_31772
-00F61E  execute_mission
-00FC3A  is_empty_flash_queue
-00FC58  handle_uplink_command
-00FCC0  handle_status_check
-00FD16  dequeue_flash_operation
-00FD78  @PRINTF_L32D_9600_31781_31772
-00FEFE  set_current_sec
-00FF12  execute_command
-00FF9A  @goto25139
+00395E  misf_init
+003C16  get_current_sec
+003C28  spi_xfer_select_stream
+003D18  spi_xfer_two_datas_select_stream
+003E94  status_register
+003F34  write_data_bytes
+00428C  misf_write_data
+004BD8  make_flash_data_table
+004D38  subsector_4kByte_erase
+00505C  misf_update_address_area
+0050EA  piclog_make
+005212  connect_port1
+00521A  connect_port2
+005222  connect_negative_power1
+005246  trim_receive_signal_header
+0052EE  get_content_size
+0053AE  check_crc
+00549E  check_device_id
+00555E  make_receive_command
+005760  clear_receive_signal
+00579C  @PUTCHARI_BIU_1
+0057AC  transmit
+00586A  transmit_command
+0058FE  transmit_ack
+005912  sector_erase
+005C74  mode_misf_erase_all
+005D52  mode_misf_erase_1sector
+005EEA  mode_misf_erase_4kbyte_subsector
+006082  mode_misf_erase_64kbyte_subsector
+0061F6  @DIV3232
+0062D0  @PRINTF_L32U_9600_31781_31772
+0063D6  mode_misf_write_demo
+006A20  flash_setting
+006A50  mode_misf_write_4kbyte_subsector
+006AC8  mode_misf_read
+0072CC  mode_misf_read_address
+0073E0  mode_misf_address_reset
+0075D4  mode_misf_erase_and_reset
+00762A  mode_smf_copy
+007706  mode_smf_read
+0079D8  mode_smf_erase
+007A40  smf_data_table_init
+007BC2  mode_smf_address_reset
+007D40  mode_smf_read_force
+008152  mode_smf_erase_force
+00823E  @MUL1616
+008260  make_meas_iv_cmd
+008358  calc_pd_value
+008368  @ITOF
+0083AE  @MULFF
+00850C  @DIVFF
+0087FA  @ADDFF
+008CF4  @SFTOI
+008D4E  calc_curr_value
+008E60  @PRINTF_LU_9600_31781_31772
+008F7C  print_meas_iv_cmd
+0091DA  @PUTCHARI_BIU_2
+0091E8  create_meas_data
+00926A  disconnect_port1
+009272  disconnect_port2
+00927A  log_meas_data
+009B3C  get_current_msec
+009B4A  sweep
+00A7E6  transmit_status
+00A7FE  check_and_respond_to_boss
+00A83E  enqueue_flash_operation
+00AA9E  mode_meas_iv
+00B276  test_sweep
+00C7EC  mode_meas_iv_debug
+00CACE  mode_meas_env
+00CBB6  sweep_with_print
+00E2BE  @MUL3232
+00E332  mode_meas_pd
+00E52A  mode_meas_iv_1sweep
+00E9D0  sweep_port1
+00F028  mode_meas_iv_port1
+00F2AC  mode_meas_iv_port2
+00F530  @DIV88
+00F578  @PRINTF_U_9600_31781_31772
+00F634  execute_mission
+00FC50  is_empty_flash_queue
+00FC6E  handle_uplink_command
+00FCD6  handle_status_check
+00FD2C  dequeue_flash_operation
+00FD8E  @PRINTF_L32D_9600_31781_31772
+00FF14  set_current_sec
+00FF28  execute_command
+00FFB0  @goto51768
 010000  @PRINTF_D_9600_31781_31772
 010138  write_data_byte
 010474  smf_write
-0113A6  get_smf_address_struct
-01152E  smf_read
-011C68  smf_erase
-0122EA  handle_smf_available
-01264E  handle_recieve_time
-012936  MAIN
-012936  @cinit1
-012A2E  @cinit2
+0113A8  get_smf_address_struct
+011530  smf_read
+011C6A  smf_erase
+0122EC  handle_smf_available
+012650  handle_recieve_time
+012938  MAIN
+012938  @cinit1
+012A30  @cinit2
 0135  NEXT
 
 Project Directory:
     c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\
 
 Project Files:
-    mmj_cigs_main.c                                         [20-10-25 19:41  CRC=886EC271]
-    mmj_cigs_main.h                                         [20-10-25 19:41  CRC=337C6097]
-    hal\cigs_config.h                                       [20-10-25 19:41  CRC=D820BA04]
+    mmj_cigs_main.c                                         [28-10-25 18:26  CRC=886EC271]
+    mmj_cigs_main.h                                         [28-10-25 18:26  CRC=337C6097]
+    hal\cigs_config.h                                       [28-10-25 18:26  CRC=D820BA04]
     ..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F67J94.h [13-5-21 13:54  CRC=CB5C8DE4]
-    hal\timer.h                                             [20-10-25 19:41  CRC=D68DDF5F]
-    hal\uart.h                                              [20-10-25 19:41  CRC=70A896CF]
-    hal\gpio.h                                              [20-10-25 19:41  CRC=E4670BCE]
-    device_driver\ad7490_driver.h                           [20-10-25 19:41  CRC=D872A938]
-    device_driver\mcp4901_driver.h                          [20-10-25 19:41  CRC=D63E48F4]
-    ..\lib\communication\typedef_content.h                  [20-10-25 19:41  CRC=0783F434]
-    ..\lib\communication\value_status.h                     [20-10-25 19:41  CRC=D872A938]
-    ..\lib\tool\calc_tools.h                                [20-10-25 19:41  CRC=C40F6EA4]
-    ..\lib\tool\smf_queue.h                                 [20-10-25 19:41  CRC=C4629A23]
-    ..\lib\tool\mmj_smf_memorymap.h                         [20-10-25 19:41  CRC=3C6C809C]
-    ..\lib\device\mt25q.h                                   [20-10-25 19:41  CRC=1183BDB9]
-    ..\lib\device\ad7490.h                                  [20-10-25 19:41  CRC=33D32650]
-    ..\lib\device\mcp4901.h                                 [20-10-25 19:41  CRC=6A890493]
-    ..\lib\communication\communication.h                    [20-10-25 19:41  CRC=87D4C82C]
-    ..\lib\communication\frame.h                            [20-10-25 19:41  CRC=320EFF35]
-    ..\lib\communication\communication_driver.h             [20-10-25 19:41  CRC=861F8EE4]
-    ..\lib\communication\mission_tools.h                    [20-10-25 19:41  CRC=AC2A773F]
-    domain\cigs_iv.h                                        [20-10-25 19:41  CRC=7904231C]
-    domain\cigs_flash.h                                     [20-10-25 19:41  CRC=EDB6BE02]
-    domain\cigs_piclog.h                                    [20-10-25 19:41  CRC=48A01A16]
-    domain\cigs_smf.h                                       [20-10-25 19:41  CRC=2962CBC8]
-    application\cigs_excute_mission.h                       [20-10-25 19:41  CRC=8FD97282]
-    application\cigs_mode_mission.h                         [22-10-25 18:44  CRC=D872803A]
-    application\cigs_mode_flash.h                           [20-10-25 19:41  CRC=7AC97D12]
-    hal\timer.c                                             [20-10-25 19:41  CRC=2F210632]
-    hal\uart.c                                              [20-10-25 19:41  CRC=A8007B5A]
-    hal\gpio.c                                              [20-10-25 19:41  CRC=AD570323]
-    ..\lib\tool\types.h                                     [20-10-25 19:41  CRC=00000000]
-    device_driver\ad7490_driver.c                           [20-10-25 19:41  CRC=5B43373A]
-    device_driver\mcp4901_driver.c                          [20-10-25 19:41  CRC=AA6C5C73]
-    ..\lib\device\ad7490.c                                  [22-10-25 18:30  CRC=8D90207F]
-    ..\lib\device\mcp4901.c                                 [20-10-25 19:41  CRC=290C8EFF]
-    ..\lib\device\mt25q.c                                   [20-10-25 19:41  CRC=F545E48C]
-    ..\lib\tool\calc_tools.c                                [20-10-25 19:41  CRC=1AACF827]
-    ..\lib\tool\smf_queue.c                                 [20-10-25 19:41  CRC=57EF6543]
-    ..\lib\communication\communication.c                    [20-10-25 19:41  CRC=DE9E8B17]
-    ..\lib\communication\communication_driver.c             [20-10-25 19:41  CRC=552DB4C1]
-    ..\lib\communication\mission_tools.c                    [20-10-25 19:41  CRC=930938D5]
-    domain\cigs_iv.c                                        [23-10-25 12:27  CRC=6546BF71]
-    domain\cigs_piclog.c                                    [20-10-25 19:41  CRC=A5E95385]
-    domain\cigs_smf.c                                       [20-10-25 19:41  CRC=E06A79BC]
-    domain\cigs_flash.c                                     [20-10-25 19:41  CRC=3EB3DBFA]
-    application\cigs_excute_mission.c                       [22-10-25 19:35  CRC=356678F2]
-    application\cigs_mode_mission.c                         [22-10-25 18:48  CRC=F83F59D3]
-    application\cigs_mode_flash.c                           [20-10-25 19:41  CRC=5CDA0F92]
+    hal\timer.h                                             [28-10-25 18:26  CRC=D68DDF5F]
+    hal\uart.h                                              [28-10-25 18:26  CRC=70A896CF]
+    hal\gpio.h                                              [28-10-25 18:26  CRC=E4670BCE]
+    device_driver\ad7490_driver.h                           [28-10-25 18:26  CRC=D872A938]
+    device_driver\mcp4901_driver.h                          [28-10-25 18:26  CRC=D63E48F4]
+    ..\lib\communication\typedef_content.h                  [28-10-25 18:26  CRC=0783F434]
+    ..\lib\communication\value_status.h                     [28-10-25 18:26  CRC=D872A938]
+    ..\lib\tool\calc_tools.h                                [28-10-25 18:26  CRC=C40F6EA4]
+    ..\lib\tool\smf_queue.h                                 [28-10-25 18:26  CRC=C4629A23]
+    ..\lib\tool\mmj_smf_memorymap.h                         [28-10-25 18:26  CRC=5C4EAC15]
+    ..\lib\device\mt25q.h                                   [28-10-25 18:26  CRC=1183BDB9]
+    ..\lib\device\ad7490.h                                  [28-10-25 18:26  CRC=33D32650]
+    ..\lib\device\mcp4901.h                                 [28-10-25 18:26  CRC=6A890493]
+    ..\lib\communication\communication.h                    [28-10-25 18:26  CRC=87D4C82C]
+    ..\lib\communication\frame.h                            [28-10-25 18:26  CRC=320EFF35]
+    ..\lib\communication\communication_driver.h             [28-10-25 18:26  CRC=861F8EE4]
+    ..\lib\communication\mission_tools.h                    [28-10-25 18:26  CRC=AC2A773F]
+    domain\cigs_iv.h                                        [28-10-25 18:26  CRC=7904231C]
+    domain\cigs_flash.h                                     [28-10-25 18:26  CRC=EDB6BE02]
+    domain\cigs_piclog.h                                    [28-10-25 18:26  CRC=48A01A16]
+    domain\cigs_smf.h                                       [28-10-25 18:26  CRC=2962CBC8]
+    application\cigs_excute_mission.h                       [28-10-25 18:26  CRC=8FD97282]
+    application\cigs_mode_mission.h                         [28-10-25 18:26  CRC=D872803A]
+    application\cigs_mode_flash.h                           [28-10-25 18:26  CRC=7AC97D12]
+    hal\timer.c                                             [28-10-25 18:26  CRC=2F210632]
+    hal\uart.c                                              [28-10-25 18:26  CRC=A8007B5A]
+    hal\gpio.c                                              [28-10-25 18:26  CRC=AD570323]
+    ..\lib\tool\types.h                                     [28-10-25 18:26  CRC=00000000]
+    device_driver\ad7490_driver.c                           [28-10-25 18:26  CRC=5B43373A]
+    device_driver\mcp4901_driver.c                          [28-10-25 18:26  CRC=AA6C5C73]
+    ..\lib\device\ad7490.c                                  [28-10-25 18:26  CRC=A2F1A2C0]
+    ..\lib\device\mcp4901.c                                 [28-10-25 18:26  CRC=290C8EFF]
+    ..\lib\device\mt25q.c                                   [28-10-25 18:26  CRC=F545E48C]
+    ..\lib\tool\calc_tools.c                                [28-10-25 18:26  CRC=1AACF827]
+    ..\lib\tool\smf_queue.c                                 [28-10-25 18:26  CRC=57EF6543]
+    ..\lib\communication\communication.c                    [28-10-25 18:26  CRC=DE9E8B17]
+    ..\lib\communication\communication_driver.c             [28-10-25 18:26  CRC=552DB4C1]
+    ..\lib\communication\mission_tools.c                    [28-10-25 18:26  CRC=930938D5]
+    domain\cigs_iv.c                                        [28-10-25 18:31  CRC=5058BDA7]
+    domain\cigs_piclog.c                                    [28-10-25 18:26  CRC=A5E95385]
+    domain\cigs_smf.c                                       [28-10-25 18:26  CRC=E06A79BC]
+    domain\cigs_flash.c                                     [28-10-25 18:26  CRC=3EB3DBFA]
+    application\cigs_excute_mission.c                       [28-10-25 18:26  CRC=356678F2]
+    application\cigs_mode_mission.c                         [28-10-25 18:49  CRC=22781A95]
+    application\cigs_mode_flash.c                           [28-10-25 18:26  CRC=5CDA0F92]
 
-Source signature=B791CFE3
+Source signature=02203C95
 Program memory checksum=0000
-Hex file CRC=A3A0
+Hex file CRC=0240
 
 Units:
     c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main (main)

@@ -175,7 +175,7 @@ void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned in
     connect_port1();
     connect_port2();
 
-    // delay_us(100); // wait for the CIGS to stabilize
+    delay_ms(100);
 
     // Init Port1
     sweep_config_t port1 = {0};
@@ -202,7 +202,7 @@ void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned in
     {
         mcp4901_1_write(count);
         mcp4901_2_write(count);
-        delay_us(1); 
+        delay_us(10); 
         if (port1.active) {
             volt = ad7490_read(ADC_CIGS1_AMP);
             curr = ad7490_read(ADC_CIGS1_CURR);
@@ -391,7 +391,7 @@ void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
         }
     }
 
-    // misf_update_address_area(); // 必要なら有効化
+    misf_update_address_area(); // 必要なら有効化
 }
 
 iv_env_t create_meas_data()
