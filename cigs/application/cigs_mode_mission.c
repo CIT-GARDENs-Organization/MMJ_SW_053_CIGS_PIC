@@ -16,7 +16,7 @@ void mode_meas_iv_1sweep(unsigned int8 *uplinkcmd_ptr)
    meas_iv_param_t cmd = make_meas_iv_cmd(uplinkcmd_ptr); // Create the measurement command structure
    cmd.sweep_limit = 0x0030;
    sweep(cmd.log_threshold, cmd.sweep_limit, cmd.pd_threshold);
-
+   
    FlashOperationStruct data = {0};
    data.func_type = ENUM_SMF_WRITE;
    data.mission_id = CIGS_IV1_DATA; // ID_CIGS_MEASURE_DATA; // コピーする目的のデータ種別

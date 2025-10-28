@@ -1260,20 +1260,20 @@ ROM Allocation:
 00E2BE  @MUL3232
 00E332  mode_meas_pd
 00E52A  mode_meas_iv_1sweep
-00E9D0  sweep_port1
-00F028  mode_meas_iv_port1
-00F2AC  mode_meas_iv_port2
-00F530  @DIV88
-00F578  @PRINTF_U_9600_31781_31772
-00F634  execute_mission
-00FC50  is_empty_flash_queue
-00FC6E  handle_uplink_command
-00FCD6  handle_status_check
-00FD2C  dequeue_flash_operation
-00FD8E  @PRINTF_L32D_9600_31781_31772
-00FF14  set_current_sec
-00FF28  execute_command
-00FFB0  @goto51768
+00E9DA  sweep_port1
+00F032  mode_meas_iv_port1
+00F2B6  mode_meas_iv_port2
+00F53A  @DIV88
+00F582  @PRINTF_U_9600_31781_31772
+00F63E  execute_mission
+00FC5A  is_empty_flash_queue
+00FC78  handle_uplink_command
+00FCE0  handle_status_check
+00FD36  dequeue_flash_operation
+00FD98  @PRINTF_L32D_9600_31781_31772
+00FF1E  set_current_sec
+00FF32  execute_command
+00FFBA  @goto36418
 010000  @PRINTF_D_9600_31781_31772
 010138  write_data_byte
 010474  smf_write
@@ -1333,17 +1333,17 @@ Project Files:
     ..\lib\communication\communication.c                    [28-10-25 18:26  CRC=DE9E8B17]
     ..\lib\communication\communication_driver.c             [28-10-25 18:26  CRC=552DB4C1]
     ..\lib\communication\mission_tools.c                    [28-10-25 18:26  CRC=930938D5]
-    domain\cigs_iv.c                                        [28-10-25 18:31  CRC=5058BDA7]
+    domain\cigs_iv.c                                        [28-10-25 20:29  CRC=5058BDA7]
     domain\cigs_piclog.c                                    [28-10-25 18:26  CRC=A5E95385]
     domain\cigs_smf.c                                       [28-10-25 18:26  CRC=E06A79BC]
     domain\cigs_flash.c                                     [28-10-25 18:26  CRC=3EB3DBFA]
     application\cigs_excute_mission.c                       [28-10-25 18:26  CRC=356678F2]
-    application\cigs_mode_mission.c                         [28-10-25 18:49  CRC=22781A95]
+    application\cigs_mode_mission.c                         [28-10-25 20:30  CRC=DDF5D9DF]
     application\cigs_mode_flash.c                           [28-10-25 18:26  CRC=5CDA0F92]
 
-Source signature=02203C95
+Source signature=BD9DFBDF
 Program memory checksum=0000
-Hex file CRC=0240
+Hex file CRC=B52B
 
 Units:
     c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main (main)
