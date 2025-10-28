@@ -1,5 +1,5 @@
-#ifndef UART_H
-#define UART_H
+#ifndef _UART_H_
+#define _UART_H_
 
 // _________ defines ________________
 
@@ -23,5 +23,5 @@ void clear_receive_signal(unsigned int8 receive_signal[], int8 *receive_signal_s
 
 
 
-#endif
-
+#endif // _UART_H_
+//------------------End of File------------------

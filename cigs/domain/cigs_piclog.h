@@ -23,7 +23,7 @@ typedef union {
 unsigned int8 PICLOG_BLANK_DATA[PICLOG_BLANK_SIZE];
 
 // PICLOG 関数（実装は .c）
-void piclog_make(unsigned int8 function, unsigned int8 parameter);
+void piclog_save(unsigned int8 function, unsigned int8 parameter);
 
 #endif // MMJ_CIGS_PICLOG_H
 //------------------End of File------------------

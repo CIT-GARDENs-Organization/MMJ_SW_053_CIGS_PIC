@@ -1,6 +1,6 @@
 #include "timer.h"
 
-int8 subsec;
+// __________ values _________
 unsigned int32 time_ms = 0;
 unsigned int32 time_sec = 0;
 

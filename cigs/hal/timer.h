@@ -1,5 +1,5 @@
-#ifndef TIMER_H
-#define TIMER_H
+#ifndef _TIMER_H_
+#define _TIMER_H_
 
 // __________ define _________
 
@@ -8,34 +8,24 @@
 
 // __________ values _________
 
-int32 tick_10ms = 0; 
-
-unsigned int32 dsec = 0, sec = 0; //dsec -> deci second (0.01 sec)
-volatile unsigned int16 day = 0;
-
-void timer_init();
-// __________ functions _________
-unsigned int32 get_current_sec();
-unsigned int16 get_current_msec();
-unsigned int16 get_current_day();
-void set_current_10msec(unsigned int32 new_10msec);
-
-#INT_TIMER0
-static void TIMER0_isr();
-
-#INT_TIMER1 
-static void TIMER1_isr();
-
 // Clock Freq : 32.768kHz
 #define TIMER_ISR_1S 0x8000 // 1秒ごとのタイマー割り込み
 #define TIMER_ISR_100MSEC 0xF313 // 100ミリ秒ごとのタイマー割り込み
 #define TIMER_ISR_10MSEC 0xFEA8 // 10ミリ秒ごとのタイマー割り込み
 #define TIMER_ISR_25MSEC 0xFC8D // 25ミリ秒ごとのタイマー割り込み
 
-void set_current_sec(unsigned int32 new_sec);
+#INT_TIMER0
+static void TIMER0_isr();
+#INT_TIMER1 
+static void TIMER1_isr();
+
+
+// __________ functions _________
+void timer_init();
+
 unsigned int32 get_current_sec();
 unsigned int16 get_current_msec();
+void set_current_sec(unsigned int32 new_sec);
 
 
-#endif
-
+#endif // _TIMER_H_

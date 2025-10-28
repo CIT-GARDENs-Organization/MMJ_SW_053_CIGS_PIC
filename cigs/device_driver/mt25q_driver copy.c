@@ -3,14 +3,7 @@
 
 
 
-static void mt25q_write_enable(Flash flash_stream)
-{
-    unsigned int8 flash_cmd = MT25Q_WRITE_ENABLE;
-    output_low(flash_stream.cs_pin); // lower the CS PIN
-    mt25q_select_stream(flash_stream, &flash_cmd, 1);
-    output_high(flash_stream.cs_pin); // take CS PIN higher back
-    return;
-}
+
 
 void mt25q_read(Flash flash_stream, unsigned int32 read_address, unsigned int8 *read_data, unsigned int32 read_amount)
 {

@@ -1073,7 +1073,7 @@ D G "ACT_INT_WHEN_LOCKED" 3 1073 "0"
 D G "ACT_INT_WHEN_NOT_LOCKED" 3 1074 "0x04"
 D G "ACT_INT_WHEN_NOT_IN_RANGE" 3 1075 "0"
 D G "ACT_INT_WHEN_IN_RANGE" 3 1076 "0x01"
-D G "ACT_CLOCK_LOCKED" 3 1078 "0x08" "internal oscillator is within � 0.20%"
+D G "ACT_CLOCK_LOCKED" 3 1078 "0x08" "internal oscillator is within � 0.20%"
 D G "ACT_OUT_OF_RANGE" 3 1079 "0x02" "oscillator frequency is outside of the OSCTUNE range"
 c L "act_status" 3 1 4 "FUNCTION"
 F N "setup_adc" 3 1086 ""
@@ -1983,13 +1983,13 @@ F N "TIMER0_isr" 4 24 ""
 f G "TIMER0_isr" 4 24 "void()" `986 
 F N "TIMER1_isr" 4 27 ""
 f G "TIMER1_isr" 4 27 "void()" `987  "Clock Freq : 32.768kHz"
-D G "TIMER_ISR_1S" 4 30 "0x8000" "1秒ごとのタイマー割�
+D G "TIMER_ISR_1S" 4 30 "0x8000" "1秒ごとのタイマー割�
 込み"
-D G "TIMER_ISR_100MSEC" 4 31 "0xF313" "100ミリ秒ごとのタイマー割�
+D G "TIMER_ISR_100MSEC" 4 31 "0xF313" "100ミリ秒ごとのタイマー割�
 込み"
-D G "TIMER_ISR_10MSEC" 4 32 "0xFEA8" "10ミリ秒ごとのタイマー割�
+D G "TIMER_ISR_10MSEC" 4 32 "0xFEA8" "10ミリ秒ごとのタイマー割�
 込み"
-D G "TIMER_ISR_25MSEC" 4 33 "0xFC8D" "25ミリ秒ごとのタイマー割�
+D G "TIMER_ISR_25MSEC" 4 33 "0xFC8D" "25ミリ秒ごとのタイマー割�
 込み"
 F N "set_current_sec" 4 35 ""
 V L "new_sec" 4 35 "int32" `989 
@@ -2680,8 +2680,8 @@ V L "mission_id" 22 117 "MissionID" `1422
 f G "get_misf_address_struct" 22 117 "MisfAddressStruct(MissionID mission_id)" `1421 
 F N "get_misf_write_struct" 22 118 ""
 V L "mission_id" 22 118 "MissionID" `1424 
-f G "get_misf_write_struct" 22 118 "MisfWriteStruct(MissionID mission_id)" `1423  "キュー�
-�入"
+f G "get_misf_write_struct" 22 118 "MisfWriteStruct(MissionID mission_id)" `1423  "キュー�
+�入"
 F N "add_smf_queue" 22 121 ""
 V L "mission_id" 22 121 "MissionID" `1426 
 V L "func_type" 22 121 "FunctionType" `1427 
@@ -2709,13 +2709,13 @@ C L "misf_write_data" 23 4 1 "FUNCTION"
 T G "piclog_t" 23 20 "{{int32 time,int8 function,int8 parameter} fields,int8[6] bytes}" `1452 
 D G "PICLOG_BLANK_SIZE" 23 22 "4"
 V G "PICLOG_BLANK_DATA" 23 23 "int8[4]" `1453  "PICLOG 関数（実装は .c）"
-F N "piclog_make" 23 26 ""
+F N "piclog_save" 23 26 ""
 V L "function" 23 26 "int8" `1455 
 V L "parameter" 23 26 "int8" `1456 
-f G "piclog_make" 23 26 "void(int8 function,int8 parameter)" `1454  "MMJ_CIGS_PICLOG_H"
-C L "piclog_make" 23 4 1 "FUNCTION"
+f G "piclog_save" 23 26 "void(int8 function,int8 parameter)" `1454  "MMJ_CIGS_PICLOG_H"
+C L "piclog_save" 23 4 1 "FUNCTION"
 D G "MMJ_CIGS_EXCUTE_MISSION_H" 24 2 ""
-C L "piclog_make" 24 4 2 "FUNCTION"
+C L "piclog_save" 24 4 2 "FUNCTION"
 F N "execute_command" 24 10 ""
 V L "Command" 24 10 " *" `1458 
 f G "execute_command" 24 10 "int8( * Command)" `1457 
@@ -3401,8 +3401,8 @@ F G "create_meas_data" 41 339 "iv_env_t()" `1358
 V L "data" 41 340 "iv_env_t" `1791 
 F N "calc_pd_value" 41 350 ""
 V L "data" 41 350 "int16" `1793 
-F G "calc_pd_value" 41 351 "int16(int16 data)" `1366  "ADCの12ビット値を電�
-�密度（mW/cm²）に変換する例"
+F G "calc_pd_value" 41 351 "int16(int16 data)" `1366  "ADCの12ビット値を電�
+�密度（mW/cm²）に変換する例"
 C L "calc_pd_value" 41 16 1 "FUNCTION"
 F N "calc_curr_value" 41 357 ""
 V L "data" 41 357 "int16" `1793 
@@ -3411,10 +3411,10 @@ V L "voltage_mv" 41 358 "float" `1792
 V L "current_ma" 41 359 "float" `1793  "12ビットADCの値を[mV]に変換"
 C L "calc_curr_value" 41 16 1 "FUNCTION"
 D G "MISSION_ID_PICLOG" 42 8 "0x03" "PICLOGミッションID"
-F N "piclog_make" 42 10 ""
+F N "piclog_save" 42 10 ""
 V L "function" 42 10 "int8" `1455 
 V L "parameter" 42 10 "int8" `1809 
-F G "piclog_make" 42 11 "void(int8 function,int8 parameter)" `1454 
+F G "piclog_save" 42 11 "void(int8 function,int8 parameter)" `1454 
 V L "piclog" 42 12 "piclog_t" `1807 
 V L "piclog_ptr" 42 13 " *" `1808 
 V L "i" 42 20 "int8" `1810 
@@ -3467,7 +3467,7 @@ F N "set_piclog_used_size_msb" 44 71 ""
 V L "value" 44 71 "int32" `1865 
 f G "set_piclog_used_size_msb" 44 71 "void(int32 value)" `1864 
 F N "get_piclog_used_size_msb" 44 72 ""
-f G "get_piclog_used_size_msb" 44 72 "int32()" `1866  "旧 data_table/meas 互換マクロは�
+f G "get_piclog_used_size_msb" 44 72 "int32()" `1866  "旧 data_table/meas 互換マクロは�
 除（不要）"
 C L "get_piclog_used_size_msb" 44 28 1 "FUNCTION"
 F N "get_smf_partition_by_mission_id" 44 76 ""

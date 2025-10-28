@@ -32,3 +32,33 @@ unsigned int16 ad7490_make_cmd(int8 channel)
     cmd.fields.write = 1; // Read operation
     return cmd.value;
 }
+
+unsigned int16 ad7490_cmd(ad7490_config_t *config)
+{
+    ad7490_cmd_t cmd;
+    
+    cmd.fields.reserved0 = 0; 
+    cmd.fields.reserved1 = 0; 
+    cmd.fields.reserved2 = 0; 
+    cmd.fields.reserved3 = 0;
+    cmd.fields.coding = config->coding; 
+    cmd.fields.range = config->range; 
+    cmd.fields.weak_tri = config->dout_mode; 
+    cmd.fields.shadow = config->shadow; 
+    cmd.fields.pm0 = (config->power_mode >> 0) & 1; 
+    cmd.fields.pm1 = (config->power_mode >> 1) & 1; 
+    // Channel bits should be set separately after this function
+    cmd.fields.seq = config->seq_mode; 
+    cmd.fields.write = AD7490_WRITE_ENABLE;
+    return cmd.value;
+}
+
+static void ad7490_enable_cs(void)
+{
+    output_low(ADC_CS); 
+}
+
+static void ad7490_disable_cs(void)
+{
+    output_high(ADC_CS); 
+}

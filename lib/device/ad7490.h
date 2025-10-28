@@ -1,23 +1,5 @@
-#ifndef  AD7490_H
-#define  AD7490_H
-
-// === AD7490 Control Word ===
-// Bit[15]   : WRITE (常に0)
-// Bit[14:13]: SEQ mode (シーケンス設定)
-// Bit[12]   : SHADOW (0=disabled, 1=enabled)
-// Bit[11]   : Don't Care
-// Bit[10]   : PM1 (Power Management)
-// Bit[9]    : PM0
-// Bit[8]    : REFSEL (0=internal, 1=external)
-// Bit[7]    : Coding (0=straight binary, 1=twos complement)
-// Bit[6]    : Don't Care
-// Bit[5]    : ADD2
-// Bit[4]    : ADD1
-// Bit[3]    : ADD0
-// Bit[2]    : DIFF (0=single-ended, 1=differential)
-// Bit[1:0]  : Don't Care
-
-
+#ifndef  _AD7490_H_
+#define  _AD7490_H_
 
 typedef union {
     unsigned int16 value; // 16-bit value for direct access
@@ -38,7 +20,6 @@ typedef union {
         int1 add3; // Channel address bits
         int1 seq; // 1: Sequential mode, 0: Random mode
         int1 write; // 1: Write operation, 0: Read operation
-
     } fields;
 } ad7490_cmd_t;
 
@@ -137,6 +118,17 @@ typedef enum {
     AD7490_CH15 = 15
 } ad7490_channel_t;
 
+typedef struct {
+    ad7490_coding_t coding;
+    ad7490_range_t range;
+    ad7490_dout_t dout_mode;
+    ad7490_shadow_t shadow;
+    ad7490_pwr_mode_t power_mode;
+    ad7490_seq_t seq_mode;
+} ad7490_config_t;
 
-#endif // AD7490_H
+unsigned int16 ad7490_cmd(ad7490_config_t config);
+
+
+#endif // _AD7490_H_
 //------------------End of File------------------

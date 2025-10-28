@@ -6,6 +6,8 @@
 void ad7490_init(void);
 unsigned int16 ad7490_read(int8 channel);
 
+static void ad7490_enable_cs(void);
+static void ad7490_disable_cs(void);
 
-#endif // MMJ_CIGS_DEVCE_H
+#endif // MMJ_CIGS_DEVICE_H
 //------------------End of File------------------

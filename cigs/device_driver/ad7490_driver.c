@@ -130,5 +130,16 @@ void ad7490_read_2port(unsigned int8 channel1, unsigned int8 channel2, unsigned 
     *data2 = readdata2;
 }
 
+void ad7490_setting_multi_channel(ad7490_channel_t channel, unsigned int8 num_channels)
+{
+    
+    
+    output_low(CS_PIN);
+    
+
+
+
+}
+
 
 // End of file

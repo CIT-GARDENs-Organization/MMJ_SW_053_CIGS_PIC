@@ -14,7 +14,7 @@ void main()
    mcp4901_init();
    misf_init();
    
-   piclog_make(PICLOG_STARTUP,0x00);
+   piclog_save(PICLOG_STARTUP,0x00);
 
    int1 is_finished = FALSE;
    fprintf(PC,"____CIGS PIC Start Operation_____\r\n\r\n");

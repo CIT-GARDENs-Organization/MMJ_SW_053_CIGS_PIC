@@ -23,15 +23,4 @@ void mt25q_write(Flash flash_stream, unsigned int32 write_address, unsigned int8
 void mt25q_sector_erase(Flash flash_stream, unsigned int32 sector_address); 
 mt25q_status_reg_t mt25q_read_status(Flash flash_stream);
 
-
-
-
-static void mt25q_enable(Flash flash_stream);
-static void mt25q_disable(Flash flash_stream);
-static void mt25q_write_enable(Flash flash_stream);
-static mt25q_status_reg_t mt25q_read_status(Flash flash_stream);
-
-
-
-
 #endif // MT25Q_DRIVER_H

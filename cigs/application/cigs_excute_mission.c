@@ -41,16 +41,16 @@ void execute_mission(int8 *uplink_cmt_ptr)
          break;
 
       // ___________________ MISF Commands ______________________
-      case ID_MISF_ERASE_ALL:
+      case ID_MISF_ERASE_ALL: //0x80
          mode_misf_erase_all(uplink_cmt_ptr);
          break;
-      case ID_MISF_ERASE_1SECTOR:
+      case ID_MISF_ERASE_1SECTOR: //0x81
          mode_misf_erase_1sector(uplink_cmt_ptr);
          break;
-      case ID_MISF_ERASE_4kByte_SUBSECTOR:
+      case ID_MISF_ERASE_4kByte_SUBSECTOR: //0x82
          mode_misf_erase_4kbyte_subsector(uplink_cmt_ptr);
          break;
-      case ID_MISF_ERASE_64kByte_SUBSECTOR:
+      case ID_MISF_ERASE_64kByte_SUBSECTOR: //0x83
          mode_misf_erase_64kbyte_subsector(uplink_cmt_ptr);
          break;
       case ID_MISF_WRITE_DEMO:
@@ -70,10 +70,10 @@ void execute_mission(int8 *uplink_cmt_ptr)
          break;
 
       // ___________________ SMF Commands ______________________
-      case ID_SMF_COPY:
+      case ID_SMF_COPY: //0x90
          mode_smf_copy(uplink_cmt_ptr);
          break;
-      case ID_SMF_READ:
+      case ID_SMF_READ: //0x91
          mode_smf_read(uplink_cmt_ptr);
          break;
       case ID_SMF_ERASE:

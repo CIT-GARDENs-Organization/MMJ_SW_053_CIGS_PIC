@@ -25,6 +25,23 @@ typedef union {
 } mcp4901_cmd_t;
 
 
+typedef enum {
+   MCP4901_GAIN_1X,
+   MCP4901_GAIN_2X
+} MCP4901_Gain_t;
+
+typedef enum {
+   MCP4901_SHUTDOWN,
+   MCP4901_NORMAL_OPERATION
+} MCP4901_OperationMode_t;
+
+typedef struct {
+   MCP4901_Gain_t gain;
+   MCP4901_OperationMode_t mode;
+} MCP4901_Config_t;
+
+
+
 // ---------------------- Public API --------------------------
 void mcp4911_init();
 

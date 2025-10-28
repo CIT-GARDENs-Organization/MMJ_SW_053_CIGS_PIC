@@ -258,12 +258,3 @@ enum smf_memory_id{
 #define SMF_IV2_DATA_SIZE    4194304
 
 #endif // SMF_MEMORY_MAP_H
-
-
-
-
-
-
-
-
-

@@ -115,10 +115,44 @@ unsigned int16 calc_curr_value(unsigned int16 data);
 #define ADC_MAX_READING 4095
 #define ADC_CURR_REF_VOLTAGE_MV 1250
 
+#define SWEEP_MAX_STEP 0xFF
+
+typedef enum {
+    CELL1 = 0,
+    CELL2,
+} cell_select_t;
+
+typedef struct {
+    cell_select_t cell;
+    unsigned int16 voltage[SWEEP_MAX_STEP];
+    unsigned int16 current[SWEEP_MAX_STEP];
+    unsigned int16 max_power;
+    unsigned int16 sweep_count;
+} cell_iv_data_t;
+
+typedef struct {
+    unsigned int32 time;
+    unsigned int16 temp_mis7;
+    unsigned int16 temp_py_top;
+    unsigned int16 temp_py_bot;
+    unsigned int16 pd;
+} env_data_t;
+
+typedef struct{
+    cell_iv_data_t cell1_iv_data;
+    cell_iv_data_t cell2_iv_data;
+} sweep_result_t;
+
+typedef struct {
+    int1 cell1;
+    int1 cell2;
+    unsigned int16 curr_limit;
+}sweep_setting_t;
 
 
-
-
+void meas_env_data(env_data_t *env_data_ptr);
+void meas_iv(sweep_setting_t *sweep_config_ptr, sweep_result_t *sweep_result_ptr);
+void save_sweep_result(env_data_t *env_data_ptr, sweep_result_t *sweep_result_ptr);
 
 #endif
 //------------------End of File------------------

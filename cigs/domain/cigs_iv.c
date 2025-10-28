@@ -240,6 +240,8 @@ void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned in
     // Ensure all connections are disabled3
     disconnect_port1();
     disconnect_port2();
+    
+
     log_meas_data(&measured_data, &port1);
     log_meas_data(&measured_data, &port2);
     // misf_update_address_area();
@@ -413,6 +415,8 @@ unsigned int16 calc_pd_value(unsigned int16 data)
     return (unsigned int16)(data);
 }
 
+
+
 int16 calc_curr_value(unsigned int16 data){
     float voltage_mv;
     float current_ma;
@@ -425,4 +429,47 @@ int16 calc_curr_value(unsigned int16 data){
 
     return (int16)current_ma;
 }
+
+
+void meas_env_data(env_data_t *env_data_ptr)
+{
+    env_data_ptr->time        = get_current_sec();
+    env_data_ptr->temp_py_top = ad7490_read(ADC_TEMP_PY_TOP);
+    env_data_ptr->temp_py_bot = ad7490_read(ADC_TEMP_PY_BOT);
+    env_data_ptr->temp_mis7   = ad7490_read(ADC_TEMP_MIS7);
+    env_data_ptr->pd          = ad7490_read(ADC_PD);
+}
+
+void meas_iv(sweep_setting_t *sweep_config_ptr, sweep_result_t *sweep_result_ptr)
+{
+    int16 count = 0;
+    // make IV data
+    while (sweep_config_ptr->cell1 || sweep_config_ptr->cell2)
+    {
+        if (sweep_config_ptr->cell1) {
+            // measure cell 1
+            mcp4901_1_write(count);
+            sweep_result_ptr->cell1_iv_data.voltage[count] = ad7490_read(ADC_CIGS1_VOLT);
+            sweep_result_ptr->cell1_iv_data.current[count] = ad7490_read(ADC_CIGS1_CURR);
+            sweep_result_ptr->cell1_iv_data.sweep_count ++;
+            if (sweep_result_ptr->cell1_iv_data.current[count] < sweep_config_ptr->curr_limit) {
+                sweep_config_ptr->cell1 = 0;  // 閾値到達で測定終了
+            }
+        }
+        if (sweep_config_ptr->cell2) {
+            // measure cell 2
+            mcp4901_2_write(count);
+            sweep_result_ptr->cell2_iv_data.voltage[count] = ad7490_read(ADC_CIGS2_VOLT);
+            sweep_result_ptr->cell2_iv_data.current[count] = ad7490_read(ADC_CIGS2_CURR);
+            sweep_result_ptr->cell2_iv_data.sweep_count ++;
+            if (sweep_result_ptr->cell2_iv_data.current[count] < sweep_config_ptr->curr_limit) {
+                sweep_config_ptr->cell2 = 0;  // 閾値到達で測定終了
+            }
+        }
+    }
+}
+
+
+
+
 // End of file

@@ -11,12 +11,12 @@ void mode_misf_erase_all(int8 parameter[])
 {
    printf("Start Flash Erase All\r\n");
    int8 cmd = parameter[0]; // Get the command ID from the parameter array
-   piclog_make(cmd, 0x00); // Log the command execution
+   piclog_save(cmd, 0x00); // Log the command execution
    
    for (int32 address = MISF_START; address < MISF_END; address += SECTOR_64K_BYTE) {
       sector_erase(mis_fm, address); // Erase each sector
    }
-   piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
+   piclog_save(cmd, PICLOG_PARAM_END); // Log the end of the command execution
    printf("End Flash Erase All\r\n");
 }
 
@@ -31,10 +31,10 @@ void mode_misf_erase_1sector(int8 parameter[])
       ((int32)parameter[4]);
 
    printf("\tSector Address: 0x%08LX\r\n", sector_address);
-   piclog_make(cmd, PICLOG_PARAM_START); // Log the command execution
+   piclog_save(cmd, PICLOG_PARAM_START); // Log the command execution
    
    sector_erase(mis_fm, sector_address);
-   piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
+   piclog_save(cmd, PICLOG_PARAM_END); // Log the end of the command execution
    printf("End Flash Erase 1 Sector\r\n");
 }
 
@@ -48,9 +48,9 @@ void mode_misf_erase_4kbyte_subsector(int8 parameter[])
       ((int32)parameter[3] << 8)  |
       ((int32)parameter[4]);
    printf("\tSubsector Address: 0x%08LX\r\n", subsector_address);
-   piclog_make(cmd, PICLOG_PARAM_START);
+   piclog_save(cmd, PICLOG_PARAM_START);
    subsector_4kByte_erase(mis_fm, subsector_address); // FIX: 固定0消去→指定アドレス
-   piclog_make(cmd, PICLOG_PARAM_END);
+   piclog_save(cmd, PICLOG_PARAM_END);
    printf("End Flash Erase 4kByte Subsector\r\n");
 }
 
@@ -65,17 +65,17 @@ void mode_misf_erase_64kbyte_subsector(unsigned int8 parameter[])
       ((unsigned int32)parameter[4]);
    
    fprintf(PC, "\tSubsector Address: 0x%08LX\r\n", subsector_address);
-   piclog_make(cmd, PICLOG_PARAM_START); // Log the command execution
+   piclog_save(cmd, PICLOG_PARAM_START); // Log the command execution
    
    //subsector_64kByte_erase(mis_fm, subsector_address);
-   piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
+   piclog_save(cmd, PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Erase 64kByte Subsector\r\n");
 }
 
 void mode_misf_write_demo(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Write Demo\r\n");
-   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
+   piclog_save(parameter[0], PICLOG_PARAM_START); // Log the command execution
 
    FLASH_WRITE_PARAM flash_write_param = {0};
    
@@ -93,7 +93,7 @@ void mode_misf_write_demo(unsigned int8 parameter[])
    fprintf(PC, "\tAddress  : 0x%08LX\r\n", flash_write_param.writeaddress);
    fprintf(PC, "\tPacketNum: 0x%04LX\r\n", flash_write_param.packetnum);
 
-   piclog_make(flash_write_param.id, 0x00); // Log the command execution
+   piclog_save(flash_write_param.id, 0x00); // Log the command execution
    
    unsigned int8 writedata[64];
    unsigned int16 p; // packet index
@@ -114,20 +114,20 @@ void mode_misf_write_demo(unsigned int8 parameter[])
       // FLASH 終端チェック (MISF_END は最終アドレス想定: inclusive)
       if(current_address > MISF_END){
          fprintf(PC, "\r\n[FLASH] Write address 0x%08LX exceeds device end 0x%08LX -> abort\r\n", current_address, (unsigned int32)MISF_END);
-         piclog_make(flash_write_param.id, PICLOG_PARAM_END);
+         piclog_save(flash_write_param.id, PICLOG_PARAM_END);
          break;
       }
       if(current_address + (PACKET_SIZE - 1) > MISF_END){
          unsigned int32 remain = (MISF_END - current_address) + 1; // 書込可能残り
          fprintf(PC, "\r\n[FLASH] Reached end. Partial write %lu bytes (packet truncated).\r\n", remain);
          write_data_bytes(mis_fm, current_address, writedata, (unsigned int16)remain);
-         piclog_make(flash_write_param.id, PICLOG_PARAM_END);
+         piclog_save(flash_write_param.id, PICLOG_PARAM_END);
          break;
       }
       write_data_bytes(mis_fm, current_address, writedata, PACKET_SIZE);
    }
 
-   piclog_make(flash_write_param.id, PICLOG_PARAM_END); // Log the end of the command execution
+   piclog_save(flash_write_param.id, PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "\r\n");
    fprintf(PC, "End Flash Write Demo\r\n");
 }
@@ -135,12 +135,12 @@ void mode_misf_write_demo(unsigned int8 parameter[])
 void mode_misf_write_4kbyte_subsector(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Write 4kByte Subsector\r\n");
-   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
+   piclog_save(parameter[0], PICLOG_PARAM_START); // Log the command execution
    flash_setting(mis_fm);
    unsigned int32 write_address = 0x00000000;
    //int8 write_data[256] = {0x01, 0x02, 0x03, 0x04}; // Example data
    //write_data_bytes(mis_fm, write_address, write_data, 256);
-   piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
+   piclog_save(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Write 4kByte Subsector\r\n");
 }
 
@@ -160,12 +160,12 @@ void mode_misf_read(unsigned int8 *uplinkcmd_ptr)
    flash_param.readpacketnum = 
       ((unsigned int16)uplinkcmd_ptr[6] << 8) |
       ((unsigned int16)uplinkcmd_ptr[7]);
-      piclog_make(flash_param.id, PICLOG_PARAM_START); // Log the command execution
+      piclog_save(flash_param.id, PICLOG_PARAM_START); // Log the command execution
    fprintf(PC, "\tMODE     : %02X\r\n", flash_param.id);
    fprintf(PC, "\tAddress  : 0x%08LX\r\n", flash_param.readaddress);
    fprintf(PC, "\tPacketNum: 0x%04LX\r\n", flash_param.readpacketnum);
    
-   piclog_make(flash_param.id, 0x00);
+   piclog_save(flash_param.id, 0x00);
    
 
    unsigned int8 readdata[PACKET_SIZE] = {0x00}; // Initialize read data buffer
@@ -174,7 +174,7 @@ void mode_misf_read(unsigned int8 *uplinkcmd_ptr)
 
    if(is_connect(mis_fm) == FALSE) {
       fprintf(PC, "Mission Flash is not connected\r\n");
-      piclog_make(flash_param.id, PICLOG_PARAM_END);
+      piclog_save(flash_param.id, PICLOG_PARAM_END);
       return; // FIX: 接続失敗時終了
    }
 
@@ -202,7 +202,7 @@ void mode_misf_read(unsigned int8 *uplinkcmd_ptr)
       }
       fprintf(PC,"\r\n");
    }
-   piclog_make(flash_param.id, PICLOG_PARAM_END); // Log the end of the command execution
+   piclog_save(flash_param.id, PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Read\r\n");
 }
 
@@ -221,7 +221,7 @@ void mode_misf_read_address(unsigned int8 parameter[])
 void mode_misf_erase_and_reset(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Erase and Reset\r\n");
-   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
+   piclog_save(parameter[0], PICLOG_PARAM_START); // Log the command execution
 
    mode_misf_erase_all(parameter); // Erase all flash memory
    mode_misf_address_reset(parameter); // Reset the address area
@@ -299,7 +299,7 @@ void mode_smf_erase(unsigned int8 parameter[])
 void mode_misf_address_reset(unsigned int8 parameter[])
 {
    fprintf(PC, "Start Flash Address Reset\r\n");
-   piclog_make(parameter[0], PICLOG_PARAM_START); 
+   piclog_save(parameter[0], PICLOG_PARAM_START); 
    FlashData_t flash_data;
    memset(flash_data.bytes, 0, PACKET_SIZE);
    /*
@@ -323,7 +323,7 @@ void mode_misf_address_reset(unsigned int8 parameter[])
    misf_init(); // Update the address area after writing
 
 
-   piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
+   piclog_save(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
    fprintf(PC, "End Flash Address Reset\r\n");
 }
 
@@ -346,7 +346,7 @@ void mode_smf_read_force(int8 parameter[])
       return;
    }
    printf("Start Flash SMF Read Force\r\n");
-   piclog_make(parameter[0], PICLOG_PARAM_START); // Log the command execution
+   piclog_save(parameter[0], PICLOG_PARAM_START); // Log the command execution
 
    // 統合管理システムからキューに追加
    // enqueue_read_data(address, packet_num * PACKET_SIZE);
@@ -366,34 +366,34 @@ void mode_smf_read_force(int8 parameter[])
    }
 
    printf("\r\nEnd Flash SMF Read Force\r\n");
-   piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
+   piclog_save(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
 }
 
 void mode_smf_erase_force(int8 parameter[])
 {
    printf("Start SMF Erase All\r\n");
    int8 cmd = parameter[0]; // Get the command ID from the parameter array
-   piclog_make(cmd, 0x00); // Log the command execution
+   piclog_save(cmd, 0x00); // Log the command execution
    
 
    
    for (int32 address = CIGS_DATA_TABLE_START_ADDRESS; address < CIGS_IV2_DATA_END_ADDRESS; address += SECTOR_64K_BYTE) {
       sector_erase(smf, address); // Erase each sector
    }
-   piclog_make(cmd, PICLOG_PARAM_END); // Log the end of the command execution
+   piclog_save(cmd, PICLOG_PARAM_END); // Log the end of the command execution
    printf("End SMF Erase All\r\n");
 }
 
 void mode_smf_address_reset(int8 parameter[])
 {
    printf("Start SMF Reset\r\n");
-   piclog_make(parameter[0], PICLOG_PARAM_START);
+   piclog_save(parameter[0], PICLOG_PARAM_START);
    int8 writedata[PACKET_SIZE] = {0x00}; 
    for (int32 address = CIGS_DATA_TABLE_START_ADDRESS; address < CIGS_IV2_DATA_END_ADDRESS; address += SECTOR_64K_BYTE) {
       sector_erase(smf, address); // Erase each sector
    }
    smf_data_table_init(); // Update the address area after writing
 
-   piclog_make(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
+   piclog_save(parameter[0], PICLOG_PARAM_END); // Log the end of the command execution
    printf("End SMF Reset\r\n");
 }
