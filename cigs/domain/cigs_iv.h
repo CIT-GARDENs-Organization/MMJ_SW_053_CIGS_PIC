@@ -20,7 +20,7 @@ void make_meas_header(unsigned int8 *packetdata, unsigned int8 *cmd);
 
 
 // void sweep(unsigned int8 parameter[]);
-void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned int16 pd_threshold);
+void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned int16 pd_limit);  
 void test_sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit);
 
 typedef struct{
@@ -61,7 +61,7 @@ typedef struct {
 typedef struct{
     unsigned int8 port_num; 
     unsigned int16 sweep_step;
-    unsigned int8 data_buffer[0x200];
+    unsigned int8 data_buffer[0x300];
     int1 active;
 } sweep_config_t;
 
@@ -88,7 +88,7 @@ typedef union{
         unsigned int8 start_marker;
         unsigned int32 time_sec;
         unsigned int8 time_msec;
-        meas_data_t env_data[2];
+        unsigned int8 envdata[6];
         unsigned int8 ivdata[PACKET_IV_HEADER_SIZE];
         unsigned int8 crc;
     }header;
@@ -98,11 +98,10 @@ typedef union{
     }data;
 } iv_data_packet_t;
 
-
+    
 
 iv_env_t create_meas_data();
-void log_meas_data(iv_env_t *environment_data_ptr, sweep_config_t *port_data);
-void log_meas_data_with_print(iv_env_t *environment_data_ptr, sweep_config_t *port_data);
+void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr);
 
 void sweep_with_print();
 

@@ -73,5 +73,22 @@ int32 get_piclog_used_size_msb(void);
 SMF_PARTITION* get_smf_partition_by_mission_id(int8 mission_id);
 void update_smf_partition_by_mission_id(int8 mission_id, int32 used_size, int32 loop_counter);
 
+void smf_update_smf_area(void);
+
+typedef union{
+    unsigned int8 bytes[PACKET_SIZE];
+    struct {
+        unsigned int32 piclog_used_size;
+        unsigned int32 envero_used_size;
+        unsigned int32 iv1_header_used_size;
+        unsigned int32 iv1_data_used_size;
+        unsigned int32 iv2_header_used_size;
+        unsigned int32 iv2_data_used_size;
+        unsigned int32 reserved[9];
+    } fields;
+
+}smf_address_header_t;
+
+
 
 #endif  // MMJ_CIGS_SMF_H

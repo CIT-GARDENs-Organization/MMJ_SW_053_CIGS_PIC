@@ -371,5 +371,12 @@ void smf_erase(FlashOperationStruct *smf_data)
 
 
 
+void smf_update_address_area()
+{
+    smf_address_header_t smf_data_table;
+    unsigned int8 buffer[PACKET_SIZE];
 
+    // Read existing SMF address area
+    read_data_bytes(smf, CIGS_DATA_TABLE_START_ADDRESS, buffer, PACKET_SIZE);
+}
 // End of file

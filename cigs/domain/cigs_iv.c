@@ -24,6 +24,7 @@ void sweep_with_print()
     port1.port_num = 1;
     port1.sweep_step = 0;
     port1.active = 1;
+    // unsigned int8 ivdata[256];
 
     // Init Port2
     sweep_debug_config_t port2 = {0};
@@ -167,144 +168,10 @@ void test_sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit)
 
 }
 
-void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned int16 pd_limit)
-{
-    unsigned int32 start_time_ms = get_current_sec();
-    fputc('.', PC);
-    // Enable both CIGS ports
-    connect_port1();
-    connect_port2();
-
-    delay_ms(100);
-
-    // Init Port1
-    sweep_config_t port1 = {0};
-    port1.port_num = 1;
-    port1.sweep_step = 0;
-    port1.active = 1;
-
-    // Init Port2
-    sweep_config_t port2 = {0};
-    port2.port_num = 2;
-    port2.sweep_step = 0;
-    port2.active = 1;
-
-    int16 count = 0;
-    
-    // Initialize DACs to 0
-    mcp4901_1_write(1);
-    mcp4901_2_write(1);
-
-    unsigned int16 volt;
-    unsigned int16 curr;
-    iv_env_t measured_data = create_meas_data();
-    while (port1.active || port2.active)
-    {
-        mcp4901_1_write(count);
-        mcp4901_2_write(count);
-        delay_us(10); 
-        if (port1.active) {
-            volt = ad7490_read(ADC_CIGS1_AMP);
-            curr = ad7490_read(ADC_CIGS1_CURR);
-            // ad7490_read_2port(ADC_CIGS1_AMP, ADC_CIGS1_CURR, &volt, &curr);
-            // fprintf(PC, "%04LX,%04LX,", volt, curr);
-            port1.data_buffer[count*3]= (volt  >> 4) & 0xFF;
-            port1.data_buffer[count*3+1]= ((volt & 0x0F) << 4) | ((curr >> 8) & 0x0F);
-            port1.data_buffer[count*3+2]= curr & 0xFF;
-            port1.sweep_step = count + 1; 
-            // fprintf(PC, "%04LX,%04LX,", port1.data_buffer[count].voltage, port1.data_buffer[count].current);
-            if (curr< curr_limit) {
-                port1.active = 0;
-                disconnect_port1();
-            }
-        }
-        if (port2.active) {
-            volt = ad7490_read(ADC_CIGS2_AMP);
-            curr = ad7490_read(ADC_CIGS2_CURR);
-            port2.data_buffer[count*3]= (volt  >> 4) & 0xFF;
-            port2.data_buffer[count*3+1]= ((volt & 0x0F) << 4) | ((curr >> 8) & 0x0F);
-            port2.data_buffer[count*3+2]= curr & 0xFF;
-            port2.sweep_step = count + 1;
-            if (curr < curr_limit) {
-                port2.active = 0;
-                disconnect_port2();
-            } 
-        }
-        count++;
-        if (count >= 255) {
-            // fprintf(PC, "Maximum step count reached: %ld\r\n", count);
-            break;
-        }
-    }
-    // unsigned int32 end_time_ms = get_current_msec();
-    // Ensure all connections are disabled3
-    disconnect_port1();
-    disconnect_port2();
-    log_meas_data(&measured_data, &port1);
-    log_meas_data(&measured_data, &port2);
-    // misf_update_address_area();
-    unsigned int32 end_time_ms = get_current_msec();
-    unsigned int32 elapsed_time_ms = end_time_ms - start_time_ms;
-}
-
-
-void sweep_port1(unsigned int16 curr_limit)
-{
-    unsigned int32 start_time_ms = get_current_sec();
-    fputc('.', PC);
-    // Enable both CIGS ports
-    connect_port1();
-
-    // Init Port1
-    sweep_config_t port1 = {0};
-    port1.port_num = 1;
-    port1.sweep_step = 0;
-    port1.active = 1;
-
-    int16 count = 0;
-    
-    // Initialize DACs to 0
-    mcp4901_1_write(1);
-    unsigned int16 volt;
-    unsigned int16 curr;
-    iv_env_t measured_data = create_meas_data();
-    while (port1.active)
-    {
-        mcp4901_1_write(count);
-        // mcp4901_2_write(count);
-        delay_us(1); 
-        if (port1.active) {
-            volt = ad7490_read(ADC_CIGS1_AMP);
-            curr = ad7490_read(ADC_CIGS1_CURR);
-            // ad7490_read_2port(ADC_CIGS1_AMP, ADC_CIGS1_CURR, &volt, &curr);
-            // fprintf(PC, "%04LX,%04LX,", volt, curr);
-            port1.data_buffer[count*3]= (volt  >> 4) & 0xFF;
-            port1.data_buffer[count*3+1]= ((volt & 0x0F) << 4) | ((curr >> 8) & 0x0F);
-            port1.data_buffer[count*3+2]= curr & 0xFF;
-            port1.sweep_step = count + 1; 
-            // fprintf(PC, "%04LX,%04LX,", port1.data_buffer[count].voltage, port1.data_buffer[count].current);
-            if (curr< curr_limit) {
-                port1.active = 0;
-                disconnect_port1();
-            }
-        }
-        count++;
-        if (count >= 255) {
-            // fprintf(PC, "Maximum step count reached: %ld\r\n", count);
-            break;
-        }
-    }
-    // unsigned int32 end_time_ms = get_current_msec();
-    // Ensure all connections are disabled3
-    disconnect_port1();
-    log_meas_data(&measured_data, &port1);
-}
-
-
-
-
 void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
 {
+    unsigned int8 port = port_data_ptr->port_num;
+    fprintf(PC,"PORT%u\r\n", port);
     iv_data_packet_t data_packet = {0};
     iv_data_packet_t *data_packet_ptr = &data_packet;
 
@@ -315,17 +182,17 @@ void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
     data_packet.header.time_msec = (unsigned int8)((measured_data_ptr->time >> 4) & 0xFF);
 
     // 環境データの設定
-    data_packet.header.env_data[0].data[0] = (measured_data_ptr->pd >> 4) & 0xFF;
-    data_packet.header.env_data[0].data[1] =
+    data_packet.header.envdata[0] = (measured_data_ptr->pd >> 4) & 0xFF;
+    data_packet.header.envdata[1] =
         ((measured_data_ptr->pd & 0x0F) << 4) |
         ((measured_data_ptr->temp_py_top >> 8) & 0x0F);
-    data_packet.header.env_data[0].data[2] = measured_data_ptr->temp_py_top & 0xFF;
+    data_packet.header.envdata[2] = measured_data_ptr->temp_py_top & 0xFF;
 
-    data_packet.header.env_data[1].data[0] = (measured_data_ptr->temp_py_bot >> 4) & 0xFF;
-    data_packet.header.env_data[1].data[1] =
+    data_packet.header.envdata[3] = (measured_data_ptr->temp_py_bot >> 4) & 0xFF;
+    data_packet.header.envdata[4] =
         ((measured_data_ptr->temp_py_bot & 0x0F) << 4) |
         ((measured_data_ptr->temp_mis7 >> 8) & 0x0F);
-    data_packet.header.env_data[1].data[2] = measured_data_ptr->temp_mis7 & 0xFF;
+    data_packet.header.envdata[5] = measured_data_ptr->temp_mis7 & 0xFF;
 
     // I-Vデータの設定
     for (unsigned int8 i = 0; i < IV_HEADER_SIZE; i++) {
@@ -393,6 +260,146 @@ void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
 
     misf_update_address_area(); // 必要なら有効化
 }
+
+void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned int16 pd_limit)
+{
+    unsigned int32 start_time_ms = get_current_sec();
+    fputc('.', PC);
+    // Enable both CIGS ports
+    connect_port1();
+    connect_port2();
+
+    delay_ms(100);
+
+    // Init Port1
+    sweep_config_t port1 = {0};
+    sweep_config_t *port1_ptr = &port1;
+    port1_ptr->port_num = 1;
+    port1_ptr->sweep_step = 0;
+    port1_ptr->active = 1;
+
+    fprintf(PC,"PORT1, %u\r\n", port1_ptr->port_num);
+
+    // Init Port2
+    sweep_config_t port2 = {0};
+    sweep_config_t *port2_ptr = &port2;
+    port2_ptr->port_num = 2;
+    port2_ptr->sweep_step = 0;
+    port2_ptr->active = 1;
+
+    fprintf(PC,"PORT2, %u\r\n", port2_ptr->port_num);
+    int16 count = 0;
+    
+    // Initialize DACs to 0
+    mcp4901_1_write(1);
+    mcp4901_2_write(1);
+
+    unsigned int16 volt;
+    unsigned int16 curr;
+    iv_env_t measured_data = create_meas_data();
+    iv_env_t *measured_data_ptr = &measured_data;   
+
+    while (port1.active || port2.active)
+    {
+        mcp4901_1_write(count);
+        mcp4901_2_write(count);
+        delay_us(10); 
+        if (port1.active) {
+            volt = ad7490_read(ADC_CIGS1_AMP);
+            curr = ad7490_read(ADC_CIGS1_CURR);
+            // ad7490_read_2port(ADC_CIGS1_AMP, ADC_CIGS1_CURR, &volt, &curr);
+            // fprintf(PC, "%04LX,%04LX,", volt, curr);
+            port1.data_buffer[count*3]= (volt  >> 4) & 0xFF;
+            port1.data_buffer[count*3+1]= ((volt & 0x0F) << 4) | ((curr >> 8) & 0x0F);
+            port1.data_buffer[count*3+2]= curr & 0xFF;
+            port1.sweep_step = count + 1; 
+            // fprintf(PC, "%04LX,%04LX,", port1.data_buffer[count].voltage, port1.data_buffer[count].current);
+            if (curr< curr_limit) {
+                port1.active = 0;
+                disconnect_port1();
+            }
+        }
+        if (port2.active) {
+            volt = ad7490_read(ADC_CIGS2_AMP);
+            curr = ad7490_read(ADC_CIGS2_CURR);
+            port2.data_buffer[count*3]= (volt  >> 4) & 0xFF;
+            port2.data_buffer[count*3+1]= ((volt & 0x0F) << 4) | ((curr >> 8) & 0x0F);
+            port2.data_buffer[count*3+2]= curr & 0xFF;
+            port2.sweep_step = count + 1;
+            if (curr < curr_limit) {
+                port2.active = 0;
+                disconnect_port2();
+            } 
+        }
+        count++;
+        if (count >= 255) {
+            // fprintf(PC, "Maximum step count reached: %ld\r\n", count);
+            break;
+        }
+    }
+    // unsigned int32 end_time_ms = get_current_msec();
+    // Ensure all connections are disabled3
+    disconnect_port1();
+    disconnect_port2();
+    log_meas_data(measured_data_ptr, port1_ptr);
+    log_meas_data(measured_data_ptr, port2_ptr);
+}
+
+
+void sweep_port1(unsigned int16 curr_limit)
+{
+    unsigned int32 start_time_ms = get_current_sec();
+    fputc('.', PC);
+    // Enable both CIGS ports
+    connect_port1();
+
+    // Init Port1
+    sweep_config_t port1 = {0};
+    port1.port_num = 1;
+    port1.sweep_step = 0;
+    port1.active = 1;
+
+    int16 count = 0;
+    
+    // Initialize DACs to 0
+    mcp4901_1_write(1);
+    unsigned int16 volt;
+    unsigned int16 curr;
+    iv_env_t measured_data = create_meas_data();
+    while (port1.active)
+    {
+        mcp4901_1_write(count);
+        // mcp4901_2_write(count);
+        delay_us(1); 
+        if (port1.active) {
+            volt = ad7490_read(ADC_CIGS1_AMP);
+            curr = ad7490_read(ADC_CIGS1_CURR);
+            // ad7490_read_2port(ADC_CIGS1_AMP, ADC_CIGS1_CURR, &volt, &curr);
+            // fprintf(PC, "%04LX,%04LX,", volt, curr);
+            port1.data_buffer[count*3]= (volt  >> 4) & 0xFF;
+            port1.data_buffer[count*3+1]= ((volt & 0x0F) << 4) | ((curr >> 8) & 0x0F);
+            port1.data_buffer[count*3+2]= curr & 0xFF;
+            port1.sweep_step = count + 1; 
+            // fprintf(PC, "%04LX,%04LX,", port1.data_buffer[count].voltage, port1.data_buffer[count].current);
+            if (curr< curr_limit) {
+                port1.active = 0;
+                disconnect_port1();
+            }
+        }
+        count++;
+        if (count >= 255) {
+            // fprintf(PC, "Maximum step count reached: %ld\r\n", count);
+            break;
+        }
+    }
+    // unsigned int32 end_time_ms = get_current_msec();
+    // Ensure all connections are disabled3
+    disconnect_port1();
+    log_meas_data(&measured_data, &port1);
+}
+
+
+
 
 iv_env_t create_meas_data()
 {
