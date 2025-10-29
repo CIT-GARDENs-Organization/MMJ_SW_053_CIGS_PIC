@@ -61,7 +61,7 @@ typedef struct {
 typedef struct{
     unsigned int8 port_num; 
     unsigned int16 sweep_step;
-    unsigned int8 data_buffer[0x200];
+    unsigned int8 data_buffer[0x300];
     int1 active;
 } sweep_config_t;
 
