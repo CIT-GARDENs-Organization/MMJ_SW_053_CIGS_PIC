@@ -85,7 +85,7 @@ typedef struct
 typedef union{
     unsigned int8 raw[PACKET_SIZE];
     struct {
-        unsigned int8 start_marker;
+        unsigned int8  start_marker;
         unsigned int32 time_sec;
         unsigned int8 time_msec;
         unsigned int8 envdata[6];

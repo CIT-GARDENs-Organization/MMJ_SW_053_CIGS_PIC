@@ -45,8 +45,8 @@ void print_misf_counter_status(int8 mission_id);
 
 // SMF Partition Header
 typedef struct {
-    int32 used_size;
-    int32 reserved;
+    int32 misf_used_size;
+    int32 smf_copied_size;
 } SMF_PARTITION;
 
 
@@ -63,11 +63,6 @@ typedef union {
 
 void smf_write_header(smf_data_table_t *smf_data_table);
 void print_smf_counter_status(smf_data_table_t *smf_data_table);
-
-// MSB形式でpartition_headerに値を設定する関数（piclog等必要分のみ）
-void set_piclog_used_size_msb(int32 value);
-int32 get_piclog_used_size_msb(void);
-// 旧 data_table/meas 互換マクロは削除（不要）
 
 // mission_idから対応するSMF_PARTITIONを取得する関数
 SMF_PARTITION* get_smf_partition_by_mission_id(int8 mission_id);

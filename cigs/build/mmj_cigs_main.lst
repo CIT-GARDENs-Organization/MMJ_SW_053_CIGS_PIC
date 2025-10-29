@@ -1,4 +1,4 @@
-CCS PCH C Compiler, Version 5.104, 57077               29-10-25 15:56
+CCS PCH C Compiler, Version 5.104, 57077               29-10-25 17:24
 
                Filename:   c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\build\mmj_cigs_main.lst
 
@@ -4236,10 +4236,10 @@ CCS PCH C Compiler, Version 5.104, 57077               29-10-25 15:56
 0222E:  DATA 63,74
 02230:  DATA 2D,32
 02232:  DATA 35,00
-02234:  DATA 31,35
-02236:  DATA 3A,35
-02238:  DATA 36,3A
-0223A:  DATA 31,38
+02234:  DATA 31,37
+02236:  DATA 3A,32
+02238:  DATA 34,3A
+0223A:  DATA 30,30
 0223C:  DATA 00,00
 0223E:  DATA 5F,5F
 02240:  DATA 5F,5F
@@ -7906,7 +7906,7 @@ CCS PCH C Compiler, Version 5.104, 57077               29-10-25 15:56
 .................... typedef union{
 ....................     unsigned int8 raw[PACKET_SIZE];
 ....................     struct {
-....................         unsigned int8 start_marker;
+....................         unsigned int8  start_marker;
 ....................         unsigned int32 time_sec;
 ....................         unsigned int8 time_msec;
 ....................         unsigned int8 envdata[6];
@@ -8545,11 +8545,6 @@ CCS PCH C Compiler, Version 5.104, 57077               29-10-25 15:56
 .................... 
 .................... void smf_write_header(smf_data_table_t *smf_data_table);
 .................... void print_smf_counter_status(smf_data_table_t *smf_data_table);
-.................... 
-.................... // MSB形式でpartition_headerに値を設定する関数（piclog等必要分のみ）
-.................... void set_piclog_used_size_msb(int32 value);
-.................... int32 get_piclog_used_size_msb(void);
-.................... // 旧 data_table/meas 互換マクロは削除（不要）
 .................... 
 .................... // mission_idから対応するSMF_PARTITIONを取得する関数
 .................... SMF_PARTITION* get_smf_partition_by_mission_id(int8 mission_id);
@@ -15805,7 +15800,7 @@ CCS PCH C Compiler, Version 5.104, 57077               29-10-25 15:56
 .................... typedef union{
 ....................     unsigned int8 raw[PACKET_SIZE];
 ....................     struct {
-....................         unsigned int8 start_marker;
+....................         unsigned int8  start_marker;
 ....................         unsigned int32 time_sec;
 ....................         unsigned int8 time_msec;
 ....................         unsigned int8 envdata[6];
@@ -27082,11 +27077,6 @@ CCS PCH C Compiler, Version 5.104, 57077               29-10-25 15:56
 .................... void smf_write_header(smf_data_table_t *smf_data_table);
 .................... void print_smf_counter_status(smf_data_table_t *smf_data_table);
 .................... 
-.................... // MSB形式でpartition_headerに値を設定する関数（piclog等必要分のみ）
-.................... void set_piclog_used_size_msb(int32 value);
-.................... int32 get_piclog_used_size_msb(void);
-.................... // 旧 data_table/meas 互換マクロは削除（不要）
-.................... 
 .................... // mission_idから対応するSMF_PARTITIONを取得する関数
 .................... SMF_PARTITION* get_smf_partition_by_mission_id(int8 mission_id);
 .................... void update_smf_partition_by_mission_id(int8 mission_id, int32 used_size, int32 loop_counter);
@@ -34903,11 +34893,6 @@ CCS PCH C Compiler, Version 5.104, 57077               29-10-25 15:56
 .................... void smf_write_header(smf_data_table_t *smf_data_table);
 .................... void print_smf_counter_status(smf_data_table_t *smf_data_table);
 .................... 
-.................... // MSB形式でpartition_headerに値を設定する関数（piclog等必要分のみ）
-.................... void set_piclog_used_size_msb(int32 value);
-.................... int32 get_piclog_used_size_msb(void);
-.................... // 旧 data_table/meas 互換マクロは削除（不要）
-.................... 
 .................... // mission_idから対応するSMF_PARTITIONを取得する関数
 .................... SMF_PARTITION* get_smf_partition_by_mission_id(int8 mission_id);
 .................... void update_smf_partition_by_mission_id(int8 mission_id, int32 used_size, int32 loop_counter);
@@ -35069,7 +35054,7 @@ CCS PCH C Compiler, Version 5.104, 57077               29-10-25 15:56
 .................... typedef union{
 ....................     unsigned int8 raw[PACKET_SIZE];
 ....................     struct {
-....................         unsigned int8 start_marker;
+....................         unsigned int8  start_marker;
 ....................         unsigned int32 time_sec;
 ....................         unsigned int8 time_msec;
 ....................         unsigned int8 envdata[6];
@@ -36903,7 +36888,7 @@ CCS PCH C Compiler, Version 5.104, 57077               29-10-25 15:56
 .................... typedef union{
 ....................     unsigned int8 raw[PACKET_SIZE];
 ....................     struct {
-....................         unsigned int8 start_marker;
+....................         unsigned int8  start_marker;
 ....................         unsigned int32 time_sec;
 ....................         unsigned int8 time_msec;
 ....................         unsigned int8 envdata[6];
@@ -40800,7 +40785,7 @@ CCS PCH C Compiler, Version 5.104, 57077               29-10-25 15:56
 .................... typedef union{
 ....................     unsigned int8 raw[PACKET_SIZE];
 ....................     struct {
-....................         unsigned int8 start_marker;
+....................         unsigned int8  start_marker;
 ....................         unsigned int32 time_sec;
 ....................         unsigned int8 time_msec;
 ....................         unsigned int8 envdata[6];

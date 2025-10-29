@@ -9,21 +9,21 @@ enabled=0
 chip=1
 D1=
 V1=
-buildcount=1031
+buildcount=1034
 
 [fileformats]
 forcecoff=0
-debug=4
+debug=0
 error=2
 object=0
 list=0
 scratch=0
-sta=1
-tre=1
+sta=0
+tre=0
 expandtree=0
 allerrors=1
 allwarnings=1
-stayupne=3
+stayupne=0
 stayupoe=0
 
 [PROJECT]
@@ -65,10 +65,10 @@ t1=1
 2=device_driver\ad7490_driver.c
 t2=1
 3=device_driver\mcp4901_driver.c
-t3=29
-4=domain\mmj_cigs_iv.c
-t4=29
-Count=14
+t3=1
+4=hal\gpio.c
+t4=1
+Count=4
 5=domain\mmj_cigs_piclog.c
 t5=1
 6=domain\mmj_cigs_smf.c
