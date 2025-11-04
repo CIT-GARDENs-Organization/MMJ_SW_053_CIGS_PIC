@@ -176,7 +176,7 @@ meas_iv_param_t make_meas_iv_cmd(int8 *uplinkcmd_ptr)
    cmd.log_threshold = (unsigned int16)uplinkcmd_ptr[3]<< 4;
    cmd.sweep_limit = (unsigned int16)uplinkcmd_ptr[4]<< 4;
    cmd.pd_threshold = (unsigned int16)uplinkcmd_ptr[5]<< 4;
-   cmd.meas_time = (unsigned int16)uplinkcmd_ptr[6] *60; // 分 -> 秒
+   cmd.meas_time = (unsigned int16)uplinkcmd_ptr[6] ; 
    return cmd;
 }
 
