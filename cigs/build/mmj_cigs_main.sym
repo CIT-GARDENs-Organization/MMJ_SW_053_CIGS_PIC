@@ -324,29 +324,21 @@
 1D4     @MUL3232.@SCRATCH4
 1D5     @MUL3232.@SCRATCH5
 1D6     @MUL3232.@SCRATCH6
-1DF-1E0 clear_receive_signal.receive_signal
 1DF-1E0 print_meas_iv_cmd.cmd_ptr
 1DF-1E0 sweep.curr_threshold
-1DF     transmit_command.frame_id
 1DF-1E0 enqueue_flash_operation.data
 1DF     mode_meas_iv.@SCRATCH1
-1E0-1E1 transmit_command.content
 1E0     mode_meas_iv.@SCRATCH2
 1E1-1E2 sweep.curr_limit
-1E1     enqueue_flash_operation.next_tail
-1E1-1E2 clear_receive_signal.receive_signal_size
 1E1-1E2 print_meas_iv_cmd.pd_value
+1E1     enqueue_flash_operation.next_tail
 1E1     mode_meas_iv.@SCRATCH3
-1E2     transmit_command.size
 1E2     enqueue_flash_operation.@SCRATCH1
 1E2     mode_meas_iv.@SCRATCH4
+1E3-1E4 sweep.pd_limit
 1E3-1EA smf_read.smf_address
 1E3-1E4 print_meas_iv_cmd.sweep_limit
-1E3-1F2 transmit_command.data
-1E3-1E4 sweep.pd_limit
-1E3     clear_receive_signal.@SCRATCH1
 1E3     enqueue_flash_operation.@SCRATCH2
-1E4     clear_receive_signal.@SCRATCH2
 1E4     enqueue_flash_operation.@SCRATCH3
 1E5-1E6 print_meas_iv_cmd.log_threshold
 1E5-1E8 sweep.start_time_ms
@@ -357,9 +349,9 @@
 1E7     enqueue_flash_operation.@SCRATCH6
 1E7     print_meas_iv_cmd.@SCRATCH1
 1E8     print_meas_iv_cmd.@SCRATCH2
+1E9-1EA calc_curr_value.data
 1E9-1EA @PRINTF_LU_9600_31781_31772.P1
 1E9-4EC sweep.port1
-1E9-1EA calc_curr_value.data
 1E9-1EA calc_pd_value.data
 1EB-1EE calc_curr_value.voltage_mv
 1EB-1EE smf_read.read_address
@@ -367,62 +359,52 @@
 1EC     @PRINTF_LU_9600_31781_31772.@SCRATCH2
 1ED     @PRINTF_LU_9600_31781_31772.@SCRATCH3
 1EE     @PRINTF_LU_9600_31781_31772.@SCRATCH4
-1EF-1F2 calc_curr_value.current_ma
 1EF-1F2 smf_read.read_size
+1EF-1F2 calc_curr_value.current_ma
 1EF     @PRINTF_LU_9600_31781_31772.@SCRATCH5
 1F0     @PRINTF_LU_9600_31781_31772.@SCRATCH6
 1F1-1F4 mode_smf_address_reset.address
 1F1     @PRINTF_LU_9600_31781_31772.@SCRATCH7
 1F2     make_meas_iv_cmd.@SCRATCH1
-1F3-1F6 smf_read.mission_remaining
 1F3-1F6 @ADDFF.P1
-1F3     transmit_command.payload_size
+1F3-1F6 smf_read.mission_remaining
 1F3-1F4 @ITOF.P1
 1F3-1F6 @SFTOI.P2
 1F3     calc_curr_value.@SCRATCH1
 1F3     make_meas_iv_cmd.@SCRATCH2
-1F4     transmit_command.data_size
 1F4     calc_curr_value.@SCRATCH2
-1F5-1F6 transmit.data
 1F5-1F8 sector_erase.flash_stream
 1F5-1F8 smf_data_table_init.address
-1F5     transmit_command.@SCRATCH1
 1F5     calc_curr_value.@SCRATCH3
 1F5     mode_smf_address_reset.@SCRATCH1
-1F6     transmit_command.@SCRATCH2
 1F6     calc_curr_value.@SCRATCH4
-1F7-1FA @DIVFF.P1
 1F7-1FA smf_read.end_address
-1F7-1FA @MULFF.P1
-1F7     mode_smf_read.i
-1F7-1F8 mode_smf_read_force.packet_count
-1F7     transmit.data_size
 1F7-1FA @ADDFF.P1
-1F7     transmit_command.@SCRATCH3
+1F7     mode_smf_read.i
+1F7-1FA @DIVFF.P1
+1F7-1FA @MULFF.P2
+1F7-1F8 mode_smf_read_force.packet_count
 1F8-1F9 mode_misf_write_demo.p
-1F8     transmit.i
 1F8-1FB mode_misf_read.read_address
 1F8     mode_smf_read.@SCRATCH1
-1F9     transmit.i
-1F9-1FC mode_smf_read_force.current_address
-1F9-1FC sector_erase.sector_address
 1F9-238 smf_data_table_init.smf_data_table
+1F9-1FC sector_erase.sector_address
+1F9-1FC mode_smf_read_force.current_address
 1F9     mode_smf_read.@SCRATCH2
 1FA-1FB mode_misf_write_demo.base_value
-1FA     transmit.@SCRATCH1
 1FA     mode_smf_read.@SCRATCH3
 1FB-1FE smf_read.addr
 1FB-1FE @DIVFF.P1
 1FB-1FE @MULFF.P2
 1FB     @ADDFF.@SCRATCH1
 1FB     mode_smf_read.@SCRATCH4
-1FC-1FF mode_misf_read.packetcount
 1FC     mode_misf_write_demo.i
+1FC-1FF mode_misf_read.packetcount
 1FC     @ADDFF.@SCRATCH2
 1FC     mode_smf_read.@SCRATCH5
 1FD-200 mode_misf_write_demo.current_address
-1FD     mode_smf_read_force.byte_count
 1FD     sector_erase.write_enable_cmd
+1FD     mode_smf_read_force.byte_count
 1FD     @ADDFF.@SCRATCH3
 1FD     mode_smf_read.@SCRATCH6
 1FE-201 sector_erase.flash_cmd
@@ -486,8 +468,8 @@
 20A     @PRINTF_L32U_9600_31781_31772.@SCRATCH1
 20A     mode_misf_write_demo.@SCRATCH6
 20A     mode_misf_read.@SCRATCH5
-20B-212 get_smf_address_struct.mis_struct
 20B-20E smf_write.misf_read_address
+20B-212 get_smf_address_struct.mis_struct
 20B     sector_erase.@SCRATCH3
 20B     @PRINTF_L32U_9600_31781_31772.@SCRATCH2
 20B     mode_misf_write_demo.@SCRATCH7
@@ -513,20 +495,28 @@
 20F     mode_misf_write_demo.@SCRATCH11
 20F     mode_misf_read.@SCRATCH10
 210     piclog_make.parameter
+210     transmit_command.frame_id
+210-211 clear_receive_signal.receive_signal
 210     smf_write.@SCRATCH1
 210     @PRINTF_L32U_9600_31781_31772.@SCRATCH7
 210     mode_misf_read.@SCRATCH11
+211-212 transmit_command.content
 211-216 piclog_make.piclog
 211     @PRINTF_D_9600_31781_31772.P1
 211     smf_write.@SCRATCH2
 211     @PRINTF_L32U_9600_31781_31772.@SCRATCH8
+212-215 @DIV3232.P1
+212-213 clear_receive_signal.receive_signal_size
 212     @PRINTF_D_9600_31781_31772.P1
-212-215 @DIV3232.P2
 212     smf_write.@SCRATCH3
+213     transmit_command.size
 213     @PRINTF_D_9600_31781_31772.@SCRATCH1
 213     smf_write.@SCRATCH4
+214-223 transmit_command.data
+214     clear_receive_signal.@SCRATCH1
 214     @PRINTF_D_9600_31781_31772.@SCRATCH2
 214     smf_write.@SCRATCH5
+215     clear_receive_signal.@SCRATCH2
 215     @PRINTF_D_9600_31781_31772.@SCRATCH3
 215     smf_write.@SCRATCH6
 216-219 @DIV3232.P1
@@ -549,8 +539,18 @@
 221     write_data_byte.write_data
 222     write_data_byte.write_enable_cmd
 223-227 write_data_byte.flash_cmd
+224     transmit_command.payload_size
+225     transmit_command.data_size
+226-227 transmit.data
+226     transmit_command.@SCRATCH1
+227     transmit_command.@SCRATCH2
+228     transmit.data_size
 228     write_data_byte.write_enable_cmd
+228     transmit_command.@SCRATCH3
 229-22E write_data_byte.flash_cmd
+229     transmit.i
+22A     transmit.i
+22B     transmit.@SCRATCH1
 22F     write_data_byte.timeout_counter
 230     write_data_byte.@SCRATCH1
 231     write_data_byte.@SCRATCH2
@@ -1257,46 +1257,46 @@ ROM Allocation:
 009CB2  sweep
 00AE06  transmit_status
 00AE1E  check_and_respond_to_boss
-00AE5E  enqueue_flash_operation
-00B0BE  mode_meas_iv
-00B896  test_sweep
-00CE0C  mode_meas_iv_debug
-00D0EE  mode_meas_env
-00D1D6  sweep_with_print
-00E8DE  get_current_msec
-00E8EC  @MUL3232
-00E960  mode_meas_pd
-00EB58  mode_meas_iv_1sweep
-00F008  sweep_port1
-00F862  mode_meas_iv_port1
-00FAE6  mode_meas_iv_port2
-00FD6A  is_empty_flash_queue
-00FD88  handle_uplink_command
-00FDF0  handle_status_check
-00FE46  dequeue_flash_operation
-00FEA8  @PRINTF_D_9600_31781_31772
-00FFE2  set_current_sec
+00AE5C  enqueue_flash_operation
+00B0BC  mode_meas_iv
+00B894  test_sweep
+00CE0A  mode_meas_iv_debug
+00D0EC  mode_meas_env
+00D1D4  sweep_with_print
+00E8DC  get_current_msec
+00E8EA  @MUL3232
+00E95E  mode_meas_pd
+00EB56  mode_meas_iv_1sweep
+00F006  sweep_port1
+00F860  mode_meas_iv_port1
+00FAE4  mode_meas_iv_port2
+00FD68  is_empty_flash_queue
+00FD86  handle_uplink_command
+00FDEE  handle_status_check
+00FE44  dequeue_flash_operation
+00FEA6  @PRINTF_D_9600_31781_31772
+00FFE0  set_current_sec
 010000  execute_mission
 01061C  @PRINTF_L32D_9600_31781_31772
 0107A2  write_data_byte
 010ADE  smf_write
-011A12  get_smf_address_struct
-011B9A  smf_read
-0122D4  smf_erase
-012956  handle_smf_available
-012CBA  handle_recieve_time
-012FA2  execute_command
-01302A  @goto26613
-013052  MAIN
-013052  @cinit1
-01314A  @cinit2
+011A16  get_smf_address_struct
+011B9E  smf_read
+0122D8  smf_erase
+01295A  handle_smf_available
+012CBE  handle_recieve_time
+012FA6  execute_command
+01302E  @goto19129
+013056  MAIN
+013056  @cinit1
+01314E  @cinit2
 0135  NEXT
 
 Project Directory:
     c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\
 
 Project Files:
-    mmj_cigs_main.c                                         [28-10-25 18:26  CRC=886EC271]
+    mmj_cigs_main.c                                         [07-11-25 15:48  CRC=886EC271]
     mmj_cigs_main.h                                         [29-10-25 15:34  CRC=337C6097]
     hal\cigs_config.h                                       [28-10-25 18:26  CRC=D820BA04]
     ..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F67J94.h [13-5-21 13:54  CRC=CB5C8DE4]
@@ -1310,20 +1310,20 @@ Project Files:
     ..\lib\tool\calc_tools.h                                [28-10-25 18:26  CRC=C40F6EA4]
     ..\lib\tool\smf_queue.h                                 [28-10-25 18:26  CRC=C4629A23]
     ..\lib\tool\mmj_smf_memorymap.h                         [28-10-25 18:26  CRC=5C4EAC15]
-    ..\lib\device\mt25q.h                                   [28-10-25 18:26  CRC=1183BDB9]
-    ..\lib\device\ad7490.h                                  [28-10-25 18:26  CRC=33D32650]
-    ..\lib\device\mcp4901.h                                 [28-10-25 18:26  CRC=6A890493]
+    ..\lib\device\mt25q.h                                   [07-11-25 15:31  CRC=1183BDB9]
+    ..\lib\device\ad7490.h                                  [07-11-25 15:31  CRC=33D32650]
+    ..\lib\device\mcp4901.h                                 [07-11-25 15:31  CRC=6A890493]
     ..\lib\communication\communication.h                    [28-10-25 18:26  CRC=87D4C82C]
     ..\lib\communication\frame.h                            [28-10-25 18:26  CRC=320EFF35]
     ..\lib\communication\communication_driver.h             [28-10-25 18:26  CRC=861F8EE4]
     ..\lib\communication\mission_tools.h                    [28-10-25 18:26  CRC=AC2A773F]
     domain\cigs_iv.h                                        [29-10-25 17:23  CRC=66AF153D]
     domain\cigs_flash.h                                     [28-10-25 18:26  CRC=EDB6BE02]
-    domain\cigs_piclog.h                                    [28-10-25 18:26  CRC=48A01A16]
-    domain\cigs_smf.h                                       [29-10-25 17:23  CRC=52CF9A62]
-    application\cigs_excute_mission.h                       [28-10-25 18:26  CRC=8FD97282]
-    application\cigs_mode_mission.h                         [28-10-25 18:26  CRC=D872803A]
-    application\cigs_mode_flash.h                           [28-10-25 18:26  CRC=7AC97D12]
+    domain\cigs_piclog.h                                    [07-11-25 15:31  CRC=48A01A16]
+    domain\cigs_smf.h                                       [07-11-25 15:31  CRC=46341600]
+    application\cigs_excute_mission.h                       [07-11-25 15:31  CRC=8FD97282]
+    application\cigs_mode_mission.h                         [07-11-25 15:31  CRC=D872803A]
+    application\cigs_mode_flash.h                           [07-11-25 15:31  CRC=7AC97D12]
     hal\timer.c                                             [28-10-25 18:26  CRC=2F210632]
     hal\uart.c                                              [28-10-25 18:26  CRC=A8007B5A]
     hal\gpio.c                                              [28-10-25 18:26  CRC=AD570323]
@@ -1339,16 +1339,16 @@ Project Files:
     ..\lib\communication\communication_driver.c             [28-10-25 18:26  CRC=552DB4C1]
     ..\lib\communication\mission_tools.c                    [28-10-25 18:26  CRC=930938D5]
     domain\cigs_iv.c                                        [29-10-25 15:56  CRC=DCDD7C77]
-    domain\cigs_piclog.c                                    [28-10-25 18:26  CRC=A5E95385]
-    domain\cigs_smf.c                                       [28-10-25 20:59  CRC=AA2CA20C]
+    domain\cigs_piclog.c                                    [07-11-25 15:31  CRC=A5E95385]
+    domain\cigs_smf.c                                       [07-11-25 15:36  CRC=A3E634F5]
     domain\cigs_flash.c                                     [28-10-25 18:26  CRC=3EB3DBFA]
-    application\cigs_excute_mission.c                       [28-10-25 18:26  CRC=356678F2]
-    application\cigs_mode_mission.c                         [28-10-25 20:30  CRC=DDF5D9DF]
-    application\cigs_mode_flash.c                           [28-10-25 18:26  CRC=5CDA0F92]
+    application\cigs_excute_mission.c                       [07-11-25 15:31  CRC=356678F2]
+    application\cigs_mode_mission.c                         [07-11-25 15:31  CRC=DDF5D9DF]
+    application\cigs_mode_flash.c                           [07-11-25 15:31  CRC=5CDA0F92]
 
-Source signature=2AFCA3BA
+Source signature=181AB241
 Program memory checksum=0000
-Hex file CRC=90D7
+Hex file CRC=5520
 
 Units:
     c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main (main)
@@ -1361,11 +1361,6 @@ Compiler Settings:
     Short,Int,Long: UNSIGNED: 1,8,16
     Float,Double:   32,32
     Compile Mode:   CCS5
-
-Output Files:
-    INHX32:      build\mmj_cigs_main.hex
-    Symbols:     build\mmj_cigs_main.sym
-    List:        build\mmj_cigs_main.lst
 
 Output Files:
     Errors:      build\mmj_cigs_main.err

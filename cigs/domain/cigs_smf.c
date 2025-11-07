@@ -105,12 +105,12 @@ void print_smf_counter_status(smf_data_table_t *smf_data_table)
     fprintf(PC, "\r\n[SMF Counter Status]\r\n");
     fprintf(PC, "\tPARTITION\tUSED\t\tRESERVE\r\n");
     fprintf(PC, "\t---------\t----------\t----------\r\n");
-    fprintf(PC, "\tPICLOG\t\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_PICLOG_DATA].used_size, smf_data_table->fields.headers[CIGS_PICLOG_DATA].reserved);
-    fprintf(PC, "\tENVIRO\t\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_ENVIRO_DATA].used_size, smf_data_table->fields.headers[CIGS_ENVIRO_DATA].reserved);
-    fprintf(PC, "\tIV1_HEADER\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV1_HEADER].used_size, smf_data_table->fields.headers[CIGS_IV1_HEADER].reserved);
-    fprintf(PC, "\tIV1_DATA\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV1_DATA].used_size, smf_data_table->fields.headers[CIGS_IV1_DATA].reserved);
-    fprintf(PC, "\tIV2_HEADER\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV2_HEADER].used_size, smf_data_table->fields.headers[CIGS_IV2_HEADER].reserved);
-    fprintf(PC, "\tIV2_DATA\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV2_DATA].used_size, smf_data_table->fields.headers[CIGS_IV2_DATA].reserved);
+    fprintf(PC, "\tPICLOG\t\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_PICLOG_DATA].smf_copied_size, smf_data_table->fields.headers[CIGS_PICLOG_DATA].misf_used_size);
+    fprintf(PC, "\tENVIRO\t\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_ENVIRO_DATA].smf_copied_size, smf_data_table->fields.headers[CIGS_ENVIRO_DATA].misf_used_size);
+    fprintf(PC, "\tIV1_HEADER\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV1_HEADER].smf_copied_size, smf_data_table->fields.headers[CIGS_IV1_HEADER].misf_used_size);
+    fprintf(PC, "\tIV1_DATA\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV1_DATA].smf_copied_size, smf_data_table->fields.headers[CIGS_IV1_DATA].misf_used_size);
+    fprintf(PC, "\tIV2_HEADER\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV2_HEADER].smf_copied_size, smf_data_table->fields.headers[CIGS_IV2_HEADER].misf_used_size);
+    fprintf(PC, "\tIV2_DATA\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV2_DATA].smf_copied_size, smf_data_table->fields.headers[CIGS_IV2_DATA].misf_used_size);
     fprintf(PC, "\t==========================================\r\n\r\n");
 }
 
@@ -261,7 +261,7 @@ void smf_write(FlashOperationStruct *smf_queue_ptr)
         }else{
             misf_write_size = 0;
         }
-        
+        check_and_respond_to_boss();
     }
     fprintf(PC, "\r\n");
 
