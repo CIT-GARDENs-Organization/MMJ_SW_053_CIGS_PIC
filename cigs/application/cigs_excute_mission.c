@@ -12,7 +12,7 @@
 #include "../lib/communication/communication_driver.h" // 通信ドライバー
 
 
-void execute_mission(int8 *uplink_cmt_ptr)
+void execute_mission(unsigned int8 *uplink_cmt_ptr)
 {
    // record to executed mission list
    int8 command_id = uplink_cmt_ptr[0];
@@ -53,17 +53,11 @@ void execute_mission(int8 *uplink_cmt_ptr)
       case ID_MISF_ERASE_64kByte_SUBSECTOR:
          mode_misf_erase_64kbyte_subsector(uplink_cmt_ptr);
          break;
-      case ID_MISF_WRITE_DEMO:
-         mode_misf_write_demo(uplink_cmt_ptr);
-         break;
       case ID_MISF_WRITE_4kByte_SUBSECTOR:
          mode_misf_write_4kbyte_subsector(uplink_cmt_ptr);
          break;
       case ID_MISF_READ:
          mode_misf_read(uplink_cmt_ptr);
-         break;
-      case ID_MISF_READ_ADDRESS:
-         mode_misf_read_address(uplink_cmt_ptr);
          break;
       case ID_MISF_ERASE_AND_RESET:
          mode_misf_erase_and_reset(uplink_cmt_ptr);
@@ -303,6 +297,8 @@ void handle_smf_available(Command *command)
          }
          
     }
+
+    smf_update_tablearea();
 
     fprintf(PC, "\t\t-> Completed %u operations\r\n",
             (unsigned int)processed_count);

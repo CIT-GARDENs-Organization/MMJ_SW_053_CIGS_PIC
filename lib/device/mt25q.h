@@ -5,6 +5,11 @@
 //#define MT25Q_DEBUG
 // =========
 
+#define SUBSECTOR_4K_BYTE 0x00001000
+#define SUBSECTOR_32K_BYTE 0x00008000
+#define SECTOR_64K_BYTE 0x00010000
+
+
 
 #define FLASH_STREAM0 MIS_FM_STREAM     // <- Align the names to `config.h` Stream name
 #define FLASH_STREAM1 SMF_STREAM

@@ -7,7 +7,7 @@
 // #define PICLOG_DEBUG
 #define MISSION_ID_PICLOG 0x03  // PICLOGミッションID
 
-void piclog_make(int8 function, int8 parameter)
+void piclog_save(int8 function, int8 parameter)
 {
     piclog_t piclog;
     piclog_t *piclog_ptr = &piclog;

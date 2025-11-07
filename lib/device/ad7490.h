@@ -1,5 +1,5 @@
-#ifndef  AD7490_H
-#define  AD7490_H
+#ifndef  _AD7490_H_
+#define  _AD7490_H_
 
 // === AD7490 Control Word ===
 // Bit[15]   : WRITE (常に0)
@@ -137,6 +137,20 @@ typedef enum {
     AD7490_CH15 = 15
 } ad7490_channel_t;
 
+typedef struct {
+    ad7490_write_t     write;
+    ad7490_seq_t       seq;
+    ad7490_coding_t    coding;
+    ad7490_range_t     range;
+    ad7490_dout_t      dout;
+    ad7490_shadow_t    shadow;
+    ad7490_pwr_mode_t  power_mode;
+    ad7490_channel_t   channel;
+} ad7490_config_t;
 
-#endif // AD7490_H
+
+unsigned int16 ad7490_make_cmd(ad7490_config_t config);
+
+
+#endif // _AD7490_H_
 //------------------End of File------------------

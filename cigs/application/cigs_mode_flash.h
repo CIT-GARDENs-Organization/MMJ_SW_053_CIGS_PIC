@@ -1,7 +1,21 @@
 #ifndef MMJ_CIGS_MODE_FLASH_H
 #define MMJ_CIGS_MODE_FLASH_H
 
-//#define PARAMETER_LENGTH 9
+#define PARAMETER_LENGTH 9
+
+
+typedef union{
+    unsigned int8 bytes[PARAMETER_LENGTH];
+    struct{
+        unsigned int8 cmd;
+        unsigned int32 address;
+        unsigned int8 blank;
+        unsigned int16 copy_packet_size;
+        unsigned int8 sector_size;
+    } fields;
+} flash_mode_param_t;
+
+
 
 // ___________MISF FUNCTIONS____________
 // Command ID 
@@ -17,28 +31,16 @@
 #define ID_MISF_ADDRESS_RESET 0x8F
 
 // Mode
-void mode_misf_erase_all(unsigned int8 parameter[]);
-void mode_misf_erase_1sector(unsigned int8 parameter[]);
-void mode_misf_erase_4kbyte_subsector(unsigned int8 parameter[]);
-void mode_misf_erase_64kbyte_subsector(unsigned int8 parameter[]);
-void mode_misf_write_demo(unsigned int8 parameter[]);
-typedef struct {
-    unsigned int8 id;
-    unsigned int32 writeaddress;
-    unsigned int16 packetnum;
-} FLASH_WRITE_PARAM;
-void mode_misf_write_4kbyte_subsector(unsigned int8 parameter[]);
+void mode_misf_erase_all(unsigned int8 *uplink_cmd_ptr);
+void mode_misf_erase_1sector(unsigned int8 *uplink_cmd_ptr);
+void mode_misf_erase_4kbyte_subsector(unsigned int8 *uplink_cmd_ptr);
+void mode_misf_erase_64kbyte_subsector(unsigned int8 *uplink_cmd_ptr);
+void mode_misf_write_demo(unsigned int8 *uplink_cmd_ptr);
+void mode_misf_write_4kbyte_subsector(unsigned int8 *uplink_cmd_ptr);
 void mode_misf_read(unsigned int8 *uplinkcmd_ptr);
-typedef struct{
-    unsigned int8 id;
-    unsigned int16 readpacketnum;
-    unsigned int32 readaddress;
-}FLASH_PARAM;
-void mode_misf_read_address(unsigned int8 parameter[]);
-void mode_misf_erase_and_reset(unsigned int8 parameter[]);
-void mode_misf_address_reset(unsigned int8 parameter[]);
-
-
+void mode_misf_read_address(unsigned int8 *uplinkcmd_ptr);
+void mode_misf_erase_and_reset(unsigned int8 *uplinkcmd_ptr);
+void mode_misf_address_reset(unsigned int8 *uplinkcmd_ptr);
 
 // ___________SMF FUNCTIONS____________
 // Command

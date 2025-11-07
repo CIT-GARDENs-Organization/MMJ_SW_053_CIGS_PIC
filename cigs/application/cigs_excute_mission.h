@@ -18,7 +18,7 @@ void handle_smf_available(Command *command);
 void handle_recieve_time(Command *command);
 
 
-void execute_mission(int8 *content);
+void execute_mission(unsigned int8 *content);
 
 int8 duration_sec = 30; // duration sec for mission
 

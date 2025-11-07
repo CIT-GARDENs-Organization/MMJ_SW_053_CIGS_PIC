@@ -1072,7 +1072,7 @@ D G "ACT_INT_WHEN_LOCKED" 3 1073 "0"
 D G "ACT_INT_WHEN_NOT_LOCKED" 3 1074 "0x04"
 D G "ACT_INT_WHEN_NOT_IN_RANGE" 3 1075 "0"
 D G "ACT_INT_WHEN_IN_RANGE" 3 1076 "0x01"
-D G "ACT_CLOCK_LOCKED" 3 1078 "0x08" "internal oscillator is within � 0.20%"
+D G "ACT_CLOCK_LOCKED" 3 1078 "0x08" "internal oscillator is within � 0.20%"
 D G "ACT_OUT_OF_RANGE" 3 1079 "0x02" "oscillator frequency is outside of the OSCTUNE range"
 c L "act_status" 3 1 4 "FUNCTION"
 F N "setup_adc" 3 1086 ""
@@ -1982,13 +1982,13 @@ F N "TIMER0_isr" 4 24 ""
 f G "TIMER0_isr" 4 24 "void()" `986 
 F N "TIMER1_isr" 4 27 ""
 f G "TIMER1_isr" 4 27 "void()" `987  "Clock Freq : 32.768kHz"
-D G "TIMER_ISR_1S" 4 30 "0x8000" "1秒ごとのタイマー割�
+D G "TIMER_ISR_1S" 4 30 "0x8000" "1秒ごとのタイマー割�
 込み"
-D G "TIMER_ISR_100MSEC" 4 31 "0xF313" "100ミリ秒ごとのタイマー割�
+D G "TIMER_ISR_100MSEC" 4 31 "0xF313" "100ミリ秒ごとのタイマー割�
 込み"
-D G "TIMER_ISR_10MSEC" 4 32 "0xFEA8" "10ミリ秒ごとのタイマー割�
+D G "TIMER_ISR_10MSEC" 4 32 "0xFEA8" "10ミリ秒ごとのタイマー割�
 込み"
-D G "TIMER_ISR_25MSEC" 4 33 "0xFC8D" "25ミリ秒ごとのタイマー割�
+D G "TIMER_ISR_25MSEC" 4 33 "0xFC8D" "25ミリ秒ごとのタイマー割�
 込み"
 F N "set_current_sec" 4 35 ""
 V L "new_sec" 4 35 "int32" `989 
@@ -2760,8 +2760,8 @@ f G "make_flash_data_table" 22 102 "FlashData_t()" `1469
 F N "misf_update_address_area" 22 103 ""
 f G "misf_update_address_area" 22 103 "void()" `1470 
 F N "print_flash_status" 22 104 ""
-f G "print_flash_status" 22 104 "void()" `1471  "キュー�
-�入"
+f G "print_flash_status" 22 104 "void()" `1471  "キュー�
+�入"
 F N "add_smf_queue" 22 108 ""
 V L "mission_id" 22 108 "MissionID" `1473 
 V L "func_type" 22 108 "FunctionType" `1474 
@@ -2789,21 +2789,21 @@ C L "misf_write_data" 23 4 1 "FUNCTION"
 T G "piclog_t" 23 20 "{{int32 time,int8 function,int8 parameter} fields,int8[6] bytes}" `1499 
 D G "PICLOG_BLANK_SIZE" 23 22 "4"
 V G "PICLOG_BLANK_DATA" 23 23 "int8[4]" `1500  "PICLOG 関数（実装は .c）"
-F N "piclog_make" 23 26 ""
+F N "piclog_save" 23 26 ""
 V L "function" 23 26 "int8" `1502 
 V L "parameter" 23 26 "int8" `1503 
-f G "piclog_make" 23 26 "void(int8 function,int8 parameter)" `1501  "MMJ_CIGS_PICLOG_H"
+f G "piclog_save" 23 26 "void(int8 function,int8 parameter)" `1501  "MMJ_CIGS_PICLOG_H"
 D G "MMJ_CIGS_SMF_H" 24 2 ""
-C L "piclog_make" 12 106 1 "FUNCTION"
-C L "piclog_make" 2 138 2 "FUNCTION"
+C L "piclog_save" 12 106 1 "FUNCTION"
+C L "piclog_save" 2 138 2 "FUNCTION"
 D G "CRC_RETRY_COUNT" 24 8 "5"
 V G "MISF_ADDRESS_TABLE" 24 10 "ADDRESS_AREA_T[1]" `1482 
 V G "smf_counter_table" 24 11 "FlashCounter_t[1]" `1506 
 V G "smf_update_flag" 24 13 "int1[10]" `1507  "SMF更新フラグ"
-C L "piclog_make" 24 16 1 "FUNCTION"
+C L "piclog_save" 24 16 1 "FUNCTION"
 T G "SMF_AREA_T" 24 20 "{ADDRESS_AREA_T header_area,ADDRESS_AREA_T data_area}" `1511 
 D G "SMF_ID_COUNT" 24 21 "7"
-C L "piclog_make" 24 16 1 "FUNCTION"
+C L "piclog_save" 24 16 1 "FUNCTION"
 E G "SMF_MISSION_DATA_TABLE" 24 27 "0" `1513 
 E G "SMF_MISSION_PICLOG" 24 28 "1" `1514 
 E G "SMF_MISSION_ENVIRO" 24 29 "2" `1515 
@@ -2812,7 +2812,7 @@ E G "SMF_MISSION_IV1_DATA" 24 31 "4" `1517
 E G "SMF_MISSION_IV2_HEADER" 24 32 "5" `1518 
 E G "SMF_MISSION_IV2_DATA" 24 33 "6" `1519 
 T G "SmfMissionAlias" 24 33 "" `1520  "利便用Alias"
-C L "piclog_make" 24 16 1 "FUNCTION"
+C L "piclog_save" 24 16 1 "FUNCTION"
 F N "smf_write" 24 36 ""
 V L "smf_data_ptr" 24 36 " *" `1522 
 f G "smf_write" 24 36 "void( * smf_data_ptr)" `1521 
@@ -2846,7 +2846,7 @@ F N "set_piclog_used_size_msb" 24 68 ""
 V L "value" 24 68 "int32" `1551 
 f G "set_piclog_used_size_msb" 24 68 "void(int32 value)" `1550 
 F N "get_piclog_used_size_msb" 24 69 ""
-f G "get_piclog_used_size_msb" 24 69 "int32()" `1552  "旧 data_table/meas 互換マクロは�
+f G "get_piclog_used_size_msb" 24 69 "int32()" `1552  "旧 data_table/meas 互換マクロは�
 除（不要）"
 C L "get_piclog_used_size_msb" 24 16 1 "FUNCTION"
 F N "get_smf_partition_by_mission_id" 24 73 ""
@@ -3585,8 +3585,8 @@ F G "create_meas_data" 42 405 "iv_env_t()" `1420
 V L "data" 42 406 "iv_env_t" `1940 
 F N "calc_pd_value" 42 416 ""
 V L "data" 42 416 "int16" `1942 
-F G "calc_pd_value" 42 417 "int16(int16 data)" `1425  "ADCの12ビット値を電�
-�密度（mW/cm²）に変換する例"
+F G "calc_pd_value" 42 417 "int16(int16 data)" `1425  "ADCの12ビット値を電�
+�密度（mW/cm²）に変換する例"
 C L "calc_pd_value" 42 15 1 "FUNCTION"
 F N "calc_curr_value" 42 423 ""
 V L "data" 42 423 "int16" `1942 
@@ -3595,10 +3595,10 @@ V L "voltage_mv" 42 424 "float" `1941
 V L "current_ma" 42 425 "float" `1942  "12ビットADCの値を[mV]に変換"
 C L "calc_curr_value" 42 15 1 "FUNCTION"
 D G "MISSION_ID_PICLOG" 43 8 "0x03" "PICLOGミッションID"
-F N "piclog_make" 43 10 ""
+F N "piclog_save" 43 10 ""
 V L "function" 43 10 "int8" `1502 
 V L "parameter" 43 10 "int8" `1958 
-F G "piclog_make" 43 11 "void(int8 function,int8 parameter)" `1501 
+F G "piclog_save" 43 11 "void(int8 function,int8 parameter)" `1501 
 V L "piclog" 43 12 "piclog_t" `1956 
 V L "piclog_ptr" 43 13 " *" `1957 
 V L "i" 43 20 "int8" `1959 

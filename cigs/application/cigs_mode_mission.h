@@ -51,6 +51,19 @@ typedef struct {
     unsigned int16 sweep_limit;
 } meas_iv_param_t;
 
+typedef union {
+    unsigned int8 bytes[CMD_LENGTH];
+    struct {
+        unsigned int8 cmd_id;          // 0: Command ID
+        unsigned int16 interval;        // 1-2: Sweep interval in ms
+        unsigned int8 log_threshold;   // 3: Log current threshold
+        unsigned int8 sweep_limit;     // 4: Sweep current limit
+        unsigned int8 pd_threshold;    // 5: PD threshold
+        unsigned int8 meas_time;      // 6: Measurement time in minutes
+        unsigned int8 blank;
+        unsigned int8 erase_misf
+    } fields;
+}meas_iv_cmd_param_t;
 
 // MEAS_IV_CMD make_meas_iv_cmd(unsigned int8 uplinkcmd[]);
 meas_iv_param_t make_meas_iv_cmd(int8 *uplinkcmd_ptr);

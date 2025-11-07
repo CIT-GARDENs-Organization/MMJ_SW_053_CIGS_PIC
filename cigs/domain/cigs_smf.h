@@ -68,20 +68,15 @@ void print_smf_counter_status(smf_data_table_t *smf_data_table);
 SMF_PARTITION* get_smf_partition_by_mission_id(int8 mission_id);
 void update_smf_partition_by_mission_id(int8 mission_id, int32 used_size, int32 loop_counter);
 
-void smf_update_smf_area(void);
+void smf_update_tablearea(void);
 
 typedef union{
     unsigned int8 bytes[PACKET_SIZE];
     struct {
-        unsigned int32 piclog_used_size;
-        unsigned int32 envero_used_size;
-        unsigned int32 iv1_header_used_size;
-        unsigned int32 iv1_data_used_size;
-        unsigned int32 iv2_header_used_size;
-        unsigned int32 iv2_data_used_size;
-        unsigned int32 reserved[9];
+        SMF_PARTITION partitions[FLASH_ID_COUNT];
+        unsigned int8 reserved[PACKET_SIZE - (sizeof(SMF_PARTITION) * FLASH_ID_COUNT) - 1];
+        unsigned int8 crc;
     } fields;
-
 }smf_address_header_t;
 
 

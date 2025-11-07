@@ -100,20 +100,6 @@ void smf_write_header(smf_data_table_t *smf_data_table)
     }
 }
 
-void print_smf_counter_status(smf_data_table_t *smf_data_table)
-{
-    fprintf(PC, "\r\n[SMF Counter Status]\r\n");
-    fprintf(PC, "\tPARTITION\tUSED\t\tRESERVE\r\n");
-    fprintf(PC, "\t---------\t----------\t----------\r\n");
-    fprintf(PC, "\tPICLOG\t\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_PICLOG_DATA].used_size, smf_data_table->fields.headers[CIGS_PICLOG_DATA].reserved);
-    fprintf(PC, "\tENVIRO\t\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_ENVIRO_DATA].used_size, smf_data_table->fields.headers[CIGS_ENVIRO_DATA].reserved);
-    fprintf(PC, "\tIV1_HEADER\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV1_HEADER].used_size, smf_data_table->fields.headers[CIGS_IV1_HEADER].reserved);
-    fprintf(PC, "\tIV1_DATA\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV1_DATA].used_size, smf_data_table->fields.headers[CIGS_IV1_DATA].reserved);
-    fprintf(PC, "\tIV2_HEADER\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV2_HEADER].used_size, smf_data_table->fields.headers[CIGS_IV2_HEADER].reserved);
-    fprintf(PC, "\tIV2_DATA\t0x%08LX\t0x%08LX\r\n", smf_data_table->fields.headers[CIGS_IV2_DATA].used_size, smf_data_table->fields.headers[CIGS_IV2_DATA].reserved);
-    fprintf(PC, "\t==========================================\r\n\r\n");
-}
-
 void smf_write(FlashOperationStruct *smf_queue_ptr)
 {
     fprintf(PC, "\r\n_______________________________\r\n");
@@ -369,6 +355,18 @@ void smf_erase(FlashOperationStruct *smf_data)
     fprintf(PC, "____________________\r\n\r\n");
 }
 
+void smf_update_tablearea();
+{
+    smf_address_header_t smf_data_table;
+    unsigned int8 buffer[PACKET_SIZE];
+    for (unsigned int8 i = 0; i < FLASH_ID_COUNT; i++)
+    {
+        smf_data_table.fields.partitions[i].smf_copied_size = misf_counter_table[i].used_counter - misf_counter_table[i].uncopied_counter;
+    }
+
+
+
+}
 
 
 void smf_update_address_area()

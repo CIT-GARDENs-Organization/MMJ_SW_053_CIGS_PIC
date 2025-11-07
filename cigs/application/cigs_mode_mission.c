@@ -113,7 +113,7 @@ void mode_meas_iv(unsigned int8 *uplinkcmd_ptr)
    fprintf(PC, "Start MODE MEAS IV\r\n");
    meas_iv_param_t cmd = make_meas_iv_cmd(uplinkcmd_ptr); // Create the measurement command structure
    print_meas_iv_cmd(&cmd); // Print the command parameters for debugging
-   piclog_make(cmd.id, PICLOG_PARAM_START); // Log the start of the command execution
+   piclog_save(cmd.id, PICLOG_PARAM_START); // Log the start of the command execution
 
    unsigned int32 start_time = get_current_sec();
    unsigned int32 current_sec = 0;
@@ -128,7 +128,7 @@ void mode_meas_iv(unsigned int8 *uplinkcmd_ptr)
       check_and_respond_to_boss(); // Check for boss commands during the wait period
    } while (get_current_sec() - start_time < cmd.meas_time);
    misf_update_address_area();
-   piclog_make(cmd.id, PICLOG_PARAM_END); // Log the end of the command execution
+   piclog_save(cmd.id, PICLOG_PARAM_END); // Log the end of the command execution
 
 
 
@@ -191,13 +191,13 @@ void mode_meas_iv_debug(unsigned int8 *uplinkcmd_ptr)
    fprintf(PC, "\tCurrentLimit:     0x%04X\r\n", cmd.curr_limit);
    fprintf(PC, "\tMeasurementTime:  0x%04X\r\n", cmd.meas_time);
 
-   piclog_make(cmd.id, PICLOG_PARAM_START); // Log start
+   piclog_save(cmd.id, PICLOG_PARAM_START); // Log start
 
    unsigned int32 start_time = get_current_sec();
    unsigned int32 current_time = 0;
    test_sweep(cmd.curr_threshold, cmd.curr_limit);
 
-   piclog_make(cmd.id, PICLOG_PARAM_END);
+   piclog_save(cmd.id, PICLOG_PARAM_END);
    fprintf(PC, "[IVDBG] End MODE IV DEBUG\r\n");
 }
 
