@@ -1,5 +1,7 @@
 {
     "files.associations": {
+        "*.md": "markdown",
+        "*.mdx": "markdown",
         "mmj_cigs_mode.h": "c",
         "mmj_cigs_main.h": "c",
         "lib.h": "c",
@@ -36,7 +38,8 @@
         "cigs_flash.h": "c",
         "cigs_smf.h": "c",
         "EX_CRC_HW.C": "cpp",
-        "EX_CRC.C": "cpp"
+        "EX_CRC.C": "cpp",
+        "cigs_config.h": "c"
     },
     "C_Cpp.default.configurationProvider": "user.vscode-extension-for-ccsc",
     "C_Cpp.configurationWarnings": "disabled",

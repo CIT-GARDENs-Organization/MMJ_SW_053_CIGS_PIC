@@ -1,9 +1,9 @@
-D G "__PCH__" 0 0 ""5.104""
-D G "__DEVICE__" 0 0 ""
-D G "__DATE__" 0 0 ""10-Nov-25""
-D G "__TIME__" 0 0 ""20:24:49""
-D G "_UNICODE" 0 0 ""?""
-D G "__EVAL" 0 0 ""?""
+D G "__PCH__" 0 62 ""5.104""
+D G "__DEVICE__" 0 62 "6794"
+D G "__DATE__" 0 62 ""10-Nov-25""
+D G "__TIME__" 0 62 ""20:49:35""
+D G "_UNICODE" 0 62 ""?""
+D G "__EVAL" 0 62 ""?""
 D G "MMJ_CIGS_MAIN_H" 1 2 ""
 D G "SELF_DEVICE_ID" 1 5 "SATO_PIC"
 D G "MMJ_CIGS_CONFIG_H" 2 2 ""
@@ -1036,9 +1036,9 @@ F N "setup_act" 3 1031 ""
 F B "setup_act" 3 1031 "int8()" `442 
 F N "setup_act" 3 1032 ""
 V L "mode" 3 1032 "int8" `444 
-f G "setup_act" 3 1032 "int8(int8 mode)" `443 
+f G "setup_act" 3 1032 "int8(int8 mode,int32 mode)" `443 
 F N "act_status" 3 1033 ""
-F B "act_status" 3 1033 "int8(int8 mode)" `443  "Constants used in setup_oscillator() are:"
+F B "act_status" 3 1033 "int8(int8 mode,int32 mode)" `443  "Constants used in setup_oscillator() are:"
 D G "OSC_31000" 3 1036 "0x00000005"
 D G "OSC_31250" 3 1037 "0x00070000"
 D G "OSC_125KHZ" 3 1038 "0x00060000"
@@ -1087,9 +1087,9 @@ F N "read_adc" 3 1089 ""
 f G "read_adc" 3 1089 "int16()" `449 
 F N "read_adc" 3 1090 ""
 V L "mode" 3 1090 "int8" `450 
-f G "read_adc" 3 1090 "int16(int8 mode)" `449 
+f G "read_adc" 3 1090 "int16(int8 mode,int32 pins)" `449 
 F N "adc_done" 3 1091 ""
-F B "adc_done" 3 1091 "int8(int8 mode)" `449  "Constants used for SETUP_ADC() are:"
+F B "adc_done" 3 1091 "int8(int8 mode,int32 pins)" `449  "Constants used for SETUP_ADC() are:"
 D G "ADC_OFF" 3 1093 "0x10000"
 D G "ADC_CLOCK" 3 1094 "0x0000"
 D G "ADC_CLOCK_DIV_2" 3 1095 "0x0001"
@@ -1554,9 +1554,9 @@ F B "i2c_transfer_in" 3 1286 "int8(int8 stream,int8 address,*int8 rData,int8 rCo
 F N "spi_xfer" 3 1289 ""
 F B "spi_xfer" 3 1289 "int8()" `750 
 F N "spi_xfer" 3 1290 ""
-f G "spi_xfer" 3 1290 "int16()" `751 
+f G "spi_xfer" 3 1290 "int16(int8 data)" `751 
 F N "spi_xfer" 3 1291 ""
-f G "spi_xfer" 3 1291 "int32()" `751 
+f G "spi_xfer" 3 1291 "int32(int8 data)" `751 
 F N "spi_xfer" 3 1292 ""
 V L "data" 3 1292 "int8" `752 
 F B "spi_xfer" 3 1292 "int8(int8 data)" `751 
@@ -1636,18 +1636,18 @@ F B "spi_prewrite" 3 1311 "void(int8 ,int32 data)" `804
 F N "spi_xfer_in" 3 1312 ""
 F B "spi_xfer_in" 3 1312 "int8()" `807 
 F N "spi_xfer_in" 3 1313 ""
-f G "spi_xfer_in" 3 1313 "int16()" `808 
+f G "spi_xfer_in" 3 1313 "int16(int8 bits)" `808 
 F N "spi_xfer_in" 3 1314 ""
-f G "spi_xfer_in" 3 1314 "int32()" `808 
+f G "spi_xfer_in" 3 1314 "int32(int8 bits)" `808 
 F N "spi_xfer_in" 3 1315 ""
 V L "bits" 3 1315 "int8" `809 
 F B "spi_xfer_in" 3 1315 "int8(int8 bits)" `808 
 F N "spi_xfer_in" 3 1316 ""
 V L "bits" 3 1316 "int8" `811 
-f G "spi_xfer_in" 3 1316 "int16(int8 bits)" `810 
+f G "spi_xfer_in" 3 1316 "int16(int8 bits,int8 bits)" `810 
 F N "spi_xfer_in" 3 1317 ""
 V L "bits" 3 1317 "int8" `811 
-f G "spi_xfer_in" 3 1317 "int32(int8 bits)" `810 
+f G "spi_xfer_in" 3 1317 "int32(int8 bits,int8 bits)" `810 
 F N "spi_xfer_in" 3 1318 ""
 V L "stream" 3 1318 "int8" `811 
 V L "bits" 3 1318 "int8" `812 
@@ -1655,11 +1655,11 @@ F B "spi_xfer_in" 3 1318 "int8(int8 stream,int8 bits)" `810
 F N "spi_xfer_in" 3 1319 ""
 V L "stream" 3 1319 "int8" `811 
 V L "bits" 3 1319 "int8" `815 
-f G "spi_xfer_in" 3 1319 "int16(int8 stream,int8 bits)" `813 
+f G "spi_xfer_in" 3 1319 "int16(int8 stream,int8 bits,int16 count)" `813 
 F N "spi_xfer_in" 3 1320 ""
 V L "stream" 3 1320 "int8" `811 
 V L "bits" 3 1320 "int8" `815 
-f G "spi_xfer_in" 3 1320 "int32(int8 stream,int8 bits)" `813 
+f G "spi_xfer_in" 3 1320 "int32(int8 stream,int8 bits,int16 count)" `813 
 F N "spi_transfer" 3 1321 ""
 V L "wData" 3 1321 "*int8" `814 
 V L "rData" 3 1321 "*int8" `815 
@@ -1728,9 +1728,9 @@ F B "rtos_stats" 3 1341 "void(int8 task,*int8 stat)" `856  "#use timer() Prototy
 F N "get_ticks" 3 1344 ""
 F B "get_ticks" 3 1344 "int8()" `859 
 F N "get_ticks" 3 1345 ""
-f G "get_ticks" 3 1345 "int16()" `860 
+f G "get_ticks" 3 1345 "int16(int8 stream)" `860 
 F N "get_ticks" 3 1346 ""
-f G "get_ticks" 3 1346 "int32()" `860 
+f G "get_ticks" 3 1346 "int32(int8 stream)" `860 
 F N "get_ticks" 3 1347 ""
 V L "stream" 3 1347 "int8" `861 
 F B "get_ticks" 3 1347 "int8(int8 stream)" `860 
@@ -2333,35 +2333,35 @@ V L "misf_start" 13 75 "int32" `1114
 V L "misf_size" 13 75 "int32" `1115 
 V L "smf_start" 13 75 "int32" `1116 
 V L "smf_size" 13 75 "int32" `1117 
-f G "init_misf_smf_manager" 13 75 "void(int8 mission_id,int32 misf_start,int32 misf_size,int32 smf_start,int32 smf_size)" `1112 
+f G "init_misf_smf_manager" 13 75 "void(int8 mission_id,int32 misf_start,int32 misf_size,int32 smf_start,int32 smf_size,ENUM_SMF_ERASE ID_APRS_TLE_DATA)" `1112 
 F N "update_misf_data" 13 76 ""
 V L "mission_id" 13 76 "int8" `1119 
 V L "data_size" 13 76 "int32" `1120 
-f G "update_misf_data" 13 76 "void(int8 mission_id,int32 data_size)" `1118 
+f G "update_misf_data" 13 76 "void(int8 mission_id,int32 data_size,value ID_APRS_PIC_LOG)" `1118 
 F N "process_misf_to_smf_transfer" 13 77 ""
 V L "mission_id" 13 77 "int8" `1122 
-f G "process_misf_to_smf_transfer" 13 77 "void(int8 mission_id)" `1121 
+f G "process_misf_to_smf_transfer" 13 77 "void(int8 mission_id,int8 ID_APRS_TLE_DATA,int32 MAIN_RESERVED_COMMAND_START_ADDRESS,int32 MAIN_RESERVED_COMMAND_END_ADDRESS,value ID_APRS_PIC_LOG)" `1121 
 F N "get_uncopied_data_size" 13 78 ""
 V L "mission_id" 13 78 "int8" `1124 
-f G "get_uncopied_data_size" 13 78 "int32(int8 mission_id)" `1123 
+f G "get_uncopied_data_size" 13 78 "int32(int8 mission_id,int32 MAIN_RESERVED_COMMAND_END_ADDRESS,value ID_APRS_PIC_LOG)" `1123 
 F N "mark_data_copied" 13 79 ""
 V L "mission_id" 13 79 "int8" `1126 
 V L "copied_size" 13 79 "int32" `1127 
-f G "mark_data_copied" 13 79 "void(int8 mission_id,int32 copied_size)" `1125 
+f G "mark_data_copied" 13 79 "void(int8 mission_id,int32 copied_size,int32 MAIN_HK_END_ADDRESS,int32 MAIN_RESERVED_COMMAND_END_ADDRESS)" `1125 
 F N "is_misf_full" 13 80 ""
 V L "mission_id" 13 80 "int8" `1129 
 f G "is_misf_full" 13 80 "int8(int8 mission_id)" `1128  "MisfSmfManagerStruct* get_misf_smf_manager(int8 mission_id);"
 F N "enqueue_flash_operation" 13 83 ""
 V L "data" 13 83 " *" `1131 
-f G "enqueue_flash_operation" 13 83 "void( * data)" `1130 
+f G "enqueue_flash_operation" 13 83 "void( * data,int32 MAIN_RESERVED_COMMAND_END_ADDRESS)" `1130 
 F N "dequeue_flash_operation" 13 85 ""
 f G "dequeue_flash_operation" 13 85 " *()" `1132 
 F N "peek_flash_operation" 13 87 ""
-f G "peek_flash_operation" 13 87 " *()" `1133 
+f G "peek_flash_operation" 13 87 " *(int8 ID_APRS_TLE_DATA)" `1133 
 F N "remove_flash_operation" 13 89 ""
 f G "remove_flash_operation" 13 89 "void()" `1134 
 F N "is_empty_flash_queue" 13 91 ""
-f G "is_empty_flash_queue" 13 91 "int8()" `1135 
+f G "is_empty_flash_queue" 13 91 "int8(int8 ID_APRS_TLE_DATA,int32 MAIN_LSHK_END_ADDRESS)" `1135 
 F N "get_smf_address_struct" 13 93 ""
 V L "mission_id" 13 93 "MissionID" `1137 
 f G "get_smf_address_struct" 13 93 "SmfAddressStruct(MissionID mission_id)" `1136  "便利な関数"
@@ -3368,7 +3368,7 @@ F G "lsb_array_to_int32" 37 28 "int32(*int8 buf,int8 index)" `1060
 F N "msb_array_to_int32" 37 36 ""
 V L "buf" 37 36 "*int8" `1818 
 V L "index" 37 36 "int8" `1819 
-F G "msb_array_to_int32" 37 37 "int32(*int8 buf,int8 index,int8 index)" `1817 
+F G "msb_array_to_int32" 37 37 "int32(*int8 buf,int8 index,int8 index,int32 value)" `1817 
 F N "int32_lsb_to_msb" 37 44 ""
 V L "value" 37 44 "int32" `1821 
 F G "int32_lsb_to_msb" 37 45 "int32(int32 value)" `1820 
