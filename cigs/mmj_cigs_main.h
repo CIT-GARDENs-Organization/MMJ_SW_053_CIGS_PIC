@@ -2,7 +2,7 @@
 #define MMJ_CIGS_MAIN_H
 
 
-#define SELF_DEVICE_ID CIGS_PIC
+#define SELF_DEVICE_ID SATO_PIC
 
 
 #opt 0 // 0 = no optimization

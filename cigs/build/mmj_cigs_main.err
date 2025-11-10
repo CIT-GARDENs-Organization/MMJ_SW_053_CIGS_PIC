@@ -1,4 +1,40 @@
-Compiling c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main on 07-11-25 at 15:55
+Compiling C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main on 10-11-25 at 16:46
+>>> Warning 225 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\domain\cigs_flash.h" Line 21(34,40): Duplicate #define
+>>> Warning 204 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 329(1,1): Condition always FALSE
+>>> Warning 204 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 469(1,1): Condition always FALSE
+>>> Warning 204 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 535(1,1): Condition always FALSE
+>>> Warning 225 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\domain\cigs_smf.c" Line 11(24,120): Duplicate #define
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\hal\timer.h" Line 11(7,16): Variable never used:   tick_10ms
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\hal\timer.h" Line 13(16,20): Variable never used:   dsec
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\hal\timer.h" Line 13(26,29): Variable never used:   sec
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\hal\timer.h" Line 14(25,28): Variable never used:   day
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\domain\cigs_piclog.h" Line 23(15,32): Variable never used:   PICLOG_BLANK_DATA
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\domain\cigs_smf.h" Line 11(23,40): Variable never used:   smf_counter_table
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_excute_mission.h" Line 23(6,18): Variable never used:   duration_sec
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\hal\timer.c" Line 3(6,12): Variable never used:   subsec
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\domain\cigs_iv.c" Line 12(20,34): Variable never used:   curr_threshold
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\domain\cigs_iv.c" Line 128(14,27): Variable never used:   measured_data
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\domain\cigs_iv.c" Line 217(23,32): Variable never used:   read_back
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\domain\cigs_iv.c" Line 266(20,33): Variable never used:   start_time_ms
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\domain\cigs_iv.c" Line 351(20,33): Variable never used:   start_time_ms
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\domain\cigs_smf.c" Line 14(22,39): Variable never used:   SMF_ADDRESS_TABLE
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\domain\cigs_smf.c" Line 376(26,40): Variable never used:   smf_data_table
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 119(19,30): Variable never used:   current_sec
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 120(19,26): Variable never used:   time_ms
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 121(18,25): Variable never used:   counter
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 196(19,29): Variable never used:   start_time
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 197(19,31): Variable never used:   current_time
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 210(19,27): Variable never used:   end_time
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 216(18,25): Variable never used:   logdata
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 217(19,27): Variable never used:   temp_top
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 218(19,27): Variable never used:   temp_bot
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 219(19,28): Variable never used:   temp_mis7
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 220(19,21): Variable never used:   pd
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 223(19,32): Variable never used:   write_address
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_mission.c" Line 323(25,27): Variable never used:   pd
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_flash.c" Line 140(19,32): Variable never used:   write_address
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_flash.c" Line 239(9,19): Variable never used:   mission_id
+>>> Warning 202 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\application\cigs_mode_flash.c" Line 391(9,18): Variable never used:   writedata
       Memory usage:   ROM=60%      RAM=11% - 80%
-      0 Errors,  0 Warnings.
+      0 Errors,  36 Warnings.
 Build Successful.

@@ -9,7 +9,7 @@ enabled=0
 chip=1
 D1=
 V1=
-buildcount=1034
+buildcount=1036
 
 [fileformats]
 forcecoff=0
@@ -68,11 +68,11 @@ t2=1
 t3=1
 4=hal\gpio.c
 t4=1
-Count=4
-5=domain\mmj_cigs_piclog.c
+Count=6
+5=..\lib\communication\value_status.h
 t5=1
-6=domain\mmj_cigs_smf.c
-t6=63
+6=application\cigs_mode_mission.c
+t6=1
 7=domain\mmj_cigs_flash.c
 t7=229
 8=application\mmj_cigs_excute_mission.c
