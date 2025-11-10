@@ -1284,12 +1284,12 @@ ROM Allocation:
 011B98  smf_read
 0122D2  smf_erase
 012954  handle_smf_available
-012CB8  handle_recieve_time
-012FA0  execute_command
-013028  @goto15102
-013050  MAIN
-013050  @cinit1
-013148  @cinit2
+012CB4  handle_recieve_time
+012F9C  execute_command
+013024  @goto16363
+01304C  MAIN
+01304C  @cinit1
+013144  @cinit2
 0135  NEXT
 
 Project Directory:
@@ -1342,13 +1342,13 @@ Project Files:
     domain\cigs_piclog.c                                    [10-11-25 16:42  CRC=A5E95385]
     domain\cigs_smf.c                                       [10-11-25 16:42  CRC=A3E634F5]
     domain\cigs_flash.c                                     [10-11-25 16:42  CRC=3EB3DBFA]
-    application\cigs_excute_mission.c                       [10-11-25 16:42  CRC=356678F2]
+    application\cigs_excute_mission.c                       [10-11-25 20:23  CRC=1E405574]
     application\cigs_mode_mission.c                         [10-11-25 16:42  CRC=DDF5D9DF]
     application\cigs_mode_flash.c                           [10-11-25 16:42  CRC=5CDA0F92]
 
-Source signature=342A8DE7
+Source signature=1D046A69
 Program memory checksum=0000
-Hex file CRC=6533
+Hex file CRC=ADF1
 
 Units:
     C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main (main)

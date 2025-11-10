@@ -1,4 +1,4 @@
-Compiling C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main on 10-11-25 at 16:46
+Compiling C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\mmj_cigs_main on 10-11-25 at 20:24
 >>> Warning 225 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\cigs\domain\cigs_flash.h" Line 21(34,40): Duplicate #define
 >>> Warning 204 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 329(1,1): Condition always FALSE
 >>> Warning 204 "C:\Users\harut\Downloads\Program\Gardens\MMJ_SW_053_CIGS_PIC\lib\device\mt25q.c" Line 469(1,1): Condition always FALSE
