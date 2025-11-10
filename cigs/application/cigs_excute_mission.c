@@ -306,7 +306,6 @@ void handle_smf_available(Command *command)
 
     fprintf(PC, "\t\t-> Completed %u operations\r\n",
             (unsigned int)processed_count);
-      status[1] = 0xC0;
       status[0] = FINISHED;
 }
 
