@@ -266,10 +266,10 @@ void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned in
     unsigned int32 start_time_ms = get_current_sec();
     fputc('.', PC);
     // Enable both CIGS ports
-    connect_port1();
-    connect_port2();
+    // connect_port1();
+    // connect_port2();
 
-    delay_ms(100);
+    // delay_ms(100);
 
     // Init Port1
     sweep_config_t port1 = {0};
@@ -290,9 +290,20 @@ void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned in
     fprintf(PC,"PORT2, %u\r\n", port2_ptr->port_num);
     int16 count = 0;
     
-    // Initialize DACs to 0
-    mcp4901_1_write(1);
-    mcp4901_2_write(1);
+    // // Initialize DACs to 0
+    // mcp4901_1_write(1);
+    // mcp4901_2_write(1);
+
+    // for SATO pic setting. but i dont know why
+    connect_port1();
+    connect_port2();
+    // Enable both CIGS ports
+    mcp4901_1_write(0); 
+    mcp4901_2_write(0);
+    connect_port1();
+    connect_port2();
+
+
 
     unsigned int16 volt;
     unsigned int16 curr;
