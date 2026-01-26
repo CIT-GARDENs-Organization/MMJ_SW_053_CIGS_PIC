@@ -118,13 +118,13 @@
 #use FIXED_IO( G_outputs=MIS_FM_CS )
 
 // ADC Settings
-#define ADC_CIGS1_VOLT      AD7490_CH0
+#define ADC_CIGS1_VOLT      AD7490_CH8
 #define ADC_CIGS1_CURR      AD7490_CH1
-#define ADC_CIGS1_AMP       AD7490_CH2
+#define ADC_CIGS1_AMP       AD7490_CH7
 #define ADC_CIGS1_VREF      AD7490_CH3
-#define ADC_CIGS2_VOLT      AD7490_CH4
+#define ADC_CIGS2_VOLT      AD7490_CH10
 #define ADC_CIGS2_CURR      AD7490_CH5
-#define ADC_CIGS2_AMP       AD7490_CH6
+#define ADC_CIGS2_AMP       AD7490_CH9
 #define ADC_CIGS2_VREF      AD7490_CH7
 #define ADC_CIGS1_DAC       AD7490_CH8
 #define ADC_CIGS2_DAC       AD7490_CH9

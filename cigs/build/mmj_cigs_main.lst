@@ -1,4 +1,4 @@
-CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
+CCS PCH C Compiler, Version 5.104, 57077               26-1-26 18:19
 
                Filename:   c:\Users\shoin\source\repos\MMJ_SW_053_CIGS_PIC\cigs\build\mmj_cigs_main.lst
 
@@ -4231,15 +4231,15 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 02224:  DATA 0D,0A
 02226:  DATA 0D,0A
 02228:  DATA 00,00
-0222A:  DATA 37,2D
-0222C:  DATA 4E,6F
-0222E:  DATA 76,2D
-02230:  DATA 32,35
-02232:  DATA 00,00
-02234:  DATA 31,35
-02236:  DATA 3A,35
-02238:  DATA 35,3A
-0223A:  DATA 30,39
+0222A:  DATA 32,36
+0222C:  DATA 2D,4A
+0222E:  DATA 61,6E
+02230:  DATA 2D,32
+02232:  DATA 36,00
+02234:  DATA 31,38
+02236:  DATA 3A,31
+02238:  DATA 39,3A
+0223A:  DATA 31,35
 0223C:  DATA 00,00
 0223E:  DATA 5F,5F
 02240:  DATA 5F,5F
@@ -6708,13 +6708,13 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 .................... #use FIXED_IO( G_outputs=MIS_FM_CS )
 .................... 
 .................... // ADC Settings
-.................... #define ADC_CIGS1_VOLT      AD7490_CH0
+.................... #define ADC_CIGS1_VOLT      AD7490_CH8
 .................... #define ADC_CIGS1_CURR      AD7490_CH1
-.................... #define ADC_CIGS1_AMP       AD7490_CH2
+.................... #define ADC_CIGS1_AMP       AD7490_CH7
 .................... #define ADC_CIGS1_VREF      AD7490_CH3
-.................... #define ADC_CIGS2_VOLT      AD7490_CH4
+.................... #define ADC_CIGS2_VOLT      AD7490_CH10
 .................... #define ADC_CIGS2_CURR      AD7490_CH5
-.................... #define ADC_CIGS2_AMP       AD7490_CH6
+.................... #define ADC_CIGS2_AMP       AD7490_CH9
 .................... #define ADC_CIGS2_VREF      AD7490_CH7
 .................... #define ADC_CIGS1_DAC       AD7490_CH8
 .................... #define ADC_CIGS2_DAC       AD7490_CH9
@@ -8336,13 +8336,13 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 .................... #use FIXED_IO( G_outputs=MIS_FM_CS )
 .................... 
 .................... // ADC Settings
-.................... #define ADC_CIGS1_VOLT      AD7490_CH0
+.................... #define ADC_CIGS1_VOLT      AD7490_CH8
 .................... #define ADC_CIGS1_CURR      AD7490_CH1
-.................... #define ADC_CIGS1_AMP       AD7490_CH2
+.................... #define ADC_CIGS1_AMP       AD7490_CH7
 .................... #define ADC_CIGS1_VREF      AD7490_CH3
-.................... #define ADC_CIGS2_VOLT      AD7490_CH4
+.................... #define ADC_CIGS2_VOLT      AD7490_CH10
 .................... #define ADC_CIGS2_CURR      AD7490_CH5
-.................... #define ADC_CIGS2_AMP       AD7490_CH6
+.................... #define ADC_CIGS2_AMP       AD7490_CH9
 .................... #define ADC_CIGS2_VREF      AD7490_CH7
 .................... #define ADC_CIGS1_DAC       AD7490_CH8
 .................... #define ADC_CIGS2_DAC       AD7490_CH9
@@ -9214,13 +9214,13 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 .................... #use FIXED_IO( G_outputs=MIS_FM_CS )
 .................... 
 .................... // ADC Settings
-.................... #define ADC_CIGS1_VOLT      AD7490_CH0
+.................... #define ADC_CIGS1_VOLT      AD7490_CH8
 .................... #define ADC_CIGS1_CURR      AD7490_CH1
-.................... #define ADC_CIGS1_AMP       AD7490_CH2
+.................... #define ADC_CIGS1_AMP       AD7490_CH7
 .................... #define ADC_CIGS1_VREF      AD7490_CH3
-.................... #define ADC_CIGS2_VOLT      AD7490_CH4
+.................... #define ADC_CIGS2_VOLT      AD7490_CH10
 .................... #define ADC_CIGS2_CURR      AD7490_CH5
-.................... #define ADC_CIGS2_AMP       AD7490_CH6
+.................... #define ADC_CIGS2_AMP       AD7490_CH9
 .................... #define ADC_CIGS2_VREF      AD7490_CH7
 .................... #define ADC_CIGS1_DAC       AD7490_CH8
 .................... #define ADC_CIGS2_DAC       AD7490_CH9
@@ -9480,13 +9480,13 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 .................... #use FIXED_IO( G_outputs=MIS_FM_CS )
 .................... 
 .................... // ADC Settings
-.................... #define ADC_CIGS1_VOLT      AD7490_CH0
+.................... #define ADC_CIGS1_VOLT      AD7490_CH8
 .................... #define ADC_CIGS1_CURR      AD7490_CH1
-.................... #define ADC_CIGS1_AMP       AD7490_CH2
+.................... #define ADC_CIGS1_AMP       AD7490_CH7
 .................... #define ADC_CIGS1_VREF      AD7490_CH3
-.................... #define ADC_CIGS2_VOLT      AD7490_CH4
+.................... #define ADC_CIGS2_VOLT      AD7490_CH10
 .................... #define ADC_CIGS2_CURR      AD7490_CH5
-.................... #define ADC_CIGS2_AMP       AD7490_CH6
+.................... #define ADC_CIGS2_AMP       AD7490_CH9
 .................... #define ADC_CIGS2_VREF      AD7490_CH7
 .................... #define ADC_CIGS1_DAC       AD7490_CH8
 .................... #define ADC_CIGS2_DAC       AD7490_CH9
@@ -10076,13 +10076,13 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 .................... #use FIXED_IO( G_outputs=MIS_FM_CS )
 .................... 
 .................... // ADC Settings
-.................... #define ADC_CIGS1_VOLT      AD7490_CH0
+.................... #define ADC_CIGS1_VOLT      AD7490_CH8
 .................... #define ADC_CIGS1_CURR      AD7490_CH1
-.................... #define ADC_CIGS1_AMP       AD7490_CH2
+.................... #define ADC_CIGS1_AMP       AD7490_CH7
 .................... #define ADC_CIGS1_VREF      AD7490_CH3
-.................... #define ADC_CIGS2_VOLT      AD7490_CH4
+.................... #define ADC_CIGS2_VOLT      AD7490_CH10
 .................... #define ADC_CIGS2_CURR      AD7490_CH5
-.................... #define ADC_CIGS2_AMP       AD7490_CH6
+.................... #define ADC_CIGS2_AMP       AD7490_CH9
 .................... #define ADC_CIGS2_VREF      AD7490_CH7
 .................... #define ADC_CIGS1_DAC       AD7490_CH8
 .................... #define ADC_CIGS2_DAC       AD7490_CH9
@@ -15958,13 +15958,13 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 .................... #use FIXED_IO( G_outputs=MIS_FM_CS )
 .................... 
 .................... // ADC Settings
-.................... #define ADC_CIGS1_VOLT      AD7490_CH0
+.................... #define ADC_CIGS1_VOLT      AD7490_CH8
 .................... #define ADC_CIGS1_CURR      AD7490_CH1
-.................... #define ADC_CIGS1_AMP       AD7490_CH2
+.................... #define ADC_CIGS1_AMP       AD7490_CH7
 .................... #define ADC_CIGS1_VREF      AD7490_CH3
-.................... #define ADC_CIGS2_VOLT      AD7490_CH4
+.................... #define ADC_CIGS2_VOLT      AD7490_CH10
 .................... #define ADC_CIGS2_CURR      AD7490_CH5
-.................... #define ADC_CIGS2_AMP       AD7490_CH6
+.................... #define ADC_CIGS2_AMP       AD7490_CH9
 .................... #define ADC_CIGS2_VREF      AD7490_CH7
 .................... #define ADC_CIGS1_DAC       AD7490_CH8
 .................... #define ADC_CIGS2_DAC       AD7490_CH9
@@ -18535,7 +18535,7 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 0E310:  MOVF   01,W
 0E312:  MOVWF  xC4
 0E314:  MOVFF  03,9C5
-0E318:  MOVLW  02
+0E318:  MOVLW  07
 0E31A:  MOVWF  xEE
 0E31C:  MOVLB  0
 0E31E:  CALL   24E4
@@ -18676,7 +18676,7 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 0E43C:  MOVF   01,W
 0E43E:  MOVWF  xC4
 0E440:  MOVFF  03,9C5
-0E444:  MOVLW  06
+0E444:  MOVLW  09
 0E446:  MOVWF  xEE
 0E448:  MOVLB  0
 0E44A:  CALL   24E4
@@ -21429,7 +21429,7 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 0C9DE:  MOVF   01,W
 0C9E0:  MOVWF  xDE
 0C9E2:  MOVFF  03,9DF
-0C9E6:  MOVLW  02
+0C9E6:  MOVLW  07
 0C9E8:  MOVWF  xEE
 0C9EA:  MOVLB  0
 0C9EC:  CALL   24E4
@@ -21562,7 +21562,7 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 0CAF4:  MOVF   01,W
 0CAF6:  MOVWF  xDE
 0CAF8:  MOVFF  03,9DF
-0CAFC:  MOVLW  06
+0CAFC:  MOVLW  09
 0CAFE:  MOVWF  xEE
 0CB00:  MOVLB  0
 0CB02:  CALL   24E4
@@ -24791,7 +24791,7 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 0AA9C:  GOTO   AC1C
 0AAA0:  MOVLB  0
 ....................             volt = ad7490_read(ADC_CIGS1_AMP);
-0AAA2:  MOVLW  02
+0AAA2:  MOVLW  07
 0AAA4:  MOVLB  9
 0AAA6:  MOVWF  xEE
 0AAA8:  MOVLB  0
@@ -24975,7 +24975,7 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 0AC24:  GOTO   ADA4
 0AC28:  MOVLB  0
 ....................             volt = ad7490_read(ADC_CIGS2_AMP);
-0AC2A:  MOVLW  06
+0AC2A:  MOVLW  09
 0AC2C:  MOVLB  9
 0AC2E:  MOVWF  xEE
 0AC30:  MOVLB  0
@@ -26054,7 +26054,7 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 0F6A0:  GOTO   F812
 0F6A4:  MOVLB  0
 ....................             volt = ad7490_read(ADC_CIGS1_AMP);
-0F6A6:  MOVLW  02
+0F6A6:  MOVLW  07
 0F6A8:  MOVLB  9
 0F6AA:  MOVWF  xEE
 0F6AC:  MOVLB  0
@@ -31579,13 +31579,13 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 .................... #use FIXED_IO( G_outputs=MIS_FM_CS )
 .................... 
 .................... // ADC Settings
-.................... #define ADC_CIGS1_VOLT      AD7490_CH0
+.................... #define ADC_CIGS1_VOLT      AD7490_CH8
 .................... #define ADC_CIGS1_CURR      AD7490_CH1
-.................... #define ADC_CIGS1_AMP       AD7490_CH2
+.................... #define ADC_CIGS1_AMP       AD7490_CH7
 .................... #define ADC_CIGS1_VREF      AD7490_CH3
-.................... #define ADC_CIGS2_VOLT      AD7490_CH4
+.................... #define ADC_CIGS2_VOLT      AD7490_CH10
 .................... #define ADC_CIGS2_CURR      AD7490_CH5
-.................... #define ADC_CIGS2_AMP       AD7490_CH6
+.................... #define ADC_CIGS2_AMP       AD7490_CH9
 .................... #define ADC_CIGS2_VREF      AD7490_CH7
 .................... #define ADC_CIGS1_DAC       AD7490_CH8
 .................... #define ADC_CIGS2_DAC       AD7490_CH9
@@ -34635,13 +34635,13 @@ CCS PCH C Compiler, Version 5.104, 57077               07-11-25 15:55
 .................... #use FIXED_IO( G_outputs=MIS_FM_CS )
 .................... 
 .................... // ADC Settings
-.................... #define ADC_CIGS1_VOLT      AD7490_CH0
+.................... #define ADC_CIGS1_VOLT      AD7490_CH8
 .................... #define ADC_CIGS1_CURR      AD7490_CH1
-.................... #define ADC_CIGS1_AMP       AD7490_CH2
+.................... #define ADC_CIGS1_AMP       AD7490_CH7
 .................... #define ADC_CIGS1_VREF      AD7490_CH3
-.................... #define ADC_CIGS2_VOLT      AD7490_CH4
+.................... #define ADC_CIGS2_VOLT      AD7490_CH10
 .................... #define ADC_CIGS2_CURR      AD7490_CH5
-.................... #define ADC_CIGS2_AMP       AD7490_CH6
+.................... #define ADC_CIGS2_AMP       AD7490_CH9
 .................... #define ADC_CIGS2_VREF      AD7490_CH7
 .................... #define ADC_CIGS1_DAC       AD7490_CH8
 .................... #define ADC_CIGS2_DAC       AD7490_CH9
