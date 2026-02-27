@@ -39,7 +39,8 @@ void mcp4901_1_write(unsigned int16 value)
     #endif
     output_low(DAC1_CS); 
     delay_us(1); 
-    spi_xfer(DAC_STREAM, cmd); 
+    spi_xfer(DAC_STREAM, cmd);
+    delay_us(1); 
     output_high(DAC1_CS); 
 }
 
@@ -52,6 +53,7 @@ void mcp4901_2_write(unsigned int16 value)
    output_low(DAC2_CS); 
    delay_us(1); 
    spi_xfer(DAC_STREAM, cmd); 
+   delay_us(1);
    output_high(DAC2_CS); 
 }
 // End of file

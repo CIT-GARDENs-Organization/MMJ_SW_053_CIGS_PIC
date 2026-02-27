@@ -99,7 +99,7 @@
     // DAC
     #define DAC1_CS PIN_D7
     #define DAC2_CS PIN_D6
-    #use spi (MASTER, CLK=PIN_D5, DO=PIN_D4,  BAUD=20000000, MODE=2, BITS=16, STREAM=DAC_STREAM)
+    #use spi (MASTER, CLK=PIN_D5, DO=PIN_D4,  BAUD=10000000, MODE=2, BITS=16, STREAM=DAC_STREAM)
 
 
     // DI/O___
@@ -107,6 +107,7 @@
     #define CONNECT_CIGS2 PIN_C5
     #define EN_NPWR1 PIN_C7
     #define EN_NPWR2 PIN_C6
+
 
 #endif
 
@@ -120,11 +121,11 @@
 // ADC Settings
 #define ADC_CIGS1_VOLT      AD7490_CH8
 #define ADC_CIGS1_CURR      AD7490_CH1
-#define ADC_CIGS1_AMP       AD7490_CH7
+#define ADC_CIGS1_AMP       AD7490_CH8
 #define ADC_CIGS1_VREF      AD7490_CH3
 #define ADC_CIGS2_VOLT      AD7490_CH10
 #define ADC_CIGS2_CURR      AD7490_CH5
-#define ADC_CIGS2_AMP       AD7490_CH9
+#define ADC_CIGS2_AMP       AD7490_CH10
 #define ADC_CIGS2_VREF      AD7490_CH7
 #define ADC_CIGS1_DAC       AD7490_CH8
 #define ADC_CIGS2_DAC       AD7490_CH9

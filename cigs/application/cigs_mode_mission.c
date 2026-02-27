@@ -274,7 +274,7 @@ meas_iv_param_t make_meas_iv_cmd(int8 *uplinkcmd_ptr)
    meas_iv_param_t cmd;
    cmd.id = uplinkcmd_ptr[0];
    cmd.interval = ((unsigned int16)uplinkcmd_ptr[1] << 8) | ((unsigned int16)uplinkcmd_ptr[2]);
-   cmd.log_threshold = (unsigned int16)uplinkcmd_ptr[3]<< 4;
+   cmd.log_threshold = (unsigned int16)uplinkcmd_ptr[3];
    cmd.sweep_limit = (unsigned int16)uplinkcmd_ptr[4]<< 4;
    cmd.pd_threshold = (unsigned int16)uplinkcmd_ptr[5]<< 4;
    cmd.meas_time = (unsigned int16)uplinkcmd_ptr[6] *60; // 分 -> 秒
@@ -328,4 +328,46 @@ void mode_meas_pd(unsigned int8 *uplinkcmd_ptr)
    }
 
    fprintf(PC, "End MODE MEAS PD\r\n");
+}
+
+
+void mode_meas_calibration(unsigned int8 *uplinkcmd_ptr)
+{
+   fprintf(PC, "Start MODE MEAS CALIBRATION\r\n");
+   fprintf(PC,"temp_py_top, temp_py_bot, temp_mis7, pd, cell1_volt, cell1_curr, cell2_volt, cell2_curr\r\n");
+   unsigned int16 interval_ms = 1000;
+   unsigned int16 last_time = get_current_sec();
+
+   // ここでは、キャリブレーションのための測定を行うと仮定します。
+   unsigned int16 temp_py_top;
+   unsigned int16 temp_py_bot;
+   unsigned int16 temp_mis7;
+   unsigned int16 pd;
+   unsigned int16 cell1_volt;
+   unsigned int16 cell1_curr;
+   unsigned int16 cell2_volt;
+   unsigned int16 cell2_curr;
+
+
+   while (true) {
+      check_and_respond_to_boss(); // Check for boss commands during the wait period
+      if (get_current_sec() - last_time >= interval_ms) {
+         last_time = get_current_sec();
+
+         // センサーから値を読み取る
+         temp_py_top = ad7490_read(ADC_TEMP_PY_TOP);
+         temp_py_bot = ad7490_read(ADC_TEMP_PY_BOT);
+         temp_mis7 = ad7490_read(ADC_TEMP_MIS7);
+         pd = ad7490_read(ADC_PD);
+         cell1_volt = ad7490_read(ADC_CIGS1_VOLT);
+         cell1_curr = ad7490_read(ADC_CIGS1_CURR);
+         cell2_volt = ad7490_read(ADC_CIGS2_VOLT);
+         cell2_curr = ad7490_read(ADC_CIGS2_CURR);
+
+         // デバッグ出力
+         fprintf(PC, "0x%04X, 0x%04X, 0x%04X, 0x%04X, 0x%04X, 0x%04X, 0x%04X, 0x%04X\r\n", temp_py_top, temp_py_bot, temp_mis7, pd, cell1_volt, cell1_curr, cell2_volt, cell2_curr);
+      }else {
+         delay_ms(100); // 過負荷防止のため、短い遅延を入れる
+      }
+   }
 }

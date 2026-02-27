@@ -261,14 +261,17 @@ void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
     misf_update_address_area(); // 必要なら有効化
 }
 
-void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned int16 pd_limit)
+void sweep(unsigned int16 power_threshold_cmd, unsigned int16 curr_limit, unsigned int16 pd_limit)
 {
     unsigned int32 start_time_ms = get_current_sec();
+    unsigned int32 power_threshold = power_threshold_cmd << 16;
+    unsigned int32 max_power = 0;
+    unsigned int32 power = 0;
+    
     fputc('.', PC);
     // Enable both CIGS ports
     connect_port1();
     connect_port2();
-
     delay_ms(100);
 
     // Init Port1
@@ -303,16 +306,21 @@ void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned in
     {
         mcp4901_1_write(count);
         mcp4901_2_write(count);
-        delay_us(10); 
+        delay_us(100); 
         if (port1.active) {
             volt = ad7490_read(ADC_CIGS1_AMP);
             curr = ad7490_read(ADC_CIGS1_CURR);
+            power = volt * curr;
+            if (power > max_power) {
+                max_power = power;
+            }
             // ad7490_read_2port(ADC_CIGS1_AMP, ADC_CIGS1_CURR, &volt, &curr);
             // fprintf(PC, "%04LX,%04LX,", volt, curr);
             port1.data_buffer[count*3]= (volt  >> 4) & 0xFF;
             port1.data_buffer[count*3+1]= ((volt & 0x0F) << 4) | ((curr >> 8) & 0x0F);
             port1.data_buffer[count*3+2]= curr & 0xFF;
-            port1.sweep_step = count + 1; 
+            port1.sweep_step = count + 1;
+             
             // fprintf(PC, "%04LX,%04LX,", port1.data_buffer[count].voltage, port1.data_buffer[count].current);
             if (curr< curr_limit) {
                 port1.active = 0;
@@ -341,8 +349,12 @@ void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned in
     // Ensure all connections are disabled3
     disconnect_port1();
     disconnect_port2();
-    log_meas_data(measured_data_ptr, port1_ptr);
-    log_meas_data(measured_data_ptr, port2_ptr);
+    if (max_power > power_threshold) {
+        log_meas_data(measured_data_ptr, port1_ptr);
+    }
+    if (max_power > power_threshold) {
+        log_meas_data(measured_data_ptr, port2_ptr);
+    }
 }
 
 
