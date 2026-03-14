@@ -132,9 +132,9 @@
 #define EMPTY_VIN0          AD7490_CH10
 #define EMPTY_VIN1          AD7490_CH11
 #define ADC_TEMP_MIS7       AD7490_CH12
-#define ADC_TEMP_PY_TOP     AD7490_CH13
+#define ADC_TEMP_PY_TOP     AD7490_CH15
 #define ADC_TEMP_PY_BOT     AD7490_CH14
-#define ADC_PD              AD7490_CH15
+#define ADC_PD              AD7490_CH13
 
 #endif // MMJ_CIGS_CONFIG_H
 

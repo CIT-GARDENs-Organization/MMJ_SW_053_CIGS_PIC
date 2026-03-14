@@ -48,9 +48,10 @@ typedef struct {
     unsigned int8 id;
     unsigned int16 interval;
     unsigned int16 pd_threshold;
-    unsigned int16 meas_time;
+    unsigned int32 meas_time;
     unsigned int16 log_threshold;
     unsigned int16 sweep_limit;
+    unsigned int8 erase_flag;
 } meas_iv_param_t;
 
 
@@ -58,5 +59,4 @@ typedef struct {
 meas_iv_param_t make_meas_iv_cmd(int8 *uplinkcmd_ptr);
 void print_meas_iv_cmd(meas_iv_param_t *cmd_ptr);
 #endif // MMJ_CIGS_MODE_MISSION_H
-
 //------------------End of File------------------

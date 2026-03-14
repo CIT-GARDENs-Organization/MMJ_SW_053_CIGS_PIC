@@ -261,12 +261,12 @@ void log_meas_data(iv_env_t *measured_data_ptr, sweep_config_t *port_data_ptr)
     misf_update_address_area(); // 必要なら有効化
 }
 
-void sweep(unsigned int16 power_threshold_cmd, unsigned int16 curr_limit, unsigned int16 pd_limit)
+void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned int16 pd_limit)
 {
     unsigned int32 start_time_ms = get_current_sec();
-    unsigned int32 power_threshold = power_threshold_cmd << 16;
-    unsigned int32 max_power = 0;
-    unsigned int32 power = 0;
+    unsigned int16 cell1_max_curr = 0;
+    unsigned int16 cell2_max_curr = 0;
+
     
     fputc('.', PC);
     // Enable both CIGS ports
@@ -310,9 +310,8 @@ void sweep(unsigned int16 power_threshold_cmd, unsigned int16 curr_limit, unsign
         if (port1.active) {
             volt = ad7490_read(ADC_CIGS1_AMP);
             curr = ad7490_read(ADC_CIGS1_CURR);
-            power = volt * curr;
-            if (power > max_power) {
-                max_power = power;
+            if (curr > cell1_max_curr) {
+                cell1_max_curr = curr;
             }
             // ad7490_read_2port(ADC_CIGS1_AMP, ADC_CIGS1_CURR, &volt, &curr);
             // fprintf(PC, "%04LX,%04LX,", volt, curr);
@@ -330,6 +329,9 @@ void sweep(unsigned int16 power_threshold_cmd, unsigned int16 curr_limit, unsign
         if (port2.active) {
             volt = ad7490_read(ADC_CIGS2_AMP);
             curr = ad7490_read(ADC_CIGS2_CURR);
+            if (curr > cell2_max_curr) {
+                cell2_max_curr = curr;
+            }
             port2.data_buffer[count*3]= (volt  >> 4) & 0xFF;
             port2.data_buffer[count*3+1]= ((volt & 0x0F) << 4) | ((curr >> 8) & 0x0F);
             port2.data_buffer[count*3+2]= curr & 0xFF;
@@ -349,12 +351,89 @@ void sweep(unsigned int16 power_threshold_cmd, unsigned int16 curr_limit, unsign
     // Ensure all connections are disabled3
     disconnect_port1();
     disconnect_port2();
-    if (max_power > power_threshold) {
+    if (cell1_max_curr > curr_threshold) {
         log_meas_data(measured_data_ptr, port1_ptr);
     }
-    if (max_power > power_threshold) {
+    if (cell2_max_curr > curr_threshold) {
         log_meas_data(measured_data_ptr, port2_ptr);
     }
+}
+
+
+void sweep_noconnect()
+{
+    unsigned int32 start_time_ms = get_current_sec();
+
+    
+    fputc('.', PC);
+
+    // Init Port1
+    sweep_config_t port1 = {0};
+    sweep_config_t *port1_ptr = &port1;
+    port1_ptr->port_num = 1;
+    port1_ptr->sweep_step = 0;
+    port1_ptr->active = 1;
+
+    // fprintf(PC,"PORT1, %u\r\n", port1_ptr->port_num);
+
+    // Init Port2
+    sweep_config_t port2 = {0};
+    sweep_config_t *port2_ptr = &port2;
+    port2_ptr->port_num = 2;
+    port2_ptr->sweep_step = 0;
+    port2_ptr->active = 1;
+
+    // fprintf(PC,"PORT2, %u\r\n", port2_ptr->port_num);
+    int16 count = 0;
+    
+    // Initialize DACs to 0
+    mcp4901_1_write(1);
+    mcp4901_2_write(1);
+
+    unsigned int16 volt;
+    unsigned int16 curr;
+    iv_env_t measured_data = create_meas_data();
+    iv_env_t *measured_data_ptr = &measured_data;   
+
+    while (port1.active || port2.active)
+    {
+        mcp4901_1_write(count);
+        mcp4901_2_write(count);
+        delay_us(100); 
+        if (port1.active) {
+            volt = ad7490_read(ADC_CIGS1_AMP);
+            curr = ad7490_read(ADC_CIGS1_CURR);
+            // ad7490_read_2port(ADC_CIGS1_AMP, ADC_CIGS1_CURR, &volt, &curr);
+            // fprintf(PC, "%04LX,%04LX,", volt, curr);
+            port1.data_buffer[count*3]= (volt  >> 4) & 0xFF;
+            port1.data_buffer[count*3+1]= ((volt & 0x0F) << 4) | ((curr >> 8) & 0x0F);
+            port1.data_buffer[count*3+2]= curr & 0xFF;
+            port1.sweep_step = count + 1;
+             
+            // fprintf(PC, "%04LX,%04LX,", port1.data_buffer[count].voltage, port1.data_buffer[count].current);
+
+        }
+        if (port2.active) {
+            volt = ad7490_read(ADC_CIGS2_AMP);
+            curr = ad7490_read(ADC_CIGS2_CURR);
+            port2.data_buffer[count*3]= (volt  >> 4) & 0xFF;
+            port2.data_buffer[count*3+1]= ((volt & 0x0F) << 4) | ((curr >> 8) & 0x0F);
+            port2.data_buffer[count*3+2]= curr & 0xFF;
+            port2.sweep_step = count + 1;
+        }
+        count++;
+        if (count >= 255) {
+            // fprintf(PC, "Maximum step count reached: %ld\r\n", count);
+            break;
+        }
+    }
+    // unsigned int32 end_time_ms = get_current_msec();
+    // Ensure all connections are disabled3
+    disconnect_port1();
+    disconnect_port2();
+    log_meas_data(measured_data_ptr, port1_ptr);
+    log_meas_data(measured_data_ptr, port2_ptr);
+
 }
 
 

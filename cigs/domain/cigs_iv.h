@@ -22,6 +22,8 @@ void make_meas_header(unsigned int8 *packetdata, unsigned int8 *cmd);
 // void sweep(unsigned int8 parameter[]);
 void sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit, unsigned int16 pd_limit);  
 void test_sweep(unsigned int16 curr_threshold, unsigned int16 curr_limit);
+void sweep_noconnect();
+
 
 typedef struct{
     unsigned int32 time;

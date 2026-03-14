@@ -143,8 +143,12 @@ void execute_mission(int8 *uplink_cmt_ptr)
          connect_port1();
          connect_port2();
          mode_meas_iv_port2(uplink_cmt_ptr);
-      break;
+         break;
 
+      case 0xAA:
+         mode_meas_calibration(uplink_cmt_ptr);
+         break;
+         
       // ________________Others______________________________
       case 0xB0:
          unsigned int32 total_seconds = get_current_sec();

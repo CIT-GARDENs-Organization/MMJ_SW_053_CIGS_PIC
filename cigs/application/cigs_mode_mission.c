@@ -111,14 +111,22 @@ void mode_meas_iv_port2(unsigned int8 *uplinkcmd_ptr)
 void mode_meas_iv(unsigned int8 *uplinkcmd_ptr)
 {
    fprintf(PC, "Start MODE MEAS IV\r\n");
-   meas_iv_param_t cmd = make_meas_iv_cmd(uplinkcmd_ptr); // Create the measurement command structure
+   meas_iv_param_t cmd ;
+   memset (&cmd, 0, sizeof(meas_iv_param_t));
+   cmd = make_meas_iv_cmd(uplinkcmd_ptr); // Create the measurement command structure
    print_meas_iv_cmd(&cmd); // Print the command parameters for debugging
    piclog_make(cmd.id, PICLOG_PARAM_START); // Log the start of the command execution
 
+
+      // Flashの初期化
+   if (cmd.erase_flag != 0) {
+      mode_misf_erase_and_reset(uplinkcmd_ptr);
+   }
    unsigned int32 start_time = get_current_sec();
    unsigned int32 current_sec = 0;
    unsigned int16 time_ms = 0;
    unsigned int8 counter = 0;
+   sweep_noconnect();
    do
    {
       sweep(cmd.log_threshold, cmd.sweep_limit, cmd.pd_threshold); 
@@ -127,6 +135,7 @@ void mode_meas_iv(unsigned int8 *uplinkcmd_ptr)
       }
       check_and_respond_to_boss(); // Check for boss commands during the wait period
    } while (get_current_sec() - start_time < cmd.meas_time);
+   sweep_noconnect();
    misf_update_address_area();
    piclog_make(cmd.id, PICLOG_PARAM_END); // Log the end of the command execution
 
@@ -274,10 +283,11 @@ meas_iv_param_t make_meas_iv_cmd(int8 *uplinkcmd_ptr)
    meas_iv_param_t cmd;
    cmd.id = uplinkcmd_ptr[0];
    cmd.interval = ((unsigned int16)uplinkcmd_ptr[1] << 8) | ((unsigned int16)uplinkcmd_ptr[2]);
-   cmd.log_threshold = (unsigned int16)uplinkcmd_ptr[3];
-   cmd.sweep_limit = (unsigned int16)uplinkcmd_ptr[4]<< 4;
-   cmd.pd_threshold = (unsigned int16)uplinkcmd_ptr[5]<< 4;
+   cmd.log_threshold = (unsigned int16)uplinkcmd_ptr[3] << 8 | uplinkcmd_ptr[4];
+   cmd.sweep_limit = (unsigned int16)uplinkcmd_ptr[5]<< 4;
    cmd.meas_time = (unsigned int16)uplinkcmd_ptr[6] *60; // 分 -> 秒
+   cmd.erase_flag = uplinkcmd_ptr[8];
+
    return cmd;
 }
 
@@ -305,27 +315,53 @@ void mode_meas_pd(unsigned int8 *uplinkcmd_ptr)
    // uplinkcmd_ptr から interval と測定時間を取り出す
    unsigned int16 interval_ms = ((unsigned int16)uplinkcmd_ptr[1] << 8) | uplinkcmd_ptr[2]; // ms
    unsigned int16 meas_time_s = (unsigned int16)uplinkcmd_ptr[6] * 60; // 秒
+   unsigned int8 erase_flag = uplinkcmd_ptr[8];
 
-   unsigned int32 start_time_ms   = get_current_msec();
-   unsigned int32 current_time_ms = 0;
+   // Flashの初期化
+   if (erase_flag != 0) {
+      mode_misf_erase_and_reset(uplinkcmd_ptr);
+   }
+   check_and_respond_to_boss();
+   unsigned int32 start_time   = get_current_sec();
+   unsigned int32 last_meas_time = 0;
    unsigned int32 meas_time_ms    = (unsigned int32)meas_time_s * 1000; // ms に変換
 
-   while (current_time_ms - start_time_ms < meas_time_ms) {
+   fprintf(PC, "Interval: %lu ms\r\n", interval_ms);
+   fprintf(PC, "Measurement Time: %lu s\r\n", meas_time_s);
 
-      current_time_ms = get_current_msec();
+   //測定ループ
 
-      // interval ごとに実行
-      static unsigned int32 last_meas_time = 0;
-      if (current_time_ms - last_meas_time >= interval_ms) {
-         last_meas_time = current_time_ms;
-
-         // PD センサー読み取り
-         unsigned int16 pd = ad7490_read(ADC_PD);
-
-         // デバッグ出力
-         // fprintf(PC, "Time:%lu ms, PD:%u\r\n", current_time_ms - start_time_ms, pd);
+   do
+   {
+      unsigned int16 pd_data = 0;
+      pd_data = ad7490_read(ADC_PD);
+      unsigned int8 logdata[2];
+      logdata[0] = (pd_data >> 8) & 0xFF;
+      logdata[1] = pd_data & 0xFF;
+      misf_write_data(FLASH_ID_ENVIRONMENT, logdata, 2);
+      
+      if (interval_ms > 0){
+         delay_ms(interval_ms);
       }
-   }
+      check_and_respond_to_boss(); // Check for boss commands during the wait period
+   } while (get_current_sec() - start_time < meas_time_s);
+   
+   misf_update_address_area();
+
+   FlashOperationStruct data = {0};
+   data.func_type = ENUM_SMF_WRITE;
+   data.mission_id = CIGS_ENVIRO_DATA; // ID_CIGS_MEASURE_DATA; // コピーする目的のデータ種別
+   data.write_mode = SMF_WRITE_CIRCULAR;
+   data.source_type = SOURCE_MISF_UNCOPIED;
+   fprintf(PC, "\r\nADD SMF QUEUE\r\n");
+   fprintf(PC, "\tMission ID:   %02X\r\n", data.mission_id);
+   fprintf(PC, "\tFunction Type:%02X\r\n", data.func_type);
+   fprintf(PC, "\tWrite Mode:   %02X\r\n", data.write_mode);
+   fprintf(PC, "\tSource Type:  %02X\r\n", data.source_type);
+   fprintf(PC, "\tStart Address:%04X\r\n", data.misf_start_addr);
+   fprintf(PC, "\tSize:         %04X\r\n", misf_counter_table[CIGS_ENVIRO_DATA].uncopied_counter);
+   enqueue_flash_operation(&data); // SMFへのデータコピーを実行する
+
 
    fprintf(PC, "End MODE MEAS PD\r\n");
 }
